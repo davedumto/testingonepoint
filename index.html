@@ -149,11 +149,30 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .scard:hover{border-color:var(--borderh);background:var(--s2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,119,192,0.06)}
 .sname{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--text);margin-bottom:7px;letter-spacing:-.01em}
 .sdesc{font-size:12.5px;color:var(--t2);line-height:1.55;margin-bottom:16px}
-.slnk{font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:gap .25s;font-weight:600;letter-spacing:.02em}
+.slnk{font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:gap .25s;font-weight:600;letter-spacing:.02em;background:none;border:none;padding:0;cursor:pointer;font-family:'Outfit',sans-serif}
 .slnk:hover{gap:8px}
 @keyframes cin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .scard:nth-child(1){animation-delay:.04s}.scard:nth-child(2){animation-delay:.09s}.scard:nth-child(3){animation-delay:.14s}
 .scard:nth-child(4){animation-delay:.19s}.scard:nth-child(5){animation-delay:.24s}.scard:nth-child(6){animation-delay:.29s}
+
+
+/* QUOTE FORM */
+.quoteform{margin-top:32px;background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:28px;display:none;box-shadow:0 6px 16px rgba(0,0,0,0.03)}
+.quoteform.active{display:block;animation:cin .3s ease}
+.qfhead{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.qfgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.qfrow{margin-bottom:14px}
+.qflabel{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.qftextarea{min-height:110px;resize:vertical}
+.qfmeta{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+.qfchip{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.qfchip span{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.qfchip strong{font-size:14px;color:var(--text);font-weight:500}
+.qfactions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qfsuccess{padding:18px 20px;border:1px solid rgba(0,119,192,.18);background:rgba(0,119,192,.06);border-radius:14px}
+.qfsuccess h4{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:6px}
+.qfsuccess p{font-size:14px;color:var(--t2);line-height:1.6}
+
 
 /* WHY */
 .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-top:64px}
@@ -246,7 +265,7 @@ footer .navname{color:#fff}
   .herostats{flex-wrap:wrap}
   .hstat{min-width:50%;padding:16px 0}
   .hstat+.hstat{border-left:none;border-top:1px solid var(--border)}
-  .prodgrid,.subgrid{grid-template-columns:1fr}
+  .prodgrid,.subgrid,.qfgrid,.qfmeta{grid-template-columns:1fr}
   .toolsgrid{grid-template-columns:repeat(2,1fr)}
   .whygrid,.procgrid{grid-template-columns:1fr}
   .ftgrid{grid-template-columns:1fr;gap:32px}
@@ -644,7 +663,7 @@ function openProd(k) {
         <div class="scard">
           <h4 class="sname">${i.name}</h4>
           <p class="sdesc">${i.desc}</p>
-          <a href="${p.qurl}" class="slnk">Get Quote <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button class="slnk" onclick="openQuoteForm('${p.name}','${i.name}')">Get Quote <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       `;
     });
@@ -659,9 +678,10 @@ function openProd(k) {
           <div class="pcnt" style="margin-bottom:12px">${p.count}</div>
           <h2 class="dettitle">${p.name}</h2>
         </div>
-        <a href="${p.qurl}" class="btn btnp">Request Quote</a>
+        <button class="btn btnp" onclick="openQuoteForm('${p.name}')">Request Quote</button>
       </div>
       <div class="subgrid">${subHTML}</div>
+      <div id="quoteForm" class="quoteform"></div>
     `;
     
     setTimeout(() => det.classList.add('in'), 50);
@@ -678,7 +698,106 @@ function closeProd() {
   }, 350);
 }
 
+
+
+function openQuoteForm(category, product = '') {
+  const form = document.getElementById('quoteForm');
+  if (!form) return;
+
+  const safeCategory = escapeHTML(category);
+  const safeProduct = escapeHTML(product || 'General Quote');
+  form.classList.add('active');
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  form.innerHTML = `
+    <div class="qfhead">
+      <h3 class="serif" style="font-size:28px;letter-spacing:-.02em;color:var(--text)">Request a Quote</h3>
+      <button class="btnlnk" type="button" onclick="closeQuoteForm()">Close</button>
+    </div>
+
+    <div class="qfmeta">
+      <div class="qfchip">
+        <span>Category</span>
+        <strong>${safeCategory}</strong>
+      </div>
+      <div class="qfchip">
+        <span>Product</span>
+        <strong>${safeProduct}</strong>
+      </div>
+    </div>
+
+    <form id="quoteRequestForm" onsubmit="submitQuote(event)">
+      <input type="hidden" name="category" value="${safeCategory}">
+      <input type="hidden" name="product" value="${safeProduct}">
+
+      <div class="qfgrid">
+        <div>
+          <label class="qflabel" for="qf-name">Full Name</label>
+          <input id="qf-name" name="name" class="nlinp" placeholder="Your full name" required>
+        </div>
+        <div>
+          <label class="qflabel" for="qf-email">Email</label>
+          <input id="qf-email" name="email" type="email" class="nlinp" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="qfgrid">
+        <div>
+          <label class="qflabel" for="qf-phone">Phone Number</label>
+          <input id="qf-phone" name="phone" class="nlinp" placeholder="(555) 555-5555" required>
+        </div>
+        <div>
+          <label class="qflabel" for="qf-zip">ZIP Code</label>
+          <input id="qf-zip" name="zip" class="nlinp" placeholder="ZIP / Postal code" required>
+        </div>
+      </div>
+
+      <div class="qfrow">
+        <label class="qflabel" for="qf-notes">Coverage Details</label>
+        <textarea id="qf-notes" name="notes" class="nlinp qftextarea" placeholder="Tell us a little about the coverage you need, current policy, preferred limits, or any questions."></textarea>
+      </div>
+
+      <div class="qfactions">
+        <button class="btn btnp" type="submit">Submit Request</button>
+        <button class="btn btng" type="button" onclick="closeQuoteForm()">Cancel</button>
+      </div>
+    </form>
+  `;
+}
+
+function closeQuoteForm() {
+  const form = document.getElementById('quoteForm');
+  if (!form) return;
+  form.classList.remove('active');
+  form.innerHTML = '';
+}
+
+function submitQuote(event) {
+  event.preventDefault();
+  const form = event.target;
+  const category = form.querySelector('input[name="category"]').value;
+  const product = form.querySelector('input[name="product"]').value;
+  const name = form.querySelector('input[name="name"]').value;
+
+  form.parentElement.innerHTML = `
+    <div class="qfsuccess">
+      <h4>Quote request received</h4>
+      <p>Thanks, ${escapeHTML(name)}. Your request for <strong>${escapeHTML(product)}</strong> under <strong>${escapeHTML(category)}</strong> has been captured in this demo flow. Connect this submit handler to your backend or CRM to make it live.</p>
+    </div>
+  `;
+}
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 // ─── CARRIERS MARQUEE ──────────────────────────────────────────
+
 const carriers = ["Progressive", "Travelers", "Safeco", "Nationwide", "Chubb", "Liberty Mutual", "Allstate", "State Auto", "Hagerty", "Mercury", "Encompass"];
 const track = document.getElementById('ctrack');
 const html = carriers.map(c => `<div class="citem">${c}</div>`).join('');
@@ -687,4 +806,3 @@ track.innerHTML = html + html + html + html;
 
 </body>
 </html>
-
