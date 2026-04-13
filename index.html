@@ -220,6 +220,14 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .ctasec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(199,238,255,.5) 0%,transparent 68%);pointer-events:none}
 .ctabtns{display:flex;gap:14px;justify-content:center;margin-top:44px}
 
+/* PAGE LINKS */
+.pagegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+.pagecard{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:28px;display:flex;flex-direction:column;gap:14px;text-decoration:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);box-shadow:0 6px 16px rgba(0,0,0,0.03)}
+.pagecard:hover{border-color:var(--borderh);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,119,192,0.08)}
+.pagecard h3{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:500;letter-spacing:-.02em;color:var(--text)}
+.pagecard p{font-size:13.5px;line-height:1.7;color:var(--t2)}
+.pagecard span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
 /* FOOTER */
 footer{background:#1D242B;border-top:1px solid var(--border);padding:88px 0 52px; color: #fff;}
 .ftgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.4fr;gap:52px;margin-bottom:72px}
@@ -266,6 +274,7 @@ footer .navname{color:#fff}
   .hstat{min-width:50%;padding:16px 0}
   .hstat+.hstat{border-left:none;border-top:1px solid var(--border)}
   .prodgrid,.subgrid,.qfgrid,.qfmeta{grid-template-columns:1fr}
+  .pagegrid{grid-template-columns:1fr}
   .toolsgrid{grid-template-columns:repeat(2,1fr)}
   .whygrid,.procgrid{grid-template-columns:1fr}
   .ftgrid{grid-template-columns:1fr;gap:32px}
@@ -541,10 +550,10 @@ footer .navname{color:#fff}
         <ul class="ftlinks">
           <li><a href="https://onepointinsuranceagency.com/auto">Auto Insurance</a></li>
           <li><a href="https://onepointinsuranceagency.com/homeowners">Homeowners</a></li>
-          <li><a href="https://onepointinsuranceagency.com/health">Health</a></li>
+          <li><a href="health/">Health</a></li>
           <li><a href="https://onepointinsuranceagency.com/business">Business</a></li>
-          <li><a href="https://onepointinsuranceagency.com/life">Life Insurance</a></li>
-          <li><a href="https://onepointinsuranceagency.com/disability-income">Disability</a></li>
+          <li><a href="life/">Life Insurance</a></li>
+          <li><a href="disability/">Disability</a></li>
           <li><a href="https://onepointinsuranceagency.com/travel">Travel</a></li>
         </ul>
       </div>
