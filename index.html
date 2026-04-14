@@ -29,6 +29,9 @@
   --accenth: #005F99;     /* Darker Hover Blue */
   --gold: #0077C0;        /* Replaced gold with blue for consistency */
   --soft-blue: #C7EEFF;   /* Light Sky Blue */
+  --orange: #E8821A;      /* Warm Action Orange */
+  --orangeh: #C96E12;     /* Orange Hover */
+  --navy: #052847;        /* Deep Navy for Dark Sections */
   
   --r: 12px;
   --rl: 20px;
@@ -74,6 +77,11 @@ p.sub{font-size:clamp(15px,1.5vw,17px);line-height:1.7;color:var(--t2);font-weig
 .btnlnk svg,.btnp svg{transition:transform .3s}
 .btnlnk:hover svg{transform:translateX(4px)}
 .btnp:hover svg{transform:translateX(3px)}
+.btno{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(232,130,26,0.22)}
+.btno:hover{background:var(--orangeh);transform:translateY(-1px);box-shadow:0 12px 28px rgba(232,130,26,0.32)}
+.btno svg{transition:transform .3s}.btno:hover svg{transform:translateX(3px)}
+.btnw{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.btnw:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .4s ease}
@@ -90,6 +98,14 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .navph:hover{color:var(--accent)}
 .navburg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .navburg span{width:22px;height:1.5px;background:var(--text);display:block;transition:all .3s}
+/* Nav transparent state over dark hero */
+nav:not(.sc) .navname{color:#fff}
+nav:not(.sc) .navlinks a{color:rgba(255,255,255,.78)}
+nav:not(.sc) .navlinks a:hover{color:#fff}
+nav:not(.sc) .navph{color:rgba(255,255,255,.65)}
+nav:not(.sc) .navph:hover{color:#fff}
+nav:not(.sc) .navmark{background:rgba(255,255,255,.15);color:#fff}
+nav:not(.sc) .navburg span{background:#fff}
 
 /* MOBILE MENU */
 .mob{display:none;position:fixed;inset:0;background:rgba(250,250,250,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
@@ -100,20 +116,40 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .mobx:hover{color:var(--text)}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:150px 44px 80px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:1000px;height:700px;background:radial-gradient(ellipse at 50% 30%,rgba(199,238,255,.6) 0%,rgba(199,238,255,.2) 40%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:240px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none;z-index:1}
-.hpill{display:inline-flex;align-items:center;gap:8px;background:rgba(0,119,192,.08);border:1px solid rgba(0,119,192,.2);border-radius:100px;padding:6px 16px;font-size:11px;color:var(--accent);letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:44px;animation:fup .8s ease both}
-.hpill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:blink 2s ease infinite}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--navy)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(5,40,71,.93) 0%,rgba(5,40,71,.72) 45%,rgba(5,40,71,.32) 100%)}
+.hero-content{position:relative;z-index:2;padding:160px 44px 60px;max-width:760px}
+.hpill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:6px 16px;font-size:11px;color:rgba(255,255,255,.9);letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:44px;animation:fup .8s ease both}
+.hpill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(58px,8.5vw,112px);font-weight:400;line-height:1.01;letter-spacing:-.035em;max-width:960px;animation:fup .8s .1s ease both;color:var(--text)}
-.heroSub{font-size:clamp(15px,1.6vw,19px);color:var(--t2);max-width:500px;line-height:1.65;margin:32px 0 48px;font-weight:300;animation:fup .8s .2s ease both}
-.heroctas{display:flex;align-items:center;gap:14px;animation:fup .8s .3s ease both}
-.herostats{display:flex;align-items:stretch;margin-top:80px;padding-top:56px;border-top:1px solid var(--border);animation:fup .8s .4s ease both;width:100%;max-width:800px;justify-content:center;position:relative;z-index:2}
-.hstat{flex:1;text-align:center;padding:0 20px}
-.hstat+.hstat{border-left:1px solid var(--border)}
-.hstatnum{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:400;color:var(--text);line-height:1}
-.hstatlbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-top:5px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,6vw,88px);font-weight:400;line-height:1.01;letter-spacing:-.035em;max-width:700px;animation:fup .8s .1s ease both;color:#fff}
+.hero h1 em{background:linear-gradient(135deg,#F4A054,#E8821A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
+.heroSub{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.75);max-width:520px;line-height:1.65;margin:24px 0 0;font-weight:300;animation:fup .8s .2s ease both}
+/* Hero embedded quote form */
+.heroform{background:rgba(255,255,255,.1);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:22px 24px;margin-top:36px;max-width:580px;animation:fup .8s .3s ease both}
+.hftabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.hftab{padding:7px 16px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.78);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:.01em}
+.hftab:hover{background:rgba(255,255,255,.18);color:#fff}
+.hftab.active{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(232,130,26,.35)}
+.hfinprow{display:flex;gap:10px;align-items:stretch}
+.hfinp{flex:1;background:rgba(255,255,255,.95);border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;min-width:0}
+.hfinp::placeholder{color:var(--t3)}
+.hfnote{font-size:11px;color:rgba(255,255,255,.48);margin:10px 0 0}
+/* Hero stats bar */
+.herostats{position:relative;z-index:2;display:flex;background:rgba(0,0,0,.3);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1)}
+.hstat{flex:1;text-align:center;padding:22px 20px;border-right:1px solid rgba(255,255,255,.1)}
+.hstat:last-child{border-right:none}
+.hstatnum{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:#fff;line-height:1}
+.hstatlbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:5px}
+
+/* HERO BADGE */
+.hero-badge{position:absolute;bottom:32px;left:28px;right:28px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-radius:16px;padding:16px 20px;border:1px solid rgba(0,119,192,.14);box-shadow:0 8px 28px rgba(5,40,71,.18);z-index:3}
+.hbdg-row{display:flex;align-items:center;gap:16px}
+.hbdg-stars{font-size:15px;color:var(--orange);letter-spacing:2px;flex-shrink:0}
+.hbdg-row strong{display:block;font-size:13px;color:var(--text);font-weight:600;line-height:1.3}
+.hbdg-row span{font-size:11.5px;color:var(--t2);margin-top:1px;display:block}
 
 /* SECTION INTRO */
 .secintro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:72px}
@@ -123,10 +159,13 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .prodwrap{position:relative}
 .prodgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;transition:opacity .3s cubic-bezier(.25,.46,.45,.94),transform .3s cubic-bezier(.25,.46,.45,.94)}
 .prodgrid.out{opacity:0;transform:translateY(-14px);pointer-events:none}
-.pcard{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:32px 28px 52px;cursor:pointer;transition:all .3s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,0.03)}
+.pcard{background:var(--s1);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--rl);padding:0 0 52px;cursor:pointer;transition:all .3s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,0.03)}
 .pcard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,119,192,.04) 0%,transparent 60%);opacity:0;transition:opacity .3s}
 .pcard:hover{border-color:var(--borderh);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,119,192,0.06)}
 .pcard:hover::after{opacity:1}
+.pcard-img{width:100%;height:180px;object-fit:cover;display:block;border-radius:var(--rl) var(--rl) 0 0;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.pcard:hover .pcard-img{transform:scale(1.04)}
+.pcard-body{padding:24px 28px 0}
 .picon{width:46px;height:46px;border-radius:10px;background:rgba(0,119,192,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--accent);transition:background .3s;flex-shrink:0}
 .pcard:hover .picon{background:rgba(0,119,192,.12)}
 .pcnt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
@@ -175,7 +214,13 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 
 
 /* WHY */
-.whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-top:64px}
+.whybanner{width:100%;height:380px;border-radius:var(--rl);overflow:hidden;margin-bottom:0;position:relative}
+.whybanner img{width:100%;height:100%;object-fit:cover;display:block}
+.whybanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,.45) 100%)}
+.whybanner-caption{position:absolute;bottom:28px;left:36px;color:#fff;z-index:2}
+.whybanner-caption h3{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400;letter-spacing:-.02em;margin-bottom:4px}
+.whybanner-caption p{font-size:14px;opacity:.8}
+.whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
 .witem{background:var(--s1);padding:48px 40px;transition:background .3s}
 .witem:hover{background:var(--s2)}
 .wnum{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:rgba(0,119,192,0.08);line-height:1;margin-bottom:24px}
@@ -183,16 +228,16 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .wp{font-size:13.5px;color:var(--t2);line-height:1.65}
 
 /* PROCESS */
-.procgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);margin-top:64px}
-.pritem{background:var(--s1);padding:40px 32px;position:relative;transition:background .3s}
-.pritem:hover{background:var(--s2)}
-.prnum{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(0,119,192,0.08);line-height:1;position:absolute;top:22px;right:20px}
+.procgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,119,192,.12);border-radius:var(--rl);overflow:hidden;border:1px solid rgba(0,119,192,.12);margin-top:64px}
+.pritem{background:#EAF4FB;padding:40px 32px;position:relative;transition:background .3s}
+.pritem:hover{background:#ddeef8}
+.prnum{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(0,119,192,0.18);line-height:1;position:absolute;top:22px;right:20px}
 .prstep{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;margin-top:8px}
 .prh{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--text);margin-bottom:9px}
 .prp{font-size:13px;color:var(--t2);line-height:1.6}
 
 /* CARRIERS */
-.carriers{padding:72px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:#fff}
+.carriers{padding:72px 0;border-top:1px solid rgba(0,119,192,.14);border-bottom:1px solid rgba(0,119,192,.14);overflow:hidden;background:#EAF4FB}
 .clbl{text-align:center;margin-bottom:44px}
 .ctwrap{overflow:hidden;-webkit-mask:linear-gradient(to right,transparent,black 14%,black 86%,transparent);mask:linear-gradient(to right,transparent,black 14%,black 86%,transparent)}
 .ctrack{display:flex;animation:scroll 32s linear infinite;width:max-content}
@@ -208,7 +253,7 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .tname{font-size:13px;font-weight:500;color:var(--text);line-height:1.35;text-align:center}
 
 /* NEWSLETTER */
-.nl{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 0}
+.nl{background:var(--s3);border-top:1px solid rgba(0,119,192,.1);border-bottom:1px solid rgba(0,119,192,.1);padding:72px 0}
 .nlinner{display:flex;justify-content:space-between;align-items:center;gap:48px}
 .nlinpwrap{display:flex;gap:10px;flex:1;max-width:480px}
 .nlinp{flex:1;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:13px 20px;font-size:14px;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .25s}
@@ -216,8 +261,13 @@ nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-
 .nlinp::placeholder{color:var(--t3)}
 
 /* CTA */
-.ctasec{padding:130px 0;text-align:center;position:relative;overflow:hidden}
-.ctasec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(199,238,255,.5) 0%,transparent 68%);pointer-events:none}
+.ctasec{padding:130px 0;text-align:center;position:relative;overflow:hidden;background:var(--navy)}
+.ctasec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(0,119,192,.28) 0%,transparent 68%);pointer-events:none}
+.ctasec .hl{color:#fff}
+.ctasec .sub{color:rgba(255,255,255,.7)}
+.ctasec .lbl{color:rgba(199,238,255,.75)}
+.ctasec .lbl-gold{color:rgba(199,238,255,.9)}
+.ctasec em{background:linear-gradient(135deg,#7FC8E8,#C7EEFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ctabtns{display:flex;gap:14px;justify-content:center;margin-top:44px}
 
 /* PAGE LINKS */
@@ -248,6 +298,18 @@ footer .navname{color:#fff}
 .ftleg a{font-size:12.5px;color:#8FA1AF;text-decoration:none;transition:color .25s}
 .ftleg a:hover{color:#A8BCC8}
 
+/* PROCESS — dark section */
+#process{background:var(--navy);padding-bottom:120px}
+#process .seclbl{color:rgba(199,238,255,.75)}
+#process h2.hl{color:#fff}
+#process .procgrid{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1)}
+#process .pritem{background:rgba(255,255,255,.05)}
+#process .pritem:hover{background:rgba(255,255,255,.1)}
+#process .prstep{color:rgba(199,238,255,.75)}
+#process .prh{color:#fff}
+#process .prp{color:rgba(255,255,255,.62)}
+#process .prnum{color:rgba(255,255,255,.1)}
+
 /* REVEAL */
 @keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease}
@@ -263,16 +325,19 @@ footer .navname{color:#fff}
   .secintro{grid-template-columns:1fr;gap:20px}
   .nlinner{flex-direction:column;text-align:center;gap:28px}
   .nlinpwrap{max-width:100%;width:100%}
+  .hero-content{padding:140px 32px 52px;max-width:100%}
+  .heroform{max-width:100%}
 }
 @media(max-width:768px){
   .container{padding:0 22px}
   .navlinks,.navctas{display:none}
   .navburg{display:flex}
   .section{padding:80px 0}
-  .hero{padding:130px 22px 60px;min-height:auto}
+  .hero-content{padding:110px 22px 44px}
+  .hfinprow{flex-direction:column}
+  .hfinprow .btn{width:100%;justify-content:center}
   .herostats{flex-wrap:wrap}
-  .hstat{min-width:50%;padding:16px 0}
-  .hstat+.hstat{border-left:none;border-top:1px solid var(--border)}
+  .hstat{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
   .prodgrid,.subgrid,.qfgrid,.qfmeta{grid-template-columns:1fr}
   .pagegrid{grid-template-columns:1fr}
   .toolsgrid{grid-template-columns:repeat(2,1fr)}
@@ -283,6 +348,8 @@ footer .navname{color:#fff}
   .dethead{flex-direction:column;align-items:flex-start}
   .navi{padding:18px 22px}
   nav.sc .navi{padding:14px 22px}
+  .whybanner{height:260px}
+  .whybanner-caption h3{font-size:24px}
 }
 </style>
 </head>
@@ -323,15 +390,28 @@ footer .navname{color:#fff}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hpill">Licensed in 18 States &nbsp;·&nbsp; Independent Agency</div>
-  <h1>Coverage built<br>around <em>your life.</em></h1>
-  <p class="heroSub">OnePoint is your independent insurance advocate — comparing top-rated carriers to find coverage that truly fits, without the pressure.</p>
-  <div class="heroctas">
-    <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btnp" style="padding:15px 32px;font-size:15px">
-      Get a Free Quote
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a href="#coverage" class="btn btng" style="padding:15px 28px;font-size:15px">Explore Coverage</a>
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=1600&auto=format&fit=crop&q=80" alt="Family protected by OnePoint Insurance" loading="lazy">
+  </div>
+  <div class="hero-content">
+    <div class="hpill">Licensed in 18 States &nbsp;·&nbsp; Independent Agency</div>
+    <h1>Coverage built<br>around <em>your life.</em></h1>
+    <p class="heroSub">OnePoint compares 25+ top-rated carriers to find coverage that truly fits — without the pressure, jargon, or runaround.</p>
+    <div class="heroform">
+      <div class="hftabs">
+        <button class="hftab active" data-prod="Auto">Auto</button>
+        <button class="hftab" data-prod="Health">Health</button>
+        <button class="hftab" data-prod="Life">Life</button>
+        <button class="hftab" data-prod="Home">Home</button>
+        <button class="hftab" data-prod="Business">Business</button>
+        <button class="hftab" data-prod="Disability">Disability</button>
+      </div>
+      <div class="hfinprow">
+        <input type="text" class="hfinp" id="hfzip" placeholder="Enter your ZIP code" maxlength="5">
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btno" id="hfcta" style="padding:14px 26px;font-size:14px;border-radius:10px;flex-shrink:0">Get My Free Quote</a>
+      </div>
+      <p class="hfnote">No spam. No obligation. Licensed advisors compare 25+ carriers for you.</p>
+    </div>
   </div>
   <div class="herostats">
     <div class="hstat"><div class="hstatnum">18</div><div class="hstatlbl">States Served</div></div>
@@ -376,6 +456,13 @@ footer .navname{color:#fff}
         <p class="sub">As an independent agency, we work for you — not for the insurance companies. We compare dozens of carriers to find you the best coverage at the best rate.</p>
       </div>
     </div>
+    <div class="whybanner reveal">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&auto=format&fit=crop&q=80" alt="Licensed insurance advisors you can trust">
+      <div class="whybanner-caption">
+        <h3>People-first insurance guidance</h3>
+        <p>Licensed experts. 25+ carriers. Zero pressure.</p>
+      </div>
+    </div>
     <div class="whygrid reveal">
       <div class="witem">
         <div class="wnum">01</div>
@@ -397,7 +484,7 @@ footer .navname{color:#fff}
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section" id="process" style="padding-top:0">
+<section class="section" id="process">
   <div class="container">
     <div class="seclbl lbl reveal">How It Works</div>
     <h2 class="hl reveal" style="max-width:540px;margin-bottom:0">From quote to covered,<br>in four simple steps.</h2>
@@ -515,18 +602,18 @@ footer .navname{color:#fff}
 <section class="ctasec">
   <div class="container" style="position:relative;z-index:1">
     <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px">
-      <span style="width:22px;height:1px;background:var(--accent);display:block"></span>
+      <span style="width:22px;height:1px;background:rgba(199,238,255,.4);display:block"></span>
       <span class="lbl lbl-gold">Get Protected Today</span>
-      <span style="width:22px;height:1px;background:var(--accent);display:block"></span>
+      <span style="width:22px;height:1px;background:rgba(199,238,255,.4);display:block"></span>
     </div>
     <h2 class="hl reveal" style="max-width:680px;margin:0 auto">Ready to find coverage<br>that actually <em>fits?</em></h2>
     <p class="sub reveal" style="max-width:440px;margin:20px auto 0">No pressure. No spam. Just honest guidance from licensed experts who always put you first.</p>
     <div class="ctabtns reveal">
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btnp" style="padding:16px 36px;font-size:15px">
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btno" style="padding:16px 36px;font-size:15px">
         Book a Free Consultation
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="tel:888-899-8117" class="btn btng" style="padding:16px 32px;font-size:15px">Call 888-899-8117</a>
+      <a href="tel:888-899-8117" class="btn btnw" style="padding:16px 32px;font-size:15px">Call 888-899-8117</a>
     </div>
   </div>
 </section>
@@ -596,6 +683,17 @@ footer .navname{color:#fff}
 </footer>
 
 <script>
+// ─── HERO FORM TAB SWITCHING ───────────────────────────────────
+document.querySelectorAll('.hftab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.hftab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const prod = tab.dataset.prod;
+    const cta = document.getElementById('hfcta');
+    cta.textContent = `Get a ${prod} Quote`;
+  });
+});
+
 // ─── NAV SCROLL & REVEAL EFFECTS ───────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('sc', window.scrollY > 40);
@@ -610,6 +708,7 @@ const PRODS = {
   auto: {
     name: 'Auto Insurance', tagline: 'Drive confident, on every road.', count: '8 Products',
     qurl: 'https://onepointinsuranceagency.com/auto-insurance-quote',
+    img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&auto=format&fit=crop&q=80',
     icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l2-5h10l2 5"/><rect x="2" y="10" width="18" height="7" rx="2"/><circle cx="6.5" cy="17" r="1.5"/><circle cx="15.5" cy="17" r="1.5"/><line x1="2" y1="13" x2="20" y2="13"/></svg>`,
     items: [
       { name: 'Standard Auto', desc: 'Comprehensive protection for your everyday commute.' },
@@ -620,6 +719,7 @@ const PRODS = {
   home: {
     name: 'Home & Property', tagline: 'Protect your biggest investment.', count: '6 Products',
     qurl: 'https://onepointinsuranceagency.com/home-insurance-quote',
+    img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&auto=format&fit=crop&q=80',
     icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
     items: [
       { name: 'Homeowners', desc: 'Coverage for your dwelling, personal property, and liability.' },
@@ -630,6 +730,7 @@ const PRODS = {
   business: {
     name: 'Business & Commercial', tagline: 'Keep your enterprise secure.', count: '10+ Products',
     qurl: 'https://onepointinsuranceagency.com/business-quote',
+    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80',
     icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line></svg>`,
     items: [
       { name: 'General Liability', desc: 'Broad coverage against property damage or bodily injury claims.' },
@@ -649,10 +750,13 @@ Object.keys(PRODS).forEach(k => {
   div.className = 'pcard';
   div.onclick = () => openProd(k);
   div.innerHTML = `
-    <div class="picon">${p.icon}</div>
-    <div class="pcnt">${p.count}</div>
-    <h3 class="pname">${p.name}</h3>
-    <p class="ptag">${p.tagline}</p>
+    <img class="pcard-img" src="${p.img}" alt="${p.name}" loading="lazy">
+    <div class="pcard-body">
+      <div class="picon">${p.icon}</div>
+      <div class="pcnt">${p.count}</div>
+      <h3 class="pname">${p.name}</h3>
+      <p class="ptag">${p.tagline}</p>
+    </div>
     <svg class="parr" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   `;
   grid.appendChild(div);
