@@ -3,292 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Health Insurance | OnePoint</title>
+<title>Health Insurance | OnePoint Insurance Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
 </head>
 <body>
-<nav class="page-nav">
-  <div class="container page-nav-inner">
-    <a href="../index.html" class="brand">
-      <span class="brand-mark">1P</span>
-      <span class="brand-name">OnePoint</span>
-    </a>
-    <ul class="page-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="./" class="active">Health</a></li>
-      <li><a href="../life/">Life</a></li>
-      <li><a href="../disability/">Disability</a></li>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><span class="nav-brand-mark">1P</span><span class="nav-brand-name">OnePoint</span></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Vehicle</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li><li><a href="https://onepointinsuranceagency.com">RV &amp; Trailer</a></li></ul>
+                <h5 style="margin-top:18px">Property</h5><ul><li><a href="../home/">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li></ul>
+              </div>
+              <div class="mega-col">
+                <h5>Personal Protection</h5><ul><li><a href="./">Health Insurance</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com">Umbrella</a></li></ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5><ul><li><a href="../business/">Business Insurance</a></li><li><a href="../business/">General Liability</a></li><li><a href="../business/">Commercial Auto</a></li></ul>
+                <h5 style="margin-top:18px">Bundle &amp; Save</h5><ul><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li></ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
+      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
     </ul>
-    <a href="https://onepointinsuranceagency.com/appointment-calendar" class="page-cta">Get a Quote</a>
+    <div class="nav-actions">
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
   </div>
 </nav>
 
 <main>
-  <section class="hero hero--health" style="background-image:url('../health.jpg')">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow">Marketplace and Family Plans</span>
-          <h1>Health coverage that feels clear, calm, and built for real life.</h1>
-          <p class="hero-copy">Health insurance should feel understandable before it feels expensive. Individuals and families can explore plan options, cost tradeoffs, and practical next steps with more confidence and less confusion.</p>
-          <div class="hero-actions">
-            <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-primary">Talk to an Advisor</a>
-            <a href="#plans" class="btn btn-secondary">Explore Plan Basics</a>
-          </div>
+
+  <!-- HERO -->
+  <section class="hero" style="background-image:url('../health.jpg')">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Health Insurance · Marketplace &amp; Family Plans</span>
+      <h1>Health coverage that fits your life — and your budget.</h1>
+      <p class="hero-sub">Compare Marketplace plans, find premium tax credits, and enroll with a licensed advisor by your side. No confusion. No pressure.</p>
+    </div>
+    <div class="quote-card-wrap">
+      <div class="quote-card">
+        <div class="qc-head">
+          <p class="qc-title">Get your health insurance quote</p>
+          <p class="qc-sub">Compare Marketplace plans and check your tax credit eligibility.</p>
         </div>
-        <aside class="hero-card">
-          <div class="hero-card-row"><strong>6 Carrier Portals</strong><span>Aetna, Oscar, Anthem &amp; more</span></div>
-          <div class="hero-card-row"><strong>4 Coverage Tiers</strong><span>Bronze · Silver · Gold · Platinum</span></div>
-          <div class="hero-card-row"><strong>Premium Tax Credits</strong><span>May lower your monthly cost</span></div>
-          <div class="hero-card-row"><strong>18 States Served</strong><span>Licensed advisors near you</span></div>
-        </aside>
+        <form class="qc-form" onsubmit="goQuote(event)">
+          <div class="qc-step">
+            <label class="qc-step-label" for="zip">ZIP code</label>
+            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
+          </div>
+          <div class="qc-step">
+            <label class="qc-step-label">What are you quoting?</label>
+            <div class="qc-tabs">
+              <a href="../auto/" class="qc-tab" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
+              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
+              <a href="./" class="qc-tab active" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
+              <a href="../life/" class="qc-tab" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
+              <a href="../disability/" class="qc-tab" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
+              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
+            </div>
+          </div>
+          <button type="submit" class="qc-submit">
+            <span>Get a quote</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
       </div>
-      <div class="stats">
-        <div class="stat"><strong>18</strong><span>States Served</span></div>
-        <div class="stat"><strong>4</strong><span>Coverage Tiers</span></div>
-        <div class="stat"><strong>2010</strong><span>ACA Launch</span></div>
-        <div class="stat"><strong>6</strong><span>Carrier Portals Listed</span></div>
+    </div>
+    <div class="other-ways-bar">
+      <div class="other-ways-inner">
+        <strong>Other ways to enroll:</strong>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
+        <span class="other-ways-sep">|</span>
+        <a href="tel:888-899-8117">Call an agent ›</a>
       </div>
     </div>
   </section>
 
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-stats">
+        <div class="trust-stat"><strong>18</strong><span>States Served</span></div>
+        <div class="trust-stat"><strong>6+</strong><span>Carrier Portals</span></div>
+        <div class="trust-stat"><strong>4</strong><span>Coverage Tiers</span></div>
+        <div class="trust-stat"><strong>$0</strong><span>Cost to Compare</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAN TIERS -->
   <section class="section" id="plans">
     <div class="container">
       <div class="section-header">
-        <div>
-          <div class="kicker">Health Insurance Basics</div>
-          <h2>The Affordable Care Act and Marketplace coverage, simplified.</h2>
-        </div>
-        <p>The Affordable Care Act changed how many people shop for coverage by expanding access, standardizing protections, and making individual and family plans easier to compare in one place.</p>
+        <div class="section-kicker">Marketplace Plan Tiers</div>
+        <h2 class="section-h2">Four tiers. One right fit for your household.</h2>
+        <p class="section-lead">Each metal tier balances your monthly premium against what you pay when you actually use care. We help you find which balance works for your health needs and your budget.</p>
       </div>
-      <div class="grid-3">
-        <article class="card">
-          <h4>ACA Foundations</h4>
-          <p>The ACA expanded access to coverage, standardized key protections, and made it harder for insurers to deny or reprice applicants because of pre-existing conditions.</p>
-        </article>
-        <article class="card">
-          <h4>Essential Benefits</h4>
-          <p>Preventive care, emergency services, prescription drugs, maternity and newborn care, and mental health services were all called out as core examples of required benefits.</p>
-        </article>
-        <article class="card">
-          <h4>Marketplace Shopping</h4>
-          <p>The Health Insurance Marketplace is the main shopping and enrollment path for many individuals and families who need to compare coverage and pricing in one place.</p>
-        </article>
-      </div>
-      <div class="inline-cta">
-        <p><strong>Not sure which plan fits your household?</strong> A licensed advisor can help you compare options in minutes — no pressure, no spam.</p>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-primary">Get a Free Health Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section band">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <div class="kicker">Plan Levels</div>
-          <h2>Four tiers, four different cost tradeoffs.</h2>
-        </div>
-        <p>Each metal tier balances monthly premiums against what you may pay when you actually use care. The right fit depends on how often you expect to need doctors, specialists, prescriptions, or ongoing treatment.</p>
-      </div>
-      <div class="grid-4">
-        <article class="card">
+      <div class="feat-grid-4">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8M10 20V4M16 20V12M22 20V8"/></svg></div>
           <h4>Bronze</h4>
-          <p>Lower monthly premiums, but more out of pocket when you actually use care. Often best for shoppers who want the lightest monthly payment.</p>
-        </article>
-        <article class="card">
+          <p>Lowest monthly premium. Highest out-of-pocket costs when you use care. Best for healthy individuals who rarely need medical services.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8M10 20V4M16 20V8M22 20V12"/></svg></div>
           <h4>Silver</h4>
-          <p>A middle ground on premium and usage cost. Silver plans can also unlock extra cost-sharing help for eligible households.</p>
-        </article>
-        <article class="card">
+          <p>Middle ground on premiums and costs. Silver plans also unlock cost-sharing reductions for eligible households — the only tier that does.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
           <h4>Gold</h4>
-          <p>Higher premiums up front, with lower costs when care is used. A stronger fit for people expecting more regular doctor visits or prescriptions.</p>
-        </article>
-        <article class="card">
+          <p>Higher monthly premium, lower costs at the point of care. A strong fit if you have regular prescriptions, doctor visits, or ongoing treatment.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M6 3L2 9M18 3l4 6M8 9h8"/></svg></div>
           <h4>Platinum</h4>
-          <p>The highest premium tier, but the lowest out-of-pocket burden at the point of care. Usually built for very frequent medical use.</p>
-        </article>
+          <p>Highest premium, lowest out-of-pocket burden. Built for people with frequent or significant medical needs who want maximum cost predictability.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- PREMIUM TAX CREDIT -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="split-grid">
+        <div>
+          <div class="section-kicker">Premium Tax Credit</div>
+          <h2 class="section-h2">You may qualify for help paying your premium — and not even know it.</h2>
+          <p class="section-lead" style="margin-bottom:28px">The Premium Tax Credit is a federal subsidy that lowers your monthly health insurance cost for eligible households buying through the Marketplace.</p>
+          <div class="split-points">
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div>
+                <h5>Lower your monthly premium now</h5>
+                <p>If eligible, the credit applies directly to your premium — reducing what you pay each month rather than waiting for tax season.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 15 11 11 15 13 20 7"/></svg></div>
+              <div>
+                <h5>Based on income and household size</h5>
+                <p>Eligibility is tied to your household income relative to the federal poverty level. Your advisor will check your eligibility in minutes.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+              <div>
+                <h5>Report income changes</h5>
+                <p>Significant income or household size changes can affect your credit. We help you stay updated to avoid surprises at tax time.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Check My Eligibility</a>
+        </div>
+        <div class="split-img">
+          <img src="../health.jpg" alt="Health insurance advisor helping a family" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <strong>Ready to find your plan?</strong>
-          <p>Open enrollment windows close fast. Talk to an advisor today and lock in the coverage that fits your budget and care needs.</p>
+          <h2>Open enrollment won't wait. Neither should you.</h2>
+          <p>Missing the enrollment window means going uninsured or paying full price. Talk to an advisor now and get covered before deadlines close.</p>
         </div>
         <div class="mid-cta-actions">
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn-orange">Get a Health Quote</a>
-          <a href="tel:888-899-8117" class="mid-cta-phone">or call 888-899-8117</a>
+          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Health Quote</a>
+          <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CARRIERS -->
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <div>
-          <div class="kicker">Cost Terms</div>
-          <h2>The words shoppers need before they compare quotes.</h2>
-        </div>
-        <p>Before comparing plans, it helps to understand the three cost terms that most directly shape how a policy feels in everyday use.</p>
+        <div class="section-kicker">Carrier Tools</div>
+        <h2 class="section-h2">Already enrolled? Manage your coverage here.</h2>
+        <p class="section-lead">Quick access to ID cards, provider search, payments, and plan details for our most common health carriers.</p>
       </div>
-      <div class="grid-3">
-        <article class="card">
-          <h4>Deductible</h4>
-          <p>The amount you generally pay before the plan starts sharing more of the cost for covered care.</p>
-        </article>
-        <article class="card">
-          <h4>Copays and Coinsurance</h4>
-          <p>Your share when you receive care. Depending on the plan, that may be a flat fee or a percentage of the service cost.</p>
-        </article>
-        <article class="card">
-          <h4>Out-of-Pocket Maximum</h4>
-          <p>The cap on what you pay for covered services in a plan year before the plan takes on more of the cost.</p>
-        </article>
+      <div class="feat-grid-3">
+        <div class="feat-card"><h4>Aetna</h4><p>Download your ID card, find in-network doctors, view benefits, and make payments through your Aetna member portal.</p></div>
+        <div class="feat-card"><h4>Oscar Health</h4><p>Access your Oscar app or member portal to manage appointments, prescriptions, and plan documents.</p></div>
+        <div class="feat-card"><h4>Anthem</h4><p>Log in to your Anthem account to view your plan, locate providers, and manage claims and payments.</p></div>
+        <div class="feat-card"><h4>Kaiser Permanente</h4><p>Manage care, view benefits, and access telehealth through your Kaiser member account.</p></div>
+        <div class="feat-card"><h4>BCBS of Texas</h4><p>Find in-network providers, download your ID card, and manage your plan through the BCBS member portal.</p></div>
+        <div class="feat-card"><h4>Alliant Health</h4><p>Access your Alliant member tools to manage coverage, find care, and review your plan documents.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- FAQ -->
+  <section class="section section-alt">
     <div class="container">
       <div class="section-header">
-        <div>
-          <div class="kicker">Premium Tax Credit</div>
-          <h2>How premium support can make coverage more affordable.</h2>
-        </div>
-        <p>Premium Tax Credits can lower monthly costs for eligible households shopping through the Marketplace. Qualification typically depends on income, household size, and access to other affordable coverage.</p>
+        <div class="section-kicker">Common Questions</div>
+        <h2 class="section-h2">Health insurance answers, without the confusion.</h2>
       </div>
-      <div class="grid-2">
-        <article class="card">
-          <h4>What the subsidy can do</h4>
-          <p>It can lower monthly premiums in advance and then gets reconciled later when taxes are filed. Keeping household and income details current helps the estimate stay accurate.</p>
-        </article>
-        <article class="card">
-          <h4>Who it is aimed at</h4>
-          <p>It is most relevant for low- and moderate-income households buying their own individual or family coverage, especially when affordable employer coverage is not available.</p>
-        </article>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">When can I enroll in a Marketplace plan? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Open enrollment typically runs November 1 through December 15. Outside that window, you may qualify for a Special Enrollment Period if you lose other coverage, get married, have a baby, or experience certain life events. Your advisor can confirm your eligibility.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What's the difference between a deductible and an out-of-pocket maximum? <span class="faq-icon">+</span></button>
+          <div class="faq-a">The deductible is what you pay before your plan starts sharing costs for most services. The out-of-pocket maximum is the most you'll ever pay in a plan year — after that, the plan covers 100% of covered services.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I keep my current doctor? <span class="faq-icon">+</span></button>
+          <div class="faq-a">It depends on the plan. HMO plans require you to stay in-network. PPO plans give you more flexibility. Your advisor will help you confirm that your current providers are in-network before you choose a plan.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do pre-existing conditions still affect my eligibility? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Not for Marketplace plans. The ACA prohibits insurers from denying coverage or charging more because of pre-existing conditions for plans sold through the Marketplace.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is it better to go directly to healthcare.gov or use an advisor? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Using a licensed advisor costs you nothing — advisors are compensated by the carriers. But you get personalized plan comparison, subsidy verification, and someone to help if there's a problem. It's one of the easiest ways to make a better decision.</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section band">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <div class="kicker">Carrier Tools</div>
-          <h2>Post-enrollment help customers usually look for.</h2>
-        </div>
-        <p>Good health insurance experiences do not stop at enrollment. Members still need fast access to cards, payments, provider lookup, and account tools after coverage begins.</p>
-      </div>
-      <div class="photo-band" style="height:320px;margin-bottom:24px">
-        <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=1200&auto=format&fit=crop&q=80" alt="Carrier portal tools and health management" loading="lazy">
-        <div class="photo-band-caption">
-          <h3>Your carriers, all in one place</h3>
-          <p>Fast access to ID cards, provider lookup, payments, and plan details &mdash; whenever you need them.</p>
-        </div>
-      </div>
-      <div class="pill-row">
-        <span class="pill">Aetna</span>
-        <span class="pill">Oscar</span>
-        <span class="pill">Kaiser Permanente</span>
-        <span class="pill">Blue Cross Blue Shield of Texas</span>
-        <span class="pill">Anthem</span>
-        <span class="pill">Alliant</span>
-      </div>
-      <div class="grid-4" style="margin-top:18px">
-        <article class="card"><h4>Download ID Card</h4><p>Quick access for appointments, prescriptions, and proof of coverage.</p></article>
-        <article class="card"><h4>View Plan Details</h4><p>Log in to see current benefits, member documents, and account details.</p></article>
-        <article class="card"><h4>Find In-Network Care</h4><p>Search doctors, hospitals, and pharmacies before booking care.</p></article>
-        <article class="card"><h4>Make a Payment</h4><p>Use carrier billing portals to keep coverage active and current.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <a href="https://onepointinsuranceagency.com/appointment-calendar" class="sticky-cta">Get a Free Quote</a>
-
+  <!-- FINAL CTA -->
   <section class="cta-band">
     <div class="container">
-      <div class="cta-band-inner">
-        <span class="eyebrow">Ready to Compare?</span>
-        <h2>Find health coverage that fits your household and your budget.</h2>
-        <p>Whether you're shopping for the first time or comparing at renewal, a licensed advisor can walk you through your options in plain language — no pressure, no spam.</p>
-        <div class="actions">
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn-orange">Talk to a Health Advisor</a>
-          <a href="tel:888-899-8117" class="btn-ghost-white">Call 888-899-8117</a>
-        </div>
+      <div class="section-kicker">Ready to Compare?</div>
+      <h2 class="section-h2">Find health coverage that fits your household and your budget.</h2>
+      <p>A licensed advisor will compare plans, check your subsidy eligibility, and walk you through enrollment — at no cost to you.</p>
+      <div class="cta-band-actions">
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Talk to a Health Advisor</a>
+        <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <div class="ftgrid">
-      <div>
-        <a href="../index.html" class="brand">
-          <span class="brand-mark">1P</span>
-          <span class="brand-name">OnePoint Insurance</span>
-        </a>
-        <p class="ftdesc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
-        <div class="ftstates">
-          <span class="ftstate">GA</span><span class="ftstate">AL</span><span class="ftstate">AZ</span><span class="ftstate">FL</span><span class="ftstate">IL</span><span class="ftstate">LA</span><span class="ftstate">MD</span><span class="ftstate">MI</span><span class="ftstate">MS</span><span class="ftstate">MO</span><span class="ftstate">NJ</span><span class="ftstate">NY</span><span class="ftstate">NC</span><span class="ftstate">OH</span><span class="ftstate">SC</span><span class="ftstate">TN</span><span class="ftstate">TX</span><span class="ftstate">VA</span>
-        </div>
-      </div>
-      <div>
-        <div class="ftcolh">Coverage</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/auto">Auto Insurance</a></li>
-          <li><a href="https://onepointinsuranceagency.com/homeowners">Homeowners</a></li>
-          <li><a href="./">Health</a></li>
-          <li><a href="https://onepointinsuranceagency.com/business">Business</a></li>
-          <li><a href="../life/">Life Insurance</a></li>
-          <li><a href="../disability/">Disability</a></li>
-          <li><a href="https://onepointinsuranceagency.com/travel">Travel</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Company</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
-          <li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li>
-          <li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li>
-          <li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li>
-          <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Client Tools</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li>
-          <li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Policy Review</a></li>
-          <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule Call</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Contact</div>
-        <div class="ftci"><span class="ftcl">Phone</span><a href="tel:888-899-8117" class="ftcv">888-899-8117</a></div>
-        <div class="ftci"><span class="ftcl">Email</span><a href="mailto:info@onepointinsuranceagency.com" class="ftcv">info@onepointins.com</a></div>
-        <div class="ftci"><span class="ftcl">Address</span><span class="ftcv">555 NorthPoint Center E<br>Alpharetta, GA 30022</span></div>
-        <div class="ftci"><span class="ftcl">Hours</span><span class="ftcv">Mon-Fri, 9am-6pm ET</span></div>
-      </div>
+    <div class="ft-grid">
+      <div><div class="ft-brand"><span class="ft-brand-mark">1P</span><span class="ft-brand-name">OnePoint Insurance</span></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="./">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li><li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li><li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
-    <div class="ftbot">
-      <p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
-      <div class="ftleg">
-        <a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a>
-        <a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a>
-      </div>
-    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a><a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a></div></div>
   </div>
 </footer>
+
+<script>
+function goQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
 </body>
 </html>

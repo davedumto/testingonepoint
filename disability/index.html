@@ -3,246 +3,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Disability Insurance | OnePoint</title>
+<title>Disability Income Insurance | OnePoint Insurance Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
 </head>
 <body>
-<nav class="page-nav">
-  <div class="container page-nav-inner">
-    <a href="../index.html" class="brand">
-      <span class="brand-mark">1P</span>
-      <span class="brand-name">OnePoint</span>
-    </a>
-    <ul class="page-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../health/">Health</a></li>
-      <li><a href="../life/">Life</a></li>
-      <li><a href="./" class="active">Disability</a></li>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><span class="nav-brand-mark">1P</span><span class="nav-brand-name">OnePoint</span></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Vehicle</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li></ul>
+                <h5 style="margin-top:18px">Property</h5><ul><li><a href="../home/">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li></ul>
+              </div>
+              <div class="mega-col">
+                <h5>Personal Protection</h5><ul><li><a href="../health/">Health Insurance</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="./">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com">Umbrella</a></li></ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5><ul><li><a href="../business/">Business Insurance</a></li><li><a href="../business/">General Liability</a></li><li><a href="../business/">Commercial Auto</a></li></ul>
+                <h5 style="margin-top:18px">Bundle &amp; Save</h5><ul><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li></ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
+      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
     </ul>
-    <a href="https://onepointinsuranceagency.com/appointment-calendar" class="page-cta">Get a Disability Quote</a>
+    <div class="nav-actions">
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
   </div>
 </nav>
 
 <main>
-  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&auto=format&fit=crop&q=80')">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow">Income Protection</span>
-          <h1>Coverage for the paycheck your whole life depends on.</h1>
-          <p class="hero-copy">Disability coverage protects the income that keeps everything else moving. Recovery scenarios, practical timelines, and everyday financial pressure all shape what kind of protection makes the most sense.</p>
-          <div class="hero-actions">
-            <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-primary">Talk to an Advisor</a>
-            <a href="#options" class="btn btn-secondary">Compare Coverage Types</a>
+
+  <!-- HERO -->
+  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&auto=format&fit=crop&q=80')">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Disability Income Insurance · Income Protection</span>
+      <h1>Your income is your most valuable asset. Protect every paycheck.</h1>
+      <p class="hero-sub">If illness or injury keeps you from working, disability income insurance replaces your paycheck — so your life doesn't stop when work does.</p>
+    </div>
+    <div class="quote-card-wrap">
+      <div class="quote-card">
+        <div class="qc-head">
+          <p class="qc-title">Get your disability income quote</p>
+          <p class="qc-sub">Replace 60-70% of your paycheck when you can't work.</p>
+        </div>
+        <form class="qc-form" onsubmit="goQuote(event)">
+          <div class="qc-step">
+            <label class="qc-step-label" for="zip">ZIP code</label>
+            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
           </div>
-        </div>
-        <aside class="hero-card">
-          <div class="hero-card-row"><strong>60–70% Income Replaced</strong><span>Monthly benefit payments</span></div>
-          <div class="hero-card-row"><strong>Short &amp; Long Term</strong><span>90–180 day elimination period</span></div>
-          <div class="hero-card-row"><strong>Business Overhead</strong><span>Keep your doors open</span></div>
-          <div class="hero-card-row"><strong>18 States Served</strong><span>Licensed disability advisors</span></div>
-        </aside>
+          <div class="qc-step">
+            <label class="qc-step-label">What are you quoting?</label>
+            <div class="qc-tabs">
+              <a href="../auto/" class="qc-tab" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
+              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
+              <a href="../health/" class="qc-tab" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
+              <a href="../life/" class="qc-tab" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
+              <a href="./" class="qc-tab active" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
+              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
+            </div>
+          </div>
+          <button type="submit" class="qc-submit">
+            <span>Get a quote</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
       </div>
-      <div class="stats">
-        <div class="stat"><strong>60-70%</strong><span>Income Replaced</span></div>
-        <div class="stat"><strong>3</strong><span>Main Disability Paths</span></div>
-        <div class="stat"><strong>90-180</strong><span>Typical LTD Wait Days</span></div>
-        <div class="stat"><strong>12-24</strong><span>BOE Benefit Months</span></div>
+    </div>
+    <div class="other-ways-bar">
+      <div class="other-ways-inner">
+        <strong>Other ways to buy:</strong>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
+        <span class="other-ways-sep">|</span>
+        <a href="tel:888-899-8117">Call an agent ›</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="options">
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-stats">
+        <div class="trust-stat"><strong>60–70%</strong><span>Income Replaced</span></div>
+        <div class="trust-stat"><strong>3</strong><span>Coverage Paths</span></div>
+        <div class="trust-stat"><strong>18</strong><span>States Served</span></div>
+        <div class="trust-stat"><strong>$0</strong><span>Cost to Compare</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVERAGE TYPES -->
+  <section class="section" id="types">
     <div class="container">
       <div class="section-header">
-        <div>
-          <div class="kicker">Coverage Types</div>
-          <h2>Three different paths for income protection.</h2>
-        </div>
-        <p>Disability protection is not one-size-fits-all. Different policies are built for different recovery windows, work situations, and financial responsibilities.</p>
+        <div class="section-kicker">Coverage Types</div>
+        <h2 class="section-h2">Three paths to income protection — each built for a different situation.</h2>
+        <p class="section-lead">Disability coverage isn't one-size-fits-all. Your recovery timeline, work situation, and financial obligations all shape which type of policy makes the most sense.</p>
       </div>
-      <div class="grid-3">
-        <article class="card">
+      <div class="feat-grid-3">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <h4>Short-Term Disability</h4>
-          <p>Built for temporary interruptions from illness, injury, surgery, or maternity leave, with support that helps protect cash flow when life pauses unexpectedly.</p>
-        </article>
-        <article class="card">
+          <p>Covers temporary gaps from illness, injury, surgery, or maternity leave. Replaces part of your paycheck while you recover — so daily expenses don't pile up while work is on pause.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
           <h4>Long-Term Disability</h4>
-          <p>Designed for longer recoveries from conditions like stroke, cancer, chronic illness, injuries, or mental health events, with benefits that can continue for months or years.</p>
-        </article>
-        <article class="card">
+          <p>For recoveries lasting months or years — cancer, stroke, chronic illness, mental health, or serious injury. Benefits typically begin after a 90–180 day elimination period and can continue for years.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h2M8 11h2M8 15h2M14 7h2M14 11h2M14 15h2"/></svg></div>
           <h4>Business Overhead Expense</h4>
-          <p>Created for owners and key professionals who need the business to keep paying rent, payroll, utilities, and fixed bills while they are unable to work.</p>
-        </article>
-      </div>
-      <div class="inline-cta">
-        <p><strong>Not sure which disability path fits your work situation?</strong> An advisor can walk you through individual, employer, and business options in one conversation.</p>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-primary">Get a Disability Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section band">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <div class="kicker">Long-Term Disability</div>
-          <h2>For recoveries that extend beyond a brief interruption.</h2>
+          <p>Built for business owners. Covers rent, payroll, utilities, and fixed operating costs so your business stays open — even when you can't show up to run it.</p>
         </div>
-        <p>Long-term disability is designed for situations where recovery lasts months or longer, helping replace a portion of income after a waiting period and creating breathing room during extended disruption.</p>
-      </div>
-      <div class="grid-4">
-        <article class="card"><h4>Why it matters</h4><p>Helps pay the mortgage, bills, and household obligations when work is off the table for an extended stretch.</p></article>
-        <article class="card"><h4>Trigger events</h4><p>Illness and injury are both major factors, including chronic conditions, cancer, stroke, and mental health-related disability.</p></article>
-        <article class="card"><h4>Timing</h4><p>Many long-term disability plans begin benefits after a waiting period of roughly 90 to 180 days.</p></article>
-        <article class="card"><h4>Features</h4><p>Own-occupation protection, rider flexibility, and reliable long-duration income support can make the policy more adaptable.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- LONG TERM DETAIL -->
+  <section class="section section-alt">
     <div class="container">
-      <div class="section-header">
+      <div class="split-grid">
         <div>
-          <div class="kicker">Short-Term Disability</div>
-          <h2>For the income gap between healthy routine and full recovery.</h2>
+          <div class="section-kicker">Long-Term Disability</div>
+          <h2 class="section-h2">When a short break becomes a long absence, this is what keeps your life intact.</h2>
+          <p class="section-lead" style="margin-bottom:28px">LTD typically replaces 50–70% of your pre-disability income after the elimination period, helping you cover your mortgage, bills, and household obligations for as long as recovery takes.</p>
+          <div class="split-points">
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+              <div>
+                <h5>Covers illness and injury</h5>
+                <p>Cancer, stroke, chronic illness, mental health events, and injuries — not just workplace accidents.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M7 2v5a5 5 0 0 0 10 0V2M7 22v-5a5 5 0 0 1 10 0v5"/></svg></div>
+              <div>
+                <h5>90–180 day elimination period</h5>
+                <p>Benefits begin after the waiting period. Short-term disability can bridge that gap.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></div>
+              <div>
+                <h5>Own-occupation definition</h5>
+                <p>The strongest policies protect your ability to do your specific job — not just any job.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Get a Disability Quote</a>
         </div>
-        <p>Short-term disability supports the gap between being unable to work and being fully back on your feet, especially when daily expenses do not slow down just because recovery begins.</p>
-      </div>
-      <div class="grid-2">
-        <article class="card">
-          <h4>Who it helps</h4>
-          <p>Employees, employers, expecting parents, and small to mid-sized businesses can all benefit from coverage that protects income during temporary interruptions.</p>
-        </article>
-        <article class="card">
-          <h4>Possible riders</h4>
-          <p>Options can include own occupation, residual disability, catastrophic disability, critical illness, guaranteed insurability, return of premium, benefit increases, non-cancelable coverage, and waiver of premium.</p>
-        </article>
+        <div class="split-img">
+          <img src="../people-first.jpg" alt="Professional protected by disability income coverage" loading="lazy">
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <strong>Your income is your most valuable asset.</strong>
-          <p>A licensed advisor can help you understand how much coverage you'd need — and which policy structure fits your recovery timeline and financial obligations.</p>
+          <h2>1 in 4 workers will become disabled before retirement.</h2>
+          <p>Most people insure their car and their home. Almost no one insures the income that pays for both. Talk to an advisor today.</p>
         </div>
         <div class="mid-cta-actions">
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn-orange">Talk to an Advisor</a>
-          <a href="tel:888-899-8117" class="mid-cta-phone">or call 888-899-8117</a>
+          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Protect My Income</a>
+          <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- BOE SECTION -->
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <div>
-          <div class="kicker">Business Overhead Expense</div>
-          <h2>Protection for the business, not just the owner.</h2>
-        </div>
-        <p>Business overhead coverage is built around a simple goal: keep fixed operating expenses covered while the owner is temporarily unable to work.</p>
+        <div class="section-kicker">Business Overhead Expense</div>
+        <h2 class="section-h2">Your business keeps running — even when you can't.</h2>
+        <p class="section-lead">Business Overhead Expense insurance pays the fixed costs that don't stop just because you're sidelined — giving you time to recover without losing what you built.</p>
       </div>
-      <div class="photo-band" style="height:300px;margin-bottom:32px">
-        <img src="https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=1200&auto=format&fit=crop&q=80" alt="Business owner protected by overhead disability coverage" loading="lazy">
-        <div class="photo-band-caption">
-          <h3>Keep your business running, even when you can&rsquo;t</h3>
-          <p>Overhead expense coverage handles rent, payroll, and fixed bills while you recover.</p>
-        </div>
-      </div>
-      <div class="grid-4">
-        <article class="card"><h4>What it pays for</h4><p>Rent, utilities, internet, insurance premiums, lease payments, professional fees, and wages for non-owner employees can all be part of the protected expense mix.</p></article>
-        <article class="card"><h4>What it does not do</h4><p>It is designed to cover fixed business expenses and preserve operations, not replace business profits.</p></article>
-        <article class="card"><h4>Why owners use it</h4><p>It buys time to recover, bring in temporary help, or transition responsibility without the business immediately collapsing under fixed expenses.</p></article>
-        <article class="card"><h4>Typical structure</h4><p>Monthly reimbursement after a waiting period, usually for a shorter benefit duration such as 12 to 24 months.</p></article>
+      <div class="feat-grid-4">
+        <div class="feat-card"><h4>What it covers</h4><p>Rent, utilities, staff wages, insurance premiums, loan payments, professional fees — the bills that keep your doors open.</p></div>
+        <div class="feat-card"><h4>What it doesn't replace</h4><p>It covers fixed operating expenses — not your business profits or personal income. That's what individual disability coverage handles.</p></div>
+        <div class="feat-card"><h4>Who it's for</h4><p>Business owners, physicians, attorneys, and key professionals whose absence would immediately threaten the business's survival.</p></div>
+        <div class="feat-card"><h4>Typical structure</h4><p>Monthly reimbursement after a waiting period, usually with a benefit period of 12–24 months while you recover or transition.</p></div>
       </div>
     </div>
   </section>
 
-  <a href="https://onepointinsuranceagency.com/appointment-calendar" class="sticky-cta">Get a Free Quote</a>
+  <!-- FAQ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Common Questions</div>
+        <h2 class="section-h2">Disability income, explained clearly.</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Doesn't my employer already provide disability coverage? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Some employers offer group disability, but it often replaces only 40–60% of income and may not be portable if you leave. An individual policy fills the gap, is owned by you, and travels with your career.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What's the difference between short-term and long-term disability? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Short-term disability covers the first few weeks to months of an inability to work. Long-term disability kicks in after the elimination period — typically 90 to 180 days — and can last for years or until retirement age.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What does "own occupation" mean? <span class="faq-icon">+</span></button>
+          <div class="faq-a">An own-occupation policy pays benefits if you can't perform your specific job — even if you could technically work in another field. This is the gold standard, especially for professionals like doctors, dentists, or attorneys.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Are disability insurance benefits taxable? <span class="faq-icon">+</span></button>
+          <div class="faq-a">It depends on who pays the premiums. If you pay with after-tax dollars, benefits are generally tax-free. If your employer pays the premiums, benefits are typically taxable. Your advisor will clarify this for your specific situation.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How much coverage do I need? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Most policies replace 60–70% of your gross income — the amount you'd need to cover essential obligations while not working. Your advisor will calculate the right benefit amount based on your current income, expenses, and existing coverage.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- FINAL CTA -->
   <section class="cta-band">
     <div class="container">
-      <div class="cta-band-inner">
-        <span class="eyebrow">Best Next Step</span>
-        <h2>Protect the paycheck that keeps everything else running.</h2>
-        <p>A conversation with a licensed advisor can help you understand which type of disability coverage fits your situation — individual, employer, or business — without the confusion.</p>
-        <div class="actions">
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn-orange">Talk to an Advisor</a>
-          <a href="tel:888-899-8117" class="btn-ghost-white">Call 888-899-8117</a>
-        </div>
+      <div class="section-kicker">Your Next Step</div>
+      <h2 class="section-h2">Protect the paycheck that keeps everything else running.</h2>
+      <p>A licensed advisor will walk you through individual, employer, and business coverage options — and find the policy that fits your income, your recovery risk, and your life.</p>
+      <div class="cta-band-actions">
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Disability Quote</a>
+        <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <div class="ftgrid">
-      <div>
-        <a href="../index.html" class="brand">
-          <span class="brand-mark">1P</span>
-          <span class="brand-name">OnePoint Insurance</span>
-        </a>
-        <p class="ftdesc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
-        <div class="ftstates">
-          <span class="ftstate">GA</span><span class="ftstate">AL</span><span class="ftstate">AZ</span><span class="ftstate">FL</span><span class="ftstate">IL</span><span class="ftstate">LA</span><span class="ftstate">MD</span><span class="ftstate">MI</span><span class="ftstate">MS</span><span class="ftstate">MO</span><span class="ftstate">NJ</span><span class="ftstate">NY</span><span class="ftstate">NC</span><span class="ftstate">OH</span><span class="ftstate">SC</span><span class="ftstate">TN</span><span class="ftstate">TX</span><span class="ftstate">VA</span>
-        </div>
-      </div>
-      <div>
-        <div class="ftcolh">Coverage</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/auto">Auto Insurance</a></li>
-          <li><a href="https://onepointinsuranceagency.com/homeowners">Homeowners</a></li>
-          <li><a href="../health/">Health</a></li>
-          <li><a href="https://onepointinsuranceagency.com/business">Business</a></li>
-          <li><a href="../life/">Life Insurance</a></li>
-          <li><a href="./">Disability</a></li>
-          <li><a href="https://onepointinsuranceagency.com/travel">Travel</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Company</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
-          <li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li>
-          <li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li>
-          <li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li>
-          <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Client Tools</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li>
-          <li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Policy Review</a></li>
-          <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule Call</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ftcolh">Contact</div>
-        <div class="ftci"><span class="ftcl">Phone</span><a href="tel:888-899-8117" class="ftcv">888-899-8117</a></div>
-        <div class="ftci"><span class="ftcl">Email</span><a href="mailto:info@onepointinsuranceagency.com" class="ftcv">info@onepointins.com</a></div>
-        <div class="ftci"><span class="ftcl">Address</span><span class="ftcv">555 NorthPoint Center E<br>Alpharetta, GA 30022</span></div>
-        <div class="ftci"><span class="ftcl">Hours</span><span class="ftcv">Mon-Fri, 9am-6pm ET</span></div>
-      </div>
+    <div class="ft-grid">
+      <div><div class="ft-brand"><span class="ft-brand-mark">1P</span><span class="ft-brand-name">OnePoint Insurance</span></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="./">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li><li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li><li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
-    <div class="ftbot">
-      <p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
-      <div class="ftleg">
-        <a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a>
-        <a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a>
-      </div>
-    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a><a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a></div></div>
   </div>
 </footer>
+
+<script>
+function goQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
 </body>
 </html>

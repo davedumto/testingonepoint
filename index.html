@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,646 +6,651 @@
 <title>OnePoint Insurance Agency — Coverage Built Around Your Life</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="coverage-pages.css">
 <style>
-/* =========================================
-   NEW COLOR SYSTEM (White & Blue Trust Theme)
-   ========================================= */
-:root{
-  --bg: #FAFAFA;          /* Soft White Background */
-  --s1: #FFFFFF;          /* Pure White Surface */
-  --s2: #F9FCFF;          /* Very Soft Blue Tint for Hover */
-  --s3: #F0F7FB;          /* Light Blue-Gray for Inputs */
-  
-  --border: rgba(29,36,43,0.08);
-  --borderh: rgba(0,119,192,0.25);
-  
-  --text: #1D242B;        /* Deep Charcoal */
-  --t2: #5F6B76;          /* Medium Gray */
-  --t3: #8FA1AF;          /* Light Gray */
-  
-  --accent: #0077C0;      /* Strong Trust Blue */
-  --accenth: #005F99;     /* Darker Hover Blue */
-  --gold: #0077C0;        /* Replaced gold with blue for consistency */
-  --soft-blue: #C7EEFF;   /* Light Sky Blue */
-  --orange: #E8821A;      /* Warm Action Orange */
-  --orangeh: #C96E12;     /* Orange Hover */
-  --navy: #052847;        /* Deep Navy for Dark Sections */
-  
-  --r: 12px;
-  --rl: 20px;
+/* ── HOME-PAGE SPECIFIC OVERRIDES ── */
+
+/* Hero: full viewport on home */
+.home-hero {
+  min-height: calc(100vh - 64px);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: var(--navy) center/cover no-repeat;
+}
+.home-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, rgba(5,40,71,.55) 0%, rgba(5,40,71,.72) 45%, rgba(5,40,71,.90) 100%);
+}
+.home-hero-bg { position: absolute; inset: 0; }
+.home-hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.home-hero-text {
+  position: relative; z-index: 2;
+  text-align: center; padding: 60px 28px 0;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.home-hero-text h1 {
+  font-size: clamp(34px, 5vw, 60px);
+  font-weight: 700; color: #fff; line-height: 1.1;
+  max-width: 780px; margin: 0 auto 14px;
+}
+.home-hero-text h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #f4a054, #e8821a);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.home-hero-text p {
+  font-size: 17px; color: rgba(255,255,255,.72);
+  max-width: 540px; margin: 0 auto 28px; line-height: 1.55;
+}
+.home-hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 16px; border-radius: 999px;
+  background: rgba(255,255,255,.12); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2);
+  font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  color: rgba(255,255,255,.85); margin-bottom: 18px;
+}
+.home-hero-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange); flex-shrink: 0;
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* Quote card styles live in coverage-pages.css (.quote-card / .qc-*) */
 
-body{
-  font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
+/* Stats bar at bottom of hero */
+.home-stats-bar {
+  position: relative; z-index: 2;
+  background: rgba(5,40,71,.85); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,.1);
+  max-width: 1200px; margin: 0 auto; padding: 0 28px;
 }
-
-em{
-  font-style:italic;
-  background:linear-gradient(135deg, #0077C0, #005F99);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+.home-stats-inner {
+  display: flex; align-items: stretch; justify-content: center;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
 }
-
-.serif{font-family:'Cormorant Garamond',serif;font-weight:400}
-.container{max-width:1220px;margin:0 auto;padding:0 44px}
-.section{padding:120px 0}
-.lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
-.lbl-gold{color:var(--accent)}
-.seclbl{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px}
-.seclbl::before{content:'';width:20px;height:1px;background:var(--accent);display:block}
-h2.hl{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,5vw,62px);line-height:1.06;letter-spacing:-.025em;color:var(--text)}
-p.sub{font-size:clamp(15px,1.5vw,17px);line-height:1.7;color:var(--t2);font-weight:300}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;text-decoration:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);cursor:pointer;border:none;letter-spacing:.01em;white-space:nowrap}
-.btnp{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(0,119,192,0.2)}
-.btnp:hover{background:var(--accenth);transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,119,192,0.3)}
-.btng{background:#fff;color:var(--text);border:1px solid var(--border)}
-.btng:hover{border-color:var(--accent);color:var(--accent)}
-.btnlnk{background:transparent;color:var(--t2);padding:10px 0;font-size:14px;display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
-.btnlnk:hover{color:var(--accent)}
-.btnlnk svg,.btnp svg{transition:transform .3s}
-.btnlnk:hover svg{transform:translateX(4px)}
-.btnp:hover svg{transform:translateX(3px)}
-.btno{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(232,130,26,0.22)}
-.btno:hover{background:var(--orangeh);transform:translateY(-1px);box-shadow:0 12px 28px rgba(232,130,26,0.32)}
-.btno svg{transition:transform .3s}.btno:hover svg{transform:translateX(3px)}
-.btnw{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.28)}
-.btnw:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .4s ease}
-.navi{display:flex;align-items:center;justify-content:space-between;padding:22px 44px;border-bottom:1px solid transparent;transition:all .4s ease}
-nav.sc .navi{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:15px 44px}
-.navlogo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.navmark{width:34px;height:34px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:#fff;flex-shrink:0}
-.navname{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--text);letter-spacing:-.01em}
-.navlinks{display:flex;align-items:center;gap:36px;list-style:none}
-.navlinks a{font-size:13.5px;color:var(--t2);text-decoration:none;transition:color .25s}
-.navlinks a:hover{color:var(--accent)}
-.navctas{display:flex;align-items:center;gap:16px}
-.navph{font-size:13px;color:var(--t3);text-decoration:none;transition:color .25s;letter-spacing:.02em}
-.navph:hover{color:var(--accent)}
-.navburg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.navburg span{width:22px;height:1.5px;background:var(--text);display:block;transition:all .3s}
-/* Nav transparent state over dark hero */
-nav:not(.sc) .navname{color:#fff}
-nav:not(.sc) .navlinks a{color:rgba(255,255,255,.78)}
-nav:not(.sc) .navlinks a:hover{color:#fff}
-nav:not(.sc) .navph{color:rgba(255,255,255,.65)}
-nav:not(.sc) .navph:hover{color:#fff}
-nav:not(.sc) .navmark{background:rgba(255,255,255,.15);color:#fff}
-nav:not(.sc) .navburg span{background:#fff}
-
-/* MOBILE MENU */
-.mob{display:none;position:fixed;inset:0;background:rgba(250,250,250,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mob.open{display:flex}
-.mob a{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:var(--text);text-decoration:none;transition:color .25s}
-.mob a:hover{color:var(--accent)}
-.mobx{position:absolute;top:24px;right:28px;font-size:26px;color:var(--t2);cursor:pointer;background:none;border:none;font-family:'Outfit',sans-serif;transition:color .25s}
-.mobx:hover{color:var(--text)}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--navy)}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(5,40,71,.93) 0%,rgba(5,40,71,.72) 45%,rgba(5,40,71,.32) 100%)}
-.hero-content{position:relative;z-index:2;padding:160px 44px 60px;max-width:760px}
-.hpill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:6px 16px;font-size:11px;color:rgba(255,255,255,.9);letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:44px;animation:fup .8s ease both}
-.hpill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;animation:blink 2s ease infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,6vw,88px);font-weight:400;line-height:1.01;letter-spacing:-.035em;max-width:700px;animation:fup .8s .1s ease both;color:#fff}
-.hero h1 em{background:linear-gradient(135deg,#F4A054,#E8821A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
-.heroSub{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.75);max-width:520px;line-height:1.65;margin:24px 0 0;font-weight:300;animation:fup .8s .2s ease both}
-/* Hero embedded quote form */
-.heroform{background:rgba(255,255,255,.1);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:22px 24px;margin-top:36px;max-width:580px;animation:fup .8s .3s ease both}
-.hftabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.hftab{padding:7px 16px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.78);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:.01em}
-.hftab:hover{background:rgba(255,255,255,.18);color:#fff}
-.hftab.active{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(232,130,26,.35)}
-.hfinprow{display:flex;gap:10px;align-items:stretch}
-.hfinp{flex:1;background:rgba(255,255,255,.95);border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-family:'Outfit',sans-serif;color:var(--text);outline:none;min-width:0}
-.hfinp::placeholder{color:var(--t3)}
-.hfnote{font-size:11px;color:rgba(255,255,255,.48);margin:10px 0 0}
-/* Hero stats bar */
-.herostats{position:relative;z-index:2;display:flex;background:rgba(0,0,0,.3);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1)}
-.hstat{flex:1;text-align:center;padding:22px 20px;border-right:1px solid rgba(255,255,255,.1)}
-.hstat:last-child{border-right:none}
-.hstatnum{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:#fff;line-height:1}
-.hstatlbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:5px}
-
-/* HERO BADGE */
-.hero-badge{position:absolute;bottom:32px;left:28px;right:28px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-radius:16px;padding:16px 20px;border:1px solid rgba(0,119,192,.14);box-shadow:0 8px 28px rgba(5,40,71,.18);z-index:3}
-.hbdg-row{display:flex;align-items:center;gap:16px}
-.hbdg-stars{font-size:15px;color:var(--orange);letter-spacing:2px;flex-shrink:0}
-.hbdg-row strong{display:block;font-size:13px;color:var(--text);font-weight:600;line-height:1.3}
-.hbdg-row span{font-size:11.5px;color:var(--t2);margin-top:1px;display:block}
-
-/* SECTION INTRO */
-.secintro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:72px}
-.secright{padding-top:4px;display:flex;flex-direction:column;align-items:flex-start;gap:24px}
-
-/* PRODUCT GRID */
-.prodwrap{position:relative}
-.prodgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;transition:opacity .3s cubic-bezier(.25,.46,.45,.94),transform .3s cubic-bezier(.25,.46,.45,.94)}
-.prodgrid.out{opacity:0;transform:translateY(-14px);pointer-events:none}
-.pcard{background:var(--s1);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:var(--rl);padding:0 0 52px;cursor:pointer;transition:all .3s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,0.03)}
-.pcard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,119,192,.04) 0%,transparent 60%);opacity:0;transition:opacity .3s}
-.pcard:hover{border-color:var(--borderh);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,119,192,0.06)}
-.pcard:hover::after{opacity:1}
-.pcard-img{width:100%;height:180px;object-fit:cover;display:block;border-radius:var(--rl) var(--rl) 0 0;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-.pcard:hover .pcard-img{transform:scale(1.04)}
-.pcard-body{padding:24px 28px 0}
-.picon{width:46px;height:46px;border-radius:10px;background:rgba(0,119,192,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--accent);transition:background .3s;flex-shrink:0}
-.pcard:hover .picon{background:rgba(0,119,192,.12)}
-.pcnt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
-.pname{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:500;color:var(--text);letter-spacing:-.015em;margin-bottom:9px;line-height:1.15}
-.ptag{font-size:13.5px;color:var(--t2);line-height:1.5}
-.parr{position:absolute;bottom:26px;right:26px;color:var(--t3);transition:all .3s cubic-bezier(.25,.46,.45,.94)}
-.pcard:hover .parr{color:var(--accent);transform:translate(2px,-2px)}
-
-/* DETAIL VIEW */
-.detview{display:none;opacity:0;transform:translateY(18px);transition:opacity .35s cubic-bezier(.25,.46,.45,.94),transform .35s cubic-bezier(.25,.46,.45,.94)}
-.detview.in{opacity:1;transform:translateY(0)}
-.detback{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--t2);cursor:pointer;background:none;border:none;padding:0;margin-bottom:44px;transition:color .25s;font-family:'Outfit',sans-serif}
-.detback:hover{color:var(--accent)}
-.detback svg{transition:transform .25s}
-.detback:hover svg{transform:translateX(-3px)}
-.dethead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:20px}
-.dettitle{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,58px);font-weight:400;letter-spacing:-.025em;color:var(--text);line-height:1.05}
-.subgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.scard{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:24px 22px;transition:all .3s cubic-bezier(.25,.46,.45,.94);opacity:0;transform:translateY(20px);animation:cin .45s cubic-bezier(.25,.46,.45,.94) both;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
-.scard:hover{border-color:var(--borderh);background:var(--s2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,119,192,0.06)}
-.sname{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--text);margin-bottom:7px;letter-spacing:-.01em}
-.sdesc{font-size:12.5px;color:var(--t2);line-height:1.55;margin-bottom:16px}
-.slnk{font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:gap .25s;font-weight:600;letter-spacing:.02em;background:none;border:none;padding:0;cursor:pointer;font-family:'Outfit',sans-serif}
-.slnk:hover{gap:8px}
-@keyframes cin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.scard:nth-child(1){animation-delay:.04s}.scard:nth-child(2){animation-delay:.09s}.scard:nth-child(3){animation-delay:.14s}
-.scard:nth-child(4){animation-delay:.19s}.scard:nth-child(5){animation-delay:.24s}.scard:nth-child(6){animation-delay:.29s}
-
-
-/* QUOTE FORM */
-.quoteform{margin-top:32px;background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:28px;display:none;box-shadow:0 6px 16px rgba(0,0,0,0.03)}
-.quoteform.active{display:block;animation:cin .3s ease}
-.qfhead{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
-.qfgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.qfrow{margin-bottom:14px}
-.qflabel{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
-.qftextarea{min-height:110px;resize:vertical}
-.qfmeta{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
-.qfchip{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
-.qfchip span{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
-.qfchip strong{font-size:14px;color:var(--text);font-weight:500}
-.qfactions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.qfsuccess{padding:18px 20px;border:1px solid rgba(0,119,192,.18);background:rgba(0,119,192,.06);border-radius:14px}
-.qfsuccess h4{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:6px}
-.qfsuccess p{font-size:14px;color:var(--t2);line-height:1.6}
-
-
-/* WHY */
-.whybanner{width:100%;height:380px;border-radius:var(--rl);overflow:hidden;margin-bottom:0;position:relative}
-.whybanner img{width:100%;height:100%;object-fit:cover;display:block}
-.whybanner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,.45) 100%)}
-.whybanner-caption{position:absolute;bottom:28px;left:36px;color:#fff;z-index:2}
-.whybanner-caption h3{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400;letter-spacing:-.02em;margin-bottom:4px}
-.whybanner-caption p{font-size:14px;opacity:.8}
-.whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
-.witem{background:var(--s1);padding:48px 40px;transition:background .3s}
-.witem:hover{background:var(--s2)}
-.wnum{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:rgba(0,119,192,0.08);line-height:1;margin-bottom:24px}
-.wh{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--text);margin-bottom:10px;letter-spacing:-.01em}
-.wp{font-size:13.5px;color:var(--t2);line-height:1.65}
-
-/* PROCESS */
-.procgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,119,192,.12);border-radius:var(--rl);overflow:hidden;border:1px solid rgba(0,119,192,.12);margin-top:64px}
-.pritem{background:#EAF4FB;padding:40px 32px;position:relative;transition:background .3s}
-.pritem:hover{background:#ddeef8}
-.prnum{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(0,119,192,0.18);line-height:1;position:absolute;top:22px;right:20px}
-.prstep{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;margin-top:8px}
-.prh{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--text);margin-bottom:9px}
-.prp{font-size:13px;color:var(--t2);line-height:1.6}
-
-/* CARRIERS */
-.carriers{padding:72px 0;border-top:1px solid rgba(0,119,192,.14);border-bottom:1px solid rgba(0,119,192,.14);overflow:hidden;background:#EAF4FB}
-.clbl{text-align:center;margin-bottom:44px}
-.ctwrap{overflow:hidden;-webkit-mask:linear-gradient(to right,transparent,black 14%,black 86%,transparent);mask:linear-gradient(to right,transparent,black 14%,black 86%,transparent)}
-.ctrack{display:flex;animation:scroll 32s linear infinite;width:max-content}
-.citem{display:flex;align-items:center;padding:0 40px;border-right:1px solid var(--border);font-size:14px;font-weight:500;color:var(--t3);letter-spacing:.04em;white-space:nowrap;transition:color .3s;height:56px}
-.citem:hover{color:var(--accent)}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* TOOLS */
-.toolsgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:64px}
-.tcard{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:32px 22px;text-align:center;transition:all .3s cubic-bezier(.25,.46,.45,.94);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
-.tcard:hover{border-color:var(--borderh);background:var(--s2);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,119,192,0.06)}
-.ticon{width:42px;height:42px;background:rgba(0,119,192,.08);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
-.tname{font-size:13px;font-weight:500;color:var(--text);line-height:1.35;text-align:center}
-
-/* NEWSLETTER */
-.nl{background:var(--s3);border-top:1px solid rgba(0,119,192,.1);border-bottom:1px solid rgba(0,119,192,.1);padding:72px 0}
-.nlinner{display:flex;justify-content:space-between;align-items:center;gap:48px}
-.nlinpwrap{display:flex;gap:10px;flex:1;max-width:480px}
-.nlinp{flex:1;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:13px 20px;font-size:14px;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .25s}
-.nlinp:focus{border-color:var(--accent)}
-.nlinp::placeholder{color:var(--t3)}
-
-/* CTA */
-.ctasec{padding:130px 0;text-align:center;position:relative;overflow:hidden;background:var(--navy)}
-.ctasec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(0,119,192,.28) 0%,transparent 68%);pointer-events:none}
-.ctasec .hl{color:#fff}
-.ctasec .sub{color:rgba(255,255,255,.7)}
-.ctasec .lbl{color:rgba(199,238,255,.75)}
-.ctasec .lbl-gold{color:rgba(199,238,255,.9)}
-.ctasec em{background:linear-gradient(135deg,#7FC8E8,#C7EEFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ctabtns{display:flex;gap:14px;justify-content:center;margin-top:44px}
-
-/* PAGE LINKS */
-.pagegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
-.pagecard{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:28px;display:flex;flex-direction:column;gap:14px;text-decoration:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);box-shadow:0 6px 16px rgba(0,0,0,0.03)}
-.pagecard:hover{border-color:var(--borderh);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,119,192,0.08)}
-.pagecard h3{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:500;letter-spacing:-.02em;color:var(--text)}
-.pagecard p{font-size:13.5px;line-height:1.7;color:var(--t2)}
-.pagecard span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-
-/* FOOTER */
-footer{background:#1D242B;border-top:1px solid var(--border);padding:88px 0 52px; color: #fff;}
-.ftgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.4fr;gap:52px;margin-bottom:72px}
-footer .navname{color:#fff}
-.ftdesc{font-size:13.5px;color:#A8BCC8;line-height:1.65;margin-top:14px;max-width:260px}
-.ftstates{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-.ftstate{font-size:11px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:2px 7px;color:#A8BCC8;letter-spacing:.04em;font-weight:600}
-.ftcolh{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8FA1AF;margin-bottom:20px}
-.ftlinks{list-style:none;display:flex;flex-direction:column;gap:12px}
-.ftlinks a{font-size:13.5px;color:#A8BCC8;text-decoration:none;transition:color .25s}
-.ftlinks a:hover{color:#fff}
-.ftci{margin-bottom:16px}
-.ftcl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#8FA1AF;display:block;margin-bottom:2px}
-.ftcv{font-size:13.5px;color:#A8BCC8;text-decoration:none;line-height:1.5;transition:color .25s;display:block}
-.ftcv:hover{color:#fff}
-.ftbot{border-top:1px solid rgba(255,255,255,0.1);padding-top:32px;display:flex;justify-content:space-between;align-items:center}
-.ftleg{display:flex;gap:24px}
-.ftleg a{font-size:12.5px;color:#8FA1AF;text-decoration:none;transition:color .25s}
-.ftleg a:hover{color:#A8BCC8}
-
-/* PROCESS — dark section */
-#process{background:var(--navy);padding-bottom:120px}
-#process .seclbl{color:rgba(199,238,255,.75)}
-#process h2.hl{color:#fff}
-#process .procgrid{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1)}
-#process .pritem{background:rgba(255,255,255,.05)}
-#process .pritem:hover{background:rgba(255,255,255,.1)}
-#process .prstep{color:rgba(199,238,255,.75)}
-#process .prh{color:#fff}
-#process .prp{color:rgba(255,255,255,.62)}
-#process .prnum{color:rgba(255,255,255,.1)}
-
-/* REVEAL */
-@keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease}
-.reveal.vis{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .container{padding:0 32px}
-  .prodgrid,.subgrid{grid-template-columns:repeat(2,1fr)}
-  .toolsgrid{grid-template-columns:repeat(3,1fr)}
-  .ftgrid{grid-template-columns:1fr 1fr}
-  .whygrid,.procgrid{grid-template-columns:repeat(2,1fr)}
-  .secintro{grid-template-columns:1fr;gap:20px}
-  .nlinner{flex-direction:column;text-align:center;gap:28px}
-  .nlinpwrap{max-width:100%;width:100%}
-  .hero-content{padding:140px 32px 52px;max-width:100%}
-  .heroform{max-width:100%}
+.home-stat {
+  flex: 1; text-align: center; padding: 20px 28px;
+  border-right: 1px solid rgba(255,255,255,.1);
 }
-@media(max-width:768px){
-  .container{padding:0 22px}
-  .navlinks,.navctas{display:none}
-  .navburg{display:flex}
-  .section{padding:80px 0}
-  .hero-content{padding:110px 22px 44px}
-  .hfinprow{flex-direction:column}
-  .hfinprow .btn{width:100%;justify-content:center}
-  .herostats{flex-wrap:wrap}
-  .hstat{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
-  .prodgrid,.subgrid,.qfgrid,.qfmeta{grid-template-columns:1fr}
-  .pagegrid{grid-template-columns:1fr}
-  .toolsgrid{grid-template-columns:repeat(2,1fr)}
-  .whygrid,.procgrid{grid-template-columns:1fr}
-  .ftgrid{grid-template-columns:1fr;gap:32px}
-  .ftbot{flex-direction:column;gap:16px;text-align:center}
-  .ctabtns{flex-direction:column;align-items:center}
-  .dethead{flex-direction:column;align-items:flex-start}
-  .navi{padding:18px 22px}
-  nav.sc .navi{padding:14px 22px}
-  .whybanner{height:260px}
-  .whybanner-caption h3{font-size:24px}
+.home-stat:last-child { border-right: none; }
+.home-stat strong { display: block; font-size: 26px; font-weight: 700; color: #fff; line-height: 1; }
+.home-stat span { display: block; font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+
+/* Other ways bar */
+.home-other-ways {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto; padding: 0 28px;
+}
+.home-other-ways-inner {
+  background: var(--bg); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--muted);
+}
+.home-other-ways-inner strong { color: var(--text); margin-right: 4px; }
+.home-other-ways-inner a { color: var(--blue); font-weight: 500; }
+.home-other-ways-inner a:hover { text-decoration: underline; }
+.home-other-ways-sep { color: var(--border); margin: 0 4px; }
+
+/* PRODUCT CARDS (selling section) */
+.prod-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.prod-card {
+  background: var(--white); border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden; transition: .2s; text-decoration: none;
+}
+.prod-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: rgba(0,102,204,.3); }
+.prod-card-img { height: 180px; overflow: hidden; }
+.prod-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.prod-card:hover .prod-card-img img { transform: scale(1.05); }
+.prod-card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
+.prod-card-kicker { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--blue); margin-bottom: 8px; }
+.prod-card-body h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
+.prod-card-body p { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+.prod-card-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 14px; font-weight: 600; color: var(--blue);
+}
+.prod-card-cta span { font-size: 18px; }
+.prod-card:hover .prod-card-cta { color: var(--orange); }
+
+/* Why grid */
+.why-grid-home {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+}
+.why-item {
+  padding: 40px 36px; border-right: 1px solid var(--border); transition: background .2s;
+}
+.why-item:last-child { border-right: none; }
+.why-item:hover { background: var(--blue-light); }
+.why-num { font-size: 52px; font-weight: 700; color: rgba(0,102,204,.1); line-height: 1; margin-bottom: 20px; }
+.why-item h4 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.why-item p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* Carrier marquee */
+.carrier-track-wrap {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+  mask: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+}
+.carrier-track {
+  display: flex; animation: marquee 30s linear infinite; width: max-content;
+}
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.carrier-item {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 44px; height: 72px; flex-shrink: 0;
+}
+.carrier-item img {
+  max-height: 44px; max-width: 140px;
+  width: auto; height: auto; object-fit: contain;
+  filter: grayscale(100%); opacity: .75; transition: .25s;
+}
+.carrier-item:hover img { filter: grayscale(0); opacity: 1; }
+
+/* Process steps — 4 col */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  margin-top: 48px;
+}
+.process-item {
+  padding: 36px 28px; border-right: 1px solid var(--border);
+  position: relative; background: var(--bg);
+}
+.process-item:last-child { border-right: none; }
+.process-num {
+  font-size: 48px; font-weight: 700; color: rgba(0,102,204,.1);
+  line-height: 1; position: absolute; top: 20px; right: 20px;
+}
+.process-step { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--blue); margin-bottom: 10px; margin-top: 8px; }
+.process-item h4 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.process-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* People-first band */
+.people-first {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border-radius: var(--radius); overflow: hidden;
+  align-items: stretch;
+}
+.pf-img { position: relative; min-height: 480px; }
+.pf-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pf-content {
+  background: var(--navy); padding: 64px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.pf-content .section-kicker { color: var(--orange); }
+.pf-content h2 { color: #fff; font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+.pf-content p { color: rgba(255,255,255,.68); font-size: 15px; line-height: 1.75; margin-bottom: 32px; }
+
+/* Newsletter */
+.nl-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 40px;
+}
+.nl-form { display: flex; gap: 10px; flex: 1; max-width: 440px; }
+.nl-input {
+  flex: 1; padding: 13px 18px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif; font-size: 15px; color: var(--text);
+  outline: none; transition: .2s;
+}
+.nl-input:focus { border-color: var(--blue); }
+.nl-input::placeholder { color: var(--subtle); }
+
+@media (max-width: 960px) {
+  .prod-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid-home, .process-grid { grid-template-columns: 1fr 1fr; }
+  .people-first { grid-template-columns: 1fr; }
+  .pf-img { min-height: 280px; height: 280px; }
+  .nl-inner { flex-direction: column; text-align: center; }
+  .nl-form { max-width: 100%; width: 100%; }
+}
+@media (max-width: 640px) {
+  .prod-grid, .why-grid-home, .process-grid { grid-template-columns: 1fr; }
+  .home-stats-inner { flex-wrap: wrap; }
+  .home-stat { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,.1); }
 }
 </style>
 </head>
 <body>
 
-<!-- MOBILE MENU -->
-<div class="mob" id="mob">
-  <button class="mobx" onclick="document.getElementById('mob').classList.remove('open')">✕</button>
-  <a href="#coverage" onclick="document.getElementById('mob').classList.remove('open')">Coverage</a>
-  <a href="#process" onclick="document.getElementById('mob').classList.remove('open')">How It Works</a>
-  <a href="#tools" onclick="document.getElementById('mob').classList.remove('open')">Client Tools</a>
-  <a href="#about" onclick="document.getElementById('mob').classList.remove('open')">About</a>
-  <a href="tel:888-899-8117" onclick="document.getElementById('mob').classList.remove('open')">888-899-8117</a>
-</div>
-
 <!-- NAV -->
-<nav id="nav">
-  <div class="navi">
-    <a href="#" class="navlogo">
-      <div class="navmark">1P</div>
-      <span class="navname">OnePoint</span>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">1P</span>
+      <span class="nav-brand-name">OnePoint</span>
     </a>
-    <ul class="navlinks">
-      <li><a href="#coverage">Coverage</a></li>
-      <li><a href="#process">How It Works</a></li>
-      <li><a href="#tools">Client Tools</a></li>
-      <li><a href="#about">About</a></li>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Vehicle</h5>
+                <ul>
+                  <li><a href="auto/">Auto Insurance</a></li>
+                  <li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li>
+                  <li><a href="https://onepointinsuranceagency.com">RV &amp; Trailer</a></li>
+                </ul>
+                <h5 style="margin-top:18px">Property</h5>
+                <ul>
+                  <li><a href="home/">Homeowners</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/homeowners">Condo</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Personal Protection</h5>
+                <ul>
+                  <li><a href="health/">Health Insurance</a></li>
+                  <li><a href="life/">Life Insurance</a></li>
+                  <li><a href="disability/">Disability Income</a></li>
+                  <li><a href="https://onepointinsuranceagency.com">Umbrella</a></li>
+                </ul>
+                <h5 style="margin-top:18px">Bundle &amp; Save</h5>
+                <ul>
+                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Renters</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="business/">Business Insurance</a></li>
+                  <li><a href="business/">General Liability</a></li>
+                  <li><a href="business/">Commercial Auto</a></li>
+                  <li><a href="business/">Workers' Comp</a></li>
+                </ul>
+                <h5 style="margin-top:18px">Ways to Save</h5>
+                <ul>
+                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Compare Rates</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Bundle &amp; Save</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims">
+              <div class="mega-col">
+                <h5>File a Claim</h5>
+                <ul>
+                  <li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/client-services">Check Claim Status</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-about">
+              <div class="mega-col">
+                <h5>Company</h5>
+                <ul>
+                  <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li>
+                  <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
+      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+      <li><a href="https://onepointinsuranceagency.com/contact-us">Contact</a></li>
     </ul>
-    <div class="navctas">
-      <a href="tel:888-899-8117" class="navph">888-899-8117</a>
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btnp" style="padding:10px 20px;font-size:13px">Get a Quote</a>
+    <div class="nav-actions">
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
     </div>
-    <button class="navburg" onclick="document.getElementById('mob').classList.add('open')">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <img src="hero-family.jpg" alt="Family protected by OnePoint Insurance" loading="lazy">
+<section class="home-hero">
+  <div class="home-hero-bg">
+    <img src="hero-family.jpg" alt="Family protected by OnePoint Insurance">
   </div>
-  <div class="hero-content">
-    <div class="hpill">Licensed in 18 States &nbsp;·&nbsp; Independent Agency</div>
-    <h1>Coverage built<br>around <em>your life.</em></h1>
-    <p class="heroSub">OnePoint compares 25+ top-rated carriers to find coverage that truly fits — without the pressure, jargon, or runaround.</p>
-    <div class="heroform">
-      <div class="hftabs">
-        <button class="hftab active" data-prod="Auto">Auto</button>
-        <button class="hftab" data-prod="Health">Health</button>
-        <button class="hftab" data-prod="Life">Life</button>
-        <button class="hftab" data-prod="Home">Home</button>
-        <button class="hftab" data-prod="Business">Business</button>
-        <button class="hftab" data-prod="Disability">Disability</button>
-      </div>
-      <div class="hfinprow">
-        <input type="text" class="hfinp" id="hfzip" placeholder="Enter your ZIP code" maxlength="5">
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btno" id="hfcta" style="padding:14px 26px;font-size:14px;border-radius:10px;flex-shrink:0">Get My Free Quote</a>
-      </div>
-      <p class="hfnote">No spam. No obligation. Licensed advisors compare 25+ carriers for you.</p>
-    </div>
+  <div class="home-hero-text">
+    <div class="home-hero-pill">Licensed in 18 States &nbsp;·&nbsp; Independent Agency</div>
+    <h1>Coverage built around <em>your life.</em></h1>
+    <p>OnePoint compares 200+ top-rated carriers to find insurance that truly fits — without the pressure, jargon, or runaround.</p>
   </div>
-  <div class="herostats">
-    <div class="hstat"><div class="hstatnum">18</div><div class="hstatlbl">States Served</div></div>
-    <div class="hstat"><div class="hstatnum">50+</div><div class="hstatlbl">Products</div></div>
-    <div class="hstat"><div class="hstatnum">25+</div><div class="hstatlbl">Top Carriers</div></div>
-    <div class="hstat"><div class="hstatnum">24/7</div><div class="hstatlbl">Client Access</div></div>
-  </div>
-</section>
 
-<!-- COVERAGE -->
-<section class="section" id="coverage">
-  <div class="container">
-    <div class="secintro reveal">
-      <div>
-        <div class="seclbl lbl">Coverage</div>
-        <h2 class="hl">Insurance for every<br>chapter of your life.</h2>
+  <!-- FLOATING QUOTE CARD -->
+  <div class="quote-card-wrap">
+    <div class="quote-card">
+      <div class="qc-head">
+        <p class="qc-title">Start your free quote</p>
+        <p class="qc-sub">Compare 200+ top-rated carriers in minutes.</p>
       </div>
-      <div class="secright">
-        <p class="sub">From your first apartment to your growing business — personal vehicles to retirement protection — we carry the right product for every stage and every risk.</p>
-        <button class="btnlnk" onclick="window.location='https://onepointinsuranceagency.com'">
-          See all insurance products
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <form class="qc-form" onsubmit="goQuote(event)">
+        <div class="qc-step">
+          <label class="qc-step-label" for="zip-home">ZIP code</label>
+          <input class="qc-input" id="zip-home" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
+        </div>
+        <div class="qc-step">
+          <label class="qc-step-label">What are you quoting?</label>
+          <div class="qc-tabs">
+            <button type="button" class="qc-tab active" onclick="setTab(this,'auto')" aria-label="Auto insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
+              Auto
+            </button>
+            <button type="button" class="qc-tab" onclick="setTab(this,'home')" aria-label="Home insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>
+              Home
+            </button>
+            <button type="button" class="qc-tab" onclick="setTab(this,'health')" aria-label="Health insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+              Health
+            </button>
+            <button type="button" class="qc-tab" onclick="setTab(this,'life')" aria-label="Life insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+              Life
+            </button>
+            <button type="button" class="qc-tab" onclick="setTab(this,'disability')" aria-label="Disability insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+              Disability
+            </button>
+            <button type="button" class="qc-tab" onclick="setTab(this,'business')" aria-label="Business insurance">
+              <span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
+              Business
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="qc-submit">
+          <span>Start a quote</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-      </div>
+      </form>
+      <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
     </div>
-    <div class="prodwrap reveal">
-      <div id="prodGrid" class="prodgrid"></div>
-      <div id="detView" class="detview"></div>
+  </div>
+
+  <div class="home-other-ways">
+    <div class="home-other-ways-inner">
+      <strong>Other ways to buy:</strong>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
+      <span class="home-other-ways-sep">|</span>
+      <a href="tel:888-899-8117">Call an agent ›</a>
+      <span class="home-other-ways-sep">|</span>
+      <a href="https://onepointinsuranceagency.com/about-us">Find an agent ›</a>
     </div>
   </div>
 </section>
 
-<!-- WHY ONEPOINT -->
-<section class="section" id="about" style="padding-top:0">
+<!-- TRUST BAR -->
+<div class="trust-bar">
   <div class="container">
-    <div class="secintro reveal">
-      <div>
-        <div class="seclbl lbl">Why OnePoint</div>
-        <h2 class="hl">Your advocate,<br>not just your agent.</h2>
-      </div>
-      <div class="secright">
-        <p class="sub">As an independent agency, we work for you — not for the insurance companies. We compare dozens of carriers to find you the best coverage at the best rate.</p>
-      </div>
+    <div class="trust-stats">
+      <div class="trust-stat"><strong>18</strong><span>States Served</span></div>
+      <div class="trust-stat"><strong>200+</strong><span>Carrier Options</span></div>
+      <div class="trust-stat"><strong>20+</strong><span>Years Experience</span></div>
+      <div class="trust-stat"><strong>6</strong><span>Lines of Coverage</span></div>
+      <div class="trust-stat"><strong>$0</strong><span>Cost to Compare</span></div>
     </div>
-    <div class="whybanner reveal">
-      <img src="people-first.jpg" alt="Licensed insurance advisors you can trust">
-      <div class="whybanner-caption">
-        <h3>People-first insurance guidance</h3>
-        <p>Licensed experts. 25+ carriers. Zero pressure.</p>
-      </div>
+  </div>
+</div>
+
+<!-- PRODUCTS — SELL THE COVERAGE -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Our Coverage</div>
+      <h2 class="section-h2">One agency. Every type of coverage your family and business needs.</h2>
+      <p class="section-lead">We're independent — which means we compare dozens of top-rated carriers to find the right policy for you, not the one that pays us the biggest commission.</p>
     </div>
-    <div class="whygrid reveal">
-      <div class="witem">
-        <div class="wnum">01</div>
-        <div class="wh">Multi-Carrier Access</div>
-        <p class="wp">We partner with 25+ A-rated carriers so you always get competitive rates — never a one-size-fits-all policy driven by commission incentives.</p>
+    <div class="prod-grid">
+      <a href="auto/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&auto=format&fit=crop&q=80" alt="Auto insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Vehicle</div>
+          <h3>Auto Insurance</h3>
+          <p>Compare top carriers and find the best rate. Most drivers overpay by hundreds a year — switching takes minutes.</p>
+          <div class="prod-card-cta">Get a free auto quote <span>›</span></div>
+        </div>
+      </a>
+      <a href="home/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&auto=format&fit=crop&q=80" alt="Homeowners insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Property</div>
+          <h3>Homeowners Insurance</h3>
+          <p>Your home is your biggest asset. Make sure it's protected with the right coverage at the right price.</p>
+          <div class="prod-card-cta">Get a free home quote <span>›</span></div>
+        </div>
+      </a>
+      <a href="health/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="health.jpg" alt="Health insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Personal</div>
+          <h3>Health Insurance</h3>
+          <p>Marketplace plans, premium tax credits, and enrollment support from a licensed advisor — at no cost to you.</p>
+          <div class="prod-card-cta">Get a free health quote <span>›</span></div>
+        </div>
+      </a>
+      <a href="life/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="hero-family.jpg" alt="Life insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Personal</div>
+          <h3>Life Insurance</h3>
+          <p>One decision that protects your family's financial future. Term, whole, universal — we find what fits.</p>
+          <div class="prod-card-cta">Get a free life quote <span>›</span></div>
+        </div>
+      </a>
+      <a href="disability/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="people-first.jpg" alt="Disability income insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Income Protection</div>
+          <h3>Disability Income</h3>
+          <p>Your income keeps everything else running. Protect 60–70% of your paycheck if illness or injury stops you from working.</p>
+          <div class="prod-card-cta">Get a disability quote <span>›</span></div>
+        </div>
+      </a>
+      <a href="business/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=600&auto=format&fit=crop&q=80" alt="Business insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Business</div>
+          <h3>Business Insurance</h3>
+          <p>General liability, commercial property, workers' comp, and more — tailored for your industry and your size.</p>
+          <div class="prod-card-cta">Get a business quote <span>›</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MID CTA -->
+<section class="mid-cta">
+  <div class="container">
+    <div class="mid-cta-inner">
+      <div class="mid-cta-text">
+        <h2>Most people are overpaying for coverage — or missing coverage they desperately need.</h2>
+        <p>A 10-minute conversation with a licensed OnePoint advisor could save you money, close dangerous gaps, or both.</p>
       </div>
-      <div class="witem">
-        <div class="wnum">02</div>
-        <div class="wh">Licensed Experts</div>
-        <p class="wp">Our advisors hold active licenses across all 18 states we serve. They know your local market and guide you through complex decisions with clarity and zero pressure.</p>
-      </div>
-      <div class="witem">
-        <div class="wnum">03</div>
-        <div class="wh">Nationwide Reach</div>
-        <p class="wp">Protecting families and businesses across Georgia, Florida, Texas, New York, and 14 more states — the same personalized care, wherever you are.</p>
+      <div class="mid-cta-actions">
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Free Quote</a>
+        <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section" id="process">
+<section class="section section-alt">
   <div class="container">
-    <div class="seclbl lbl reveal">How It Works</div>
-    <h2 class="hl reveal" style="max-width:540px;margin-bottom:0">From quote to covered,<br>in four simple steps.</h2>
-    <div class="procgrid reveal">
-      <div class="pritem">
-        <div class="prnum">01</div>
-        <div class="prstep">Tell Us About You</div>
-        <div class="prh">Start a Conversation</div>
-        <p class="prp">Share your needs online, by phone, or by appointment. No jargon, no pressure, no confusing forms.</p>
+    <div class="section-header">
+      <div class="section-kicker">How It Works</div>
+      <h2 class="section-h2">Getting the right insurance is simpler than you think.</h2>
+      <p class="section-lead">We take the complexity out of insurance so you can make a confident decision without spending hours researching on your own.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="process-num">1</div>
+        <div class="process-step">Step 1</div>
+        <h4>Tell us about yourself</h4>
+        <p>A quick conversation about your coverage needs, budget, and situation — no forms to fill out alone.</p>
       </div>
-      <div class="pritem">
-        <div class="prnum">02</div>
-        <div class="prstep">We Do the Research</div>
-        <div class="prh">Compare Your Options</div>
-        <p class="prp">We pull quotes from multiple top carriers, analyze coverage depth and value — so you never have to guess what you're getting.</p>
+      <div class="process-item">
+        <div class="process-num">2</div>
+        <div class="process-step">Step 2</div>
+        <h4>We shop 200+ carriers</h4>
+        <p>We compare rates and coverage from dozens of top-rated carriers you may not have access to on your own.</p>
       </div>
-      <div class="pritem">
-        <div class="prnum">03</div>
-        <div class="prstep">Make a Smart Choice</div>
-        <div class="prh">Review Together</div>
-        <p class="prp">We walk you through every option in plain language, answer every question, and help you decide with complete confidence.</p>
+      <div class="process-item">
+        <div class="process-num">3</div>
+        <div class="process-step">Step 3</div>
+        <h4>We explain your options</h4>
+        <p>No jargon. We walk you through what we found, what it covers, what it costs, and what makes sense.</p>
       </div>
-      <div class="pritem">
-        <div class="prnum">04</div>
-        <div class="prstep">Stay Protected</div>
-        <div class="prh">Get &amp; Stay Covered</div>
-        <p class="prp">Bind your policy fast. We stay connected for renewals, policy updates, claims, and every life change along the way.</p>
+      <div class="process-item">
+        <div class="process-num">4</div>
+        <div class="process-step">Step 4</div>
+        <h4>You choose and get covered</h4>
+        <p>Pick your plan, lock in your rate, and get your policy in place — as fast as today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE FIRST -->
+<section class="section">
+  <div class="container">
+    <div class="people-first">
+      <div class="pf-img">
+        <img src="people-first.jpg" alt="OnePoint advisors putting people first" loading="lazy">
+      </div>
+      <div class="pf-content">
+        <div class="section-kicker">Why OnePoint</div>
+        <h2>People-first insurance guidance.</h2>
+        <p>We're not a call center. We're a team of licensed advisors who take the time to understand your situation — then find coverage that actually works for you. Independent means we work for you, not the insurance company.</p>
+        <div class="split-points">
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <div>
+              <h5 style="color:#fff">We shop 200+ carriers</h5>
+              <p>More options means better rates and better coverage — not just the loudest name.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+            <div>
+              <h5 style="color:#fff">A real advisor, every time</h5>
+              <p>No bots. No scripts. A licensed professional who knows your name and your policy.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1)"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
+            <div>
+              <h5 style="color:#fff">We stay with you</h5>
+              <p>We're there at enrollment, at renewal, and when something goes wrong and you need to file a claim.</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Talk to an Advisor</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CARRIERS -->
-<div class="carriers">
-  <div class="clbl"><p class="lbl">Featured Carriers We Trust</p></div>
-  <div class="ctwrap"><div class="ctrack" id="ctrack"></div></div>
-</div>
-
-<!-- CLIENT TOOLS -->
-<section class="section" id="tools">
+<section style="padding:52px 0;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
-    <div class="secintro reveal">
-      <div>
-        <div class="seclbl lbl">Client Services</div>
-        <h2 class="hl">Manage your policy,<br>on your schedule.</h2>
-      </div>
-      <div class="secright">
-        <p class="sub">Submit requests, upload documents, review coverage, or start a claim — directly, without waiting on hold or driving to an office.</p>
-        <a href="https://onepointinsuranceagency.com/client-services" class="btn btng" style="margin-top:8px">Go to Client Portal</a>
-      </div>
-    </div>
-    <div class="toolsgrid reveal">
-      <a href="https://onepointinsuranceagency.com/client-services" class="tcard">
-        <div class="ticon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2H6a2 2 0 00-2 2v14a2 2 0 002 2h8a2 2 0 002-2V6L13 2z"/><polyline points="13 2 13 7 18 7"/><line x1="7" y1="11" x2="13" y2="11"/><line x1="7" y1="14" x2="10" y2="14"/>
-          </svg>
-        </div>
-        <span class="tname">File a Claim</span>
-      </a>
-      <a href="https://onepointinsuranceagency.com/policy-request" class="tcard">
-        <div class="ticon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 4H4a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-          </svg>
-        </div>
-        <span class="tname">Update My Policy</span>
-      </a>
-      <a href="https://onepointinsuranceagency.com/client-services" class="tcard">
-        <div class="ticon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 15.39A5 5 0 0018 6h-1.26A8 8 0 103 16.3"/>
-          </svg>
-        </div>
-        <span class="tname">Upload Document</span>
-      </a>
-      <a href="https://onepointinsuranceagency.com/policy-request" class="tcard">
-        <div class="ticon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-          </svg>
-        </div>
-        <span class="tname">Policy Review</span>
-      </a>
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="tcard">
-        <div class="ticon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="16" height="14" rx="2"/><line x1="2" y1="9" x2="18" y2="9"/><line x1="6" y1="2" x2="6" y2="6"/><line x1="14" y1="2" x2="14" y2="6"/>
-          </svg>
-        </div>
-        <span class="tname">Schedule a Call</span>
-      </a>
+    <p style="text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--subtle);margin-bottom:28px">Carriers we work with</p>
+  </div>
+  <div class="carrier-track-wrap">
+    <div class="carrier-track">
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d638ef7a80e28d1330e.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d63c42af0213dff4367.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d630fd3c4eccd93f472.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d628ef7a826b6d1330d.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d630fd3c4531093f473.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d62bec938796f914e28.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/650b579fe039896ae1dd3edf.png" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/65a6d7bae967b36a6e7efd95.png" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/688417d05463167c140febb9.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68841660ad320866fc0bc910.webp" alt="Carrier logo" loading="lazy"></span>
+      <!-- duplicate for seamless loop -->
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d638ef7a80e28d1330e.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d63c42af0213dff4367.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d630fd3c4eccd93f472.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d628ef7a826b6d1330d.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d630fd3c4531093f473.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/67290d62bec938796f914e28.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/650b579fe039896ae1dd3edf.png" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/65a6d7bae967b36a6e7efd95.png" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/688417d05463167c140febb9.webp" alt="Carrier logo" loading="lazy"></span>
+      <span class="carrier-item"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68841660ad320866fc0bc910.webp" alt="Carrier logo" loading="lazy"></span>
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<div class="nl">
+<!-- FINAL CTA -->
+<section class="cta-band">
   <div class="container">
-    <div class="nlinner reveal">
-      <div>
-        <div class="seclbl lbl" style="margin-bottom:10px">Stay Informed</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;letter-spacing:-.02em;color:var(--text)">Stay covered. Stay informed.</h3>
-        <p style="font-size:14px;color:var(--t2);margin-top:6px">Monthly insurance tips, plan updates, and exclusive offers. Unsubscribe anytime.</p>
-      </div>
-      <div class="nlinpwrap">
-        <input type="email" class="nlinp" placeholder="Your email address">
-        <button class="btn btnp">Subscribe</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA -->
-<section class="ctasec">
-  <div class="container" style="position:relative;z-index:1">
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px">
-      <span style="width:22px;height:1px;background:rgba(199,238,255,.4);display:block"></span>
-      <span class="lbl lbl-gold">Get Protected Today</span>
-      <span style="width:22px;height:1px;background:rgba(199,238,255,.4);display:block"></span>
-    </div>
-    <h2 class="hl reveal" style="max-width:680px;margin:0 auto">Ready to find coverage<br>that actually <em>fits?</em></h2>
-    <p class="sub reveal" style="max-width:440px;margin:20px auto 0">No pressure. No spam. Just honest guidance from licensed experts who always put you first.</p>
-    <div class="ctabtns reveal">
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btno" style="padding:16px 36px;font-size:15px">
-        Book a Free Consultation
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="tel:888-899-8117" class="btn btnw" style="padding:16px 32px;font-size:15px">Call 888-899-8117</a>
+    <div class="section-kicker">Your Next Step</div>
+    <h2 class="section-h2">Get the coverage your family deserves — starting today.</h2>
+    <p>A licensed OnePoint advisor will compare your options, explain your choices in plain language, and find you the best rate. It costs nothing to find out.</p>
+    <div class="cta-band-actions">
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Quote</a>
+      <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer class="site-footer">
   <div class="container">
-    <div class="ftgrid">
+    <div class="ft-grid">
       <div>
-        <a href="#" class="navlogo">
-          <div class="navmark">1P</div>
-          <span class="navname">OnePoint Insurance</span>
-        </a>
-        <p class="ftdesc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
-        <div class="ftstates">
-          <span class="ftstate">GA</span><span class="ftstate">AL</span><span class="ftstate">AZ</span><span class="ftstate">FL</span><span class="ftstate">IL</span><span class="ftstate">LA</span><span class="ftstate">MD</span><span class="ftstate">MI</span><span class="ftstate">MS</span><span class="ftstate">MO</span><span class="ftstate">NJ</span><span class="ftstate">NY</span><span class="ftstate">NC</span><span class="ftstate">OH</span><span class="ftstate">SC</span><span class="ftstate">TN</span><span class="ftstate">TX</span><span class="ftstate">VA</span>
+        <div class="ft-brand">
+          <span class="ft-brand-mark">1P</span>
+          <span class="ft-brand-name">OnePoint Insurance</span>
+        </div>
+        <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
+        <div class="ft-states">
+          <span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span>
         </div>
       </div>
-      <div>
-        <div class="ftcolh">Coverage</div>
-        <ul class="ftlinks">
-          <li><a href="https://onepointinsuranceagency.com/auto">Auto Insurance</a></li>
-          <li><a href="https://onepointinsuranceagency.com/homeowners">Homeowners</a></li>
+      <div class="ft-col">
+        <h5>Coverage</h5>
+        <ul>
+          <li><a href="auto/">Auto Insurance</a></li>
+          <li><a href="home/">Homeowners</a></li>
           <li><a href="health/">Health</a></li>
-          <li><a href="https://onepointinsuranceagency.com/business">Business</a></li>
           <li><a href="life/">Life Insurance</a></li>
-          <li><a href="disability/">Disability</a></li>
-          <li><a href="https://onepointinsuranceagency.com/travel">Travel</a></li>
+          <li><a href="disability/">Disability Income</a></li>
+          <li><a href="business/">Business</a></li>
         </ul>
       </div>
-      <div>
-        <div class="ftcolh">Company</div>
-        <ul class="ftlinks">
+      <div class="ft-col">
+        <h5>Company</h5>
+        <ul>
           <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
           <li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li>
           <li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li>
@@ -654,27 +658,26 @@ footer .navname{color:#fff}
           <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
         </ul>
       </div>
-      <div>
-        <div class="ftcolh">Client Tools</div>
-        <ul class="ftlinks">
+      <div class="ft-col">
+        <h5>Client Tools</h5>
+        <ul>
           <li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li>
           <li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li>
           <li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Policy Review</a></li>
-          <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule Call</a></li>
+          <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li>
         </ul>
       </div>
-      <div>
-        <div class="ftcolh">Contact</div>
-        <div class="ftci"><span class="ftcl">Phone</span><a href="tel:888-899-8117" class="ftcv">888-899-8117</a></div>
-        <div class="ftci"><span class="ftcl">Email</span><a href="mailto:info@onepointinsuranceagency.com" class="ftcv">info@onepointins.com</a></div>
-        <div class="ftci"><span class="ftcl">Address</span><span class="ftcv">555 NorthPoint Center E<br>Alpharetta, GA 30022</span></div>
-        <div class="ftci"><span class="ftcl">Hours</span><span class="ftcv">Mon–Fri, 9am–6pm ET</span></div>
+      <div class="ft-col">
+        <h5>Contact</h5>
+        <div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon–Fri, 9am–6pm ET</div></div>
       </div>
     </div>
-    <div class="ftbot">
-      <p style="font-size:12.5px;color:#8FA1AF">© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
-      <div class="ftleg">
+    <div class="ft-bottom">
+      <p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
+      <div class="ft-bottom-links">
         <a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a>
         <a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a>
       </div>
@@ -683,239 +686,34 @@ footer .navname{color:#fff}
 </footer>
 
 <script>
-// ─── HERO FORM TAB SWITCHING ───────────────────────────────────
-document.querySelectorAll('.hftab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.hftab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const prod = tab.dataset.prod;
-    const cta = document.getElementById('hfcta');
-    cta.textContent = `Get a ${prod} Quote`;
-  });
+let activeProduct = 'auto';
+
+function setTab(btn, product) {
+  document.querySelectorAll('.qc-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  activeProduct = product;
+}
+
+function goQuote(e) {
+  e.preventDefault();
+  window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
+}
+
+function toggleMega(btn) {
+  const li = btn.closest('li');
+  const isOpen = li.classList.contains('open');
+  document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('open'));
+  if (!isOpen) li.classList.add('open');
+}
+function switchTab(btn, panel) {
+  btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + panel).classList.add('active');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.has-mega')) document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('open'));
 });
-
-// ─── NAV SCROLL & REVEAL EFFECTS ───────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('sc', window.scrollY > 40);
-  document.querySelectorAll('.reveal').forEach(el => {
-    if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('vis');
-  });
-});
-window.dispatchEvent(new Event('scroll'));
-
-// ─── COMPLETED PRODUCTS DATA & RENDER JS ───────────────────────
-const PRODS = {
-  auto: {
-    name: 'Auto Insurance', tagline: 'Drive confident, on every road.', count: '8 Products',
-    qurl: 'https://onepointinsuranceagency.com/auto-insurance-quote',
-    img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&auto=format&fit=crop&q=80',
-    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l2-5h10l2 5"/><rect x="2" y="10" width="18" height="7" rx="2"/><circle cx="6.5" cy="17" r="1.5"/><circle cx="15.5" cy="17" r="1.5"/><line x1="2" y1="13" x2="20" y2="13"/></svg>`,
-    items: [
-      { name: 'Standard Auto', desc: 'Comprehensive protection for your everyday commute.' },
-      { name: 'Motorcycle', desc: 'Coverage built specifically for two-wheel adventures.' },
-      { name: 'Classic Car', desc: 'Agreed-value protection for your vintage or custom vehicle.' }
-    ]
-  },
-  home: {
-    name: 'Home & Property', tagline: 'Protect your biggest investment.', count: '6 Products',
-    qurl: 'https://onepointinsuranceagency.com/home-insurance-quote',
-    img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&auto=format&fit=crop&q=80',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
-    items: [
-      { name: 'Homeowners', desc: 'Coverage for your dwelling, personal property, and liability.' },
-      { name: 'Renters', desc: 'Protect your belongings and liability when renting.' },
-      { name: 'Flood Insurance', desc: 'Specialized coverage for water damage not covered by standard home policies.' }
-    ]
-  },
-  business: {
-    name: 'Business & Commercial', tagline: 'Keep your enterprise secure.', count: '10+ Products',
-    qurl: 'https://onepointinsuranceagency.com/business-quote',
-    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line></svg>`,
-    items: [
-      { name: 'General Liability', desc: 'Broad coverage against property damage or bodily injury claims.' },
-      { name: 'Workers Comp', desc: 'Protect your employees if they are injured on the job.' },
-      { name: 'Commercial Auto', desc: 'Coverage for vehicles used strictly for business operations.' }
-    ]
-  }
-};
-
-const grid = document.getElementById('prodGrid');
-const det = document.getElementById('detView');
-
-// Populate Main Grid
-Object.keys(PRODS).forEach(k => {
-  const p = PRODS[k];
-  const div = document.createElement('div');
-  div.className = 'pcard';
-  div.onclick = () => openProd(k);
-  div.innerHTML = `
-    <img class="pcard-img" src="${p.img}" alt="${p.name}" loading="lazy">
-    <div class="pcard-body">
-      <div class="picon">${p.icon}</div>
-      <div class="pcnt">${p.count}</div>
-      <h3 class="pname">${p.name}</h3>
-      <p class="ptag">${p.tagline}</p>
-    </div>
-    <svg class="parr" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  `;
-  grid.appendChild(div);
-});
-
-// Open Detail View function
-function openProd(k) {
-  const p = PRODS[k];
-  grid.classList.add('out');
-  setTimeout(() => {
-    grid.style.display = 'none';
-    det.style.display = 'block';
-    
-    let subHTML = '';
-    p.items.forEach(i => {
-      subHTML += `
-        <div class="scard">
-          <h4 class="sname">${i.name}</h4>
-          <p class="sdesc">${i.desc}</p>
-          <button class="slnk" onclick="openQuoteForm('${p.name}','${i.name}')">Get Quote <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
-      `;
-    });
-    
-    det.innerHTML = `
-      <button class="detback" onclick="closeProd()">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15 8H1M1 8l6-6M1 8l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to all coverage
-      </button>
-      <div class="dethead">
-        <div>
-          <div class="pcnt" style="margin-bottom:12px">${p.count}</div>
-          <h2 class="dettitle">${p.name}</h2>
-        </div>
-        <button class="btn btnp" onclick="openQuoteForm('${p.name}')">Request Quote</button>
-      </div>
-      <div class="subgrid">${subHTML}</div>
-      <div id="quoteForm" class="quoteform"></div>
-    `;
-    
-    setTimeout(() => det.classList.add('in'), 50);
-  }, 300);
-}
-
-// Close Detail View function
-function closeProd() {
-  det.classList.remove('in');
-  setTimeout(() => {
-    det.style.display = 'none';
-    grid.style.display = 'grid';
-    setTimeout(() => grid.classList.remove('out'), 50);
-  }, 350);
-}
-
-
-
-function openQuoteForm(category, product = '') {
-  const form = document.getElementById('quoteForm');
-  if (!form) return;
-
-  const safeCategory = escapeHTML(category);
-  const safeProduct = escapeHTML(product || 'General Quote');
-  form.classList.add('active');
-  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-  form.innerHTML = `
-    <div class="qfhead">
-      <h3 class="serif" style="font-size:28px;letter-spacing:-.02em;color:var(--text)">Request a Quote</h3>
-      <button class="btnlnk" type="button" onclick="closeQuoteForm()">Close</button>
-    </div>
-
-    <div class="qfmeta">
-      <div class="qfchip">
-        <span>Category</span>
-        <strong>${safeCategory}</strong>
-      </div>
-      <div class="qfchip">
-        <span>Product</span>
-        <strong>${safeProduct}</strong>
-      </div>
-    </div>
-
-    <form id="quoteRequestForm" onsubmit="submitQuote(event)">
-      <input type="hidden" name="category" value="${safeCategory}">
-      <input type="hidden" name="product" value="${safeProduct}">
-
-      <div class="qfgrid">
-        <div>
-          <label class="qflabel" for="qf-name">Full Name</label>
-          <input id="qf-name" name="name" class="nlinp" placeholder="Your full name" required>
-        </div>
-        <div>
-          <label class="qflabel" for="qf-email">Email</label>
-          <input id="qf-email" name="email" type="email" class="nlinp" placeholder="you@example.com" required>
-        </div>
-      </div>
-
-      <div class="qfgrid">
-        <div>
-          <label class="qflabel" for="qf-phone">Phone Number</label>
-          <input id="qf-phone" name="phone" class="nlinp" placeholder="(555) 555-5555" required>
-        </div>
-        <div>
-          <label class="qflabel" for="qf-zip">ZIP Code</label>
-          <input id="qf-zip" name="zip" class="nlinp" placeholder="ZIP / Postal code" required>
-        </div>
-      </div>
-
-      <div class="qfrow">
-        <label class="qflabel" for="qf-notes">Coverage Details</label>
-        <textarea id="qf-notes" name="notes" class="nlinp qftextarea" placeholder="Tell us a little about the coverage you need, current policy, preferred limits, or any questions."></textarea>
-      </div>
-
-      <div class="qfactions">
-        <button class="btn btnp" type="submit">Submit Request</button>
-        <button class="btn btng" type="button" onclick="closeQuoteForm()">Cancel</button>
-      </div>
-    </form>
-  `;
-}
-
-function closeQuoteForm() {
-  const form = document.getElementById('quoteForm');
-  if (!form) return;
-  form.classList.remove('active');
-  form.innerHTML = '';
-}
-
-function submitQuote(event) {
-  event.preventDefault();
-  const form = event.target;
-  const category = form.querySelector('input[name="category"]').value;
-  const product = form.querySelector('input[name="product"]').value;
-  const name = form.querySelector('input[name="name"]').value;
-
-  form.parentElement.innerHTML = `
-    <div class="qfsuccess">
-      <h4>Quote request received</h4>
-      <p>Thanks, ${escapeHTML(name)}. Your request for <strong>${escapeHTML(product)}</strong> under <strong>${escapeHTML(category)}</strong> has been captured in this demo flow. Connect this submit handler to your backend or CRM to make it live.</p>
-    </div>
-  `;
-}
-
-function escapeHTML(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
-
-// ─── CARRIERS MARQUEE ──────────────────────────────────────────
-
-const carriers = ["Progressive", "Travelers", "Safeco", "Nationwide", "Chubb", "Liberty Mutual", "Allstate", "State Auto", "Hagerty", "Mercury", "Encompass"];
-const track = document.getElementById('ctrack');
-const html = carriers.map(c => `<div class="citem">${c}</div>`).join('');
-track.innerHTML = html + html + html + html; 
 </script>
-
 </body>
 </html>
