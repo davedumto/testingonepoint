@@ -3,17 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Insurance | OnePoint Insurance Agency</title>
+<title>Life Insurance Quotes | Term, Whole & Universal Life | OnePoint</title>
+<meta name="description" content="Compare life insurance quotes from top-rated carriers. Term life, whole life, universal, indexed, final expense, and long-term care coverage. Lock in today's rate.">
+<meta name="keywords" content="life insurance, term life insurance, whole life insurance, universal life, final expense, indexed universal life, life insurance quote">
+<meta property="og:title" content="Life Insurance Quotes | Term, Whole, Universal | OnePoint">
+<meta property="og:description" content="Protect the people who depend on you. Compare term, whole, and universal life from top carriers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
+<script src="../quote-modal.js" defer></script>
+<style>
+  :root { --hero-accent: rgba(124,58,237,.14); --hero-accent-2: rgba(232,130,26,.06); }
+  .hero-eyebrow { color: #7c3aed; }
+  .section-kicker { color: #7c3aed; }
+
+  /* LIFE HERO — "Rate Lock" : layered photo composition + horizontal stepped rate ladder */
+  .hero {
+    min-height: 0; display: block; padding: 0;
+    background: linear-gradient(180deg, #f4f5f7 0%, #ffffff 70%);
+    position: relative; overflow: visible;
+  }
+  .hero-decor::before, .hero-decor::after { display: none; }
+
+  /* corner ornament — abstract grid of dots top-right of hero */
+  .hero::before {
+    content: ''; position: absolute; top: 80px; right: 0; width: 220px; height: 220px;
+    background-image: radial-gradient(rgba(124,58,237,.18) 1.5px, transparent 1.5px);
+    background-size: 14px 14px; pointer-events: none; z-index: 0;
+  }
+
+  .life-bread {
+    max-width: 1200px; margin: 0 auto; padding: 16px 28px 0;
+    font-size: 13px; color: var(--muted); position: relative; z-index: 2;
+  }
+  .life-bread a { color: var(--muted); text-decoration: none; }
+  .life-bread a:hover { color: #7c3aed; }
+  .life-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .life-bread .current { color: var(--text); font-weight: 500; }
+
+  .life-hero-grid {
+    max-width: 1200px; margin: 0 auto; padding: 36px 28px 0;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px;
+    align-items: center; position: relative; z-index: 2;
+  }
+
+  /* LEFT — editorial copy + horizontal Freeway-style quote card */
+  .life-hero-left .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: #7c3aed; margin-bottom: 18px;
+  }
+  .life-hero-left .kicker::before { content: ''; width: 28px; height: 1.5px; background: #7c3aed; }
+  .life-hero-left h1 {
+    font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+    color: var(--navy); line-height: 1.04; letter-spacing: -.02em;
+    margin-bottom: 18px;
+  }
+  .life-hero-left h1 .accent {
+    display: inline-block; padding: 0 8px;
+    background: #7c3aed; color: #fff;
+    transform: skewX(-8deg); font-weight: 800;
+  }
+  .life-hero-left h1 .accent span { display: inline-block; transform: skewX(8deg); }
+  .life-hero-left .lead {
+    font-size: 17px; color: var(--text); line-height: 1.55;
+    max-width: 520px; margin-bottom: 28px;
+  }
+
+  .life-hero-form .quote-card {
+    background: #fff; border-top: 4px solid #7c3aed;
+    box-shadow: 0 18px 44px rgba(124,58,237,.18);
+    max-width: none;
+  }
+  .life-hero-form .qc-cta {
+    background: #7c3aed; border-radius: 0;
+  }
+  .life-hero-form .qc-cta:hover { background: #6d28d9; }
+  .life-hero-form .qc-product-dropdown {
+    right: auto; width: 520px; max-width: calc(100vw - 48px);
+  }
+
+  .life-trust-row {
+    display: flex; align-items: center; gap: 18px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  .life-trust-row .stars { color: #f5a623; letter-spacing: 2px; font-size: 14px; }
+  .life-trust-row strong { color: var(--navy); font-weight: 700; }
+
+  /* RIGHT — layered photo composition (offset purple block + photo + floating badges) */
+  .life-photo-stage {
+    position: relative; height: 480px; min-width: 0;
+  }
+  /* offset solid purple block behind photo (bottom-right) */
+  .life-photo-stage .accent-block {
+    position: absolute; right: -14px; bottom: -14px; width: 78%; height: 76%;
+    background: #7c3aed; z-index: 1;
+  }
+  /* dashed outlined block (top-left) */
+  .life-photo-stage .accent-outline {
+    position: absolute; top: -10px; left: -10px; width: 56%; height: 50%;
+    border: 1.5px dashed rgba(124,58,237,.5); z-index: 1;
+  }
+  /* main photo */
+  .life-photo-stage .photo-frame {
+    position: absolute; inset: 18px 32px 32px 18px; z-index: 2;
+    overflow: hidden; box-shadow: 0 20px 50px rgba(20,30,80,.18);
+  }
+  .life-photo-stage .photo-frame img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .6s ease;
+  }
+  .life-photo-stage:hover .photo-frame img { transform: scale(1.04); }
+  /* photo top-left tag */
+  .life-photo-tag {
+    position: absolute; top: 32px; left: 32px; z-index: 4;
+    background: rgba(255,255,255,.95);
+    padding: 8px 14px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--navy);
+    backdrop-filter: blur(6px);
+  }
+  .life-photo-tag::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    background: #7c3aed; margin-right: 8px; vertical-align: middle;
+  }
+  /* floating "RATE LOCKED" badge — bottom-left, overlaps photo */
+  .life-rate-badge {
+    position: absolute; left: -20px; bottom: 28px; z-index: 5;
+    background: #fff; padding: 16px 20px;
+    box-shadow: 0 16px 36px rgba(20,30,80,.22);
+    border-left: 4px solid #7c3aed;
+    min-width: 200px;
+  }
+  .life-rate-badge .rb-label {
+    font-size: 9.5px; font-weight: 800; letter-spacing: .16em;
+    text-transform: uppercase; color: #7c3aed;
+  }
+  .life-rate-badge .rb-amount {
+    display: flex; align-items: baseline; gap: 4px; margin-top: 2px;
+  }
+  .life-rate-badge .rb-amount strong {
+    font-size: 36px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -.01em;
+  }
+  .life-rate-badge .rb-amount span { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .life-rate-badge .rb-meta {
+    font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.4;
+  }
+  /* rotated "POLICY ACTIVE" stamp — top-right */
+  .life-stamp {
+    position: absolute; top: -8px; right: -10px; z-index: 6;
+    background: var(--orange); color: #fff;
+    padding: 10px 14px; font-size: 10px; font-weight: 800;
+    letter-spacing: .14em; text-transform: uppercase;
+    transform: rotate(6deg);
+    box-shadow: 0 10px 22px rgba(232,130,26,.35);
+    text-align: center; line-height: 1.2;
+  }
+  .life-stamp small { display: block; font-size: 8.5px; opacity: .85; font-weight: 600; margin-top: 2px; letter-spacing: .12em; }
+
+  /* HORIZONTAL STEPPED RATE LADDER — full-width, runs below the hero grid */
+  .life-ladder-wrap {
+    margin-top: 56px; background: var(--navy); color: #fff;
+    position: relative; z-index: 2;
+  }
+  .life-ladder-inner {
+    max-width: 1200px; margin: 0 auto; padding: 30px 28px 36px;
+  }
+  .life-ladder-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 14px; margin-bottom: 18px;
+  }
+  .life-ladder-head .lh-title {
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+  }
+  .life-ladder-head .lh-title strong { color: #fff; display: block; font-size: 18px; margin-top: 4px; letter-spacing: -.005em; text-transform: none; font-weight: 700; }
+  .life-ladder-head .lh-foot { font-size: 12px; color: rgba(255,255,255,.55); }
+  .life-ladder-head .lh-foot a { color: #c4b5fd; text-decoration: none; font-weight: 600; }
+
+  .life-ladder {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    align-items: end; border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .life-step {
+    position: relative; padding: 22px 20px;
+    border-right: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(180deg, transparent 0%, rgba(124,58,237,.06) 100%);
+  }
+  .life-step:last-child { border-right: none; }
+  /* stepped heights — visualize rate climb */
+  .life-step:nth-child(1) { padding-top: 22px; }
+  .life-step:nth-child(2) { padding-top: 38px; background: linear-gradient(180deg, transparent 0%, rgba(124,58,237,.10) 100%); }
+  .life-step:nth-child(3) { padding-top: 58px; background: linear-gradient(180deg, transparent 0%, rgba(124,58,237,.16) 100%); }
+  .life-step:nth-child(4) { padding-top: 82px; background: linear-gradient(180deg, transparent 0%, rgba(232,130,26,.14) 100%); }
+
+  .life-step .ls-age {
+    font-size: 10px; font-weight: 800; letter-spacing: .14em;
+    text-transform: uppercase; color: #7c3aed;
+  }
+  .life-step .ls-age strong {
+    display: block; font-size: 30px; color: #fff; letter-spacing: -.02em; line-height: 1; margin-top: 2px;
+  }
+  .life-step .ls-rate {
+    font-size: 22px; font-weight: 800; color: #fff; margin-top: 14px; letter-spacing: -.005em;
+  }
+  .life-step .ls-rate span { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.55); }
+  .life-step .ls-delta {
+    font-size: 12px; color: rgba(255,255,255,.7); margin-top: 6px;
+  }
+  .life-step .ls-milestone {
+    font-size: 12.5px; color: rgba(255,255,255,.7); line-height: 1.45; margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.08); padding-top: 10px;
+  }
+  .life-step .ls-milestone strong { color: #fff; font-weight: 700; display: block; margin-bottom: 2px; font-size: 13px; }
+  .life-step.hot::before {
+    content: 'LOCK NOW'; position: absolute; top: 8px; right: 8px;
+    background: var(--orange); color: #fff;
+    padding: 3px 8px; font-size: 9px; font-weight: 800; letter-spacing: .12em;
+  }
+
+  @media (max-width: 960px) {
+    .life-hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 28px; }
+    .life-photo-stage { height: 380px; }
+    .life-ladder { grid-template-columns: repeat(2, 1fr); }
+    .life-step:nth-child(n) { padding-top: 22px; }
+    .life-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  }
+  @media (max-width: 640px) {
+    .hero::before { display: none; }
+    .life-photo-stage { height: 320px; }
+    .life-rate-badge { left: 8px; bottom: 8px; padding: 12px 16px; min-width: 0; }
+    .life-rate-badge .rb-amount strong { font-size: 28px; }
+    .life-stamp { padding: 8px 10px; font-size: 9px; }
+    .life-ladder { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-brand"><span class="nav-brand-mark">1P</span><span class="nav-brand-name">OnePoint</span></a>
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
         <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
@@ -26,26 +256,103 @@
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
               <div class="mega-col">
-                <h5>Vehicle</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li></ul>
-                <h5 style="margin-top:18px">Property</h5><ul><li><a href="../home/">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li></ul>
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Personal Protection</h5><ul><li><a href="../health/">Health Insurance</a></li><li><a href="./">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com">Umbrella</a></li></ul>
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Business</h5><ul><li><a href="../business/">Business Insurance</a></li><li><a href="../business/">General Liability</a></li><li><a href="../business/">Commercial Auto</a></li></ul>
-                <h5 style="margin-top:18px">Bundle &amp; Save</h5><ul><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li></ul>
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
               </div>
             </div>
-            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li></ul></div></div>
-            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
           </div>
         </div>
       </li>
-      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
-      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
     </div>
@@ -54,52 +361,182 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero" style="background-image:url('../hero-family.jpg')">
-    <div class="hero-text">
-      <span class="hero-eyebrow">Life Insurance · Legacy &amp; Family Protection</span>
-      <h1>One decision that protects everyone who depends on you.</h1>
-      <p class="hero-sub">From term to whole life — we help you find the right coverage for your family's future, your budget, and every stage of life.</p>
-    </div>
-    <div class="quote-card-wrap">
-      <div class="quote-card">
-        <div class="qc-head">
-          <p class="qc-title">Start your life insurance quote</p>
-          <p class="qc-sub">Lock in today's rate — it only goes up from here.</p>
+  <!-- HERO — "Life Stage Timeline": editorial left + vertical age/milestone timeline on right -->
+  <section class="hero">
+    <nav class="life-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Life Insurance</span>
+    </nav>
+    <div class="life-hero-grid">
+      <div class="life-hero-left">
+        <span class="kicker">Life Insurance</span>
+        <h1 data-swap="heroH1">Lock today's rate. <span class="accent"><span>Never</span></span> pay more.</h1>
+        <p class="lead" data-swap="heroLead">Rates go up roughly 8–10% every year you wait. Term, whole, universal, final expense — compare policies from top-rated carriers and protect the people who depend on you.</p>
+        <div class="life-hero-form">
+          <div class="quote-card">
+            <form class="qc-form" onsubmit="goQuote(event)">
+              <div class="qc-product-field">
+                <label class="qc-field-label">Policy type</label>
+                <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
+                  <span class="qc-product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+                  <span class="qc-product-name">Life (Term)</span>
+                  <span class="qc-product-caret">▾</span>
+                </button>
+                <div class="qc-product-dropdown" id="productDropdown">
+                  <p class="qc-bundle-headline">Pair life with the income and care protection most families miss.<sup>Δ</sup></p>
+                  <div class="qc-bundle-links">
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Life Insurance (Term)');">Life + Disability</a>
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Final Expense');">Life + Final Expense</a>
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Long-Term Care');">Life + Long-Term Care</a>
+                  </div>
+                  <p class="qc-other-label">Or, quote another product</p>
+                  <div class="qc-other-grid">
+                    <a href="#life-subs">Annuity</a>
+                    <a href="../auto/">Auto</a>
+                    <a href="../business/">Business Insurance</a>
+                    <a href="#life-subs">Critical Illness</a>
+                    <a href="../disability/">Disability Income</a>
+                    <a href="#life-subs">Final Expense</a>
+                    <a href="../business/">General Liability</a>
+                    <a href="#life-subs">Group Life</a>
+                    <a href="../health/">Health (Marketplace)</a>
+                    <a href="../home/">Homeowners</a>
+                    <a href="#life-subs">Indexed Universal Life</a>
+                    <a href="./" class="current">Life (Term)</a>
+                    <a href="#life-subs">Long-Term Care</a>
+                    <a href="#life-subs">Universal Life</a>
+                    <a href="#life-subs">Whole Life</a>
+                  </div>
+                </div>
+              </div>
+              <div class="qc-location-field">
+                <label class="qc-field-label" for="zip">ZIP Code</label>
+                <input class="qc-location-input" id="zip" type="text" placeholder="00000" maxlength="5" inputmode="numeric" required>
+              </div>
+              <button type="submit" class="qc-cta">Lock my rate</button>
+            </form>
+          </div>
         </div>
-        <form class="qc-form" onsubmit="goQuote(event)">
-          <div class="qc-step">
-            <label class="qc-step-label" for="zip">ZIP code</label>
-            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
+      </div>
+      <div class="life-hero-right">
+        <div class="life-photo-stage">
+          <div class="accent-outline" aria-hidden="true"></div>
+          <div class="accent-block" aria-hidden="true"></div>
+          <div class="photo-frame">
+            <img src="../life-insurance-2.jpg" alt="Family protected by OnePoint life insurance">
           </div>
-          <div class="qc-step">
-            <label class="qc-step-label">What are you quoting?</label>
-            <div class="qc-tabs">
-              <a href="../auto/" class="qc-tab" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
-              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
-              <a href="../health/" class="qc-tab" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
-              <a href="./" class="qc-tab active" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
-              <a href="../disability/" class="qc-tab" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
-              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
-            </div>
+          <span class="life-photo-tag">Covering what matters</span>
+          <div class="life-stamp">Policy<small>Active</small></div>
+          <div class="life-rate-badge" role="note">
+            <div class="rb-label">Rate Locked</div>
+            <div class="rb-amount"><strong>$22</strong><span>/mo</span></div>
+            <div class="rb-meta">$500k · 20-yr term · age 25 · non-smoker</div>
           </div>
-          <button type="submit" class="qc-submit">
-            <span>Start a quote</span>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
+        </div>
       </div>
     </div>
-    <div class="other-ways-bar">
-      <div class="other-ways-inner">
-        <strong>Other ways to buy:</strong>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
-        <span class="other-ways-sep">|</span>
-        <a href="tel:888-899-8117">Call an agent ›</a>
+
+  </section>
+
+  <section class="sub-section" id="life-subs" style="padding: 72px 0; background: var(--white);">
+    <style>
+      #life-subs .sub-header { text-align: center; max-width: 760px; margin: 0 auto 40px; padding: 0 28px; }
+      #life-subs .sub-header h2 { font-size: clamp(26px, 3.2vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+      #life-subs .sub-header p { color: var(--muted); font-size: 16px; }
+      #life-subs .life-picker { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+      #life-subs .life-tabs { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 0; }
+      #life-subs .life-tab { background: none; border: none; padding: 18px 8px 14px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: 'Outfit', sans-serif; color: var(--muted); transition: .2s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+      #life-subs .life-tab svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      #life-subs .life-tab span { font-size: 11.5px; font-weight: 600; text-align: center; line-height: 1.2; }
+      #life-subs .life-tab:hover { color: var(--navy); }
+      #life-subs .life-tab.active { color: #7c3aed; border-bottom-color: #7c3aed; }
+      #life-subs .life-tab.active span { color: var(--navy); font-weight: 700; }
+      #life-subs .life-panel { background: #faf5ff; padding: 36px 40px; display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; position: relative; border-left: 4px solid #7c3aed; }
+      #life-subs .life-panel-icon { width: 80px; height: 80px; background: #fff; display: flex; align-items: center; justify-content: center; color: #7c3aed; box-shadow: 0 4px 16px rgba(124,58,237,.12); }
+      #life-subs .life-panel-icon svg { width: 48px; height: 48px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      #life-subs .life-panel-body h3 { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 6px; letter-spacing: -.005em; }
+      #life-subs .life-panel-body p { font-size: 15px; color: var(--muted); line-height: 1.55; max-width: 520px; }
+      #life-subs .life-panel-kicker { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7c3aed; margin-bottom: 6px; }
+      #life-subs .life-panel-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; min-width: 280px; }
+      #life-subs .life-panel-form input { padding: 13px 16px; border: 1.5px solid var(--border); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; letter-spacing: .2em; background: #fff; min-width: 0; }
+      #life-subs .life-panel-form input:focus { border-color: #7c3aed; }
+      #life-subs .life-panel-form button { padding: 13px 22px; background: #7c3aed; color: #fff; border: none; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
+      #life-subs .life-panel-form button:hover { background: #6d28d9; }
+      @media (max-width: 960px) {
+        #life-subs .life-tabs { grid-template-columns: repeat(4, 1fr); }
+        #life-subs .life-panel { grid-template-columns: 1fr; text-align: left; gap: 20px; padding: 28px; }
+        #life-subs .life-panel-form { min-width: 0; }
+      }
+      @media (max-width: 520px) { #life-subs .life-tabs { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+    <div class="sub-header">
+      <h2>Eight types of life insurance.</h2>
+      <p>Pick a policy type to see what it covers and start a quote.</p>
+    </div>
+    <div class="life-picker">
+      <div class="life-tabs" role="tablist">
+        <button type="button" class="life-tab active" data-v="term" onclick="selectLife('term')"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg><span>Term</span></button>
+        <button type="button" class="life-tab" data-v="whole" onclick="selectLife('whole')"><svg viewBox="0 0 24 24"><path d="M18 7a5 5 0 0 0-5 5 5 5 0 0 1-5 5 5 5 0 0 1 0-10 5 5 0 0 1 5 5 5 5 0 0 0 5 5 5 5 0 0 0 0-10z"/></svg><span>Whole</span></button>
+        <button type="button" class="life-tab" data-v="universal" onclick="selectLife('universal')"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg><span>Universal</span></button>
+        <button type="button" class="life-tab" data-v="iul" onclick="selectLife('iul')"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg><span>Indexed UL</span></button>
+        <button type="button" class="life-tab" data-v="final" onclick="selectLife('final')"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/></svg><span>Final Expense</span></button>
+        <button type="button" class="life-tab" data-v="annuity" onclick="selectLife('annuity')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Annuity</span></button>
+        <button type="button" class="life-tab" data-v="group" onclick="selectLife('group')"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="3"/><path d="M13 21a5 5 0 0 1 10 0"/></svg><span>Group Life</span></button>
+        <button type="button" class="life-tab" data-v="critical" onclick="selectLife('critical')"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></svg><span>Critical Illness</span></button>
+      </div>
+      <div class="life-panel" role="tabpanel">
+        <div class="life-panel-icon" id="lp-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+        </div>
+        <div class="life-panel-body">
+          <span class="life-panel-kicker" id="lp-kicker">Affordable protection</span>
+          <h3 id="lp-title">Term Life</h3>
+          <p id="lp-desc">Coverage for a set period (10/20/30 years) at a fixed rate. Cheapest way to get substantial death benefit — ideal for income replacement, mortgages, and growing families.</p>
+        </div>
+        <form class="life-panel-form" onsubmit="lpQuote(event)">
+          <input type="text" id="lp-zip" placeholder="ZIP code" maxlength="5" inputmode="numeric" required>
+          <button type="submit">Quote →</button>
+        </form>
       </div>
     </div>
   </section>
+
+  <!-- Horizontal stepped rate ladder — moved below picker -->
+  <div class="life-ladder-wrap" aria-label="How life insurance rates rise with age">
+    <div class="life-ladder-inner">
+      <div class="life-ladder-head">
+        <div class="lh-title">Rate ladder <strong>$500k · 20-year term · non-smoker</strong></div>
+        <div class="lh-foot">Each step waited compounds — <a href="#" onclick="event.preventDefault();openQM('Life Insurance (Term)');">lock today's rate</a></div>
+      </div>
+      <div class="life-ladder">
+        <div class="life-step hot">
+          <div class="ls-age">Age<strong>25</strong></div>
+          <div class="ls-rate">$22<span>/mo</span></div>
+          <div class="ls-delta">cheapest lifetime tier</div>
+          <div class="ls-milestone"><strong>Career starting</strong>First apartment, first serious plans.</div>
+        </div>
+        <div class="life-step">
+          <div class="ls-age">Age<strong>35</strong></div>
+          <div class="ls-rate">$28<span>/mo</span></div>
+          <div class="ls-delta">+27% vs age 25</div>
+          <div class="ls-milestone"><strong>Family &amp; mortgage</strong>Kids, house, growing income.</div>
+        </div>
+        <div class="life-step">
+          <div class="ls-age">Age<strong>45</strong></div>
+          <div class="ls-rate">$58<span>/mo</span></div>
+          <div class="ls-delta">+164% vs age 25</div>
+          <div class="ls-milestone"><strong>Peak earning</strong>Kids near college, income replacement matters.</div>
+        </div>
+        <div class="life-step">
+          <div class="ls-age">Age<strong>55</strong></div>
+          <div class="ls-rate">$142<span>/mo</span></div>
+          <div class="ls-delta">+545% vs age 25</div>
+          <div class="ls-milestone"><strong>Retirement runway</strong>You'll pay 6× what you could have locked at 25.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- TRUST BAR -->
   <div class="trust-bar">
@@ -113,70 +550,17 @@
     </div>
   </div>
 
-  <!-- COVERAGE TYPES -->
-  <section class="section" id="types">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Coverage Types</div>
-        <h2 class="section-h2">Eight types of life insurance. One that's right for you.</h2>
-        <p class="section-lead">Each policy type serves a different purpose. Your advisor helps you understand which one fits your family's needs — not just the one that's easiest to sell.</p>
-      </div>
-      <div class="feat-grid-4">
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
-          <h4>Term Life</h4>
-          <p>Affordable protection for 10, 20, or 30 years. The most cost-effective way to cover income replacement, mortgages, and growing families.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7a5 5 0 0 0-5 5 5 5 0 0 1-5 5 5 5 0 0 1 0-10 5 5 0 0 1 5 5 5 5 0 0 0 5 5 5 5 0 0 0 0-10z"/></svg></div>
-          <h4>Whole Life</h4>
-          <p>Lifetime coverage with fixed premiums and a guaranteed cash value component that builds over time.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
-          <h4>Universal Life</h4>
-          <p>Flexible premiums and death benefits with potential for cash value growth. Adjustable as your needs change.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></div>
-          <h4>Indexed Universal Life</h4>
-          <p>Cash value tied to a market index — offering growth potential with downside protection built in.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/></svg></div>
-          <h4>Final Expense</h4>
-          <p>Simplified underwriting and affordable premiums designed to cover funeral costs, burial, and end-of-life expenses.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
-          <h4>Long-Term Care</h4>
-          <p>Supports extended care needs — assisted living, nursing home, or in-home care — as part of broader retirement planning.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h4>Group Life</h4>
-          <p>Employer-sponsored group coverage that gives teams a foundational benefit at little or no cost to employees.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg></div>
-          <h4>Critical Illness</h4>
-          <p>Lump-sum payment after a diagnosis of cancer, stroke, heart attack, or other covered events — when bills hit fast.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WHY IT MATTERS -->
   <section class="section section-alt">
     <div class="container">
       <div class="split-grid">
         <div class="split-img">
-          <img src="../hero-family.jpg" alt="Family protected by life insurance" loading="lazy">
+          <img src="../life-insurance.jpg" alt="Family protected by life insurance" loading="lazy">
         </div>
         <div>
-          <div class="section-kicker">Why It Matters</div>
-          <h2 class="section-h2">Life insurance is love turned into financial protection.</h2>
-          <p class="section-lead" style="margin-bottom:28px">It ensures the people who depend on you won't face financial hardship on top of grief. It's one of the most important decisions a family can make.</p>
+          <div class="section-kicker" data-swap="coverKicker">Why It Matters</div>
+          <h2 class="section-h2" data-swap="coverH2">Life insurance is love turned into financial protection.</h2>
+          <p class="section-lead" style="margin-bottom:28px" data-swap="coverBody">It ensures the people who depend on you won't face financial hardship on top of grief. It's one of the most important decisions a family can make.</p>
           <div class="split-points">
             <div class="split-point">
               <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -206,13 +590,57 @@
     </div>
   </section>
 
+  <!-- BUNDLE & SAVE -->
+  <section class="bundle-section" style="--bundle-accent: #7c3aed;">
+    <div class="bundle-header">
+      <span class="bundle-kicker">Bundle &amp; Save</span>
+      <h2>Life insurance is stronger when it's paired with the right protection.</h2>
+      <p>A single life policy isn't the whole picture — pair it with the coverage that fills the gaps most families miss.</p>
+    </div>
+    <div class="bundle-grid">
+      <button type="button" class="bundle-card" onclick="openQM('Disability Income (Overview)')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+        </div>
+        <h4>Life + Disability</h4>
+        <p>Life pays if you die. Disability pays if you can't work. Most families need both — and almost nobody has both in place.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Full income protection</span>
+        <span class="bundle-card-cta">Bundle life + DI <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Final Expense')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/></svg></span>
+        </div>
+        <h4>Life + Final Expense</h4>
+        <p>Term life covers income replacement. A separate final-expense policy handles funeral, burial, and end-of-life costs — so family doesn't dip into the term benefit.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Protect the benefit amount</span>
+        <span class="bundle-card-cta">Bundle life + final expense <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Long-Term Care')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></span>
+        </div>
+        <h4>Life + Long-Term Care</h4>
+        <p>70% of us will need some form of long-term care after 65. Life-LTC hybrid policies protect your estate from nursing-home costs eating it alive.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Hybrid policies available</span>
+        <span class="bundle-card-cta">Bundle life + LTC <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+
   <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <h2>The longer you wait, the more it costs.</h2>
-          <p>Life insurance premiums go up with age and health changes. Locking in your rate today is one of the best financial moves you can make for your family.</p>
+          <h2 data-swap="midCtaH2">The longer you wait, the more it costs.</h2>
+          <p data-swap="midCtaLead">Life insurance premiums go up with age and health changes. Locking in your rate today is one of the best financial moves you can make for your family.</p>
         </div>
         <div class="mid-cta-actions">
           <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Life Quote</a>
@@ -285,8 +713,8 @@
   <section class="cta-band">
     <div class="container">
       <div class="section-kicker">Your Next Step</div>
-      <h2 class="section-h2">Life insurance is one decision that takes care of everyone else.</h2>
-      <p>A short conversation with a licensed advisor is all it takes to understand your options, find the right fit, and protect your family's future.</p>
+      <h2 class="section-h2" data-swap="finalCtaH2">Life insurance is one decision that takes care of everyone else.</h2>
+      <p data-swap="finalCtaLead">A short conversation with a licensed advisor is all it takes to understand your options, find the right fit, and protect your family's future.</p>
       <div class="cta-band-actions">
         <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Talk to a Life Advisor</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
@@ -299,22 +727,198 @@
 <footer class="site-footer">
   <div class="container">
     <div class="ft-grid">
-      <div><div class="ft-brand"><span class="ft-brand-mark">1P</span><span class="ft-brand-name">OnePoint Insurance</span></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="./">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li><li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div>
-      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li><li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
-    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a><a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a></div></div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
   </div>
 </footer>
 
 <script>
-function goQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function goQuote(e){
+  e.preventDefault();
+  var zip = e.target && e.target.querySelector ? (e.target.querySelector('input[type="text"]') || {}).value : '';
+  if (window.openQM) openQM('Life Insurance (Term)', { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
+}
+function subQuote(e, product) {
+  e.preventDefault();
+  var zip = e.target.querySelector('input').value;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar?product=' + encodeURIComponent(product) + '&zip=' + encodeURIComponent(zip);
+}
+const lifeData = {
+  term:       { kicker: 'Affordable protection',    name: 'Term Life',              desc: "Coverage for a set period (10/20/30 years) at a fixed rate. Cheapest way to get substantial death benefit — ideal for income replacement, mortgages, and growing families." },
+  whole:      { kicker: 'Permanent + cash value',   name: 'Whole Life',             desc: "Lifelong coverage with guaranteed premiums and a cash value that grows tax-deferred. Pays regardless of when you die." },
+  universal:  { kicker: 'Flexible permanent',       name: 'Universal Life',         desc: "Permanent coverage with adjustable premiums and death benefits. Cash value grows with a declared interest rate." },
+  iul:        { kicker: 'Market-linked growth',     name: 'Indexed Universal Life', desc: "Permanent coverage with cash value tied to a market index (like the S&P 500) — upside potential with downside floor protection." },
+  final:      { kicker: 'Funeral &amp; end-of-life', name: 'Final Expense',          desc: "Smaller-face whole life (typically $5k–$40k) with simplified underwriting — pays funeral, burial, and final medical bills." },
+  annuity:    { kicker: 'Retirement income',        name: 'Annuity',                desc: "Not technically life insurance, but a contract that converts a lump sum into guaranteed income — often used alongside life for full retirement protection." },
+  group:      { kicker: 'Employer-sponsored',       name: 'Group Life',             desc: "Life coverage offered through your employer — usually 1–2× salary at low or no cost. Often not portable when you change jobs." },
+  critical:   { kicker: 'Lump sum on diagnosis',    name: 'Critical Illness Rider', desc: "Pays a lump sum if you're diagnosed with a covered critical illness — can be added as a rider or purchased standalone." }
+};
+// Page-wide copy keyed by subproduct slug. The `term` entry IS the original
+// page copy verbatim — clicking the Term tab restores the page to its default state.
+const lifeSwap = {
+  term: {
+    heroH1: "Lock today's rate. <span class=\"accent\"><span>Never</span></span> pay more.",
+    heroLead: "Rates go up roughly 8\u201310% every year you wait. Term, whole, universal, final expense \u2014 compare policies from top-rated carriers and protect the people who depend on you.",
+    coverKicker: "Why It Matters",
+    coverH2: "Life insurance is love turned into financial protection.",
+    coverBody: "It ensures the people who depend on you won't face financial hardship on top of grief. It's one of the most important decisions a family can make.",
+    midCtaH2: "The longer you wait, the more it costs.",
+    midCtaLead: "Life insurance premiums go up with age and health changes. Locking in your rate today is one of the best financial moves you can make for your family.",
+    finalCtaH2: "Life insurance is one decision that takes care of everyone else.",
+    finalCtaLead: "A short conversation with a licensed advisor is all it takes to understand your options, find the right fit, and protect your family's future."
+  },
+  whole: {
+    heroH1: "Whole Life Insurance",
+    heroLead: "Lifelong protection with level premiums and cash value that grows predictably for as long as you live.",
+    coverKicker: "What's Covered",
+    coverH2: "Lifetime protection with guaranteed cash value.",
+    coverBody: "Whole life pays a guaranteed death benefit to your beneficiaries whenever you pass away, with premiums that never increase. A portion of each payment builds tax-deferred cash value you can borrow against or withdraw during your lifetime.",
+    midCtaH2: "See what whole life can cost.",
+    midCtaLead: "Answer a few quick questions and get a personalized whole life quote in minutes.",
+    finalCtaH2: "Lock in coverage that never expires.",
+    finalCtaLead: "Protect your family for life with guaranteed premiums, guaranteed coverage, and guaranteed cash value growth."
+  },
+  universal: {
+    heroH1: "Universal Life Insurance",
+    heroLead: "Permanent coverage with adjustable premiums and death benefits \u2014 plus cash value that grows at a declared interest rate.",
+    coverKicker: "What's Covered",
+    coverH2: "Permanent coverage you can adjust over time.",
+    coverBody: "Universal life provides lifelong death benefit protection with the flexibility to raise or lower premiums and adjust coverage as your needs change. Cash value accumulates tax-deferred at a declared interest rate and can be accessed while you're alive.",
+    midCtaH2: "Design coverage that fits your life.",
+    midCtaLead: "Get a universal life quote tailored to your budget, timeline, and long-term goals.",
+    finalCtaH2: "Flexible protection. Permanent peace of mind.",
+    finalCtaLead: "Start a universal life policy that adapts as your family, income, and priorities evolve."
+  },
+  iul: {
+    heroH1: "Indexed Universal Life Insurance",
+    heroLead: "Permanent life coverage with cash value tied to market index performance \u2014 protected by a guaranteed floor against losses.",
+    coverKicker: "What's Covered",
+    coverH2: "Lifetime coverage with index-linked growth.",
+    coverBody: "IUL pays a death benefit to your beneficiaries and builds cash value based on the performance of a market index like the S&P 500. You participate in gains up to a cap, with a floor that shields your account from index losses.",
+    midCtaH2: "Explore indexed universal life options.",
+    midCtaLead: "See how an IUL policy can deliver protection plus growth potential tied to the market.",
+    finalCtaH2: "Protection today. Growth potential tomorrow.",
+    finalCtaLead: "Combine permanent life coverage with index-linked cash value accumulation in a single policy."
+  },
+  final: {
+    heroH1: "Final Expense Insurance",
+    heroLead: "Small whole-life policies designed to cover funeral costs, medical bills, and end-of-life expenses for your loved ones.",
+    coverKicker: "What's Covered",
+    coverH2: "Cover funeral costs and final bills.",
+    coverBody: "Final expense provides a modest death benefit \u2014 typically enough to pay for funeral services, burial or cremation, outstanding medical bills, and small debts. Premiums stay level, coverage never expires, and most applications require no medical exam.",
+    midCtaH2: "Spare your family the burden.",
+    midCtaLead: "Get a final expense quote quickly and ease the financial stress your loved ones would otherwise face.",
+    finalCtaH2: "Peace of mind for your family.",
+    finalCtaLead: "Lock in affordable final expense coverage so your loved ones don't have to pay out of pocket."
+  },
+  annuity: {
+    heroH1: "Annuities for Retirement Income",
+    heroLead: "Turn savings into guaranteed income you can't outlive \u2014 with tax-deferred growth and options for every stage of retirement.",
+    coverKicker: "What's Included",
+    coverH2: "Guaranteed income for your retirement years.",
+    coverBody: "An annuity converts a lump sum or series of payments into a stream of income, often guaranteed for life. Your contributions grow tax-deferred, and you can choose fixed, indexed, or variable options that match your risk tolerance and income needs.",
+    midCtaH2: "Build a paycheck for retirement.",
+    midCtaLead: "Get a personalized annuity illustration showing the income your savings could produce.",
+    finalCtaH2: "Secure income you can't outlive.",
+    finalCtaLead: "Start planning reliable retirement income today with an annuity designed around your goals."
+  },
+  group: {
+    heroH1: "Group Life Insurance",
+    heroLead: "Affordable life coverage offered through your employer or organization \u2014 protection without individual underwriting hurdles.",
+    coverKicker: "What's Covered",
+    coverH2: "Life coverage for every team member.",
+    coverBody: "Group life provides a death benefit to eligible employees or members under one master policy. Coverage is typically guaranteed up to a set amount without a medical exam, and members can often add voluntary coverage for themselves and dependents.",
+    midCtaH2: "Offer life coverage to your team.",
+    midCtaLead: "Request a group life quote and learn how to extend meaningful protection across your organization.",
+    finalCtaH2: "Strengthen your benefits package.",
+    finalCtaLead: "Give your team the security of life insurance with a group plan built for your organization."
+  },
+  critical: {
+    heroH1: "Critical Illness Coverage",
+    heroLead: "A tax-free lump-sum benefit paid on diagnosis of cancer, heart attack, stroke, or other serious covered conditions.",
+    coverKicker: "What's Covered",
+    coverH2: "Cash support when a serious diagnosis hits.",
+    coverBody: "Critical illness pays a tax-free lump sum upon diagnosis of a covered condition such as cancer, heart attack, stroke, or organ failure. Use the money however you need \u2014 treatment, travel, lost income, or household expenses.",
+    midCtaH2: "Prepare for the unexpected diagnosis.",
+    midCtaLead: "Get a critical illness quote and see how a lump-sum benefit can protect your finances.",
+    finalCtaH2: "Protect your finances from serious illness.",
+    finalCtaLead: "Add critical illness coverage so a major diagnosis doesn't become a financial crisis too."
+  }
+};
+// Swap every [data-swap] element on the page to the chosen subproduct's copy.
+// DOM is never moved or restructured — only innerHTML of tagged nodes changes.
+function swapLifeCopy(v){
+  const data = lifeSwap[v];
+  if(!data) return;
+  document.querySelectorAll('[data-swap]').forEach(el => {
+    const key = el.getAttribute('data-swap');
+    if(data[key] != null) el.innerHTML = data[key];
+  });
+}
+let selectedLife = 'term';
+function selectLife(v){
+  if (!lifeData[v]) return;
+  selectedLife = v;
+  document.querySelectorAll('#life-subs .life-tab').forEach(t => t.classList.toggle('active', t.dataset.v === v));
+  document.getElementById('lp-kicker').textContent = lifeData[v].kicker;
+  document.getElementById('lp-title').textContent = lifeData[v].name;
+  document.getElementById('lp-desc').innerHTML = lifeData[v].desc;
+  swapLifeCopy(v);
+}
+function lpQuote(e){
+  e.preventDefault();
+  var zip = document.getElementById('lp-zip').value;
+  var product = lifeData[selectedLife].name;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar?product=' + encodeURIComponent(product) + '&zip=' + encodeURIComponent(zip);
+}
 function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
 function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
 function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
-document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+function toggleProductDropdown(e){e.stopPropagation();const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');btn.classList.toggle('open');dd.classList.toggle('open');}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));
+  if(!e.target.closest('.qc-product-field')){const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');if(btn)btn.classList.remove('open');if(dd)dd.classList.remove('open');}
+});
+function handleLifeHash(){
+  var hash = window.location.hash.replace('#','');
+  if(hash && lifeData[hash]){
+    selectLife(hash);
+    var picker = document.getElementById('life-subs');
+    if(picker) setTimeout(function(){ picker.scrollIntoView({behavior:'smooth',block:'start'}); }, 300);
+  }
+}
+handleLifeHash();
+window.addEventListener('hashchange', handleLifeHash);
 </script>
+
+<!-- RESUME QUOTE MODAL -->
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

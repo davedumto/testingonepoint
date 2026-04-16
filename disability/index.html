@@ -3,17 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Disability Income Insurance | OnePoint Insurance Agency</title>
+<title>Disability Income Insurance | Protect Your Paycheck | OnePoint</title>
+<meta name="description" content="Compare disability income insurance quotes. Short-term, long-term, and business overhead expense coverage to replace 60-70% of your paycheck if illness or injury keeps you out of work.">
+<meta name="keywords" content="disability income insurance, short term disability, long term disability, income protection, business overhead expense, paycheck protection">
+<meta property="og:title" content="Disability Income Insurance | Protect Your Income | OnePoint">
+<meta property="og:description" content="Replace 60-70% of your paycheck if you can't work. Compare short-term, long-term, and BOE coverage.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
+<script src="../quote-modal.js" defer></script>
+<style>
+  :root { --hero-accent: rgba(5,40,71,.14); --hero-accent-2: rgba(232,130,26,.1); }
+  .hero-eyebrow { color: var(--navy); }
+  .section-kicker { color: var(--navy); }
+
+  /* DISABILITY HERO — "Paycheck Math":
+     Navy dark hero. Editorial copy + income-replacement bar visualization on the left.
+     disability.jpg portrait panel with dark-to-photo gradient on the right.
+     No ticker, no magazine spine, no offset accent blocks — own identity. */
+  .hero {
+    min-height: 0; display: block; padding: 0;
+    background: var(--navy);
+    position: relative; overflow: visible;
+  }
+  .hero-decor::before, .hero-decor::after { display: none; }
+
+  /* Clipped decor layer holds the glow so it can't leak outside,
+     while .hero keeps overflow:visible so the product dropdown can escape. */
+  .dis-decor {
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden; pointer-events: none;
+  }
+  .dis-decor::before {
+    content: ''; position: absolute; left: -120px; top: -120px;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,130,26,.18) 0%, rgba(232,130,26,0) 70%);
+  }
+
+  .dis-bread {
+    position: relative; z-index: 3;
+    max-width: 1280px; margin: 0 auto; padding: 16px 28px;
+    font-size: 13px; color: rgba(255,255,255,.55);
+  }
+  .dis-bread a { color: rgba(255,255,255,.55); text-decoration: none; }
+  .dis-bread a:hover { color: #fff; }
+  .dis-bread .sep { margin: 0 8px; color: rgba(255,255,255,.3); }
+  .dis-bread .current { color: #fff; font-weight: 500; }
+
+  .dis-hero {
+    position: relative; z-index: 2;
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    min-height: 560px; align-items: stretch;
+  }
+
+  /* LEFT: editorial content + math visualization + inline form */
+  .dis-content {
+    padding: 28px 48px 48px 28px;
+    display: flex; flex-direction: column; gap: 18px;
+    justify-content: center;
+  }
+  .dis-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .dis-kicker::before { content: ''; width: 28px; height: 1.5px; background: var(--orange); }
+
+  .dis-content h1 {
+    font-size: clamp(34px, 4.4vw, 52px); font-weight: 700;
+    color: #fff; line-height: 1.05; letter-spacing: -.02em;
+    max-width: 620px;
+  }
+  .dis-content h1 .underline {
+    display: inline; position: relative;
+    padding: 0 2px;
+  }
+  .dis-content h1 .underline::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 2px;
+    height: 12px; background: var(--orange); opacity: .55; z-index: -1;
+    transform: skewX(-6deg);
+  }
+  .dis-content .lead {
+    font-size: 17px; color: rgba(255,255,255,.72); line-height: 1.55;
+    max-width: 500px; margin-top: 4px;
+  }
+
+  /* Paycheck math visualization — the creative selling element */
+  .dis-math {
+    background: rgba(255,255,255,.04);
+    border-left: 3px solid var(--orange);
+    padding: 18px 22px 20px;
+    margin: 10px 0 6px;
+    max-width: 560px;
+  }
+  .dis-math-title {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(255,255,255,.6);
+    margin-bottom: 14px;
+  }
+  .dis-math-row {
+    display: grid; grid-template-columns: 130px 1fr 90px;
+    gap: 14px; align-items: center;
+    margin-bottom: 10px;
+  }
+  .dis-math-row:last-child { margin-bottom: 0; }
+  .dis-math-row .name {
+    font-size: 13px; font-weight: 600; color: #fff;
+  }
+  .dis-math-row.alt .name { color: rgba(255,255,255,.55); }
+  .dis-math-row .bar {
+    height: 14px; background: rgba(255,255,255,.08);
+    position: relative;
+  }
+  .dis-math-row .bar .fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: #fff;
+    transition: width .8s cubic-bezier(.22,.9,.3,1);
+  }
+  .dis-math-row.alt .bar .fill {
+    background: repeating-linear-gradient(
+      45deg, rgba(255,255,255,.25) 0 6px, rgba(255,255,255,.12) 6px 12px
+    );
+    width: 26%;
+  }
+  .dis-math-row.protected .bar .fill {
+    background: linear-gradient(90deg, var(--orange) 0%, #f4a054 100%);
+    width: 70%;
+  }
+  .dis-math-row.full .bar .fill { background: #fff; width: 100%; }
+  .dis-math-row .amt {
+    font-size: 13px; color: #fff; font-weight: 600;
+    font-variant-numeric: tabular-nums; text-align: right;
+  }
+  .dis-math-row.alt .amt { color: rgba(255,255,255,.6); }
+  .dis-math-row.protected .amt { color: var(--orange); font-weight: 700; }
+  .dis-math-footnote {
+    font-size: 11px; color: rgba(255,255,255,.45);
+    margin-top: 14px; font-style: italic;
+  }
+
+  /* Compact horizontal quote form docked in the content column */
+  .dis-form {
+    display: grid; grid-template-columns: 1.4fr 1fr auto;
+    gap: 0; margin-top: 6px;
+    background: #fff;
+    max-width: 620px;
+  }
+  .dis-form .qc-product-field,
+  .dis-form .qc-location-field {
+    padding: 14px 20px; border: none;
+    border-right: 1px solid var(--border);
+  }
+  .dis-form .qc-field-label {
+    color: var(--text); font-size: 10px; letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .dis-form .qc-product-btn { padding: 0; }
+  .dis-form .qc-product-name {
+    border-bottom-color: var(--text); font-size: 15px; padding-bottom: 2px;
+  }
+  .dis-form .qc-location-input {
+    border: none; border-bottom: 2px solid var(--border);
+    font-size: 15px; padding: 2px 0;
+  }
+  .dis-form .qc-cta {
+    background: var(--orange); color: #fff;
+    border: none; border-radius: 0;
+    padding: 0 32px; font-size: 14px; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+  }
+  .dis-form .qc-cta:hover { background: var(--orange-dark); }
+  /* Let the dropdown breathe — much wider than its narrow parent column */
+  .dis-form .qc-product-dropdown {
+    color: var(--text);
+    right: auto;
+    width: 560px;
+    max-width: calc(100vw - 48px);
+  }
+  .dis-form .qc-other-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 20px;
+  }
+  @media (max-width: 640px) {
+    .dis-form .qc-product-dropdown { width: calc(100vw - 48px); }
+    .dis-form .qc-other-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* RIGHT: vertical portrait panel */
+  .dis-portrait {
+    position: relative; background: var(--navy);
+    overflow: hidden;
+  }
+  .dis-portrait::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('../disability.jpg') center/cover no-repeat;
+  }
+  .dis-portrait::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(5,40,71,1) 0%, rgba(5,40,71,.65) 18%, rgba(5,40,71,0) 45%);
+  }
+  .dis-portrait-tag {
+    position: absolute; right: 28px; bottom: 28px; z-index: 2;
+    background: rgba(5,40,71,.92); backdrop-filter: blur(8px);
+    color: #fff; padding: 14px 18px;
+    border-left: 3px solid var(--orange);
+    max-width: 280px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .dis-portrait-tag .big {
+    font-size: 26px; font-weight: 700; color: var(--orange);
+    line-height: 1; letter-spacing: -.01em;
+  }
+  .dis-portrait-tag .small {
+    font-size: 12px; color: rgba(255,255,255,.78); line-height: 1.45;
+  }
+
+  @media (max-width: 960px) {
+    .dis-hero { grid-template-columns: 1fr; min-height: 0; }
+    .dis-content { padding: 20px 28px 32px; }
+    .dis-portrait { min-height: 300px; }
+    .dis-portrait::after {
+      background: linear-gradient(180deg, rgba(5,40,71,.6) 0%, rgba(5,40,71,0) 40%);
+    }
+    .dis-form { grid-template-columns: 1fr; }
+    .dis-form .qc-product-field,
+    .dis-form .qc-location-field { border-right: none; border-bottom: 1px solid var(--border); }
+    .dis-form .qc-cta { padding: 16px; }
+    .dis-math-row { grid-template-columns: 100px 1fr 70px; gap: 10px; }
+  }
+
+  /* SUB-PRODUCTS — numbered step picker (editorial) + unified panel */
+  .sub-section { padding: 72px 0; background: var(--white); }
+  .sub-header { text-align: center; max-width: 780px; margin: 0 auto 40px; padding: 0 28px; }
+  .sub-header h2 {
+    font-size: clamp(26px, 3.2vw, 36px); font-weight: 700;
+    color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+  }
+  .sub-header p { color: var(--muted); font-size: 16px; }
+
+  .dis-picker {
+    max-width: 1080px; margin: 0 auto; padding: 0 28px;
+  }
+  .dis-steps {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+    border-top: 2px solid var(--navy);
+    border-bottom: 2px solid var(--navy);
+    margin-bottom: 0;
+  }
+  .dis-step {
+    background: none; border: none;
+    border-right: 1px solid var(--border);
+    padding: 20px 16px 18px; cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    display: flex; flex-direction: column; gap: 6px;
+    text-align: left; transition: .2s;
+    position: relative;
+  }
+  .dis-step:last-child { border-right: none; }
+  .dis-step-num {
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    font-variant-numeric: tabular-nums; letter-spacing: .05em;
+  }
+  .dis-step-name {
+    font-size: 13px; font-weight: 600; color: var(--navy);
+    line-height: 1.25;
+  }
+  .dis-step:hover { background: var(--bg); }
+  .dis-step:hover .dis-step-num { color: var(--orange); }
+  .dis-step.active { background: var(--navy); }
+  .dis-step.active .dis-step-num { color: var(--orange); }
+  .dis-step.active .dis-step-name { color: #fff; font-weight: 700; }
+
+  .dis-panel {
+    background: var(--bg); border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 44px;
+    display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start;
+  }
+  .dis-panel-left { display: flex; flex-direction: column; gap: 14px; }
+  .dis-panel-num {
+    font-size: 56px; font-weight: 700; color: rgba(5,40,71,.14);
+    line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+  }
+  .dis-panel-tag {
+    display: inline-block; padding: 4px 12px;
+    background: rgba(232,130,26,.1); color: var(--orange);
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+    width: fit-content;
+  }
+  .dis-panel h3 {
+    font-size: 28px; font-weight: 700; color: var(--navy);
+    line-height: 1.15; letter-spacing: -.005em;
+  }
+  .dis-panel p {
+    font-size: 15px; color: var(--text); line-height: 1.65;
+  }
+
+  .dis-panel-form {
+    background: #fff; padding: 26px; border: 1px solid var(--border);
+    border-top: 4px solid var(--orange);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .dis-panel-form .title {
+    font-size: 16px; font-weight: 700; color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .dis-panel-form .sub {
+    font-size: 13px; color: var(--muted); margin-bottom: 12px;
+  }
+  .dis-panel-form input {
+    padding: 13px 16px; border: 1.5px solid var(--border);
+    font-family: 'Outfit', sans-serif; font-size: 14px;
+    outline: none; letter-spacing: .2em;
+  }
+  .dis-panel-form input:focus { border-color: var(--orange); }
+  .dis-panel-form button {
+    padding: 13px 20px; background: var(--navy); color: #fff;
+    border: none; font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: .06em;
+    transition: .15s;
+  }
+  .dis-panel-form button:hover { background: #03182b; }
+
+  @media (max-width: 900px) {
+    .dis-steps { grid-template-columns: repeat(3, 1fr); }
+    .dis-step { border-bottom: 1px solid var(--border); }
+    .dis-step:nth-child(3n) { border-right: none; }
+    .dis-panel { grid-template-columns: 1fr; padding: 28px; gap: 24px; }
+  }
+  @media (max-width: 520px) {
+    .dis-steps { grid-template-columns: repeat(2, 1fr); }
+    .dis-step:nth-child(3n) { border-right: 1px solid var(--border); }
+    .dis-step:nth-child(2n) { border-right: none; }
+  }
+</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-brand"><span class="nav-brand-mark">1P</span><span class="nav-brand-name">OnePoint</span></a>
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
         <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
@@ -26,26 +360,103 @@
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
               <div class="mega-col">
-                <h5>Vehicle</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li></ul>
-                <h5 style="margin-top:18px">Property</h5><ul><li><a href="../home/">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li></ul>
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Personal Protection</h5><ul><li><a href="../health/">Health Insurance</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="./">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com">Umbrella</a></li></ul>
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Business</h5><ul><li><a href="../business/">Business Insurance</a></li><li><a href="../business/">General Liability</a></li><li><a href="../business/">Commercial Auto</a></li></ul>
-                <h5 style="margin-top:18px">Bundle &amp; Save</h5><ul><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li></ul>
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
               </div>
             </div>
-            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li></ul></div></div>
-            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
           </div>
         </div>
       </li>
-      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
-      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
     </div>
@@ -54,49 +465,119 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&auto=format&fit=crop&q=80')">
-    <div class="hero-text">
-      <span class="hero-eyebrow">Disability Income Insurance · Income Protection</span>
-      <h1>Your income is your most valuable asset. Protect every paycheck.</h1>
-      <p class="hero-sub">If illness or injury keeps you from working, disability income insurance replaces your paycheck — so your life doesn't stop when work does.</p>
-    </div>
-    <div class="quote-card-wrap">
-      <div class="quote-card">
-        <div class="qc-head">
-          <p class="qc-title">Get your disability income quote</p>
-          <p class="qc-sub">Replace 60-70% of your paycheck when you can't work.</p>
-        </div>
-        <form class="qc-form" onsubmit="goQuote(event)">
-          <div class="qc-step">
-            <label class="qc-step-label" for="zip">ZIP code</label>
-            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
+  <!-- HERO — "Paycheck Math": navy editorial + income-bar visualization, photo portrait right -->
+  <section class="hero">
+    <div class="dis-decor" aria-hidden="true"></div>
+    <nav class="dis-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Disability Income Insurance</span>
+    </nav>
+    <div class="dis-hero">
+      <div class="dis-content">
+        <span class="dis-kicker">Disability Income Insurance</span>
+        <h1 data-swap="heroH1">If your paycheck stops, we keep it <span class="underline">coming.</span></h1>
+        <p class="lead" data-swap="heroLead">1 in 4 working Americans will face a disability lasting 90+ days before they retire. Don't let a bad diagnosis cost you your rent, your groceries, or your kids' plans — insure the asset that pays for all of it.</p>
+
+        <div class="dis-math" aria-label="Income replacement math">
+          <p class="dis-math-title">The math on a $5,000/mo paycheck</p>
+          <div class="dis-math-row full">
+            <span class="name">Your income</span>
+            <span class="bar"><span class="fill"></span></span>
+            <span class="amt">$5,000</span>
           </div>
-          <div class="qc-step">
-            <label class="qc-step-label">What are you quoting?</label>
-            <div class="qc-tabs">
-              <a href="../auto/" class="qc-tab" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
-              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
-              <a href="../health/" class="qc-tab" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
-              <a href="../life/" class="qc-tab" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
-              <a href="./" class="qc-tab active" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
-              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
+          <div class="dis-math-row alt">
+            <span class="name">State DI only</span>
+            <span class="bar"><span class="fill"></span></span>
+            <span class="amt">~$1,300</span>
+          </div>
+          <div class="dis-math-row protected">
+            <span class="name">With OnePoint</span>
+            <span class="bar"><span class="fill"></span></span>
+            <span class="amt">$3,500</span>
+          </div>
+          <p class="dis-math-footnote">Up to 70% of gross income replaced. Exact amount varies by state, age, and occupation class.</p>
+        </div>
+
+        <form class="dis-form quote-card" onsubmit="goQuote(event)">
+          <div class="qc-product-field">
+            <label class="qc-field-label">Type of coverage</label>
+            <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
+              <span class="qc-product-name">Disability Income</span>
+              <span class="qc-product-caret">▾</span>
+            </button>
+            <div class="qc-product-dropdown" id="productDropdown">
+              <p class="qc-bundle-headline">Build a complete income-protection strategy with the right mix of policies.<sup>Δ</sup></p>
+              <div class="qc-bundle-links">
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Life Insurance (Term)');">Disability + Life</a>
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Health Insurance (Marketplace)');">Disability + Health</a>
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Business Overhead Expense Disability');">Disability + BOE</a>
+              </div>
+              <p class="qc-other-label">Or, quote another product</p>
+              <div class="qc-other-grid">
+                <a href="#dis-subs">Business Overhead Expense</a>
+                <a href="./" class="current">Disability Income</a>
+                <a href="#dis-subs">Group Disability</a>
+                <a href="#dis-subs">Individual Disability</a>
+                <a href="#dis-subs">Long-Term Disability</a>
+                <a href="#dis-subs">Short-Term Disability</a>
+                <a href="../auto/">Auto</a>
+                <a href="../business/">Commercial Auto</a>
+                <a href="../life/">Final Expense</a>
+                <a href="../business/">General Liability</a>
+                <a href="../health/">Health (Marketplace)</a>
+                <a href="../home/">Homeowners</a>
+                <a href="../life/">Life (Term)</a>
+                <a href="../life/">Long-Term Care</a>
+                <a href="../business/">Workers' Comp</a>
+              </div>
             </div>
           </div>
-          <button type="submit" class="qc-submit">
-            <span>Get a quote</span>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          <div class="qc-location-field">
+            <label class="qc-field-label" for="zip">ZIP Code</label>
+            <input class="qc-location-input" id="zip" type="text" placeholder="00000" maxlength="5" inputmode="numeric" required>
+          </div>
+          <button type="submit" class="qc-cta">Quote in 30s →</button>
         </form>
-        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
+      </div>
+
+      <div class="dis-portrait" role="img" aria-label="Worker protected by OnePoint disability income insurance">
+        <div class="dis-portrait-tag">
+          <span class="big">As low as $25/mo</span>
+          <span class="small">Own your policy. Keep it if you change jobs. Starts covering illness &amp; injury on day one.</span>
+        </div>
       </div>
     </div>
-    <div class="other-ways-bar">
-      <div class="other-ways-inner">
-        <strong>Other ways to buy:</strong>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
-        <span class="other-ways-sep">|</span>
-        <a href="tel:888-899-8117">Call an agent ›</a>
+  </section>
+
+  <!-- SUB-PRODUCTS — numbered step picker + unified editorial panel -->
+  <section class="sub-section" id="dis-subs">
+    <div class="sub-header">
+      <h2>Six ways to protect your income.</h2>
+      <p>Pick a policy type to see what it covers and start a quote.</p>
+    </div>
+    <div class="dis-picker">
+      <div class="dis-steps" role="tablist">
+        <button type="button" class="dis-step active" data-v="overview" onclick="selectDis('overview')" role="tab"><span class="dis-step-num">01</span><span class="dis-step-name">Overview</span></button>
+        <button type="button" class="dis-step" data-v="individual" onclick="selectDis('individual')" role="tab"><span class="dis-step-num">02</span><span class="dis-step-name">Individual DI</span></button>
+        <button type="button" class="dis-step" data-v="short" onclick="selectDis('short')" role="tab"><span class="dis-step-num">03</span><span class="dis-step-name">Short-Term</span></button>
+        <button type="button" class="dis-step" data-v="long" onclick="selectDis('long')" role="tab"><span class="dis-step-num">04</span><span class="dis-step-name">Long-Term</span></button>
+        <button type="button" class="dis-step" data-v="group" onclick="selectDis('group')" role="tab"><span class="dis-step-num">05</span><span class="dis-step-name">Group</span></button>
+        <button type="button" class="dis-step" data-v="boe" onclick="selectDis('boe')" role="tab"><span class="dis-step-num">06</span><span class="dis-step-name">Business Overhead</span></button>
+      </div>
+      <div class="dis-panel" role="tabpanel">
+        <div class="dis-panel-left">
+          <div class="dis-panel-num" id="dp-num">01</div>
+          <span class="dis-panel-tag" id="dp-tag">Start here if you're new</span>
+          <h3 id="dp-title">Disability Income (Overview)</h3>
+          <p id="dp-desc">The broad category of policies that pay a monthly benefit if illness or injury stops you from earning. Short-term, long-term, individual, group, and Business Overhead Expense policies all roll up under this umbrella.</p>
+        </div>
+        <form class="dis-panel-form" onsubmit="dpQuote(event)">
+          <span class="title">Get your quote</span>
+          <span class="sub">Enter your ZIP to compare rates.</span>
+          <input type="text" id="dp-zip" placeholder="ZIP code" maxlength="5" inputmode="numeric" required>
+          <button type="submit">Get quote →</button>
+        </form>
       </div>
     </div>
   </section>
@@ -117,9 +598,9 @@
   <section class="section" id="types">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Coverage Types</div>
-        <h2 class="section-h2">Three paths to income protection — each built for a different situation.</h2>
-        <p class="section-lead">Disability coverage isn't one-size-fits-all. Your recovery timeline, work situation, and financial obligations all shape which type of policy makes the most sense.</p>
+        <div class="section-kicker" data-swap="coverKicker">Coverage Types</div>
+        <h2 class="section-h2" data-swap="coverH2">Three paths to income protection — each built for a different situation.</h2>
+        <p class="section-lead" data-swap="coverBody">Disability coverage isn't one-size-fits-all. Your recovery timeline, work situation, and financial obligations all shape which type of policy makes the most sense.</p>
       </div>
       <div class="feat-grid-3">
         <div class="feat-card">
@@ -181,13 +662,57 @@
     </div>
   </section>
 
+  <!-- BUNDLE & SAVE -->
+  <section class="bundle-section" style="--bundle-accent: var(--orange);">
+    <div class="bundle-header">
+      <span class="bundle-kicker">Build your income-protection stack</span>
+      <h2>Disability income works harder when it's paired right.</h2>
+      <p>Disability replaces your paycheck. Life and health fill in the edges. Together they form a full income-protection stack.</p>
+    </div>
+    <div class="bundle-grid">
+      <button type="button" class="bundle-card" onclick="openQM('Life Insurance (Term)')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+        </div>
+        <h4>Disability + Life</h4>
+        <p>Disability pays when you can't work. Life pays when you can't come home. The two most underweighted coverages most families carry.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Complete income + legacy</span>
+        <span class="bundle-card-cta">Bundle DI + life <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Health Insurance (Marketplace)')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+        </div>
+        <h4>Disability + Health</h4>
+        <p>Health pays the doctor. Disability pays the rent while you see them. Stacking the two is how recovery doesn't bankrupt you.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Cover care AND cash flow</span>
+        <span class="bundle-card-cta">Bundle DI + health <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Business Overhead Expense Disability')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
+        </div>
+        <h4>Disability + BOE</h4>
+        <p>For business owners: individual DI replaces your paycheck, BOE keeps your business open — covering rent, staff, and fixed costs while you recover.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> For self-employed &amp; owners</span>
+        <span class="bundle-card-cta">Bundle DI + BOE <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+
   <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <h2>1 in 4 workers will become disabled before retirement.</h2>
-          <p>Most people insure their car and their home. Almost no one insures the income that pays for both. Talk to an advisor today.</p>
+          <h2 data-swap="midCtaH2">1 in 4 workers will become disabled before retirement.</h2>
+          <p data-swap="midCtaLead">Most people insure their car and their home. Almost no one insures the income that pays for both. Talk to an advisor today.</p>
         </div>
         <div class="mid-cta-actions">
           <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Protect My Income</a>
@@ -250,8 +775,8 @@
   <section class="cta-band">
     <div class="container">
       <div class="section-kicker">Your Next Step</div>
-      <h2 class="section-h2">Protect the paycheck that keeps everything else running.</h2>
-      <p>A licensed advisor will walk you through individual, employer, and business coverage options — and find the policy that fits your income, your recovery risk, and your life.</p>
+      <h2 class="section-h2" data-swap="finalCtaH2">Protect the paycheck that keeps everything else running.</h2>
+      <p data-swap="finalCtaLead">A licensed advisor will walk you through individual, employer, and business coverage options — and find the policy that fits your income, your recovery risk, and your life.</p>
       <div class="cta-band-actions">
         <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Disability Quote</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
@@ -264,22 +789,165 @@
 <footer class="site-footer">
   <div class="container">
     <div class="ft-grid">
-      <div><div class="ft-brand"><span class="ft-brand-mark">1P</span><span class="ft-brand-name">OnePoint Insurance</span></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="./">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li><li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div>
-      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li><li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
-    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a><a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a></div></div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
   </div>
 </footer>
 
 <script>
-function goQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function goQuote(e){e.preventDefault();var zip=e.target&&e.target.querySelector?(e.target.querySelector('input[type="text"]')||{}).value:'';if(window.openQM)openQM('Disability Income (Overview)',{zip:zip});else window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
 function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
 function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
 function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
-document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+function toggleProductDropdown(e){e.stopPropagation();const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');btn.classList.toggle('open');dd.classList.toggle('open');}
+function subQuote(e,product){e.preventDefault();const zip=e.target.querySelector('input').value;if(window.openQM)openQM(product,{zip:zip});else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);}
+const disData = {
+  overview:   { num:'01', tag:"Start here if you're new",            name:'Disability Income (Overview)',            desc:"The broad category of policies that pay a monthly benefit if illness or injury stops you from earning. Short-term, long-term, individual, group, and Business Overhead Expense policies all roll up under this umbrella." },
+  individual: { num:'02', tag:'Portable · Own-occupation available', name:'Individual Disability Income',            desc:"A personal policy you own (and keep if you change jobs) that pays a contracted monthly benefit based on your pre-disability income. Best-in-class coverage for professionals and high earners." },
+  short:      { num:'03', tag:'Fast payout · Short duration',        name:'Short-Term Disability',                    desc:"Benefits that kick in within 1–14 days and typically last up to 3–6 months — built for surgery recovery, maternity leave, or temporary illness." },
+  long:       { num:'04', tag:'90–180 day elimination · Years',      name:'Long-Term Disability',                     desc:"Coverage for serious conditions — cancer, stroke, chronic illness, or major injury — with benefits that can continue for years, up to retirement age in many policies." },
+  group:      { num:'05', tag:'Employer-sponsored',                  name:'Group Disability',                         desc:"Employer-sponsored coverage that protects teams with short- and long-term options. A foundational workplace benefit that helps recruit and retain talent." },
+  boe:        { num:'06', tag:'For owners · Keeps the business running', name:'Business Overhead Expense Disability', desc:"For business owners. Covers rent, payroll, utilities, and fixed operating costs so your business stays open — even when you can't show up to run it." }
+};
+// Page-wide copy keyed by subproduct slug. The `overview` entry IS the original
+// page copy verbatim — clicking the Overview tab restores the page to its default state.
+const disabilitySwap = {
+  overview: {
+    heroH1: "If your paycheck stops, we keep it <span class=\"underline\">coming.</span>",
+    heroLead: "1 in 4 working Americans will face a disability lasting 90+ days before they retire. Don't let a bad diagnosis cost you your rent, your groceries, or your kids' plans — insure the asset that pays for all of it.",
+    coverKicker: "Coverage Types",
+    coverH2: "Three paths to income protection — each built for a different situation.",
+    coverBody: "Disability coverage isn't one-size-fits-all. Your recovery timeline, work situation, and financial obligations all shape which type of policy makes the most sense.",
+    midCtaH2: "1 in 4 workers will become disabled before retirement.",
+    midCtaLead: "Most people insure their car and their home. Almost no one insures the income that pays for both. Talk to an advisor today.",
+    finalCtaH2: "Protect the paycheck that keeps everything else running.",
+    finalCtaLead: "A licensed advisor will walk you through individual, employer, and business coverage options — and find the policy that fits your income, your recovery risk, and your life."
+  },
+  individual: {
+    heroH1: "Individual Disability Income",
+    heroLead: "A personal policy you own — and keep when you change jobs — that pays a contracted monthly benefit if you can't work.",
+    coverKicker: "What's Covered",
+    coverH2: "Income protection that goes wherever you do.",
+    coverBody: "Individual DI is best-in-class coverage for professionals and high earners. Pays a monthly benefit based on your pre-disability income, often with own-occupation language so partial disability still pays — even if you can do a different job.",
+    midCtaH2: "Lock in your rate while you're healthy.",
+    midCtaLead: "Premiums depend on age, occupation, and health — and they only go up the longer you wait.",
+    finalCtaH2: "Protect your paycheck for the long haul.",
+    finalCtaLead: "Get a personalized individual DI quote and own a policy that follows you through every job change."
+  },
+  short: {
+    heroH1: "Short-Term Disability",
+    heroLead: "Benefits that kick in within 1–14 days and last up to 3–6 months — built for surgery recovery, maternity leave, or temporary illness.",
+    coverKicker: "What's Covered",
+    coverH2: "Fast benefits when you can't work for weeks.",
+    coverBody: "Short-term disability typically replaces 60–70% of your gross income for 3–6 months after a brief elimination period. Built to bridge the gap between an injury or illness and your return to work — or until long-term coverage takes over.",
+    midCtaH2: "Cover the first months out of work.",
+    midCtaLead: "Most short-term disability claims are non-injury related — pregnancy, surgery, mental health, illness.",
+    finalCtaH2: "Get short-term disability coverage.",
+    finalCtaLead: "Affordable monthly premiums and benefits that start within days of an approved claim."
+  },
+  long: {
+    heroH1: "Long-Term Disability",
+    heroLead: "Coverage for serious conditions — cancer, stroke, chronic illness, major injury — with benefits that can continue for years.",
+    coverKicker: "What's Covered",
+    coverH2: "Protection for the diagnoses that change everything.",
+    coverBody: "Long-term disability replaces a portion of your income (typically 50–70%) after a 90–180-day elimination period. Benefits can continue for 2 years, 5 years, or all the way to retirement age depending on the policy you choose.",
+    midCtaH2: "Cover the years your career can't.",
+    midCtaLead: "1 in 4 working Americans will face a disability lasting 90+ days before they retire.",
+    finalCtaH2: "Get long-term disability coverage.",
+    finalCtaLead: "Lock in income protection while you're healthy and watch the years of coverage stack up cheaply."
+  },
+  group: {
+    heroH1: "Group Disability Insurance",
+    heroLead: "Employer-sponsored coverage that protects teams with short- and long-term options — a foundational workplace benefit.",
+    coverKicker: "What's Covered",
+    coverH2: "A foundational benefit your team will use.",
+    coverBody: "Group disability covers eligible employees under one master policy with simplified or no-medical underwriting. Plans can include short-term, long-term, or both — with employer-paid, voluntary, or contributory funding structures to fit any budget.",
+    midCtaH2: "Add disability to your benefits package.",
+    midCtaLead: "Disability is the most-claimed benefit employees actually use — and one of the cheapest to offer.",
+    finalCtaH2: "Request a group disability quote.",
+    finalCtaLead: "Share your headcount and we'll return competitive proposals across A-rated group carriers."
+  },
+  boe: {
+    heroH1: "Business Overhead Expense (BOE)",
+    heroLead: "For business owners. Covers rent, payroll, utilities, and fixed costs so your business stays open — even when you can't show up.",
+    coverKicker: "What's Covered",
+    coverH2: "Keep the lights on when you can't work.",
+    coverBody: "BOE reimburses your business's fixed monthly operating expenses — rent, utilities, employee salaries, insurance premiums, equipment leases — for 12–24 months while you're disabled. Designed for owner-operators whose absence shuts the business down.",
+    midCtaH2: "Don't let your business close with you.",
+    midCtaLead: "BOE is one of the most overlooked policies for sole owners — and the cheapest insurance for a closed-shop risk.",
+    finalCtaH2: "Get a Business Overhead Expense quote.",
+    finalCtaLead: "Tell us about your monthly fixed costs and we'll quote BOE coverage that keeps your business running."
+  }
+};
+// Swap every [data-swap] element on the page to the chosen subproduct's copy.
+// DOM is never moved or restructured — only innerHTML of tagged nodes changes.
+function swapDisabilityCopy(v){
+  const data = disabilitySwap[v];
+  if(!data) return;
+  document.querySelectorAll('[data-swap]').forEach(el => {
+    const key = el.getAttribute('data-swap');
+    if(data[key] != null) el.innerHTML = data[key];
+  });
+}
+let selectedDis = 'overview';
+function selectDis(v){
+  if(!disData[v]) return;
+  selectedDis = v;
+  document.querySelectorAll('.dis-step').forEach(s=>s.classList.toggle('active', s.dataset.v === v));
+  document.getElementById('dp-num').textContent = disData[v].num;
+  document.getElementById('dp-tag').textContent = disData[v].tag;
+  document.getElementById('dp-title').textContent = disData[v].name;
+  document.getElementById('dp-desc').textContent = disData[v].desc;
+  swapDisabilityCopy(v);
+}
+function dpQuote(e){
+  e.preventDefault();
+  const zip = document.getElementById('dp-zip').value;
+  const product = disData[selectedDis].name;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
+}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));
+  if(!e.target.closest('.qc-product-field')){const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');if(btn)btn.classList.remove('open');if(dd)dd.classList.remove('open');}
+});
+function handleDisHash(){
+  var hash = window.location.hash.replace('#','');
+  if(hash && disData[hash]){
+    selectDis(hash);
+    var picker = document.getElementById('dis-subs');
+    if(picker) setTimeout(function(){ picker.scrollIntoView({behavior:'smooth',block:'start'}); }, 300);
+  }
+}
+handleDisHash();
+window.addEventListener('hashchange', handleDisHash);
 </script>
+
+<!-- RESUME QUOTE MODAL -->
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

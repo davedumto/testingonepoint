@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy Request | Update Policy, ID Card, Proof of Insurance | OnePoint</title>
+<meta name="description" content="Request a policy document, ID card, proof of insurance, certificate of insurance, billing info, or 1095-A tax form. We turn most requests around within one business day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../coverage-pages.css">
+<style>
+  :root { --hero-accent: rgba(232,130,26,.14); }
+  .section-kicker { color: var(--orange); }
+
+  .hero { min-height: 0; display: block; padding: 0; background: linear-gradient(180deg, #eaf3ff 0%, #ffffff 70%); position: relative; overflow: visible; }
+  .hero-decor::before, .hero-decor::after { display: none; }
+  .pr-bread { max-width: 1200px; margin: 0 auto; padding: 18px 28px 0; font-size: 13px; color: var(--muted); }
+  .pr-bread a { color: var(--muted); text-decoration: none; }
+  .pr-bread a:hover { color: var(--orange); }
+  .pr-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .pr-bread .current { color: var(--text); font-weight: 500; }
+
+  .pr-hero { max-width: 1120px; margin: 0 auto; padding: 36px 28px 32px; text-align: center; }
+  .pr-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+  .pr-kicker::before, .pr-kicker::after { content: ''; width: 28px; height: 1.5px; background: var(--orange); }
+  .pr-hero h1 { font-size: clamp(34px, 4.6vw, 52px); font-weight: 700; color: var(--navy); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px; }
+  .pr-hero h1 .accent { display: inline-block; padding: 0 8px; background: var(--orange); color: #fff; transform: skewX(-8deg); font-weight: 800; }
+  .pr-hero h1 .accent span { display: inline-block; transform: skewX(8deg); }
+  .pr-hero .lead { font-size: 17px; color: var(--text); line-height: 1.55; max-width: 620px; margin: 0 auto; }
+
+  /* QUICK PICK CHIPS */
+  .pr-chips { max-width: 920px; margin: 30px auto 0; padding: 0 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .pr-chip { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: #fff; border: 1.5px solid var(--border); color: var(--navy); font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: .15s; }
+  .pr-chip:hover { border-color: var(--orange); color: var(--orange); }
+  .pr-chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .pr-chip svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* MAIN GRID — form left, sidebar right */
+  .pr-main { padding: 56px 0 80px; background: var(--bg); }
+  .pr-main-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: start; }
+  .pr-form-card { background: #fff; border-top: 4px solid var(--orange); padding: 36px; box-shadow: 0 14px 36px rgba(5,40,71,.08); }
+  .pr-form-card h2 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.2; letter-spacing: -.005em; }
+  .pr-form-card p.intro { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .pr-form { display: grid; gap: 18px; }
+  .pr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pr-field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+  .pr-field input, .pr-field select, .pr-field textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; transition: .15s; background: #fff; color: var(--text); }
+  .pr-field input:focus, .pr-field select:focus, .pr-field textarea:focus { border-color: var(--orange); }
+  .pr-field textarea { min-height: 100px; resize: vertical; }
+  .pr-checkbox { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 16px; background: var(--bg); border-left: 3px solid var(--orange); }
+  .pr-checkbox input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--orange); margin-top: 2px; cursor: pointer; }
+  .pr-checkbox label { font-size: 13px; color: var(--text); line-height: 1.55; cursor: pointer; }
+  .pr-submit { padding: 14px 28px; background: var(--orange); color: #fff; border: none; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: .15s; justify-self: start; }
+  .pr-submit:hover { background: var(--orange-dark); }
+
+  .pr-side { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 28px; }
+  .pr-side-card { background: #fff; border: 1px solid var(--border); padding: 26px; }
+  .pr-side-card.dark { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .pr-side-card .pr-side-kicker { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+  .pr-side-card.dark .pr-side-kicker { color: #f5a623; }
+  .pr-side-card h3 { font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 14px; letter-spacing: -.005em; }
+  .pr-side-card.dark h3 { color: #fff; }
+  .pr-side-card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .pr-side-card.dark p { color: rgba(255,255,255,.78); }
+  .pr-sla { display: grid; gap: 14px; margin-top: 16px; }
+  .pr-sla-row { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; }
+  .pr-sla-row .ico { width: 36px; height: 36px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: #fff; }
+  .pr-sla-row .ico svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .pr-sla-row strong { display: block; color: var(--navy); font-size: 14px; }
+  .pr-side-card.dark .pr-sla-row strong { color: #fff; }
+  .pr-sla-row span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pr-side-card.dark .pr-sla-row span { color: rgba(255,255,255,.55); }
+
+  /* CAREERS BAND */
+  .pr-careers { padding: 80px 0; background: #fff; }
+  .pr-careers-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; }
+  .pr-careers-img { position: relative; height: 380px; overflow: hidden; }
+  .pr-careers-img::before { content: ''; position: absolute; right: -16px; bottom: -16px; width: 60%; height: 60%; background: var(--orange); z-index: 0; }
+  .pr-careers-img img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+  .pr-careers h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 14px; letter-spacing: -.01em; }
+  .pr-careers .lead { font-size: 15px; color: var(--text); line-height: 1.6; margin-bottom: 22px; }
+  .pr-careers .pr-coverage-link { display: inline-flex; align-items: center; gap: 8px; color: var(--orange); font-size: 13px; font-weight: 700; text-decoration: none; padding-bottom: 4px; border-bottom: 2px solid var(--orange); margin-top: 6px; }
+
+  @media (max-width: 960px) {
+    .pr-main-grid { grid-template-columns: 1fr; }
+    .pr-side { position: static; }
+    .pr-row { grid-template-columns: 1fr; }
+    .pr-careers-grid { grid-template-columns: 1fr; }
+    .pr-careers-img { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav class="pr-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Policy Request</span>
+    </nav>
+    <div class="pr-hero">
+      <span class="pr-kicker">Client Tools</span>
+      <h1>Need a document, ID card, or <span class="accent"><span>policy update?</span></span></h1>
+      <p class="lead">Tell us what you need and we'll handle it. Most requests come back within one business day — usually the same one.</p>
+      <div class="pr-chips" id="prChips">
+        <button type="button" class="pr-chip" onclick="setRequest(this,'Proof of Insurance')"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9 9 4 9 9z"/></svg> Proof of Insurance</button>
+        <button type="button" class="pr-chip" onclick="setRequest(this,'ID Card Request')"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ID Card</button>
+        <button type="button" class="pr-chip" onclick="setRequest(this,'Certificate of Insurance')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 14l-3 8 6-3 6 3-3-8"/></svg> Certificate of Insurance</button>
+        <button type="button" class="pr-chip" onclick="setRequest(this,'Policy Document')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Policy Document</button>
+        <button type="button" class="pr-chip" onclick="setRequest(this,'Billing Information')"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Billing Info</button>
+        <button type="button" class="pr-chip" onclick="setRequest(this,'1095-A Tax Form')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg> 1095-A Tax Form</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <section class="pr-main">
+    <div class="pr-main-grid">
+      <div class="pr-form-card">
+        <h2>Submit your request</h2>
+        <p class="intro">Fill out the form below and we'll process your request as quickly as possible. Most documents are sent back within one business day.</p>
+        <form class="pr-form" onsubmit="submitPR(event)">
+          <div class="pr-row">
+            <div class="pr-field"><label for="pf-first">First name *</label><input type="text" id="pf-first" required></div>
+            <div class="pr-field"><label for="pf-last">Last name *</label><input type="text" id="pf-last" required></div>
+          </div>
+          <div class="pr-row">
+            <div class="pr-field"><label for="pf-phone">Phone *</label><input type="tel" id="pf-phone" required></div>
+            <div class="pr-field"><label for="pf-email">Email *</label><input type="email" id="pf-email" required></div>
+          </div>
+          <div class="pr-field"><label for="pf-type">What request do you want? *</label>
+            <select id="pf-type" required>
+              <option value="">Select a request type</option>
+              <option>1095-A Tax Form</option>
+              <option>Billing Information</option>
+              <option>Proof of Insurance</option>
+              <option>Certificate of Insurance</option>
+              <option>Policy Document</option>
+              <option>ID Card Request</option>
+            </select>
+          </div>
+          <div class="pr-field"><label for="pf-policy">Policy number (if known)</label><input type="text" id="pf-policy" placeholder="Leave blank if you don't have it"></div>
+          <div class="pr-field"><label for="pf-notes">Additional details</label><textarea id="pf-notes" placeholder="Anything else we should know? (e.g. specific lender, certificate holder, deadline)"></textarea></div>
+          <div class="pr-checkbox">
+            <input type="checkbox" id="pf-consent" required>
+            <label for="pf-consent">By checking this box, I consent to receive transactional messages related to my account, orders, or services I have requested. These messages may include appointment reminders, order confirmations, and account notifications. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt-out.</label>
+          </div>
+          <button type="submit" class="pr-submit">Submit Request →</button>
+        </form>
+      </div>
+
+      <div class="pr-side">
+        <div class="pr-side-card dark">
+          <div class="pr-side-kicker">Turnaround</div>
+          <h3>What to expect</h3>
+          <p>We work fast — and we'll always tell you when something requires a carrier on their end.</p>
+          <div class="pr-sla">
+            <div class="pr-sla-row"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><strong>1 business day</strong><span>ID cards, proof of insurance, policy docs</span></div></div>
+            <div class="pr-sla-row"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><strong>1–3 business days</strong><span>Certificates, billing info, tax forms</span></div></div>
+            <div class="pr-sla-row"><div class="ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div><div><strong>Need it now?</strong><span>Call <a href="tel:888-899-8117" style="color:#f5a623">888-899-8117</a></span></div></div>
+          </div>
+        </div>
+
+        <div class="pr-side-card">
+          <div class="pr-side-kicker">Other tools</div>
+          <h3>Need something else?</h3>
+          <p style="margin-bottom:14px">If you're filing a claim, uploading a doc, or scheduling a call, head straight to:</p>
+          <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px">
+            <li><a href="../client-services/" style="font-size:14px;font-weight:700;color:var(--blue);text-decoration:none">→ File a claim</a></li>
+            <li><a href="../client-services/" style="font-size:14px;font-weight:700;color:var(--blue);text-decoration:none">→ Upload a document</a></li>
+            <li><a href="https://onepointinsuranceagency.com/appointment-calendar" style="font-size:14px;font-weight:700;color:var(--blue);text-decoration:none">→ Schedule a call</a></li>
+            <li><a href="../partners/" style="font-size:14px;font-weight:700;color:var(--blue);text-decoration:none">→ Contact your carrier directly</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section class="pr-careers">
+    <div class="pr-careers-grid">
+      <div class="pr-careers-img"><img src="../people-first.jpg" alt="OnePoint team" loading="lazy"></div>
+      <div>
+        <div class="section-kicker">Be Part of OnePoint</div>
+        <h2>Join a team that's reshaping how insurance feels.</h2>
+        <p class="lead">We're a community of dedicated professionals reshaping the future of insurance. With access to unparalleled resources, continuous training, and industry-leading tools, we empower you to build lasting client relationships and achieve your career goals. Together, we're making insurance more accessible and impactful for clients everywhere.</p>
+        <a href="../about/" class="pr-coverage-link">See our coverages <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="./">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
+  </div>
+</footer>
+
+<script>
+function setRequest(btn,val){document.querySelectorAll('.pr-chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');document.getElementById('pf-type').value=val;document.getElementById('pf-type').scrollIntoView({behavior:'smooth',block:'center'});}
+function submitPR(e){e.preventDefault();alert("Request received. We'll be in touch within one business day.");e.target.reset();document.querySelectorAll('.pr-chip').forEach(c=>c.classList.remove('active'));}
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
+
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

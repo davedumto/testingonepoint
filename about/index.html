@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About OnePoint Insurance Agency | Real Protection. Real People. Real Easy.</title>
+<meta name="description" content="OnePoint is an independent insurance agency founded in 2020. We protect 5,000+ clients across 18 states with coverage from 50+ top-rated carriers — no jargon, no quotas, just real people who care.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../coverage-pages.css">
+<style>
+  :root { --hero-accent: rgba(232,130,26,.14); --hero-accent-2: rgba(0,102,204,.06); }
+  .hero-eyebrow, .section-kicker { color: var(--orange); }
+
+  /* ABOUT HERO — editorial split: bold left + photo composition right */
+  .hero { min-height: 0; display: block; padding: 0; background: linear-gradient(180deg, #eaf3ff 0%, #ffffff 70%); position: relative; overflow: visible; }
+  .hero-decor::before, .hero-decor::after { display: none; }
+  .ab-bread { max-width: 1200px; margin: 0 auto; padding: 18px 28px 0; font-size: 13px; color: var(--muted); }
+  .ab-bread a { color: var(--muted); text-decoration: none; }
+  .ab-bread a:hover { color: var(--orange); }
+  .ab-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .ab-bread .current { color: var(--text); font-weight: 500; }
+
+  .ab-hero-grid { max-width: 1200px; margin: 0 auto; padding: 36px 28px 56px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .ab-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+  .ab-kicker::before { content: ''; width: 28px; height: 1.5px; background: var(--orange); }
+  .ab-hero-left h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 700; color: var(--navy); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 18px; }
+  .ab-hero-left h1 .accent { display: inline-block; padding: 0 8px; background: var(--orange); color: #fff; transform: skewX(-8deg); font-weight: 800; }
+  .ab-hero-left h1 .accent span { display: inline-block; transform: skewX(8deg); }
+  .ab-hero-left .lead { font-size: 18px; color: var(--text); line-height: 1.55; max-width: 520px; margin-bottom: 28px; }
+  .ab-hero-left .ab-cta { display: inline-flex; align-items: center; gap: 10px; }
+  .ab-hero-left .ab-cta .btn { padding: 14px 24px; }
+
+  /* layered photo composition right side */
+  .ab-photo-stage { position: relative; height: 460px; }
+  .ab-photo-stage .accent-block { position: absolute; right: -14px; bottom: -14px; width: 78%; height: 76%; background: var(--orange); z-index: 1; }
+  .ab-photo-stage .accent-outline { position: absolute; top: -10px; left: -10px; width: 56%; height: 50%; border: 1.5px dashed rgba(232,130,26,.5); z-index: 1; }
+  .ab-photo-stage .photo-frame { position: absolute; inset: 18px 32px 32px 18px; z-index: 2; overflow: hidden; box-shadow: 0 20px 50px rgba(20,30,80,.18); }
+  .ab-photo-stage .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  .ab-photo-stage:hover .photo-frame img { transform: scale(1.04); }
+  .ab-photo-tag { position: absolute; top: 32px; left: 32px; z-index: 4; background: rgba(255,255,255,.95); padding: 8px 14px; font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
+  .ab-photo-tag::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--orange); margin-right: 8px; vertical-align: middle; }
+  .ab-stat-badge { position: absolute; left: -20px; bottom: 28px; z-index: 5; background: #fff; padding: 18px 22px; box-shadow: 0 16px 36px rgba(20,30,80,.22); border-left: 4px solid var(--orange); min-width: 200px; }
+  .ab-stat-badge .sb-label { font-size: 9.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); }
+  .ab-stat-badge strong { display: block; font-size: 36px; font-weight: 800; color: var(--navy); line-height: 1; margin-top: 4px; letter-spacing: -.01em; }
+  .ab-stat-badge .sb-meta { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
+
+  /* STATS STRIP */
+  .ab-stats { background: var(--navy); color: #fff; }
+  .ab-stats-inner { max-width: 1200px; margin: 0 auto; padding: 36px 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; align-items: center; }
+  .ab-stat-cell { text-align: center; padding: 8px 18px; border-right: 1px solid rgba(255,255,255,.1); }
+  .ab-stat-cell:last-child { border-right: none; }
+  .ab-stat-cell strong { display: block; font-size: clamp(34px, 4vw, 48px); font-weight: 800; line-height: 1; letter-spacing: -.02em; color: #fff; }
+  .ab-stat-cell span { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-top: 8px; }
+  .ab-stat-cell em { display: block; font-style: normal; font-size: 12px; color: var(--orange); font-weight: 700; margin-top: 4px; }
+
+  /* VALUES — 4 card grid */
+  .ab-values { padding: 80px 0; background: var(--white); }
+  .ab-values .container { max-width: 1200px; }
+  .ab-values .head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+  .ab-values h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; color: var(--navy); line-height: 1.18; letter-spacing: -.01em; margin-top: 6px; margin-bottom: 12px; }
+  .ab-values .head p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+  .ab-vgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 28px; }
+  .ab-vcard { background: var(--white); border: 1px solid var(--border); padding: 28px; transition: .2s; position: relative; }
+  .ab-vcard:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(5,40,71,.10); border-color: var(--orange); }
+  .ab-vcard::before { content: ''; position: absolute; top: 0; left: 0; height: 4px; width: 36px; background: var(--orange); }
+  .ab-vcard .num { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; margin-top: 8px; }
+  .ab-vcard h4 { font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 10px; }
+  .ab-vcard p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+  /* PROMISE — split with photo */
+  .ab-promise { padding: 80px 0; background: var(--bg); }
+  .ab-promise-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
+  .ab-promise-img { position: relative; height: 420px; overflow: hidden; }
+  .ab-promise-img img { width: 100%; height: 100%; object-fit: cover; }
+  .ab-promise-img::before { content: ''; position: absolute; left: -16px; top: -16px; width: 60%; height: 60%; background: var(--blue); z-index: 0; }
+  .ab-promise-img > * { position: relative; z-index: 1; }
+  .ab-promise h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: var(--navy); margin-bottom: 16px; line-height: 1.2; letter-spacing: -.01em; }
+  .ab-promise .lead { font-size: 16px; color: var(--text); line-height: 1.6; margin-bottom: 26px; }
+  .ab-promise ul { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 14px; }
+  .ab-promise li { display: flex; gap: 14px; font-size: 14.5px; color: var(--text); line-height: 1.5; }
+  .ab-promise li svg { flex-shrink: 0; width: 22px; height: 22px; stroke: var(--orange); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; margin-top: 1px; }
+  .ab-promise li strong { color: var(--navy); display: block; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+
+  /* STATES MAP STRIP */
+  .ab-states { padding: 72px 0; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .ab-states .head { text-align: center; max-width: 720px; margin: 0 auto 32px; padding: 0 28px; }
+  .ab-states h2 { font-size: clamp(24px, 2.8vw, 32px); font-weight: 700; color: var(--navy); margin-top: 6px; }
+  .ab-states .head p { color: var(--muted); font-size: 15px; margin-top: 8px; }
+  .ab-state-grid { max-width: 920px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+  .ab-state { background: var(--white); border: 1.5px solid var(--border); padding: 14px 12px; text-align: center; font-weight: 700; color: var(--navy); font-size: 14px; letter-spacing: .04em; transition: .15s; }
+  .ab-state:hover { border-color: var(--orange); color: var(--orange); }
+  .ab-state span { display: block; font-size: 10px; color: var(--subtle); font-weight: 600; letter-spacing: .12em; margin-top: 3px; }
+
+  @media (max-width: 960px) {
+    .ab-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ab-photo-stage { height: 360px; }
+    .ab-stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .ab-stat-cell { border-right: none; }
+    .ab-vgrid { grid-template-columns: repeat(2, 1fr); }
+    .ab-promise-grid { grid-template-columns: 1fr; }
+    .ab-promise-img { height: 320px; }
+  }
+  @media (max-width: 520px) {
+    .ab-vgrid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="./">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="./">About Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav class="ab-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">About Us</span>
+    </nav>
+    <div class="ab-hero-grid">
+      <div class="ab-hero-left">
+        <span class="ab-kicker">About OnePoint</span>
+        <h1>Real protection. Real people. <span class="accent"><span>Real easy.</span></span></h1>
+        <p class="lead">At OnePoint, we believe insurance should feel like a conversation, not a chore. We're not here to push policies — we're here to protect people.</p>
+        <div class="ab-cta">
+          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Talk to an Advisor</a>
+          <a href="../contact/" class="btn btn-ghost-navy">Contact Us</a>
+        </div>
+      </div>
+      <div class="ab-photo-stage">
+        <div class="accent-outline" aria-hidden="true"></div>
+        <div class="accent-block" aria-hidden="true"></div>
+        <div class="photo-frame">
+          <img src="../our-team.png" alt="OnePoint team helping clients">
+        </div>
+        <span class="ab-photo-tag">Our team</span>
+        <div class="ab-stat-badge">
+          <div class="sb-label">Founded</div>
+          <strong>2020</strong>
+          <div class="sb-meta">Independent · Atlanta-based · Family-built</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="ab-stats">
+    <div class="ab-stats-inner">
+      <div class="ab-stat-cell">
+        <strong>2020</strong>
+        <span>Founded</span>
+        <em>Independent</em>
+      </div>
+      <div class="ab-stat-cell">
+        <strong>18</strong>
+        <span>States Served</span>
+        <em>Coast to coast growth</em>
+      </div>
+      <div class="ab-stat-cell">
+        <strong>50+</strong>
+        <span>Carrier Partners</span>
+        <em>A-rated, top-tier</em>
+      </div>
+      <div class="ab-stat-cell">
+        <strong>5,000+</strong>
+        <span>Clients Protected</span>
+        <em>And counting</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="ab-values">
+    <div class="container">
+      <div class="head">
+        <div class="section-kicker">Why Clients Choose Us</div>
+        <h2>What it actually means to be on your side.</h2>
+        <p>Independent agents have one job: get you the right coverage at the right price. Here's how we do it differently.</p>
+      </div>
+      <div class="ab-vgrid">
+        <div class="ab-vcard">
+          <div class="num">01</div>
+          <h4>Independent &amp; unbiased</h4>
+          <p>We work for you, not insurance companies. Access to multiple carriers means better options and better pricing — no quota chasing.</p>
+        </div>
+        <div class="ab-vcard">
+          <div class="num">02</div>
+          <h4>Clear communication</h4>
+          <p>No jargon. No confusion. We explain everything in simple terms you can understand and decide on with confidence.</p>
+        </div>
+        <div class="ab-vcard">
+          <div class="num">03</div>
+          <h4>Personalized approach</h4>
+          <p>Every client is unique. We listen to your situation and tailor solutions specifically for you — not a generic template.</p>
+        </div>
+        <div class="ab-vcard">
+          <div class="num">04</div>
+          <h4>Ongoing support</h4>
+          <p>From enrollment through claims, we're with you every step. Your success is our priority — not your premium.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <section class="ab-promise">
+    <div class="ab-promise-grid">
+      <div class="ab-promise-img">
+        <img src="../our-team-2.png" alt="OnePoint advisors with clients" loading="lazy">
+      </div>
+      <div>
+        <div class="section-kicker" style="color:var(--blue)">Our Promise</div>
+        <h2>A trusted partner — from quote through claim.</h2>
+        <p class="lead">We measure success by how confident you feel about your coverage, not by what we sold you. Here's what that looks like in practice.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Accessibility</strong>Real people answer the phone. We don't bury you in menus or chatbots.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Proactive management</strong>We re-shop your policies before renewal — not after a rate hike.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Transparency</strong>You see the carriers, the rates, and the trade-offs. No hidden anything.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Empathy &amp; reliability</strong>Claims are stressful. We stay with you through every call and form.</div></li>
+        </ul>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Schedule a Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES SERVED -->
+  <section class="ab-states">
+    <div class="head">
+      <div class="section-kicker">Where We Serve</div>
+      <h2>Licensed across 18 states.</h2>
+      <p>Headquartered in Alpharetta, GA — protecting clients from coast to coast.</p>
+    </div>
+    <div class="ab-state-grid">
+      <div class="ab-state">GA <span>Georgia</span></div>
+      <div class="ab-state">AL <span>Alabama</span></div>
+      <div class="ab-state">AZ <span>Arizona</span></div>
+      <div class="ab-state">FL <span>Florida</span></div>
+      <div class="ab-state">IL <span>Illinois</span></div>
+      <div class="ab-state">LA <span>Louisiana</span></div>
+      <div class="ab-state">MD <span>Maryland</span></div>
+      <div class="ab-state">MI <span>Michigan</span></div>
+      <div class="ab-state">MS <span>Mississippi</span></div>
+      <div class="ab-state">MO <span>Missouri</span></div>
+      <div class="ab-state">NJ <span>New Jersey</span></div>
+      <div class="ab-state">NY <span>New York</span></div>
+      <div class="ab-state">NC <span>North Carolina</span></div>
+      <div class="ab-state">OH <span>Ohio</span></div>
+      <div class="ab-state">SC <span>South Carolina</span></div>
+      <div class="ab-state">TN <span>Tennessee</span></div>
+      <div class="ab-state">TX <span>Texas</span></div>
+      <div class="ab-state">VA <span>Virginia</span></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="section-kicker">Get Started</div>
+      <h2 class="section-h2">Ready to work with people who actually have your back?</h2>
+      <p>A short conversation is all it takes. We'll listen first, shop the market, and recommend coverage that actually fits your life.</p>
+      <div class="cta-band-actions">
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Book a Free Consultation</a>
+        <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="./">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
+  </div>
+</footer>
+
+<script>
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
+
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

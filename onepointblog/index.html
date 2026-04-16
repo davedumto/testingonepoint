@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insurance Insights | OnePoint Blog</title>
+<meta name="description" content="Expert insights, practical tips, and updates on auto, home, life, health, and business insurance — straight from OnePoint's licensed advisors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../coverage-pages.css">
+<style>
+  :root { --hero-accent: rgba(0,102,204,.14); }
+  .section-kicker { color: var(--blue); }
+
+  .hero { min-height: 0; display: block; padding: 0; background: linear-gradient(180deg, #eaf3ff 0%, #ffffff 70%); position: relative; overflow: visible; }
+  .hero-decor::before, .hero-decor::after { display: none; }
+  .bl-bread { max-width: 1200px; margin: 0 auto; padding: 18px 28px 0; font-size: 13px; color: var(--muted); }
+  .bl-bread a { color: var(--muted); text-decoration: none; }
+  .bl-bread a:hover { color: var(--blue); }
+  .bl-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .bl-bread .current { color: var(--text); font-weight: 500; }
+
+  .bl-hero { max-width: 1120px; margin: 0 auto; padding: 36px 28px 28px; text-align: center; }
+  .bl-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 18px; }
+  .bl-kicker::before, .bl-kicker::after { content: ''; width: 28px; height: 1.5px; background: var(--blue); }
+  .bl-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--navy); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 14px; }
+  .bl-hero h1 .accent { display: inline-block; padding: 0 8px; background: var(--blue); color: #fff; transform: skewX(-8deg); font-weight: 800; }
+  .bl-hero h1 .accent span { display: inline-block; transform: skewX(8deg); }
+  .bl-hero .lead { font-size: 17px; color: var(--text); line-height: 1.55; max-width: 620px; margin: 0 auto; }
+
+  /* Filter pills */
+  .bl-filter { max-width: 1120px; margin: 24px auto 0; padding: 0 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .bl-pill { display: inline-flex; align-items: center; padding: 9px 16px; background: #fff; border: 1.5px solid var(--border); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: .15s; }
+  .bl-pill.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .bl-pill:hover { border-color: var(--blue); color: var(--blue); }
+  .bl-pill.active:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+  /* Featured post */
+  .bl-featured { padding: 48px 0 28px; background: #fff; }
+  .bl-featured-card { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; align-items: stretch; text-decoration: none; color: inherit; transition: .2s; }
+  .bl-featured-card .img { position: relative; overflow: hidden; min-height: 380px; }
+  .bl-featured-card .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .bl-featured-card:hover .img img { transform: scale(1.04); }
+  .bl-featured-card .body { background: var(--navy); color: #fff; padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .bl-featured-card .body::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--orange); }
+  .bl-featured-card .tag { font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+  .bl-featured-card h2 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; line-height: 1.2; letter-spacing: -.005em; color: #fff; margin-bottom: 14px; }
+  .bl-featured-card p { font-size: 15px; color: rgba(255,255,255,.78); line-height: 1.6; margin-bottom: 22px; }
+  .bl-featured-card .meta { font-size: 12.5px; color: rgba(255,255,255,.55); font-weight: 600; }
+  .bl-featured-card .meta strong { color: rgba(255,255,255,.85); font-weight: 600; }
+  .bl-featured-card .cta { margin-top: 22px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: .03em; }
+  .bl-featured-card .cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+  .bl-featured-card:hover .cta svg { transform: translateX(4px); }
+
+  /* Post grid */
+  .bl-grid-section { padding: 36px 0 80px; background: #fff; }
+  .bl-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .bl-card { background: #fff; border: 1px solid var(--border); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: .2s; overflow: hidden; }
+  .bl-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(5,40,71,.10); border-color: var(--orange); }
+  .bl-card .img { height: 180px; overflow: hidden; position: relative; }
+  .bl-card .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .bl-card:hover .img img { transform: scale(1.04); }
+  .bl-card .img .tag { position: absolute; top: 14px; left: 14px; background: var(--orange); color: #fff; padding: 6px 12px; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .bl-card[data-cat="auto"] .tag { background: #dc2626; }
+  .bl-card[data-cat="home"] .tag { background: #2e9a55; }
+  .bl-card[data-cat="health"] .tag { background: #0d9488; }
+  .bl-card[data-cat="life"] .tag { background: #7c3aed; }
+  .bl-card[data-cat="business"] .tag { background: var(--orange); }
+  .bl-card .body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+  .bl-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1.28; letter-spacing: -.005em; margin-bottom: 10px; }
+  .bl-card p { font-size: 14px; color: var(--muted); line-height: 1.55; flex: 1; margin-bottom: 14px; }
+  .bl-card .meta { font-size: 12px; color: var(--subtle); font-weight: 600; }
+  .bl-card .meta strong { color: var(--text); font-weight: 600; }
+
+  /* Newsletter band */
+  .bl-newsletter { padding: 64px 0; background: var(--navy); color: #fff; }
+  .bl-newsletter-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+  .bl-newsletter .kicker { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .bl-newsletter h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff; line-height: 1.2; letter-spacing: -.01em; margin-bottom: 12px; }
+  .bl-newsletter p { font-size: 15px; color: rgba(255,255,255,.7); line-height: 1.55; }
+  .bl-newsletter form { display: grid; grid-template-columns: 1fr auto; gap: 0; }
+  .bl-newsletter input { padding: 16px 18px; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.18); color: #fff; font-family: 'Outfit', sans-serif; font-size: 15px; outline: none; }
+  .bl-newsletter input::placeholder { color: rgba(255,255,255,.45); }
+  .bl-newsletter input:focus { border-color: var(--orange); }
+  .bl-newsletter button { padding: 16px 28px; background: var(--orange); color: #fff; border: none; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: .15s; }
+  .bl-newsletter button:hover { background: var(--orange-dark); }
+  .bl-newsletter .disclaimer { font-size: 11.5px; color: rgba(255,255,255,.45); margin-top: 12px; line-height: 1.5; }
+
+  @media (max-width: 960px) {
+    .bl-featured-card { grid-template-columns: 1fr; }
+    .bl-featured-card .img { min-height: 280px; }
+    .bl-grid { grid-template-columns: repeat(2, 1fr); }
+    .bl-newsletter-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .bl-grid { grid-template-columns: 1fr; }
+    .bl-newsletter form { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <nav class="bl-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Blog</span>
+    </nav>
+    <div class="bl-hero">
+      <span class="bl-kicker">Insurance Insights</span>
+      <h1>From the <span class="accent"><span>OnePoint</span></span> blog.</h1>
+      <p class="lead">Expert insights, practical tips, and updates on auto, home, life, health, and business insurance — straight from our licensed advisors.</p>
+      <div class="bl-filter">
+        <button class="bl-pill active" data-cat="all" onclick="filterPosts(this,'all')">All Posts</button>
+        <button class="bl-pill" data-cat="auto" onclick="filterPosts(this,'auto')">Auto</button>
+        <button class="bl-pill" data-cat="home" onclick="filterPosts(this,'home')">Home</button>
+        <button class="bl-pill" data-cat="health" onclick="filterPosts(this,'health')">Health</button>
+        <button class="bl-pill" data-cat="life" onclick="filterPosts(this,'life')">Life</button>
+        <button class="bl-pill" data-cat="business" onclick="filterPosts(this,'business')">Business</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POST -->
+  <section class="bl-featured">
+    <a href="../post/short-term-medical-insurance-guide/" class="bl-featured-card" data-cat="health">
+      <div class="img">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/686d9a4270b080e1f75a8197.jpeg" alt="Short term medical insurance">
+      </div>
+      <div class="body">
+        <span class="tag">Featured · Health Insurance</span>
+        <h2>Short Term Medical Insurance in 2025: Fast, Affordable Health Coverage Gaps</h2>
+        <p>Between jobs, waiting on Open Enrollment, or unable to afford ACA coverage? Short Term Medical can fill the gap with same-day starts and lower premiums — if you know how to use it.</p>
+        <div class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025 · 4 min read</div>
+        <span class="cta">Read the article <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+  </section>
+
+  <!-- POST GRID -->
+  <section class="bl-grid-section">
+    <div class="bl-grid" id="blGrid">
+      <a href="../post/what-is-liability-coverage-auto-insurance/" class="bl-card" data-cat="auto">
+        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/6876a9a6c595e1fb7cb9933a.jpeg" alt="Auto liability coverage" loading="lazy"><span class="tag">Auto</span></div>
+        <div class="body">
+          <h3>What Is Liability Coverage in Auto Insurance?</h3>
+          <p>The backbone of your car insurance policy — what bodily injury and property damage liability actually pay for, in plain English.</p>
+          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
+        </div>
+      </a>
+      <a href="../post/what-is-term-life-insurance/" class="bl-card" data-cat="life">
+        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764446180db3b3ed6d00ab.jpeg" alt="Term life insurance" loading="lazy"><span class="tag">Life</span></div>
+        <div class="body">
+          <h3>What Is Term Life Insurance? Your Most Affordable Coverage Option</h3>
+          <p>Straightforward, affordable financial protection for your loved ones — what it covers, who needs it, and how much it costs.</p>
+          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
+        </div>
+      </a>
+      <a href="../post/what-is-commercial-property-insurance/" class="bl-card" data-cat="business">
+        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764595da707be6382ebaf5.jpeg" alt="Commercial property insurance" loading="lazy"><span class="tag">Business</span></div>
+        <div class="body">
+          <h3>What Is Commercial Property Insurance? Protecting Your Business Assets</h3>
+          <p>From fire to theft — what commercial property coverage pays for, what it doesn't, and why your landlord's policy isn't enough.</p>
+          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
+        </div>
+      </a>
+      <a href="../post/how-business-owners-policies-work-bop-insurance/" class="bl-card" data-cat="business">
+        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764596180db3ed566d02e7.jpeg" alt="Business owners policy" loading="lazy"><span class="tag">Business</span></div>
+        <div class="body">
+          <h3>How Business Owner's Policies (BOPs) Work: Bundled Protection Made Simple</h3>
+          <p>One policy, big protection. How a BOP bundles property, liability, and business interruption — and when you need to add more.</p>
+          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
+        </div>
+      </a>
+      <a href="../post/short-term-medical-insurance-guide/" class="bl-card" data-cat="health">
+        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/686d9a4270b080e1f75a8197.jpeg" alt="Short term medical insurance" loading="lazy"><span class="tag">Health</span></div>
+        <div class="body">
+          <h3>Short Term Medical Insurance in 2025</h3>
+          <p>Fast, flexible, and frequently misunderstood. Who STM is right for, what it covers, and how it compares to ACA and COBRA.</p>
+          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="bl-newsletter">
+    <div class="bl-newsletter-grid">
+      <div>
+        <div class="kicker">Stay in the loop</div>
+        <h2>Insurance insights, in your inbox.</h2>
+        <p>Once-a-month roundup of the articles, deadlines, and changes that actually matter. No fluff. Unsubscribe anytime.</p>
+      </div>
+      <form onsubmit="subscribe(event)">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe →</button>
+        <p class="disclaimer" style="grid-column:1 / -1">By subscribing, you agree to receive emails from OnePoint Insurance Agency. We never share your address.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="./">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
+  </div>
+</footer>
+
+<script>
+function filterPosts(btn, cat){
+  document.querySelectorAll('.bl-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.bl-card').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+  });
+}
+function subscribe(e){e.preventDefault();alert("Thanks for subscribing! Check your inbox for confirmation.");e.target.reset();}
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
+
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

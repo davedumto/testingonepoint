@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact OnePoint Insurance Agency | Get In Touch with a Real Advisor</title>
+<meta name="description" content="Reach OnePoint Insurance Agency by phone (888-899-8117), email (info@onepointinsuranceagency.com), or stop by our Alpharetta, GA office. We respond within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../coverage-pages.css">
+<style>
+  :root { --hero-accent: rgba(0,102,204,.14); }
+  .section-kicker { color: var(--blue); }
+
+  /* CONTACT HERO */
+  .hero { min-height: 0; display: block; padding: 0; background: linear-gradient(180deg, #eaf3ff 0%, #ffffff 70%); position: relative; overflow: visible; }
+  .hero-decor::before, .hero-decor::after { display: none; }
+  .ct-bread { max-width: 1200px; margin: 0 auto; padding: 18px 28px 0; font-size: 13px; color: var(--muted); }
+  .ct-bread a { color: var(--muted); text-decoration: none; }
+  .ct-bread a:hover { color: var(--blue); }
+  .ct-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .ct-bread .current { color: var(--text); font-weight: 500; }
+  .ct-hero { max-width: 1120px; margin: 0 auto; padding: 36px 28px 48px; text-align: center; }
+  .ct-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 18px; }
+  .ct-kicker::before, .ct-kicker::after { content: ''; width: 28px; height: 1.5px; background: var(--blue); }
+  .ct-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--navy); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 16px; }
+  .ct-hero h1 .accent { display: inline-block; padding: 0 8px; background: var(--blue); color: #fff; transform: skewX(-8deg); font-weight: 800; }
+  .ct-hero h1 .accent span { display: inline-block; transform: skewX(8deg); }
+  .ct-hero .lead { font-size: 18px; color: var(--text); line-height: 1.55; max-width: 600px; margin: 0 auto; }
+
+  /* CONTACT METHODS — 3 cards */
+  .ct-methods { padding: 24px 0 64px; background: #fff; }
+  .ct-methods-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ct-method { background: var(--white); border: 1px solid var(--border); padding: 32px 28px; text-align: center; transition: .2s; text-decoration: none; color: inherit; position: relative; }
+  .ct-method::before { content: ''; position: absolute; top: 0; left: 0; height: 4px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+  .ct-method:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(5,40,71,.10); border-color: var(--blue); }
+  .ct-method:hover::before { transform: scaleX(1); }
+  .ct-method-icon { width: 56px; height: 56px; margin: 0 auto 18px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; color: var(--blue); }
+  .ct-method-icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .ct-method h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: .02em; text-transform: uppercase; font-size: 12px; letter-spacing: .14em; color: var(--blue); }
+  .ct-method strong { display: block; font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: -.005em; line-height: 1.2; margin-bottom: 6px; }
+  .ct-method p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* MAIN GRID — form left, details right */
+  .ct-main { padding: 64px 0 80px; background: var(--bg); }
+  .ct-main-grid { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
+  .ct-form-card { background: #fff; border-top: 4px solid var(--orange); padding: 36px; box-shadow: 0 14px 36px rgba(5,40,71,.08); }
+  .ct-form-card h2 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.2; letter-spacing: -.005em; }
+  .ct-form-card p.intro { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .ct-form { display: grid; gap: 18px; }
+  .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ct-field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+  .ct-field input, .ct-field select, .ct-field textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; transition: .15s; background: #fff; color: var(--text); }
+  .ct-field input:focus, .ct-field select:focus, .ct-field textarea:focus { border-color: var(--orange); }
+  .ct-field textarea { min-height: 120px; resize: vertical; font-family: 'Outfit', sans-serif; }
+  .ct-submit { padding: 14px 28px; background: var(--orange); color: #fff; border: none; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: .15s; justify-self: start; }
+  .ct-submit:hover { background: var(--orange-dark); }
+  .ct-disclaimer { font-size: 12px; color: var(--subtle); line-height: 1.5; }
+
+  .ct-side { display: flex; flex-direction: column; gap: 18px; }
+  .ct-side-card { background: #fff; border: 1px solid var(--border); padding: 24px 26px; }
+  .ct-side-card.dark { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .ct-side-card .ct-side-kicker { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+  .ct-side-card.dark .ct-side-kicker { color: #f5a623; }
+  .ct-side-card h3 { font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 14px; }
+  .ct-side-card.dark h3 { color: #fff; }
+  .ct-row-line { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14px; color: var(--text); }
+  .ct-side-card.dark .ct-row-line { border-bottom-color: rgba(255,255,255,.12); color: rgba(255,255,255,.85); }
+  .ct-row-line:last-child { border-bottom: none; }
+  .ct-row-line .lbl { width: 80px; flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--subtle); padding-top: 2px; }
+  .ct-side-card.dark .ct-row-line .lbl { color: rgba(255,255,255,.5); }
+  .ct-row-line a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .ct-side-card.dark .ct-row-line a { color: #93c5fd; }
+  .ct-row-line strong { color: inherit; font-weight: 700; }
+  .ct-side-card .ct-map-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--orange); text-decoration: none; }
+  .ct-side-card .ct-map-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* FAQ */
+  .ct-faq { padding: 80px 0; background: #fff; }
+  .ct-faq .head { text-align: center; max-width: 720px; margin: 0 auto 36px; padding: 0 28px; }
+  .ct-faq h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-top: 6px; letter-spacing: -.01em; }
+  .ct-faq .head p { color: var(--muted); margin-top: 8px; font-size: 15px; }
+  .ct-faq-list { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; background: none; border: none; padding: 22px 0; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 20px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--navy); }
+  .faq-icon { font-size: 24px; font-weight: 300; color: var(--blue); flex-shrink: 0; }
+  .faq-a { display: none; padding: 0 0 22px; color: var(--muted); font-size: 14.5px; line-height: 1.6; max-width: 700px; }
+  .faq-item.open .faq-a { display: block; }
+
+  @media (max-width: 960px) {
+    .ct-methods-grid { grid-template-columns: 1fr; }
+    .ct-main-grid { grid-template-columns: 1fr; gap: 28px; }
+    .ct-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <div class="mega-menu">
+          <div class="mega-sidebar">
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
+            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
+          </div>
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col">
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="./">Contact Us</a></li></ul></div></div>
+          </div>
+        </div>
+      </li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav class="ct-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Contact Us</span>
+    </nav>
+    <div class="ct-hero">
+      <span class="ct-kicker">Get In Touch</span>
+      <h1>We'd love to <span class="accent"><span>hear from you.</span></span></h1>
+      <p class="lead">Have questions about insurance coverage, or need help with your policy? Our friendly team is here to help you every step of the way.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT METHODS -->
+  <section class="ct-methods">
+    <div class="ct-methods-grid">
+      <a href="tel:888-899-8117" class="ct-method">
+        <div class="ct-method-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>Call us</h3>
+        <strong>888-899-8117</strong>
+        <p>Toll free · Direct: 770-884-8117</p>
+      </a>
+      <a href="mailto:info@onepointinsuranceagency.com" class="ct-method">
+        <div class="ct-method-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <h3>Email us</h3>
+        <strong>info@onepointinsuranceagency.com</strong>
+        <p>We respond within 24 hours</p>
+      </a>
+      <a href="https://maps.google.com/?q=555+NorthPoint+Center+E+Alpharetta+GA+30022" target="_blank" rel="noopener" class="ct-method">
+        <div class="ct-method-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Visit us</h3>
+        <strong>Alpharetta, GA</strong>
+        <p>555 NorthPoint Center E</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- MAIN: form + details -->
+  <section class="ct-main">
+    <div class="ct-main-grid">
+      <div class="ct-form-card">
+        <h2>Send us a message</h2>
+        <p class="intro">Tell us what you're looking for and we'll get back to you within 24 hours. Real reply, real person — promise.</p>
+        <form class="ct-form" onsubmit="submitContact(event)">
+          <div class="ct-row">
+            <div class="ct-field"><label for="cf-first">First name *</label><input type="text" id="cf-first" required></div>
+            <div class="ct-field"><label for="cf-last">Last name *</label><input type="text" id="cf-last" required></div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-field"><label for="cf-email">Email *</label><input type="email" id="cf-email" required></div>
+            <div class="ct-field"><label for="cf-phone">Phone *</label><input type="tel" id="cf-phone" required></div>
+          </div>
+          <div class="ct-field"><label for="cf-topic">What can we help with?</label>
+            <select id="cf-topic">
+              <option>I need a new quote</option>
+              <option>I have a policy question</option>
+              <option>I need to file a claim</option>
+              <option>I want to update my policy</option>
+              <option>I'm a partner / carrier inquiry</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="ct-field"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell us a little about what you're looking for..."></textarea></div>
+          <button type="submit" class="ct-submit">Send Message →</button>
+          <p class="ct-disclaimer">By submitting, you consent to receive communications from OnePoint regarding your inquiry. We never share your information with anyone outside the carriers we work with on your behalf.</p>
+        </form>
+      </div>
+
+      <div class="ct-side">
+        <div class="ct-side-card dark">
+          <div class="ct-side-kicker">Quick Contact</div>
+          <h3>Reach us directly</h3>
+          <div class="ct-row-line"><span class="lbl">Toll Free</span><a href="tel:888-899-8117">888-899-8117</a></div>
+          <div class="ct-row-line"><span class="lbl">Direct</span><a href="tel:770-884-8117">770-884-8117</a></div>
+          <div class="ct-row-line"><span class="lbl">Email</span><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div>
+        </div>
+
+        <div class="ct-side-card">
+          <div class="ct-side-kicker">Office Hours</div>
+          <h3>When we're available</h3>
+          <div class="ct-row-line"><span class="lbl">Mon–Fri</span><strong>9:00 AM – 5:00 PM ET</strong></div>
+          <div class="ct-row-line"><span class="lbl">Sat–Sun</span><strong>Closed</strong></div>
+          <div class="ct-row-line" style="border-bottom:none"><span class="lbl">Holidays</span><strong>By appointment</strong></div>
+        </div>
+
+        <div class="ct-side-card">
+          <div class="ct-side-kicker">Our Office</div>
+          <h3>555 NorthPoint Center E</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.55">Suite 400, Alpharetta, GA 30022<br>United States</p>
+          <a href="https://maps.google.com/?q=555+NorthPoint+Center+E+Alpharetta+GA+30022" target="_blank" rel="noopener" class="ct-map-link">Get directions <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="ct-faq">
+    <div class="head">
+      <div class="section-kicker">Common Questions</div>
+      <h2>What people ask before reaching out.</h2>
+      <p>If you don't see your question here, just send us a message — we'll be happy to help.</p>
+    </div>
+    <div class="ct-faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What are your office hours? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We're open Monday through Friday, 9:00 AM – 5:00 PM Eastern. We're closed on weekends, but you can leave a voicemail or send a message any time and we'll respond first thing the next business day.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How quickly will I hear back? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We aim to respond to all calls, emails, and form submissions within 24 hours during business days. Most responses come back the same business day.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do you offer virtual consultations? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Our advisors are happy to meet by phone, video call, or in-person at our Alpharetta office. Use the "Schedule a Call" link in the footer to book a time that works for you.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What types of insurance do you offer? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We offer auto, homeowners, life, health, disability income, and a full suite of business/commercial coverage — including specialty lines like cyber, professional liability, and workers' comp. We work with 50+ A-rated carriers, so you get options.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Are there fees for service? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. As an independent agency, we're paid by the carriers — not by you. Our quotes, advice, and ongoing policy support are always free for our clients.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="section-kicker">Or skip the form</div>
+      <h2 class="section-h2">Want to talk to someone right now?</h2>
+      <p>Real advisors, real conversations — no phone tree, no scripts. Call us or book a time that works for you.</p>
+      <div class="cta-band-actions">
+        <a href="tel:888-899-8117" class="btn btn-orange">Call 888-899-8117</a>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-ghost-white">Schedule a Call</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="./">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
+  </div>
+</footer>
+
+<script>
+function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
+function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
+function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
+function submitContact(e){e.preventDefault();alert("Thanks! We'll get back to you within 24 hours.");e.target.reset();}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+</script>
+
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

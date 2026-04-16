@@ -3,17 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Health Insurance | OnePoint Insurance Agency</title>
+<title>Health Insurance Quotes | Marketplace Plans & Tax Credits | OnePoint</title>
+<meta name="description" content="Compare Marketplace health insurance plans from Aetna, Oscar, Anthem, Kaiser, and BCBS. Check tax credit eligibility. Free quotes in minutes from a licensed advisor.">
+<meta name="keywords" content="health insurance, marketplace health plans, ACA health insurance, premium tax credit, bronze silver gold platinum plans, affordable health insurance">
+<meta property="og:title" content="Health Insurance Quotes | Compare Marketplace Plans | OnePoint">
+<meta property="og:description" content="Marketplace, subsidies, and carrier comparisons in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
+<script src="../quote-modal.js" defer></script>
+<style>
+  :root { --hero-accent: rgba(13,148,136,.14); --hero-accent-2: rgba(0,102,204,.06); }
+  .hero-eyebrow { color: #0d9488; }
+  .section-kicker { color: #0d9488; }
+
+  /* HEALTH HERO — "Plan Dashboard": 2-column split, photo composition on right, tier cards below */
+  .hero {
+    min-height: 0; display: block; padding: 0;
+    background: linear-gradient(180deg, #f4f5f7 0%, #ffffff 70%);
+    position: relative; overflow: visible;
+  }
+  .hero-decor::before, .hero-decor::after { display: none; }
+
+  .health-bread {
+    max-width: 1200px; margin: 0 auto; padding: 16px 28px 0;
+    font-size: 13px; color: var(--muted);
+  }
+  .health-bread a { color: var(--muted); text-decoration: none; }
+  .health-bread a:hover { color: #0d9488; }
+  .health-bread .sep { margin: 0 8px; color: var(--subtle); }
+  .health-bread .current { color: var(--text); font-weight: 500; }
+
+  /* Main 2-column grid */
+  .health-hero-grid {
+    max-width: 1200px; margin: 0 auto; padding: 28px 28px 40px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px;
+    align-items: center;
+  }
+  .health-hero-left { position: relative; z-index: 2; }
+  .health-hero-left .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px;
+    background: rgba(13,148,136,.1);
+    color: #0d9488;
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .health-hero-left h1 {
+    font-size: clamp(34px, 4.4vw, 52px); font-weight: 700;
+    color: var(--navy); line-height: 1.06; letter-spacing: -.02em;
+    margin-bottom: 14px; max-width: 560px;
+  }
+  .health-hero-left h1 .serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-weight: 500;
+    color: #0d9488;
+  }
+  .health-hero-left p.lead {
+    font-size: 17px; color: var(--muted); line-height: 1.55;
+    max-width: 500px; margin-bottom: 24px;
+  }
+
+  /* Horizontal quote card — white card with teal accent (matches other product pages) */
+  .health-hero-form { position: relative; z-index: 4; max-width: 560px; }
+  .health-hero-form .quote-card {
+    background: #fff; border-top: 4px solid #0d9488;
+    box-shadow: 0 18px 44px rgba(5,40,71,.14);
+    max-width: none;
+  }
+  .health-hero-form .qc-form { grid-template-columns: 1.5fr 1fr auto; }
+  .health-hero-form .qc-product-field,
+  .health-hero-form .qc-location-field {
+    padding: 18px 22px;
+  }
+  .health-hero-form .qc-field-label { color: var(--text); font-size: 11px; letter-spacing: .08em; font-weight: 700; }
+  .health-hero-form .qc-product-btn { color: var(--navy); font-size: 14px; border-bottom: 2px solid var(--text); padding: 4px 0 6px; }
+  .health-hero-form .qc-product-name { border-bottom: none; color: var(--navy); }
+  .health-hero-form .qc-product-caret { color: #0d9488; }
+  .health-hero-form .qc-location-input {
+    color: var(--navy); border-bottom: 2px solid var(--border); font-size: 14px;
+  }
+  .health-hero-form .qc-location-input::placeholder { color: var(--subtle); letter-spacing: .1em; }
+  .health-hero-form .qc-location-input:focus { border-bottom-color: #0d9488; }
+  .health-hero-form .qc-cta {
+    background: #0d9488; border-radius: 0;
+    padding: 0 28px; font-size: 13px;
+  }
+  .health-hero-form .qc-cta:hover { background: #0b7e71; }
+  .health-hero-form .qc-product-dropdown {
+    color: var(--text);
+    right: auto;
+    width: 520px;
+    max-width: calc(100vw - 48px);
+  }
+  @media (max-width: 640px) {
+    .health-hero-form .qc-product-dropdown { width: calc(100vw - 48px); }
+  }
+
+  /* Right column — photo composition: teal block + photo + floating stat badge */
+  .health-hero-right {
+    position: relative; height: 440px;
+  }
+  .health-hero-photo {
+    position: absolute; inset: 16px 0 16px 22px;
+    overflow: hidden; z-index: 2;
+    box-shadow: 0 20px 44px rgba(5,40,71,.2);
+  }
+  .health-hero-photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: opacity .6s cubic-bezier(.4,0,.2,1);
+  }
+  .health-hero-photo img.hero-img-out { opacity: 0; }
+  .health-hero-photo img.hero-img-in  { opacity: 1; }
+  .health-hero-photo:hover img.hero-img-in { transform: scale(1.04); transition: transform .6s ease, opacity .6s cubic-bezier(.4,0,.2,1); }
+  .health-hero-block {
+    position: absolute; right: -16px; top: 0;
+    width: 70%; height: 68%;
+    background: linear-gradient(135deg, #0d9488 0%, #0b7e71 100%);
+    z-index: 1;
+  }
+  .health-hero-outline {
+    position: absolute; left: -10px; bottom: 0;
+    width: 46%; height: 50%;
+    border: 3px solid #0d9488; z-index: 1; pointer-events: none;
+  }
+  .health-hero-badge {
+    position: absolute; left: 0; bottom: 30px;
+    background: #fff; padding: 14px 20px 14px 18px;
+    box-shadow: 0 12px 32px rgba(5,40,71,.22);
+    border-left: 4px solid #0d9488;
+    display: flex; align-items: center; gap: 14px;
+    z-index: 3; max-width: 280px;
+  }
+  .health-hero-badge-num {
+    font-size: 26px; font-weight: 700; color: #0d9488;
+    line-height: 1; letter-spacing: -.01em;
+  }
+  .health-hero-badge-label {
+    font-size: 11px; color: var(--muted); line-height: 1.4;
+    text-transform: uppercase; letter-spacing: .06em; font-weight: 600;
+  }
+  .health-hero-badge-label strong {
+    display: block; color: var(--navy); font-size: 13px;
+    margin-bottom: 2px; letter-spacing: .02em;
+  }
+
+  /* 4-tier plan preview — standalone section below the picker */
+  .health-tiers-section { padding: 56px 0 72px; background: var(--white); border-top: 1px solid var(--border); }
+  .health-tiers-head { max-width: 760px; margin: 0 auto 28px; text-align: center; padding: 0 28px; }
+  .health-tiers-head .section-kicker { color: #0d9488; }
+  .health-tiers-head h2 { font-size: clamp(24px, 2.8vw, 32px); font-weight: 700; color: var(--navy); line-height: 1.2; letter-spacing: -.005em; margin-top: 6px; }
+  .health-tiers-head p { color: var(--muted); font-size: 15px; line-height: 1.55; margin-top: 8px; }
+  .health-tiers {
+    max-width: 1120px; margin: 0 auto; padding: 0 28px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  .health-tier {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 22px 20px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+    border-top: 4px solid;
+    transition: .2s;
+  }
+  .health-tier:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(5,40,71,.1); }
+  .health-tier.bronze { border-top-color: #cd7f32; }
+  .health-tier.silver { border-top-color: #c0c0c0; }
+  .health-tier.gold { border-top-color: #d4af37; }
+  .health-tier.platinum { border-top-color: #6f88a0; }
+  .health-tier-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .health-tier-badge .dot { width: 10px; height: 10px; }
+  .health-tier.bronze .dot { background: #cd7f32; }
+  .health-tier.silver .dot { background: #c0c0c0; }
+  .health-tier.gold .dot { background: #d4af37; }
+  .health-tier.platinum .dot { background: #6f88a0; }
+  .health-tier-name { font-size: 20px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .health-tier-price {
+    font-size: 13px; color: var(--muted); font-weight: 600;
+  }
+  .health-tier-price strong {
+    display: block; font-size: 22px; color: var(--navy);
+    letter-spacing: -.01em; margin-bottom: 2px;
+  }
+  .health-tier-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .health-tier-cta {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: #0d9488;
+    margin-top: auto; padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; cursor: pointer; background: none; border-left: none; border-right: none; border-bottom: none;
+    text-align: left;
+  }
+  .health-tier-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+  .health-tier:hover .health-tier-cta svg { transform: translateX(3px); }
+
+  @media (max-width: 960px) {
+    .health-hero-grid { grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; }
+    .health-hero-right { height: 340px; }
+  }
+  @media (max-width: 900px) {
+    .health-tiers { grid-template-columns: 1fr 1fr; }
+    .health-hero-form .qc-form { grid-template-columns: 1fr; }
+    .health-hero-form .qc-product-field,
+    .health-hero-form .qc-location-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .health-hero-form .qc-cta { width: 100%; padding: 16px; }
+  }
+  @media (max-width: 520px) { .health-tiers { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-brand"><span class="nav-brand-mark">1P</span><span class="nav-brand-name">OnePoint</span></a>
+    <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
         <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
@@ -26,26 +234,103 @@
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
               <div class="mega-col">
-                <h5>Vehicle</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li><li><a href="https://onepointinsuranceagency.com">RV &amp; Trailer</a></li></ul>
-                <h5 style="margin-top:18px">Property</h5><ul><li><a href="../home/">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li></ul>
+                <h5>Auto</h5>
+                <ul>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Personal Protection</h5><ul><li><a href="./">Health Insurance</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com">Umbrella</a></li></ul>
+                <h5>Homeowners</h5>
+                <ul>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
               </div>
               <div class="mega-col">
-                <h5>Business</h5><ul><li><a href="../business/">Business Insurance</a></li><li><a href="../business/">General Liability</a></li><li><a href="../business/">Commercial Auto</a></li></ul>
-                <h5 style="margin-top:18px">Bundle &amp; Save</h5><ul><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li></ul>
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
+                  <li><a href="../disability/">Disability Income</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Business</h5>
+                <ul>
+                  <li><a href="../business/">General Liability</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
+                </ul>
               </div>
             </div>
-            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li></ul></div></div>
-            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
+            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
           </div>
         </div>
       </li>
-      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
-      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
     </div>
@@ -54,49 +339,77 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero" style="background-image:url('../health.jpg')">
-    <div class="hero-text">
-      <span class="hero-eyebrow">Health Insurance · Marketplace &amp; Family Plans</span>
-      <h1>Health coverage that fits your life — and your budget.</h1>
-      <p class="hero-sub">Compare Marketplace plans, find premium tax credits, and enroll with a licensed advisor by your side. No confusion. No pressure.</p>
-    </div>
-    <div class="quote-card-wrap">
-      <div class="quote-card">
-        <div class="qc-head">
-          <p class="qc-title">Get your health insurance quote</p>
-          <p class="qc-sub">Compare Marketplace plans and check your tax credit eligibility.</p>
+  <!-- HERO — "Plan Dashboard": 2-col (editorial + photo composition) with 4 tier cards below -->
+  <section class="hero">
+    <nav class="health-bread" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Health Insurance</span>
+    </nav>
+    <div class="health-hero-grid">
+      <div class="health-hero-left">
+        <span class="kicker">Health Insurance · Marketplace</span>
+        <h1 data-swap="heroH1">Affordable care that fits your <span class="serif">budget</span> and your life.</h1>
+        <p class="lead" data-swap="heroLead">Compare Bronze, Silver, Gold, and Platinum plans from Aetna, Oscar, Anthem, Kaiser, and BCBS — premium tax credit eligibility checked for you, free.</p>
+        <div class="health-hero-form">
+          <div class="quote-card">
+            <form class="qc-form" onsubmit="goQuote(event)">
+              <div class="qc-product-field">
+                <label class="qc-field-label">Plan type</label>
+                <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
+                  <span class="qc-product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+                  <span class="qc-product-name">Marketplace (ACA)</span>
+                  <span class="qc-product-caret">▾</span>
+                </button>
+                <div class="qc-product-dropdown" id="productDropdown">
+                  <p class="qc-bundle-headline">Round out your medical coverage with the protection most plans don't include.<sup>Δ</sup></p>
+                  <div class="qc-bundle-links">
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Health Insurance (Marketplace)');">Health + Dental</a>
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Health Insurance (Marketplace)');">Health + Vision</a>
+                    <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Health Insurance (Marketplace)');">Health + Disability</a>
+                  </div>
+                  <p class="qc-other-label">Or, quote another product</p>
+                  <div class="qc-other-grid">
+                    <a href="#health-subs">Accident</a>
+                    <a href="../auto/">Auto</a>
+                    <a href="../business/">Business Insurance</a>
+                    <a href="#health-subs">Critical Illness</a>
+                    <a href="#health-subs">Dental</a>
+                    <a href="../disability/">Disability Income</a>
+                    <a href="../life/">Final Expense</a>
+                    <a href="#health-subs">Group Health</a>
+                    <a href="./" class="current">Health (Marketplace)</a>
+                    <a href="../home/">Homeowners</a>
+                    <a href="#health-subs">Hospitalization</a>
+                    <a href="#health-subs">International Travel</a>
+                    <a href="../life/">Life (Term)</a>
+                    <a href="../life/">Long-Term Care</a>
+                    <a href="#health-subs">Medicare Advantage</a>
+                    <a href="#health-subs">Short-Term Medical</a>
+                    <a href="#health-subs">Vision</a>
+                  </div>
+                </div>
+              </div>
+              <div class="qc-location-field">
+                <label class="qc-field-label" for="zip">ZIP Code</label>
+                <input class="qc-location-input" id="zip" type="text" placeholder="00000" maxlength="5" inputmode="numeric" required>
+              </div>
+              <button type="submit" class="qc-cta">Find plans</button>
+            </form>
+          </div>
         </div>
-        <form class="qc-form" onsubmit="goQuote(event)">
-          <div class="qc-step">
-            <label class="qc-step-label" for="zip">ZIP code</label>
-            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
-          </div>
-          <div class="qc-step">
-            <label class="qc-step-label">What are you quoting?</label>
-            <div class="qc-tabs">
-              <a href="../auto/" class="qc-tab" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
-              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
-              <a href="./" class="qc-tab active" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
-              <a href="../life/" class="qc-tab" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
-              <a href="../disability/" class="qc-tab" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
-              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
-            </div>
-          </div>
-          <button type="submit" class="qc-submit">
-            <span>Get a quote</span>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
       </div>
-    </div>
-    <div class="other-ways-bar">
-      <div class="other-ways-inner">
-        <strong>Other ways to enroll:</strong>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
-        <span class="other-ways-sep">|</span>
-        <a href="tel:888-899-8117">Call an agent ›</a>
+      <div class="health-hero-right">
+        <div class="health-hero-block"></div>
+        <div class="health-hero-outline"></div>
+        <div class="health-hero-photo">
+          <img id="healthImgA" class="hero-img-in" src="../health.jpg" alt="Health insurance coverage">
+          <img id="healthImgB" class="hero-img-out" src="../health.jpg" alt="Health insurance coverage">
+        </div>
+        <div class="health-hero-badge">
+          <span class="health-hero-badge-num">$0</span>
+          <span class="health-hero-badge-label"><strong>Marketplace plans</strong>available after tax credits</span>
+        </div>
       </div>
     </div>
   </section>
@@ -113,36 +426,100 @@
     </div>
   </div>
 
-  <!-- PLAN TIERS -->
-  <section class="section" id="plans">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Marketplace Plan Tiers</div>
-        <h2 class="section-h2">Four tiers. One right fit for your household.</h2>
-        <p class="section-lead">Each metal tier balances your monthly premium against what you pay when you actually use care. We help you find which balance works for your health needs and your budget.</p>
+  <!-- SUB-PRODUCTS — all 10 health coverage types, icon-grid picker + unified panel -->
+  <section class="sub-section" id="health-subs" style="padding: 72px 0; background: var(--white);">
+    <style>
+      /* Scoped picker styles — icon grid on left, big panel on right (unique layout) */
+      #health-subs .sub-header { text-align: center; max-width: 760px; margin: 0 auto 48px; padding: 0 28px; }
+      #health-subs .sub-header h2 { font-size: clamp(26px, 3.2vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+      #health-subs .sub-header p { color: var(--muted); font-size: 16px; }
+      #health-subs .health-picker { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 320px 1fr; gap: 0; background: #fff; border: 1px solid var(--border); }
+      #health-subs .health-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-right: 1px solid var(--border); }
+      #health-subs .health-tab { background: #fff; border: none; padding: 18px 12px 14px; cursor: pointer; font-family: 'Outfit', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--navy); transition: .15s; text-align: center; }
+      #health-subs .health-tab svg { width: 28px; height: 28px; stroke: #0d9488; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      #health-subs .health-tab span { font-size: 11.5px; font-weight: 600; line-height: 1.3; }
+      #health-subs .health-tab:hover { background: #f0fdfa; }
+      #health-subs .health-tab.active { background: #0d9488; color: #fff; }
+      #health-subs .health-tab.active svg { stroke: #fff; }
+      #health-subs .health-panel { padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; }
+      #health-subs .health-panel-kicker { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0d9488; }
+      #health-subs .health-panel h3 { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+      #health-subs .health-panel p { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 520px; }
+      #health-subs .health-panel-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; max-width: 420px; margin-top: 6px; }
+      #health-subs .health-panel-form input { padding: 13px 16px; border: 1.5px solid var(--border); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; letter-spacing: .2em; }
+      #health-subs .health-panel-form input:focus { border-color: #0d9488; }
+      #health-subs .health-panel-form button { padding: 13px 22px; background: #0d9488; color: #fff; border: none; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+      #health-subs .health-panel-form button:hover { background: #0b7e71; }
+      @media (max-width: 820px) {
+        #health-subs .health-picker { grid-template-columns: 1fr; }
+        #health-subs .health-grid { border-right: none; border-bottom: 1px solid var(--border); }
+      }
+    </style>
+    <div class="sub-header">
+      <h2>Every kind of health coverage — under one roof.</h2>
+      <p>Pick a coverage type to see what it includes and start a quote.</p>
+    </div>
+    <div class="health-picker">
+      <div class="health-grid" role="tablist">
+        <button type="button" class="health-tab active" data-v="marketplace" onclick="selectHealth('marketplace')"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg><span>Marketplace (ACA)</span></button>
+        <button type="button" class="health-tab" data-v="medicare" onclick="selectHealth('medicare')"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18"/><path d="M7 15h3"/></svg><span>Medicare Advantage</span></button>
+        <button type="button" class="health-tab" data-v="short" onclick="selectHealth('short')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Short-Term Medical</span></button>
+        <button type="button" class="health-tab" data-v="group" onclick="selectHealth('group')"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="3"/><path d="M13 21a5 5 0 0 1 10 0"/></svg><span>Group Health</span></button>
+        <button type="button" class="health-tab" data-v="dental" onclick="selectHealth('dental')"><svg viewBox="0 0 24 24"><path d="M12 3c-4 0-6 2-6 6 0 4 1 6 2 8s1 4 2 4 1-2 2-4 2 0 3 0 1 2 2 4 1 0 2-4 2-4 2-8c0-4-2-6-6-6 0 0-2 1-3 1s-3-1-3-1z"/></svg><span>Dental</span></button>
+        <button type="button" class="health-tab" data-v="vision" onclick="selectHealth('vision')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span>Vision</span></button>
+        <button type="button" class="health-tab" data-v="accident" onclick="selectHealth('accident')"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></svg><span>Accident Coverage</span></button>
+        <button type="button" class="health-tab" data-v="critical" onclick="selectHealth('critical')"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><circle cx="12" cy="11" r="1.5" fill="currentColor"/></svg><span>Critical Illness</span></button>
+        <button type="button" class="health-tab" data-v="hospital" onclick="selectHealth('hospital')"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="15" rx="1"/><path d="M12 10v6M9 13h6"/><path d="M7 6V3h10v3"/></svg><span>Hospitalization</span></button>
+        <button type="button" class="health-tab" data-v="travel" onclick="selectHealth('travel')"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>International Travel</span></button>
       </div>
-      <div class="feat-grid-4">
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8M10 20V4M16 20V12M22 20V8"/></svg></div>
-          <h4>Bronze</h4>
-          <p>Lowest monthly premium. Highest out-of-pocket costs when you use care. Best for healthy individuals who rarely need medical services.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8M10 20V4M16 20V8M22 20V12"/></svg></div>
-          <h4>Silver</h4>
-          <p>Middle ground on premiums and costs. Silver plans also unlock cost-sharing reductions for eligible households — the only tier that does.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
-          <h4>Gold</h4>
-          <p>Higher monthly premium, lower costs at the point of care. A strong fit if you have regular prescriptions, doctor visits, or ongoing treatment.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M6 3L2 9M18 3l4 6M8 9h8"/></svg></div>
-          <h4>Platinum</h4>
-          <p>Highest premium, lowest out-of-pocket burden. Built for people with frequent or significant medical needs who want maximum cost predictability.</p>
-        </div>
+      <div class="health-panel" role="tabpanel">
+        <span class="health-panel-kicker" id="hp-kicker">ACA Marketplace plans</span>
+        <h3 id="hp-title">Marketplace (ACA)</h3>
+        <p id="hp-desc">Bronze, Silver, Gold, and Platinum plans from Aetna, Oscar, Anthem, Kaiser, BCBS, and more — with Premium Tax Credit eligibility checked for you, free.</p>
+        <form class="health-panel-form" onsubmit="hpQuote(event)">
+          <input type="text" id="hp-zip" placeholder="ZIP code" maxlength="5" inputmode="numeric" required>
+          <button type="submit">Get quote →</button>
+        </form>
       </div>
+    </div>
+  </section>
+
+  <!-- 4-TIER PLAN PREVIEW — moved here from hero so the picker sits higher -->
+  <section class="health-tiers-section" aria-label="ACA Marketplace plan tiers">
+    <div class="health-tiers-head">
+      <div class="section-kicker">ACA Plan Tiers</div>
+      <h2>Bronze, Silver, Gold, Platinum — what you actually pay.</h2>
+      <p>Real Marketplace ranges after Premium Tax Credits. Pick a tier to start a quote — your advisor will check eligibility for cost-sharing reductions before you commit.</p>
+    </div>
+    <div class="health-tiers">
+      <button type="button" class="health-tier bronze" onclick="openQM('Health Insurance (Marketplace)')">
+        <span class="health-tier-badge"><span class="dot"></span>Lowest premium</span>
+        <span class="health-tier-name">Bronze</span>
+        <span class="health-tier-price"><strong>$0–$175/mo</strong>after tax credits</span>
+        <span class="health-tier-desc">Lowest monthly cost. Higher out-of-pocket when you use care. Best for healthy individuals.</span>
+        <span class="health-tier-cta">Start Bronze quote <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="health-tier silver" onclick="openQM('Health Insurance (Marketplace)')">
+        <span class="health-tier-badge"><span class="dot"></span>Cost-sharing unlocks</span>
+        <span class="health-tier-name">Silver</span>
+        <span class="health-tier-price"><strong>$50–$245/mo</strong>after tax credits</span>
+        <span class="health-tier-desc">Middle ground. Qualifying households unlock cost-sharing reductions — only on Silver.</span>
+        <span class="health-tier-cta">Start Silver quote <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="health-tier gold" onclick="openQM('Health Insurance (Marketplace)')">
+        <span class="health-tier-badge"><span class="dot"></span>Lower copays</span>
+        <span class="health-tier-name">Gold</span>
+        <span class="health-tier-price"><strong>$180–$310/mo</strong>after tax credits</span>
+        <span class="health-tier-desc">Higher monthly, lower copays at the doctor. Strong fit if you see providers often.</span>
+        <span class="health-tier-cta">Start Gold quote <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="health-tier platinum" onclick="openQM('Health Insurance (Marketplace)')">
+        <span class="health-tier-badge"><span class="dot"></span>Max benefits</span>
+        <span class="health-tier-name">Platinum</span>
+        <span class="health-tier-price"><strong>$260–$420/mo</strong>after tax credits</span>
+        <span class="health-tier-desc">Highest premium, lowest out-of-pocket. Built for frequent or major medical needs.</span>
+        <span class="health-tier-cta">Start Platinum quote <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
     </div>
   </section>
 
@@ -151,9 +528,9 @@
     <div class="container">
       <div class="split-grid">
         <div>
-          <div class="section-kicker">Premium Tax Credit</div>
-          <h2 class="section-h2">You may qualify for help paying your premium — and not even know it.</h2>
-          <p class="section-lead" style="margin-bottom:28px">The Premium Tax Credit is a federal subsidy that lowers your monthly health insurance cost for eligible households buying through the Marketplace.</p>
+          <div class="section-kicker" data-swap="coverKicker">Premium Tax Credit</div>
+          <h2 class="section-h2" data-swap="coverH2">You may qualify for help paying your premium — and not even know it.</h2>
+          <p class="section-lead" style="margin-bottom:28px" data-swap="coverBody">The Premium Tax Credit is a federal subsidy that lowers your monthly health insurance cost for eligible households buying through the Marketplace.</p>
           <div class="split-points">
             <div class="split-point">
               <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -186,13 +563,57 @@
     </div>
   </section>
 
+  <!-- BUNDLE & SAVE -->
+  <section class="bundle-section" style="--bundle-accent: #0d9488;">
+    <div class="bundle-header">
+      <span class="bundle-kicker">Bundle &amp; Save</span>
+      <h2>Health insurance works better when it's paired with the right add-ons.</h2>
+      <p>Major medical plans leave gaps. Pair your health plan with the coverage that fills them in.</p>
+    </div>
+    <div class="bundle-grid">
+      <button type="button" class="bundle-card" onclick="openQM('Dental Insurance')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M12 3c-4 0-6 2-6 6 0 4 1 6 2 8s1 4 2 4 1-2 2-4 2 0 3 0 1 2 2 4 1 0 2-4 2-4 2-8c0-4-2-6-6-6 0 0-2 1-3 1s-3-1-3-1z"/></svg></span>
+        </div>
+        <h4>Health + Dental</h4>
+        <p>Most major medical plans exclude routine dental care. Add a dental plan to cover cleanings, fillings, and major dental work.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Plans from $15/mo</span>
+        <span class="bundle-card-cta">Bundle health + dental <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Vision Insurance')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        </div>
+        <h4>Health + Vision</h4>
+        <p>Annual eye exams, glasses, and contacts aren't covered by most medical plans. Bundle vision to protect the one sense you use every minute.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Plans from $8/mo</span>
+        <span class="bundle-card-cta">Bundle health + vision <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Disability Income (Overview)')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>
+        </div>
+        <h4>Health + Disability</h4>
+        <p>Health pays your doctor. Disability pays your rent while you see them. Pair the two to cover medical bills AND your income when you can't work.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Full income protection</span>
+        <span class="bundle-card-cta">Bundle health + DI <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+
   <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <h2>Open enrollment won't wait. Neither should you.</h2>
-          <p>Missing the enrollment window means going uninsured or paying full price. Talk to an advisor now and get covered before deadlines close.</p>
+          <h2 data-swap="midCtaH2">Open enrollment won't wait. Neither should you.</h2>
+          <p data-swap="midCtaLead">Missing the enrollment window means going uninsured or paying full price. Talk to an advisor now and get covered before deadlines close.</p>
         </div>
         <div class="mid-cta-actions">
           <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Health Quote</a>
@@ -257,8 +678,8 @@
   <section class="cta-band">
     <div class="container">
       <div class="section-kicker">Ready to Compare?</div>
-      <h2 class="section-h2">Find health coverage that fits your household and your budget.</h2>
-      <p>A licensed advisor will compare plans, check your subsidy eligibility, and walk you through enrollment — at no cost to you.</p>
+      <h2 class="section-h2" data-swap="finalCtaH2">Find health coverage that fits your household and your budget.</h2>
+      <p data-swap="finalCtaLead">A licensed advisor will compare plans, check your subsidy eligibility, and walk you through enrollment — at no cost to you.</p>
       <div class="cta-band-actions">
         <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Talk to a Health Advisor</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
@@ -271,22 +692,257 @@
 <footer class="site-footer">
   <div class="container">
     <div class="ft-grid">
-      <div><div class="ft-brand"><span class="ft-brand-mark">1P</span><span class="ft-brand-name">OnePoint Insurance</span></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
+      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div></div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="./">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li><li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li><li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li></ul></div>
-      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li><li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li><li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
-    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a><a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a></div></div>
+    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
   </div>
 </footer>
 
 <script>
-function goQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function goQuote(e){
+  e.preventDefault();
+  var zip = e.target && e.target.querySelector ? (e.target.querySelector('input[type="text"]') || {}).value : '';
+  if (window.openQM) openQM('Health Insurance (Marketplace)', { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
+}
+function subQuote(e, product) {
+  e.preventDefault();
+  var zip = e.target.querySelector('input').value;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar?product=' + encodeURIComponent(product) + '&zip=' + encodeURIComponent(zip);
+}
+const healthData = {
+  marketplace: { kicker: 'ACA Marketplace plans',  name: 'Marketplace (ACA)',         desc: "Bronze, Silver, Gold, and Platinum plans from Aetna, Oscar, Anthem, Kaiser, BCBS, and more — with Premium Tax Credit eligibility checked for you, free." },
+  medicare:    { kicker: 'Medicare Part C',         name: 'Medicare Advantage',         desc: "Medicare Advantage plans bundle Part A, B, and often D with extra benefits like vision, dental, and prescriptions." },
+  short:       { kicker: 'Temporary coverage',      name: 'Short-Term Medical',         desc: "Temporary coverage between jobs, during open-enrollment gaps, or waiting periods. 1–12 months, much cheaper than ACA." },
+  group:       { kicker: 'Employer-sponsored',      name: 'Group Health',               desc: "Small-business group health plans that help you attract and retain employees while you manage costs." },
+  dental:      { kicker: 'Preventive + major care', name: 'Dental Insurance',           desc: "Cleanings, fillings, crowns, and orthodontics — standalone plans or paired with your health coverage." },
+  vision:      { kicker: 'Eye care',                name: 'Vision Insurance',           desc: "Annual exams, frames, contacts, and lenses — simple vision plans for individuals and families." },
+  accident:    { kicker: 'Cash benefits',           name: 'Accident Coverage',          desc: "Lump-sum cash payouts for covered injuries — ER visits, fractures, dislocations, burns — to fill deductible gaps." },
+  critical:    { kicker: 'Lump-sum on diagnosis',   name: 'Critical Illness',           desc: "Cash on diagnosis of covered conditions like cancer, stroke, or heart attack — to cover what health insurance doesn't." },
+  hospital:    { kicker: 'Per-day hospital cash',   name: 'Hospitalization Insurance',  desc: "Daily benefits for hospital admissions, ICU, and surgeries — covers the expensive gaps in major medical plans." },
+  travel:      { kicker: 'Medical abroad',          name: 'International Travel',       desc: "Emergency medical, evacuation, and trip coverage for travelers — individual trips or annual multi-trip plans." }
+};
+// Page-wide copy keyed by subproduct slug. The `marketplace` entry IS the original
+// page copy verbatim — clicking the Marketplace tab restores the page to its default state.
+const healthSwap = {
+  marketplace: {
+    heroH1: "Affordable care that fits your <span class=\"serif\">budget</span> and your life.",
+    heroLead: "Compare Bronze, Silver, Gold, and Platinum plans from Aetna, Oscar, Anthem, Kaiser, and BCBS — premium tax credit eligibility checked for you, free.",
+    coverKicker: "Premium Tax Credit",
+    coverH2: "You may qualify for help paying your premium — and not even know it.",
+    coverBody: "The Premium Tax Credit is a federal subsidy that lowers your monthly health insurance cost for eligible households buying through the Marketplace.",
+    midCtaH2: "Open enrollment won't wait. Neither should you.",
+    midCtaLead: "Missing the enrollment window means going uninsured or paying full price. Talk to an advisor now and get covered before deadlines close.",
+    finalCtaH2: "Find health coverage that fits your household and your budget.",
+    finalCtaLead: "A licensed advisor will compare plans, check your subsidy eligibility, and walk you through enrollment — at no cost to you."
+  },
+  medicare: {
+    heroH1: "Medicare Advantage Plans",
+    heroLead: "All-in-one Medicare coverage that bundles hospital, medical, and often prescription benefits into a single plan.",
+    coverKicker: "What's Covered",
+    coverH2: "Medicare Advantage benefits at a glance.",
+    coverBody: "Medicare Advantage replaces Original Medicare with a private plan covering Part A hospital stays, Part B doctor visits, and usually Part D drugs. Most plans add extras like dental, vision, hearing, fitness programs, and telehealth — often with low or zero monthly premiums.",
+    midCtaH2: "Compare Medicare Advantage plans nearby.",
+    midCtaLead: "See which carriers offer the richest extras and lowest out-of-pocket costs in your ZIP code.",
+    finalCtaH2: "Ready to enroll in Medicare Advantage?",
+    finalCtaLead: "A licensed advisor will walk you through plan options and handle the enrollment paperwork."
+  },
+  short: {
+    heroH1: "Short-Term Medical Insurance",
+    heroLead: "Affordable bridge coverage for gaps between jobs, ACA enrollment windows, or while you wait for new benefits to kick in.",
+    coverKicker: "What's Covered",
+    coverH2: "Short-term medical, when you need it now.",
+    coverBody: "Short-term plans cover ER visits, hospitalization, and basic outpatient care for 1–12 months. Lower premiums, faster approval, and immediate start dates — but they don't cover pre-existing conditions or essential health benefits like ACA plans.",
+    midCtaH2: "Bridge the gap without overpaying.",
+    midCtaLead: "Get short-term coverage that starts as soon as tomorrow and costs a fraction of COBRA.",
+    finalCtaH2: "Get a short-term medical quote.",
+    finalCtaLead: "Cover yourself for the next 1 to 12 months while you figure out the long-term plan."
+  },
+  group: {
+    heroH1: "Group Health Insurance",
+    heroLead: "Employer-sponsored health plans that attract talent, retain staff, and keep your team covered at competitive group rates.",
+    coverKicker: "What's Covered",
+    coverH2: "Group health plan components.",
+    coverBody: "Group health covers preventive care, doctor visits, hospitalization, prescriptions, mental health, and maternity for employees and dependents. Plans range from HMO and PPO to HSA-compatible high-deductible options, with optional dental, vision, and life benefits bundled alongside.",
+    midCtaH2: "Build a benefits package employees love.",
+    midCtaLead: "Compare carriers, network quality, and contribution strategies tailored to your headcount and budget.",
+    finalCtaH2: "Request a group health proposal.",
+    finalCtaLead: "Share a few details about your company and we'll return competitive quotes within one business day."
+  },
+  dental: {
+    heroH1: "Dental Insurance Plans",
+    heroLead: "Coverage for cleanings, fillings, and major dental work — so routine care and surprises both stay affordable.",
+    coverKicker: "What's Covered",
+    coverH2: "Dental benefits you can expect.",
+    coverBody: "Most dental plans pay 100% for preventive cleanings and exams, ~80% for fillings and extractions, and ~50% for crowns, bridges, and root canals. Orthodontia riders are available, and many plans waive waiting periods for preventive services.",
+    midCtaH2: "Find a dental plan that fits.",
+    midCtaLead: "Compare annual maximums, waiting periods, and in-network providers to pick the right coverage level.",
+    finalCtaH2: "Smile with confidence.",
+    finalCtaLead: "Get a dental quote in minutes and start using preventive benefits right away on most plans."
+  },
+  vision: {
+    heroH1: "Vision Insurance Plans",
+    heroLead: "Low-cost coverage for eye exams, lenses, frames, and contacts — keep your vision sharp and out-of-pocket costs down.",
+    coverKicker: "What's Covered",
+    coverH2: "Vision benefits you can count on.",
+    coverBody: "Vision plans typically cover an annual eye exam with a small copay, an allowance toward frames or contact lenses every 12–24 months, and discounts on standard and specialty lenses. Many plans add savings on LASIK and second-pair purchases through network providers.",
+    midCtaH2: "See clearly for less each year.",
+    midCtaLead: "Annual exams catch more than vision changes. Compare plans that make eye care routine, not expensive.",
+    finalCtaH2: "Get a vision quote today.",
+    finalCtaLead: "Pair vision with dental for bundled savings and one simple monthly premium."
+  },
+  accident: {
+    heroH1: "Accident Insurance Coverage",
+    heroLead: "Cash benefits paid directly to you after a covered injury — to offset deductibles, lost income, and everyday bills.",
+    coverKicker: "What's Covered",
+    coverH2: "Accident insurance payouts explained.",
+    coverBody: "Accident insurance pays lump-sum benefits for injuries like fractures, dislocations, burns, concussions, and ER visits. Use the cash however you need — for medical deductibles, transportation, childcare, or rent — with no coordination required against your primary health plan.",
+    midCtaH2: "Cover the costs health insurance misses.",
+    midCtaLead: "Deductibles and copays add up fast after an ER visit. Accident coverage closes the gap.",
+    finalCtaH2: "Add accident protection today.",
+    finalCtaLead: "Affordable premiums, fast claims, and benefits paid directly to you — not your doctor."
+  },
+  critical: {
+    heroH1: "Critical Illness Insurance",
+    heroLead: "A tax-free lump sum paid on diagnosis of cancer, heart attack, stroke, and other serious covered conditions.",
+    coverKicker: "What's Covered",
+    coverH2: "Conditions critical illness plans cover.",
+    coverBody: "Critical illness pays a one-time benefit (typically $10K–$100K) after diagnosis of a covered event such as invasive cancer, heart attack, stroke, major organ transplant, or kidney failure. Spend the money on treatment, recovery, or any expense you choose.",
+    midCtaH2: "Focus on recovery, not bills.",
+    midCtaLead: "A serious diagnosis shouldn't drain your savings. Lump-sum cash gives you flexibility when it matters most.",
+    finalCtaH2: "Get critical illness coverage.",
+    finalCtaLead: "Quick underwriting and benefits that pay quickly after a covered diagnosis is confirmed."
+  },
+  hospital: {
+    heroH1: "Hospital Indemnity Insurance",
+    heroLead: "Fixed cash benefits for each day you're admitted — to cover deductibles, copays, and income lost during a stay.",
+    coverKicker: "What's Covered",
+    coverH2: "Hospital indemnity benefits breakdown.",
+    coverBody: "Hospital indemnity plans pay set amounts for admission, each day of a stay, ICU confinement, surgery, and sometimes outpatient procedures. Benefits come directly to you, stacking on top of major medical to offset high-deductible plan costs and non-medical expenses at home.",
+    midCtaH2: "Soften the sticker shock of a hospital stay.",
+    midCtaLead: "Even one night in the hospital can trigger thousands in out-of-pocket costs. Indemnity coverage helps.",
+    finalCtaH2: "Add hospital coverage now.",
+    finalCtaLead: "Affordable monthly premiums and benefits paid fast — usually within days of discharge."
+  },
+  travel: {
+    heroH1: "International Travel Insurance",
+    heroLead: "Medical, evacuation, and trip protection for travelers abroad — where your U.S. health plan typically stops working.",
+    coverKicker: "What's Covered",
+    coverH2: "International travel protection included.",
+    coverBody: "Travel insurance covers emergency medical treatment, hospitalization, and prescriptions abroad, plus medical evacuation, repatriation, trip cancellation, interruption, lost luggage, and travel delays. Plans can cover a single trip or a full year of travel.",
+    midCtaH2: "Travel abroad without the what-ifs.",
+    midCtaLead: "One hospital visit overseas can cost tens of thousands. Travel coverage turns emergencies into inconveniences.",
+    finalCtaH2: "Quote international travel insurance.",
+    finalCtaLead: "Coverage can start as early as tomorrow — whether you're leaving for a week or a year."
+  }
+};
+// Swap every [data-swap] element on the page to the chosen subproduct's copy.
+// DOM is never moved or restructured — only innerHTML of tagged nodes changes.
+function swapHealthCopy(v){
+  const data = healthSwap[v];
+  if(!data) return;
+  document.querySelectorAll('[data-swap]').forEach(el => {
+    const key = el.getAttribute('data-swap');
+    if(data[key] != null) el.innerHTML = data[key];
+  });
+}
+// Hero image per sub-product — dual-image crossfade
+const healthHeroImg = {
+  marketplace: '../health.jpg',
+  medicare:    '../medicare.jpg',
+  short:       '../short-term-medical.jpg',
+  group:       '../group-health.jpg',
+  dental:      '../Dental.jpg',
+  vision:      '../Vision-health.jpg',
+  accident:    '../accident.jpg',
+  critical:    '../critical-illness.jpg',
+  hospital:    '../hospitalization.jpg',
+  travel:      '../international-travels.jpg'
+};
+var healthFront = 'A';
+function swapHealthImage(slug){
+  var imgA = document.getElementById('healthImgA');
+  var imgB = document.getElementById('healthImgB');
+  if(!imgA || !imgB || !healthHeroImg[slug]) return;
+  var front = healthFront === 'A' ? imgA : imgB;
+  var back  = healthFront === 'A' ? imgB : imgA;
+  var newSrc = healthHeroImg[slug];
+  if(front.src.endsWith(newSrc.replace('../',''))) return;
+  back.src = newSrc;
+  back.alt = healthData[slug].name + ' insurance coverage';
+  var doFade = function(){
+    back.classList.remove('hero-img-out');
+    back.classList.add('hero-img-in');
+    front.classList.remove('hero-img-in');
+    front.classList.add('hero-img-out');
+    healthFront = healthFront === 'A' ? 'B' : 'A';
+  };
+  if(back.complete && back.naturalWidth > 0) doFade();
+  else back.onload = doFade;
+}
+let selectedHealth = 'marketplace';
+function selectHealth(v){
+  if (!healthData[v]) return;
+  selectedHealth = v;
+  document.querySelectorAll('#health-subs .health-tab').forEach(t => t.classList.toggle('active', t.dataset.v === v));
+  document.getElementById('hp-kicker').textContent = healthData[v].kicker;
+  document.getElementById('hp-title').textContent = healthData[v].name;
+  document.getElementById('hp-desc').textContent = healthData[v].desc;
+  swapHealthCopy(v);
+  swapHealthImage(v);
+}
+function hpQuote(e){
+  e.preventDefault();
+  var zip = document.getElementById('hp-zip').value;
+  var product = healthData[selectedHealth].name;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar?product=' + encodeURIComponent(product) + '&zip=' + encodeURIComponent(zip);
+}
 function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
 function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
 function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
-document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
+function toggleProductDropdown(e){e.stopPropagation();const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');btn.classList.toggle('open');dd.classList.toggle('open');}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));
+  if(!e.target.closest('.qc-product-field')){const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');if(btn)btn.classList.remove('open');if(dd)dd.classList.remove('open');}
+});
+function handleHealthHash(){
+  var hash = window.location.hash.replace('#','');
+  if(hash && healthData[hash]){
+    selectHealth(hash);
+    var picker = document.getElementById('health-subs');
+    if(picker) setTimeout(function(){ picker.scrollIntoView({behavior:'smooth',block:'start'}); }, 300);
+  }
+}
+handleHealthHash();
+window.addEventListener('hashchange', handleHealthHash);
 </script>
+
+<!-- RESUME QUOTE MODAL -->
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

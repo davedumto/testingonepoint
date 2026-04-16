@@ -3,19 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auto Insurance | OnePoint Insurance Agency</title>
+<title>Auto Insurance Quotes | Save on Car Insurance | OnePoint</title>
+<meta name="description" content="Compare auto insurance quotes from 200+ A-rated carriers. Liability, collision, comprehensive, roadside, and uninsured motorist coverage. Switch and save in minutes.">
+<meta name="keywords" content="auto insurance, car insurance, cheap auto insurance, car insurance quote, liability coverage, collision coverage, uninsured motorist, switch car insurance">
+<meta property="og:title" content="Auto Insurance Quotes | Compare Rates in Minutes | OnePoint">
+<meta property="og:description" content="Independent agent comparing 200+ carriers for the best auto insurance rate.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
+<script src="../quote-modal.js" defer></script>
+<style>
+  :root { --hero-accent: rgba(220,38,38,.14); --hero-accent-2: rgba(0,102,204,.06); }
+  .hero-eyebrow { color: #dc2626; }
+  .section-kicker { color: #dc2626; }
+
+  /* AUTO HERO — Freeway-style: compact, two-column, mint background, breadcrumb */
+  .hero {
+    min-height: 0;
+    background: #f4f5f7;
+    padding: 0;
+    display: block;
+  }
+  .hero-breadcrumb {
+    max-width: 1200px; margin: 0 auto; padding: 14px 28px;
+    font-size: 13px; color: var(--muted);
+  }
+  .hero-breadcrumb a { color: var(--muted); text-decoration: none; }
+  .hero-breadcrumb a:hover { color: var(--blue); }
+  .hero-breadcrumb .sep { margin: 0 8px; color: var(--subtle); }
+  .hero-breadcrumb .current { color: var(--text); font-weight: 500; }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 20px 28px 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: center; position: relative;
+  }
+  .hero-left { position: relative; z-index: 20; }
+  .hero-left h1 {
+    font-size: clamp(34px, 4vw, 48px);
+    font-weight: 700; color: var(--blue-dark);
+    line-height: 1.1; letter-spacing: -.01em;
+    margin-bottom: 10px; max-width: 540px;
+  }
+  .hero-left p.lead {
+    font-size: 18px; color: var(--text);
+    max-width: 460px; margin-bottom: 24px; line-height: 1.5;
+  }
+  .auto-trustpilot {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 22px; font-size: 14px; color: var(--text);
+  }
+  .auto-trustpilot strong { color: var(--navy); font-weight: 700; }
+  .auto-trustpilot .stars { color: #00b67a; letter-spacing: 1px; font-size: 18px; }
+  .auto-trustpilot a { color: var(--blue); text-decoration: underline; }
+
+  /* Right-side composition — offset frame + accent block + floating savings badge */
+  .hero-right {
+    position: relative; height: 380px;
+  }
+  .hero-photo-frame {
+    position: absolute; inset: 16px 0 16px 20px;
+    overflow: hidden; z-index: 2;
+    box-shadow: 0 16px 36px rgba(5,40,71,.16);
+  }
+  .hero-photo-frame img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: opacity .6s cubic-bezier(.4,0,.2,1);
+  }
+  .hero-photo-frame img.hero-img-out { opacity: 0; }
+  .hero-photo-frame img.hero-img-in  { opacity: 1; }
+  .hero-photo-frame:hover img { transform: scale(1.04); }
+
+  /* Red accent block behind the photo, offset up-right */
+  .hero-accent-block {
+    position: absolute; right: -18px; top: 0;
+    width: 75%; height: 74%;
+    background: #dc2626; z-index: 1;
+  }
+  /* Thin outline block offset bottom-left */
+  .hero-outline-block {
+    position: absolute; left: -10px; bottom: 0;
+    width: 46%; height: 52%;
+    border: 3px solid var(--navy);
+    z-index: 1; pointer-events: none;
+  }
+
+  /* Floating stat badge bottom-left */
+  .hero-savings-badge {
+    position: absolute; left: 0; bottom: 28px;
+    background: #fff; padding: 14px 20px 14px 18px;
+    box-shadow: 0 10px 28px rgba(5,40,71,.18);
+    border-left: 4px solid #dc2626;
+    display: flex; align-items: center; gap: 14px;
+    z-index: 3; max-width: 260px;
+  }
+  .hero-savings-num {
+    font-size: 28px; font-weight: 700; color: #dc2626;
+    line-height: 1; letter-spacing: -.01em;
+  }
+  .hero-savings-label {
+    font-size: 11px; color: var(--muted); line-height: 1.4;
+    text-transform: uppercase; letter-spacing: .06em; font-weight: 600;
+  }
+  .hero-savings-label strong { color: var(--navy); display: block; font-size: 13px; margin-bottom: 2px; letter-spacing: .02em; }
+
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
+    .hero-right { display: none; }
+  }
+
+  /* Inline quote card inside Freeway hero */
+  .auto-inline-card {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 22px 24px; max-width: 560px;
+    position: relative;
+  }
+  .auto-inline-card .qc-form {
+    grid-template-columns: 1.4fr 1fr auto;
+    gap: 16px; align-items: end;
+    display: grid;
+  }
+  .auto-inline-card .qc-product-field,
+  .auto-inline-card .qc-location-field {
+    padding: 0; border: none;
+  }
+  .auto-inline-card .qc-field-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--text); margin-bottom: 6px;
+  }
+  .auto-inline-card .qc-product-btn {
+    padding: 4px 0 6px; border-bottom: 2px solid var(--text);
+  }
+  .auto-inline-card .qc-product-name { border-bottom: none; }
+  .auto-inline-card .qc-location-input {
+    border-bottom: 2px solid var(--border);
+    color: var(--text);
+  }
+  .auto-inline-card .qc-location-input::placeholder { color: var(--subtle); }
+  .auto-inline-card .qc-cta {
+    padding: 13px 26px; background: #dc2626;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+  }
+  .auto-inline-card .qc-cta:hover { background: #b91c1c; }
+  .auto-inline-card .qc-product-dropdown {
+    color: var(--text);
+    right: auto; width: 520px;
+    max-width: calc(100vw - 48px);
+  }
+  @media (max-width: 640px) {
+    .auto-inline-card .qc-product-dropdown {
+      width: calc(100vw - 48px); left: 0;
+    }
+  }
+  .auto-tos {
+    font-size: 12px; color: var(--muted); margin-top: 12px;
+  }
+  .auto-tos a { color: var(--blue); text-decoration: underline; }
+
+  /* SUB-PRODUCTS — single interactive module: tabs + one unified panel */
+  .sub-section { padding: 72px 0; background: var(--white); }
+  .sub-header { text-align: center; max-width: 760px; margin: 0 auto 40px; padding: 0 28px; }
+  .sub-header h2 {
+    font-size: clamp(26px, 3.2vw, 36px); font-weight: 700;
+    color: var(--navy); line-height: 1.22; margin-bottom: 10px;
+  }
+  .sub-header p { color: var(--muted); font-size: 16px; }
+
+  .vehicle-picker {
+    max-width: 1120px; margin: 0 auto; padding: 0 28px;
+  }
+  .vehicle-tabs {
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 0;
+  }
+  .vehicle-tab {
+    background: none; border: none; padding: 18px 10px 16px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--muted); transition: .2s;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    position: relative;
+  }
+  .vehicle-tab svg {
+    width: 32px; height: 32px; stroke: currentColor; fill: none;
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    transition: .2s;
+  }
+  .vehicle-tab span {
+    font-size: 12px; font-weight: 600; letter-spacing: .02em;
+    text-align: center; line-height: 1.2;
+  }
+  .vehicle-tab:hover { color: var(--navy); }
+  .vehicle-tab.active {
+    color: #dc2626; border-bottom-color: #dc2626;
+  }
+  .vehicle-tab.active span { font-weight: 700; color: var(--navy); }
+
+  .vehicle-panel {
+    background: #fff7f7; border: 1px solid var(--border);
+    padding: 36px 40px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .vehicle-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+    background: #dc2626;
+  }
+  .vehicle-panel-icon {
+    width: 84px; height: 84px; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    color: #dc2626;
+    box-shadow: 0 4px 16px rgba(220,38,38,.12);
+  }
+  .vehicle-panel-icon svg {
+    width: 52px; height: 52px; stroke: currentColor; fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .vehicle-panel-body { min-width: 0; }
+  .vehicle-panel-body h3 {
+    font-size: 26px; font-weight: 700; color: var(--navy);
+    line-height: 1.15; margin-bottom: 6px; letter-spacing: -.005em;
+  }
+  .vehicle-panel-body p {
+    font-size: 15px; color: var(--muted); line-height: 1.55;
+    max-width: 520px;
+  }
+  .vehicle-panel-form {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px;
+    min-width: 280px;
+  }
+  .vehicle-panel-form input {
+    padding: 13px 16px; border: 1.5px solid var(--border);
+    font-family: 'Outfit', sans-serif; font-size: 14px;
+    outline: none; letter-spacing: .2em; background: #fff;
+    min-width: 0;
+  }
+  .vehicle-panel-form input:focus { border-color: #dc2626; }
+  .vehicle-panel-form button {
+    padding: 13px 22px; background: #dc2626; color: #fff;
+    border: none; font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: .06em; white-space: nowrap;
+    transition: .15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .vehicle-panel-form button:hover { background: #b91c1c; }
+
+  @media (max-width: 960px) {
+    .vehicle-tabs { grid-template-columns: repeat(4, 1fr); }
+    .vehicle-panel { grid-template-columns: 1fr; text-align: left; gap: 20px; padding: 28px; }
+    .vehicle-panel-icon { width: 64px; height: 64px; }
+    .vehicle-panel-icon svg { width: 40px; height: 40px; }
+    .vehicle-panel-form { min-width: 0; }
+  }
+  @media (max-width: 520px) {
+    .vehicle-tabs { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-brand">
-      <span class="nav-brand-mark">1P</span>
-      <span class="nav-brand-name">OnePoint</span>
+      <img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo">
     </a>
     <ul class="nav-links">
       <li class="has-mega">
@@ -29,39 +284,87 @@
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
               <div class="mega-col">
-                <h5>Vehicle</h5>
+                <h5>Auto</h5>
                 <ul>
-                  <li><a href="./">Auto Insurance</a></li>
-                  <li><a href="https://onepointinsuranceagency.com">Motorcycle</a></li>
-                  <li><a href="https://onepointinsuranceagency.com">RV &amp; Trailer</a></li>
-                </ul>
-                <h5 style="margin-top:18px">Property</h5>
-                <ul>
-                  <li><a href="../home/">Homeowners</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/homeowners">Renters</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/homeowners">Condo</a></li>
+                  <li><a href="../auto/">Auto Insurance</a></li>
+                  <li><a href="../auto/#classic">Antique / Classic Car</a></li>
+                  <li><a href="../auto/#atv">ATV</a></li>
+                  <li><a href="../auto/#motorcycle">Motorcycle</a></li>
+                  <li><a href="../auto/#rv">RV &amp; Travel Trailer</a></li>
+                  <li><a href="../auto/#boat">Boat &amp; Watercraft</a></li>
+                  <li><a href="../auto/#snowmobile">Snowmobile</a></li>
+                  <li><a href="../auto/#scooter">Scooter</a></li>
                 </ul>
               </div>
               <div class="mega-col">
-                <h5>Personal Protection</h5>
+                <h5>Homeowners</h5>
                 <ul>
-                  <li><a href="../health/">Health Insurance</a></li>
-                  <li><a href="../life/">Life Insurance</a></li>
+                  <li><a href="../home/">Homeowners</a></li>
+                  <li><a href="../home/#condo">Condo</a></li>
+                  <li><a href="../home/#mobile">Mobile Home</a></li>
+                  <li><a href="../home/#renters">Renters</a></li>
+                  <li><a href="../home/#flood">Flood</a></li>
+                  <li><a href="../home/#landlord">Landlord</a></li>
+                  <li><a href="../home/#umbrella">Umbrella</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Health</h5>
+                <ul>
+                  <li><a href="../health/">Marketplace (ACA)</a></li>
+                  <li><a href="../health/#short">Short-Term Medical</a></li>
+                  <li><a href="../health/#dental">Dental</a></li>
+                  <li><a href="../health/#vision">Vision</a></li>
+                  <li><a href="../health/#medicare">Medicare Advantage</a></li>
+                  <li><a href="../health/#accident">Accident</a></li>
+                  <li><a href="../health/#hospital">Hospitalization</a></li>
+                  <li><a href="../health/#group">Group Health</a></li>
+                  <li><a href="../health/#travel">International Travel</a></li>
+                  <li><a href="../health/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Life</h5>
+                <ul>
+                  <li><a href="../life/">Term Life</a></li>
+                  <li><a href="../life/#whole">Whole Life</a></li>
+                  <li><a href="../life/#final">Final Expense</a></li>
+                  <li><a href="../life/#universal">Universal Life</a></li>
+                  <li><a href="../life/#iul">Indexed Universal Life</a></li>
+                  <li><a href="../life/#annuity">Annuity</a></li>
+                  <li><a href="../life/#group">Group Life</a></li>
+                  <li><a href="../life/#critical">Critical Illness</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h5>Disability</h5>
+                <ul>
                   <li><a href="../disability/">Disability Income</a></li>
-                  <li><a href="https://onepointinsuranceagency.com">Umbrella</a></li>
+                  <li><a href="../disability/#individual">Individual DI</a></li>
+                  <li><a href="../disability/#long">Long-Term</a></li>
+                  <li><a href="../disability/#short">Short-Term</a></li>
+                  <li><a href="../disability/#group">Group Disability</a></li>
+                  <li><a href="../disability/#boe">Business Overhead</a></li>
                 </ul>
               </div>
               <div class="mega-col">
                 <h5>Business</h5>
                 <ul>
-                  <li><a href="../business/">Business Insurance</a></li>
                   <li><a href="../business/">General Liability</a></li>
-                  <li><a href="../business/">Commercial Auto</a></li>
-                </ul>
-                <h5 style="margin-top:18px">Bundle &amp; Save</h5>
-                <ul>
-                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Home</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Auto + Renters</a></li>
+                  <li><a href="../business/#cauto">Commercial Auto</a></li>
+                  <li><a href="../business/#truck">Trucking</a></li>
+                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#prop">Commercial Property</a></li>
+                  <li><a href="../business/#pl">Professional Liability</a></li>
+                  <li><a href="../business/#mal">Malpractice</a></li>
+                  <li><a href="../business/#sport">Sport Insurance</a></li>
+                  <li><a href="../business/#wc">Workers' Comp</a></li>
+                  <li><a href="../business/#bop">Business Owners (BOP)</a></li>
+                  <li><a href="../business/#liq">Liquor Liability</a></li>
+                  <li><a href="../business/#uml">Commercial Umbrella</a></li>
+                  <li><a href="../business/#garage">Garage</a></li>
+                  <li><a href="../business/#event">Event Insurance</a></li>
+                  <li><a href="../business/#travel">Travel Insurance</a></li>
                 </ul>
               </div>
             </div>
@@ -69,9 +372,9 @@
               <div class="mega-col">
                 <h5>File a Claim</h5>
                 <ul>
-                  <li><a href="https://onepointinsuranceagency.com/client-services">Start a Claim</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/client-services">Upload Documents</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/client-services">Check Status</a></li>
+                  <li><a href="../client-services/">Start a Claim</a></li>
+                  <li><a href="../client-services/">Upload Documents</a></li>
+                  <li><a href="../client-services/">Check Status</a></li>
                 </ul>
               </div>
             </div>
@@ -79,19 +382,23 @@
               <div class="mega-col">
                 <h5>Company</h5>
                 <ul>
-                  <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/partners">Our Carriers</a></li>
-                  <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
+                  <li><a href="../about/">About Us</a></li>
+                  <li><a href="../partners/">Our Carriers</a></li>
+                  <li><a href="../contact/">Contact Us</a></li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </li>
-      <li><a href="https://onepointinsuranceagency.com/client-services">Claims</a></li>
-      <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
+      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="../about/">About Us</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="nav-resume" type="button" onclick="openResume()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+        Pick up quote
+      </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
     </div>
@@ -100,49 +407,139 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1600&auto=format&fit=crop&q=80')">
-    <div class="hero-text">
-      <span class="hero-eyebrow">Auto Insurance · 18 States</span>
-      <h1>Switch and save on car insurance today.</h1>
-      <p class="hero-sub">OnePoint compares top-rated carriers to find you the best rate. Takes minutes — no obligation.</p>
-    </div>
-    <div class="quote-card-wrap">
-      <div class="quote-card">
-        <div class="qc-head">
-          <p class="qc-title">Get your auto insurance quote</p>
-          <p class="qc-sub">Switch in minutes. Compare top-rated carriers.</p>
-        </div>
-        <form class="qc-form" onsubmit="goQuote(event)">
-          <div class="qc-step">
-            <label class="qc-step-label" for="zip">ZIP code</label>
-            <input class="qc-input" id="zip" type="text" placeholder="Enter your ZIP code" maxlength="5" inputmode="numeric" required>
-          </div>
-          <div class="qc-step">
-            <label class="qc-step-label">What are you quoting?</label>
-            <div class="qc-tabs">
-              <a href="./" class="qc-tab active" aria-label="Auto insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>Auto</a>
-              <a href="../home/" class="qc-tab" aria-label="Home insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</a>
-              <a href="../health/" class="qc-tab" aria-label="Health insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.7-7 10-7 10z"/><path d="M8 11h8M12 7v8"/></svg></span>Health</a>
-              <a href="../life/" class="qc-tab" aria-label="Life insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><polyline points="9 12 11 14 15 10"/></svg></span>Life</a>
-              <a href="../disability/" class="qc-tab" aria-label="Disability insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 0 0 7H6"/></svg></span>Disability</a>
-              <a href="../business/" class="qc-tab" aria-label="Business insurance"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>Business</a>
+  <!-- HERO — Freeway-inspired compact layout -->
+  <section class="hero">
+    <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Car Insurance Quotes</span>
+    </nav>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1 data-swap="heroH1">Car Insurance Quotes</h1>
+        <p class="lead" data-swap="heroLead">Compare auto insurance prices online and save.</p>
+        <div class="auto-inline-card quote-card">
+          <form class="qc-form" onsubmit="goQuote(event)">
+            <div class="qc-product-field">
+              <label class="qc-field-label">Type of Insurance Product</label>
+              <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
+                <span class="qc-product-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
+                <span class="qc-product-name">Auto Insurance</span>
+                <span class="qc-product-caret">▾</span>
+              </button>
+              <div class="qc-product-dropdown" id="productDropdown">
+                <p class="qc-bundle-headline">Bundle property and save an average of 5% on auto in most states!<sup>Δ</sup></p>
+                <div class="qc-bundle-links">
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Home</a>
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Condo</a>
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Renters</a>
+                </div>
+                <p class="qc-other-label">Or, quote another product</p>
+                <div class="qc-other-grid">
+                  <a href="#auto-subs">ATV</a>
+                  <a href="./" class="current">Auto</a>
+                  <a href="#auto-subs">Scooter</a>
+                  <a href="#auto-subs">Boat &amp; Watercraft</a>
+                  <a href="#auto-subs">Classic Car</a>
+                  <a href="../business/">Commercial Auto</a>
+                  <a href="../home/">Condo</a>
+                  <a href="../disability/">Disability Income</a>
+                  <a href="../life/">Final Expense</a>
+                  <a href="../home/">Flood</a>
+                  <a href="../business/">General Liability</a>
+                  <a href="../health/">Health (Marketplace)</a>
+                  <a href="../home/">Homeowners</a>
+                  <a href="../home/">Landlord</a>
+                  <a href="../life/">Life (Term)</a>
+                  <a href="../life/">Long-Term Care</a>
+                  <a href="../home/">Mobile Home</a>
+                  <a href="#auto-subs">Motorcycle</a>
+                  <a href="../business/">Professional Liability</a>
+                  <a href="../home/">Renters</a>
+                  <a href="#auto-subs">RV &amp; Travel Trailer</a>
+                  <a href="#auto-subs">Snowmobile</a>
+                  <a href="../home/">Umbrella</a>
+                  <a href="../business/">Workers' Comp</a>
+                </div>
+              </div>
             </div>
-          </div>
-          <button type="submit" class="qc-submit">
-            <span>Get a quote</span>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-        <p class="qc-note">No obligation. No spam. Free advice from a licensed advisor.</p>
+            <div class="qc-location-field">
+              <label class="qc-field-label" for="zip">Zip Code</label>
+              <input class="qc-location-input" id="zip" type="text" placeholder="Zip Code" maxlength="5" inputmode="numeric" required>
+            </div>
+            <button type="submit" class="qc-cta">Start Quote</button>
+          </form>
+          <p class="auto-tos">By clicking Start Quote, I agree to the <a href="../privacy/">Privacy Policy</a> and <a href="../terms/">Terms of Use</a>.</p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-accent-block"></div>
+        <div class="hero-outline-block"></div>
+        <div class="hero-photo-frame">
+          <img id="heroImgA" class="hero-img-in" src="../car1.jpg" alt="Car insurance coverage">
+          <img id="heroImgB" class="hero-img-out" src="../car1.jpg" alt="Car insurance coverage">
+        </div>
+        <div class="hero-savings-badge">
+          <span class="hero-savings-num">$820</span>
+          <span class="hero-savings-label"><strong>Avg annual savings</strong>when drivers switch</span>
+        </div>
       </div>
     </div>
-    <div class="other-ways-bar">
-      <div class="other-ways-inner">
-        <strong>Other ways to buy:</strong>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a call ›</a>
-        <span class="other-ways-sep">|</span>
-        <a href="tel:888-899-8117">Call an agent ›</a>
+  </section>
+
+  <!-- SUB-PRODUCTS — single interactive picker: tabs + one unified quote panel -->
+  <section class="sub-section" id="auto-subs">
+    <div class="sub-header">
+      <h2>All the vehicles we insure</h2>
+      <p>Pick a vehicle to see what's covered, then enter your ZIP to start a quote. One agency, every kind of ride.</p>
+    </div>
+    <div class="vehicle-picker">
+      <div class="vehicle-tabs" role="tablist">
+        <button type="button" class="vehicle-tab active" data-v="auto" onclick="selectVehicle('auto')" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg>
+          <span>Auto</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="classic" onclick="selectVehicle('classic')" role="tab">
+          <svg viewBox="0 0 24 24"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.5 7h11a2 2 0 0 1 1.9 1.5L21 13"/><path d="M2 13h20v4h-2.2a1.8 1.8 0 0 1-3.6 0h-8.4a1.8 1.8 0 0 1-3.6 0H2v-4z"/><circle cx="6" cy="17" r="1.2"/><circle cx="18" cy="17" r="1.2"/><path d="M7 7V5h10v2"/></svg>
+          <span>Classic Car</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="atv" onclick="selectVehicle('atv')" role="tab">
+          <svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-8h4l4 8"/><path d="M10 9h4"/></svg>
+          <span>ATV</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="motorcycle" onclick="selectVehicle('motorcycle')" role="tab">
+          <svg viewBox="0 0 24 24"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M8 17l3-6h6l2 6"/><path d="M11 11l-2-3h4"/></svg>
+          <span>Motorcycle</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="rv" onclick="selectVehicle('rv')" role="tab">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M18 10h2l2 3v4h-4"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M5 7v-2h10v2"/></svg>
+          <span>RV &amp; Trailer</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="boat" onclick="selectVehicle('boat')" role="tab">
+          <svg viewBox="0 0 24 24"><path d="M3 17c2 1 4 1 6 0s4-1 6 0 4 1 6 0"/><path d="M5 13l1-4h12l1 4"/><path d="M12 9V5h3"/></svg>
+          <span>Boat</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="snowmobile" onclick="selectVehicle('snowmobile')" role="tab">
+          <svg viewBox="0 0 24 24"><path d="M3 17h18"/><path d="M5 17l3-7h9l3 7"/><path d="M8 13h9"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/></svg>
+          <span>Snowmobile</span>
+        </button>
+        <button type="button" class="vehicle-tab" data-v="scooter" onclick="selectVehicle('scooter')" role="tab">
+          <svg viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 18h6M12 18V6h4"/><path d="M9 11h4"/></svg>
+          <span>Scooter</span>
+        </button>
+      </div>
+      <div class="vehicle-panel" role="tabpanel">
+        <div class="vehicle-panel-icon" id="vp-icon">
+          <svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg>
+        </div>
+        <div class="vehicle-panel-body">
+          <h3 id="vp-title">Auto</h3>
+          <p id="vp-desc">Your everyday ride — liability, collision, comprehensive, and uninsured motorist coverage from 200+ top-rated carriers.</p>
+        </div>
+        <form class="vehicle-panel-form" onsubmit="vpQuote(event)">
+          <input type="text" id="vp-zip" placeholder="ZIP code" maxlength="5" inputmode="numeric" required>
+          <button type="submit">Get quote →</button>
+        </form>
       </div>
     </div>
   </section>
@@ -163,9 +560,9 @@
   <section class="section" id="coverage">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">What's Covered</div>
-        <h2 class="section-h2">Auto coverage that protects you in the moments that matter.</h2>
-        <p class="section-lead">From fender benders to total losses, the right policy makes sure an accident doesn't derail your finances.</p>
+        <div class="section-kicker" data-swap="coverKicker">What's Covered</div>
+        <h2 class="section-h2" data-swap="coverH2">Auto coverage that protects you in the moments that matter.</h2>
+        <p class="section-lead" data-swap="coverBody">From fender benders to total losses, the right policy makes sure an accident doesn't derail your finances.</p>
       </div>
       <div class="feat-grid-3">
         <div class="feat-card">
@@ -235,7 +632,7 @@
     <div class="container">
       <div class="split-grid">
         <div class="split-img">
-          <img src="../hero-family.jpg" alt="OnePoint Insurance advisors helping a family" loading="lazy">
+          <img src="../car2.jpg" alt="Auto insurance — OnePoint helps you switch and save" loading="lazy">
         </div>
         <div>
           <div class="section-kicker">Why OnePoint</div>
@@ -256,10 +653,10 @@
               </div>
             </div>
             <div class="split-point">
-              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
               <div>
-                <h5>Bundle and save more</h5>
-                <p>Combine auto with home, renters, or life coverage and unlock multi-policy discounts across your household.</p>
+                <h5>Every discount you qualify for</h5>
+                <p>Safe driver, good student, low mileage, paid in full, anti-theft — we surface every car insurance discount across every carrier.</p>
               </div>
             </div>
           </div>
@@ -269,13 +666,57 @@
     </div>
   </section>
 
+  <!-- BUNDLE & SAVE -->
+  <section class="bundle-section" style="--bundle-accent: #dc2626;">
+    <div class="bundle-header">
+      <span class="bundle-kicker">Bundle &amp; Save</span>
+      <h2>Bundle property and save an average of 5% on auto in most states.<sup style="color:#dc2626">Δ</sup></h2>
+      <p>Combine your auto policy with a home, condo, or renters policy and unlock multi-policy discounts.</p>
+    </div>
+    <div class="bundle-grid">
+      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>
+        </div>
+        <h4>Auto + Home</h4>
+        <p>The most popular bundle. Protect the car and the house with one carrier and cut premiums on both.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Avg 5% off auto</span>
+        <span class="bundle-card-cta">Bundle auto + home <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13"/><rect x="6" y="11" width="3" height="3"/><rect x="11" y="11" width="3" height="3"/><rect x="16" y="11" width="3" height="3"/><path d="M3 8l9-5 9 5"/></svg></span>
+        </div>
+        <h4>Auto + Condo</h4>
+        <p>HO-6 condo coverage protects everything inside your walls. Bundle with auto and most carriers cut both rates.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Multi-policy discount</span>
+        <span class="bundle-card-cta">Bundle auto + condo <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11H3z"/><path d="M10 21v-6h4v6"/><path d="M7 10h2M15 10h2"/></svg></span>
+        </div>
+        <h4>Auto + Renters</h4>
+        <p>Renters is one of the cheapest policies you can buy — and bundling often makes your auto premium drop more than renters costs.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Renters from $15/mo</span>
+        <span class="bundle-card-cta">Bundle auto + renters <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+
   <!-- MID CTA -->
   <section class="mid-cta">
     <div class="container">
       <div class="mid-cta-inner">
         <div class="mid-cta-text">
-          <h2>Most drivers overpay by hundreds a year.</h2>
-          <p>A quick comparison takes two minutes and costs nothing. Find out what you should actually be paying.</p>
+          <h2 data-swap="midCtaH2">Most drivers overpay by hundreds a year.</h2>
+          <p data-swap="midCtaLead">A quick auto insurance comparison takes two minutes and costs nothing. Find out what you should actually be paying.</p>
         </div>
         <div class="mid-cta-actions">
           <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Start My Free Quote</a>
@@ -321,8 +762,8 @@
   <section class="cta-band">
     <div class="container">
       <div class="section-kicker">Your Next Step</div>
-      <h2 class="section-h2">Get your free auto quote in minutes.</h2>
-      <p>No pressure. No spam. Just honest advice from a licensed advisor who has your best interest — not a carrier's commission — in mind.</p>
+      <h2 class="section-h2" data-swap="finalCtaH2">Get your free auto quote in minutes.</h2>
+      <p data-swap="finalCtaLead">No pressure. No spam. Just honest advice from a licensed advisor who has your best interest — not a carrier's commission — in mind.</p>
       <div class="cta-band-actions">
         <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Quote</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
@@ -337,8 +778,7 @@
     <div class="ft-grid">
       <div>
         <div class="ft-brand">
-          <span class="ft-brand-mark">1P</span>
-          <span class="ft-brand-name">OnePoint Insurance</span>
+          <img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo">
         </div>
         <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
         <div class="ft-states">
@@ -359,19 +799,19 @@
       <div class="ft-col">
         <h5>Company</h5>
         <ul>
-          <li><a href="https://onepointinsuranceagency.com/about-us">About Us</a></li>
-          <li><a href="https://onepointinsuranceagency.com/partners">Carriers</a></li>
-          <li><a href="https://onepointinsuranceagency.com/onepointblog">Blog</a></li>
+          <li><a href="../about/">About Us</a></li>
+          <li><a href="../partners/">Carriers</a></li>
+          <li><a href="../onepointblog/">Blog</a></li>
           <li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li>
-          <li><a href="https://onepointinsuranceagency.com/contact-us">Contact Us</a></li>
+          <li><a href="../contact/">Contact Us</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <h5>Client Tools</h5>
         <ul>
-          <li><a href="https://onepointinsuranceagency.com/client-services">File a Claim</a></li>
-          <li><a href="https://onepointinsuranceagency.com/policy-request">Update Policy</a></li>
-          <li><a href="https://onepointinsuranceagency.com/client-services">Upload Document</a></li>
+          <li><a href="../client-services/">File a Claim</a></li>
+          <li><a href="../policy-request/">Update Policy</a></li>
+          <li><a href="../client-services/">Upload Document</a></li>
           <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li>
         </ul>
       </div>
@@ -398,8 +838,8 @@
     <div class="ft-bottom">
       <p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
       <div class="ft-bottom-links">
-        <a href="https://onepointinsuranceagency.com/privacypolicy">Privacy Policy</a>
-        <a href="https://onepointinsuranceagency.com/termofuse">Terms of Use</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
       </div>
     </div>
   </div>
@@ -408,7 +848,9 @@
 <script>
 function goQuote(e) {
   e.preventDefault();
-  window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
+  var zip = e.target && e.target.querySelector ? (e.target.querySelector('input[type="text"]') || {}).value : '';
+  if (window.openQM) openQM('Auto', { zip: zip });
+  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
 }
 function toggleMega(btn) {
   const li = btn.closest('li');
@@ -434,11 +876,242 @@ function toggleFaq(btn) {
     btn.querySelector('.faq-icon').textContent = '−';
   }
 }
+function toggleProductDropdown(e){
+  e.stopPropagation();
+  const btn=document.querySelector('.qc-product-btn');
+  const dd=document.getElementById('productDropdown');
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+}
+function subQuote(e,product){
+  e.preventDefault();
+  const zip=e.target.querySelector('input').value;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
+}
+const vehicleData = {
+  auto:       { name:'Auto',                  desc:"Your everyday ride — liability, collision, comprehensive, and uninsured motorist coverage from 200+ top-rated carriers.", icon:'<svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg>' },
+  classic:    { name:'Classic / Antique Car', desc:"Agreed-value coverage built for show cars and collector vehicles — so your '67 Mustang is insured for what it's worth, not blue-book.", icon:'<svg viewBox="0 0 24 24"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.5 7h11a2 2 0 0 1 1.9 1.5L21 13"/><path d="M2 13h20v4h-2.2a1.8 1.8 0 0 1-3.6 0h-8.4a1.8 1.8 0 0 1-3.6 0H2v-4z"/><circle cx="6" cy="17" r="1.2"/><circle cx="18" cy="17" r="1.2"/><path d="M7 7V5h10v2"/></svg>' },
+  atv:        { name:'ATV',                   desc:"Off-road protection for 4-wheelers, side-by-sides, and UTVs — theft, collision, and liability for recreational riders.", icon:'<svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-8h4l4 8"/><path d="M10 9h4"/></svg>' },
+  motorcycle: { name:'Motorcycle',            desc:"Liability, collision, and custom-parts coverage for cruisers, sport bikes, and touring motorcycles — with guest passenger options.", icon:'<svg viewBox="0 0 24 24"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M8 17l3-6h6l2 6"/><path d="M11 11l-2-3h4"/></svg>' },
+  rv:         { name:'RV & Travel Trailer',   desc:"Full-time or weekend RV coverage — liability, personal effects, roadside, and vacation liability for your home on wheels.", icon:'<svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M18 10h2l2 3v4h-4"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M5 7v-2h10v2"/></svg>' },
+  boat:       { name:'Boat & Watercraft',     desc:"Hull, motor, and liability coverage for speedboats, fishing boats, sailboats, and personal watercraft.", icon:'<svg viewBox="0 0 24 24"><path d="M3 17c2 1 4 1 6 0s4-1 6 0 4 1 6 0"/><path d="M5 13l1-4h12l1 4"/><path d="M12 9V5h3"/></svg>' },
+  snowmobile: { name:'Snowmobile',            desc:"Winter-ready coverage — collision, theft, and snowmobile liability for one-off sleds or a whole garage of them.", icon:'<svg viewBox="0 0 24 24"><path d="M3 17h18"/><path d="M5 17l3-7h9l3 7"/><path d="M8 13h9"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/></svg>' },
+  scooter:    { name:'Scooter',               desc:"Protection for motor scooters, mopeds, and low-displacement commuter rides — liability and collision built for city commutes.", icon:'<svg viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 18h6M12 18V6h4"/><path d="M9 11h4"/></svg>' }
+};
+// Page-wide copy keyed by subproduct slug. The `auto` entry IS the original
+// page copy verbatim — clicking the Auto tab restores the page to its default state.
+const autoSwap = {
+  auto: {
+    heroH1: "Car Insurance Quotes",
+    heroLead: "Compare auto insurance prices online and save.",
+    coverKicker: "What's Covered",
+    coverH2: "Auto coverage that protects you in the moments that matter.",
+    coverBody: "From fender benders to total losses, the right policy makes sure an accident doesn't derail your finances.",
+    midCtaH2: "Most drivers overpay by hundreds a year.",
+    midCtaLead: "A quick auto insurance comparison takes two minutes and costs nothing. Find out what you should actually be paying.",
+    finalCtaH2: "Get your free auto quote in minutes.",
+    finalCtaLead: "No pressure. No spam. Just honest advice from a licensed advisor who has your best interest — not a carrier's commission — in mind."
+  },
+  classic: {
+    heroH1: "Classic Car Insurance",
+    heroLead: "Specialized coverage for antique and collector vehicles, built around their true value and the way you actually drive them.",
+    coverKicker: "What's Covered",
+    coverH2: "Protection as timeless as your car.",
+    coverBody: "Agreed value coverage locks in your car's worth with no depreciation, plus spare parts, restoration-in-progress, flexible mileage plans, roadside assistance, and liability — tailored to collectors, not daily drivers.",
+    midCtaH2: "Your classic is priceless. Insure it that way.",
+    midCtaLead: "Standard auto policies underpay on classics. Get agreed value coverage that respects what your car is really worth.",
+    finalCtaH2: "Protect the ride you've built.",
+    finalCtaLead: "Talk to a specialist who understands collector cars and get a quote tailored to your vehicle's true value."
+  },
+  atv: {
+    heroH1: "ATV Insurance",
+    heroLead: "Affordable coverage that protects your quad, your gear, and your adventures wherever the trail takes you.",
+    coverKicker: "What's Covered",
+    coverH2: "Coverage that goes where you ride.",
+    coverBody: "Liability, collision, comprehensive, uninsured motorist, medical payments, custom parts and accessories, trailside recovery, and transport trailer coverage — built for trail riders, farm use, and weekend warriors alike.",
+    midCtaH2: "Ride harder. Worry less.",
+    midCtaLead: "Whether it's mud, dunes, or backwoods trails, the right ATV policy keeps one bad day from costing a whole season.",
+    finalCtaH2: "Protect your ATV and your adventures.",
+    finalCtaLead: "Get a free, personalized ATV insurance quote in minutes from a licensed OnePoint advisor."
+  },
+  motorcycle: {
+    heroH1: "Motorcycle Insurance",
+    heroLead: "Coverage designed for riders who value freedom, safety, and peace of mind on every highway and side street.",
+    coverKicker: "What's Covered",
+    coverH2: "Protection for every mile you ride.",
+    coverBody: "Liability, collision, and comprehensive cover crashes, theft, and weather damage, while custom parts and accessories coverage protects your exhaust, fairings, saddlebags, paint, and the upgrades that make the bike yours.",
+    midCtaH2: "Your journey, our priority.",
+    midCtaLead: "We make motorcycle insurance simple so you can focus on what matters — the open road.",
+    finalCtaH2: "Ride protected. Ride free.",
+    finalCtaLead: "Compare motorcycle carriers in minutes with a licensed advisor and lock in coverage before your next ride."
+  },
+  rv: {
+    heroH1: "RV & Travel Trailer Insurance",
+    heroLead: "Affordable coverage designed for life on the road, so you have peace of mind wherever you park.",
+    coverKicker: "What's Covered",
+    coverH2: "Protection for the road and the campsite.",
+    coverBody: "Covers accidents, theft, vandalism, fire, and weather damage to your RV, plus the belongings you travel with and liability protection when you're on the road or set up at a campsite.",
+    midCtaH2: "Hit the road fully covered.",
+    midCtaLead: "From weekend trailers to full-time motorhomes, we'll match you with carriers that know RV life.",
+    finalCtaH2: "Ready to roll with confidence?",
+    finalCtaLead: "Get a personalized RV quote in minutes and travel knowing your rig and belongings are protected."
+  },
+  boat: {
+    heroH1: "Boat & Watercraft Insurance",
+    heroLead: "From fishing trips to weekend cruises, safeguard your boat and everyone aboard with tailored coverage.",
+    coverKicker: "What's Covered",
+    coverH2: "Coverage from the dock to open water.",
+    coverBody: "Hull and machinery damage, liability, medical payments, uninsured boater, personal effects, fishing equipment, towing and emergency service, trailer coverage, and agreed value or total loss replacement on qualifying boats.",
+    midCtaH2: "Get a free custom boat quote.",
+    midCtaLead: "Tell us about your boat and how you use it — we'll shop marine carriers for the right coverage at the right price.",
+    finalCtaH2: "Ready to set sail with confidence?",
+    finalCtaLead: "A licensed OnePoint advisor will compare marine policies and get you on the water, fully covered."
+  },
+  snowmobile: {
+    heroH1: "Snowmobile Insurance",
+    heroLead: "Comprehensive coverage built to keep you safe on and off the trail all season long.",
+    coverKicker: "What's Covered",
+    coverH2: "Protection for every trail you take.",
+    coverBody: "Liability, collision, comprehensive, uninsured motorist, medical payments, trailside assistance, accessory and gear coverage, transport trailer, trip interruption, seasonal lay-up, and agreed value on qualifying sleds.",
+    midCtaH2: "What shapes your snowmobile premium?",
+    midCtaLead: "Your riding record, sled type, usage, and where you store it all factor in. See what you'd actually pay.",
+    finalCtaH2: "Ready to ride with confidence?",
+    finalCtaLead: "Get a fast, free snowmobile insurance quote tailored to your sled and how you ride."
+  },
+  scooter: {
+    heroH1: "Scooter Insurance",
+    heroLead: "Stay covered on the road with flexible, low-cost scooter coverage built for city commutes and short trips.",
+    coverKicker: "What's Covered",
+    coverH2: "Coverage for every block you ride.",
+    coverBody: "Liability for injuries and property damage you cause, collision for crash repairs, comprehensive for theft, vandalism, and weather, uninsured motorist protection, and medical payments for your own injuries after a covered incident.",
+    midCtaH2: "Ready to start riding smarter?",
+    midCtaLead: "Compare scooter coverage from trusted carriers and stack the discounts you qualify for in minutes.",
+    finalCtaH2: "Ride with confidence — get covered.",
+    finalCtaLead: "Get a personalized scooter quote in minutes from a licensed OnePoint advisor. Free and no pressure."
+  }
+};
+// Swap every [data-swap-*] element on the page to the chosen subproduct's copy.
+// DOM is never moved or restructured — only innerHTML of tagged nodes changes.
+function swapAutoCopy(v){
+  const data = autoSwap[v];
+  if(!data) return;
+  document.querySelectorAll('[data-swap]').forEach(el => {
+    const key = el.getAttribute('data-swap');
+    if(data[key] != null) el.innerHTML = data[key];
+  });
+}
+// Hero image per sub-product — fades on tab switch
+const autoHeroImg = {
+  auto:       '../car1.jpg',
+  classic:    '../classic-cars.jpg',
+  atv:        '../atv.jpg',
+  motorcycle: '../motorcycle.jpg',
+  rv:         '../rv-mobile-home.jpg',
+  boat:       '../boat.jpg',
+  snowmobile: '../snow-mobile.jpg',
+  scooter:    '../scooter.jpg'
+};
+// True dual-image crossfade — both images stack inside .hero-photo-frame.
+// The "front" image fades out while the "back" image (already loaded) fades in
+// simultaneously, producing a smooth overlap dissolve with no gap.
+var heroFront = 'A';
+function swapHeroImage(slug){
+  if(!autoHeroImg[slug]) return;
+  var newSrc = autoHeroImg[slug];
+  var imgA = document.getElementById('heroImgA');
+  var imgB = document.getElementById('heroImgB');
+  if(!imgA || !imgB) return;
+  // Determine which layer is currently visible (front) vs hidden (back)
+  var front = heroFront === 'A' ? imgA : imgB;
+  var back  = heroFront === 'A' ? imgB : imgA;
+  // If already showing this image, skip
+  if(front.src.endsWith(newSrc.replace('../',''))) return;
+  // Load new image into the hidden back layer
+  back.src = newSrc;
+  back.alt = vehicleData[slug].name + ' insurance coverage';
+  // Once loaded (or immediately if cached), crossfade
+  var doFade = function(){
+    back.classList.remove('hero-img-out');
+    back.classList.add('hero-img-in');
+    front.classList.remove('hero-img-in');
+    front.classList.add('hero-img-out');
+    heroFront = heroFront === 'A' ? 'B' : 'A';
+  };
+  if(back.complete && back.naturalWidth > 0) {
+    doFade();
+  } else {
+    back.onload = doFade;
+  }
+}
+let selectedVehicle = 'auto';
+function selectVehicle(v){
+  if(!vehicleData[v]) return;
+  selectedVehicle = v;
+  document.querySelectorAll('.vehicle-tab').forEach(t=>{
+    const on = t.dataset.v === v;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+  document.getElementById('vp-icon').innerHTML = vehicleData[v].icon;
+  document.getElementById('vp-title').textContent = vehicleData[v].name;
+  document.getElementById('vp-desc').textContent = vehicleData[v].desc;
+  swapAutoCopy(v);
+  swapHeroImage(v);
+}
+function vpQuote(e){
+  e.preventDefault();
+  const zip = document.getElementById('vp-zip').value;
+  const product = vehicleData[selectedVehicle].name;
+  if (window.openQM) openQM(product, { zip: zip });
+  else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.qc-product-field')){
+    const btn=document.querySelector('.qc-product-btn');
+    const dd=document.getElementById('productDropdown');
+    if(btn)btn.classList.remove('open');
+    if(dd)dd.classList.remove('open');
+  }
+});
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.has-mega')) {
     document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('open'));
   }
 });
+// Auto-select sub-product from URL hash (e.g. /auto/#motorcycle)
+function handleAutoHash(){
+  var hash = window.location.hash.replace('#','');
+  if(hash && vehicleData[hash]){
+    selectVehicle(hash);
+    var picker = document.getElementById('auto-subs');
+    if(picker) setTimeout(function(){ picker.scrollIntoView({behavior:'smooth',block:'start'}); }, 300);
+  }
+}
+handleAutoHash();
+window.addEventListener('hashchange', handleAutoHash);
 </script>
+
+<!-- RESUME QUOTE MODAL -->
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>
