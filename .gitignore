@@ -1,0 +1,13 @@
+# Build outputs
+.next/
+portal/.next/
+portal/src/.next/
+portal/node_modules/
+
+# Env files
+.env*
+portal/.env*
+
+# Misc
+.DS_Store
+*.pem

@@ -1,0 +1,77 @@
+import { NextRequest } from 'next/server';
+import { connectDB } from '@/lib/db';
+import User from '@/models/User';
+import Policy from '@/models/Policy';
+
+// Inbound webhook from GHL — receives policy updates when advisor binds a new policy
+export async function POST(req: NextRequest) {
+  try {
+    const payload = await req.json();
+
+    // In production, verify GHL webhook signature here
+    // const signature = req.headers.get('x-ghl-signature');
+    // if (!verifySignature(payload, signature)) return Response.json({ error: 'Invalid signature' }, { status: 403 });
+
+    const { type, email, contactId } = payload;
+
+    if (!email) {
+      return Response.json({ error: 'Email required in payload.' }, { status: 400 });
+    }
+
+    await connectDB();
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      // User not in portal yet — log and return
+      console.log('GHL webhook: no portal user for', email);
+      return Response.json({ received: true, matched: false });
+    }
+
+    // Handle different event types
+    if (type === 'ContactUpdate' || type === 'PolicyUpdate') {
+      // If GHL sends policy data in custom fields, sync it
+      const { customFields } = payload;
+      if (customFields && Array.isArray(customFields)) {
+        for (const field of customFields) {
+          if (field.key?.startsWith('policy_') && field.value) {
+            // Parse: "Progressive #12345 - Auto Insurance"
+            const parts = field.value.split(' - ');
+            const carrierAndNumber = parts[0] || '';
+            const productName = parts[1] || field.key.replace('policy_', '');
+            const [carrier, policyNumber] = carrierAndNumber.split(' #');
+
+            await Policy.findOneAndUpdate(
+              { userId: user._id, productName },
+              {
+                userId: user._id,
+                userEmail: email.toLowerCase(),
+                productName,
+                productCategory: inferCategory(productName),
+                carrier: carrier || 'Unknown',
+                policyNumber: policyNumber || `GHL-${Date.now()}`,
+                status: 'active',
+              },
+              { upsert: true }
+            );
+          }
+        }
+      }
+    }
+
+    return Response.json({ received: true, matched: true, userId: user._id });
+  } catch (error) {
+    console.error('GHL webhook error:', error);
+    return Response.json({ error: 'Webhook processing failed.' }, { status: 500 });
+  }
+}
+
+function inferCategory(productName: string): string {
+  const lower = productName.toLowerCase();
+  if (['auto', 'motorcycle', 'boat', 'atv', 'rv', 'scooter', 'snowmobile', 'classic'].some(k => lower.includes(k))) return 'auto';
+  if (['home', 'condo', 'renters', 'flood', 'landlord', 'umbrella', 'mobile'].some(k => lower.includes(k))) return 'home';
+  if (['health', 'dental', 'vision', 'medicare', 'medical', 'hospital', 'accident'].some(k => lower.includes(k))) return 'health';
+  if (['life', 'term', 'whole', 'universal', 'final expense', 'annuity'].some(k => lower.includes(k))) return 'life';
+  if (['disability', 'overhead'].some(k => lower.includes(k))) return 'disability';
+  if (['liability', 'commercial', 'workers', 'cyber', 'trucking', 'garage', 'bop', 'malpractice'].some(k => lower.includes(k))) return 'business';
+  return 'auto';
+}
