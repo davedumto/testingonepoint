@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../coverage-pages.css">
-<script src="../quote-modal.js" defer></script>
+<!-- quote-modal.js removed — auto page uses dedicated auto-quote form -->
 <style>
   :root { --hero-accent: rgba(220,38,38,.14); --hero-accent-2: rgba(0,102,204,.06); }
   .hero-eyebrow { color: #dc2626; }
@@ -400,7 +400,7 @@
         Pick up quote
       </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+      <a href="../auto-quote/" class="nav-cta">Get a Quote</a>
     </div>
   </div>
 </nav>
@@ -430,9 +430,9 @@
               <div class="qc-product-dropdown" id="productDropdown">
                 <p class="qc-bundle-headline">Bundle property and save an average of 5% on auto in most states!<sup>Δ</sup></p>
                 <div class="qc-bundle-links">
-                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Home</a>
-                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Condo</a>
-                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();openQM('Auto');">Auto + Renters</a>
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='../auto-quote/';">Auto + Home</a>
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='../auto-quote/';">Auto + Condo</a>
+                  <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='../auto-quote/';">Auto + Renters</a>
                 </div>
                 <p class="qc-other-label">Or, quote another product</p>
                 <div class="qc-other-grid">
@@ -660,7 +660,7 @@
               </div>
             </div>
           </div>
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Get a Free Auto Quote</a>
+          <a href="../auto-quote/" class="btn btn-orange" style="margin-top:32px">Get a Free Auto Quote</a>
         </div>
       </div>
     </div>
@@ -674,7 +674,7 @@
       <p>Combine your auto policy with a home, condo, or renters policy and unlock multi-policy discounts.</p>
     </div>
     <div class="bundle-grid">
-      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+      <button type="button" class="bundle-card" onclick="window.location.href='../auto-quote/'">
         <div class="bundle-icons">
           <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
           <span class="bundle-plus">+</span>
@@ -685,7 +685,7 @@
         <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Avg 5% off auto</span>
         <span class="bundle-card-cta">Bundle auto + home <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </button>
-      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+      <button type="button" class="bundle-card" onclick="window.location.href='../auto-quote/'">
         <div class="bundle-icons">
           <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
           <span class="bundle-plus">+</span>
@@ -696,7 +696,7 @@
         <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Multi-policy discount</span>
         <span class="bundle-card-cta">Bundle auto + condo <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </button>
-      <button type="button" class="bundle-card" onclick="openQM('Auto')">
+      <button type="button" class="bundle-card" onclick="window.location.href='../auto-quote/'">
         <div class="bundle-icons">
           <span class="bundle-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
           <span class="bundle-plus">+</span>
@@ -719,7 +719,7 @@
           <p data-swap="midCtaLead">A quick auto insurance comparison takes two minutes and costs nothing. Find out what you should actually be paying.</p>
         </div>
         <div class="mid-cta-actions">
-          <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Start My Free Quote</a>
+          <a href="../auto-quote/" class="btn btn-orange">Start My Free Quote</a>
           <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
         </div>
       </div>
@@ -765,7 +765,7 @@
       <h2 class="section-h2" data-swap="finalCtaH2">Get your free auto quote in minutes.</h2>
       <p data-swap="finalCtaLead">No pressure. No spam. Just honest advice from a licensed advisor who has your best interest — not a carrier's commission — in mind.</p>
       <div class="cta-band-actions">
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Quote</a>
+        <a href="../auto-quote/" class="btn btn-orange">Get a Free Quote</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
       </div>
     </div>
@@ -783,6 +783,12 @@
         <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
         <div class="ft-states">
           <span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span>
+        </div>
+        <div class="ft-social">
+          <a href="https://facebook.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://g.page/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg></a>
+          <a href="https://instagram.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://linkedin.com/company/onepointinsurance-agency" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
       </div>
       <div class="ft-col">
@@ -812,7 +818,7 @@
           <li><a href="../client-services/">File a Claim</a></li>
           <li><a href="../policy-request/">Update Policy</a></li>
           <li><a href="../client-services/">Upload Document</a></li>
-          <li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li>
+          <li><a href="../auto-quote/">Schedule a Call</a></li>
         </ul>
       </div>
       <div class="ft-col">
@@ -849,8 +855,7 @@
 function goQuote(e) {
   e.preventDefault();
   var zip = e.target && e.target.querySelector ? (e.target.querySelector('input[type="text"]') || {}).value : '';
-  if (window.openQM) openQM('Auto', { zip: zip });
-  else window.location.href = 'https://onepointinsuranceagency.com/appointment-calendar';
+  window.location.href = '../auto-quote/' + (zip ? '?zip=' + encodeURIComponent(zip) : '');
 }
 function toggleMega(btn) {
   const li = btn.closest('li');
@@ -886,8 +891,7 @@ function toggleProductDropdown(e){
 function subQuote(e,product){
   e.preventDefault();
   const zip=e.target.querySelector('input').value;
-  if (window.openQM) openQM(product, { zip: zip });
-  else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
+  window.location.href='../auto-quote/?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
 }
 const vehicleData = {
   auto:       { name:'Auto',                  desc:"Your everyday ride — liability, collision, comprehensive, and uninsured motorist coverage from 200+ top-rated carriers.", icon:'<svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg>' },
@@ -1063,8 +1067,7 @@ function vpQuote(e){
   e.preventDefault();
   const zip = document.getElementById('vp-zip').value;
   const product = vehicleData[selectedVehicle].name;
-  if (window.openQM) openQM(product, { zip: zip });
-  else window.location.href='https://onepointinsuranceagency.com/appointment-calendar?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
+  window.location.href='../auto-quote/?product='+encodeURIComponent(product)+'&zip='+encodeURIComponent(zip);
 }
 document.addEventListener('click',function(e){
   if(!e.target.closest('.qc-product-field')){
@@ -1077,7 +1080,7 @@ document.addEventListener('click',function(e){
 function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
 function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
 function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
-function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function resumeQuote(e){e.preventDefault();window.location.href='../auto-quote/';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.has-mega')) {

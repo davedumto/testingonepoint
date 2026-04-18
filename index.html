@@ -50,9 +50,9 @@
   letter-spacing: -.015em; text-wrap: balance;
 }
 .home-hero-headline h1 .accent {
-  display: inline-block; padding: 0 6px;
-  background: var(--orange); color: var(--navy);
-  transform: skewX(-8deg); transform-origin: center; font-weight: 800;
+  display: inline-block; padding: 0;
+  background: none; color: var(--blue-dark);
+  transform: none; font-weight: 800;
 }
 .home-hero-headline h1 .accent span { display: inline-block; transform: skewX(8deg); }
 
@@ -572,8 +572,10 @@
 <!-- HERO — Travelers-style: centered headline + 4 scene cards + split Personal/Business action cards -->
 <section class="home-hero">
   <div class="home-hero-headline">
-    <span class="eyebrow">Independent · Licensed in 18 states</span>
-    <h1><span class="accent"><span>OnePoint</span></span> has you covered every day — and when it matters most.</h1>
+    <span class="eyebrow">Independent · Licensed in 18 States</span>
+    <h1>Insurance Done Right — Fast, Simple, and Built Around You</h1>
+    <p style="font-size:17px;color:var(--muted);max-width:620px;margin:14px auto 0;line-height:1.6;">We compare top-rated carriers to find you the best coverage at the best value — so you don't overpay or stay underprotected.</p>
+    <p style="font-size:15px;color:var(--text);font-weight:500;max-width:520px;margin:12px auto 0;">Get covered in minutes — not days. No long forms. No confusion.</p>
   </div>
 
   <div class="home-scenes">
@@ -665,28 +667,114 @@
       Contact us
     </a>
   </div>
+  <p style="text-align:center;font-size:12px;color:var(--muted);margin:18px auto 0;padding:0 28px;">Takes less than 3 minutes · No obligation · No spam</p>
+  <p style="text-align:center;font-size:15px;color:var(--navy);font-weight:600;margin:14px auto 0;padding:0 28px;max-width:560px;">Because one unexpected moment shouldn't cost you everything.</p>
 </section>
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="container">
     <div class="trust-stats">
-      <div class="trust-stat"><strong>18</strong><span>States Served</span></div>
-      <div class="trust-stat"><strong>200+</strong><span>Carrier Options</span></div>
-      <div class="trust-stat"><strong>20+</strong><span>Years Experience</span></div>
-      <div class="trust-stat"><strong>6</strong><span>Lines of Coverage</span></div>
-      <div class="trust-stat"><strong>$0</strong><span>Cost to Compare</span></div>
+      <div class="trust-stat"><strong>18</strong><span>Licensed States</span></div>
+      <div class="trust-stat"><strong>Independent</strong><span>Brokerage</span></div>
+      <div class="trust-stat"><strong>200+</strong><span>Top Carriers</span></div>
+      <div class="trust-stat"><strong>Personalized</strong><span>Strategy</span></div>
     </div>
   </div>
 </div>
 
-<!-- PRODUCTS — SELL THE COVERAGE -->
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">How It Works</div>
+      <h2 class="section-h2">Getting Covered Is Simple</h2>
+      <p class="section-lead">No long forms. No guesswork. Just real answers.</p>
+    </div>
+    <div class="process-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="process-item">
+        <div class="process-num">1</div>
+        <div class="process-step">Step 1</div>
+        <h4>Tell Us What You Need</h4>
+        <p>Answer a few quick questions about your coverage and situation.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">2</div>
+        <div class="process-step">Step 2</div>
+        <h4>We Compare Top Carriers</h4>
+        <p>We shop 200+ insurance companies to find your best options.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">3</div>
+        <div class="process-step">Step 3</div>
+        <h4>Choose &amp; Get Covered</h4>
+        <p>Pick the best plan and activate your policy — often the same day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ONEPOINT -->
+<section class="section">
+  <div class="container">
+    <div class="people-first">
+      <div class="pf-img">
+        <img src="why-one.jpg" alt="OnePoint Insurance advisors" loading="lazy">
+      </div>
+      <div class="pf-content">
+        <div class="section-kicker">Why OnePoint</div>
+        <h2>Why Smart Clients Choose OnePoint Insurance Agency</h2>
+        <p>We don't just sell insurance — we design protection strategies.</p>
+        <div class="split-points">
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h5 style="color:#fff">We Work for You — Not the Insurance Company</h5>
+              <p>As an independent brokerage, your needs come first — always.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <div>
+              <h5 style="color:#fff">Multiple Options, Better Decisions</h5>
+              <p>We compare plans across top carriers so you get the right fit — not just what's available.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+            <div>
+              <h5 style="color:#fff">Real Advisors, Not Just Quotes</h5>
+              <p>A licensed professional explains your options clearly — no confusion, no pressure.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div>
+              <h5 style="color:#fff">We Find Gaps Other Agents Miss</h5>
+              <p>We identify hidden risks so you're fully protected — not just covered on paper.</p>
+            </div>
+          </div>
+          <div class="split-point">
+            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div>
+              <h5 style="color:#fff">Faster Service, Better Results</h5>
+              <p>From quote to coverage — we move with urgency so you're not left exposed.</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Talk to an Advisor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <div class="section-kicker">Our Coverage</div>
-      <h2 class="section-h2">One agency. Every type of coverage your family and business needs.</h2>
-      <p class="section-lead">We're independent — which means we compare dozens of top-rated carriers to find the right policy for you, not the one that pays us the biggest commission.</p>
+      <h2 class="section-h2">Coverage Built Around Your Life &amp; Business</h2>
+      <p class="section-lead">Most clients improve coverage and reduce costs after switching to OnePoint.</p>
     </div>
     <div class="prod-grid">
       <a href="auto/" class="prod-card featured">
@@ -697,7 +785,7 @@
           <div class="prod-card-kicker">Vehicle</div>
           <h3>Auto Insurance</h3>
           <p>Most drivers overpay by hundreds every year. We compare 200+ top-rated carriers to find the coverage and rate that actually fits your driving — liability, collision, comprehensive, roadside and more.</p>
-          <div class="prod-card-cta">Get a free auto quote <span>›</span></div>
+          <div class="prod-card-cta">Get a free auto quote <span>&rsaquo;</span></div>
         </div>
       </a>
       <a href="home/" class="prod-card">
@@ -708,7 +796,7 @@
           <div class="prod-card-kicker">Property</div>
           <h3>Homeowners Insurance</h3>
           <p>Your home is your biggest asset. Make sure it's protected with the right coverage at the right price.</p>
-          <div class="prod-card-cta">Get a free home quote <span>›</span></div>
+          <div class="prod-card-cta">Get a free home quote <span>&rsaquo;</span></div>
         </div>
       </a>
       <a href="health/" class="prod-card">
@@ -719,7 +807,7 @@
           <div class="prod-card-kicker">Personal</div>
           <h3>Health Insurance</h3>
           <p>Marketplace plans, premium tax credits, and enrollment support from a licensed advisor — at no cost to you.</p>
-          <div class="prod-card-cta">Get a free health quote <span>›</span></div>
+          <div class="prod-card-cta">Get a free health quote <span>&rsaquo;</span></div>
         </div>
       </a>
       <a href="life/" class="prod-card">
@@ -730,7 +818,7 @@
           <div class="prod-card-kicker">Personal</div>
           <h3>Life Insurance</h3>
           <p>One decision that protects your family's financial future. Term, whole, universal — we find what fits.</p>
-          <div class="prod-card-cta">Get a free life quote <span>›</span></div>
+          <div class="prod-card-cta">Get a free life quote <span>&rsaquo;</span></div>
         </div>
       </a>
       <a href="disability/" class="prod-card">
@@ -740,8 +828,8 @@
         <div class="prod-card-body">
           <div class="prod-card-kicker">Income Protection</div>
           <h3>Disability Income</h3>
-          <p>Your income keeps everything else running. Protect 60–70% of your paycheck if illness or injury stops you from working.</p>
-          <div class="prod-card-cta">Get a disability quote <span>›</span></div>
+          <p>Your income keeps everything else running. Protect 60-70% of your paycheck if illness or injury stops you from working.</p>
+          <div class="prod-card-cta">Get a disability quote <span>&rsaquo;</span></div>
         </div>
       </a>
       <a href="business/" class="prod-card featured reverse">
@@ -752,101 +840,23 @@
           <div class="prod-card-kicker">Business</div>
           <h3>Business Insurance</h3>
           <p>General liability, commercial property, workers' comp, commercial auto, and professional liability — tailored for your industry, your size, and the specific risks your business actually faces.</p>
-          <div class="prod-card-cta">Get a business quote <span>›</span></div>
+          <div class="prod-card-cta">Get a business quote <span>&rsaquo;</span></div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- MID CTA -->
+<!-- TRUST & SOCIAL PROOF -->
 <section class="mid-cta">
   <div class="container">
-    <div class="mid-cta-inner">
-      <div class="mid-cta-text">
-        <h2>Most people are overpaying for coverage — or missing coverage they desperately need.</h2>
-        <p>A 10-minute conversation with a licensed OnePoint advisor could save you money, close dangerous gaps, or both.</p>
-      </div>
-      <div class="mid-cta-actions">
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Free Quote</a>
-        <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">How It Works</div>
-      <h2 class="section-h2">Getting the right insurance is simpler than you think.</h2>
-      <p class="section-lead">We take the complexity out of insurance so you can make a confident decision without spending hours researching on your own.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-item">
-        <div class="process-num">1</div>
-        <div class="process-step">Step 1</div>
-        <h4>Tell us about yourself</h4>
-        <p>A quick conversation about your coverage needs, budget, and situation — no forms to fill out alone.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">2</div>
-        <div class="process-step">Step 2</div>
-        <h4>We shop 200+ carriers</h4>
-        <p>We compare rates and coverage from dozens of top-rated carriers you may not have access to on your own.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">3</div>
-        <div class="process-step">Step 3</div>
-        <h4>We explain your options</h4>
-        <p>No jargon. We walk you through what we found, what it covers, what it costs, and what makes sense.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">4</div>
-        <div class="process-step">Step 4</div>
-        <h4>You choose and get covered</h4>
-        <p>Pick your plan, lock in your rate, and get your policy in place — as fast as today.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PEOPLE FIRST -->
-<section class="section">
-  <div class="container">
-    <div class="people-first">
-      <div class="pf-img">
-        <img src="why-one.jpg" alt="OnePoint advisors putting people first" loading="lazy">
-      </div>
-      <div class="pf-content">
-        <div class="section-kicker">Why OnePoint</div>
-        <h2>People-first insurance guidance.</h2>
-        <p>We're not a call center. We're a team of licensed advisors who take the time to understand your situation — then find coverage that actually works for you. Independent means we work for you, not the insurance company.</p>
-        <div class="split-points">
-          <div class="split-point">
-            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-            <div>
-              <h5 style="color:#fff">We shop 200+ carriers</h5>
-              <p>More options means better rates and better coverage — not just the loudest name.</p>
-            </div>
-          </div>
-          <div class="split-point">
-            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
-            <div>
-              <h5 style="color:#fff">A real advisor, every time</h5>
-              <p>No bots. No scripts. A licensed professional who knows your name and your policy.</p>
-            </div>
-          </div>
-          <div class="split-point">
-            <div class="split-point-icon" style="background:rgba(255,255,255,.1);color:#fff"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
-            <div>
-              <h5 style="color:#fff">We stay with you</h5>
-              <p>We're there at enrollment, at renewal, and when something goes wrong and you need to file a claim.</p>
-            </div>
-          </div>
-        </div>
-        <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange" style="margin-top:32px">Talk to an Advisor</a>
+    <div class="mid-cta-inner" style="flex-direction:column;text-align:center;">
+      <div class="mid-cta-text" style="max-width:680px;">
+        <div class="section-kicker" style="color:rgba(255,255,255,.7);margin-bottom:8px;">Why Clients Trust Us</div>
+        <h2>Trusted Protection. Proven Results.</h2>
+        <p style="margin-top:18px;">Google Reviews &nbsp;|&nbsp; 18 states served &nbsp;|&nbsp; Hundreds of policies protected</p>
+        <blockquote style="margin:28px auto 0;max-width:580px;font-size:17px;color:rgba(255,255,255,.9);font-style:italic;line-height:1.6;border-left:3px solid rgba(255,255,255,.3);padding-left:20px;text-align:left;">"OnePoint made the process simple and saved me money while improving my coverage. Highly recommend!"</blockquote>
+        <p style="margin-top:20px;font-size:14px;">We're not tied to one carrier — we work for you.</p>
       </div>
     </div>
   </div>
@@ -959,9 +969,9 @@
     }
   </style>
   <div class="learn-head">
-    <div class="section-kicker">Learn with OnePoint</div>
-    <h2>Real answers. Straight talk. Insurance made simple.</h2>
-    <p>Whether you're insuring your car, protecting your home, covering your family, or planning for retirement — we're here to help you make smart, confident choices.</p>
+    <div class="section-kicker">Not Sure What You Need?</div>
+    <h2>We'll Guide You.</h2>
+    <p>Insurance can be confusing — but it doesn't have to be. We break down your options in plain language so you understand exactly what you're getting, what you're paying for, and why it matters.</p>
   </div>
   <div class="learn-cats">
     <a href="onepointblog/" class="learn-cat">All Topics</a>
@@ -1131,16 +1141,45 @@
   </div>
 </section>
 
+<!-- OBJECTION HANDLING -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Common Questions</div>
+      <h2 class="section-h2">We Make Insurance Easy</h2>
+    </div>
+    <div class="process-grid" style="grid-template-columns:repeat(4,1fr);">
+      <div class="process-item" style="background:var(--white);">
+        <h4>"I don't have time."</h4>
+        <p>We handle the comparison and setup for you.</p>
+      </div>
+      <div class="process-item" style="background:var(--white);">
+        <h4>"I don't understand insurance."</h4>
+        <p>We explain everything in simple, clear terms.</p>
+      </div>
+      <div class="process-item" style="background:var(--white);">
+        <h4>"I just want the best price."</h4>
+        <p>We compare multiple carriers to find it.</p>
+      </div>
+      <div class="process-item" style="background:var(--white);">
+        <h4>"I already have coverage."</h4>
+        <p>We review your policy to uncover savings or gaps — no pressure to switch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section class="cta-band">
   <div class="container">
     <div class="section-kicker">Your Next Step</div>
-    <h2 class="section-h2">Get the coverage your family deserves — starting today.</h2>
-    <p>A licensed OnePoint advisor will compare your options, explain your choices in plain language, and find you the best rate. It costs nothing to find out.</p>
+    <h2 class="section-h2">Don't Wait Until It's Too Late to Be Covered</h2>
+    <p>Get the right protection now — before you need it.</p>
     <div class="cta-band-actions">
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get a Free Quote</a>
+      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="btn btn-orange">Get My Free Quote Now</a>
       <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
     </div>
+    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-top:18px;">Takes less than 3 minutes · No obligation</p>
   </div>
 </section>
 
@@ -1155,6 +1194,12 @@
         <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
         <div class="ft-states">
           <span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span>
+        </div>
+        <div class="ft-social">
+          <a href="https://facebook.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://g.page/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg></a>
+          <a href="https://instagram.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://linkedin.com/company/onepointinsurance-agency" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
       </div>
       <div class="ft-col">

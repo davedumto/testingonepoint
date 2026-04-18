@@ -27,7 +27,7 @@ export async function sendWelcomeEmail(to: string, name: string) {
         </p>
         <div style="text-align: center; margin: 32px 0;">
           <a href="${process.env.NEXT_PUBLIC_APP_URL}/login"
-             style="background: #e8821a; color: #fff; padding: 14px 32px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;">
+             style="background: #4a90d9; color: #fff; padding: 14px 32px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;">
             Go to My Portal
           </a>
         </div>
@@ -110,7 +110,7 @@ export async function sendCheckoutNotification(to: string, name: string, cartIte
           A licensed OnePoint advisor will call you within one business day to review your options,
           compare carriers, and finalize the best rates for your bundle.
         </p>
-        <p style="color: #e8821a; font-size: 14px; font-weight: 700;">
+        <p style="color: #4a90d9; font-size: 14px; font-weight: 700;">
           Current tier: ${currentTier}
         </p>
         <hr style="border: none; border-top: 1px solid #dde4ed; margin: 32px 0;" />

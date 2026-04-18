@@ -54,7 +54,7 @@ export default function SecurityDashboard() {
       title: 'Orphaned Sessions (>24h)',
       description: 'Clock-ins without matching clock-outs older than 24 hours',
       count: data.orphanedSessions.count,
-      color: data.orphanedSessions.count > 0 ? '#e8821a' : 'var(--navy)',
+      color: data.orphanedSessions.count > 0 ? '#4a90d9' : 'var(--navy)',
       items: data.orphanedSessions.items.map(i => ({
         primary: i.userName || i.userEmail,
         secondary: i.userEmail,
@@ -76,7 +76,7 @@ export default function SecurityDashboard() {
       title: 'Flagged Sessions (7 days)',
       description: 'Clock events outside normal business hours or on weekends',
       count: data.flaggedSessions.count,
-      color: data.flaggedSessions.count > 0 ? '#e8821a' : 'var(--navy)',
+      color: data.flaggedSessions.count > 0 ? '#4a90d9' : 'var(--navy)',
       items: data.flaggedSessions.items.map(i => ({
         primary: i.userName || i.userEmail,
         secondary: i.flagReason,
