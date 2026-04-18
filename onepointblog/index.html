@@ -62,7 +62,7 @@
   .bl-card .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
   .bl-card:hover .img img { transform: scale(1.04); }
   .bl-card .img .tag { position: absolute; top: 14px; left: 14px; background: var(--orange); color: #fff; padding: 6px 12px; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-  .bl-card[data-cat="auto"] .tag { background: #dc2626; }
+  .bl-card[data-cat="auto"] .tag { background: #0a3d6b; }
   .bl-card[data-cat="home"] .tag { background: #2e9a55; }
   .bl-card[data-cat="health"] .tag { background: #0d9488; }
   .bl-card[data-cat="life"] .tag { background: #7c3aed; }
@@ -214,7 +214,7 @@
         Pick up quote
       </button>
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
-      <a href="https://onepointinsuranceagency.com/appointment-calendar" class="nav-cta">Get a Quote</a>
+      <a href="../book/" class="nav-cta">Get a Quote</a>
     </div>
   </div>
 </nav>
@@ -231,7 +231,7 @@
       <h1>From the <span class="accent"><span>OnePoint</span></span> blog.</h1>
       <p class="lead">Expert insights, practical tips, and updates on auto, home, life, health, and business insurance — straight from our licensed advisors.</p>
       <div class="bl-filter">
-        <button class="bl-pill active" data-cat="all" onclick="filterPosts(this,'all')">All Posts</button>
+        <button class="bl-pill active" data-cat="all" onclick="filterPosts(this,'all')">All Posts (16)</button>
         <button class="bl-pill" data-cat="auto" onclick="filterPosts(this,'auto')">Auto</button>
         <button class="bl-pill" data-cat="home" onclick="filterPosts(this,'home')">Home</button>
         <button class="bl-pill" data-cat="health" onclick="filterPosts(this,'health')">Health</button>
@@ -260,45 +260,72 @@
   <!-- POST GRID -->
   <section class="bl-grid-section">
     <div class="bl-grid" id="blGrid">
+      <!-- Local posts -->
       <a href="../post/what-is-liability-coverage-auto-insurance/" class="bl-card" data-cat="auto">
-        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/6876a9a6c595e1fb7cb9933a.jpeg" alt="Auto liability coverage" loading="lazy"><span class="tag">Auto</span></div>
-        <div class="body">
-          <h3>What Is Liability Coverage in Auto Insurance?</h3>
-          <p>The backbone of your car insurance policy — what bodily injury and property damage liability actually pay for, in plain English.</p>
-          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
-        </div>
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/6876a9a6c595e1fb7cb9933a.jpeg" alt="Auto liability coverage" loading="lazy"><span class="tag">Auto</span></div>
+        <div class="body"><h3>What Is Liability Coverage in Auto Insurance?</h3><p>The backbone of your car insurance policy — what bodily injury and property damage liability actually pay for.</p><p class="meta">By <strong>Vera Orji</strong> · Jul 15, 2025</p></div>
       </a>
       <a href="../post/what-is-term-life-insurance/" class="bl-card" data-cat="life">
-        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764446180db3b3ed6d00ab.jpeg" alt="Term life insurance" loading="lazy"><span class="tag">Life</span></div>
-        <div class="body">
-          <h3>What Is Term Life Insurance? Your Most Affordable Coverage Option</h3>
-          <p>Straightforward, affordable financial protection for your loved ones — what it covers, who needs it, and how much it costs.</p>
-          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
-        </div>
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764446180db3b3ed6d00ab.jpeg" alt="Term life insurance" loading="lazy"><span class="tag">Life</span></div>
+        <div class="body"><h3>What Is Term Life Insurance? Your Most Affordable Coverage Option</h3><p>Straightforward, affordable financial protection for your loved ones — what it covers, who needs it, and how much it costs.</p><p class="meta">By <strong>Vera Orji</strong> · Jul 15, 2025</p></div>
       </a>
       <a href="../post/what-is-commercial-property-insurance/" class="bl-card" data-cat="business">
-        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764595da707be6382ebaf5.jpeg" alt="Commercial property insurance" loading="lazy"><span class="tag">Business</span></div>
-        <div class="body">
-          <h3>What Is Commercial Property Insurance? Protecting Your Business Assets</h3>
-          <p>From fire to theft — what commercial property coverage pays for, what it doesn't, and why your landlord's policy isn't enough.</p>
-          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
-        </div>
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764595da707be6382ebaf5.jpeg" alt="Commercial property insurance" loading="lazy"><span class="tag">Business</span></div>
+        <div class="body"><h3>What Is Commercial Property Insurance?</h3><p>From fire to theft — what commercial property coverage pays for, and why your landlord's policy isn't enough.</p><p class="meta">By <strong>Vera Orji</strong> · Jul 15, 2025</p></div>
       </a>
       <a href="../post/how-business-owners-policies-work-bop-insurance/" class="bl-card" data-cat="business">
-        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68764596180db3ed566d02e7.jpeg" alt="Business owners policy" loading="lazy"><span class="tag">Business</span></div>
-        <div class="body">
-          <h3>How Business Owner's Policies (BOPs) Work: Bundled Protection Made Simple</h3>
-          <p>One policy, big protection. How a BOP bundles property, liability, and business interruption — and when you need to add more.</p>
-          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
-        </div>
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68c224df6880bf5c2ae70b23.png" alt="Business owners policy" loading="lazy"><span class="tag">Business</span></div>
+        <div class="body"><h3>How Business Owner's Policies (BOPs) Work</h3><p>Bundle liability, property, and income coverage in one policy. Learn how BOPs protect small businesses.</p><p class="meta">By <strong>Vera Orji</strong> · Jul 15, 2025</p></div>
       </a>
       <a href="../post/short-term-medical-insurance-guide/" class="bl-card" data-cat="health">
-        <div class="img"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/686d9a4270b080e1f75a8197.jpeg" alt="Short term medical insurance" loading="lazy"><span class="tag">Health</span></div>
-        <div class="body">
-          <h3>Short Term Medical Insurance in 2025</h3>
-          <p>Fast, flexible, and frequently misunderstood. Who STM is right for, what it covers, and how it compares to ACA and COBRA.</p>
-          <p class="meta">By <strong>OnePoint Insurance Agency</strong> · Jul 15, 2025</p>
-        </div>
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/686d9a4270b080e1f75a8197.jpeg" alt="Short term medical insurance" loading="lazy"><span class="tag">Health</span></div>
+        <div class="body"><h3>Short Term Medical Insurance in 2025</h3><p>Fast, flexible, and frequently misunderstood. Who STM is right for and how it compares to ACA and COBRA.</p><p class="meta">By <strong>Vera Orji</strong> · Jul 15, 2025</p></div>
+      </a>
+      <!-- From onepoint-blog -->
+      <a href="https://onepointinsuranceagency.com/onepoint-blog" class="bl-card" data-cat="life" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68c879c217537c55266e2e26.jpeg" alt="Life insurance benefits" loading="lazy"><span class="tag">Life</span></div>
+        <div class="body"><h3>5 Financial Benefits of Getting Life Insurance Before Year-End</h3><p>Discover 5 powerful financial benefits of securing life insurance before year-end. Save money, reduce taxes, and protect your family.</p><p class="meta">By <strong>Vera Orji</strong> · Jan 15, 2026</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/onepoint-blog" class="bl-card" data-cat="auto" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68c3681b3164e9865f260888.png" alt="Summer road trip auto insurance" loading="lazy"><span class="tag">Auto</span></div>
+        <div class="body"><h3>The Summer Road Trip Dream (and a Common Oversight)</h3><p>Does your auto insurance actually cover you on the road? Learn what your policy covers and what endorsements to consider.</p><p class="meta">By <strong>Vera Orji</strong> · Jan 12, 2026</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/onepoint-blog" class="bl-card" data-cat="home" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68ac7d3abaaed69b367ac841.png" alt="Flood insurance Georgia" loading="lazy"><span class="tag">Home</span></div>
+        <div class="body"><h3>Flood Insurance in Georgia: Protect Your Home in 2025</h3><p>Georgia storms are stronger than ever. Standard home insurance won't cover flood damage — here's what you need.</p><p class="meta">By <strong>Vera Orji</strong> · Jan 9, 2026</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/onepoint-blog" class="bl-card" data-cat="home" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/689ca585d232a3a454ff304f.png" alt="Umbrella coverage" loading="lazy"><span class="tag">Home</span></div>
+        <div class="body"><h3>Why Every Home Should Consider Umbrella Coverage</h3><p>Umbrella insurance is essential for homeowners, renters, and landlords. Get extra liability protection beyond standard policies.</p><p class="meta">By <strong>Vera Orji</strong> · Jan 9, 2026</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/onepoint-blog" class="bl-card" data-cat="business" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/687eeb2f2c48dd685b023cb0.png" alt="Commercial umbrella insurance" loading="lazy"><span class="tag">Business</span></div>
+        <div class="body"><h3>What Is Commercial Umbrella Insurance &amp; Why It Matters</h3><p>Protect your business from costly lawsuits. Learn what commercial umbrella insurance covers and why it matters.</p><p class="meta">By <strong>Vera Orji</strong> · Jan 7, 2026</p></div>
+      </a>
+      <!-- From learn hub -->
+      <a href="https://onepointinsuranceagency.com/post/understanding-homeowners-insurance-what-every-georgia-property-owner-needs-to-know" class="bl-card" data-cat="home" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/6892ae7500987b30268273d5.png" alt="Georgia homeowners insurance" loading="lazy"><span class="tag">Home</span></div>
+        <div class="body"><h3>Understanding Homeowners Insurance: What Every Georgia Property Owner Needs to Know</h3><p>Everything Georgia homeowners need to know about homeowners insurance in 2025. Coverages, add-ons, and expert tips.</p><p class="meta">By <strong>Vera Orji</strong> · Sep 16, 2025</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/post/a-lifetime-of-financial-protection-and-value" class="bl-card" data-cat="life" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68b0a01c621e11c8a9673b26.png" alt="Whole life insurance" loading="lazy"><span class="tag">Life</span></div>
+        <div class="body"><h3>What Is Whole Life Insurance?</h3><p>How whole life insurance works, what it covers, and how it builds cash value over time.</p><p class="meta">By <strong>Vera Orji</strong> · Sep 12, 2025</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/post/what-is-hospitalization-indemnity-insurance" class="bl-card" data-cat="health" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68ac894e7ac3b255d1f2416c.png" alt="Hospital indemnity insurance" loading="lazy"><span class="tag">Health</span></div>
+        <div class="body"><h3>What Is Hospital Indemnity Insurance?</h3><p>How hospital indemnity insurance pays cash benefits up to $2,000/day, covering deductibles, ICU stays, and more.</p><p class="meta">By <strong>Vera Orji</strong> · Sep 9, 2025</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/post/auto-insurance-101" class="bl-card" data-cat="auto" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68b82a7c9bcba95fe6bc3bb9.png" alt="Auto insurance 101" loading="lazy"><span class="tag">Auto</span></div>
+        <div class="body"><h3>Auto Insurance 101: Complete Guide to Coverage, Costs &amp; Discounts</h3><p>Everything about auto insurance in 2025 — coverage types, costs, discounts, and tips to save while staying protected.</p><p class="meta">By <strong>Vera Orji</strong> · Sep 2, 2025</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/post/health-insurance-in-2025" class="bl-card" data-cat="health" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68911a149f2737098e513cff.png" alt="Health insurance 2025" loading="lazy"><span class="tag">Health</span></div>
+        <div class="body"><h3>Health Insurance in 2025: Affordable Plans, Benefits &amp; How to Choose</h3><p>Plan types, costs, benefits, and how to get affordable health coverage in 2025.</p><p class="meta">By <strong>Vera Orji</strong> · Aug 22, 2025</p></div>
+      </a>
+      <a href="https://onepointinsuranceagency.com/post/critical-illness-insurance" class="bl-card" data-cat="health" target="_blank">
+        <div class="img"><img src="https://storage.googleapis.com/msgsndr/HJjN5l584XeaaH5Qokj4/media/68a4fbe28939e9ea136ee218.png" alt="Critical illness insurance" loading="lazy"><span class="tag">Health</span></div>
+        <div class="body"><h3>Critical Illness Insurance: Coverage, Benefits &amp; Financial Security</h3><p>What critical illness insurance covers, why it matters, and how it protects your finances with a lump-sum benefit.</p><p class="meta">By <strong>Vera Orji</strong> · Aug 19, 2025</p></div>
       </a>
     </div>
   </section>
@@ -327,7 +354,7 @@
       <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div><div class="ft-social"><a href="https://facebook.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a><a href="https://g.page/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg></a><a href="https://instagram.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="https://linkedin.com/company/onepointinsurance-agency" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div></div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
       <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="./">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
-      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="https://onepointinsuranceagency.com/appointment-calendar">Schedule a Call</a></li></ul></div>
+      <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="../book/">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
     </div>
     <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
@@ -348,7 +375,7 @@ function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.me
 function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
 function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
 function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
-function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/appointment-calendar';}
+function resumeQuote(e){e.preventDefault();window.location.href='../book/';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
 document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));});
 </script>
