@@ -1,2 +1,31 @@
-// Alias route — neutral path for GHL OAuth callback (GHL marketplace blocks "ghl" in URLs)
-export { GET } from '@/app/employee/api/oauth/ghl/callback/route';
+import { NextRequest } from 'next/server';
+import { handleCallback } from '@/lib/oauth-handlers/ghl-handler';
+import { logger } from '@/lib/logger';
+
+// GET /employee/api/oauth/crm/callback — GHL OAuth callback (neutral path)
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const code = searchParams.get('code');
+  const state = searchParams.get('state');
+  const error = searchParams.get('error');
+
+  if (error) {
+    return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl&error=${error}`);
+  }
+
+  if (!code || !state) {
+    return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl&error=missing_params`);
+  }
+
+  try {
+    const result = await handleCallback(code, state);
+    if (result.success) {
+      return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=success&provider=ghl`);
+    } else {
+      return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl`);
+    }
+  } catch (err) {
+    logger.error('GHL callback error', { error: String(err) });
+    return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl&error=server_error`);
+  }
+}
