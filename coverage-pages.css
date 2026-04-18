@@ -5,11 +5,11 @@
 
 :root {
   --navy:        #052847;
-  --blue:        #4a90d9;
-  --blue-dark:   #3a78ba;
-  --blue-light:  #e8f2fc;
-  --orange:      #4a90d9;
-  --orange-dark: #3a78ba;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --orange:      #0a3d6b;
+  --orange-dark: #052847;
   --text:        #1a2e42;
   --muted:       #5a6c7e;
   --subtle:      #8a9baa;
