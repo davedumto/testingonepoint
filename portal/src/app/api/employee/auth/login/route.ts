@@ -6,6 +6,8 @@ import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rat
 import { isAccountLocked, recordFailedLogin, clearLoginAttempts } from '@/lib/security/account-lockout';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { hmacEmail } from '@/lib/security/encryption';
+import { generateCSRFToken } from '@/lib/security/csrf';
 
 // POST — two-phase: check email exists, then login with password
 export async function POST(req: NextRequest) {
@@ -16,14 +18,14 @@ export async function POST(req: NextRequest) {
 
   // Rate limit
   const rateKey = getRateLimitKey(ip, 'employee-login');
-  const rateResult = checkRateLimit(rateKey, RATE_LIMITS.login);
+  const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.login);
   if (!rateResult.allowed) {
     auditLog({ ipAddress: ip, userAgent, action: AUDIT_ACTIONS.RATE_LIMIT_HIT, status: 'failure', severity: 'warning', details: { endpoint: 'employee-login' } });
     return Response.json({ error: 'Too many attempts. Please try again later.' }, { status: 429 });
   }
 
   await connectDB();
-  const employee = await Employee.findOne({ email: email.toLowerCase().trim() });
+  const employee = await Employee.findOne({ hmacEmail: hmacEmail(email) });
 
   // Phase 1: just check if email exists and what state it's in
   if (phase === 'check') {
@@ -76,6 +78,8 @@ export async function POST(req: NextRequest) {
     email: employee.email,
     name: employee.name || employee.email.split('@')[0],
   });
+
+  await generateCSRFToken();
 
   auditLog({ userId: employee._id.toString(), userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { portal: 'employee' } });
 

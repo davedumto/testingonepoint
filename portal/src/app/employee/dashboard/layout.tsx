@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IconDashboard, IconLogout } from '@/components/Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface EmpUser { name: string; email: string }
 
@@ -33,7 +34,7 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
   }, [router]);
 
   async function handleLogout() {
-    await fetch('/api/employee/auth/logout', { method: 'POST' });
+    await secureFetch('/api/employee/auth/logout', { method: 'POST' });
     router.push('/employee/login');
   }
 

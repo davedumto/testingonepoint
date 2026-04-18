@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getTier, getRecommendations, TIER_CONFIG, type InsuranceProduct } from '@/lib/products';
 import { IconArrowRight, IconPlus, IconCheck, IconPhone } from '@/components/Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 import Toast from '@/components/Toast';
 
 interface Policy { _id: string; productName: string; productCategory: string; carrier: string; policyNumber: string; status: string; premium?: number; startDate?: string; endDate?: string; }
@@ -46,7 +47,7 @@ export default function DashboardPage() {
   const incompleteCount = quotes.filter(q => q.status === 'incomplete').length;
 
   async function addToCart(p: InsuranceProduct) {
-    const res = await fetch('/api/cart', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productName: p.name, productCategory: p.category }) });
+    const res = await secureFetch('/api/cart', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productName: p.name, productCategory: p.category }) });
     if (res.ok) {
       const d = await res.json();
       const newCart = [...cart, d.item];

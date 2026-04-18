@@ -3,6 +3,7 @@ import { getEmployeeUser } from '@/lib/employee-auth';
 import { connectDB } from '@/lib/db';
 import AccessRequest from '@/models/AccessRequest';
 import { initiateAuth } from '@/lib/oauth-handlers/ghl-handler';
+import { logger } from '@/lib/logger';
 
 // GET /employee/api/oauth/ghl — initiates GHL OAuth flow
 export async function GET(req: NextRequest) {
@@ -26,7 +27,7 @@ export async function GET(req: NextRequest) {
     const authorizeUrl = await initiateAuth(user.userId, user.email);
     return Response.redirect(authorizeUrl);
   } catch (error) {
-    console.error('GHL OAuth initiation error:', error);
+    logger.error('GHL OAuth initiation error', { error: String(error) });
     return Response.json({ error: 'Failed to initiate GHL authentication.' }, { status: 500 });
   }
 }

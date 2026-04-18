@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface AccessReq {
   _id: string;
@@ -38,7 +39,7 @@ export default function AccessRequestsPage() {
   async function handleAction(requestId: string, action: 'approve' | 'deny') {
     setActing(requestId);
     try {
-      const res = await fetch('/employee/api/access-requests/admin', {
+      const res = await secureFetch('/employee/api/access-requests/admin', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ requestId, action }),

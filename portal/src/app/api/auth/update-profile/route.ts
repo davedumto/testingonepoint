@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { getAuthUser, setAuthCookie } from '@/lib/auth';
 import User from '@/models/User';
+import { hmacEmail } from '@/lib/security/encryption';
 
 export async function PUT(req: NextRequest) {
   const authUser = await getAuthUser();
@@ -22,7 +23,7 @@ export async function PUT(req: NextRequest) {
 
   // Check if email is taken by another user
   if (email.toLowerCase() !== authUser.email.toLowerCase()) {
-    const existing = await User.findOne({ email: email.toLowerCase(), _id: { $ne: authUser.userId } });
+    const existing = await User.findOne({ hmacEmail: hmacEmail(email), _id: { $ne: authUser.userId } });
     if (existing) {
       return Response.json({ error: 'This email is already in use.' }, { status: 409 });
     }
@@ -30,13 +31,12 @@ export async function PUT(req: NextRequest) {
 
   const user = await User.findByIdAndUpdate(
     authUser.userId,
-    { name: name.trim(), email: email.toLowerCase().trim() },
+    { name: name.trim(), email: email.toLowerCase().trim(), hmacEmail: hmacEmail(email) },
     { new: true }
   );
 
   if (!user) return Response.json({ error: 'User not found.' }, { status: 404 });
 
-  // Update the session cookie with new info
   await setAuthCookie({
     userId: user._id.toString(),
     email: user.email,

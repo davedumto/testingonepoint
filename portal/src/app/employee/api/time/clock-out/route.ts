@@ -5,6 +5,7 @@ import TimeSession from '@/models/TimeSession';
 import { calculateDuration } from '@/lib/shift-config';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rate-limiter';
 
 // POST — employee clocks out (or auto-logout triggers this)
 export async function POST(req: NextRequest) {
@@ -12,6 +13,8 @@ export async function POST(req: NextRequest) {
   if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { ip, userAgent } = getRequestInfo(req);
+  const rateResult = await checkRateLimit(getRateLimitKey(ip, 'clock-out'), RATE_LIMITS.clockInOut);
+  if (!rateResult.allowed) return Response.json({ error: 'Too many requests.' }, { status: 429 });
   const { logoutType } = await req.json().catch(() => ({ logoutType: 'manual' }));
 
   await connectDB();

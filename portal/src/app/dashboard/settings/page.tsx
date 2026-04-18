@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 export default function SettingsPage() {
   const [name, setName] = useState('');
@@ -30,7 +31,7 @@ export default function SettingsPage() {
     e.preventDefault();
     setSavingProfile(true);
     try {
-      const res = await fetch('/api/auth/update-profile', {
+      const res = await secureFetch('/api/auth/update-profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email }),
@@ -57,7 +58,7 @@ export default function SettingsPage() {
     }
     setSavingPassword(true);
     try {
-      const res = await fetch('/api/auth/change-password', {
+      const res = await secureFetch('/api/auth/change-password', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),

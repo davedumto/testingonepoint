@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
 import Policy from '@/models/Policy';
+import { hmacEmail } from '@/lib/security/encryption';
+import { logger } from '@/lib/logger';
 
 // Inbound webhook from GHL — receives policy updates when advisor binds a new policy
 export async function POST(req: NextRequest) {
@@ -20,10 +22,10 @@ export async function POST(req: NextRequest) {
 
     await connectDB();
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ hmacEmail: hmacEmail(email) });
     if (!user) {
       // User not in portal yet — log and return
-      console.log('GHL webhook: no portal user for', email);
+      logger.info('GHL webhook: no portal user found', { email });
       return Response.json({ received: true, matched: false });
     }
 
@@ -60,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     return Response.json({ received: true, matched: true, userId: user._id });
   } catch (error) {
-    console.error('GHL webhook error:', error);
+    logger.error('GHL webhook error', { error: String(error) });
     return Response.json({ error: 'Webhook processing failed.' }, { status: 500 });
   }
 }

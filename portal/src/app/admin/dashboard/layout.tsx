@@ -33,6 +33,9 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
           <a href="/admin/dashboard/employees" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', fontSize: 14, fontWeight: 500, color: 'var(--muted)', borderRadius: 6, marginBottom: 4 }}>
             Employees
           </a>
+          <a href="/admin/dashboard/security" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', fontSize: 14, fontWeight: 500, color: 'var(--muted)', borderRadius: 6, marginBottom: 4 }}>
+            Security
+          </a>
         </nav>
 
         <div style={{ padding: '16px 24px', borderTop: '1px solid var(--line)' }}>

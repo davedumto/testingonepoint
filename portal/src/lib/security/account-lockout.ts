@@ -25,6 +25,9 @@ const LoginAttemptSchema = new Schema<ILoginAttempt>({
   lockedAt: { type: Date },
 });
 
+// TTL: auto-delete unlocked attempt records after 24 hours
+LoginAttemptSchema.index({ lastAttempt: 1 }, { expireAfterSeconds: 86400 });
+
 const LoginAttempt = mongoose.models.LoginAttempt || mongoose.model('LoginAttempt', LoginAttemptSchema);
 
 const MAX_ATTEMPTS = 5;

@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { handleCallback } from '@/lib/oauth-handlers/ghl-handler';
+import { logger } from '@/lib/logger';
 
 // GET /employee/api/oauth/ghl/callback — handles GHL OAuth callback
 export async function GET(req: NextRequest) {
@@ -24,7 +25,7 @@ export async function GET(req: NextRequest) {
       return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl`);
     }
   } catch (err) {
-    console.error('GHL callback error:', err);
+    logger.error('GHL callback error', { error: String(err) });
     return Response.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/employee/dashboard?auth=failed&provider=ghl&error=server_error`);
   }
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ALL_PRODUCTS } from '@/lib/products';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface PendingQuote { _id: string; productName: string; productCategory: string; formData: Record<string, string>; status: string; updatedAt: string; }
 
@@ -43,7 +44,7 @@ export default function FormsPage() {
     const product = active?.productName || selProduct;
     const category = active?.productCategory || ALL_PRODUCTS.find(p => p.name === selProduct)?.category || 'auto';
     try {
-      const res = await fetch('/api/forms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ quoteId: active?._id, productName: product, productCategory: category, formData, submit }) });
+      const res = await secureFetch('/api/forms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ quoteId: active?._id, productName: product, productCategory: category, formData, submit }) });
       const data = await res.json();
       if (res.ok) {
         if (submit) { setMsg('Form submitted! An advisor will reach out.'); setActive(null); setShowNew(false); const r = await fetch('/api/forms'); const d = await r.json(); setQuotes(d.quotes || []); }

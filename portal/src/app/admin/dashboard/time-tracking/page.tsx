@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface Session {
   _id: string; userName: string; userEmail: string; loginAt: string; logoutAt?: string;
@@ -40,7 +41,7 @@ export default function AdminTimeTrackingPage() {
   async function handleExtraHours(requestId: string, action: 'approve' | 'deny') {
     setActing(requestId);
     try {
-      const res = await fetch('/employee/api/time/extra-hours/admin', {
+      const res = await secureFetch('/employee/api/time/extra-hours/admin', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ requestId, action }),

@@ -6,6 +6,8 @@ import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rat
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { safeValidate, forgotPasswordSchema } from '@/lib/security/validation';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { hmacEmail } from '@/lib/security/encryption';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   const { ip, userAgent } = getRequestInfo(req);
@@ -13,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     // Rate limit — stricter for password reset
     const rateKey = getRateLimitKey(ip, 'password-reset');
-    const rateResult = checkRateLimit(rateKey, RATE_LIMITS.passwordReset);
+    const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.passwordReset);
     if (!rateResult.allowed) {
       auditLog({ ipAddress: ip, userAgent, action: AUDIT_ACTIONS.RATE_LIMIT_HIT, status: 'failure', severity: 'warning', details: { endpoint: 'forgot-password' } });
       return Response.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
@@ -29,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     await connectDB();
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ hmacEmail: hmacEmail(email) });
 
     // Always return success to prevent email enumeration
     if (!user) {
@@ -52,7 +54,7 @@ export async function POST(req: NextRequest) {
     // Send reset email (non-blocking)
     try {
       const { sendPasswordResetEmail } = await import('@/lib/email');
-      sendPasswordResetEmail(user.email, user.name, resetToken).catch(console.error);
+      sendPasswordResetEmail(user.email, user.name, resetToken).catch((err) => logger.error('Password reset email error', { error: String(err) }));
     } catch { /* Don't block */ }
 
     return Response.json({
@@ -60,7 +62,7 @@ export async function POST(req: NextRequest) {
       message: 'If an account with that email exists, we sent a password reset link.',
     });
   } catch (error) {
-    console.error('Forgot password error:', error);
+    logger.error('Forgot password error', { error: String(error) });
     return Response.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }

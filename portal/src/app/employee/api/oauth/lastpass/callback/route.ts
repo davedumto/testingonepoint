@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { handleCallback } from '@/lib/oauth-handlers/lastpass-handler';
+import { logger } from '@/lib/logger';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -15,7 +16,7 @@ export async function GET(req: NextRequest) {
     const result = await handleCallback(code, state);
     return Response.redirect(`${base}/employee/dashboard?auth=${result.success ? 'success' : 'failed'}&provider=lastpass`);
   } catch (err) {
-    console.error('LastPass callback error:', err);
+    logger.error('LastPass callback error', { error: String(err) });
     return Response.redirect(`${base}/employee/dashboard?auth=failed&provider=lastpass&error=server_error`);
   }
 }

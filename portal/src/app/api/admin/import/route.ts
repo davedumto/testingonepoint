@@ -3,6 +3,8 @@ import { getAuthUser } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
 import Policy from '@/models/Policy';
+import { hmacEmail } from '@/lib/security/encryption';
+import { logger } from '@/lib/logger';
 
 // CSV Import endpoint — parses CSV of policies exported from GHL
 // Expected CSV columns: email, product_name, product_category, carrier, policy_number, status, start_date, end_date, premium
@@ -42,7 +44,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Find user by email
-      const dbUser = await User.findOne({ email });
+      const dbUser = await User.findOne({ hmacEmail: hmacEmail(email) });
       if (!dbUser) {
         results.errors.push(`Row ${i + 1}: no user found for ${email}`);
         results.skipped++;
@@ -83,7 +85,7 @@ export async function POST(req: NextRequest) {
       ...results,
     });
   } catch (error) {
-    console.error('CSV import error:', error);
+    logger.error('CSV import error', { error: String(error) });
     return Response.json({ error: 'Import failed.' }, { status: 500 });
   }
 }

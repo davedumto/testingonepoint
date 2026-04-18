@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IconDashboard, IconPolicies, IconCart, IconForms, IconPhone, IconLogout, IconMobile, IconSettings } from './Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface Props {
   user: { name: string; email: string; userId: string };
@@ -44,7 +45,7 @@ export default function DashboardShell({ user, children }: Props) {
   }, []);
 
   async function handleLogout() {
-    await fetch('/api/auth/logout', { method: 'POST' });
+    await secureFetch('/api/auth/logout', { method: 'POST' });
     router.push('/login');
   }
 

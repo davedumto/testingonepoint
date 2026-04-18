@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import Toast from '@/components/Toast';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface AppStatus {
   provider: string;
@@ -53,7 +54,7 @@ function EmployeeDashboardContent() {
   async function requestAccess(provider: string) {
     setRequesting(provider);
     try {
-      const res = await fetch('/employee/api/access-requests', {
+      const res = await secureFetch('/employee/api/access-requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ provider }),

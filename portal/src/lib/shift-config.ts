@@ -1,62 +1,94 @@
-// Shift configuration — defines work hours and auto-logout rules
+/**
+ * Shift configuration — timezone-aware work hours and auto-logout rules.
+ * All shift boundaries are computed per-employee using their IANA timezone.
+ */
+
+import { toZonedTime, fromZonedTime } from 'date-fns-tz';
+import { DEFAULT_TIMEZONE } from '@/lib/timezones';
 
 export const SHIFT_CONFIG = {
-  // Standard shift hours (24h format, EST)
-  startHour: 9,  // 9 AM
-  endHour: 17,   // 5 PM
-
-  // Auto-logout grace period after shift ends (minutes)
-  gracePeriod: 15,
-
-  // Max session duration (hours) — force logout after this even during shift
+  startHour: 9,   // 9 AM in employee's timezone
+  endHour: 17,    // 5 PM in employee's timezone
+  gracePeriod: 15, // minutes after shift end before auto-logout
   maxSessionHours: 10,
-
-  // Weekend days (0=Sunday, 6=Saturday)
-  weekendDays: [0, 6],
+  weekendDays: [0, 6], // Sunday, Saturday
 };
 
-export function isWithinShift(): boolean {
-  const now = new Date();
-  const hour = now.getHours();
+/**
+ * Get the current time in a specific IANA timezone.
+ */
+export function getNowInTimezone(timezone: string = DEFAULT_TIMEZONE): Date {
+  return toZonedTime(new Date(), timezone);
+}
+
+/**
+ * Check if the current UTC time falls within shift hours in the employee's timezone.
+ */
+export function isWithinShift(timezone: string = DEFAULT_TIMEZONE): boolean {
+  const zoned = toZonedTime(new Date(), timezone);
+  const hour = zoned.getHours();
   return hour >= SHIFT_CONFIG.startHour && hour < SHIFT_CONFIG.endHour;
 }
 
-export function isWeekend(): boolean {
-  const day = new Date().getDay();
-  return SHIFT_CONFIG.weekendDays.includes(day);
+/**
+ * Check if the current UTC time is a weekend in the employee's timezone.
+ */
+export function isWeekend(timezone: string = DEFAULT_TIMEZONE): boolean {
+  const zoned = toZonedTime(new Date(), timezone);
+  return SHIFT_CONFIG.weekendDays.includes(zoned.getDay());
 }
 
-export function getShiftEndTime(): Date {
-  const now = new Date();
-  const end = new Date(now);
-  end.setHours(SHIFT_CONFIG.endHour, SHIFT_CONFIG.gracePeriod, 0, 0);
-  return end;
+/**
+ * Get the shift end time as a UTC Date for a specific timezone.
+ * Example: 5:15 PM America/New_York during EDT = 9:15 PM UTC.
+ */
+export function getShiftEndUTC(timezone: string = DEFAULT_TIMEZONE): Date {
+  const zoned = toZonedTime(new Date(), timezone);
+  zoned.setHours(SHIFT_CONFIG.endHour, SHIFT_CONFIG.gracePeriod, 0, 0);
+  // Convert the zoned shift-end back to a real UTC timestamp
+  return fromZonedTime(zoned, timezone);
 }
 
-export function getMinutesUntilShiftEnd(): number {
-  const now = new Date();
-  const end = getShiftEndTime();
-  return Math.max(0, Math.floor((end.getTime() - now.getTime()) / 60000));
+/**
+ * Get minutes until shift end for an employee.
+ */
+export function getMinutesUntilShiftEnd(timezone: string = DEFAULT_TIMEZONE): number {
+  const shiftEndUTC = getShiftEndUTC(timezone);
+  return Math.max(0, Math.floor((shiftEndUTC.getTime() - Date.now()) / 60000));
 }
 
-// Security flags
-export function checkSecurityFlags(loginTime: Date, ipAddress?: string): { flagged: boolean; reason?: string } {
-  const hour = loginTime.getHours();
-  const day = loginTime.getDay();
+/**
+ * Check if the current UTC time has passed shift end + grace in the employee's timezone.
+ */
+export function isPastShiftEnd(timezone: string = DEFAULT_TIMEZONE): boolean {
+  const shiftEndUTC = getShiftEndUTC(timezone);
+  return Date.now() > shiftEndUTC.getTime();
+}
 
-  // Flag: login outside business hours (before 7 AM or after 10 PM)
+/**
+ * Security flags — checks login time against employee's timezone.
+ */
+export function checkSecurityFlags(loginTimeUTC: Date, timezone: string = DEFAULT_TIMEZONE): { flagged: boolean; reason?: string } {
+  const zoned = toZonedTime(loginTimeUTC, timezone);
+  const hour = zoned.getHours();
+  const day = zoned.getDay();
+
+  // Flag: login outside business hours (before 7 AM or after 10 PM in employee TZ)
   if (hour < 7 || hour >= 22) {
-    return { flagged: true, reason: 'Login outside business hours (before 7 AM or after 10 PM)' };
+    return { flagged: true, reason: `Login outside business hours (${hour}:00 ${timezone})` };
   }
 
-  // Flag: weekend login without approved extra hours
+  // Flag: weekend login
   if (SHIFT_CONFIG.weekendDays.includes(day)) {
-    return { flagged: true, reason: 'Weekend login — verify extra hours approval' };
+    return { flagged: true, reason: `Weekend login in ${timezone}` };
   }
 
   return { flagged: false };
 }
 
+/**
+ * Calculate duration between two UTC timestamps in minutes.
+ */
 export function calculateDuration(loginAt: Date, logoutAt: Date): number {
-  return Math.round((logoutAt.getTime() - loginAt.getTime()) / 60000); // minutes
+  return Math.round((logoutAt.getTime() - loginAt.getTime()) / 60000);
 }

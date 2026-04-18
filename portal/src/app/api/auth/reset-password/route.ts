@@ -5,6 +5,7 @@ import User from '@/models/User';
 import { safeValidate, resetPasswordSchema } from '@/lib/security/validation';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   const { ip, userAgent } = getRequestInfo(req);
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
       message: 'Password reset successfully. You can now log in.',
     });
   } catch (error) {
-    console.error('Reset password error:', error);
+    logger.error('Reset password error', { error: String(error) });
     return Response.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }

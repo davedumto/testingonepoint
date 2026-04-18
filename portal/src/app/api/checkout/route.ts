@@ -5,6 +5,7 @@ import Policy from '@/models/Policy';
 import { sendCartCheckout } from '@/lib/ghl';
 import { sendCheckoutNotification } from '@/lib/email';
 import { getTier } from '@/lib/products';
+import { logger } from '@/lib/logger';
 
 export async function POST() {
   const user = await getAuthUser();
@@ -32,7 +33,7 @@ export async function POST() {
 
   // Send confirmation email (non-blocking)
   try {
-    sendCheckoutNotification(user.email, user.name, cartProducts, currentTier.label).catch(console.error);
+    sendCheckoutNotification(user.email, user.name, cartProducts, currentTier.label).catch((err) => logger.error('Checkout email error', { error: String(err) }));
   } catch { /* don't block */ }
 
   // Clear the cart after successful checkout

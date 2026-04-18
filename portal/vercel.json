@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/auto-logout",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/cron/audit-integrity",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/audit-archive",
+      "schedule": "0 3 1 * *"
+    }
+  ]
+}

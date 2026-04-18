@@ -5,6 +5,8 @@ import Employee from '@/models/Employee';
 import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rate-limiter';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { hmacEmail } from '@/lib/security/encryption';
+import { generateCSRFToken } from '@/lib/security/csrf';
 
 // POST — employee sets their password for the first time
 export async function POST(req: NextRequest) {
@@ -12,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   // Rate limit
   const rateKey = getRateLimitKey(ip, 'employee-setup');
-  const rateResult = checkRateLimit(rateKey, RATE_LIMITS.signup);
+  const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.signup);
   if (!rateResult.allowed) {
     return Response.json({ error: 'Too many attempts. Please try again later.' }, { status: 429 });
   }
@@ -27,7 +29,7 @@ export async function POST(req: NextRequest) {
   }
 
   await connectDB();
-  const employee = await Employee.findOne({ email: email.toLowerCase().trim() });
+  const employee = await Employee.findOne({ hmacEmail: hmacEmail(email) });
 
   if (!employee) {
     return Response.json({ error: 'Employee not found. Contact your admin.' }, { status: 404 });
@@ -50,6 +52,8 @@ export async function POST(req: NextRequest) {
     email: employee.email,
     name: employee.name,
   });
+
+  await generateCSRFToken();
 
   auditLog({ userId: employee._id.toString(), userEmail: employee.email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.SIGNUP, status: 'success', details: { portal: 'employee', type: 'password_setup' } });
 

@@ -89,6 +89,24 @@ export function decryptPII(encrypted: string): string {
 }
 
 /**
+ * Compute HMAC-SHA-256 of an email for indexed lookups on encrypted data.
+ * Uses a separate key (HMAC_KEY_EMAIL) so the HMAC is deterministic for the same input.
+ */
+export function hmacEmail(email: string): string {
+  const key = process.env.HMAC_KEY_EMAIL || '';
+  if (!key) throw new Error('HMAC_KEY_EMAIL not set in environment');
+  return crypto.createHmac('sha256', key).update(email.toLowerCase().trim()).digest('hex');
+}
+
+/**
+ * Check if a string looks like it's already encrypted (iv:authTag:ciphertext format).
+ */
+export function isEncrypted(value: string): boolean {
+  const parts = value.split(':');
+  return parts.length === 3 && parts[0].length === 32 && /^[0-9a-f]+$/.test(parts[0]);
+}
+
+/**
  * Redact sensitive values from log output.
  * Call this before logging ANY object that might contain tokens/secrets.
  */

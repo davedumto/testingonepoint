@@ -5,6 +5,8 @@ import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rat
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { safeValidate, adminLoginSchema } from '@/lib/security/validation';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { generateCSRFToken } from '@/lib/security/csrf';
+import { logger } from '@/lib/logger';
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL!;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD!;
@@ -16,7 +18,7 @@ export async function POST(req: NextRequest) {
   try {
     // Rate limit
     const rateKey = getRateLimitKey(ip, 'admin-login');
-    const rateResult = checkRateLimit(rateKey, RATE_LIMITS.login);
+    const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.login);
     if (!rateResult.allowed) {
       auditLog({ ipAddress: ip, userAgent, action: AUDIT_ACTIONS.RATE_LIMIT_HIT, status: 'failure', severity: 'critical', details: { endpoint: 'admin-login' } });
       return Response.json({ error: 'Too many attempts. Try again later.' }, { status: 429 });
@@ -50,11 +52,13 @@ export async function POST(req: NextRequest) {
       path: '/',
     });
 
+    await generateCSRFToken();
+
     auditLog({ userId: 'admin', userEmail: ADMIN_EMAIL, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { portal: 'admin' } });
 
     return Response.json({ success: true });
   } catch (error) {
-    console.error('Admin login error:', error);
+    logger.error('Admin login error', { error: String(error) });
     return Response.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }

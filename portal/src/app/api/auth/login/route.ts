@@ -1,4 +1,6 @@
 import { NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 import { connectDB } from '@/lib/db';
 import { setAuthCookie } from '@/lib/auth';
 import User from '@/models/User';
@@ -6,7 +8,12 @@ import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rat
 import { isAccountLocked, recordFailedLogin, clearLoginAttempts } from '@/lib/security/account-lockout';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { safeValidate, loginSchema } from '@/lib/security/validation';
+import { hmacEmail } from '@/lib/security/encryption';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { generateCSRFToken } from '@/lib/security/csrf';
+import { logger } from '@/lib/logger';
+
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function POST(req: NextRequest) {
   const { ip, userAgent } = getRequestInfo(req);
@@ -14,7 +21,7 @@ export async function POST(req: NextRequest) {
   try {
     // Rate limit check
     const rateKey = getRateLimitKey(ip, 'login');
-    const rateResult = checkRateLimit(rateKey, RATE_LIMITS.login);
+    const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.login);
     if (!rateResult.allowed) {
       auditLog({ ipAddress: ip, userAgent, action: AUDIT_ACTIONS.RATE_LIMIT_HIT, status: 'failure', severity: 'warning', details: { endpoint: 'login' } });
       return Response.json(
@@ -40,7 +47,7 @@ export async function POST(req: NextRequest) {
       return Response.json({ error: 'Account is locked. Contact your administrator.' }, { status: 423 });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ hmacEmail: hmacEmail(email) });
     if (!user) {
       await recordFailedLogin(email);
       auditLog({ userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN_FAILED, status: 'failure', details: { reason: 'user_not_found' } });
@@ -61,11 +68,35 @@ export async function POST(req: NextRequest) {
     // Success — clear lockout counter
     await clearLoginAttempts(email);
 
+    // Check if 2FA is enabled — if so, issue pending token instead of session
+    if (user.twoFactorEnabled) {
+      const pendingToken = jwt.sign(
+        { userId: user._id.toString(), email: user.email, name: user.name, pending2fa: true },
+        JWT_SECRET,
+        { expiresIn: '5m' }
+      );
+      const cookieStore = await cookies();
+      cookieStore.set('op_pending_2fa', pendingToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 300, // 5 minutes
+        path: '/',
+      });
+
+      auditLog({ userId: user._id.toString(), userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { requires2FA: true } });
+
+      return Response.json({ success: true, requires2FA: true });
+    }
+
+    // No 2FA — issue session directly
     await setAuthCookie({
       userId: user._id.toString(),
       email: user.email,
       name: user.name,
     });
+
+    await generateCSRFToken();
 
     auditLog({ userId: user._id.toString(), userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success' });
 
@@ -74,7 +105,7 @@ export async function POST(req: NextRequest) {
       user: { name: user.name, email: user.email },
     });
   } catch (error) {
-    console.error('Login error:', error);
+    logger.error('Login error', { error: String(error) });
     return Response.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 }

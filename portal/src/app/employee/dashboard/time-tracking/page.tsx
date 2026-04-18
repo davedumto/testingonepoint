@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import Toast from '@/components/Toast';
 import { IconCheck } from '@/components/Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface Session {
   _id: string; loginAt: string; logoutAt?: string; duration?: number;
@@ -19,6 +20,7 @@ export default function TimeTrackingPage() {
   const [loading, setLoading] = useState(true);
   const [acting, setActing] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [minutesLeft, setMinutesLeft] = useState<number | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
 
   // Extra hours form
@@ -53,22 +55,21 @@ export default function TimeTrackingPage() {
     return () => clearInterval(interval);
   }, [activeSession]);
 
-  // Auto-logout check (every 60 seconds)
+  // Poll for server-side auto-logout — detect if session was closed by cron
   useEffect(() => {
     if (!activeSession) return;
-    const interval = setInterval(async () => {
-      const now = new Date();
-      const hour = now.getHours();
-      // Auto-logout after 5:15 PM (shift end + grace)
-      if (hour >= 17 && now.getMinutes() >= 15) {
-        await fetch('/employee/api/time/clock-out', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ logoutType: 'shift_end' }),
-        });
-        setToast({ message: 'Auto-logged out — shift has ended.', type: 'info' });
-        fetchData();
-      }
+    const interval = setInterval(() => {
+      fetch('/employee/api/time/sessions').then(r => r.json()).then(d => {
+        if (!d.activeSession) {
+          setActiveSession(null);
+          setToast({ message: 'Your session was auto-logged out by the server.', type: 'info' });
+          fetchData();
+        }
+        // Update minutes remaining from server
+        if (d.minutesUntilShiftEnd !== undefined) {
+          setMinutesLeft(d.minutesUntilShiftEnd);
+        }
+      }).catch(() => {});
     }, 60000);
     return () => clearInterval(interval);
   }, [activeSession, fetchData]);
@@ -76,10 +77,11 @@ export default function TimeTrackingPage() {
   async function clockIn() {
     setActing(true);
     try {
-      const res = await fetch('/employee/api/time/clock-in', { method: 'POST' });
+      const res = await secureFetch('/employee/api/time/clock-in', { method: 'POST' });
       const data = await res.json();
       if (res.ok) {
         setToast({ message: 'Clocked in successfully.', type: 'success' });
+        if (data.minutesUntilShiftEnd !== undefined) setMinutesLeft(data.minutesUntilShiftEnd);
         fetchData();
       } else {
         setToast({ message: data.error || 'Failed.', type: 'error' });
@@ -91,7 +93,7 @@ export default function TimeTrackingPage() {
   async function clockOut() {
     setActing(true);
     try {
-      const res = await fetch('/employee/api/time/clock-out', {
+      const res = await secureFetch('/employee/api/time/clock-out', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ logoutType: 'manual' }),
@@ -99,6 +101,7 @@ export default function TimeTrackingPage() {
       const data = await res.json();
       if (res.ok) {
         setToast({ message: `Clocked out. Duration: ${Math.round((data.session?.duration || 0) / 60 * 10) / 10} hours.`, type: 'success' });
+        setMinutesLeft(null);
         fetchData();
       } else {
         setToast({ message: data.error || 'Failed.', type: 'error' });
@@ -110,7 +113,7 @@ export default function TimeTrackingPage() {
   async function submitExtraHours(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const res = await fetch('/employee/api/time/extra-hours', {
+      const res = await secureFetch('/employee/api/time/extra-hours', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ requestedDate: extraDate, startTime: extraStart, endTime: extraEnd, hoursRequested: parseFloat(extraHours), reason: extraReason }),
@@ -142,6 +145,13 @@ export default function TimeTrackingPage() {
 
       <h1 style={{ fontSize: 24, fontWeight: 700, color: 'var(--navy)', marginBottom: 8 }}>Time Tracking</h1>
       <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 32 }}>Clock in/out and track your work hours.</p>
+
+      {/* Shift ending warning banner */}
+      {activeSession && minutesLeft !== null && minutesLeft <= 30 && minutesLeft > 0 && (
+        <div style={{ padding: '12px 16px', background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.15)', marginBottom: 16, fontSize: 13, color: '#dc2626', fontWeight: 600 }}>
+          Shift ends in {minutesLeft} minutes. You will be auto-logged out by the server.
+        </div>
+      )}
 
       {/* Clock in/out card */}
       <div className="card" style={{ marginBottom: 24, padding: 32, textAlign: 'center' }}>

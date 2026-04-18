@@ -2,6 +2,7 @@ import { getEmployeeUser } from '@/lib/employee-auth';
 import { connectDB } from '@/lib/db';
 import AccessRequest from '@/models/AccessRequest';
 import { initiateAuth } from '@/lib/oauth-handlers/canva-handler';
+import { logger } from '@/lib/logger';
 
 export async function GET() {
   const user = await getEmployeeUser();
@@ -15,7 +16,7 @@ export async function GET() {
     const url = await initiateAuth(user.userId, user.email);
     return Response.redirect(url);
   } catch (error) {
-    console.error('Canva OAuth error:', error);
+    logger.error('Canva OAuth error', { error: String(error) });
     return Response.json({ error: 'Failed to initiate.' }, { status: 500 });
   }
 }

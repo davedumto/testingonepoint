@@ -5,6 +5,7 @@ import AccessRequest from '@/models/AccessRequest';
 import OAuthEvent from '@/models/EmployeeAuth';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { logger } from '@/lib/logger';
 
 const PROVIDER_NAMES: Record<string, string> = {
   ghl: 'GoHighLevel',
@@ -51,6 +52,9 @@ export async function GET(req: NextRequest) {
     })
   );
 
+  const { ip, userAgent: ua } = getRequestInfo(req);
+  auditLog({ userId: 'admin', userEmail: admin.email, ipAddress: ip, userAgent: ua, action: 'admin.data_viewed', status: 'success', targetResource: 'access_requests', details: { statusFilter: status, resultCount: enriched.length } });
+
   return Response.json({ requests: enriched });
 }
 
@@ -96,7 +100,7 @@ export async function PUT(req: NextRequest) {
         request.userName,
         request.provider,
         PROVIDER_NAMES[request.provider] || request.provider
-      ).catch(console.error);
+      ).catch((err) => logger.error('Access approved email error', { error: String(err) }));
     } catch {
       // Email is optional — don't block approval
     }

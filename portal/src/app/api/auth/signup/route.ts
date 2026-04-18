@@ -6,6 +6,8 @@ import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rat
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { safeValidate, signupSchema } from '@/lib/security/validation';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { hmacEmail } from '@/lib/security/encryption';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   const { ip, userAgent } = getRequestInfo(req);
@@ -13,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     // Rate limit
     const rateKey = getRateLimitKey(ip, 'signup');
-    const rateResult = checkRateLimit(rateKey, RATE_LIMITS.signup);
+    const rateResult = await checkRateLimit(rateKey, RATE_LIMITS.signup);
     if (!rateResult.allowed) {
       auditLog({ ipAddress: ip, userAgent, action: AUDIT_ACTIONS.RATE_LIMIT_HIT, status: 'failure', severity: 'warning', details: { endpoint: 'signup' } });
       return Response.json({ error: 'Too many signup attempts. Please try again later.' }, { status: 429 });
@@ -29,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     await connectDB();
 
-    const existing = await User.findOne({ email });
+    const existing = await User.findOne({ hmacEmail: hmacEmail(email) });
     if (existing) {
       return Response.json({ error: 'An account with this email already exists.' }, { status: 409 });
     }
@@ -47,7 +49,7 @@ export async function POST(req: NextRequest) {
     // Send welcome email (non-blocking)
     try {
       const { sendWelcomeEmail } = await import('@/lib/email');
-      sendWelcomeEmail(user.email, user.name).catch(console.error);
+      sendWelcomeEmail(user.email, user.name).catch((err) => logger.error('Welcome email error', { error: String(err) }));
     } catch { /* Email sending is optional */ }
 
     return Response.json({
@@ -55,7 +57,7 @@ export async function POST(req: NextRequest) {
       user: { name: user.name, email: user.email },
     }, { status: 201 });
   } catch (error) {
-    console.error('Signup error:', error);
+    logger.error('Signup error', { error: String(error) });
     return Response.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 }

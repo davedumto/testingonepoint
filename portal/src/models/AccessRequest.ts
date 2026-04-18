@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { encryptPII, decryptPII, isEncrypted } from '@/lib/security/encryption';
 
-// Employee request to access a specific app — requires admin approval
 export interface IAccessRequest extends Document {
   userId: mongoose.Types.ObjectId;
   userEmail: string;
@@ -13,10 +13,13 @@ export interface IAccessRequest extends Document {
   reason?: string;
 }
 
+const piiSetter = (v: string) => { try { return encryptPII(v); } catch { return v; } };
+const piiGetter = (v: string) => { try { return isEncrypted(v) ? decryptPII(v) : v; } catch { return v; } };
+
 const AccessRequestSchema = new Schema<IAccessRequest>({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-  userEmail: { type: String, required: true, lowercase: true },
-  userName: { type: String, required: true },
+  userEmail: { type: String, required: true, set: piiSetter, get: piiGetter },
+  userName: { type: String, required: true, set: piiSetter, get: piiGetter },
   provider: { type: String, enum: ['ghl', 'canva', 'lastpass', 'microsoft'], required: true },
   status: { type: String, enum: ['pending', 'approved', 'denied'], default: 'pending' },
   requestedAt: { type: Date, default: Date.now },
@@ -25,6 +28,8 @@ const AccessRequestSchema = new Schema<IAccessRequest>({
   reason: { type: String },
 });
 
+AccessRequestSchema.set('toJSON', { getters: true });
+AccessRequestSchema.set('toObject', { getters: true });
 AccessRequestSchema.index({ userId: 1, provider: 1 });
 AccessRequestSchema.index({ status: 1 });
 

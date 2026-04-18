@@ -4,6 +4,7 @@ import { connectDB } from '@/lib/db';
 import BookedCall from '@/models/BookedCall';
 import { sendCallBooking } from '@/lib/ghl';
 import { safeValidate, bookCallSchema } from '@/lib/security/validation';
+import { logger } from '@/lib/logger';
 
 export async function GET() {
   const user = await getAuthUser();
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
   sendCallBooking(
     { name: user.name, email: user.email },
     topic, preferredDate, preferredTime, phone, notes
-  ).catch(console.error);
+  ).catch((err) => logger.error('Call booking GHL error', { error: String(err) }));
 
   return Response.json({ success: true, call }, { status: 201 });
 }

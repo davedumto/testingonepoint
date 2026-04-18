@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getTier } from '@/lib/products';
+import { secureFetch } from '@/lib/client/secure-fetch';
 import { IconCheck, IconTrash, IconCart } from '@/components/Icons';
 
 interface CartItem { _id: string; productName: string; productCategory: string; }
@@ -19,7 +20,7 @@ export default function CartPage() {
   useEffect(() => { Promise.all([fetch('/api/cart'), fetch('/api/policies')]).then(async ([c, p]) => { setItems((await c.json()).items || []); setPolicies((await p.json()).policies || []); setLoading(false); }); }, []);
 
   async function removeItem(id: string) {
-    await fetch(`/api/cart?id=${id}`, { method: 'DELETE' });
+    await secureFetch(`/api/cart?id=${id}`, { method: 'DELETE' });
     const newItems = items.filter(i => i._id !== id);
     setItems(newItems);
     window.dispatchEvent(new CustomEvent('cart-update', { detail: { count: newItems.length } }));
@@ -27,7 +28,7 @@ export default function CartPage() {
 
   async function handleCheckout() {
     setChecking(true);
-    try { const res = await fetch('/api/checkout', { method: 'POST' }); if (res.ok) { setSuccess(true); setItems([]); window.dispatchEvent(new CustomEvent('cart-update', { detail: { count: 0 } })); setTimeout(() => router.push('/dashboard'), 4000); } else { const d = await res.json(); alert(d.error || 'Failed.'); } }
+    try { const res = await secureFetch('/api/checkout', { method: 'POST' }); if (res.ok) { setSuccess(true); setItems([]); window.dispatchEvent(new CustomEvent('cart-update', { detail: { count: 0 } })); setTimeout(() => router.push('/dashboard'), 4000); } else { const d = await res.json(); alert(d.error || 'Failed.'); } }
     catch { alert('Error.'); } finally { setChecking(false); }
   }
 

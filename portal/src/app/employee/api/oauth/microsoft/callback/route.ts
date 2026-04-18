@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { handleCallback } from '@/lib/oauth-handlers/microsoft-handler';
+import { logger } from '@/lib/logger';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -15,7 +16,7 @@ export async function GET(req: NextRequest) {
     const result = await handleCallback(code, state);
     return Response.redirect(`${base}/employee/dashboard?auth=${result.success ? 'success' : 'failed'}&provider=microsoft`);
   } catch (err) {
-    console.error('Microsoft callback error:', err);
+    logger.error('Microsoft callback error', { error: String(err) });
     return Response.redirect(`${base}/employee/dashboard?auth=failed&provider=microsoft&error=server_error`);
   }
 }

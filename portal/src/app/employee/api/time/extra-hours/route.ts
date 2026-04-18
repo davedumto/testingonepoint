@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { getEmployeeUser } from '@/lib/employee-auth';
 import { connectDB } from '@/lib/db';
 import ExtraHoursRequest from '@/models/ExtraHoursRequest';
+import { checkRateLimit, getRateLimitKey, RATE_LIMITS } from '@/lib/security/rate-limiter';
+import { getRequestInfo } from '@/lib/security/request-info';
 
 // GET — employee's own extra hours requests
 export async function GET() {
@@ -17,6 +19,10 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const user = await getEmployeeUser();
   if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { ip } = getRequestInfo(req);
+  const rateResult = await checkRateLimit(getRateLimitKey(ip, 'extra-hours'), RATE_LIMITS.extraHours);
+  if (!rateResult.allowed) return Response.json({ error: 'Too many requests.' }, { status: 429 });
 
   const { requestedDate, startTime, endTime, hoursRequested, reason } = await req.json();
 

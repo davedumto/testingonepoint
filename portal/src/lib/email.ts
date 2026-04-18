@@ -76,6 +76,21 @@ export async function sendPasswordResetEmail(to: string, name: string, resetToke
   });
 }
 
+export async function sendAlertEmail(to: string, subject: string, message: string) {
+  await transporter.sendMail({
+    from: `"OnePoint Security" <${process.env.SMTP_FROM}>`,
+    to,
+    subject,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 24px;">
+        <h1 style="color: #dc2626; font-size: 20px;">Security Alert</h1>
+        <p style="color: #1a2e42; font-size: 15px; line-height: 1.6;">${message}</p>
+        <p style="color: #8a9baa; font-size: 12px; margin-top: 32px;">This is an automated alert from the OnePoint Portal security system.</p>
+      </div>
+    `,
+  });
+}
+
 export async function sendCheckoutNotification(to: string, name: string, cartItems: string[], currentTier: string) {
   await transporter.sendMail({
     from: `"OnePoint Insurance" <${process.env.SMTP_FROM}>`,

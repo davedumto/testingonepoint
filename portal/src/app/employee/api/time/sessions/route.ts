@@ -1,6 +1,9 @@
 import { getEmployeeUser } from '@/lib/employee-auth';
 import { connectDB } from '@/lib/db';
 import TimeSession from '@/models/TimeSession';
+import Employee from '@/models/Employee';
+import { getMinutesUntilShiftEnd } from '@/lib/shift-config';
+import { DEFAULT_TIMEZONE } from '@/lib/timezones';
 
 // GET — employee's own time sessions (last 30 days)
 export async function GET() {
@@ -8,6 +11,10 @@ export async function GET() {
   if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   await connectDB();
+
+  // Load employee timezone
+  const employee = await Employee.findById(user.employeeId).select('timezone');
+  const timezone = employee?.timezone || DEFAULT_TIMEZONE;
 
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -40,5 +47,7 @@ export async function GET() {
       sessionCount: sessions.length,
       flaggedCount: sessions.filter(s => s.flagged).length,
     },
+    minutesUntilShiftEnd: activeSession ? getMinutesUntilShiftEnd(timezone) : undefined,
+    timezone,
   });
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { IconCheck } from '@/components/Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 const TOPICS = ['Review my current coverage', 'Get a new quote', 'Bundle my policies', 'File or follow up on a claim', 'Policy renewal questions', 'Billing or payment issue', 'Other'];
 
@@ -18,7 +19,7 @@ export default function BookCallPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); setError(''); setLoading(true);
     try {
-      const res = await fetch('/api/book-call', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ topic, preferredDate, preferredTime, phone, notes }) });
+      const res = await secureFetch('/api/book-call', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ topic, preferredDate, preferredTime, phone, notes }) });
       const data = await res.json();
       if (!res.ok) { setError(data.error || 'Failed.'); return; }
       setSuccess(true);

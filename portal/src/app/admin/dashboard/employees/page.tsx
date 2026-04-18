@@ -2,8 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
-interface Emp { _id: string; email: string; name?: string; isSetup: boolean; addedAt: string; lastLogin?: string; }
+const ALLOWED_TIMEZONES = [
+  'America/New_York',
+  'America/Chicago',
+  'America/Denver',
+  'America/Los_Angeles',
+  'America/Phoenix',
+  'Africa/Lagos',
+  'Europe/London',
+  'UTC',
+];
+
+interface Emp { _id: string; email: string; name?: string; timezone?: string; isSetup: boolean; addedAt: string; lastLogin?: string; }
 
 export default function AdminEmployeesPage() {
   const [employees, setEmployees] = useState<Emp[]>([]);
@@ -26,7 +38,7 @@ export default function AdminEmployeesPage() {
     if (!newEmail.trim()) return;
     setAdding(true);
     try {
-      const res = await fetch('/api/admin/employees', {
+      const res = await secureFetch('/api/admin/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: newEmail }),
@@ -43,9 +55,23 @@ export default function AdminEmployeesPage() {
     finally { setAdding(false); }
   }
 
+  async function updateTimezone(id: string, timezone: string) {
+    const res = await secureFetch('/api/admin/employees', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, timezone }),
+    });
+    if (res.ok) {
+      setToast({ message: `Timezone updated to ${timezone}.`, type: 'success' });
+      fetchEmployees();
+    } else {
+      setToast({ message: 'Failed to update timezone.', type: 'error' });
+    }
+  }
+
   async function removeEmployee(id: string) {
     if (!confirm('Remove this employee?')) return;
-    const res = await fetch(`/api/admin/employees?id=${id}`, { method: 'DELETE' });
+    const res = await secureFetch(`/api/admin/employees?id=${id}`, { method: 'DELETE' });
     if (res.ok) { setToast({ message: 'Employee removed.', type: 'success' }); fetchEmployees(); }
   }
 
@@ -54,7 +80,7 @@ export default function AdminEmployeesPage() {
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
       <h1 style={{ fontSize: 24, fontWeight: 700, color: 'var(--navy)', marginBottom: 8 }}>Manage Employees</h1>
-      <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 24 }}>Add employee emails. They&apos;ll set their own password on first login.</p>
+      <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 24 }}>Add employee emails and set their timezone. They&apos;ll set their own password on first login.</p>
 
       {/* Add employee */}
       <form onSubmit={addEmployee} className="card" style={{ marginBottom: 24, display: 'flex', gap: 12, alignItems: 'flex-end' }}>
@@ -97,6 +123,18 @@ export default function AdminEmployeesPage() {
                   </span>
                 </div>
                 <p style={{ fontSize: 12, color: 'var(--muted)' }}>{emp.email}</p>
+              </div>
+              <div style={{ minWidth: 180 }}>
+                <select
+                  value={emp.timezone || 'America/New_York'}
+                  onChange={e => updateTimezone(emp._id, e.target.value)}
+                  className="input"
+                  style={{ padding: '6px 8px', fontSize: 12 }}
+                >
+                  {ALLOWED_TIMEZONES.map(tz => (
+                    <option key={tz} value={tz}>{tz}</option>
+                  ))}
+                </select>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: 11, color: 'var(--subtle)' }}>Added {new Date(emp.addedAt).toLocaleDateString()}</p>

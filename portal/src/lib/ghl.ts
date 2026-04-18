@@ -1,5 +1,7 @@
 // GoHighLevel webhook integration
 
+import { logger } from '@/lib/logger';
+
 const GHL_WEBHOOK_URL = process.env.GHL_WEBHOOK_URL;
 
 interface GHLPayload {
@@ -13,13 +15,12 @@ interface GHLPayload {
 
 export async function sendToGHL(payload: GHLPayload) {
   if (!GHL_WEBHOOK_URL) {
-    console.warn('GHL_WEBHOOK_URL not configured — skipping webhook');
+    logger.warn('GHL_WEBHOOK_URL not configured — skipping webhook');
     return { success: false, reason: 'no_webhook_url' };
   }
 
   try {
-    console.log('>>> GHL WEBHOOK SENDING TO:', GHL_WEBHOOK_URL);
-    console.log('>>> PAYLOAD:', JSON.stringify(payload, null, 2));
+    logger.info('GHL webhook sending', { url: GHL_WEBHOOK_URL });
 
     const response = await fetch(GHL_WEBHOOK_URL, {
       method: 'POST',
@@ -28,16 +29,16 @@ export async function sendToGHL(payload: GHLPayload) {
     });
 
     const responseText = await response.text();
-    console.log('>>> GHL RESPONSE:', response.status, responseText);
+    logger.info('GHL webhook response', { status: response.status });
 
     if (!response.ok) {
-      console.error('GHL webhook failed:', response.status, responseText);
+      logger.error('GHL webhook failed', { status: response.status });
       return { success: false, reason: 'webhook_error', status: response.status };
     }
 
     return { success: true };
   } catch (error) {
-    console.error('GHL webhook error:', error);
+    logger.error('GHL webhook error', { error: String(error) });
     return { success: false, reason: 'network_error' };
   }
 }

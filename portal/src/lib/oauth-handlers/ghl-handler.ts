@@ -1,6 +1,7 @@
 import { getProvider, getCallbackUrl } from '@/lib/oauth-providers';
 import { connectDB } from '@/lib/db';
 import OAuthEvent from '@/models/EmployeeAuth';
+import { encryptToken } from '@/lib/security/encryption';
 
 const PROVIDER_KEY = 'ghl';
 
@@ -66,8 +67,8 @@ export async function handleCallback(code: string, state: string) {
       userId,
       userEmail,
       provider: PROVIDER_KEY,
-      accessToken: tokenData.access_token,
-      refreshToken: tokenData.refresh_token,
+      accessToken: encryptToken(tokenData.access_token),
+      refreshToken: tokenData.refresh_token ? encryptToken(tokenData.refresh_token) : undefined,
       tokenExpiry: tokenData.expires_in ? new Date(Date.now() + tokenData.expires_in * 1000) : undefined,
       authenticatedAt: new Date(),
       status: 'completed',

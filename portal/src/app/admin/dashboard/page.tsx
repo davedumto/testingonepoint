@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { IconCheck } from '@/components/Icons';
+import { secureFetch } from '@/lib/client/secure-fetch';
 
 export default function AdminPage() {
   const [csvText, setCsvText] = useState('');
@@ -21,7 +22,7 @@ export default function AdminPage() {
     setError(''); setResult(null); setLoading(true);
 
     try {
-      const res = await fetch('/api/admin/import', {
+      const res = await secureFetch('/api/admin/import', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ csvData: csvText }),

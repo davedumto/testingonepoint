@@ -4,6 +4,7 @@ import { connectDB } from '@/lib/db';
 import PendingQuote from '@/models/PendingQuote';
 import { sendFormSubmission } from '@/lib/ghl';
 import { safeValidate, formSubmitSchema } from '@/lib/security/validation';
+import { logger } from '@/lib/logger';
 
 // Get all pending/incomplete quotes for the user
 export async function GET() {
@@ -58,7 +59,7 @@ export async function POST(req: NextRequest) {
       { name: user.name, email: user.email },
       productName,
       formData || {}
-    ).catch(console.error);
+    ).catch((err) => logger.error('Form submission GHL error', { error: String(err) }));
   }
 
   return Response.json({ success: true, quote }, { status: quoteId ? 200 : 201 });

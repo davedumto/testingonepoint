@@ -21,7 +21,7 @@ export function getProvider(key: string): OAuthProvider | null {
       authorizeUrl: 'https://marketplace.gohighlevel.com/oauth/chooselocation',
       tokenUrl: 'https://services.leadconnectorhq.com/oauth/token',
       scopes: 'contacts.readonly contacts.write opportunities.readonly',
-      callbackPath: '/employee/api/oauth/ghl/callback',
+      callbackPath: '/employee/api/oauth/crm/callback',
     }),
     canva: () => ({
       name: 'Canva',
