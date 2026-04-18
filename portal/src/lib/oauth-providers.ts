@@ -20,7 +20,7 @@ export function getProvider(key: string): OAuthProvider | null {
       clientSecret: process.env.GHL_OAUTH_CLIENT_SECRET || '',
       authorizeUrl: 'https://marketplace.gohighlevel.com/oauth/chooselocation',
       tokenUrl: 'https://services.leadconnectorhq.com/oauth/token',
-      scopes: 'contacts.readonly contacts.write opportunities.readonly',
+      scopes: 'contacts.readonly contacts.write calendars.readonly calendars.write calendars/events.readonly calendars/events.write conversations.readonly conversations.write conversations/message.readonly conversations/message.write opportunities.readonly opportunities.write',
       callbackPath: '/employee/api/oauth/crm/callback',
     }),
     canva: () => ({
