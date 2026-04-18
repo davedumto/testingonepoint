@@ -31,6 +31,12 @@ export default function SignupPage() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 16px 48px' }}>
       <div style={{ width: '100%', maxWidth: 420 }}>
+        <div style={{ marginBottom: 16 }}>
+          <a href="https://www.onepointinsuranceagency.com" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--muted)', textDecoration: 'none' }}>
+            <svg style={{ width: 16, height: 16 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to website
+          </a>
+        </div>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img src="/logo.webp" alt="OnePoint Insurance Agency" style={{ height: 44, width: 'auto', marginBottom: 16 }} />
           <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--navy)' }}>Create your account</h1>

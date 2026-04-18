@@ -440,8 +440,6 @@
         <div class="mega-menu">
           <div class="mega-sidebar">
             <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
-            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
-            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
           </div>
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
@@ -530,31 +528,12 @@
                 </ul>
               </div>
             </div>
-            <div class="mega-panel" id="panel-claims">
-              <div class="mega-col">
-                <h5>File a Claim</h5>
-                <ul>
-                  <li><a href="client-services/">Start a Claim</a></li>
-                  <li><a href="client-services/">Upload Documents</a></li>
-                  <li><a href="client-services/">Check Claim Status</a></li>
-                </ul>
-              </div>
             </div>
-            <div class="mega-panel" id="panel-about">
-              <div class="mega-col">
-                <h5>Company</h5>
-                <ul>
-                  <li><a href="about/">About Us</a></li>
-                  <li><a href="partners/">Our Carriers</a></li>
-                  <li><a href="onepointblog/">Blog</a></li>
-                  <li><a href="contact/">Contact Us</a></li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
       </li>
-      <li><a href="client-services/">Claims</a></li>
+      <li><a href="https://testingonepoint-7ly8.vercel.app/login">Client Portal</a></li>
       <li><a href="about/">About Us</a></li>
       <li><a href="contact/">Contact</a></li>
     </ul>
@@ -566,8 +545,24 @@
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="book/" class="nav-cta">Get a Quote</a>
     </div>
+    <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="auto/">Auto Insurance</a>
+  <a href="home/">Homeowners</a>
+  <a href="health/">Health Insurance</a>
+  <a href="life/">Life Insurance</a>
+  <a href="disability/">Disability</a>
+  <a href="business/">Business Insurance</a>
+  <a href="about/">About Us</a>
+  <a href="contact/">Contact</a>
+  <a href="https://testingonepoint-7ly8.vercel.app/login">Client Portal</a>
+  <a href="book/" class="mobile-cta">Get a Free Quote</a>
+  <p class="mobile-phone">or call <a href="tel:888-899-8117">888-899-8117</a></p>
+</div>
 
 <!-- HERO -->
 <section class="home-hero">
@@ -575,7 +570,7 @@
     <!-- HOOK — stops attention above the headline -->
     <p style="font-size:14px;font-weight:700;color:#d03030;letter-spacing:.04em;margin-bottom:10px;">Most people are overpaying for insurance — find out in minutes.</p>
     <span class="eyebrow">Independent · Licensed in 18 States</span>
-    <h1>Insurance Done Right — Fast, Simple, and Built Around You</h1>
+    <h1>Insurance Done Right, Fast, Simple, and Built Around You</h1>
     <p style="font-size:17px;color:var(--muted);max-width:620px;margin:14px auto 0;line-height:1.6;">We compare top-rated carriers to find you the best coverage at the best value — so you don't overpay or stay underprotected.</p>
     <p style="font-size:11px;color:var(--subtle);margin-top:16px;">No obligation · No spam · Takes less than 3 minutes</p>
   </div>
@@ -783,7 +778,7 @@
   <div class="container">
     <div class="section-header">
       <div class="section-kicker">Our Coverage</div>
-      <h2 class="section-h2">Coverage Built Around Your Life &amp; Business</h2>
+      <h2 class="section-h2">Coverage Built Around Your Life and Business</h2>
       <p class="section-lead">Most clients improve coverage and reduce costs after switching to OnePoint.</p>
     </div>
     <div class="prod-grid">
@@ -1257,6 +1252,13 @@ function goQuote(e) {
   else window.location.href = 'book/';
 }
 
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.querySelector('.nav-mobile-toggle');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
 function toggleMega(btn) {
   const li = btn.closest('li');
   const isOpen = li.classList.contains('open');

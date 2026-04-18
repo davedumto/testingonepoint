@@ -118,8 +118,6 @@
         <div class="mega-menu">
           <div class="mega-sidebar">
             <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
-            <button class="mega-tab" onclick="switchTab(this,'claims')">Claims</button>
-            <button class="mega-tab" onclick="switchTab(this,'about')">About Us</button>
           </div>
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
@@ -208,12 +206,10 @@
                 </ul>
               </div>
             </div>
-            <div class="mega-panel" id="panel-claims"><div class="mega-col"><h5>File a Claim</h5><ul><li><a href="../client-services/">Start a Claim</a></li><li><a href="../client-services/">Upload Documents</a></li></ul></div></div>
-            <div class="mega-panel" id="panel-about"><div class="mega-col"><h5>Company</h5><ul><li><a href="./">About Us</a></li><li><a href="../partners/">Our Carriers</a></li><li><a href="../contact/">Contact Us</a></li></ul></div></div>
           </div>
         </div>
       </li>
-      <li><a href="../client-services/">Claims</a></li>
+      <li><a href="https://testingonepoint-7ly8.vercel.app/login">Client Portal</a></li>
       <li><a href="./">About Us</a></li>
     </ul>
     <div class="nav-actions">
@@ -224,8 +220,24 @@
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
       <a href="../book/" class="nav-cta">Get a Quote</a>
     </div>
+    <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="../auto/">Auto Insurance</a>
+  <a href="../home/">Homeowners</a>
+  <a href="../health/">Health Insurance</a>
+  <a href="../life/">Life Insurance</a>
+  <a href="../disability/">Disability</a>
+  <a href="../business/">Business Insurance</a>
+  <a href="../about/">About Us</a>
+  <a href="../contact/">Contact</a>
+  <a href="https://testingonepoint-7ly8.vercel.app/login">Client Portal</a>
+  <a href="../book/" class="mobile-cta">Get a Free Quote</a>
+  <p class="mobile-phone">or call <a href="tel:888-899-8117">888-899-8117</a></p>
+</div>
 
 <main>
 
@@ -238,9 +250,9 @@
     </nav>
     <div class="ab-hero-grid">
       <div class="ab-hero-left">
-        <span class="ab-kicker">About OnePoint</span>
-        <h1>Real protection. Real people. <span class="accent"><span>Real easy.</span></span></h1>
-        <p class="lead">At OnePoint, we believe insurance should feel like a conversation, not a chore. We're not here to push policies — we're here to protect people.</p>
+        <span class="ab-kicker">About OnePoint Insurance Agency</span>
+        <h1>Insurance Expertise You Can Trust. Protection You Can Rely On.</h1>
+        <p class="lead">At OnePoint, we don't just sell policies — we design protection strategies that safeguard your income, your assets, and your future. Serving individuals and businesses across 18 states.</p>
         <div class="ab-cta">
           <a href="../book/" class="btn btn-orange">Talk to an Advisor</a>
           <a href="../contact/" class="btn btn-ghost-navy">Contact Us</a>
@@ -276,7 +288,7 @@
         <em>Coast to coast growth</em>
       </div>
       <div class="ab-stat-cell">
-        <strong>50+</strong>
+        <strong>70+</strong>
         <span>Carrier Partners</span>
         <em>A-rated, top-tier</em>
       </div>
@@ -288,34 +300,58 @@
     </div>
   </section>
 
-  <!-- VALUES -->
+  <!-- AUTHORITY STATEMENT -->
+  <section class="section" style="padding:64px 0;">
+    <div class="container" style="max-width:800px;text-align:center;">
+      <div class="section-kicker">Our Mission</div>
+      <h2 class="section-h2">Built to Protect, Designed to Lead</h2>
+      <p class="section-lead">OnePoint Insurance Agency was founded with a simple mission: to give clients better coverage, better guidance, and better outcomes. As an independent brokerage, we are not tied to one carrier. We work for you — analyzing risk, comparing options, and delivering coverage that actually fits.</p>
+    </div>
+  </section>
+
+  <!-- CEO AUTHORITY -->
+  <section style="padding:56px 0;background:var(--bg);">
+    <div class="container" style="max-width:800px;">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;">
+        <div style="width:120px;height:120px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;flex-shrink:0;">VO</div>
+        <div>
+          <div class="section-kicker">Leadership</div>
+          <h2 class="section-h2" style="margin-bottom:12px;">Leadership That Understands Risk</h2>
+          <p style="font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Founded by <strong style="color:var(--navy);">Vera Orji</strong>, OnePoint Insurance Agency was built on the belief that insurance should be strategic — not transactional. With deep industry knowledge and a commitment to client protection, Vera leads a team focused on risk analysis, coverage accuracy, and long-term client protection.</p>
+          <p style="font-size:14px;color:var(--navy);font-weight:600;font-style:italic;">Every policy we recommend is backed by expertise — not guesswork.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT SETS US APART -->
   <section class="ab-values">
     <div class="container">
       <div class="head">
-        <div class="section-kicker">Why Clients Choose Us</div>
-        <h2>What it actually means to be on your side.</h2>
-        <p>Independent agents have one job: get you the right coverage at the right price. Here's how we do it differently.</p>
+        <div class="section-kicker">What Sets Us Apart</div>
+        <h2>Why smart clients choose OnePoint.</h2>
+        <p>We don't just quote — we advise, explain, and guide you to the right decision.</p>
       </div>
       <div class="ab-vgrid">
         <div class="ab-vcard">
           <div class="num">01</div>
-          <h4>Independent &amp; unbiased</h4>
-          <p>We work for you, not insurance companies. Access to multiple carriers means better options and better pricing — no quota chasing.</p>
+          <h4>Independent &amp; Strategic</h4>
+          <p>We compare multiple carriers to find the best fit — not the most convenient option. Your needs come first, always.</p>
         </div>
         <div class="ab-vcard">
           <div class="num">02</div>
-          <h4>Clear communication</h4>
-          <p>No jargon. No confusion. We explain everything in simple terms you can understand and decide on with confidence.</p>
+          <h4>Expert Guidance</h4>
+          <p>We don't just quote — we advise, explain, and guide you to the right decision with clarity and confidence.</p>
         </div>
         <div class="ab-vcard">
           <div class="num">03</div>
-          <h4>Personalized approach</h4>
-          <p>Every client is unique. We listen to your situation and tailor solutions specifically for you — not a generic template.</p>
+          <h4>Tailored Coverage</h4>
+          <p>Every policy is customized based on your real risks — not a template. No two clients get the same recommendation.</p>
         </div>
         <div class="ab-vcard">
           <div class="num">04</div>
-          <h4>Ongoing support</h4>
-          <p>From enrollment through claims, we're with you every step. Your success is our priority — not your premium.</p>
+          <h4>Ongoing Protection</h4>
+          <p>From enrollment to claims to renewal, we stay with you every step of the way. Your success is our priority.</p>
         </div>
       </div>
     </div>
@@ -329,13 +365,13 @@
       </div>
       <div>
         <div class="section-kicker" style="color:var(--blue)">Our Promise</div>
-        <h2>A trusted partner — from quote through claim.</h2>
-        <p class="lead">We measure success by how confident you feel about your coverage, not by what we sold you. Here's what that looks like in practice.</p>
+        <h2>We Stand With You — Before, During, and After the Policy</h2>
+        <p class="lead">We measure success by how confident you feel about your coverage, not by what we sold you.</p>
         <ul>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Accessibility</strong>Real people answer the phone. We don't bury you in menus or chatbots.</div></li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Proactive management</strong>We re-shop your policies before renewal — not after a rate hike.</div></li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Transparency</strong>You see the carriers, the rates, and the trade-offs. No hidden anything.</div></li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>Empathy &amp; reliability</strong>Claims are stressful. We stay with you through every call and form.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>We answer when you call</strong>Real people, not menus or chatbots. Your advisor knows your name and your policy.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>We review your coverage proactively</strong>We re-shop your policies before renewal — not after a rate hike surprises you.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>We guide you through claims</strong>Claims are stressful. We advocate for you and make sure nothing is missed.</div></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><div><strong>We protect your long-term interests</strong>Your life changes. We make sure your coverage keeps pace with your growth.</div></li>
         </ul>
         <a href="../book/" class="btn btn-orange">Schedule a Call</a>
       </div>
@@ -345,9 +381,9 @@
   <!-- STATES SERVED -->
   <section class="ab-states">
     <div class="head">
-      <div class="section-kicker">Where We Serve</div>
+      <div class="section-kicker">Growing With Our Clients</div>
       <h2>Licensed across 18 states.</h2>
-      <p>Headquartered in Alpharetta, GA — protecting clients from coast to coast.</p>
+      <p>From local beginnings to multi-state reach — our focus remains the same: protecting what matters most.</p>
     </div>
     <div class="ab-state-grid">
       <div class="ab-state">GA <span>Georgia</span></div>
@@ -374,13 +410,14 @@
   <!-- CTA -->
   <section class="cta-band">
     <div class="container">
-      <div class="section-kicker">Get Started</div>
-      <h2 class="section-h2">Ready to work with people who actually have your back?</h2>
-      <p>A short conversation is all it takes. We'll listen first, shop the market, and recommend coverage that actually fits your life.</p>
+      <div class="section-kicker">Work With Us</div>
+      <h2 class="section-h2">Work With a Brokerage That Puts You First</h2>
+      <p>A short conversation can change how well you're protected. We'll listen first, analyze your risks, and recommend coverage that actually fits.</p>
       <div class="cta-band-actions">
-        <a href="../book/" class="btn btn-orange">Book a Free Consultation</a>
+        <a href="../book/" class="btn btn-orange" style="font-size:16px;padding:16px 36px;">Get a Free Quote</a>
         <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
       </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.45);margin-top:18px;">No obligation · Licensed advisors · Serving 18 states</p>
     </div>
   </section>
 
@@ -389,17 +426,34 @@
 <footer class="site-footer">
   <div class="container">
     <div class="ft-grid">
-      <div><div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div><p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p><div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div><div class="ft-social"><a href="https://facebook.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a><a href="https://g.page/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg></a><a href="https://instagram.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="https://linkedin.com/company/onepointinsurance-agency" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div></div>
+      <div>
+        <div class="ft-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo"></div>
+        <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
+        <div class="ft-states"><span class="ft-state">GA</span><span class="ft-state">AL</span><span class="ft-state">AZ</span><span class="ft-state">FL</span><span class="ft-state">IL</span><span class="ft-state">LA</span><span class="ft-state">MD</span><span class="ft-state">MI</span><span class="ft-state">MS</span><span class="ft-state">MO</span><span class="ft-state">NJ</span><span class="ft-state">NY</span><span class="ft-state">NC</span><span class="ft-state">OH</span><span class="ft-state">SC</span><span class="ft-state">TN</span><span class="ft-state">TX</span><span class="ft-state">VA</span></div>
+        <div class="ft-social">
+          <a href="https://facebook.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://g.page/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg></a>
+          <a href="https://instagram.com/onepointinsuranceagency" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://linkedin.com/company/onepointinsurance-agency" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="./">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
       <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="../book/">Schedule a Call</a></li></ul></div>
-      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div></div>
+      <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div><div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon-Fri, 9am-6pm ET</div></div></div>
     </div>
-    <div class="ft-bottom"><p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
+    <div class="ft-bottom"><p>&copy; 2025 OnePoint Insurance Agency. All Rights Reserved.</p><div class="ft-bottom-links"><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></div></div>
   </div>
 </footer>
 
 <script>
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.querySelector('.nav-mobile-toggle');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
 function toggleMega(btn){const li=btn.closest('li');const isOpen=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));if(!isOpen)li.classList.add('open');}
 function switchTab(btn,panel){btn.closest('.mega-sidebar').querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');btn.closest('.mega-menu').querySelectorAll('.mega-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');}
 function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
