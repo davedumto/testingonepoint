@@ -133,7 +133,7 @@ function EmployeeDashboardContent() {
               )}
 
               {/* Action buttons */}
-              <div style={{ display: 'flex', gap: 8 }}>
+              <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
                 {accessStatus === 'none' || accessStatus === 'denied' ? (
                   <button
                     onClick={() => requestAccess(key)}
@@ -144,14 +144,27 @@ function EmployeeDashboardContent() {
                     {requesting === key ? 'Requesting...' : 'Request Access'}
                   </button>
                 ) : accessStatus === 'pending' ? (
-                  <div style={{ flex: 1, padding: '8px 16px', background: 'var(--surface)', textAlign: 'center', fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>
+                  <div style={{ padding: '8px 16px', background: 'var(--surface)', textAlign: 'center', fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>
                     Awaiting Admin Approval
+                  </div>
+                ) : accessStatus === 'approved' && lastAuth ? (
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: 'rgba(46,154,85,0.06)', border: '1px solid rgba(46,154,85,0.15)', textAlign: 'center' }}>
+                      <svg style={{ width: 16, height: 16, color: '#2e9a55', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: '#2e9a55' }}>Authenticated</span>
+                    </div>
+                    <a
+                      href={`/employee/api/oauth/${key}`}
+                      style={{ display: 'block', textAlign: 'center', marginTop: 8, fontSize: 12, color: 'var(--muted)', textDecoration: 'none' }}
+                    >
+                      Re-authenticate
+                    </a>
                   </div>
                 ) : accessStatus === 'approved' ? (
                   <a
                     href={`/employee/api/oauth/${key}`}
                     className="btn btn-teal"
-                    style={{ padding: '8px 16px', fontSize: 12, flex: 1, textAlign: 'center', textDecoration: 'none' }}
+                    style={{ padding: '8px 16px', fontSize: 12, textAlign: 'center', textDecoration: 'none' }}
                   >
                     Authenticate Now
                   </a>
