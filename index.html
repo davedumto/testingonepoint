@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="coverage-pages.css">
-<script src="quote-modal.js" defer></script>
+<!-- quote-modal.js removed — pages use dedicated quote forms -->
 <style>
 /* ── HOME-PAGE HERO — Travelers-style scene grid + split action cards, sharpened with our design system ── */
 
@@ -293,7 +293,7 @@
   display: inline-flex; align-items: center; gap: 8px;
 }
 .prod-card-kicker::before {
-  content: ''; width: 18px; height: 1.5px; background: var(--blue);
+  display: none;
 }
 .prod-card-body h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
 .prod-card.featured .prod-card-body h3 { font-size: 28px; margin-bottom: 14px; }
@@ -421,6 +421,13 @@
 }
 @media (max-width: 640px) {
   .prod-grid, .why-grid-home, .process-grid { grid-template-columns: 1fr; }
+  .prod-grid { align-items: start; gap: 12px; grid-auto-rows: min-content; }
+  .prod-card, .prod-card.featured { min-height: 0 !important; height: auto !important; align-self: start !important; border: none !important; box-shadow: 0 1px 4px rgba(5,40,71,.1); grid-column: span 1 !important; }
+  .prod-card-body, .prod-card.featured .prod-card-body { flex: none !important; padding: 16px 18px; }
+  .prod-card-body p, .prod-card.featured .prod-card-body p { flex: none !important; margin-bottom: 8px; }
+  .prod-card-img { height: 140px; }
+  .prod-card.featured .prod-card-img { height: 160px; }
+  .prod-card.featured .prod-card-body { padding: 16px 18px; }
   .home-stats-inner { flex-wrap: wrap; }
   .home-stat { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,.1); }
 }
@@ -438,12 +445,12 @@
         <div class="mega-menu">
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
-              <div class="mega-col"><h5>Auto</h5><ul><li><a href="auto/">Auto Insurance</a></li><li><a href="auto/#classic">Classic Car</a></li><li><a href="auto/#motorcycle">Motorcycle</a></li><li><a href="auto/#rv">RV &amp; Trailer</a></li><li><a href="auto/#boat">Boat</a></li></ul></div>
-              <div class="mega-col"><h5>Homeowners</h5><ul><li><a href="home/">Homeowners</a></li><li><a href="home/#condo">Condo</a></li><li><a href="home/#renters">Renters</a></li><li><a href="home/#flood">Flood</a></li><li><a href="home/#umbrella">Umbrella</a></li></ul></div>
-              <div class="mega-col"><h5>Health</h5><ul><li><a href="health/">Marketplace (ACA)</a></li><li><a href="health/#short">Short-Term Medical</a></li><li><a href="health/#dental">Dental</a></li><li><a href="health/#vision">Vision</a></li><li><a href="health/#medicare">Medicare</a></li></ul></div>
-              <div class="mega-col"><h5>Life</h5><ul><li><a href="life/">Term Life</a></li><li><a href="life/#whole">Whole Life</a></li><li><a href="life/#final">Final Expense</a></li><li><a href="life/#universal">Universal Life</a></li></ul></div>
-              <div class="mega-col"><h5>Disability</h5><ul><li><a href="disability/">Disability Income</a></li><li><a href="disability/#long">Long-Term</a></li><li><a href="disability/#short">Short-Term</a></li></ul></div>
-              <div class="mega-col"><h5>Business</h5><ul><li><a href="business/">General Liability</a></li><li><a href="business/#cauto">Commercial Auto</a></li><li><a href="business/#wc">Workers' Comp</a></li><li><a href="business/#bop">BOP</a></li><li><a href="business/#pl">Professional Liability</a></li></ul></div>
+              <div class="mega-col"><h5>Auto</h5><ul><li><a href="auto/">Auto Insurance</a></li><li><a href="auto/#classic">Antique / Classic Car</a></li><li><a href="auto/#atv">ATV</a></li><li><a href="auto/#motorcycle">Motorcycle</a></li><li><a href="auto/#rv">RV &amp; Travel Trailer</a></li><li><a href="auto/#boat">Boat &amp; Watercraft</a></li><li><a href="auto/#snowmobile">Snowmobile</a></li><li><a href="auto/#scooter">Scooter</a></li></ul></div>
+              <div class="mega-col"><h5>Homeowners</h5><ul><li><a href="home/">Homeowners</a></li><li><a href="home/#condo">Condo</a></li><li><a href="home/#mobile">Mobile Home</a></li><li><a href="home/#renters">Renters</a></li><li><a href="home/#flood">Flood</a></li><li><a href="home/#landlord">Landlord</a></li><li><a href="home/#umbrella">Umbrella</a></li></ul></div>
+              <div class="mega-col"><h5>Health</h5><ul><li><a href="health/">Marketplace (ACA)</a></li><li><a href="health/#short">Short-Term Medical</a></li><li><a href="health/#dental">Dental</a></li><li><a href="health/#vision">Vision</a></li><li><a href="health/#medicare">Medicare Advantage</a></li><li><a href="health/#accident">Accident</a></li><li><a href="health/#hospital">Hospitalization</a></li><li><a href="health/#group">Group Health</a></li><li><a href="health/#travel">International Travel</a></li><li><a href="health/#critical">Critical Illness</a></li></ul></div>
+              <div class="mega-col"><h5>Life</h5><ul><li><a href="life/">Term Life</a></li><li><a href="life/#whole">Whole Life</a></li><li><a href="life/#final">Final Expense</a></li><li><a href="life/#universal">Universal Life</a></li><li><a href="life/#iul">Indexed Universal Life</a></li><li><a href="life/#annuity">Annuity</a></li><li><a href="life/#group">Group Life</a></li><li><a href="life/#critical">Critical Illness</a></li></ul></div>
+              <div class="mega-col"><h5>Disability</h5><ul><li><a href="disability/">Disability Income</a></li><li><a href="disability/#individual">Individual DI</a></li><li><a href="disability/#long">Long-Term</a></li><li><a href="disability/#short">Short-Term</a></li><li><a href="disability/#group">Group Disability</a></li><li><a href="disability/#boe">Business Overhead</a></li></ul></div>
+              <div class="mega-col"><h5>Business</h5><ul><li><a href="business/">General Liability</a></li><li><a href="business/#cauto">Commercial Auto</a></li><li><a href="business/#truck">Trucking</a></li><li><a href="business/#cyber">Cyber</a></li><li><a href="business/#prop">Commercial Property</a></li><li><a href="business/#pl">Professional Liability</a></li><li><a href="business/#mal">Malpractice</a></li><li><a href="business/#sport">Sport Insurance</a></li><li><a href="business/#wc">Workers' Comp</a></li><li><a href="business/#bop">Business Owners (BOP)</a></li><li><a href="business/#liq">Liquor Liability</a></li><li><a href="business/#uml">Commercial Umbrella</a></li><li><a href="business/#garage">Garage</a></li><li><a href="business/#event">Event Insurance</a></li><li><a href="business/#travel">Travel Insurance</a></li></ul></div>
             </div>
           </div>
         </div>
@@ -567,24 +574,6 @@
   </div>
   </div>
 
-  <div class="home-utility">
-    <a href="client-services/">
-      <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
-      Pay my bill
-    </a>
-    <a href="client-services/">
-      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-      File a claim
-    </a>
-    <a href="about/">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8z"/></svg>
-      Find an agent
-    </a>
-    <a href="contact/">
-      <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-      Contact us
-    </a>
-  </div>
   <p style="text-align:center;font-size:12px;color:var(--muted);margin:18px auto 0;padding:0 28px;">Takes less than 3 minutes · No obligation · No spam</p>
   <p style="text-align:center;font-size:15px;color:var(--navy);font-weight:600;margin:14px auto 0;padding:0 28px;max-width:560px;">Because one unexpected moment shouldn't cost you everything.</p>
 </section>
@@ -1076,7 +1065,7 @@
     <div class="ft-grid">
       <div>
         <div class="ft-brand">
-          <img src="logo.webp" alt="OnePoint Insurance Agency" class="ft-brand-logo">
+          <img src="logo-footer.png" alt="OnePoint Insurance Agency" class="ft-brand-logo">
         </div>
         <p class="ft-desc">Your independent advocate for insurance that truly fits. Protecting families and businesses across 18 states with honesty, care, and expertise.</p>
         <div class="ft-states">
@@ -1121,14 +1110,24 @@
       </div>
       <div class="ft-col">
         <h5>Contact</h5>
-        <div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div>
-        <div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Toll-Free</div><div class="ft-contact-val"><a href="tel:888-899-8117">1-888-899-8117</a></div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Local</div><div class="ft-contact-val"><a href="tel:770-884-8117">770-884-8117</a></div></div>
+        <div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointinsuranceagency.com</a></div></div>
         <div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div>
         <div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon–Fri, 9am–6pm ET</div></div>
       </div>
     </div>
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding:24px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Certifications</span>
+      <img src="68e681a90650b566cbe08739.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+      <img src="685a853e3daa6b419b43cdb2.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+      <img src="685a853e8e17408d41272967.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+      <img src="685a853e8e174045a5272966.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+      <img src="689d09a6d232a3616b169fb8.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+      <img src="689d09a64687e1340bb979bc.png" alt="Certificate" style="height:48px;width:auto;opacity:.85;">
+    </div>
     <div class="ft-bottom">
-      <p>© 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
+      <p>&copy; 2025 OnePoint Insurance Agency. All Rights Reserved.</p>
       <div class="ft-bottom-links">
         <a href="privacy/">Privacy Policy</a>
         <a href="terms/">Terms of Use</a>
@@ -1155,11 +1154,8 @@ function heroQuote() {
 }
 function goQuote(e) {
   e.preventDefault();
-  var productLabel = (document.querySelector('.qc-product-name') || {}).textContent || 'Auto Insurance';
-  var zipEl = document.getElementById('zip-home');
-  var zip = zipEl ? zipEl.value : '';
-  if (window.openQM) openQM(productLabel.trim(), { zip: zip });
-  else window.location.href = 'book/';
+  var zip = (document.getElementById('zip-home') || {}).value || '';
+  window.location.href = 'auto-quote/' + (zip ? '?zip=' + encodeURIComponent(zip) : '');
 }
 
 function toggleMobileMenu() {
