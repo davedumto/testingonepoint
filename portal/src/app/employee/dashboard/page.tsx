@@ -20,6 +20,25 @@ const APP_INFO: Record<string, { name: string; description: string; color: strin
   microsoft: { name: 'Microsoft 365', description: 'Email, SharePoint, Teams, and Office apps', color: '#052847' },
 };
 
+// Employees must re-authenticate with each connected app every 24 hours.
+const AUTH_FRESHNESS_MS = 24 * 60 * 60 * 1000;
+
+function isAuthFresh(lastAuth?: string | null): boolean {
+  if (!lastAuth) return false;
+  const t = new Date(lastAuth).getTime();
+  if (Number.isNaN(t)) return false;
+  return Date.now() - t < AUTH_FRESHNESS_MS;
+}
+
+function formatRelative(iso: string): string {
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const hrs = Math.floor(diffMs / 3600000);
+  if (hrs < 1) return 'under an hour ago';
+  if (hrs < 24) return `${hrs} hour${hrs === 1 ? '' : 's'} ago`;
+  const days = Math.floor(hrs / 24);
+  return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
 function EmployeeDashboardContent() {
   const searchParams = useSearchParams();
   const [apps, setApps] = useState<AppStatus[]>([]);
@@ -92,12 +111,21 @@ function EmployeeDashboardContent() {
         </p>
       </div>
 
-      {/* App cards */}
+      {/* App cards — only apps the admin has enabled on the App Gateway */}
+      {apps.length === 0 ? (
+        <div className="card" style={{ textAlign: 'center', padding: 48 }}>
+          <p style={{ color: 'var(--muted)', fontSize: 14 }}>
+            No apps are available right now. Check back later or contact your admin.
+          </p>
+        </div>
+      ) : (
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        {Object.entries(APP_INFO).map(([key, info]) => {
-          const status = apps.find(a => a.provider === key);
-          const accessStatus = status?.accessStatus || 'none';
-          const lastAuth = status?.lastAuthenticated;
+        {apps.map((status) => {
+          const key = status.provider;
+          const info = APP_INFO[key];
+          if (!info) return null;
+          const accessStatus = status.accessStatus;
+          const lastAuth = status.lastAuthenticated;
 
           return (
             <div key={key} className="card" style={{ padding: 24 }}>
@@ -127,8 +155,10 @@ function EmployeeDashboardContent() {
 
               {/* Last authenticated */}
               {lastAuth && (
-                <p style={{ fontSize: 12, color: 'var(--subtle)', marginBottom: 12 }}>
-                  Last authenticated: {new Date(lastAuth).toLocaleString()}
+                <p style={{ fontSize: 12, color: isAuthFresh(lastAuth) ? 'var(--subtle)' : '#d97706', marginBottom: 12 }}>
+                  {isAuthFresh(lastAuth)
+                    ? `Last authenticated: ${new Date(lastAuth).toLocaleString()}`
+                    : `Expired \u2014 last authenticated ${formatRelative(lastAuth)}`}
                 </p>
               )}
 
@@ -147,7 +177,7 @@ function EmployeeDashboardContent() {
                   <div style={{ padding: '8px 16px', background: 'var(--surface)', textAlign: 'center', fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>
                     Awaiting Admin Approval
                   </div>
-                ) : accessStatus === 'approved' && lastAuth ? (
+                ) : accessStatus === 'approved' && isAuthFresh(lastAuth) ? (
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: 'rgba(46,154,85,0.06)', border: '1px solid rgba(46,154,85,0.15)', textAlign: 'center' }}>
                       <svg style={{ width: 16, height: 16, color: '#2e9a55', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
@@ -166,7 +196,7 @@ function EmployeeDashboardContent() {
                     className="btn btn-teal"
                     style={{ padding: '8px 16px', fontSize: 12, textAlign: 'center', textDecoration: 'none' }}
                   >
-                    Authenticate Now
+                    {lastAuth ? 'Re-authenticate Now' : 'Authenticate Now'}
                   </a>
                 ) : null}
               </div>
@@ -174,6 +204,7 @@ function EmployeeDashboardContent() {
           );
         })}
       </div>
+      )}
     </div>
   );
 }

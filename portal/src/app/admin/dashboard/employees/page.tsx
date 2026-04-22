@@ -15,7 +15,7 @@ const ALLOWED_TIMEZONES = [
   'UTC',
 ];
 
-interface Emp { _id: string; email: string; name?: string; timezone?: string; isSetup: boolean; addedAt: string; lastLogin?: string; }
+interface Emp { _id: string; email: string; name?: string; timezone?: string; isSetup: boolean; isLocked?: boolean; has2FA?: boolean; addedAt: string; lastLogin?: string; }
 
 export default function AdminEmployeesPage() {
   const [employees, setEmployees] = useState<Emp[]>([]);
@@ -75,6 +75,37 @@ export default function AdminEmployeesPage() {
     if (res.ok) { setToast({ message: 'Employee removed.', type: 'success' }); fetchEmployees(); }
   }
 
+  async function unlockEmployee(email: string) {
+    const res = await secureFetch('/api/admin/employees/unlock', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      setToast({ message: `${email} unlocked.`, type: 'success' });
+      fetchEmployees();
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setToast({ message: d.error || 'Failed to unlock.', type: 'error' });
+    }
+  }
+
+  async function disable2FA(email: string) {
+    if (!confirm(`Disable 2FA for ${email}? They'll log in with password only until they re-enable it.`)) return;
+    const res = await secureFetch('/api/admin/employees/disable-2fa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      setToast({ message: `2FA disabled for ${email}.`, type: 'success' });
+      fetchEmployees();
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setToast({ message: d.error || 'Failed to disable 2FA.', type: 'error' });
+    }
+  }
+
   return (
     <div>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
@@ -121,6 +152,16 @@ export default function AdminEmployeesPage() {
                   }}>
                     {emp.isSetup ? 'Active' : 'Pending Setup'}
                   </span>
+                  {emp.isLocked && (
+                    <span className="badge" style={{ background: 'rgba(220,38,38,0.1)', color: '#dc2626' }}>
+                      Locked
+                    </span>
+                  )}
+                  {emp.has2FA && (
+                    <span className="badge" style={{ background: 'rgba(13,148,136,0.1)', color: '#0d9488' }}>
+                      2FA
+                    </span>
+                  )}
                 </div>
                 <p style={{ fontSize: 12, color: 'var(--muted)' }}>{emp.email}</p>
               </div>
@@ -140,6 +181,16 @@ export default function AdminEmployeesPage() {
                 <p style={{ fontSize: 11, color: 'var(--subtle)' }}>Added {new Date(emp.addedAt).toLocaleDateString()}</p>
                 {emp.lastLogin && <p style={{ fontSize: 11, color: 'var(--subtle)' }}>Last login {new Date(emp.lastLogin).toLocaleString()}</p>}
               </div>
+              {emp.isLocked && (
+                <button onClick={() => unlockEmployee(emp.email)} style={{ fontSize: 12, color: '#0d9488', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+                  Unlock
+                </button>
+              )}
+              {emp.has2FA && (
+                <button onClick={() => disable2FA(emp.email)} style={{ fontSize: 12, color: '#7c3aed', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+                  Disable 2FA
+                </button>
+              )}
               <button onClick={() => removeEmployee(emp._id)} style={{ fontSize: 12, color: 'var(--red)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
                 Remove
               </button>

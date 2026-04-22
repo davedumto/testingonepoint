@@ -80,6 +80,7 @@ export const AUDIT_ACTIONS = {
   RATE_LIMIT_HIT: 'security.rate_limit',
   CSRF_VIOLATION: 'security.csrf_violation',
   AUDIT_CHAIN_BREAK: 'security.audit_chain_break',
+  WEBHOOK_AUTH_FAILED: 'security.webhook_auth_failed',
 } as const;
 
 /**

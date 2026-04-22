@@ -25,8 +25,12 @@ const LoginAttemptSchema = new Schema<ILoginAttempt>({
   lockedAt: { type: Date },
 });
 
-// TTL: auto-delete unlocked attempt records after 24 hours
-LoginAttemptSchema.index({ lastAttempt: 1 }, { expireAfterSeconds: 86400 });
+// TTL: auto-delete attempt records 24h after last attempt, but ONLY if not locked.
+// Locked accounts persist forever and require admin unlock (stated policy above).
+LoginAttemptSchema.index(
+  { lastAttempt: 1 },
+  { expireAfterSeconds: 86400, partialFilterExpression: { locked: false } }
+);
 
 const LoginAttempt = mongoose.models.LoginAttempt || mongoose.model('LoginAttempt', LoginAttemptSchema);
 

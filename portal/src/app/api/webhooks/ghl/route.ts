@@ -1,18 +1,43 @@
 import { NextRequest } from 'next/server';
+import crypto from 'crypto';
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
 import Policy from '@/models/Policy';
 import { hmacEmail } from '@/lib/security/encryption';
+import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
+import { getRequestInfo } from '@/lib/security/request-info';
 import { logger } from '@/lib/logger';
+
+function verifyWebhookSecret(provided: string | null): boolean {
+  const expected = process.env.GHL_WEBHOOK_SECRET;
+  if (!expected || !provided) return false;
+  const a = Buffer.from(provided);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
 
 // Inbound webhook from GHL — receives policy updates when advisor binds a new policy
 export async function POST(req: NextRequest) {
+  const { ip, userAgent } = getRequestInfo(req);
+
+  // Verify shared secret before reading body. GHL workflow "Outbound Webhook"
+  // action is configured to send x-webhook-secret matching GHL_WEBHOOK_SECRET.
+  const provided = req.headers.get('x-webhook-secret');
+  if (!verifyWebhookSecret(provided)) {
+    auditLog({
+      ipAddress: ip,
+      userAgent,
+      action: AUDIT_ACTIONS.WEBHOOK_AUTH_FAILED,
+      status: 'failure',
+      severity: 'critical',
+      details: { endpoint: 'ghl-webhook', reason: provided ? 'mismatch' : 'missing' },
+    });
+    return Response.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   try {
     const payload = await req.json();
-
-    // In production, verify GHL webhook signature here
-    // const signature = req.headers.get('x-ghl-signature');
-    // if (!verifySignature(payload, signature)) return Response.json({ error: 'Invalid signature' }, { status: 403 });
 
     const { type, email, contactId } = payload;
 

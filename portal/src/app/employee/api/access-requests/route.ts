@@ -5,6 +5,8 @@ import AccessRequest from '@/models/AccessRequest';
 import { safeValidate, accessRequestSchema } from '@/lib/security/validation';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { isProviderEnabled } from '@/lib/provider-config';
+import type { ProviderSlug } from '@/models/ProviderConfig';
 
 // GET — list current employee's access requests
 export async function GET() {
@@ -28,6 +30,12 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: validation.error }, { status: 400 });
   }
   const { provider, reason } = validation.data;
+
+  // Reject if admin has disabled this provider on the App Gateway
+  const enabled = await isProviderEnabled(provider as ProviderSlug);
+  if (!enabled) {
+    return Response.json({ error: 'This app is not available right now.' }, { status: 403 });
+  }
 
   await connectDB();
 

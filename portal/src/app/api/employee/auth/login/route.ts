@@ -1,4 +1,6 @@
 import { NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 import { connectDB } from '@/lib/db';
 import { setEmployeeCookie } from '@/lib/employee-auth';
 import Employee from '@/models/Employee';
@@ -8,6 +10,8 @@ import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
 import { hmacEmail } from '@/lib/security/encryption';
 import { generateCSRFToken } from '@/lib/security/csrf';
+
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 // POST — two-phase: check email exists, then login with password
 export async function POST(req: NextRequest) {
@@ -66,22 +70,46 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: 'Invalid password.' }, { status: 401 });
   }
 
-  // Success
+  // Password correct. If 2FA is enabled, issue a short-lived pending cookie
+  // and require the client to POST to /api/employee/auth/2fa/login-verify.
+  const empId = employee._id.toString();
+  const displayName = employee.name || employee.email.split('@')[0];
+
+  if (employee.twoFactorEnabled) {
+    const pendingToken = jwt.sign(
+      { employeeId: empId, email: employee.email, name: displayName, pending2fa: true },
+      JWT_SECRET,
+      { expiresIn: '5m' },
+    );
+    const cookieStore = await cookies();
+    cookieStore.set('op_employee_pending_2fa', pendingToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 300,
+      path: '/',
+    });
+
+    auditLog({ userId: empId, userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { portal: 'employee', requires2FA: true } });
+
+    return Response.json({ success: true, requires2FA: true });
+  }
+
+  // No 2FA — issue full session immediately
   await clearLoginAttempts(email);
   employee.lastLogin = new Date();
   await employee.save();
 
-  const empId = employee._id.toString();
   await setEmployeeCookie({
     employeeId: empId,
     userId: empId,
     email: employee.email,
-    name: employee.name || employee.email.split('@')[0],
+    name: displayName,
   });
 
   await generateCSRFToken();
 
-  auditLog({ userId: employee._id.toString(), userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { portal: 'employee' } });
+  auditLog({ userId: empId, userEmail: email, ipAddress: ip, userAgent, action: AUDIT_ACTIONS.LOGIN, status: 'success', details: { portal: 'employee' } });
 
   return Response.json({
     success: true,

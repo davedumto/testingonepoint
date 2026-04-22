@@ -3,7 +3,9 @@ import { cookies } from 'next/headers';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 const TOKEN_NAME = 'op_session';
-const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+// 20 min of inactivity. The cookie is refreshed on every authenticated
+// server call (see getAuthUser), so any activity keeps the session alive.
+const MAX_AGE = 60 * 20;
 
 interface TokenPayload {
   userId: string;
@@ -35,11 +37,28 @@ export async function setAuthCookie(payload: TokenPayload) {
   });
 }
 
+// Sliding session: every call to getAuthUser re-issues the cookie with a
+// fresh 20-min window. No activity for 20 min → cookie expires → next call
+// returns null → layout redirects to /login.
 export async function getAuthUser(): Promise<TokenPayload | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(TOKEN_NAME)?.value;
   if (!token) return null;
-  return verifyToken(token);
+  const payload = verifyToken(token);
+  if (!payload) return null;
+  const fresh = jwt.sign(
+    { userId: payload.userId, email: payload.email, name: payload.name },
+    JWT_SECRET,
+    { expiresIn: MAX_AGE },
+  );
+  cookieStore.set(TOKEN_NAME, fresh, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: MAX_AGE,
+    path: '/',
+  });
+  return payload;
 }
 
 export async function clearAuthCookie() {

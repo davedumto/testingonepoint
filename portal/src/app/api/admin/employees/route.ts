@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import mongoose from 'mongoose';
 import { getAdminUser } from '@/lib/admin-auth';
 import { connectDB } from '@/lib/db';
 import Employee from '@/models/Employee';
@@ -20,9 +21,28 @@ export async function GET(req: NextRequest) {
   await connectDB();
   const employees = await Employee.find({}, { password: 0 }).sort({ addedAt: -1 });
 
+  // Look up which of these emails are currently locked
+  const emails = employees.map(e => e.email.toLowerCase());
+  const lockedDocs = emails.length
+    ? await mongoose.connection.collection('loginattempts').find(
+        { email: { $in: emails }, locked: true },
+        { projection: { email: 1 } },
+      ).toArray()
+    : [];
+  const lockedSet = new Set(lockedDocs.map(d => d.email));
+
+  const enriched = employees.map(e => {
+    const obj = e.toJSON();
+    return {
+      ...obj,
+      isLocked: lockedSet.has(e.email.toLowerCase()),
+      has2FA: !!e.twoFactorEnabled,
+    };
+  });
+
   auditLog({ userId: admin.userId, userEmail: admin.email, ipAddress: ip, userAgent, action: 'admin.data_viewed', status: 'success', targetResource: 'employees', details: { resultCount: employees.length } });
 
-  return Response.json({ employees });
+  return Response.json({ employees: enriched });
 }
 
 // POST — admin adds an employee email

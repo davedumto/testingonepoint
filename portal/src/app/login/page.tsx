@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function LoginPage() {
+function LoginPageInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const inactiveReason = searchParams.get('reason') === 'inactive';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [totpCode, setTotpCode] = useState('');
@@ -78,6 +80,12 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {inactiveReason && !requires2FA && (
+          <div className="alert" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--navy)', padding: '12px 16px', borderRadius: 6, marginBottom: 16, fontSize: 14 }}>
+            You were signed out after 20 minutes of inactivity. Sign in to continue.
+          </div>
+        )}
+
         {!requires2FA ? (
           <form onSubmit={handleSubmit} className="card">
             {error && <div className="alert alert-error">{error}</div>}
@@ -142,5 +150,13 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageInner />
+    </Suspense>
   );
 }

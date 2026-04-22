@@ -24,14 +24,15 @@ export default function DashboardShell({ user, children }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const [cartCount, setCartCount] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close drawer whenever the route changes on mobile
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
 
   useEffect(() => {
-    function fetchCartCount() {
-      fetch('/api/cart').then(r => r.json()).then(d => setCartCount(d.items?.length || 0)).catch(() => {});
-    }
-    fetchCartCount();
-    const interval = setInterval(fetchCartCount, 10000);
-    return () => clearInterval(interval);
+    // Single fetch on mount. Polling was removed because it also kept the
+    // 20-min inactivity session alive indefinitely.
+    fetch('/api/cart').then(r => r.json()).then(d => setCartCount(d.items?.length || 0)).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -44,6 +45,29 @@ export default function DashboardShell({ user, children }: Props) {
     return () => window.removeEventListener('cart-update', handleCartUpdate);
   }, []);
 
+  // Inactivity logout: after 20 min of no user input, log out and redirect.
+  // Server-side JWT expiry mirrors this; the client timer is for immediate
+  // UX feedback so users don't discover expiry only on next action.
+  useEffect(() => {
+    const IDLE_MS = 20 * 60 * 1000;
+    let timer: ReturnType<typeof setTimeout>;
+    const onIdle = async () => {
+      try { await secureFetch('/api/auth/logout', { method: 'POST' }); } catch { /* ignore */ }
+      router.push('/login?reason=inactive');
+    };
+    const reset = () => {
+      clearTimeout(timer);
+      timer = setTimeout(onIdle, IDLE_MS);
+    };
+    reset();
+    const events: (keyof WindowEventMap)[] = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'];
+    events.forEach(e => window.addEventListener(e, reset, { passive: true }));
+    return () => {
+      clearTimeout(timer);
+      events.forEach(e => window.removeEventListener(e, reset));
+    };
+  }, [router]);
+
   async function handleLogout() {
     await secureFetch('/api/auth/logout', { method: 'POST' });
     router.push('/login');
@@ -53,11 +77,21 @@ export default function DashboardShell({ user, children }: Props) {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex' }}>
+      {/* Mobile backdrop */}
+      <div
+        className={`sidebar-backdrop${mobileOpen ? ' open' : ''}`}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden
+      />
+
       {/* Sidebar */}
-      <aside style={{
-        width: 260, background: '#ffffff', borderRight: '1px solid #e8ecf1',
-        flexShrink: 0, display: 'flex', flexDirection: 'column',
-      }}>
+      <aside
+        className={`sidebar-drawer${mobileOpen ? ' open' : ''}`}
+        style={{
+          width: 260, background: '#ffffff', borderRight: '1px solid #e8ecf1',
+          flexShrink: 0, display: 'flex', flexDirection: 'column',
+        }}
+      >
         {/* Brand */}
         <div style={{ padding: '22px 24px', borderBottom: '1px solid #e8ecf1' }}>
           <img src="/logo.webp" alt="OnePoint Insurance Agency" style={{ height: 36, width: 'auto' }} />
@@ -91,17 +125,34 @@ export default function DashboardShell({ user, children }: Props) {
                 key={item.href}
                 href={item.href}
                 style={{
+                  position: 'relative',
                   display: 'flex', alignItems: 'center', gap: 10,
                   padding: '9px 14px', marginBottom: 2,
                   fontSize: 14, fontWeight: isActive ? 600 : 500,
                   borderRadius: 8,
                   color: isActive ? '#052847' : '#5a6c7e',
                   background: isActive ? '#f0f4f8' : 'transparent',
-                  transition: 'all 0.15s',
-                  borderLeft: isActive ? '3px solid #0d9488' : '3px solid transparent',
+                  transition: 'background 0.2s ease, color 0.2s ease, font-weight 0.2s ease',
+                  textDecoration: 'none',
                 }}
               >
-                <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa' }} />
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 6,
+                    bottom: 6,
+                    width: 3,
+                    borderRadius: 2,
+                    background: '#0d9488',
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? 'scaleY(1)' : 'scaleY(0.4)',
+                    transformOrigin: 'center',
+                    transition: 'opacity 0.25s ease, transform 0.25s ease',
+                  }}
+                />
+                <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa', transition: 'color 0.2s ease' }} />
                 {item.label}
                 {showBadge && (
                   <span style={{
@@ -159,8 +210,24 @@ export default function DashboardShell({ user, children }: Props) {
       </aside>
 
       {/* Main content */}
-      <main style={{ flex: 1, background: '#f4f7fb', overflow: 'auto' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px' }}>
+      <main style={{ flex: 1, background: '#f4f7fb', overflow: 'auto', minWidth: 0 }}>
+        {/* Mobile top bar with hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#fff', borderBottom: '1px solid #e8ecf1' }} className="mobile-topbar">
+          <button
+            type="button"
+            className="mobile-menu-btn"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <img src="/logo.webp" alt="OnePoint" style={{ height: 28, width: 'auto' }} />
+        </div>
+        <div className="shell-content" style={{ maxWidth: 1100, margin: '0 auto', padding: '32px' }}>
           {children}
         </div>
       </main>

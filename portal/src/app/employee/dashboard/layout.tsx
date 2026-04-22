@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { IconDashboard, IconLogout } from '@/components/Icons';
+import { IconDashboard, IconLogout, IconSettings } from '@/components/Icons';
 import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface EmpUser { name: string; email: string }
@@ -19,6 +19,7 @@ function IconGrid({ style }: { style?: React.CSSProperties }) {
 const NAV_ITEMS = [
   { href: '/employee/dashboard', label: 'App Gateway', Icon: IconGrid, exact: true },
   { href: '/employee/dashboard/time-tracking', label: 'Time Tracking', Icon: IconClock, exact: false },
+  { href: '/employee/dashboard/settings', label: 'Settings', Icon: IconSettings, exact: false },
 ];
 
 export default function EmployeeDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -81,18 +82,34 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
                 key={item.href}
                 href={item.href}
                 style={{
+                  position: 'relative',
                   display: 'flex', alignItems: 'center', gap: 10,
                   padding: '9px 14px', marginBottom: 2,
                   fontSize: 14, fontWeight: isActive ? 600 : 500,
                   borderRadius: 8,
                   color: isActive ? '#052847' : '#5a6c7e',
                   background: isActive ? '#f0f4f8' : 'transparent',
-                  transition: 'all 0.15s',
-                  borderLeft: isActive ? '3px solid #0d9488' : '3px solid transparent',
+                  transition: 'background 0.2s ease, color 0.2s ease, font-weight 0.2s ease',
                   textDecoration: 'none',
                 }}
               >
-                <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa' }} />
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 6,
+                    bottom: 6,
+                    width: 3,
+                    borderRadius: 2,
+                    background: '#0d9488',
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? 'scaleY(1)' : 'scaleY(0.4)',
+                    transformOrigin: 'center',
+                    transition: 'opacity 0.25s ease, transform 0.25s ease',
+                  }}
+                />
+                <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa', transition: 'color 0.2s ease' }} />
                 {item.label}
               </Link>
             );

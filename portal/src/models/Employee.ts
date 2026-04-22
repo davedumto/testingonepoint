@@ -13,6 +13,11 @@ export interface IEmployee extends Document {
   addedBy: string;
   addedAt: Date;
   lastLogin?: Date;
+  resetToken?: string;
+  resetTokenExpiry?: Date;
+  twoFactorSecret?: string;
+  twoFactorEnabled: boolean;
+  twoFactorBackupCodes?: string[];
   comparePassword(candidate: string): Promise<boolean>;
 }
 
@@ -26,6 +31,11 @@ const EmployeeSchema = new Schema<IEmployee>({
   addedBy: { type: String, required: true },
   addedAt: { type: Date, default: Date.now },
   lastLogin: { type: Date },
+  resetToken: { type: String, index: true },
+  resetTokenExpiry: { type: Date },
+  twoFactorSecret: { type: String },
+  twoFactorEnabled: { type: Boolean, default: false },
+  twoFactorBackupCodes: { type: [String], default: undefined },
 });
 
 EmployeeSchema.set('toJSON', { getters: true });

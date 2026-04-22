@@ -8,7 +8,7 @@ export async function GET() {
 
   // Fetch fresh data from DB instead of relying on JWT payload
   await connectDB();
-  const employee = await Employee.findById(session.employeeId).select('name email');
+  const employee = await Employee.findById(session.employeeId).select('name email timezone twoFactorEnabled twoFactorBackupCodes');
 
   if (!employee) return Response.json({ error: 'Employee not found' }, { status: 404 });
 
@@ -18,6 +18,9 @@ export async function GET() {
       userId: session.employeeId,
       name: employee.name,
       email: employee.email,
+      timezone: employee.timezone,
+      twoFactorEnabled: !!employee.twoFactorEnabled,
+      backupCodesRemaining: employee.twoFactorBackupCodes?.length ?? 0,
     },
   });
 }
