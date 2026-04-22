@@ -5,10 +5,40 @@ const transporter = nodemailer.createTransport({
   port: Number(process.env.SMTP_PORT) || 587,
   secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
+
+// Sent when a recognized client requests a one-time sign-in code.
+export async function sendClientLoginCode(to: string, name: string, code: string) {
+  await transporter.sendMail({
+    from: `"OnePoint Insurance" <${process.env.SMTP_FROM}>`,
+    to,
+    subject: `Your OnePoint sign-in code: ${code}`,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 24px;">
+        <h1 style="color: #052847; font-size: 24px; text-align: center; margin-bottom: 24px;">Your sign-in code</h1>
+        <p style="color: #1a2e42; font-size: 16px; line-height: 1.6;">Hi ${name},</p>
+        <p style="color: #5a6c7e; font-size: 15px; line-height: 1.6;">
+          Use the code below to sign in to your OnePoint client portal. It expires in 10 minutes.
+        </p>
+        <div style="text-align: center; margin: 32px 0;">
+          <div style="display: inline-block; background: #f4f7fb; border: 1.5px solid #dde4ed; padding: 20px 32px; font-family: 'Courier New', monospace; font-size: 32px; font-weight: 700; letter-spacing: 0.4em; color: #052847;">
+            ${code}
+          </div>
+        </div>
+        <p style="color: #8a9baa; font-size: 13px; line-height: 1.5;">
+          If you didn't request this, you can ignore this email. No one can access your account without this code.
+        </p>
+        <hr style="border: none; border-top: 1px solid #dde4ed; margin: 32px 0;" />
+        <p style="color: #8a9baa; font-size: 11px; text-align: center;">
+          OnePoint Insurance Agency | 888-899-8117
+        </p>
+      </div>
+    `,
+  });
+}
 
 export async function sendWelcomeEmail(to: string, name: string) {
   await transporter.sendMail({
@@ -33,39 +63,6 @@ export async function sendWelcomeEmail(to: string, name: string) {
         </div>
         <p style="color: #8a9baa; font-size: 13px; line-height: 1.5;">
           Questions? Call us at <a href="tel:888-899-8117" style="color: #4a90d9;">888-899-8117</a> or reply to this email.
-        </p>
-        <hr style="border: none; border-top: 1px solid #dde4ed; margin: 32px 0;" />
-        <p style="color: #8a9baa; font-size: 11px; text-align: center;">
-          OnePoint Insurance Agency | 555 NorthPoint Center E, Alpharetta, GA 30022
-        </p>
-      </div>
-    `,
-  });
-}
-
-export async function sendPasswordResetEmail(to: string, name: string, resetToken: string) {
-  const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`;
-
-  await transporter.sendMail({
-    from: `"OnePoint Insurance" <${process.env.SMTP_FROM}>`,
-    to,
-    subject: 'Reset Your OnePoint Portal Password',
-    html: `
-      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 24px;">
-        <h1 style="color: #052847; font-size: 24px; text-align: center; margin-bottom: 24px;">Password Reset</h1>
-        <p style="color: #1a2e42; font-size: 16px; line-height: 1.6;">Hi ${name},</p>
-        <p style="color: #5a6c7e; font-size: 15px; line-height: 1.6;">
-          We received a request to reset your password. Click below to choose a new one.
-          This link expires in 15 minutes.
-        </p>
-        <div style="text-align: center; margin: 32px 0;">
-          <a href="${resetUrl}"
-             style="background: #052847; color: #fff; padding: 14px 32px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;">
-            Reset My Password
-          </a>
-        </div>
-        <p style="color: #8a9baa; font-size: 13px; line-height: 1.5;">
-          If you didn't request this, ignore this email — your password won't change.
         </p>
         <hr style="border: none; border-top: 1px solid #dde4ed; margin: 32px 0;" />
         <p style="color: #8a9baa; font-size: 11px; text-align: center;">

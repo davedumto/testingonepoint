@@ -3,7 +3,8 @@
  *
  * Applies security headers to every response.
  * Validates CSRF tokens on all POST/PUT/PATCH/DELETE requests to /api and /employee/api.
- * Exempts login, signup, webhook, and 2FA-verify routes (they issue tokens, not consume them).
+ * Exempts unauthenticated session-issuing routes (request-code, verify-code,
+ * admin-login, employee login, password setup) and external webhooks.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -11,16 +12,16 @@ import { NextRequest, NextResponse } from 'next/server';
 const CSRF_COOKIE = 'op_csrf';
 const CSRF_HEADER = 'x-csrf-token';
 
-// Routes that are exempt from CSRF validation (they create sessions / are external)
+// Routes that are exempt from CSRF validation. They either issue a session
+// (no cookie yet to validate against) or are inbound from external systems.
 const CSRF_EXEMPT = [
-  '/api/auth/login',
-  '/api/auth/signup',
+  '/api/auth/request-code',
+  '/api/auth/verify-code',
   '/api/auth/admin-login',
-  '/api/auth/forgot-password',
-  '/api/auth/reset-password',
-  '/api/auth/2fa/login-verify',
   '/api/employee/auth/login',
   '/api/employee/auth/setup-password',
+  '/api/employee/auth/forgot-password',
+  '/api/employee/auth/reset-password',
   '/api/webhooks/',
 ];
 

@@ -2,54 +2,54 @@
 
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+
+type Phase = 'identity' | 'code' | 'not-found';
 
 function LoginPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const inactiveReason = searchParams.get('reason') === 'inactive';
+
+  const [phase, setPhase] = useState<Phase>('identity');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [totpCode, setTotpCode] = useState('');
+  const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [requires2FA, setRequires2FA] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleIdentity(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch('/api/auth/request-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Login failed.'); return; }
-
-      if (data.requires2FA) {
-        setRequires2FA(true);
-        return;
+      if (!res.ok) { setError(data.error || 'Something went wrong.'); return; }
+      if (data.matched) {
+        setPhase('code');
+      } else {
+        setPhase('not-found');
       }
-
-      router.push('/dashboard');
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError('Something went wrong.');
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleTOTP(e: React.FormEvent) {
+  async function handleVerify(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/2fa/login-verify', {
+      const res = await fetch('/api/auth/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: totpCode }),
+        body: JSON.stringify({ email, code }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error || 'Verification failed.'); return; }
@@ -61,93 +61,138 @@ function LoginPageInner() {
     }
   }
 
+  async function resendCode() {
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/request-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || 'Something went wrong.'); return; }
+      if (!data.matched) { setPhase('not-found'); return; }
+      setCode('');
+      setError('New code sent. Check your email.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ width: '100%', maxWidth: 420 }}>
+      <div style={{ width: '100%', maxWidth: 440 }}>
         <div style={{ marginBottom: 16 }}>
           <a href="https://www.onepointinsuranceagency.com" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--muted)', textDecoration: 'none' }}>
             <svg style={{ width: 16, height: 16 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Back to website
           </a>
         </div>
+
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img src="/logo.webp" alt="OnePoint Insurance Agency" style={{ height: 74, width: 'auto', marginBottom: 16 }} />
           <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--navy)' }}>
-            {requires2FA ? 'Two-Factor Verification' : 'Welcome back'}
+            {phase === 'code' ? 'Enter your sign-in code' : phase === 'not-found' ? 'We couldn’t find your account' : 'Are you a client?'}
           </h1>
-          <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 4 }}>
-            {requires2FA ? 'Enter the 6-digit code from your authenticator app' : 'Sign in to your client portal'}
+          <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 6, lineHeight: 1.5 }}>
+            {phase === 'identity' && 'Enter your name and email and we’ll look up your details.'}
+            {phase === 'code' && `We sent a 6-digit code to ${email}. It expires in 10 minutes.`}
+            {phase === 'not-found' && 'Your details aren’t in our system yet.'}
           </p>
         </div>
 
-        {inactiveReason && !requires2FA && (
+        {inactiveReason && phase === 'identity' && (
           <div className="alert" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--navy)', padding: '12px 16px', borderRadius: 6, marginBottom: 16, fontSize: 14 }}>
-            You were signed out after 20 minutes of inactivity. Sign in to continue.
+            You were signed out after 20 minutes of inactivity. Sign in again to continue.
           </div>
         )}
 
-        {!requires2FA ? (
-          <form onSubmit={handleSubmit} className="card">
+        {phase === 'identity' && (
+          <form onSubmit={handleIdentity} className="card">
             {error && <div className="alert alert-error">{error}</div>}
 
             <div style={{ marginBottom: 20 }}>
+              <label htmlFor="name" className="label">Full name</label>
+              <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required autoComplete="name" className="input" placeholder="First Last" />
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
               <label htmlFor="email" className="label">Email address</label>
               <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" className="input" placeholder="you@example.com" />
             </div>
 
-            <div style={{ marginBottom: 20 }}>
-              <label htmlFor="password" className="label">Password</label>
-              <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required autoComplete="current-password" className="input" placeholder="Enter your password" />
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 24 }}>
-              <Link href="/forgot-password" style={{ fontSize: 14, fontWeight: 600, color: 'var(--teal)' }}>Forgot password?</Link>
-            </div>
-
             <button type="submit" disabled={loading} className="btn btn-navy btn-full">
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Looking up…' : 'Continue'}
             </button>
-          </form>
-        ) : (
-          <form onSubmit={handleTOTP} className="card">
-            {error && <div className="alert alert-error">{error}</div>}
 
-            <div style={{ padding: '12px 16px', background: 'rgba(13,148,136,0.06)', marginBottom: 20, fontSize: 13, color: 'var(--navy)', lineHeight: 1.5 }}>
-              Signing in as <strong>{email}</strong>. Open your authenticator app and enter the current code.
-            </div>
+            <p style={{ fontSize: 12, color: 'var(--subtle)', marginTop: 16, textAlign: 'center', lineHeight: 1.5 }}>
+              We’ll email you a one-time code to sign in. No password needed.
+            </p>
+          </form>
+        )}
+
+        {phase === 'code' && (
+          <form onSubmit={handleVerify} className="card">
+            {error && (
+              <div className={error.toLowerCase().includes('new code') ? 'alert alert-success' : 'alert alert-error'}>
+                {error}
+              </div>
+            )}
 
             <div style={{ marginBottom: 24 }}>
-              <label htmlFor="totp" className="label">Authentication Code</label>
+              <label htmlFor="code" className="label">6-digit code</label>
               <input
-                id="totp"
+                id="code"
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]{6}"
                 maxLength={6}
-                value={totpCode}
-                onChange={e => setTotpCode(e.target.value.replace(/\D/g, ''))}
+                value={code}
+                onChange={e => setCode(e.target.value.replace(/\D/g, ''))}
                 required
                 autoFocus
+                autoComplete="one-time-code"
                 className="input"
                 placeholder="000000"
                 style={{ textAlign: 'center', fontSize: 24, letterSpacing: '0.3em', fontWeight: 700 }}
               />
             </div>
 
-            <button type="submit" disabled={loading || totpCode.length !== 6} className="btn btn-navy btn-full">
-              {loading ? 'Verifying...' : 'Verify & Sign In'}
+            <button type="submit" disabled={loading || code.length !== 6} className="btn btn-navy btn-full">
+              {loading ? 'Verifying…' : 'Verify & sign in'}
             </button>
 
-            <button type="button" onClick={() => { setRequires2FA(false); setTotpCode(''); setError(''); }} style={{ width: '100%', marginTop: 12, padding: 10, background: 'none', border: 'none', color: 'var(--muted)', fontSize: 13, cursor: 'pointer' }}>
-              ← Back to login
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 16 }}>
+              <button type="button" onClick={() => { setPhase('identity'); setCode(''); setError(''); }} style={{ fontSize: 13, color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                ← Use different details
+              </button>
+              <button type="button" onClick={resendCode} disabled={loading} style={{ fontSize: 13, fontWeight: 600, color: 'var(--teal)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                Resend code
+              </button>
+            </div>
           </form>
         )}
 
-        <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: 'var(--muted)' }}>
-          Don&apos;t have an account?{' '}
-          <Link href="/signup" style={{ fontWeight: 600, color: 'var(--navy)' }}>Create one</Link>
-        </p>
+        {phase === 'not-found' && (
+          <div className="card">
+            <p style={{ fontSize: 15, color: 'var(--ink)', lineHeight: 1.6, marginBottom: 16 }}>
+              We couldn’t match that name and email to a client account. The portal is for current OnePoint clients only.
+            </p>
+            <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6, marginBottom: 24 }}>
+              Ready to become a client? Book a call with a licensed advisor, we’ll build your coverage and set up your portal.
+            </p>
+            <a href="https://www.onepointinsuranceagency.com/book" className="btn btn-navy btn-full" style={{ marginBottom: 10 }}>
+              Book a call
+            </a>
+            <a href="tel:888-899-8117" className="btn btn-outline btn-full">
+              Call 888-899-8117
+            </a>
+            <button type="button" onClick={() => { setPhase('identity'); setError(''); }} style={{ width: '100%', marginTop: 16, padding: 8, background: 'none', border: 'none', color: 'var(--muted)', fontSize: 13, cursor: 'pointer' }}>
+              Try a different name or email
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
