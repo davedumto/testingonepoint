@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import type { Types } from 'mongoose';
 import { z } from 'zod';
 import { getEmployeeUser } from '@/lib/employee-auth';
 import { connectDB } from '@/lib/db';
@@ -58,8 +59,8 @@ export async function GET(req: NextRequest) {
       type: p.type,
       body: p.body,
       praiseRecipientName: p.praiseRecipientName,
-      likes: p.likes.map(id => id.toString()),
-      likedByMe: p.likes.some(id => id.toString() === user.employeeId),
+      likes: p.likes.map((id: Types.ObjectId) => id.toString()),
+      likedByMe: p.likes.some((id: Types.ObjectId) => id.toString() === user.employeeId),
       replyCount: p.replyCount,
       createdAt: p.createdAt,
       replies: (repliesByPost.get(p._id.toString()) || []).map(r => ({
