@@ -3,23 +3,35 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { IconDashboard, IconLogout, IconSettings } from '@/components/Icons';
+import { IconLogout, IconSettings } from '@/components/Icons';
 import { secureFetch } from '@/lib/client/secure-fetch';
 
 interface EmpUser { name: string; email: string }
 
-function IconClock({ style }: { style?: React.CSSProperties }) {
-  return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
-}
+type P = { style?: React.CSSProperties };
+function IconHome({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/></svg>; }
+function IconNews({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>; }
+function IconChat({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>; }
+function IconDocs({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>; }
+function IconTools({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>; }
+function IconDirectory({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>; }
+function IconCalendar({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>; }
+function IconClock({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>; }
+function IconBook({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>; }
+function IconUser({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>; }
 
-function IconGrid({ style }: { style?: React.CSSProperties }) {
-  return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
-}
-
-const NAV_ITEMS = [
-  { href: '/employee/dashboard', label: 'App Gateway', Icon: IconGrid, exact: true },
-  { href: '/employee/dashboard/time-tracking', label: 'Time Tracking', Icon: IconClock, exact: false },
-  { href: '/employee/dashboard/settings', label: 'Settings', Icon: IconSettings, exact: false },
+const NAV_ITEMS: { href: string; label: string; Icon: (p: P) => React.ReactElement; exact: boolean; group: string }[] = [
+  { href: '/employee/dashboard', label: 'Team Hub', Icon: IconHome, exact: true, group: 'Hub' },
+  { href: '/employee/dashboard/news', label: 'News', Icon: IconNews, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/conversations', label: 'Conversations', Icon: IconChat, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/documents', label: 'Documents', Icon: IconDocs, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/tools', label: 'Tools & Resources', Icon: IconTools, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/directory', label: 'Team Directory', Icon: IconDirectory, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/meetings', label: 'Meetings', Icon: IconCalendar, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/learning', label: 'Learning Hub', Icon: IconBook, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/time-tracking', label: 'Time Tracking', Icon: IconClock, exact: false, group: 'Me' },
+  { href: '/employee/dashboard/profile', label: 'My Profile', Icon: IconUser, exact: false, group: 'Me' },
+  { href: '/employee/dashboard/settings', label: 'Settings', Icon: IconSettings, exact: false, group: 'Me' },
 ];
 
 export default function EmployeeDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -44,10 +56,10 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
     : '..';
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex' }}>
-      {/* Sidebar */}
+    <div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+      {/* Sidebar — fixed to viewport height; only its own nav scrolls if overflowing */}
       <aside style={{
-        width: 260, background: '#ffffff', borderRight: '1px solid #e8ecf1',
+        width: 260, height: '100vh', background: '#ffffff', borderRight: '1px solid #e8ecf1',
         flexShrink: 0, display: 'flex', flexDirection: 'column',
       }}>
         {/* Brand */}
@@ -72,48 +84,54 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
         </div>
 
         {/* Navigation */}
-        <nav style={{ flex: 1, padding: '12px' }}>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a9baa', padding: '8px 14px 6px', marginTop: 4 }}>Menu</p>
-          {NAV_ITEMS.map(item => {
-            const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  position: 'relative',
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '9px 14px', marginBottom: 2,
-                  fontSize: 14, fontWeight: isActive ? 600 : 500,
-                  borderRadius: 8,
-                  color: isActive ? '#052847' : '#5a6c7e',
-                  background: isActive ? '#f0f4f8' : 'transparent',
-                  transition: 'background 0.2s ease, color 0.2s ease, font-weight 0.2s ease',
-                  textDecoration: 'none',
-                }}
-              >
-                <span
-                  aria-hidden
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 6,
-                    bottom: 6,
-                    width: 3,
-                    borderRadius: 2,
-                    background: '#0d9488',
-                    opacity: isActive ? 1 : 0,
-                    transform: isActive ? 'scaleY(1)' : 'scaleY(0.4)',
-                    transformOrigin: 'center',
-                    transition: 'opacity 0.25s ease, transform 0.25s ease',
-                  }}
-                />
-                <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa', transition: 'color 0.2s ease' }} />
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav style={{ flex: 1, padding: '12px', overflowY: 'auto' }}>
+          {(() => {
+            const seen: string[] = [];
+            const byGroup: Record<string, typeof NAV_ITEMS> = {};
+            NAV_ITEMS.forEach(item => {
+              if (!byGroup[item.group]) { byGroup[item.group] = []; seen.push(item.group); }
+              byGroup[item.group].push(item);
+            });
+            return seen.map(group => (
+              <div key={group} style={{ marginBottom: 10 }}>
+                <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a9baa', padding: '8px 14px 6px' }}>{group}</p>
+                {byGroup[group].map(item => {
+                  const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      style={{
+                        position: 'relative',
+                        display: 'flex', alignItems: 'center', gap: 10,
+                        padding: '9px 14px', marginBottom: 2,
+                        fontSize: 14, fontWeight: isActive ? 600 : 500,
+                        borderRadius: 8,
+                        color: isActive ? '#052847' : '#5a6c7e',
+                        background: isActive ? '#f0f4f8' : 'transparent',
+                        transition: 'background 0.2s ease, color 0.2s ease, font-weight 0.2s ease',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <span
+                        aria-hidden
+                        style={{
+                          position: 'absolute', left: 0, top: 6, bottom: 6, width: 3, borderRadius: 2,
+                          background: '#0d9488',
+                          opacity: isActive ? 1 : 0,
+                          transform: isActive ? 'scaleY(1)' : 'scaleY(0.4)',
+                          transformOrigin: 'center',
+                          transition: 'opacity 0.25s ease, transform 0.25s ease',
+                        }}
+                      />
+                      <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa', transition: 'color 0.2s ease' }} />
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            ));
+          })()}
         </nav>
 
         {/* Footer */}
@@ -134,8 +152,8 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
         </div>
       </aside>
 
-      {/* Main content */}
-      <main style={{ flex: 1, background: '#f4f7fb', overflow: 'auto' }}>
+      {/* Main content — the only scrollable region on desktop */}
+      <main style={{ flex: 1, background: '#f4f7fb', overflowY: 'auto', height: '100vh' }}>
         {children}
       </main>
     </div>

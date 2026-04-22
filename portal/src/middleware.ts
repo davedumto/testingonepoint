@@ -23,6 +23,7 @@ const CSRF_EXEMPT = [
   '/api/employee/auth/forgot-password',
   '/api/employee/auth/reset-password',
   '/api/webhooks/',
+  '/api/pusher/auth',
 ];
 
 function isCSRFExempt(pathname: string): boolean {
@@ -72,7 +73,7 @@ export function middleware(req: NextRequest) {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https:",
-    "connect-src 'self' https://services.leadconnectorhq.com https://hooks.leadconnectorhq.com",
+    "connect-src 'self' https://services.leadconnectorhq.com https://hooks.leadconnectorhq.com wss://*.pusher.com https://*.pusher.com https://sockjs-mt1.pusher.com wss://ws-mt1.pusher.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
