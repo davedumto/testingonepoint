@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
 import { secureFetch } from '@/lib/client/secure-fetch';
+import { formatDateTime } from '@/lib/client/format-time';
 
 interface Suggestion {
   _id: string;
@@ -14,7 +15,16 @@ interface Suggestion {
   adminNotes?: string;
   reviewedBy?: string;
   reviewedAt?: string;
+  assignedTo?: string;
+  assignedAt?: string;
+  assignedBy?: string;
   createdAt: string;
+}
+
+interface EmployeeOption {
+  _id: string;
+  name?: string;
+  email: string;
 }
 
 const STATUSES: { value: Suggestion['status']; label: string; color: string }[] = [
@@ -31,6 +41,32 @@ export default function SuggestionsAdminPage() {
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [notesDraft, setNotesDraft] = useState<Record<string, string>>({});
+  const [employees, setEmployees] = useState<EmployeeOption[]>([]);
+  const [assignOpen, setAssignOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/admin/employees')
+      .then(r => r.json())
+      .then((d: { employees?: EmployeeOption[] }) => {
+        if (d.employees) setEmployees(d.employees);
+      });
+  }, []);
+
+  async function assign(suggestionId: string, assigneeId: string) {
+    const res = await secureFetch(`/api/admin/suggestions/${suggestionId}/assign`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ assigneeId }),
+    });
+    if (res.ok) {
+      setToast({ message: 'Tagged. Notification sent.', type: 'success' });
+      setAssignOpen(null);
+      load();
+    } else {
+      const data = await res.json().catch(() => ({}));
+      setToast({ message: data.error || 'Could not tag.', type: 'error' });
+    }
+  }
 
   function load() {
     const url = filter === 'all' ? '/api/admin/suggestions' : `/api/admin/suggestions?status=${filter}`;
@@ -92,7 +128,7 @@ export default function SuggestionsAdminPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 8, flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 200 }}>
                   <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{s.submitterName}</p>
-                  <p style={{ fontSize: 12, color: 'var(--muted)' }}>{s.submitterEmail} · {new Date(s.createdAt).toLocaleString()}</p>
+                  <p style={{ fontSize: 12, color: 'var(--muted)' }}>{s.submitterEmail} · {formatDateTime(s.createdAt)}</p>
                 </div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   <span className="badge" style={{ background: `${statusCfg.color}22`, color: statusCfg.color }}>
@@ -119,17 +155,45 @@ export default function SuggestionsAdminPage() {
                 </button>
               </div>
 
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                 {STATUSES.filter(x => x.value !== s.status).map(x => (
                   <button key={x.value} onClick={() => updateStatus(s._id, x.value)} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: 11 }}>
                     Mark {x.label}
                   </button>
                 ))}
+                <button onClick={() => setAssignOpen(assignOpen === s._id ? null : s._id)} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: 11 }}>
+                  {s.assignedTo ? 'Reassign' : 'Tag employee'}
+                </button>
               </div>
 
-              {s.reviewedAt && (
+              {assignOpen === s._id && (
+                <div style={{ marginTop: 10, padding: 10, background: 'var(--surface)', borderRadius: 6, border: '1px solid var(--line)' }}>
+                  <p style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 6 }}>Tag someone to handle this. They get a priority notification.</p>
+                  <select
+                    className="input"
+                    defaultValue=""
+                    onChange={e => { if (e.target.value) assign(s._id, e.target.value); }}
+                    style={{ fontSize: 13 }}
+                  >
+                    <option value="" disabled>Choose teammate…</option>
+                    {employees.map(emp => (
+                      <option key={emp._id} value={emp._id}>
+                        {emp.name || emp.email}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {s.assignedTo && (
                 <p style={{ fontSize: 11, color: 'var(--subtle)', marginTop: 8 }}>
-                  Last reviewed by {s.reviewedBy} on {new Date(s.reviewedAt).toLocaleString()}
+                  Tagged by {s.assignedBy}{s.assignedAt ? ` on ${formatDateTime(s.assignedAt)}` : ''}
+                </p>
+              )}
+
+              {s.reviewedAt && (
+                <p style={{ fontSize: 11, color: 'var(--subtle)', marginTop: 4 }}>
+                  Last reviewed by {s.reviewedBy} on {formatDateTime(s.reviewedAt)}
                 </p>
               )}
             </div>

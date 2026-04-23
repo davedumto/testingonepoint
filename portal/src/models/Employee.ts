@@ -18,6 +18,21 @@ export interface IEmployee extends Document {
   twoFactorSecret?: string;
   twoFactorEnabled: boolean;
   twoFactorBackupCodes?: string[];
+  hasCompletedOnboarding: boolean;
+  // Profile fields written by /api/employee/auth/update-profile and
+  // /api/employee/auth/photo-upload. Without these declared, Mongoose strict
+  // mode silently drops them on save.
+  photoUrl?: string;
+  jobTitle?: string;
+  department?: string;
+  bio?: string;
+  phone?: string;
+  birthday?: Date;
+  hireDate?: Date;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
+  emergencyContactRelation?: string;
+  shareEmergencyContactWithTeam?: boolean;
   comparePassword(candidate: string): Promise<boolean>;
 }
 
@@ -36,6 +51,21 @@ const EmployeeSchema = new Schema<IEmployee>({
   twoFactorSecret: { type: String },
   twoFactorEnabled: { type: Boolean, default: false },
   twoFactorBackupCodes: { type: [String], default: undefined },
+  hasCompletedOnboarding: { type: Boolean, default: false },
+  // Profile fields. PII-bearing fields (phone, birthday, emergency contact)
+  // are stored plain for now; encrypting them is a follow-up that should match
+  // the email/name pattern above.
+  photoUrl: { type: String },
+  jobTitle: { type: String, trim: true },
+  department: { type: String, trim: true },
+  bio: { type: String, trim: true },
+  phone: { type: String, trim: true },
+  birthday: { type: Date },
+  hireDate: { type: Date },
+  emergencyContactName: { type: String, trim: true },
+  emergencyContactPhone: { type: String, trim: true },
+  emergencyContactRelation: { type: String, trim: true },
+  shareEmergencyContactWithTeam: { type: Boolean, default: false },
 });
 
 EmployeeSchema.set('toJSON', { getters: true });

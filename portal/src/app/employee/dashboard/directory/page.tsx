@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+const MARKETING_BASE = 'https://www.onepointinsuranceagency.com';
+const HERO_BG = `${MARKETING_BASE}/our-team.png`;
+
 interface DirEmployee {
   _id: string;
   name?: string;
@@ -21,10 +24,12 @@ function tenureBadge(hireDate?: string, addedAt?: string): { years: number; labe
   if (!start) return null;
   const years = Math.floor((Date.now() - start.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
   if (years < 1) return null;
-  if (years >= 10) return { years, label: `${years} yrs`, color: '#7c3aed' };
-  if (years >= 5) return { years, label: `${years} yrs`, color: '#0d9488' };
-  if (years >= 3) return { years, label: `${years} yrs`, color: '#2e9a55' };
-  if (years >= 1) return { years, label: `${years} yr${years > 1 ? 's' : ''}`, color: '#8a5a00' };
+  // All tenure colours in the brand navy/blue family — the label ("10 yrs")
+  // already communicates the milestone; we don't need a rainbow.
+  if (years >= 10) return { years, label: `${years} yrs`, color: '#052847' };
+  if (years >= 5) return { years, label: `${years} yrs`, color: '#0a3d6b' };
+  if (years >= 3) return { years, label: `${years} yrs`, color: '#052847' };
+  if (years >= 1) return { years, label: `${years} yr${years > 1 ? 's' : ''}`, color: '#0a3d6b' };
   return null;
 }
 
@@ -55,45 +60,98 @@ export default function DirectoryPage() {
   });
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: 32 }}>
-      <h1 style={{ fontSize: 24, fontWeight: 700, color: 'var(--navy)', marginBottom: 8 }}>Team Directory</h1>
-      <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 20 }}>Find your teammates and see their tenure, role, and timezone.</p>
+    <div style={{ maxWidth: 1040, margin: '0 auto', padding: 32 }}>
+      {/* Navy hero — matches the Team Hub header band */}
+      <div
+        className="card-hero-navy"
+        style={{ marginBottom: 28, ['--hero-bg' as string]: `url('${HERO_BG}')` }}
+      >
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24 }}>
+          <div style={{ maxWidth: 560 }}>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700, marginBottom: 10 }}>Your teammates</p>
+            <h1 style={{ fontSize: 36, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 10 }}>
+              Team Directory
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 15, lineHeight: 1.55 }}>
+              Find colleagues, see tenure and role, and click through to any profile.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <div style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 16px', borderRadius: 10, minWidth: 140 }}>
+              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.7)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Teammates</p>
+              <p style={{ fontSize: 22, color: '#fff', fontWeight: 800, marginTop: 2, lineHeight: 1.1 }}>{employees.length}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <input
-        type="text"
-        placeholder="Search by name, email, title, or department…"
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="input"
-        style={{ marginBottom: 20 }}
-      />
+      <div style={{ position: 'relative', marginBottom: 24, maxWidth: 480 }}>
+        <svg style={{ position: 'absolute', top: '50%', left: 14, transform: 'translateY(-50%)', width: 16, height: 16, color: 'var(--subtle)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          type="text"
+          placeholder="Search by name, email, title, or department…"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="input"
+          style={{ paddingLeft: 40 }}
+        />
+      </div>
 
       {loading ? (
-        <p style={{ color: 'var(--muted)' }}>Loading…</p>
+        <p style={{ color: 'var(--muted)', textAlign: 'center', padding: 60 }}>Loading…</p>
       ) : filtered.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', color: 'var(--muted)', padding: 40 }}>No employees match.</div>
+        <div className="card" style={{ textAlign: 'center', color: 'var(--muted)', padding: 60 }}>No employees match.</div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
           {filtered.map(emp => {
             const badge = tenureBadge(emp.hireDate, emp.addedAt);
             return (
-              <Link key={emp._id} href={`/employee/dashboard/directory/${emp._id}`} className="card-sm" style={{ padding: 16, textDecoration: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-                  {emp.photoUrl ? (
-                    <img src={emp.photoUrl} alt={emp.name || ''} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} />
-                  ) : (
-                    <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--navy)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700 }}>
-                      {initials(emp.name, emp.email)}
+              <Link key={emp._id} href={`/employee/dashboard/directory/${emp._id}`} className="card-sm" style={{ padding: 0, textDecoration: 'none', overflow: 'hidden', display: 'block' }}>
+                {/* Slim navy accent strip — just enough to nod to the brand
+                    without overwhelming the card. The avatar overlaps onto the
+                    white area below it, which makes the card feel anchored. */}
+                <div style={{ height: 56, background: 'linear-gradient(135deg, #052847 0%, #0a3d6b 100%)' }} />
+
+                <div style={{ padding: '0 20px 20px', textAlign: 'center' }}>
+                  <div style={{ marginTop: -36, marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
+                    {emp.photoUrl ? (
+                      <img
+                        src={emp.photoUrl}
+                        alt={emp.name || ''}
+                        style={{ width: 72, height: 72, borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 2px 8px rgba(5,40,71,0.18)' }}
+                      />
+                    ) : (
+                      <div style={{ width: 72, height: 72, borderRadius: '50%', background: '#0a3d6b', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 700, border: '3px solid #fff', boxShadow: '0 2px 8px rgba(5,40,71,0.18)' }}>
+                        {initials(emp.name, emp.email)}
+                      </div>
+                    )}
+                  </div>
+
+                  <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {emp.name || emp.email}
+                  </p>
+                  {emp.jobTitle && (
+                    <p style={{ fontSize: 13, color: 'var(--ink)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {emp.jobTitle}
+                    </p>
+                  )}
+                  {emp.department && (
+                    <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {emp.department}
+                    </p>
+                  )}
+
+                  {badge && (
+                    <div style={{ marginTop: 10 }}>
+                      <span className="badge" style={{ background: `${badge.color}18`, color: badge.color, fontSize: 10 }}>{badge.label}</span>
                     </div>
                   )}
-                  <div style={{ minWidth: 0, flex: 1 }}>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{emp.name || emp.email}</p>
-                    {emp.jobTitle && <p style={{ fontSize: 12, color: 'var(--muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{emp.jobTitle}</p>}
+
+                  <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--line)', fontSize: 12, color: 'var(--blue)', fontWeight: 600 }}>
+                    View profile →
                   </div>
-                </div>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {emp.department && <span className="badge badge-teal">{emp.department}</span>}
-                  {badge && <span className="badge" style={{ background: `${badge.color}22`, color: badge.color }}>🏅 {badge.label}</span>}
                 </div>
               </Link>
             );

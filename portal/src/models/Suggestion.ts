@@ -13,6 +13,9 @@ export interface ISuggestion extends Document {
   adminNotes?: string;
   reviewedBy?: string;
   reviewedAt?: Date;
+  assignedTo?: mongoose.Types.ObjectId;   // Employee tagged to act on this
+  assignedAt?: Date;
+  assignedBy?: string;                     // Admin email who did the assignment
   createdAt: Date;
 }
 
@@ -26,6 +29,9 @@ const SuggestionSchema = new Schema<ISuggestion>({
   adminNotes: { type: String, maxlength: 2000 },
   reviewedBy: { type: String },
   reviewedAt: { type: Date },
+  assignedTo: { type: Schema.Types.ObjectId, ref: 'Employee', index: true },
+  assignedAt: { type: Date },
+  assignedBy: { type: String },
   createdAt: { type: Date, default: Date.now, index: true },
 });
 

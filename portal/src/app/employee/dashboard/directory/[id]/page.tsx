@@ -2,6 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import Link from 'next/link';
+import { formatDate, formatMonthDay } from '@/lib/client/format-time';
 
 interface ProfileData {
   _id: string;
@@ -60,7 +61,7 @@ export default function ProfileViewPage({ params }: { params: Promise<{ id: stri
   if (error || !profile) return (
     <div style={{ maxWidth: 600, margin: '60px auto', padding: 20, textAlign: 'center' }}>
       <p style={{ color: 'var(--muted)' }}>{error || 'Employee not found.'}</p>
-      <Link href="/employee/dashboard/directory" style={{ color: 'var(--teal)', fontWeight: 600 }}>← Back to directory</Link>
+      <Link href="/employee/dashboard/directory" style={{ color: 'var(--blue)', fontWeight: 600 }}>← Back to directory</Link>
     </div>
   );
 
@@ -85,9 +86,9 @@ export default function ProfileViewPage({ params }: { params: Promise<{ id: stri
             {profile.jobTitle && <p style={{ fontSize: 15, color: 'var(--ink)', marginTop: 4 }}>{profile.jobTitle}</p>}
             {profile.department && <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>{profile.department}</p>}
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 10 }}>
-              {tenure && <span className="badge badge-teal">🏅 {tenure}</span>}
+              {tenure && <span className="badge badge-blue">🏅 {tenure}</span>}
               {profile.timezone && <span className="badge badge-navy">{profile.timezone}</span>}
-              {profile.isSelf && <span className="badge badge-purple">You</span>}
+              {profile.isSelf && <span className="badge badge-blue">You</span>}
             </div>
           </div>
           {profile.isSelf && (
@@ -118,13 +119,13 @@ export default function ProfileViewPage({ params }: { params: Promise<{ id: stri
           {profile.hireDate && (
             <div>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--subtle)', marginBottom: 4 }}>Hire date</p>
-              <p style={{ fontSize: 13, color: 'var(--ink)' }}>{new Date(profile.hireDate).toLocaleDateString()}</p>
+              <p style={{ fontSize: 13, color: 'var(--ink)' }}>{formatDate(profile.hireDate)}</p>
             </div>
           )}
           {profile.birthday && (
             <div>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--subtle)', marginBottom: 4 }}>Birthday</p>
-              <p style={{ fontSize: 13, color: 'var(--ink)' }}>{new Date(profile.birthday).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</p>
+              <p style={{ fontSize: 13, color: 'var(--ink)' }}>{formatMonthDay(profile.birthday)}</p>
             </div>
           )}
         </div>

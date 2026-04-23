@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
 import { secureFetch } from '@/lib/client/secure-fetch';
+import PageHeader from '@/components/PageHeader';
 
 const ALLOWED_TIMEZONES = [
   'America/New_York',
@@ -177,8 +178,11 @@ export default function EmployeeSettingsPage() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 32 }}>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
-      <h1 style={{ fontSize: 24, fontWeight: 700, color: 'var(--navy)', marginBottom: 8 }}>Account Settings</h1>
-      <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 32 }}>Update your name, timezone, and password. Contact your admin to change your email.</p>
+      <PageHeader
+        eyebrow="Account"
+        title="Settings"
+        description="Update your name, timezone, and password. Contact your admin to change your email."
+      />
 
       {/* Profile */}
       <form onSubmit={handleProfileUpdate} className="card" style={{ marginBottom: 24, maxWidth: 560 }}>

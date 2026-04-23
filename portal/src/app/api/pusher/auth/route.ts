@@ -18,7 +18,13 @@ export async function POST(req: NextRequest) {
     return new Response('Bad Request', { status: 400 });
   }
 
-  if (!ALLOWED_CHANNELS.has(channelName)) {
+  // Allow: (a) shared channels in the static allowlist, or (b) the user's own
+  // notification channel `private-user-{theirId}`. Never let a user subscribe
+  // to someone else's user channel — that's the main abuse vector here.
+  const isSharedChannel = ALLOWED_CHANNELS.has(channelName);
+  const isOwnUserChannel = channelName === `private-user-${user.employeeId}`;
+
+  if (!isSharedChannel && !isOwnUserChannel) {
     return new Response('Forbidden', { status: 403 });
   }
 

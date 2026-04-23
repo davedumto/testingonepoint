@@ -5,8 +5,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IconLogout, IconSettings } from '@/components/Icons';
 import { secureFetch } from '@/lib/client/secure-fetch';
+import NotificationBell from '@/components/NotificationBell';
+import OnboardingTour, { tourStorageKey } from '@/components/OnboardingTour';
 
-interface EmpUser { name: string; email: string }
+interface EmpUser { name: string; email: string; employeeId?: string; hasCompletedOnboarding?: boolean; photoUrl?: string }
 
 type P = { style?: React.CSSProperties };
 function IconHome({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/></svg>; }
@@ -19,6 +21,7 @@ function IconCalendar({ style }: P) { return <svg style={style} viewBox="0 0 24 
 function IconClock({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>; }
 function IconBook({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>; }
 function IconUser({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>; }
+function IconBell({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>; }
 
 const NAV_ITEMS: { href: string; label: string; Icon: (p: P) => React.ReactElement; exact: boolean; group: string }[] = [
   { href: '/employee/dashboard', label: 'Team Hub', Icon: IconHome, exact: true, group: 'Hub' },
@@ -29,6 +32,7 @@ const NAV_ITEMS: { href: string; label: string; Icon: (p: P) => React.ReactEleme
   { href: '/employee/dashboard/directory', label: 'Team Directory', Icon: IconDirectory, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/meetings', label: 'Meetings', Icon: IconCalendar, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/learning', label: 'Learning Hub', Icon: IconBook, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/notifications', label: 'Notifications', Icon: IconBell, exact: false, group: 'Me' },
   { href: '/employee/dashboard/time-tracking', label: 'Time Tracking', Icon: IconClock, exact: false, group: 'Me' },
   { href: '/employee/dashboard/profile', label: 'My Profile', Icon: IconUser, exact: false, group: 'Me' },
   { href: '/employee/dashboard/settings', label: 'Settings', Icon: IconSettings, exact: false, group: 'Me' },
@@ -38,13 +42,27 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<EmpUser | null>(null);
+  const [tourOpen, setTourOpen] = useState(false);
 
   useEffect(() => {
     fetch('/api/employee/auth/me')
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-      .then(d => setUser(d.employee))
+      .then(d => {
+        setUser(d.employee);
+        // Tour only fires on the home dashboard, and only if the user hasn't
+        // already seen it. Check localStorage FIRST (survives reloads even if
+        // the server sync failed on completion), then fall back to the
+        // server-side hasCompletedOnboarding flag.
+        if (d.employee && pathname === '/employee/dashboard') {
+          let localDone = false;
+          try { localDone = localStorage.getItem(tourStorageKey(d.employee.employeeId)) === '1'; } catch { /* SSR/privacy */ }
+          if (!localDone && !d.employee.hasCompletedOnboarding) {
+            setTourOpen(true);
+          }
+        }
+      })
       .catch(() => router.push('/employee/login'));
-  }, [router]);
+  }, [router, pathname]);
 
   async function handleLogout() {
     await secureFetch('/api/employee/auth/logout', { method: 'POST' });
@@ -57,8 +75,10 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
 
   return (
     <div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+      {tourOpen && user?.employeeId && <OnboardingTour userId={user.employeeId} onComplete={() => setTourOpen(false)} />}
+
       {/* Sidebar — fixed to viewport height; only its own nav scrolls if overflowing */}
-      <aside style={{
+      <aside data-tour="sidebar" style={{
         width: 260, height: '100vh', background: '#ffffff', borderRight: '1px solid #e8ecf1',
         flexShrink: 0, display: 'flex', flexDirection: 'column',
       }}>
@@ -69,16 +89,26 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
 
         {/* User info */}
         <div style={{ padding: '18px 24px', borderBottom: '1px solid #e8ecf1', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{
-            width: 38, height: 38, borderRadius: '50%',
-            background: '#052847', color: '#fff',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 13, fontWeight: 700, flexShrink: 0,
-          }}>
-            {initials}
-          </div>
+          {user?.photoUrl ? (
+            <img
+              src={user.photoUrl}
+              alt={user.name || 'Profile'}
+              style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+            />
+          ) : (
+            <div style={{
+              width: 38, height: 38, borderRadius: '50%',
+              background: '#052847', color: '#fff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 13, fontWeight: 700, flexShrink: 0,
+            }}>
+              {initials}
+            </div>
+          )}
           <div style={{ overflow: 'hidden' }}>
-            <p style={{ fontSize: 14, fontWeight: 600, color: '#052847', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.name || 'Loading...'}</p>
+            <p style={{ fontSize: 14, fontWeight: 600, color: '#052847', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {user ? (user.name?.trim() || user.email.split('@')[0]) : '…'}
+            </p>
             <p style={{ fontSize: 12, color: '#8a9baa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email || ''}</p>
           </div>
         </div>
@@ -117,14 +147,14 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
                         aria-hidden
                         style={{
                           position: 'absolute', left: 0, top: 6, bottom: 6, width: 3, borderRadius: 2,
-                          background: '#0d9488',
+                          background: '#052847',
                           opacity: isActive ? 1 : 0,
                           transform: isActive ? 'scaleY(1)' : 'scaleY(0.4)',
                           transformOrigin: 'center',
                           transition: 'opacity 0.25s ease, transform 0.25s ease',
                         }}
                       />
-                      <item.Icon style={{ width: 18, height: 18, color: isActive ? '#0d9488' : '#8a9baa', transition: 'color 0.2s ease' }} />
+                      <item.Icon style={{ width: 18, height: 18, color: isActive ? '#052847' : '#8a9baa', transition: 'color 0.2s ease' }} />
                       {item.label}
                     </Link>
                   );
@@ -153,7 +183,16 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
       </aside>
 
       {/* Main content — the only scrollable region on desktop */}
-      <main style={{ flex: 1, background: '#f4f7fb', overflowY: 'auto', height: '100vh' }}>
+      <main style={{ flex: 1, background: '#f4f7fb', overflowY: 'auto', height: '100vh', position: 'relative' }}>
+        {/* Floating top-right bell. Position absolute inside the scroll container so
+            it stays pinned to the visible viewport edge without reserving layout space. */}
+        {user?.employeeId && (
+          <div style={{ position: 'sticky', top: 16, zIndex: 20, display: 'flex', justifyContent: 'flex-end', padding: '0 24px', pointerEvents: 'none', height: 0 }}>
+            <div style={{ pointerEvents: 'auto' }}>
+              <NotificationBell userId={user.employeeId} />
+            </div>
+          </div>
+        )}
         {children}
       </main>
     </div>

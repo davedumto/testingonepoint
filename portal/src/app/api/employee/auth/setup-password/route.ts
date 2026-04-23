@@ -24,6 +24,12 @@ export async function POST(req: NextRequest) {
   if (!email || !password) {
     return Response.json({ error: 'Email and password are required.' }, { status: 400 });
   }
+  if (typeof name !== 'string' || !name.trim()) {
+    return Response.json({ error: 'Your name is required.' }, { status: 400 });
+  }
+  if (name.trim().length > 100) {
+    return Response.json({ error: 'Name is too long.' }, { status: 400 });
+  }
   if (password.length < 8) {
     return Response.json({ error: 'Password must be at least 8 characters.' }, { status: 400 });
   }
@@ -40,17 +46,24 @@ export async function POST(req: NextRequest) {
   }
 
   employee.password = password; // Hashed by pre-save hook
-  employee.name = name?.trim() || employee.email.split('@')[0];
+  employee.name = name.trim();
   employee.isSetup = true;
   employee.lastLogin = new Date();
   await employee.save();
+
+  // Reload from DB to force the field-level getters (decryption) to run on
+  // a freshly-read document. Prevents any chance of the cookie being signed
+  // with an assignment-time value that hasn't round-tripped through the
+  // encrypt/decrypt pipeline.
+  const persisted = await Employee.findById(employee._id).select('name email');
+  const persistedName = persisted?.name || employee.name;
 
   const empId = employee._id.toString();
   await setEmployeeCookie({
     employeeId: empId,
     userId: empId,
     email: employee.email,
-    name: employee.name,
+    name: persistedName,
   });
 
   await generateCSRFToken();
@@ -59,6 +72,6 @@ export async function POST(req: NextRequest) {
 
   return Response.json({
     success: true,
-    employee: { name: employee.name, email: employee.email },
+    employee: { name: persistedName, email: employee.email },
   });
 }
