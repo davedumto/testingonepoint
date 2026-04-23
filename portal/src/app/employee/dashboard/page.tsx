@@ -17,12 +17,12 @@ type ProductIcon = 'auto' | 'home' | 'health' | 'life' | 'disability' | 'busines
 // Using the same filesafe.space CDN URLs keeps the visual language consistent
 // between the public site and the portal.
 const INSURANCE_PRODUCTS: Array<{ name: string; description: string; url: string; accent: string; icon: ProductIcon; image: string }> = [
-  { name: 'Auto', description: 'Personal vehicle coverage', url: `${MARKETING_BASE}/auto-insurance/`, accent: '#052847', icon: 'auto', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dda50b9a3263a27422e.jpg' },
-  { name: 'Home Owners', description: 'Home + property protection', url: `${MARKETING_BASE}/home`, accent: '#0a3d6b', icon: 'home', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a3c8695313005f1864d45b.png' },
-  { name: 'Health', description: 'ACA + ancillary medical', url: `${MARKETING_BASE}/health`, accent: '#052847', icon: 'health', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a8d83a54a62614a4cd1b8b.png' },
-  { name: 'Life', description: 'Term + whole life', url: `${MARKETING_BASE}/life`, accent: '#0a3d6b', icon: 'life', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b0925bd7b732ee5c5ab224.png' },
-  { name: 'Disability', description: 'Short + long term disability', url: `${MARKETING_BASE}/disability-insurance`, accent: '#052847', icon: 'disability', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0ed643dbee4f1d79e75.png' },
-  { name: 'Business', description: 'Commercial + BOP coverage', url: `${MARKETING_BASE}/business`, accent: '#0a3d6b', icon: 'business', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454f8b902708d926ec.png' },
+  { name: 'Auto', description: 'Personal vehicle coverage', url: `${MARKETING_BASE}/resources/auto`, accent: '#052847', icon: 'auto', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dda50b9a3263a27422e.jpg' },
+  { name: 'Home Owners', description: 'Home + property protection', url: `${MARKETING_BASE}/resources/home`, accent: '#0a3d6b', icon: 'home', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a3c8695313005f1864d45b.png' },
+  { name: 'Health', description: 'ACA + ancillary medical', url: `${MARKETING_BASE}/resources/health`, accent: '#052847', icon: 'health', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a8d83a54a62614a4cd1b8b.png' },
+  { name: 'Life', description: 'Term + whole life', url: `${MARKETING_BASE}/resources/life`, accent: '#0a3d6b', icon: 'life', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b0925bd7b732ee5c5ab224.png' },
+  { name: 'Disability', description: 'Short + long term disability', url: `${MARKETING_BASE}/resources/disability`, accent: '#052847', icon: 'disability', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0ed643dbee4f1d79e75.png' },
+  { name: 'Business', description: 'Commercial + BOP coverage', url: `${MARKETING_BASE}/resources/business`, accent: '#0a3d6b', icon: 'business', image: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454f8b902708d926ec.png' },
 ];
 
 const HERO_BG_IMAGE = `${MARKETING_BASE}/hero-family.jpg`;
