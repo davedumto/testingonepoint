@@ -5,6 +5,7 @@ import { connectDB } from '@/lib/db';
 import EmployeeOfMonth from '@/models/EmployeeOfMonth';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
+import { publishHubChanged } from '@/lib/pusher/server';
 import { logger } from '@/lib/logger';
 
 // DELETE — admin removes an Employee of the Month record. If the record is
@@ -39,6 +40,9 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
         wasActive: record.expiresAt.getTime() > Date.now(),
       },
     });
+
+    // Invalidate the hub so open dashboards clear their banner live.
+    await publishHubChanged('recognition');
 
     return Response.json({ success: true });
   } catch (error) {

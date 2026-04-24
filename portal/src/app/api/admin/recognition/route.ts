@@ -6,6 +6,7 @@ import { connectDB } from '@/lib/db';
 import Employee from '@/models/Employee';
 import EmployeeOfMonth from '@/models/EmployeeOfMonth';
 import { broadcastToAllEmployees } from '@/lib/notifications';
+import { publishHubChanged } from '@/lib/pusher/server';
 import { safeValidate } from '@/lib/security/validation';
 import { auditLog, AUDIT_ACTIONS } from '@/lib/security/audit-log';
 import { getRequestInfo } from '@/lib/security/request-info';
@@ -79,6 +80,11 @@ export async function POST(req: NextRequest) {
       body: message || `Give ${employeeName.split(' ')[0]} a huge round of applause for the great work this month.`,
       actorName: admin.email,
     });
+
+    // Push a hub invalidation so every open dashboard refetches the active
+    // EOTM record and the celebration banner appears live, without needing
+    // the employee to refresh the page.
+    await publishHubChanged('recognition');
 
     auditLog({
       userId: admin.userId,

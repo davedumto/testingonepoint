@@ -56,7 +56,7 @@ export function authorizeChannel(socketId: string, channel: string): { auth: str
 // Invalidation signal for hub surfaces. Clients subscribed to CHANNELS.hub
 // refetch /employee/api/hub on receipt. Cheap on-write, avoids per-surface
 // payload syncing when a single refetch already returns everything.
-export type HubSurface = 'announcements' | 'meetings' | 'events' | 'documents' | 'suggestions';
+export type HubSurface = 'announcements' | 'meetings' | 'events' | 'documents' | 'suggestions' | 'recognition';
 export async function publishHubChanged(surface: HubSurface): Promise<void> {
   return publish(CHANNELS.hub, 'hub:changed', { surface });
 }

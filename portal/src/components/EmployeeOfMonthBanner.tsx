@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { subscribe, CHANNELS } from '@/lib/pusher/client';
 
 interface ActiveEOTM {
   _id: string;
@@ -20,23 +21,46 @@ export default function EmployeeOfMonthBanner() {
   const [data, setData] = useState<ActiveEOTM | null>(null);
   const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/employee/api/recognition/active')
-      .then(r => (r.ok ? r.json() : { active: null }))
-      .then(({ active }: { active: ActiveEOTM | null }) => {
-        if (cancelled || !active) return;
-        const dismissKey = `eotm:dismissed:${active._id}`;
-        if (typeof window !== 'undefined' && window.localStorage.getItem(dismissKey) === '1') {
-          setDismissed(true);
-        }
-        // If the window already elapsed between the server read and client render, treat as inactive.
-        if (new Date(active.expiresAt).getTime() <= Date.now()) return;
-        setData(active);
-      })
-      .catch(() => {});
-    return () => { cancelled = true; };
+  // Fetches the current active EOTM and drops it into state. Extracted so
+  // both the mount-load and the Pusher invalidation handler can reuse it.
+  const loadActive = useCallback(async () => {
+    try {
+      const res = await fetch('/employee/api/recognition/active');
+      if (!res.ok) return;
+      const { active }: { active: ActiveEOTM | null } = await res.json();
+      if (!active) {
+        // Admin removed the EOTM — clear the banner for everyone on screen.
+        setData(null);
+        return;
+      }
+      if (new Date(active.expiresAt).getTime() <= Date.now()) {
+        setData(null);
+        return;
+      }
+      const dismissKey = `eotm:dismissed:${active._id}`;
+      const isDismissed = typeof window !== 'undefined' && window.localStorage.getItem(dismissKey) === '1';
+      setDismissed(isDismissed);
+      setData(active);
+    } catch {
+      // Non-fatal — banner stays in its previous state.
+    }
   }, []);
+
+  useEffect(() => { loadActive(); }, [loadActive]);
+
+  // Live invalidation: the admin POST/DELETE on /api/admin/recognition
+  // publishes `hub:changed` with surface='recognition'. Any open dashboard
+  // listens and refetches, so new winners light up live (and removed ones
+  // clear live) without anyone needing to refresh.
+  useEffect(() => {
+    const teardown = subscribe(CHANNELS.hub, {
+      'hub:changed': (payload) => {
+        const p = payload as { surface?: string } | undefined;
+        if (p?.surface === 'recognition') loadActive();
+      },
+    });
+    return teardown;
+  }, [loadActive]);
 
   if (!data || dismissed) return null;
 
