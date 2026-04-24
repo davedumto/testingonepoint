@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { getEmployeeUser } from '@/lib/employee-auth';
 import { getAuthUser } from '@/lib/auth';
 import { authorizeChannel, ALLOWED_CHANNELS } from '@/lib/pusher/server';
+import { connectDB } from '@/lib/db';
+import TicTacToeGame from '@/models/TicTacToeGame';
 
 // Pusher private channels require the client to POST socket_id + channel_name
 // here; we verify the session and sign the response. Without this step anyone
@@ -31,6 +33,19 @@ export async function POST(req: NextRequest) {
 
   if (isClientOwnChannel) {
     // Clients get only their own channel — never shared ones.
+    const auth = authorizeChannel(socketId, channelName);
+    if (!auth) return new Response('Realtime not configured', { status: 503 });
+    return Response.json(auth);
+  }
+
+  // Tic-Tac-Toe room channels: only the two players in that specific room
+  // may subscribe. We verify membership against the DB before signing.
+  const tttMatch = channelName.match(/^private-tictactoe-([A-Z0-9]{4,10})$/);
+  if (employee && tttMatch) {
+    await connectDB();
+    const room = await TicTacToeGame.findOne({ roomCode: tttMatch[1] }).select('playerX playerO');
+    const ids = [room?.playerX?.userId?.toString(), room?.playerO?.userId?.toString()].filter(Boolean);
+    if (!ids.includes(employee.employeeId)) return new Response('Forbidden', { status: 403 });
     const auth = authorizeChannel(socketId, channelName);
     if (!auth) return new Response('Realtime not configured', { status: 503 });
     return Response.json(auth);

@@ -22,6 +22,7 @@ function IconClock({ style }: P) { return <svg style={style} viewBox="0 0 24 24"
 function IconBook({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>; }
 function IconUser({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>; }
 function IconBell({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>; }
+function IconGames({ style }: P) { return <svg style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>; }
 
 const NAV_ITEMS: { href: string; label: string; Icon: (p: P) => React.ReactElement; exact: boolean; group: string }[] = [
   { href: '/employee/dashboard', label: 'Team Hub', Icon: IconHome, exact: true, group: 'Hub' },
@@ -29,9 +30,10 @@ const NAV_ITEMS: { href: string; label: string; Icon: (p: P) => React.ReactEleme
   { href: '/employee/dashboard/conversations', label: 'Conversations', Icon: IconChat, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/documents', label: 'Documents', Icon: IconDocs, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/tools', label: 'Tools & Resources', Icon: IconTools, exact: false, group: 'Hub' },
-  { href: '/employee/dashboard/directory', label: 'Team Directory', Icon: IconDirectory, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/directory', label: 'Team Members', Icon: IconDirectory, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/meetings', label: 'Meetings', Icon: IconCalendar, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/learning', label: 'Learning Hub', Icon: IconBook, exact: false, group: 'Hub' },
+  { href: '/employee/dashboard/games', label: 'Games', Icon: IconGames, exact: false, group: 'Hub' },
   { href: '/employee/dashboard/notifications', label: 'Notifications', Icon: IconBell, exact: false, group: 'Me' },
   { href: '/employee/dashboard/time-tracking', label: 'Time Tracking', Icon: IconClock, exact: false, group: 'Me' },
   { href: '/employee/dashboard/profile', label: 'My Profile', Icon: IconUser, exact: false, group: 'Me' },
@@ -61,7 +63,13 @@ export default function EmployeeDashboardLayout({ children }: { children: React.
           }
         }
       })
-      .catch(() => router.push('/employee/login'));
+      .catch(() => {
+        // Preserve the deep link so the login flow can return the user here
+        // after they sign in (e.g. for invite links into a TTT room).
+        const next = pathname + (typeof window !== 'undefined' ? window.location.search : '');
+        const q = next && next !== '/employee/dashboard' ? `?next=${encodeURIComponent(next)}` : '';
+        router.push(`/employee/login${q}`);
+      });
   }, [router, pathname]);
 
   async function handleLogout() {

@@ -18,6 +18,8 @@ const NAV_ITEMS: { href: string; label: string; exact: boolean; group?: string }
   { href: '/admin/dashboard/documents', label: 'Documents', exact: false, group: 'Hub' },
   { href: '/admin/dashboard/suggestions', label: 'Suggestions', exact: false, group: 'Hub' },
   { href: '/admin/dashboard/broadcast', label: 'Broadcast', exact: false, group: 'Hub' },
+  { href: '/admin/dashboard/recognition', label: 'Employee of the Month', exact: false, group: 'Hub' },
+  { href: '/admin/dashboard/games', label: 'Games', exact: false, group: 'Hub' },
   { href: '/admin/dashboard/security', label: 'Security', exact: false, group: 'System' },
 ];
 

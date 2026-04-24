@@ -42,12 +42,21 @@ export default function DirectoryPage() {
   const [employees, setEmployees] = useState<DirEmployee[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [eotmEmployeeId, setEotmEmployeeId] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/employee/api/directory')
       .then(r => r.json())
       .then(d => setEmployees(d.employees || []))
       .finally(() => setLoading(false));
+
+    // Pull the active Employee of the Month so the directory card for the
+    // winner can carry a trophy badge. Silent-fail: if the fetch errors, we
+    // just don't show a badge.
+    fetch('/employee/api/recognition/active')
+      .then(r => (r.ok ? r.json() : { active: null }))
+      .then(({ active }) => { if (active?.employeeId) setEotmEmployeeId(active.employeeId); })
+      .catch(() => {});
   }, []);
 
   const filtered = employees.filter(e => {
@@ -109,24 +118,50 @@ export default function DirectoryPage() {
             const badge = tenureBadge(emp.hireDate, emp.addedAt);
             return (
               <Link key={emp._id} href={`/employee/dashboard/directory/${emp._id}`} className="card-sm" style={{ padding: 0, textDecoration: 'none', overflow: 'hidden', display: 'block' }}>
-                {/* Slim navy accent strip — just enough to nod to the brand
-                    without overwhelming the card. The avatar overlaps onto the
-                    white area below it, which makes the card feel anchored. */}
-                <div style={{ height: 56, background: 'linear-gradient(135deg, #052847 0%, #0a3d6b 100%)' }} />
+                {/* Navy accent strip sized to let the larger avatar overlap
+                    onto the white area below — gives the card a grounded feel
+                    without overwhelming the photo. */}
+                <div style={{ height: 76, background: 'linear-gradient(135deg, #052847 0%, #0a3d6b 100%)' }} />
 
-                <div style={{ padding: '0 20px 20px', textAlign: 'center' }}>
-                  <div style={{ marginTop: -36, marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
-                    {emp.photoUrl ? (
-                      <img
-                        src={emp.photoUrl}
-                        alt={emp.name || ''}
-                        style={{ width: 72, height: 72, borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 2px 8px rgba(5,40,71,0.18)' }}
-                      />
-                    ) : (
-                      <div style={{ width: 72, height: 72, borderRadius: '50%', background: '#0a3d6b', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 700, border: '3px solid #fff', boxShadow: '0 2px 8px rgba(5,40,71,0.18)' }}>
-                        {initials(emp.name, emp.email)}
-                      </div>
-                    )}
+                <div style={{ padding: '0 20px 22px', textAlign: 'center' }}>
+                  <div style={{ marginTop: -56, marginBottom: 14, display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ position: 'relative' }}>
+                      {emp.photoUrl ? (
+                        <img
+                          src={emp.photoUrl}
+                          alt={emp.name || ''}
+                          style={{ width: 110, height: 110, borderRadius: '50%', objectFit: 'cover', border: '4px solid #fff', boxShadow: '0 4px 14px rgba(5,40,71,0.22)' }}
+                        />
+                      ) : (
+                        <div style={{ width: 110, height: 110, borderRadius: '50%', background: '#0a3d6b', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32, fontWeight: 700, border: '4px solid #fff', boxShadow: '0 4px 14px rgba(5,40,71,0.22)' }}>
+                          {initials(emp.name, emp.email)}
+                        </div>
+                      )}
+                      {eotmEmployeeId === emp._id && (
+                        <span
+                          title="Employee of the Month"
+                          aria-label="Employee of the Month"
+                          style={{
+                            position: 'absolute',
+                            top: -2,
+                            right: -2,
+                            width: 36,
+                            height: 36,
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #f5d76e 0%, #e8c74e 60%, #b8901e 100%)',
+                            border: '3px solid #fff',
+                            boxShadow: '0 3px 10px rgba(232,199,78,0.55)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: 18,
+                            lineHeight: 1,
+                          }}
+                        >
+                          🏆
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

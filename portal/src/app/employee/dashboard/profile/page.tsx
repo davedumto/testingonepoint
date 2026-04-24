@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Toast from '@/components/Toast';
 import { secureFetch } from '@/lib/client/secure-fetch';
 import PageHeader from '@/components/PageHeader';
+import PhotoCropper from '@/components/PhotoCropper';
 
 const ALLOWED_TIMEZONES = [
   'America/New_York',
@@ -33,6 +34,7 @@ export default function MyProfilePage() {
   const [bio, setBio] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const [photoUploading, setPhotoUploading] = useState(false);
+  const [pendingPhotoFile, setPendingPhotoFile] = useState<File | null>(null);
   const [phone, setPhone] = useState('');
   const [birthday, setBirthday] = useState('');
   const [hireDate, setHireDate] = useState('');
@@ -78,18 +80,26 @@ export default function MyProfilePage() {
       .finally(() => setLoading(false));
   }, [myId]);
 
-  async function uploadPhoto(e: React.ChangeEvent<HTMLInputElement>) {
+  // Picking a file opens the cropper modal, not an immediate upload. We only
+  // hit the server once the user has positioned and confirmed the crop, so
+  // Cloudinary never has to guess the crop with face detection.
+  function onPhotoSelected(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
+    e.target.value = '';
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
       setToast({ message: 'Photo is too large. Max 5 MB.', type: 'error' });
-      e.target.value = '';
       return;
     }
+    setPendingPhotoFile(file);
+  }
+
+  async function uploadCroppedBlob(blob: Blob) {
+    setPendingPhotoFile(null);
     setPhotoUploading(true);
     try {
       const fd = new FormData();
-      fd.append('file', file);
+      fd.append('file', new File([blob], 'avatar.jpg', { type: 'image/jpeg' }));
       const res = await secureFetch('/api/employee/auth/photo-upload', {
         method: 'POST',
         body: fd,
@@ -102,7 +112,6 @@ export default function MyProfilePage() {
       setToast({ message: 'Upload failed.', type: 'error' });
     } finally {
       setPhotoUploading(false);
-      e.target.value = '';
     }
   }
 
@@ -139,6 +148,13 @@ export default function MyProfilePage() {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto', padding: 32 }}>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+      {pendingPhotoFile && (
+        <PhotoCropper
+          file={pendingPhotoFile}
+          onCancel={() => setPendingPhotoFile(null)}
+          onConfirm={uploadCroppedBlob}
+        />
+      )}
 
       <PageHeader
         eyebrow="About you"
@@ -209,7 +225,7 @@ export default function MyProfilePage() {
               <div style={{ flex: 1 }}>
                 <label className="btn btn-outline" style={{ padding: '8px 16px', fontSize: 13, cursor: photoUploading ? 'wait' : 'pointer', opacity: photoUploading ? 0.6 : 1, display: 'inline-flex' }}>
                   {photoUploading ? 'Uploading…' : photoUrl ? 'Change photo' : 'Upload photo'}
-                  <input type="file" accept="image/*" onChange={uploadPhoto} disabled={photoUploading} style={{ display: 'none' }} />
+                  <input type="file" accept="image/*" onChange={onPhotoSelected} disabled={photoUploading} style={{ display: 'none' }} />
                 </label>
                 {photoUrl && !photoUploading && (
                   <button type="button" onClick={() => setPhotoUrl('')} style={{ marginLeft: 8, background: 'none', border: 'none', color: 'var(--red)', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>

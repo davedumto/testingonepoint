@@ -1,8 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+
+// Safety: only follow `?next=<path>` when it points inside our own app so
+// a malicious link can't redirect the user off-site after login.
+function safeNext(raw: string | null): string {
+  if (!raw) return '/employee/dashboard';
+  try {
+    const decoded = decodeURIComponent(raw);
+    if (decoded.startsWith('/') && !decoded.startsWith('//')) return decoded;
+  } catch { /* fallthrough */ }
+  return '/employee/dashboard';
+}
 
 type Phase = 'email' | 'setup' | 'login' | 'totp';
 
@@ -62,8 +73,13 @@ function PasswordInput({ value, onChange, placeholder, autoComplete, autoFocus }
   );
 }
 
-export default function EmployeeLoginPage() {
+// Inner component reads useSearchParams, which Next 16 requires to live
+// inside a Suspense boundary during static export. The default export below
+// wraps this in <Suspense/> so the prerender doesn't bail.
+function EmployeeLoginInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = safeNext(searchParams.get('next'));
   const [phase, setPhase] = useState<Phase>('email');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -123,7 +139,7 @@ export default function EmployeeLoginPage() {
       const data = await res.json();
 
       if (!res.ok) { setError(data.error || 'Setup failed.'); return; }
-      router.push('/employee/dashboard');
+      router.push(next);
     } catch {
       setError('Something went wrong.');
     } finally {
@@ -152,7 +168,7 @@ export default function EmployeeLoginPage() {
         return;
       }
 
-      router.push('/employee/dashboard');
+      router.push(next);
     } catch {
       setError('Something went wrong.');
     } finally {
@@ -172,7 +188,7 @@ export default function EmployeeLoginPage() {
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error || 'Verification failed.'); return; }
-      router.push('/employee/dashboard');
+      router.push(next);
     } catch {
       setError('Something went wrong.');
     } finally {
@@ -384,5 +400,13 @@ export default function EmployeeLoginPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function EmployeeLoginPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)' }}>Loading…</div>}>
+      <EmployeeLoginInner />
+    </Suspense>
   );
 }

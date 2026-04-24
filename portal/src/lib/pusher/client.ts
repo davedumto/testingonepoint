@@ -26,6 +26,25 @@ function getPusher(): PusherClient | null {
   return instance;
 }
 
+// Fires `handler` every time the connection transitions back to 'connected'
+// *after* an initial connection. Used to refetch authoritative state from
+// the server when the WebSocket reconnects after a drop, since Pusher
+// Channels don't replay missed events. No-op when Pusher isn't configured.
+export function onReconnect(handler: () => void): () => void {
+  const p = getPusher();
+  if (!p) return () => {};
+
+  // If the connection is already established when we attach, treat that as
+  // the "initial connect" — we only want to react to subsequent reconnects.
+  let hasConnectedOnce = p.connection.state === 'connected';
+  const onConnected = () => {
+    if (hasConnectedOnce) handler();
+    hasConnectedOnce = true;
+  };
+  p.connection.bind('connected', onConnected);
+  return () => p.connection.unbind('connected', onConnected);
+}
+
 // Subscribe a component to a channel. Returns a teardown fn safe to call
 // from useEffect cleanup — unbinds the handlers and unsubscribes if this
 // was the last listener. No-op (returns a noop teardown) when Pusher isn't

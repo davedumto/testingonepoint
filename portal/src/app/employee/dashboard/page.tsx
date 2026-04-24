@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Toast from '@/components/Toast';
 import ClockInWidget from '@/components/ClockInWidget';
+import EmployeeOfMonthBanner from '@/components/EmployeeOfMonthBanner';
 import { secureFetch } from '@/lib/client/secure-fetch';
 import { subscribe, CHANNELS } from '@/lib/pusher/client';
 import { formatClock, formatDate as formatDateShort, formatMonthAbbrev as formatEventMonth, formatDayOfMonth as formatEventDay } from '@/lib/client/format-time';
@@ -53,7 +54,7 @@ const QUICK_TOOLS = [
   { name: 'Quote Forms', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', color: '#0d9488', imageUrl: 'https://media.akamai.odsp.cdn.office.net/southcentralus1-mediap.svc.ms/transform/thumbnail?provider=url&inputFormat=jpg&docid=https%3A%2F%2Fcdn.hubblecontent.osi.office.net%2Fm365content%2Fpublish%2Fe8d814a4-baa6-4c1e-82e6-f03a10350289%2F678822401.jpg&w=400' },
   { name: 'Tech Tools', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tech-Tools.aspx', color: '#052847', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a38e07b348488dea5.png' },
   { name: 'Client Tools', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', color: '#0a7d63', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322b9ff45b49cc916125.png' },
-  { name: 'Imagine, Grok', url: 'https://grok.com', color: '#000000', imageUrl: 'https://grok.com/icon-512x512.png' },
+  { name: 'Imagine, Grok', url: 'https://grok.com', color: '#000000', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916eb0e5e2bb7f6f317b.png' },
   { name: 'My LastPass Vault', url: 'https://lastpass.com/vault', color: '#d32d27', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498a1636a6c6547a3a3.png' },
   { name: 'Microsoft Teams', url: 'https://teams.cloud.microsoft/', color: '#5059c9', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498b0e5e2bb7fe92615.png' },
   { name: 'Outlook', url: 'https://outlook.cloud.microsoft/mail/', color: '#0078d4', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e934989ff45b49cc9201f8.png' },
@@ -62,7 +63,7 @@ const QUICK_TOOLS = [
   // branded hero images are uploaded to the filesafe CDN alongside the rest.
   { name: 'Canva', url: 'https://www.canva.com/', color: '#00c4cc', imageUrl: 'https://www.google.com/s2/favicons?domain=canva.com&sz=256' },
   { name: 'HyGen', url: 'https://app.hygen.ai/', color: '#7c3aed', imageUrl: 'https://www.google.com/s2/favicons?domain=hygen.ai&sz=256' },
-  { name: 'Microsoft Loop', url: 'https://loop.cloud.microsoft/', color: '#5b5fc7', imageUrl: 'https://www.google.com/s2/favicons?domain=loop.cloud.microsoft&sz=256' },
+  { name: 'Microsoft Loop', url: 'https://loop.cloud.microsoft/', color: '#5b5fc7', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916e0d66f2a665df0105.png' },
 ];
 
 const CRM_IMAGE_URL = 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a717d5dd4e123759b.png';
@@ -133,17 +134,28 @@ export default function EmployeeTeamHubPage() {
   }, []);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/employee/auth/me').then(r => r.json()),
-      fetch('/employee/api/hub').then(r => r.json()),
-    ]).then(([me, hubData]) => {
-      if (me.employee) {
-        setUser({ name: me.employee.name || me.employee.email, email: me.employee.email });
-        setSuggestName(me.employee.name || '');
-        setSuggestEmail(me.employee.email || '');
+    // Resilient fetch: return null on non-OK or non-JSON responses so a
+    // transient 401 or empty body during dev compilation doesn't crash the
+    // whole page with an unhandled rejection.
+    const safeJson = async (url: string) => {
+      try {
+        const r = await fetch(url);
+        if (!r.ok) return null;
+        return await r.json();
+      } catch {
+        return null;
       }
-      if (hubData.announcements) setHub(hubData);
-    }).finally(() => setLoading(false));
+    };
+    Promise.all([safeJson('/api/employee/auth/me'), safeJson('/employee/api/hub')])
+      .then(([me, hubData]) => {
+        if (me?.employee) {
+          setUser({ name: me.employee.name || me.employee.email, email: me.employee.email });
+          setSuggestName(me.employee.name || '');
+          setSuggestEmail(me.employee.email || '');
+        }
+        if (hubData?.announcements) setHub(hubData);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   // Live invalidation: any admin write on a hub surface triggers a single
@@ -186,11 +198,12 @@ export default function EmployeeTeamHubPage() {
     }
   }
 
+  // Clicking the CRM card either opens GHL directly (if the employee's last
+  // OAuth is still fresh) or kicks off the OAuth flow. No admin approval
+  // step — any employee can authenticate.
   const crmFresh = isAuthFresh(hub?.crm.lastAuthenticated);
-  const crmHref = !hub?.crm.hasApprovedAccess || !crmFresh ? CRM_OAUTH_INITIATE : CRM_DESTINATION;
-  const crmLabel = !hub?.crm.hasApprovedAccess
-    ? 'Request Access'
-    : crmFresh ? 'Open CRM' : 'Authenticate';
+  const crmHref = crmFresh ? CRM_DESTINATION : CRM_OAUTH_INITIATE;
+  const crmLabel = crmFresh ? 'Open CRM' : 'Authenticate';
 
   if (loading) return <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '80px 0' }}>Loading…</p>;
 
@@ -226,6 +239,11 @@ export default function EmployeeTeamHubPage() {
           </div>
         </div>
       </div>
+
+      {/* Employee of the Month banner — sits directly under the greeting so
+          the celebration is the first thing employees see. Renders nothing
+          unless there's an active winner within the 24h window. */}
+      <EmployeeOfMonthBanner />
 
       {/* Clock-in widget — first thing employees see under the greeting.
           Pops a "don't forget to clock in" toast on mount when they're not
@@ -439,13 +457,15 @@ export default function EmployeeTeamHubPage() {
       <section data-tour="tools" style={{ marginBottom: 32 }}>
         <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--navy)', letterSpacing: '-0.01em', marginBottom: 14 }}>Quick Access Tools</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
-          {/* GHL CRM tile with OAuth gate */}
-          <a href={crmHref} target={crmFresh && hub?.crm.hasApprovedAccess ? '_blank' : '_self'} rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
+          {/* GHL CRM tile — clicking goes straight to OAuth unless the
+              employee's last authentication is still fresh, in which case
+              we jump straight to the CRM in a new tab. */}
+          <a href={crmHref} target={crmFresh ? '_blank' : '_self'} rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
             <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef', position: 'relative' }}>
               <img src={CRM_IMAGE_URL} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               <span className="badge" style={{
                 position: 'absolute', top: 8, right: 8,
-                background: crmFresh && hub?.crm.hasApprovedAccess ? 'rgba(46,154,85,0.95)' : 'rgba(13,148,136,0.95)',
+                background: crmFresh ? 'rgba(46,154,85,0.95)' : 'rgba(13,148,136,0.95)',
                 color: '#fff',
                 fontSize: 10,
               }}>

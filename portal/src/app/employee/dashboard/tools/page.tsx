@@ -11,11 +11,14 @@ const TOOLS = [
   { name: 'Quote Forms', description: 'Run quotes across carriers', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', imageUrl: 'https://media.akamai.odsp.cdn.office.net/southcentralus1-mediap.svc.ms/transform/thumbnail?provider=url&inputFormat=jpg&docid=https%3A%2F%2Fcdn.hubblecontent.osi.office.net%2Fm365content%2Fpublish%2Fe8d814a4-baa6-4c1e-82e6-f03a10350289%2F678822401.jpg&w=400' },
   { name: 'Tech Tools', description: 'Internal tooling and utilities', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tech-Tools.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a38e07b348488dea5.png' },
   { name: 'Client Tools', description: 'Service desk and resources', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322b9ff45b49cc916125.png' },
-  { name: 'Imagine, Grok', description: 'AI assistant for research', url: 'https://grok.com', imageUrl: 'https://grok.com/icon-512x512.png' },
+  { name: 'Imagine, Grok', description: 'AI assistant for research', url: 'https://grok.com', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916eb0e5e2bb7f6f317b.png' },
   { name: 'My LastPass Vault', description: 'Shared credential vault', url: 'https://lastpass.com/vault', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498a1636a6c6547a3a3.png' },
   { name: 'OnePoint CRM', description: 'GoHighLevel client workspace', url: 'http://app.innovateihub.com/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a717d5dd4e123759b.png' },
   { name: 'Microsoft Teams', description: 'Team chat and meetings', url: 'https://teams.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498b0e5e2bb7fe92615.png' },
+  { name: 'Microsoft Loop', description: 'Docs and project pages', url: 'https://loop.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916e0d66f2a665df0105.png' },
   { name: 'Outlook', description: 'Email and calendar', url: 'https://outlook.cloud.microsoft/mail/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e934989ff45b49cc9201f8.png' },
+  { name: 'Canva', description: 'Design graphics and social posts', url: 'https://www.canva.com/', imageUrl: 'https://www.google.com/s2/favicons?domain=canva.com&sz=256' },
+  { name: 'HyGen', description: 'AI video generation', url: 'https://app.hygen.ai/', imageUrl: 'https://www.google.com/s2/favicons?domain=hygen.ai&sz=256' },
 ];
 
 export default function ToolsPage() {
@@ -71,20 +74,31 @@ export default function ToolsPage() {
 
         {/* Image-led cards — 16:9 image header + name/description body. Matches
             the Hub's Quick Access Tools treatment so the portal feels unified. */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16, alignItems: 'start' }}>
           {TOOLS.map(tool => (
             <a key={tool.name} href={tool.url} target="_blank" rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef', position: 'relative' }}>
-                <img src={tool.imageUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef', position: 'relative', overflow: 'hidden' }}>
+                <img
+                  src={tool.imageUrl}
+                  alt=""
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
                 <span style={{ position: 'absolute', top: 10, right: 10, width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.92)', color: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 6px rgba(5,40,71,0.15)' }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7" /><path d="M7 7h10v10" />
                   </svg>
                 </span>
               </div>
-              <div style={{ padding: 16, flex: 1 }}>
-                <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy)', lineHeight: 1.3 }}>{tool.name}</p>
-                <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>{tool.description}</p>
+              <div style={{ padding: 16 }}>
+                <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy)', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tool.name}</p>
+                <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tool.description}</p>
               </div>
             </a>
           ))}

@@ -48,13 +48,16 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Face-aware thumbnail at 400x400, auto format + quality. Deterministic
-    // public_id per-employee means re-uploads overwrite the prior photo.
+    // Employees crop client-side before upload (PhotoCropper) so input is
+    // already a square. We just resize to 400x400 with center gravity, no
+    // face-detection re-crop — that re-crop was the source of previously
+    // off-center Cloudinary thumbnails. Deterministic public_id per-employee
+    // means re-uploads overwrite the prior photo.
     const result = await uploadBuffer(buffer, {
       folder: 'onepoint-portal/employee-photos',
       publicId: `employee-${session.employeeId}`,
       transformation: [
-        { width: 400, height: 400, gravity: 'face', crop: 'thumb' },
+        { width: 400, height: 400, gravity: 'center', crop: 'fill' },
         { quality: 'auto', fetch_format: 'auto' },
       ],
     });
