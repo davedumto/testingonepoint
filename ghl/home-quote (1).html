@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homeowners Insurance Quote | OnePoint Insurance Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#faf9f6;
+  --bg-card:#ffffff;
+  --bg-input:#ffffff;
+  --navy:#052847;
+  --blue:#0a3d6b;
+  --border:#dde4ed;
+  --text:#1a2e42;
+  --text-dim:#5a6c7e;
+  --text-mute:#8a9baa;
+  --accent:#0a3d6b;
+  --accent-hover:#052847;
+  --accent-dim:#041d33;
+  --gold:#E8C74E;
+  --danger:#ef4444;
+  --white:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+/* GHL embed fallback - full-width wrapper ensures background applies even if body styles are stripped by parent page */
+.app-shell{background:var(--bg);min-height:100vh;display:flex;flex-direction:column;flex:1;width:100%}
+
+/* Header */
+.site-header{display:flex;justify-content:space-between;align-items:center;padding:20px 32px;border-bottom:1px solid var(--border);background:var(--bg)}
+.header-nav{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--text-dim);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;padding:8px 12px;border-radius:6px;transition:background .2s}
+.header-nav:hover{background:var(--bg-card);color:var(--text)}
+.header-nav svg{width:16px;height:16px;stroke-width:2.5}
+.header-nav.disabled{opacity:.35;cursor:default}
+.header-nav.disabled:hover{background:none;color:var(--text-dim)}
+.brand{display:flex;flex-direction:column;align-items:center;gap:4px}
+.brand-mark{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.5px}
+.brand-mark .leaf{color:var(--accent);display:inline-flex}
+.brand-mark .leaf svg{width:20px;height:20px}
+.brand-tag{font-size:13px;color:var(--text-dim);font-weight:500}
+.brand-logo{height:42px;width:auto;padding:0;background:transparent;border-radius:0;display:block}
+@media (max-width:640px){.brand-logo{height:34px;padding:4px 10px}}
+
+.brand-tag .accent{color:var(--accent);font-weight:700}
+
+/* Progress */
+.progress-wrap{max-width:780px;width:100%;margin:0 auto;padding:28px 32px 8px}
+.progress-bar{height:6px;background:rgba(5,40,71,0.08);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);width:0%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.progress-label{text-align:center;margin-top:10px;font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.2px}
+.progress-label .dot{color:var(--text-dim);margin:0 4px}
+.progress-label .stage{color:var(--text);font-weight:500}
+
+/* Main */
+.main{padding:40px 24px 48px;max-width:680px;width:100%;margin:0 auto;text-align:center}
+
+/* Slides */
+.slide{display:none}
+.slide.active{display:block;animation:fadeIn .4s cubic-bezier(.4,0,.2,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.q-kicker{display:inline-block;background:rgba(10,61,107,.1);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px}
+.q-title{font-size:34px;font-weight:700;color:var(--navy);margin:0 0 14px;line-height:1.2;letter-spacing:-0.5px}
+.q-sub{font-size:15px;color:var(--text-dim);margin:0 auto 36px;max-width:480px}
+
+/* Option buttons */
+.opt-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 auto 36px;max-width:680px}
+.opt-btn{display:flex;align-items:center;justify-content:center;padding:20px 14px;min-height:72px;border-radius:12px;border:2px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14.5px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .18s ease;text-align:center;line-height:1.3}
+.opt-btn:hover{border-color:var(--accent);background:var(--bg-input)}
+.opt-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+/* For 2-3 options, fewer columns and bigger cards */
+.opt-row:has(.opt-btn:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr));max-width:420px}
+.opt-row:has(.opt-btn:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr));max-width:540px}
+/* Vertical mode: long lists, full-width cards stacked, icon on left */
+.opt-row.vertical{grid-template-columns:repeat(3,minmax(0,1fr));max-width:680px;gap:12px}
+.opt-row.vertical .opt-btn{min-height:64px;padding:16px 18px}
+/* When 4+ options in vertical mode on narrow screens, still stack as 3 */
+@media (max-width:640px){.opt-row.vertical{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Responsive */
+@media (max-width:640px){
+  .opt-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:440px}
+  .opt-btn{min-height:64px;padding:14px 12px;font-size:13.5px}
+  }
+
+/* Form inputs */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left;margin:0 auto 36px;max-width:560px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1 / -1}
+.field label{font-size:13px;color:var(--text-dim);font-weight:500}
+.field .opt{color:var(--text-mute);font-weight:400;font-size:12px}
+.input,.select{width:100%;padding:14px 16px;background:var(--bg-input);border:2px solid var(--border);border-radius:8px;color:var(--text);font-size:15px;font-family:inherit;transition:border-color .15s}
+.input:focus,.select:focus{outline:none;border-color:var(--accent)}
+.input::placeholder{color:var(--text-mute)}
+.select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='%239aadbf' d='M6 8L0 0h12z'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.err-msg{color:var(--danger);font-size:13px;margin-top:4px;font-weight:500}
+.field.has-error .input,.field.has-error .select{border-color:var(--danger)}
+
+/* Checkbox */
+.check-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg-card);border:2px solid var(--border);border-radius:10px;cursor:pointer;text-align:left;margin:0 auto 14px;max-width:560px;transition:border-color .2s;user-select:none}
+.check-card:hover{border-color:var(--text-dim)}
+.check-card.checked{border-color:var(--accent);background:rgba(10,61,107,.05)}
+.check-card input{display:none}
+.check-card .box{width:22px;height:22px;flex-shrink:0;border:2px solid var(--text-dim);border-radius:5px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s}
+.check-card.checked .box{background:var(--accent);border-color:var(--accent)}
+.check-card .box::after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .2s;margin-top:-2px}
+.check-card.checked .box::after{transform:rotate(45deg) scale(1)}
+.check-card .ctext{flex:1;font-size:14.5px;color:var(--text);line-height:1.5}
+.check-card .ctext strong{color:var(--navy);font-weight:600}
+.check-card.has-error{border-color:var(--danger)}
+.upload-card{max-width:520px;margin:0 auto 18px}
+.upload-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px 20px;border:2px dashed var(--border);border-radius:12px;background:var(--bg-card);cursor:pointer;transition:all .2s;color:var(--text-dim)}
+.upload-drop:hover{border-color:var(--accent);color:var(--text)}
+.upload-drop svg{color:var(--accent)}
+.upload-title{font-size:15px;font-weight:600;color:var(--text);margin-top:4px}
+.upload-hint{font-size:12px;color:var(--text-mute)}
+.upload-preview{background:var(--bg-input);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;color:var(--text);font-size:14px}
+.upload-preview .file-ic{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.upload-preview .file-ic svg{color:#fff;width:18px;height:18px}
+.upload-preview .fname{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-preview .fsize{color:var(--text-dim);font-size:12px}
+.upload-preview .fremove{background:none;border:0;color:var(--text-dim);cursor:pointer;font-size:18px;padding:4px;font-family:inherit}
+.upload-preview .fremove:hover{color:var(--danger)}
+
+.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:680px;margin:0 auto 14px}
+.check-grid .check-card{margin:0;max-width:none}
+@media (max-width:640px){.check-grid{grid-template-columns:1fr}}
+
+/* Condition list inside certification card */
+.cert-list{margin:10px 0 0 0;padding-left:18px;color:var(--text-dim);font-size:13.5px}
+.cert-list li{margin-bottom:4px}
+
+/* Continue */
+.continue-btn{padding:17px 48px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-size:15px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:inherit;transition:all .2s;box-shadow:0 6px 20px rgba(10,61,107,.18)}
+.continue-btn:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 24px rgba(10,61,107,.25)}
+.continue-btn:disabled{background:var(--navy);color:var(--text-mute);cursor:not-allowed;box-shadow:none;transform:none}
+.continue-btn svg{width:18px;height:18px;stroke-width:2.5}
+
+/* Hero welcome */
+.hero{padding:20px 0 40px}
+.hero h1{font-size:42px;font-weight:800;color:var(--navy);margin:0 0 16px;line-height:1.1;letter-spacing:-1px}
+.hero p{font-size:17px;color:var(--text-dim);margin:0 auto 32px;max-width:520px}
+.hero-trust{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:28px;color:var(--text-dim);font-size:13px}
+.hero-trust .item{display:flex;align-items:center;gap:6px}
+.hero-trust svg{color:var(--accent);width:14px;height:14px}
+
+/* Review panel */
+.review{text-align:left;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:28px}
+.review h3{font-size:14px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center}
+.review h3:not(:first-child){margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.review .row{display:flex;justify-content:space-between;gap:16px;padding:6px 0;font-size:14px}
+.review .lbl{color:var(--text-dim)}
+.review .val{color:var(--navy);font-weight:500;text-align:right}
+.review .edit{background:none;border:1px solid var(--border);color:var(--text-dim);font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s}
+.review .edit:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Signature */
+.sig-display{padding:14px 18px;background:var(--bg-input);border:1px solid var(--border);border-radius:8px;font-weight:600;color:var(--navy);margin-top:8px;text-align:left}
+.sig-preview{padding:22px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;font-family:'Caveat',cursive;font-size:40px;color:var(--navy);min-height:72px;text-align:center;margin-top:8px}
+
+/* Loading */
+.loading-wrap{padding:80px 20px;text-align:center}
+.loading-spinner{width:56px;height:56px;margin:0 auto 24px;border:4px solid rgba(255,255,255,0.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-title{font-size:24px;color:var(--navy);font-weight:700;margin-bottom:8px}
+.loading-sub{color:var(--text-dim)}
+
+/* Thank you */
+.thanks-wrap{padding:40px 20px;text-align:center}
+.thanks-icon{width:80px;height:80px;margin:0 auto 20px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.thanks-icon svg{width:40px;height:40px;color:#fff;stroke-width:3}
+.thanks-ref{display:inline-block;background:var(--bg-card);border:1px solid var(--border);padding:10px 20px;border-radius:8px;font-family:monospace;font-size:15px;color:var(--navy);margin:16px 0 24px;letter-spacing:.5px}
+
+/* Toast */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--accent);color:var(--navy);padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;box-shadow:0 10px 40px rgba(0,0,0,.15);z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:20px;z-index:2000}
+.modal-backdrop.show{display:flex}
+.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:28px;max-width:440px;width:100%;text-align:center}
+.modal h3{color:var(--navy);font-size:20px;margin-bottom:10px}
+.modal p{color:var(--text-dim);margin-bottom:20px;font-size:14.5px}
+.modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.modal-actions .btn{padding:10px 22px;border-radius:8px;border:0;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.modal-actions .btn.primary{background:var(--accent);color:#fff}
+.modal-actions .btn.secondary{background:#fff;color:var(--navy);border:1.5px solid var(--border-strong)}
+
+/* Responsive */
+@media (max-width:640px){
+  .site-header{padding:14px 16px}
+  .brand-tag{display:none}
+  .header-nav span{display:none}
+  .progress-wrap{padding:20px 16px 8px}
+  .main{padding:32px 16px 60px}
+  .q-title{font-size:26px}
+  .hero h1{font-size:32px}
+  .form-grid{grid-template-columns:1fr}
+  .opt-btn{min-width:120px;padding:12px 28px}
+  .continue-btn{width:100%;max-width:320px;justify-content:center}
+  .review{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+<header class="site-header">
+  <button type="button" class="header-nav" id="prevBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span>Previous Question</span>
+  </button>
+  <div class="brand">
+    <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69cefb46849c507b52617aaf.svg" alt="OnePoint Insurance Agency" class="brand-logo">
+    <div class="brand-tag">We do <span class="accent">insurance</span> now</div>
+  </div>
+  <button type="button" class="header-nav" id="exitBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <span>Exit</span>
+  </button>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label"><span id="progressPct">0%</span> <span class="dot">•</span> <span class="stage" id="progressStage">Getting started</span></div>
+</div>
+
+<main class="main">
+
+<section class="slide active" data-slide="welcome">
+  <h1 class="q-title" style="font-size:28px;margin-top:20px">Compare Rates In Your Area Instantly</h1>
+  <div style="margin:56px auto 40px;max-width:260px">
+    <div style="font-size:24px;font-weight:700;color:var(--navy);margin-bottom:22px;text-align:center">ZIP Code</div>
+    <input type="text" class="input" id="w_zip" inputmode="numeric" maxlength="5" placeholder="30022" autocomplete="postal-code" style="text-align:center;font-size:22px;font-weight:700;padding:18px;letter-spacing:2px">
+    <div class="err-msg" id="err_w_zip" style="display:none;text-align:center;margin-top:8px"></div>
+  </div>
+  <button type="button" class="continue-btn" data-next style="min-width:280px;justify-content:center">GET RATES NOW</button>
+</section>
+
+<section class="slide" data-slide="property_type">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Are you a homeowner, landlord, or renter?</h2>
+  <p class="q-sub">This determines the type of policy we quote.</p>
+  <div class="opt-row vertical" data-radio="property_type"><button type="button" class="opt-btn" data-val="Homeowner">Homeowner — I live here</button><button type="button" class="opt-btn" data-val="Landlord">Landlord — I rent it out</button><button type="button" class="opt-btn" data-val="Condo">Condo owner</button><button type="button" class="opt-btn" data-val="Mobile">Mobile / manufactured home</button><button type="button" class="opt-btn" data-val="Renter">Renter — I rent this place</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="rental_type">
+  <span class="q-kicker">Rental</span>
+  <h2 class="q-title">What type of rental do you live in?</h2>
+  <p class="q-sub">Helps us quote the right renter policy (HO4).</p>
+  <div class="opt-row vertical" data-radio="rental_type"><button type="button" class="opt-btn" data-val="Apartment">Apartment</button><button type="button" class="opt-btn" data-val="Condo">Condo</button><button type="button" class="opt-btn" data-val="Townhome">Townhome</button><button type="button" class="opt-btn" data-val="Single_Family">Single-family home</button><button type="button" class="opt-btn" data-val="Duplex">Duplex / multi-unit</button><button type="button" class="opt-btn" data-val="Mobile">Mobile / manufactured</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="current_insurer">
+  <span class="q-kicker">Current Coverage</span>
+  <h2 class="q-title">Who's your current home insurance carrier?</h2>
+  <p class="q-sub">Helps us compare and identify switching discounts.</p>
+  <div class="opt-row vertical" data-radio="current_insurer"><button type="button" class="opt-btn" data-val="None">I'm not currently insured</button><button type="button" class="opt-btn" data-val="Allstate">Allstate</button><button type="button" class="opt-btn" data-val="State_Farm">State Farm</button><button type="button" class="opt-btn" data-val="GEICO">GEICO</button><button type="button" class="opt-btn" data-val="Progressive">Progressive</button><button type="button" class="opt-btn" data-val="Farmers">Farmers</button><button type="button" class="opt-btn" data-val="Liberty_Mutual">Liberty Mutual</button><button type="button" class="opt-btn" data-val="USAA">USAA</button><button type="button" class="opt-btn" data-val="Nationwide">Nationwide</button><button type="button" class="opt-btn" data-val="Travelers">Travelers</button><button type="button" class="opt-btn" data-val="American_Family">American Family</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="policy_upload">
+  <span class="q-kicker">Current Coverage</span>
+  <h2 class="q-title">Upload your current policy</h2>
+  <p class="q-sub">Optional — share your declarations page so we can match and beat your coverage. PDF, JPG, or PNG up to 5 MB.</p>
+  <div class="upload-card">
+    <input type="file" id="policy_doc_input" accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" style="display:none">
+    <label for="policy_doc_input" class="upload-drop" id="policy_doc_drop">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div class="upload-title">Click to upload declarations page</div>
+      <div class="upload-hint">PDF, JPG, PNG &middot; Max 5 MB</div>
+    </label>
+    <div class="upload-preview" id="policy_doc_preview" style="display:none"></div>
+  </div>
+  <button type="button" class="continue-btn" data-next style="margin-top:12px">Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+  <div style="margin-top:12px"><button type="button" class="header-nav" data-next style="margin:0 auto">Skip for now</button></div>
+</section>
+
+<section class="slide" data-slide="pp_value">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Estimated value of your personal property</h2>
+  <p class="q-sub">Furniture, electronics, clothing, appliances — the total replacement cost.</p>
+  <div class="opt-row vertical" data-radio="pp_value"><button type="button" class="opt-btn" data-val="$0 - 25,000">$0 – 25,000</button><button type="button" class="opt-btn" data-val="$25,001 - 50,000">$25,001 – 50,000</button><button type="button" class="opt-btn" data-val="$50,001 - 75,000">$50,001 – 75,000</button><button type="button" class="opt-btn" data-val="$75,001 - 100,000">$75,001 – 100,000</button><button type="button" class="opt-btn" data-val="$100,001 - 150,000">$100,001 – 150,000</button><button type="button" class="opt-btn" data-val="$150,001 - 200,000">$150,001 – 200,000</button><button type="button" class="opt-btn" data-val="$200,001 - 300,000">$200,001 – 300,000</button><button type="button" class="opt-btn" data-val="$300,001+">$300,001+</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="gender">
+  <span class="q-kicker">About You</span>
+  <h2 class="q-title">What's your gender?</h2>
+  
+  <div class="opt-row" data-radio="p_sex"><button type="button" class="opt-btn" data-val="Male">Male</button><button type="button" class="opt-btn" data-val="Female">Female</button><button type="button" class="opt-btn" data-val="Nonbinary">Nonbinary</button><button type="button" class="opt-btn" data-val="Prefer_not">Prefer not to say</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="marital">
+  <span class="q-kicker">About You</span>
+  <h2 class="q-title">What's your marital status?</h2>
+  
+  <div class="opt-row vertical" data-radio="p_marital"><button type="button" class="opt-btn" data-val="Single">Single</button><button type="button" class="opt-btn" data-val="Married">Married</button><button type="button" class="opt-btn" data-val="Domestic_Partner">Domestic partner</button><button type="button" class="opt-btn" data-val="Divorced">Divorced</button><button type="button" class="opt-btn" data-val="Widowed">Widowed</button><button type="button" class="opt-btn" data-val="Separated">Separated</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="military">
+  <span class="q-kicker">About You</span>
+  <h2 class="q-title">US military service status</h2>
+  <p class="q-sub">Active duty, veterans, and dependents may qualify for special discounts.</p>
+  <div class="opt-row vertical" data-radio="p_military"><button type="button" class="opt-btn" data-val="Active">Active duty</button><button type="button" class="opt-btn" data-val="Reserve">Reserve / National Guard</button><button type="button" class="opt-btn" data-val="Veteran">Veteran</button><button type="button" class="opt-btn" data-val="Dependent">Military dependent</button><button type="button" class="opt-btn" data-val="None">Not applicable</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="p_address">
+  <span class="q-kicker">Property</span>
+  <h2 class="q-title">What's the property address?</h2>
+  <p class="q-sub">Physical address only — no P.O. Boxes.</p>
+  <div class="form-grid">
+  <div class="field full"><label for="a_street">Street address <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="a_street" placeholder="123 Main Street"><div class="err-msg" id="err_a_street" style="display:none"></div></div>
+  <div class="field full"><label for="a_apt">Apt. / Ste. <span class="opt">(Optional)</span></label><input type="text" class="input" id="a_apt"></div>
+  <div class="field"><label for="a_state">State <span style="color:var(--danger)">*</span></label><select class="select" id="a_state" data-state-for="a"><option value="">Select state</option></select><div class="err-msg" id="err_a_state" style="display:none"></div></div>
+  <div class="field"><label for="a_city">City <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="a_city" list="a_city_list" placeholder="Start typing"><datalist id="a_city_list"></datalist><div class="err-msg" id="err_a_city" style="display:none"></div></div>
+  <div class="field"><label for="a_zip">ZIP code <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="a_zip" inputmode="numeric" maxlength="5"><div class="err-msg" id="err_a_zip" style="display:none"></div></div>
+  <div class="field"><label for="a_county">County <span style="color:var(--danger)">*</span></label><select class="select" id="a_county" data-county-for="a"><option value="">Select state first</option></select><div class="err-msg" id="err_a_county" style="display:none"></div></div>
+</div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="mail_same">
+  <span class="q-kicker">Mailing</span>
+  <h2 class="q-title">Is your mailing address the same as the property?</h2>
+  
+  <div class="opt-row" data-radio="mail_same"><button type="button" class="opt-btn" data-val="Yes">Yes, same</button><button type="button" class="opt-btn" data-val="No">No, different</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="mail_address">
+  <span class="q-kicker">Mailing</span>
+  <h2 class="q-title">What's your mailing address?</h2>
+  
+  <div class="form-grid">
+  <div class="field full"><label for="m_street">Street address <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="m_street" placeholder="123 Main Street"><div class="err-msg" id="err_m_street" style="display:none"></div></div>
+  <div class="field full"><label for="m_apt">Apt. / Ste. <span class="opt">(Optional)</span></label><input type="text" class="input" id="m_apt"></div>
+  <div class="field"><label for="m_state">State <span style="color:var(--danger)">*</span></label><select class="select" id="m_state" data-state-for="m"><option value="">Select state</option></select><div class="err-msg" id="err_m_state" style="display:none"></div></div>
+  <div class="field"><label for="m_city">City <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="m_city" list="m_city_list" placeholder="Start typing"><datalist id="m_city_list"></datalist><div class="err-msg" id="err_m_city" style="display:none"></div></div>
+  <div class="field"><label for="m_zip">ZIP code <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="m_zip" inputmode="numeric" maxlength="5"><div class="err-msg" id="err_m_zip" style="display:none"></div></div>
+  <div class="field"><label for="m_county">County <span style="color:var(--danger)">*</span></label><select class="select" id="m_county" data-county-for="m"><option value="">Select state first</option></select><div class="err-msg" id="err_m_county" style="display:none"></div></div>
+</div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="year_built">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">What year was the home built?</h2>
+  <p class="q-sub">Find this on the county tax record or your deed.</p>
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="d_year_built">Year built <span style="color:var(--danger)">*</span></label><input type="number" class="input" id="d_year_built" inputmode="numeric" placeholder="e.g. 2006"><div class="err-msg" id="err_d_year_built" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="sq_footage">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">What's the total square footage?</h2>
+  <p class="q-sub">Finished living area only — exclude garage and unfinished basement.</p>
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="d_sqft">Square footage <span style="color:var(--danger)">*</span></label><input type="number" class="input" id="d_sqft" inputmode="numeric" placeholder="e.g. 2000"><div class="err-msg" id="err_d_sqft" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="stories">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Number of stories</h2>
+  
+  <div class="opt-row vertical" data-radio="d_stories"><button type="button" class="opt-btn" data-val="1">1 story</button><button type="button" class="opt-btn" data-val="1.5">1.5 stories</button><button type="button" class="opt-btn" data-val="2">2 stories</button><button type="button" class="opt-btn" data-val="2.5">2.5 stories</button><button type="button" class="opt-btn" data-val="3">3+ stories</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="construction">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">What type of construction?</h2>
+  
+  <div class="opt-row vertical" data-radio="d_construction"><button type="button" class="opt-btn" data-val="Frame">Wood frame</button><button type="button" class="opt-btn" data-val="Brick">Brick or masonry</button><button type="button" class="opt-btn" data-val="Stucco">Stucco</button><button type="button" class="opt-btn" data-val="Vinyl">Vinyl siding</button><button type="button" class="opt-btn" data-val="Other">Other / mixed</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="foundation">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Foundation type</h2>
+  
+  <div class="opt-row vertical" data-radio="d_foundation"><button type="button" class="opt-btn" data-val="Slab">Slab</button><button type="button" class="opt-btn" data-val="Crawlspace">Crawlspace</button><button type="button" class="opt-btn" data-val="Basement_Full">Full basement</button><button type="button" class="opt-btn" data-val="Basement_Partial">Partial basement</button><button type="button" class="opt-btn" data-val="Pier">Pier & beam</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="roof">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Roof material</h2>
+  
+  <div class="opt-row vertical" data-radio="d_roof"><button type="button" class="opt-btn" data-val="Asphalt">Asphalt shingle</button><button type="button" class="opt-btn" data-val="Metal">Metal</button><button type="button" class="opt-btn" data-val="Tile">Tile</button><button type="button" class="opt-btn" data-val="Slate">Slate</button><button type="button" class="opt-btn" data-val="Wood">Wood shake</button><button type="button" class="opt-btn" data-val="Flat">Flat / rolled</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="roof_updated">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Has the roof been replaced or updated?</h2>
+  <p class="q-sub">Newer roofs often qualify for discounts.</p>
+  <div class="opt-row" data-radio="d_roof_updated"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="roof_year">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">What year was the roof updated?</h2>
+  
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="d_roof_year">Year roof updated <span style="color:var(--danger)">*</span></label><input type="number" class="input" id="d_roof_year" inputmode="numeric" placeholder="e.g. 2018"><div class="err-msg" id="err_d_roof_year" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="heat">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Primary heat source</h2>
+  
+  <div class="opt-row vertical" data-radio="d_heat"><button type="button" class="opt-btn" data-val="Furnace">Furnace (forced air)</button><button type="button" class="opt-btn" data-val="Heat_Pump">Heat pump</button><button type="button" class="opt-btn" data-val="Boiler">Boiler / radiator</button><button type="button" class="opt-btn" data-val="Electric">Electric baseboard</button><button type="button" class="opt-btn" data-val="Wood_Stove">Wood stove</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="fuel">
+  <span class="q-kicker">Dwelling</span>
+  <h2 class="q-title">Primary heating fuel</h2>
+  
+  <div class="opt-row vertical" data-radio="d_fuel"><button type="button" class="opt-btn" data-val="Natural_Gas">Natural gas</button><button type="button" class="opt-btn" data-val="Electric">Electric</button><button type="button" class="opt-btn" data-val="Propane">Propane</button><button type="button" class="opt-btn" data-val="Oil">Oil</button><button type="button" class="opt-btn" data-val="Wood">Wood</button><button type="button" class="opt-btn" data-val="Other">Other</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="dwelling_use">
+  <span class="q-kicker">Usage</span>
+  <h2 class="q-title">How is the dwelling used?</h2>
+  
+  <div class="opt-row vertical" data-radio="d_use"><button type="button" class="opt-btn" data-val="Primary">Primary residence</button><button type="button" class="opt-btn" data-val="Secondary">Secondary / vacation</button><button type="button" class="opt-btn" data-val="Seasonal">Seasonal</button><button type="button" class="opt-btn" data-val="Rental">Rental property</button><button type="button" class="opt-btn" data-val="Vacant">Vacant</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="pool">
+  <span class="q-kicker">Eligibility</span>
+  <h2 class="q-title">Is there a swimming pool more than 2.5 feet deep?</h2>
+  
+  <div class="opt-row" data-radio="d_pool"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="trampoline">
+  <span class="q-kicker">Eligibility</span>
+  <h2 class="q-title">Is there a trampoline on the premises?</h2>
+  
+  <div class="opt-row" data-radio="d_trampoline"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="dogs">
+  <span class="q-kicker">Eligibility</span>
+  <h2 class="q-title">Any dogs with bite history or restricted breeds?</h2>
+  <p class="q-sub">Some breeds (Pit Bull, Rottweiler, Doberman, etc.) may be excluded.</p>
+  <div class="opt-row" data-radio="d_dogs"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="business">
+  <span class="q-kicker">Eligibility</span>
+  <h2 class="q-title">Is any business conducted on the premises?</h2>
+  <p class="q-sub">Includes home offices, farming, daycare, or retail.</p>
+  <div class="opt-row" data-radio="d_business"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="damage">
+  <span class="q-kicker">Condition</span>
+  <h2 class="q-title">Any existing damage or needed repairs?</h2>
+  <p class="q-sub">Roof, structure, foundation, chimney, etc.</p>
+  <div class="opt-row" data-radio="d_damage"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="renovation">
+  <span class="q-kicker">Condition</span>
+  <h2 class="q-title">Under major construction or renovation?</h2>
+  
+  <div class="opt-row" data-radio="d_renovation"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="security">
+  <span class="q-kicker">Security</span>
+  <h2 class="q-title">Security devices installed</h2>
+  <p class="q-sub">Check all that apply — each may qualify for a discount.</p>
+  <div class="check-grid"><label class="check-card" data-check="sec_deadbolt"><input type="checkbox"><span class="box"></span><span class="ctext">Deadbolt locks</span></label><label class="check-card" data-check="sec_smoke"><input type="checkbox"><span class="box"></span><span class="ctext">Smoke detector</span></label><label class="check-card" data-check="sec_fire_ext"><input type="checkbox"><span class="box"></span><span class="ctext">Fire extinguisher</span></label><label class="check-card" data-check="sec_burglar"><input type="checkbox"><span class="box"></span><span class="ctext">Burglar alarm</span></label><label class="check-card" data-check="sec_central_fire"><input type="checkbox"><span class="box"></span><span class="ctext">Central fire alarm</span></label><label class="check-card" data-check="sec_sprinkler"><input type="checkbox"><span class="box"></span><span class="ctext">Sprinkler system</span></label><label class="check-card" data-check="sec_co2"><input type="checkbox"><span class="box"></span><span class="ctext">Carbon monoxide detector</span></label><label class="check-card" data-check="sec_smart"><input type="checkbox"><span class="box"></span><span class="ctext">Smart home device</span></label><label class="check-card" data-check="sec_none"><input type="checkbox"><span class="box"></span><span class="ctext">None of the above</span></label></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="claims">
+  <span class="q-kicker">History</span>
+  <h2 class="q-title">Any claims or losses in the past 5 years?</h2>
+  <p class="q-sub">Includes any location you owned or rented, even if you didn't file a claim.</p>
+  <div class="opt-row" data-radio="d_claims"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="claim_details">
+  <span class="q-kicker">History</span>
+  <h2 class="q-title">Tell us about the claim</h2>
+  <p class="q-sub">You can list multiple; separate with commas or new lines.</p>
+  <div class="form-grid"><div class="field full"><label for="claim_info">Loss details (cause, date, amount paid)</label><textarea class="input" id="claim_info" rows="4" style="resize:vertical;min-height:110px;font-family:inherit"></textarea></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="canceled">
+  <span class="q-kicker">History</span>
+  <h2 class="q-title">Canceled, declined, or non-renewed in the past 5 years?</h2>
+  <p class="q-sub">Excluding non-payment on your part.</p>
+  <div class="opt-row" data-radio="d_canceled"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="name">
+  <span class="q-kicker">Your Info</span>
+  <h2 class="q-title">What's your name?</h2>
+  <p class="q-sub">Use your legal name as it appears on your ID.</p>
+  <div class="form-grid"><div class="field"><label for="p_first">First name <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="p_first"><div class="err-msg" id="err_p_first" style="display:none"></div></div><div class="field"><label for="p_middle">Middle <span class="opt">(Optional)</span></label><input type="text" class="input" id="p_middle" placeholder="Optional"><div class="err-msg" id="err_p_middle" style="display:none"></div></div><div class="field"><label for="p_last">Last name <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="p_last"><div class="err-msg" id="err_p_last" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="dob">
+  <span class="q-kicker">Your Info</span>
+  <h2 class="q-title">What's your date of birth?</h2>
+  
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="p_dob">Date of birth <span style="color:var(--danger)">*</span></label><input type="date" class="input" id="p_dob"><div class="err-msg" id="err_p_dob" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="has_ssn">
+  <span class="q-kicker">Your Info</span>
+  <h2 class="q-title">Do you have a Social Security Number?</h2>
+  <p class="q-sub">SSN helps verify your identity and may unlock additional discounts. Optional.</p>
+  <div class="opt-row" data-radio="p_has_ssn"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="ssn_input">
+  <span class="q-kicker">Your Info</span>
+  <h2 class="q-title">Enter your Social Security Number</h2>
+  <p class="q-sub">Stored securely and used only for verification.</p>
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="p_ssn">SSN <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="p_ssn" placeholder="XXX-XX-XXXX"><div class="err-msg" id="err_p_ssn" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="contact">
+  <span class="q-kicker">Your Info</span>
+  <h2 class="q-title">How can we reach you?</h2>
+  <p class="q-sub">Your quote will be sent here.</p>
+  <div class="form-grid"><div class="field"><label for="c_phone">Phone <span style="color:var(--danger)">*</span></label><input type="tel" class="input" id="c_phone" placeholder="(555) 555-5555"><div class="err-msg" id="err_c_phone" style="display:none"></div></div><div class="field"><label for="c_email">Email address <span style="color:var(--danger)">*</span></label><input type="email" class="input" id="c_email" placeholder="you@email.com"><div class="err-msg" id="err_c_email" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="dwelling_amount">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Desired dwelling coverage amount</h2>
+  <p class="q-sub">How much it would cost to rebuild your home. An agent will help refine if you're unsure.</p>
+  <div class="opt-row vertical" data-radio="cov_dwelling"><button type="button" class="opt-btn" data-val="0-150K">Up to $150,000</button><button type="button" class="opt-btn" data-val="150-250K">$150,000 – $250,000</button><button type="button" class="opt-btn" data-val="250-400K">$250,000 – $400,000</button><button type="button" class="opt-btn" data-val="400-600K">$400,000 – $600,000</button><button type="button" class="opt-btn" data-val="600-1M">$600,000 – $1M</button><button type="button" class="opt-btn" data-val="1M+">Over $1M</button><button type="button" class="opt-btn" data-val="NotSure">Not sure — help me decide</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="deductible">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Preferred deductible</h2>
+  <p class="q-sub">Higher deductible = lower premium. You'll pay this amount out of pocket before insurance kicks in.</p>
+  <div class="opt-row vertical" data-radio="cov_deductible"><button type="button" class="opt-btn" data-val="500">$500</button><button type="button" class="opt-btn" data-val="1000">$1,000</button><button type="button" class="opt-btn" data-val="2500">$2,500</button><button type="button" class="opt-btn" data-val="5000">$5,000</button><button type="button" class="opt-btn" data-val="10000">$10,000</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="liability">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Personal liability limit</h2>
+  <p class="q-sub">Protects you if someone is injured on your property.</p>
+  <div class="opt-row vertical" data-radio="cov_liability"><button type="button" class="opt-btn" data-val="100K">$100,000</button><button type="button" class="opt-btn" data-val="300K">$300,000</button><button type="button" class="opt-btn" data-val="500K">$500,000</button><button type="button" class="opt-btn" data-val="1M">$1,000,000</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="replacement">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Replacement cost coverage on belongings?</h2>
+  <p class="q-sub">Replacement cost pays what it costs to replace today — not depreciated value. Typically 5-10% more.</p>
+  <div class="opt-row" data-radio="cov_replacement"><button type="button" class="opt-btn" data-val="Yes">Yes, replacement cost</button><button type="button" class="opt-btn" data-val="ACV">No, actual cash value</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="addons">
+  <span class="q-kicker">Coverage</span>
+  <h2 class="q-title">Would you like any of these add-ons?</h2>
+  <p class="q-sub">Check all that interest you. An agent will confirm availability.</p>
+  <div class="check-grid"><label class="check-card" data-check="addon_water_backup"><input type="checkbox"><span class="box"></span><span class="ctext">Water backup of sewers / drains</span></label><label class="check-card" data-check="addon_earthquake"><input type="checkbox"><span class="box"></span><span class="ctext">Earthquake coverage</span></label><label class="check-card" data-check="addon_identity"><input type="checkbox"><span class="box"></span><span class="ctext">Identity fraud protection</span></label><label class="check-card" data-check="addon_equipment"><input type="checkbox"><span class="box"></span><span class="ctext">Equipment breakdown</span></label><label class="check-card" data-check="addon_service_line"><input type="checkbox"><span class="box"></span><span class="ctext">Service line coverage</span></label><label class="check-card" data-check="addon_mold"><input type="checkbox"><span class="box"></span><span class="ctext">Mold / fungi coverage</span></label><label class="check-card" data-check="addon_none"><input type="checkbox"><span class="box"></span><span class="ctext">None of the above</span></label></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="add_insured">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">Any additional insureds or co-owners?</h2>
+  <p class="q-sub">A spouse, co-owner, or mortgagee who should be listed on the policy.</p>
+  <div class="opt-row" data-radio="add_insured"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="add_insured_details">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">Additional insured details</h2>
+  
+  <div class="form-grid"><div class="field full"><label for="ai_name">Name <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="ai_name"><div class="err-msg" id="err_ai_name" style="display:none"></div></div><div class="field full"><label for="ai_rel">Relationship <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="ai_rel" placeholder="Spouse, co-owner, mortgagee, etc."><div class="err-msg" id="err_ai_rel" style="display:none"></div></div><div class="field full"><label for="ai_company">Company name <span class="opt">(Optional)</span></label><input type="text" class="input" id="ai_company" placeholder="If mortgagee"><div class="err-msg" id="err_ai_company" style="display:none"></div></div><div class="field full"><label for="ai_address">Their mailing address <span class="opt">(Optional)</span></label><input type="text" class="input" id="ai_address"><div class="err-msg" id="err_ai_address" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="has_mortgage">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">Is there a mortgage on the property?</h2>
+  <p class="q-sub">If yes, your mortgagee will be listed on the policy as loss payee.</p>
+  <div class="opt-row" data-radio="has_mortgage"><button type="button" class="opt-btn" data-val="Yes">Yes</button><button type="button" class="opt-btn" data-val="No">No, owned outright</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="mortgage_info">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">Mortgagee information</h2>
+  
+  <div class="form-grid"><div class="field full"><label for="mort_company">Mortgage company name <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="mort_company"><div class="err-msg" id="err_mort_company" style="display:none"></div></div><div class="field full"><label for="mort_loan">Loan / account number <span class="opt">(Optional)</span></label><input type="text" class="input" id="mort_loan"><div class="err-msg" id="err_mort_loan" style="display:none"></div></div><div class="field full"><label for="mort_address">Mortgagee mailing address <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="mort_address"><div class="err-msg" id="err_mort_address" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="effective">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">When would you like coverage to start?</h2>
+  <p class="q-sub">Usually the closing date or expiration of current policy.</p>
+  <div class="form-grid" style="max-width:340px"><div class="field full"><label for="pol_effective">Effective date <span style="color:var(--danger)">*</span></label><input type="date" class="input" id="pol_effective"><div class="err-msg" id="err_pol_effective" style="display:none"></div></div></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="payment">
+  <span class="q-kicker">Policy</span>
+  <h2 class="q-title">Preferred payment frequency</h2>
+  
+  <div class="opt-row vertical" data-radio="pay_mode"><button type="button" class="opt-btn" data-val="Annual">Annual (one payment — usually lowest)</button><button type="button" class="opt-btn" data-val="SemiAnnual">Semi-annual</button><button type="button" class="opt-btn" data-val="Quarterly">Quarterly</button><button type="button" class="opt-btn" data-val="Monthly">Monthly</button></div>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="attestations">
+  <span class="q-kicker">Attestations</span>
+  <h2 class="q-title">Quick final acknowledgments</h2>
+  
+  <label class="check-card" data-check="att_truthful"><input type="checkbox"><span class="box"></span><span class="ctext">I certify that the information provided is true and correct to the best of my knowledge.</span></label><label class="check-card" data-check="att_quote"><input type="checkbox"><span class="box"></span><span class="ctext">I understand this quote is unbound and unguaranteed; premium and eligibility are subject to underwriter review.</span></label><label class="check-card" data-check="att_tcpa"><input type="checkbox"><span class="box"></span><span class="ctext">I consent to be contacted by OnePoint Insurance Agency at the phone and email provided, including by automated means.</span></label>
+  <button type="button" class="continue-btn" data-next>Continue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="signature">
+  <span class="q-kicker">Final step</span>
+  <h2 class="q-title">Electronic signature</h2>
+  <p class="q-sub">Type your full legal name exactly as you entered it. This serves as your electronic signature.</p>
+  <div class="form-grid"><div class="field full"><label for="sig_name">Type your full legal name <span style="color:var(--danger)">*</span></label><input type="text" class="input" id="sig_name" placeholder="First Middle Last"><div class="err-msg" id="err_sig_name" style="display:none"></div></div></div><div class="form-grid" style="margin-top:4px"><div class="field full"><label>Signature date</label><div class="sig-display" id="sigDateDisplay">—</div></div><div class="field full"><label>Signature preview</label><div class="sig-preview" id="sigPreview">&nbsp;</div></div></div>
+  <button type="button" class="continue-btn" data-next>Review<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="review">
+  <span class="q-kicker">Review</span>
+  <h2 class="q-title">Look good?</h2>
+  <p class="q-sub">Check your answers. Click Edit on any section to fix.</p>
+  <div id="reviewPanel" class="review"></div>
+  <button type="button" class="continue-btn" id="finalizeBtn">Finalize &amp; Submit<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<section class="slide" data-slide="loading">
+  <div class="loading-wrap">
+    <div class="loading-spinner"></div>
+    <div class="loading-title">Submitting your quote…</div>
+    <div class="loading-sub">Please don't close this window.</div>
+  </div>
+</section>
+
+<section class="slide" data-slide="thanks">
+  <div class="thanks-wrap">
+    <div class="thanks-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2 class="q-title">You're all set!</h2>
+    <p class="q-sub">Your quote request has been received. A licensed OnePoint agent will reach out within one business day with pricing and options.</p>
+    <div class="thanks-ref">Reference: <span id="refNumber">OP-HM-0000</span></div>
+    <p style="color:var(--text-dim);font-size:13px">Questions? Call <a href="tel:8888998117" style="color:var(--accent)">888-899-8117</a>.</p>
+    <div style="margin-top:24px"><a href="https://www.onepointinsuranceagency.com" class="continue-btn" style="text-decoration:none">Return to OnePoint</a></div>
+  </div>
+</section>
+
+</main>
+
+</div><!-- /.app-shell -->
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-backdrop" id="resumeModal">
+  <div class="modal">
+    <h3>Resume your quote?</h3>
+    <p>We saved your progress. Continue where you left off, or start fresh.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn secondary" id="startFreshBtn">Start fresh</button>
+      <button type="button" class="btn primary" id="resumeBtn">Resume</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="exitModal">
+  <div class="modal">
+    <h3>Leave your quote?</h3>
+    <p>Your progress is saved. You can come back anytime to finish.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn secondary" id="cancelExitBtn">Stay</button>
+      <button type="button" class="btn primary" id="confirmExitBtn">Exit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ===== CONFIG =====
+const WEBHOOK_URL='https://services.leadconnectorhq.com/hooks/HJjN5l584XeaaH5Qokj4/webhook-trigger/cf0cb454-89e7-49d9-9c6a-f4ee57ab0094';
+const SOURCE_NAME='OnePoint Homeowners Quote Form v1';
+const STORAGE_KEY='op_home_v1';
+const STAGE_MAP={
+  welcome:'Getting started',
+  property_type:'Getting started',
+  rental_type:'Rental',
+  current_insurer:'Getting started',
+  policy_upload:'Current Coverage',
+  pp_value:'Getting started',
+  gender:'About you',
+  marital:'About you',
+  military:'About you',
+  p_address:'Property',
+  mail_same:'Property',
+  mail_address:'Property',
+  year_built:'Dwelling',
+  sq_footage:'Dwelling',
+  stories:'Dwelling',
+  construction:'Dwelling',
+  foundation:'Dwelling',
+  roof:'Dwelling',
+  roof_updated:'Dwelling',
+  roof_year:'Dwelling',
+  heat:'Dwelling',
+  fuel:'Dwelling',
+  dwelling_use:'Usage',
+  pool:'Eligibility',
+  trampoline:'Eligibility',
+  dogs:'Eligibility',
+  business:'Eligibility',
+  damage:'Condition',
+  renovation:'Condition',
+  security:'Security',
+  claims:'History',
+  claim_details:'History',
+  canceled:'History',
+  name:'Your info',
+  dob:'Your info',
+  has_ssn:'Your info',
+  ssn_input:'Your info',
+  contact:'Your info',
+  dwelling_amount:'Coverage',
+  deductible:'Coverage',
+  liability:'Coverage',
+  replacement:'Coverage',
+  addons:'Coverage',
+  add_insured:'Policy',
+  add_insured_details:'Policy',
+  has_mortgage:'Policy',
+  mortgage_info:'Policy',
+  effective:'Policy',
+  payment:'Policy',
+  attestations:'Final step',
+  signature:'Final step',
+  review:'Review',
+  loading:'Submitting',
+  thanks:'Done!'
+};
+
+// ===== STATE DATA =====
+const STATE_ABBR={"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"};
+const STATE_COUNTIES={"AL":["Autauga County","Baldwin County","Barbour County","Bibb County","Blount County","Bullock County","Butler County","Calhoun County","Chambers County","Cherokee County","Chilton County","Choctaw County","Clarke County","Clay County","Cleburne County","Coffee County","Colbert County","Conecuh County","Coosa County","Covington County","Crenshaw County","Cullman County","Dale County","Dallas County","Dekalb County","Elmore County","Escambia County","Etowah County","Fayette County","Franklin County","Geneva County","Greene County","Hale County","Henry County","Houston County","Jackson County","Jefferson County","Lamar County","Lauderdale County","Lawrence County","Lee County","Limestone County","Lowndes County","Macon County","Madison County","Marengo County","Marion County","Marshall County","Mobile County","Monroe County","Montgomery County","Morgan County","Perry County","Pickens County","Pike County","Randolph County","Russell County","Saint Clair County","Shelby County","St. Clair County","Sumter County","Talladega County","Tallapoosa County","Tuscaloosa County","Walker County","Washington County","Wilcox County","Winston County"],"AK":["Aleutians East Borough","Aleutians West Census Area","Anchorage Municipality","Bethel Census Area","Bristol Bay Borough","Copper River Census Area","Denali Borough","Dillingham Census Area","Fairbanks North Star Borough","Haines Borough","Hoonah-Angoon Census Area","Juneau","Juneau City and Borough","Kenai Peninsula Borough","Ketchikan Gateway Borough","Kodiak Island Borough","Kusilvak Census Area","Lake and Peninsula Borough","Matanuska-Susitna Borough","Nome Census Area","North Slope Borough","Northwest Arctic Borough","Petersburg Census Area","Prince of Wales-Hyder Census Area","Sitka","Sitka City and Borough","Skagway Municipality","Southeast Fairbanks Census Area","Valdez-Cordova Census Area","Wade Hampton Census Area","Wrangell","Wrangell City and Borough","Yakutat","Yakutat City and Borough","Yukon-Koyukuk Census Area"],"AZ":["Apache County","Cochise County","Coconino County","Gila County","Graham County","Greenlee County","La Paz County","Maricopa County","Mohave County","Navajo County","Pima County","Pinal County","Santa Cruz County","Yavapai County","Yuma County"],"AR":["Arkansas County","Ashley County","Baxter County","Benton County","Boone County","Bradley County","Calhoun County","Carroll County","Chicot County","Clark County","Clay County","Cleburne County","Cleveland County","Columbia County","Conway County","Craighead County","Crawford County","Crittenden County","Cross County","Dallas County","Desha County","Drew County","Faulkner County","Franklin County","Fulton County","Garland County","Grant County","Greene County","Hempstead County","Hot Spring County","Howard County","Independence County","Izard County","Jackson County","Jefferson County","Johnson County","Lafayette County","Lawrence County","Lee County","Lincoln County","Little River County","Logan County","Lonoke County","Madison County","Marion County","Miller County","Mississippi County","Monroe County","Montgomery County","Nevada County","Newton County","Ouachita County","Perry County","Phillips County","Pike County","Poinsett County","Polk County","Pope County","Prairie County","Pulaski County","Randolph County","Saint Francis County","Saline County","Scott County","Searcy County","Sebastian County","Sevier County","Sharp County","St. Francis County","Stone County","Union County","Van Buren County","Washington County","White County","Woodruff County","Yell County"],"CA":["Alameda County","Alpine County","Amador County","Butte County","Calaveras County","Colusa County","Contra Costa County","Del Norte County","El Dorado County","Fresno County","Glenn County","Humboldt County","Imperial County","Inyo County","Kern County","Kings County","Lake County","Lassen County","Los Angeles County","Madera County","Marin County","Mariposa County","Mendocino County","Merced County","Modoc County","Mono County","Monterey County","Napa County","Nevada County","Orange County","Placer County","Plumas County","Riverside County","Sacramento County","San Benito County","San Bernardino County","San Diego County","San Francisco County","San Joaquin County","San Luis Obispo County","San Mateo County","Santa Barbara County","Santa Clara County","Santa Cruz County","Shasta County","Sierra County","Siskiyou County","Solano County","Sonoma County","Stanislaus County","Sutter County","Tehama County","Trinity County","Tulare County","Tuolumne County","Ventura County","Yolo County","Yuba County"],"CO":["Adams County","Alamosa County","Arapahoe County","Archuleta County","Baca County","Bent County","Boulder County","Broomfield County","Chaffee County","Cheyenne County","Clear Creek County","Conejos County","Costilla County","Crowley County","Custer County","Delta County","Denver County","Dolores County","Douglas County","Eagle County","El Paso County","Elbert County","Fremont County","Garfield County","Gilpin County","Grand County","Gunnison County","Hinsdale County","Huerfano County","Jackson County","Jefferson County","Kiowa County","Kit Carson County","La Plata County","Lake County","Larimer County","Las Animas County","Lincoln County","Logan County","Mesa County","Mineral County","Moffat County","Montezuma County","Montrose County","Morgan County","Otero County","Ouray County","Park County","Phillips County","Pitkin County","Prowers County","Pueblo County","Rio Blanco County","Rio Grande County","Routt County","Saguache County","San Juan County","San Miguel County","Sedgwick County","Summit County","Teller County","Washington County","Weld County","Yuma County"],"CT":["Fairfield County","Hartford County","Litchfield County","Middlesex County","New Haven County","New London County","Tolland County","Windham County"],"DE":["Kent County","New Castle County","Sussex County"],"FL":["Alachua County","Baker County","Bay County","Bradford County","Brevard County","Broward County","Calhoun County","Charlotte County","Citrus County","Clay County","Collier County","Columbia County","Desoto County","Dixie County","Duval County","Escambia County","Flagler County","Franklin County","Gadsden County","Gilchrist County","Glades County","Gulf County","Hamilton County","Hardee County","Hendry County","Hernando County","Highlands County","Hillsborough County","Holmes County","Indian River County","Jackson County","Jefferson County","Lafayette County","Lake County","Lee County","Leon County","Levy County","Liberty County","Madison County","Manatee County","Marion County","Martin County","Miami-Dade County","Monroe County","Nassau County","Okaloosa County","Okeechobee County","Orange County","Osceola County","Palm Beach County","Pasco County","Pinellas County","Polk County","Putnam County","Saint Johns County","Saint Lucie County","Santa Rosa County","Sarasota County","Seminole County","St. Johns County","St. Lucie County","Sumter County","Suwannee County","Taylor County","Union County","Volusia County","Wakulla County","Walton County","Washington County"],"GA":["Appling County","Atkinson County","Bacon County","Baker County","Baldwin County","Banks County","Barrow County","Bartow County","Ben Hill County","Berrien County","Bibb County","Bleckley County","Brantley County","Brooks County","Bryan County","Bulloch County","Burke County","Butts County","Calhoun County","Camden County","Candler County","Carroll County","Catoosa County","Charlton County","Chatham County","Chattahoochee County","Chattooga County","Cherokee County","Clarke County","Clay County","Clayton County","Clinch County","Cobb County","Coffee County","Colquitt County","Columbia County","Cook County","Coweta County","Crawford County","Crisp County","Dade County","Dawson County","Decatur County","Dekalb County","Dodge County","Dooly County","Dougherty County","Douglas County","Early County","Echols County","Effingham County","Elbert County","Emanuel County","Evans County","Fannin County","Fayette County","Floyd County","Forsyth County","Franklin County","Fulton County","Gilmer County","Glascock County","Glynn County","Gordon County","Grady County","Greene County","Gwinnett County","Habersham County","Hall County","Hancock County","Haralson County","Harris County","Hart County","Heard County","Henry County","Houston County","Irwin County","Jackson County","Jasper County","Jeff Davis County","Jefferson County","Jenkins County","Johnson County","Jones County","Lamar County","Lanier County","Laurens County","Lee County","Liberty County","Lincoln County","Long County","Lowndes County","Lumpkin County","Macon County","Madison County","Marion County","Mcduffie County","Mcintosh County","Meriwether County","Miller County","Mitchell County","Monroe County","Montgomery County","Morgan County","Murray County","Muscogee County","Newton County","Oconee County","Oglethorpe County","Paulding County","Peach County","Pickens County","Pierce County","Pike County","Polk County","Pulaski County","Putnam County","Quitman County","Rabun County","Randolph County","Richmond County","Rockdale County","Schley County","Screven County","Seminole County","Spalding County","Stephens County","Stewart County","Sumter County","Talbot County","Taliaferro County","Tattnall County","Taylor County","Telfair County","Terrell County","Thomas County","Tift County","Toombs County","Towns County","Treutlen County","Troup County","Turner County","Twiggs County","Union County","Upson County","Walker County","Walton County","Ware County","Warren County","Washington County","Wayne County","Webster County","Wheeler County","White County","Whitfield County","Wilcox County","Wilkes County","Wilkinson County","Worth County"],"HI":["Hawaii County","Honolulu County","Kalawao County","Kauai County","Maui County"],"ID":["Ada County","Adams County","Bannock County","Bear Lake County","Benewah County","Bingham County","Blaine County","Boise County","Bonner County","Bonneville County","Boundary County","Butte County","Camas County","Canyon County","Caribou County","Cassia County","Clark County","Clearwater County","Custer County","Elmore County","Franklin County","Fremont County","Gem County","Gooding County","Idaho County","Jefferson County","Jerome County","Kootenai County","Latah County","Lemhi County","Lewis County","Lincoln County","Madison County","Minidoka County","Nez Perce County","Oneida County","Owyhee County","Payette County","Power County","Shoshone County","Teton County","Twin Falls County","Valley County","Washington County"],"IL":["Adams County","Alexander County","Bond County","Boone County","Brown County","Bureau County","Calhoun County","Carroll County","Cass County","Champaign County","Christian County","Clark County","Clay County","Clinton County","Coles County","Cook County","Crawford County","Cumberland County","De Witt County","Dekalb County","Douglas County","Dupage County","Edgar County","Edwards County","Effingham County","Fayette County","Ford County","Franklin County","Fulton County","Gallatin County","Greene County","Grundy County","Hamilton County","Hancock County","Hardin County","Henderson County","Henry County","Iroquois County","Jackson County","Jasper County","Jefferson County","Jersey County","Jo Daviess County","Johnson County","Kane County","Kankakee County","Kendall County","Knox County","Lake County","Lasalle County","Lawrence County","Lee County","Livingston County","Logan County","Macon County","Macoupin County","Madison County","Marion County","Marshall County","Mason County","Massac County","Mcdonough County","Mchenry County","Mclean County","Menard County","Mercer County","Monroe County","Montgomery County","Morgan County","Moultrie County","Ogle County","Peoria County","Perry County","Piatt County","Pike County","Pope County","Pulaski County","Putnam County","Randolph County","Richland County","Rock Island County","Saint Clair County","Saline County","Sangamon County","Schuyler County","Scott County","Shelby County","St. Clair County","Stark County","Stephenson County","Tazewell County","Union County","Vermilion County","Wabash County","Warren County","Washington County","Wayne County","White County","Whiteside County","Will County","Williamson County","Winnebago County","Woodford County"],"IN":["Adams County","Allen County","Bartholomew County","Benton County","Blackford County","Boone County","Brown County","Carroll County","Cass County","Clark County","Clay County","Clinton County","Crawford County","Daviess County","Dearborn County","Decatur County","Dekalb County","Delaware County","Dubois County","Elkhart County","Fayette County","Floyd County","Fountain County","Franklin County","Fulton County","Gibson County","Grant County","Greene County","Hamilton County","Hancock County","Harrison County","Hendricks County","Henry County","Howard County","Huntington County","Jackson County","Jasper County","Jay County","Jefferson County","Jennings County","Johnson County","Knox County","Kosciusko County","Lagrange County","Lake County","Laporte County","Lawrence County","Madison County","Marion County","Marshall County","Martin County","Miami County","Monroe County","Montgomery County","Morgan County","Newton County","Noble County","Ohio County","Orange County","Owen County","Parke County","Perry County","Pike County","Porter County","Posey County","Pulaski County","Putnam County","Randolph County","Ripley County","Rush County","Saint Joseph County","Scott County","Shelby County","Spencer County","St. Joseph County","Starke County","Steuben County","Sullivan County","Switzerland County","Tippecanoe County","Tipton County","Union County","Vanderburgh County","Vermillion County","Vigo County","Wabash County","Warren County","Warrick County","Washington County","Wayne County","Wells County","White County","Whitley County"],"IA":["Adair County","Adams County","Allamakee County","Appanoose County","Audubon County","Benton County","Black Hawk County","Boone County","Bremer County","Buchanan County","Buena Vista County","Butler County","Calhoun County","Carroll County","Cass County","Cedar County","Cerro Gordo County","Cherokee County","Chickasaw County","Clarke County","Clay County","Clayton County","Clinton County","Crawford County","Dallas County","Davis County","Decatur County","Delaware County","Des Moines County","Dickinson County","Dubuque County","Emmet County","Fayette County","Floyd County","Franklin County","Fremont County","Greene County","Grundy County","Guthrie County","Hamilton County","Hancock County","Hardin County","Harrison County","Henry County","Howard County","Humboldt County","Ida County","Iowa County","Jackson County","Jasper County","Jefferson County","Johnson County","Jones County","Keokuk County","Kossuth County","Lee County","Linn County","Louisa County","Lucas County","Lyon County","Madison County","Mahaska County","Marion County","Marshall County","Mills County","Mitchell County","Monona County","Monroe County","Montgomery County","Muscatine County","Obrien County","Osceola County","Page County","Palo Alto County","Plymouth County","Pocahontas County","Polk County","Pottawattamie County","Poweshiek County","Ringgold County","Sac County","Scott County","Shelby County","Sioux County","Story County","Tama County","Taylor County","Union County","Van Buren County","Wapello County","Warren County","Washington County","Wayne County","Webster County","Winnebago County","Winneshiek County","Woodbury County","Worth County","Wright County"],"KS":["Allen County","Anderson County","Atchison County","Barber County","Barton County","Bourbon County","Brown County","Butler County","Chase County","Chautauqua County","Cherokee County","Cheyenne County","Clark County","Clay County","Cloud County","Coffey County","Comanche County","Cowley County","Crawford County","Decatur County","Dickinson County","Doniphan County","Douglas County","Edwards County","Elk County","Ellis County","Ellsworth County","Finney County","Ford County","Franklin County","Geary County","Gove County","Graham County","Grant County","Gray County","Greeley County","Greenwood County","Hamilton County","Harper County","Harvey County","Haskell County","Hodgeman County","Jackson County","Jefferson County","Jewell County","Johnson County","Kearny County","Kingman County","Kiowa County","Labette County","Lane County","Leavenworth County","Lincoln County","Linn County","Logan County","Lyon County","Marion County","Marshall County","Mcpherson County","Meade County","Miami County","Mitchell County","Montgomery County","Morris County","Morton County","Nemaha County","Neosho County","Ness County","Norton County","Osage County","Osborne County","Ottawa County","Pawnee County","Phillips County","Pottawatomie County","Pratt County","Rawlins County","Reno County","Republic County","Rice County","Riley County","Rooks County","Rush County","Russell County","Saline County","Scott County","Sedgwick County","Seward County","Shawnee County","Sheridan County","Sherman County","Smith County","Stafford County","Stanton County","Stevens County","Sumner County","Thomas County","Trego County","Wabaunsee County","Wallace County","Washington County","Wichita County","Wilson County","Woodson County","Wyandotte County"],"KY":["Adair County","Allen County","Anderson County","Ballard County","Barren County","Bath County","Bell County","Boone County","Bourbon County","Boyd County","Boyle County","Bracken County","Breathitt County","Breckinridge County","Bullitt County","Butler County","Caldwell County","Calloway County","Campbell County","Carlisle County","Carroll County","Carter County","Casey County","Christian County","Clark County","Clay County","Clinton County","Crittenden County","Cumberland County","Daviess County","Edmonson County","Elliott County","Estill County","Fayette County","Fleming County","Floyd County","Franklin County","Fulton County","Gallatin County","Garrard County","Grant County","Graves County","Grayson County","Green County","Greenup County","Hancock County","Hardin County","Harlan County","Harrison County","Hart County","Henderson County","Henry County","Hickman County","Hopkins County","Jackson County","Jefferson County","Jessamine County","Johnson County","Kenton County","Knott County","Knox County","Larue County","Laurel County","Lawrence County","Lee County","Leslie County","Letcher County","Lewis County","Lincoln County","Livingston County","Logan County","Lyon County","Madison County","Magoffin County","Marion County","Marshall County","Martin County","Mason County","Mccracken County","Mccreary County","Mclean County","Meade County","Menifee County","Mercer County","Metcalfe County","Monroe County","Montgomery County","Morgan County","Muhlenberg County","Nelson County","Nicholas County","Ohio County","Oldham County","Owen County","Owsley County","Pendleton County","Perry County","Pike County","Powell County","Pulaski County","Robertson County","Rockcastle County","Rowan County","Russell County","Scott County","Shelby County","Simpson County","Spencer County","Taylor County","Todd County","Trigg County","Trimble County","Union County","Warren County","Washington County","Wayne County","Webster County","Whitley County","Wolfe County","Woodford County"],"LA":["Acadia Parish","Allen Parish","Ascension Parish","Assumption Parish","Avoyelles Parish","Beauregard Parish","Bienville Parish","Bossier Parish","Caddo Parish","Calcasieu Parish","Caldwell Parish","Cameron Parish","Catahoula Parish","Claiborne Parish","Concordia Parish","De Soto Parish","East Baton Rouge Parish","East Carroll Parish","East Feliciana Parish","Evangeline Parish","Franklin Parish","Grant Parish","Iberia Parish","Iberville Parish","Jackson Parish","Jefferson Davis Parish","Jefferson Parish","La Salle Parish","Lafayette Parish","Lafourche Parish","Lincoln Parish","Livingston Parish","Madison Parish","Morehouse Parish","Natchitoches Parish","Orleans Parish","Ouachita Parish","Plaquemines Parish","Pointe Coupee Parish","Rapides Parish","Red River Parish","Richland Parish","Sabine Parish","Saint Bernard Parish","Saint Charles Parish","Saint Helena Parish","Saint James Parish","Saint John the Baptist Parish","Saint Landry Parish","Saint Martin Parish","Saint Mary Parish","Saint Tammany Parish","St. Bernard Parish","St. Charles Parish","St. Helena Parish","St. James Parish","St. John the Baptist Parish","St. Landry Parish","St. Martin Parish","St. Mary Parish","St. Tammany Parish","Tangipahoa Parish","Tensas Parish","Terrebonne Parish","Union Parish","Vermilion Parish","Vernon Parish","Washington Parish","Webster Parish","West Baton Rouge Parish","West Carroll Parish","West Feliciana Parish","Winn Parish"],"ME":["Androscoggin County","Aroostook County","Cumberland County","Franklin County","Hancock County","Kennebec County","Knox County","Lincoln County","Oxford County","Penobscot County","Piscataquis County","Sagadahoc County","Somerset County","Waldo County","Washington County","York County"],"MD":["Allegany County","Anne Arundel County","Baltimore City","Baltimore County","Calvert County","Caroline County","Carroll County","Cecil County","Charles County","Dorchester County","Frederick County","Garrett County","Harford County","Howard County","Kent County","Montgomery County","Prince Georges County","Queen Annes County","Saint Marys County","Somerset County","St. Marys County","Talbot County","Washington County","Wicomico County","Worcester County"],"MA":["Barnstable County","Berkshire County","Bristol County","Dukes County","Essex County","Franklin County","Hampden County","Hampshire County","Middlesex County","Nantucket County","Norfolk County","Plymouth County","Suffolk County","Worcester County"],"MI":["Alcona County","Alger County","Allegan County","Alpena County","Antrim County","Arenac County","Baraga County","Barry County","Bay County","Benzie County","Berrien County","Branch County","Calhoun County","Cass County","Charlevoix County","Cheboygan County","Chippewa County","Clare County","Clinton County","Crawford County","Delta County","Dickinson County","Eaton County","Emmet County","Genesee County","Gladwin County","Gogebic County","Grand Traverse County","Gratiot County","Hillsdale County","Houghton County","Huron County","Ingham County","Ionia County","Iosco County","Iron County","Isabella County","Jackson County","Kalamazoo County","Kalkaska County","Kent County","Keweenaw County","Lake County","Lapeer County","Leelanau County","Lenawee County","Livingston County","Luce County","Mackinac County","Macomb County","Manistee County","Marquette County","Mason County","Mecosta County","Menominee County","Midland County","Missaukee County","Monroe County","Montcalm County","Montmorency County","Muskegon County","Newaygo County","Oakland County","Oceana County","Ogemaw County","Ontonagon County","Osceola County","Oscoda County","Otsego County","Ottawa County","Presque Isle County","Roscommon County","Saginaw County","Saint Clair County","Saint Joseph County","Sanilac County","Schoolcraft County","Shiawassee County","St. Clair County","St. Joseph County","Tuscola County","Van Buren County","Washtenaw County","Wayne County","Wexford County"],"MN":["Aitkin County","Anoka County","Becker County","Beltrami County","Benton County","Big Stone County","Blue Earth County","Brown County","Carlton County","Carver County","Cass County","Chippewa County","Chisago County","Clay County","Clearwater County","Cook County","Cottonwood County","Crow Wing County","Dakota County","Dodge County","Douglas County","Faribault County","Fillmore County","Freeborn County","Goodhue County","Grant County","Hennepin County","Houston County","Hubbard County","Isanti County","Itasca County","Jackson County","Kanabec County","Kandiyohi County","Kittson County","Koochiching County","Lac Qui Parle County","Lake County","Lake of the Woods County","Le Sueur County","Lincoln County","Lyon County","Mahnomen County","Marshall County","Martin County","Mcleod County","Meeker County","Mille Lacs County","Morrison County","Mower County","Murray County","Nicollet County","Nobles County","Norman County","Olmsted County","Otter Tail County","Pennington County","Pine County","Pipestone County","Polk County","Pope County","Ramsey County","Red Lake County","Redwood County","Renville County","Rice County","Rock County","Roseau County","Saint Louis County","Scott County","Sherburne County","Sibley County","St. Louis County","Stearns County","Steele County","Stevens County","Swift County","Todd County","Traverse County","Wabasha County","Wadena County","Waseca County","Washington County","Watonwan County","Wilkin County","Winona County","Wright County","Yellow Medicine County"],"MS":["Adams County","Alcorn County","Amite County","Attala County","Benton County","Bolivar County","Calhoun County","Carroll County","Chickasaw County","Choctaw County","Claiborne County","Clarke County","Clay County","Coahoma County","Copiah County","Covington County","Desoto County","Forrest County","Franklin County","George County","Greene County","Grenada County","Hancock County","Harrison County","Hinds County","Holmes County","Humphreys County","Issaquena County","Itawamba County","Jackson County","Jasper County","Jefferson County","Jefferson Davis County","Jones County","Kemper County","Lafayette County","Lamar County","Lauderdale County","Lawrence County","Leake County","Lee County","Leflore County","Lincoln County","Lowndes County","Madison County","Marion County","Marshall County","Monroe County","Montgomery County","Neshoba County","Newton County","Noxubee County","Oktibbeha County","Panola County","Pearl River County","Perry County","Pike County","Pontotoc County","Prentiss County","Quitman County","Rankin County","Scott County","Sharkey County","Simpson County","Smith County","Stone County","Sunflower County","Tallahatchie County","Tate County","Tippah County","Tishomingo County","Tunica County","Union County","Walthall County","Warren County","Washington County","Wayne County","Webster County","Wilkinson County","Winston County","Yalobusha County","Yazoo County"],"MO":["Adair County","Andrew County","Atchison County","Audrain County","Barry County","Barton County","Bates County","Benton County","Bollinger County","Boone County","Buchanan County","Butler County","Caldwell County","Callaway County","Camden County","Cape Girardeau County","Carroll County","Carter County","Cass County","Cedar County","Chariton County","Christian County","Clark County","Clay County","Clinton County","Cole County","Cooper County","Crawford County","Dade County","Dallas County","Daviess County","Dekalb County","Dent County","Douglas County","Dunklin County","Franklin County","Gasconade County","Gentry County","Greene County","Grundy County","Harrison County","Henry County","Hickory County","Holt County","Howard County","Howell County","Iron County","Jackson County","Jasper County","Jefferson County","Johnson County","Knox County","Laclede County","Lafayette County","Lawrence County","Lewis County","Lincoln County","Linn County","Livingston County","Macon County","Madison County","Maries County","Marion County","Mcdonald County","Mercer County","Miller County","Mississippi County","Moniteau County","Monroe County","Montgomery County","Morgan County","New Madrid County","Newton County","Nodaway County","Oregon County","Osage County","Ozark County","Pemiscot County","Perry County","Pettis County","Phelps County","Pike County","Platte County","Polk County","Pulaski County","Putnam County","Ralls County","Randolph County","Ray County","Reynolds County","Ripley County","Saint Charles County","Saint Clair County","Saint Francois County","Saint Louis City","Saint Louis County","Sainte Genevieve County","Saline County","Schuyler County","Scotland County","Scott County","Shannon County","Shelby County","St. Charles County","St. Clair County","St. Francois County","St. Louis City","St. Louis County","Ste. Genevieve County","Stoddard County","Stone County","Sullivan County","Taney County","Texas County","Vernon County","Warren County","Washington County","Wayne County","Webster County","Worth County","Wright County"],"MT":["Beaverhead County","Big Horn County","Blaine County","Broadwater County","Carbon County","Carter County","Cascade County","Chouteau County","Custer County","Daniels County","Dawson County","Deer Lodge County","Fallon County","Fergus County","Flathead County","Gallatin County","Garfield County","Glacier County","Golden Valley County","Granite County","Hill County","Jefferson County","Judith Basin County","Lake County","Lewis and Clark County","Liberty County","Lincoln County","Madison County","Mccone County","Meagher County","Mineral County","Missoula County","Musselshell County","Park County","Petroleum County","Phillips County","Pondera County","Powder River County","Powell County","Prairie County","Ravalli County","Richland County","Roosevelt County","Rosebud County","Sanders County","Sheridan County","Silver Bow County","Stillwater County","Sweet Grass County","Teton County","Toole County","Treasure County","Valley County","Wheatland County","Wibaux County","Yellowstone County"],"NE":["Adams County","Antelope County","Arthur County","Banner County","Blaine County","Boone County","Box Butte County","Boyd County","Brown County","Buffalo County","Burt County","Butler County","Cass County","Cedar County","Chase County","Cherry County","Cheyenne County","Clay County","Colfax County","Cuming County","Custer County","Dakota County","Dawes County","Dawson County","Deuel County","Dixon County","Dodge County","Douglas County","Dundy County","Fillmore County","Franklin County","Frontier County","Furnas County","Gage County","Garden County","Garfield County","Gosper County","Grant County","Greeley County","Hall County","Hamilton County","Harlan County","Hayes County","Hitchcock County","Holt County","Hooker County","Howard County","Jefferson County","Johnson County","Kearney County","Keith County","Keya Paha County","Kimball County","Knox County","Lancaster County","Lincoln County","Logan County","Loup County","Madison County","Mcpherson County","Merrick County","Morrill County","Nance County","Nemaha County","Nuckolls County","Otoe County","Pawnee County","Perkins County","Phelps County","Pierce County","Platte County","Polk County","Red Willow County","Richardson County","Rock County","Saline County","Sarpy County","Saunders County","Scotts Bluff County","Seward County","Sheridan County","Sherman County","Sioux County","Stanton County","Thayer County","Thomas County","Thurston County","Valley County","Washington County","Wayne County","Webster County","Wheeler County","York County"],"NV":["Carson","Carson City","Churchill County","Clark County","Douglas County","Elko County","Esmeralda County","Eureka County","Humboldt County","Lander County","Lincoln County","Lyon County","Mineral County","Nye County","Pershing County","Storey County","Washoe County","White Pine County"],"NH":["Belknap County","Carroll County","Cheshire County","Coos County","Grafton County","Hillsborough County","Merrimack County","Rockingham County","Strafford County","Sullivan County"],"NJ":["Atlantic County","Bergen County","Burlington County","Camden County","Cape May County","Cumberland County","Essex County","Gloucester County","Hudson County","Hunterdon County","Mercer County","Middlesex County","Monmouth County","Morris County","Ocean County","Passaic County","Salem County","Somerset County","Sussex County","Union County","Warren County"],"NM":["Bernalillo County","Catron County","Chaves County","Cibola County","Colfax County","Curry County","De Baca County","Dona Ana County","Eddy County","Grant County","Guadalupe County","Harding County","Hidalgo County","Lea County","Lincoln County","Los Alamos County","Luna County","Mckinley County","Mora County","Otero County","Quay County","Rio Arriba County","Roosevelt County","San Juan County","San Miguel County","Sandoval County","Santa Fe County","Sierra County","Socorro County","Taos County","Torrance County","Union County","Valencia County"],"NY":["Albany County","Allegany County","Bronx County","Brooklyn Borough","Broome County","Cattaraugus County","Cayuga County","Chautauqua County","Chemung County","Chenango County","Clinton County","Columbia County","Cortland County","Delaware County","Dutchess County","Erie County","Essex County","Franklin County","Fulton County","Genesee County","Greene County","Hamilton County","Herkimer County","Jefferson County","Kings County","Lewis County","Livingston County","Madison County","Manhattan Borough","Monroe County","Montgomery County","Nassau County","New York County","Niagara County","Oneida County","Onondaga County","Ontario County","Orange County","Orleans County","Oswego County","Otsego County","Putnam County","Queens County","Rensselaer County","Richmond County","Rockland County","Saint Lawrence County","Saratoga County","Schenectady County","Schoharie County","Schuyler County","Seneca County","St. Lawrence County","Staten Island Borough","Steuben County","Suffolk County","Sullivan County","The Bronx Borough","Tioga County","Tompkins County","Ulster County","Warren County","Washington County","Wayne County","Westchester County","Wyoming County","Yates County"],"NC":["Alamance County","Alexander County","Alleghany County","Anson County","Ashe County","Avery County","Beaufort County","Bertie County","Bladen County","Brunswick County","Buncombe County","Burke County","Cabarrus County","Caldwell County","Camden County","Carteret County","Caswell County","Catawba County","Chatham County","Cherokee County","Chowan County","Clay County","Cleveland County","Columbus County","Craven County","Cumberland County","Currituck County","Dare County","Davidson County","Davie County","Duplin County","Durham County","Edgecombe County","Forsyth County","Franklin County","Gaston County","Gates County","Graham County","Granville County","Greene County","Guilford County","Halifax County","Harnett County","Haywood County","Henderson County","Hertford County","Hoke County","Hyde County","Iredell County","Jackson County","Johnston County","Jones County","Lee County","Lenoir County","Lincoln County","Macon County","Madison County","Martin County","Mcdowell County","Mecklenburg County","Mitchell County","Montgomery County","Moore County","Nash County","New Hanover County","Northampton County","Onslow County","Orange County","Pamlico County","Pasquotank County","Pender County","Perquimans County","Person County","Pitt County","Polk County","Randolph County","Richmond County","Robeson County","Rockingham County","Rowan County","Rutherford County","Sampson County","Scotland County","Stanly County","Stokes County","Surry County","Swain County","Transylvania County","Tyrrell County","Union County","Vance County","Wake County","Warren County","Washington County","Watauga County","Wayne County","Wilkes County","Wilson County","Yadkin County","Yancey County"],"ND":["Adams County","Barnes County","Benson County","Billings County","Bottineau County","Bowman County","Burke County","Burleigh County","Cass County","Cavalier County","Dickey County","Divide County","Dunn County","Eddy County","Emmons County","Foster County","Golden Valley County","Grand Forks County","Grant County","Griggs County","Hettinger County","Kidder County","Lamoure County","Logan County","Mchenry County","Mcintosh County","Mckenzie County","Mclean County","Mercer County","Morton County","Mountrail County","Nelson County","Oliver County","Pembina County","Pierce County","Ramsey County","Ransom County","Renville County","Richland County","Rolette County","Sargent County","Sheridan County","Sioux County","Slope County","Stark County","Steele County","Stutsman County","Towner County","Traill County","Walsh County","Ward County","Wells County","Williams County"],"OH":["Adams County","Allen County","Ashland County","Ashtabula County","Athens County","Auglaize County","Belmont County","Brown County","Butler County","Carroll County","Champaign County","Clark County","Clermont County","Clinton County","Columbiana County","Coshocton County","Crawford County","Cuyahoga County","Darke County","Defiance County","Delaware County","Erie County","Fairfield County","Fayette County","Franklin County","Fulton County","Gallia County","Geauga County","Greene County","Guernsey County","Hamilton County","Hancock County","Hardin County","Harrison County","Henry County","Highland County","Hocking County","Holmes County","Huron County","Jackson County","Jefferson County","Knox County","Lake County","Lawrence County","Licking County","Logan County","Lorain County","Lucas County","Madison County","Mahoning County","Marion County","Medina County","Meigs County","Mercer County","Miami County","Monroe County","Montgomery County","Morgan County","Morrow County","Muskingum County","Noble County","Ottawa County","Paulding County","Perry County","Pickaway County","Pike County","Portage County","Preble County","Putnam County","Richland County","Ross County","Sandusky County","Scioto County","Seneca County","Shelby County","Stark County","Summit County","Trumbull County","Tuscarawas County","Union County","Van Wert County","Vinton County","Warren County","Washington County","Wayne County","Williams County","Wood County","Wyandot County"],"OK":["Adair County","Alfalfa County","Atoka County","Beaver County","Beckham County","Blaine County","Bryan County","Caddo County","Canadian County","Carter County","Cherokee County","Choctaw County","Cimarron County","Cleveland County","Coal County","Comanche County","Cotton County","Craig County","Creek County","Custer County","Delaware County","Dewey County","Ellis County","Garfield County","Garvin County","Grady County","Grant County","Greer County","Harmon County","Harper County","Haskell County","Hughes County","Jackson County","Jefferson County","Johnston County","Kay County","Kingfisher County","Kiowa County","Latimer County","Le Flore County","Lincoln County","Logan County","Love County","Major County","Marshall County","Mayes County","Mcclain County","Mccurtain County","Mcintosh County","Murray County","Muskogee County","Noble County","Nowata County","Okfuskee County","Oklahoma County","Okmulgee County","Osage County","Ottawa County","Pawnee County","Payne County","Pittsburg County","Pontotoc County","Pottawatomie County","Pushmataha County","Roger Mills County","Rogers County","Seminole County","Sequoyah County","Stephens County","Texas County","Tillman County","Tulsa County","Wagoner County","Washington County","Washita County","Woods County","Woodward County"],"OR":["Baker County","Benton County","Clackamas County","Clatsop County","Columbia County","Coos County","Crook County","Curry County","Deschutes County","Douglas County","Gilliam County","Grant County","Harney County","Hood River County","Jackson County","Jefferson County","Josephine County","Klamath County","Lake County","Lane County","Lincoln County","Linn County","Malheur County","Marion County","Morrow County","Multnomah County","Polk County","Sherman County","Tillamook County","Umatilla County","Union County","Wallowa County","Wasco County","Washington County","Wheeler County","Yamhill County"],"PA":["Adams County","Allegheny County","Armstrong County","Beaver County","Bedford County","Berks County","Blair County","Bradford County","Bucks County","Butler County","Cambria County","Cameron County","Carbon County","Centre County","Chester County","Clarion County","Clearfield County","Clinton County","Columbia County","Crawford County","Cumberland County","Dauphin County","Delaware County","Elk County","Erie County","Fayette County","Forest County","Franklin County","Fulton County","Greene County","Huntingdon County","Indiana County","Jefferson County","Juniata County","Lackawanna County","Lancaster County","Lawrence County","Lebanon County","Lehigh County","Luzerne County","Lycoming County","Mckean County","Mercer County","Mifflin County","Monroe County","Montgomery County","Montour County","Northampton County","Northumberland County","Perry County","Philadelphia County","Pike County","Potter County","Schuylkill County","Snyder County","Somerset County","Sullivan County","Susquehanna County","Tioga County","Union County","Venango County","Warren County","Washington County","Wayne County","Westmoreland County","Wyoming County","York County"],"RI":["Bristol County","Kent County","Newport County","Providence County","Washington County"],"SC":["Abbeville County","Aiken County","Allendale County","Anderson County","Bamberg County","Barnwell County","Beaufort County","Berkeley County","Calhoun County","Charleston County","Cherokee County","Chester County","Chesterfield County","Clarendon County","Colleton County","Darlington County","Dillon County","Dorchester County","Edgefield County","Fairfield County","Florence County","Georgetown County","Greenville County","Greenwood County","Hampton County","Horry County","Jasper County","Kershaw County","Lancaster County","Laurens County","Lee County","Lexington County","Marion County","Marlboro County","Mccormick County","Newberry County","Oconee County","Orangeburg County","Pickens County","Richland County","Saluda County","Spartanburg County","Sumter County","Union County","Williamsburg County","York County"],"SD":["Aurora County","Beadle County","Bennett County","Bon Homme County","Brookings County","Brown County","Brule County","Buffalo County","Butte County","Campbell County","Charles Mix County","Clark County","Clay County","Codington County","Corson County","Custer County","Davison County","Day County","Deuel County","Dewey County","Douglas County","Edmunds County","Fall River County","Faulk County","Grant County","Gregory County","Haakon County","Hamlin County","Hand County","Hanson County","Harding County","Hughes County","Hutchinson County","Hyde County","Jackson County","Jerauld County","Jones County","Kingsbury County","Lake County","Lawrence County","Lincoln County","Lyman County","Marshall County","Mccook County","Mcpherson County","Meade County","Mellette County","Miner County","Minnehaha County","Moody County","Oglala Lakota County","Pennington County","Perkins County","Potter County","Roberts County","Sanborn County","Shannon County","Spink County","Stanley County","Sully County","Todd County","Tripp County","Turner County","Union County","Walworth County","Yankton County","Ziebach County"],"TN":["Anderson County","Bedford County","Benton County","Bledsoe County","Blount County","Bradley County","Campbell County","Cannon County","Carroll County","Carter County","Cheatham County","Chester County","Claiborne County","Clay County","Cocke County","Coffee County","Crockett County","Cumberland County","Davidson County","Decatur County","Dekalb County","Dickson County","Dyer County","Fayette County","Fentress County","Franklin County","Gibson County","Giles County","Grainger County","Greene County","Grundy County","Hamblen County","Hamilton County","Hancock County","Hardeman County","Hardin County","Hawkins County","Haywood County","Henderson County","Henry County","Hickman County","Houston County","Humphreys County","Jackson County","Jefferson County","Johnson County","Knox County","Lake County","Lauderdale County","Lawrence County","Lewis County","Lincoln County","Loudon County","Macon County","Madison County","Marion County","Marshall County","Maury County","Mcminn County","Mcnairy County","Meigs County","Monroe County","Montgomery County","Moore County","Morgan County","Obion County","Overton County","Perry County","Pickett County","Polk County","Putnam County","Rhea County","Roane County","Robertson County","Rutherford County","Scott County","Sequatchie County","Sevier County","Shelby County","Smith County","Stewart County","Sullivan County","Sumner County","Tipton County","Trousdale County","Unicoi County","Union County","Van Buren County","Warren County","Washington County","Wayne County","Weakley County","White County","Williamson County","Wilson County"],"TX":["Anderson County","Andrews County","Angelina County","Aransas County","Archer County","Armstrong County","Atascosa County","Austin County","Bailey County","Bandera County","Bastrop County","Baylor County","Bee County","Bell County","Bexar County","Blanco County","Borden County","Bosque County","Bowie County","Brazoria County","Brazos County","Brewster County","Briscoe County","Brooks County","Brown County","Burleson County","Burnet County","Caldwell County","Calhoun County","Callahan County","Cameron County","Camp County","Carson County","Cass County","Castro County","Chambers County","Cherokee County","Childress County","Clay County","Cochran County","Coke County","Coleman County","Collin County","Collingsworth County","Colorado County","Comal County","Comanche County","Concho County","Cooke County","Coryell County","Cottle County","Crane County","Crockett County","Crosby County","Culberson County","Dallam County","Dallas County","Dawson County","Deaf Smith County","Delta County","Denton County","Dewitt County","Dickens County","Dimmit County","Donley County","Duval County","Eastland County","Ector County","Edwards County","El Paso County","Ellis County","Erath County","Falls County","Fannin County","Fayette County","Fisher County","Floyd County","Foard County","Fort Bend County","Franklin County","Freestone County","Frio County","Ft. Bend County","Gaines County","Galveston County","Garza County","Gillespie County","Glasscock County","Goliad County","Gonzales County","Gray County","Grayson County","Gregg County","Grimes County","Guadalupe County","Hale County","Hall County","Hamilton County","Hansford County","Hardeman County","Hardin County","Harris County","Harrison County","Hartley County","Haskell County","Hays County","Hemphill County","Henderson County","Hidalgo County","Hill County","Hockley County","Hood County","Hopkins County","Houston County","Howard County","Hudspeth County","Hunt County","Hutchinson County","Irion County","Jack County","Jackson County","Jasper County","Jeff Davis County","Jefferson County","Jim Hogg County","Jim Wells County","Johnson County","Jones County","Karnes County","Kaufman County","Kendall County","Kenedy County","Kent County","Kerr County","Kimble County","King County","Kinney County","Kleberg County","Knox County","La Salle County","Lamar County","Lamb County","Lampasas County","Lavaca County","Lee County","Leon County","Liberty County","Limestone County","Lipscomb County","Live Oak County","Llano County","Loving County","Lubbock County","Lynn County","Madison County","Marion County","Martin County","Mason County","Matagorda County","Maverick County","Mcculloch County","Mclennan County","Mcmullen County","Medina County","Menard County","Midland County","Milam County","Mills County","Mitchell County","Montague County","Montgomery County","Moore County","Morris County","Motley County","Nacogdoches County","Navarro County","Newton County","Nolan County","Nueces County","Ochiltree County","Oldham County","Orange County","Palo Pinto County","Panola County","Parker County","Parmer County","Pecos County","Polk County","Potter County","Presidio County","Rains County","Randall County","Reagan County","Real County","Red River County","Reeves County","Refugio County","Roberts County","Robertson County","Rockwall County","Runnels County","Rusk County","Sabine County","San Augustine County","San Jacinto County","San Patricio County","San Saba County","Schleicher County","Scurry County","Shackelford County","Shelby County","Sherman County","Smith County","Somervell County","Starr County","Stephens County","Sterling County","Stonewall County","Sutton County","Swisher County","Tarrant County","Taylor County","Terrell County","Terry County","Throckmorton County","Titus County","Tom Green County","Travis County","Trinity County","Tyler County","Upshur County","Upton County","Uvalde County","Val Verde County","Van Zandt County","Victoria County","Walker County","Waller County","Ward County","Washington County","Webb County","Wharton County","Wheeler County","Wichita County","Wilbarger County","Willacy County","Williamson County","Wilson County","Winkler County","Wise County","Wood County","Yoakum County","Young County","Zapata County","Zavala County"],"UT":["Beaver County","Box Elder County","Cache County","Carbon County","Daggett County","Davis County","Duchesne County","Emery County","Garfield County","Grand County","Iron County","Juab County","Kane County","Millard County","Morgan County","Piute County","Rich County","Salt Lake County","San Juan County","Sanpete County","Sevier County","Summit County","Tooele County","Uintah County","Utah County","Wasatch County","Washington County","Wayne County","Weber County"],"VT":["Addison County","Bennington County","Caledonia County","Chittenden County","Essex County","Franklin County","Grand Isle County","Lamoille County","Orange County","Orleans County","Rutland County","Washington County","Windham County","Windsor County"],"VA":["Accomack County","Albemarle County","Alexandria","Alexandria City","Alleghany County","Amelia County","Amherst County","Appomattox County","Arlington County","Augusta County","Bath County","Bedford City","Bedford County","Bland County","Botetourt County","Bristol","Bristol City","Brunswick County","Buchanan County","Buckingham County","Buena Vista","Buena Vista City","Campbell County","Caroline County","Carroll County","Charles City County","Charlotte County","Charlottesville","Charlottesville City","Chesapeake","Chesapeake City","Chesterfield County","Clarke County","Colonial Heights","Colonial Heights City","Covington","Covington City","Craig County","Culpeper County","Cumberland County","Danville","Danville City","Dickenson County","Dinwiddie County","Emporia","Emporia City","Essex County","Fairfax City","Fairfax County","Falls Church","Falls Church City","Fauquier County","Floyd County","Fluvanna County","Franklin City","Franklin County","Frederick County","Fredericksburg","Fredericksburg City","Galax","Galax City","Giles County","Gloucester County","Goochland County","Grayson County","Greene County","Greensville County","Halifax County","Hampton","Hampton City","Hanover County","Harrisonburg","Harrisonburg City","Henrico County","Henry County","Highland County","Hopewell","Hopewell City","Isle of Wight County","James City County","King George County","King William County","King and Queen County","Lancaster County","Lee County","Lexington","Lexington City","Loudoun County","Louisa County","Lunenburg County","Lynchburg","Lynchburg City","Madison County","Manassas","Manassas City","Manassas Park","Manassas Park City","Martinsville","Martinsville City","Mathews County","Mecklenburg County","Middlesex County","Montgomery County","Nelson County","New Kent County","Newport News","Newport News City","Norfolk","Norfolk City","Northampton County","Northumberland County","Norton","Norton City","Nottoway County","Orange County","Page County","Patrick County","Petersburg","Petersburg City","Pittsylvania County","Poquoson","Poquoson City","Portsmouth","Portsmouth City","Powhatan County","Prince Edward County","Prince George County","Prince William County","Pulaski County","Radford","Radford City","Rappahannock County","Richmond City","Richmond County","Roanoke City","Roanoke County","Rockbridge County","Rockingham County","Russell County","Salem","Salem City","Scott County","Shenandoah County","Smyth County","Southampton County","Spotsylvania County","Stafford County","Staunton","Staunton City","Suffolk","Suffolk City","Surry County","Sussex County","Tazewell County","Virginia Beach","Virginia Beach City","Warren County","Washington County","Waynesboro","Waynesboro City","Westmoreland County","Williamsburg","Williamsburg City","Winchester","Winchester City","Wise County","Wythe County","York County"],"WA":["Adams County","Asotin County","Benton County","Chelan County","Clallam County","Clark County","Columbia County","Cowlitz County","Douglas County","Ferry County","Franklin County","Garfield County","Grant County","Grays Harbor County","Island County","Jefferson County","King County","Kitsap County","Kittitas County","Klickitat County","Lewis County","Lincoln County","Mason County","Okanogan County","Pacific County","Pend Oreille County","Pierce County","San Juan County","Skagit County","Skamania County","Snohomish County","Spokane County","Stevens County","Thurston County","Wahkiakum County","Walla Walla County","Whatcom County","Whitman County","Yakima County"],"WV":["Barbour County","Berkeley County","Boone County","Braxton County","Brooke County","Cabell County","Calhoun County","Clay County","Doddridge County","Fayette County","Gilmer County","Grant County","Greenbrier County","Hampshire County","Hancock County","Hardy County","Harrison County","Jackson County","Jefferson County","Kanawha County","Lewis County","Lincoln County","Logan County","Marion County","Marshall County","Mason County","Mcdowell County","Mercer County","Mineral County","Mingo County","Monongalia County","Monroe County","Morgan County","Nicholas County","Ohio County","Pendleton County","Pleasants County","Pocahontas County","Preston County","Putnam County","Raleigh County","Randolph County","Ritchie County","Roane County","Summers County","Taylor County","Tucker County","Tyler County","Upshur County","Wayne County","Webster County","Wetzel County","Wirt County","Wood County","Wyoming County"],"WI":["Adams County","Ashland County","Barron County","Bayfield County","Brown County","Buffalo County","Burnett County","Calumet County","Chippewa County","Clark County","Columbia County","Crawford County","Dane County","Dodge County","Door County","Douglas County","Dunn County","Eau Claire County","Florence County","Fond Du Lac County","Forest County","Grant County","Green County","Green Lake County","Iowa County","Iron County","Jackson County","Jefferson County","Juneau County","Kenosha County","Kewaunee County","La Crosse County","Lafayette County","Langlade County","Lincoln County","Manitowoc County","Marathon County","Marinette County","Marquette County","Menominee County","Milwaukee County","Monroe County","Oconto County","Oneida County","Outagamie County","Ozaukee County","Pepin County","Pierce County","Polk County","Portage County","Price County","Racine County","Richland County","Rock County","Rusk County","Saint Croix County","Sauk County","Sawyer County","Shawano County","Sheboygan County","St. Croix County","Taylor County","Trempealeau County","Vernon County","Vilas County","Walworth County","Washburn County","Washington County","Waukesha County","Waupaca County","Waushara County","Winnebago County","Wood County"],"WY":["Albany County","Big Horn County","Campbell County","Carbon County","Converse County","Crook County","Fremont County","Goshen County","Hot Springs County","Johnson County","Laramie County","Lincoln County","Natrona County","Niobrara County","Park County","Platte County","Sheridan County","Sublette County","Sweetwater County","Teton County","Uinta County","Washakie County","Weston County"],"DC":["District of Columbia","Washington"]};
+function stateAbbr(name){return STATE_ABBR[name]||"";}
+
+
+// ===== STATE =====
+const state={slide:0,reference:'',submitted:false,data:{}};
+
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const escapeHtml=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slides=()=>$$('.slide');
+function getData(k){return state.data[k]||'';}
+function setData(k,v){state.data[k]=v;save();}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+function load(){try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
+function clearSave(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toastT);window.__toastT=setTimeout(()=>t.classList.remove('show'),2600);}
+function markError(id,msg){const f=document.getElementById(id);if(f){f.closest('.field')?.classList.add('has-error');}const e=document.getElementById('err_'+id);if(e){e.textContent=msg;e.style.display='block';}}
+function clearErrors(){$$('.field.has-error').forEach(f=>f.classList.remove('has-error'));$$('[id^="err_"]').forEach(e=>{e.textContent='';e.style.display='none';});$$('.check-card.has-error').forEach(c=>c.classList.remove('has-error'));$$('[data-radio]').forEach(r=>r.classList.remove('has-error'));}
+
+// ===== STATE dropdown population =====
+function populateStates(){
+  const states=Object.keys(STATE_ABBR);
+  ['a_state','m_state'].forEach(id=>{
+    const sel=document.getElementById(id);if(!sel)return;
+    sel.innerHTML='<option value="">Select state</option>'+states.map(s=>`<option>${s}</option>`).join('');
+  });
+}
+
+// ===== COUNTY data (abbreviated for renters — just enough for common states; full list can be added later if needed) =====
+// For renters quote, we'll use Zippopotam.us to auto-populate. County isn't strictly required for rating renters but we'll keep the field free-type as fallback.
+function populateCountyDropdown(sel, stateName, savedValue){
+  if(!sel)return;
+  const abbr=stateAbbr(stateName);
+  const counties=STATE_COUNTIES[abbr]||[];
+  const want=savedValue||sel.value||'';
+  if(!counties.length){
+    sel.innerHTML='<option value="">Select state first</option>';
+    return;
+  }
+  sel.innerHTML='<option value="">Select county</option>'+counties.map(c=>'<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===want?' selected':'')+'>'+c+'</option>').join('');
+}
+
+// ===== Address wiring =====
+let __cityCache={};
+async function populateCityDatalist(dl, stateName){
+  if(!dl||!stateName)return;
+  dl.innerHTML='';
+  if(__cityCache[stateName]){dl.innerHTML=__cityCache[stateName].map(c=>`<option value="${escapeHtml(c)}">`).join('');return;}
+  try{
+    const r=await fetch('https://countriesnow.space/api/v0.1/countries/state/cities',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country:'United States',state:stateName})});
+    const j=await r.json();
+    if(j&&!j.error&&Array.isArray(j.data)){__cityCache[stateName]=j.data;dl.innerHTML=j.data.map(c=>`<option value="${escapeHtml(c)}">`).join('');}
+  }catch(e){}
+}
+
+function wirePolicyUpload(){
+  const inp=document.getElementById('policy_doc_input');
+  const drop=document.getElementById('policy_doc_drop');
+  const prev=document.getElementById('policy_doc_preview');
+  if(!inp||inp.__opBound)return;
+  inp.__opBound=true;
+  // Restore previous upload if any
+  const stored=getData('policy_doc_name');
+  if(stored&&prev&&drop){
+    drop.style.display='none';
+    prev.style.display='flex';
+    prev.innerHTML=`<div class="file-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="fname">${escapeHtml(stored)}<div class="fsize">${Math.round((getData('policy_doc_size')||0)/1024)} KB</div></div><button type="button" class="fremove" aria-label="Remove">&times;</button>`;
+    prev.querySelector('.fremove').addEventListener('click',e=>{e.stopPropagation();['policy_doc_name','policy_doc_type','policy_doc_size','policy_doc_data'].forEach(k=>setData(k,''));prev.style.display='none';drop.style.display='flex';inp.value='';});
+  }
+  inp.addEventListener('change',()=>{
+    const f=inp.files&&inp.files[0];if(!f)return;
+    if(f.size>5*1024*1024){toast('File too large (max 5 MB)');inp.value='';return;}
+    const r=new FileReader();
+    r.onload=()=>{
+      const data=r.result.split(',')[1]||'';
+      setData('policy_doc_name',f.name);setData('policy_doc_type',f.type);setData('policy_doc_size',f.size);setData('policy_doc_data',data);
+      if(prev&&drop){
+        drop.style.display='none';
+        prev.style.display='flex';
+        prev.innerHTML=`<div class="file-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="fname">${escapeHtml(f.name)}<div class="fsize">${Math.round(f.size/1024)} KB</div></div><button type="button" class="fremove" aria-label="Remove">&times;</button>`;
+        prev.querySelector('.fremove').addEventListener('click',e=>{e.stopPropagation();['policy_doc_name','policy_doc_type','policy_doc_size','policy_doc_data'].forEach(k=>setData(k,''));prev.style.display='none';drop.style.display='flex';inp.value='';});
+      }
+      toast('Policy uploaded');
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+function wireAddressBlock(prefix){
+  const st=document.getElementById(prefix+'_state');
+  const ct=document.getElementById(prefix+'_city');
+  const cl=document.getElementById(prefix+'_city_list');
+  const co=document.getElementById(prefix+'_county');
+  const zp=document.getElementById(prefix+'_zip');
+  if(!st)return;
+  if(!st.__opBound){
+    st.__opBound=true;
+    const refresh=()=>{populateCityDatalist(cl,st.value);populateCountyDropdown(co,st.value,getData(prefix+'_county'));};
+    st.addEventListener('change',refresh);
+    st.addEventListener('input',refresh);
+    if(st.value)refresh();
+  }
+  if(zp&&!zp.__opBound){
+    zp.__opBound=true;
+    let zipTimer;
+    zp.addEventListener('input',()=>{
+      const z=zp.value.replace(/\D/g,'');if(z.length===5){clearTimeout(zipTimer);zipTimer=setTimeout(()=>{fetch('https://api.zippopotam.us/us/'+z).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.places&&j.places[0]){const p=j.places[0];if(st&&!st.value){st.value=p.state;setData(prefix+'_state',p.state);st.dispatchEvent(new Event('change'));}if(ct&&!ct.value){ct.value=p['place name'];setData(prefix+'_city',p['place name']);}/* county populated by state change above via populateCountyDropdown */}});},300);}
+    });
+  }
+  // Allow free-typing into county field by swapping to input if no options present
+  if(co&&!co.__opBound){
+    co.__opBound=true;
+    co.addEventListener('change',()=>setData(prefix+'_county',co.value));
+  }
+}
+
+// ===== Resume =====
+function initResume(){
+  const saved=load();
+  if(saved&&saved.data&&Object.keys(saved.data).length>0&&!saved.submitted){
+    $('#resumeModal').classList.add('show');
+    $('#startFreshBtn').addEventListener('click',()=>{clearSave();$('#resumeModal').classList.remove('show');});
+    $('#resumeBtn').addEventListener('click',()=>{
+      Object.assign(state,saved);
+      // Re-hydrate inputs
+      Object.keys(state.data).forEach(k=>{
+        const el=document.getElementById(k);if(!el)return;
+        if(el.type==='checkbox'){el.checked=!!state.data[k];}
+        else{el.value=state.data[k];}
+      });
+      // Re-apply radio selections
+      $$('[data-radio]').forEach(wrap=>{
+        const key=wrap.dataset.radio;const val=state.data[key];if(!val)return;
+        wrap.querySelectorAll('.opt-btn').forEach(b=>{if(b.dataset.val===val)b.classList.add('active');});
+      });
+      // Re-apply check-card states
+      $$('[data-check]').forEach(el=>{const key=el.dataset.check;if(state.data[key]){el.classList.add('checked');const cb=el.querySelector('input[type="checkbox"]');if(cb)cb.checked=true;}});
+      $('#resumeModal').classList.remove('show');
+      showSlide(state.slide);
+    });
+  }
+}
+
+// ===== Navigation =====
+function slideIndex(sid){return slides().findIndex(s=>s.dataset.slide===sid);}
+function currentSid(){return slides()[state.slide]?.dataset.slide;}
+
+function shouldSkip(i){
+  const sid=slides()[i]?.dataset.slide;
+  const isRenter=getData('property_type')==='Renter';
+  // rental_type only shown to renters
+  if(sid==='rental_type')return !isRenter;
+  // Renter skips all structure-specific questions (they don't own the building)
+  const renterSkipList=['year_built','sq_footage','stories','construction','foundation','roof','roof_updated','roof_year','heat','fuel','pool','trampoline','damage','renovation','dwelling_amount','replacement','has_mortgage','mortgage_info'];
+  if(isRenter && renterSkipList.includes(sid))return true;
+  if(sid==='mail_address')return getData('mail_same')!=='No';
+  if(sid==='roof_year')return getData('d_roof_updated')!=='Yes';
+  if(sid==='claim_details')return getData('d_claims')!=='Yes';
+  if(sid==='ssn_input')return getData('p_has_ssn')!=='Yes';
+  if(sid==='add_insured_details')return getData('add_insured')!=='Yes';
+  if(sid==='policy_upload')return getData('current_insurer')==='None'||!getData('current_insurer');
+  if(sid==='mortgage_info')return getData('has_mortgage')!=='Yes';
+  if(sid==='loading')return true;
+  if(sid==='thanks')return true;
+  return false;
+}
+
+function validateSlide(i){
+  clearErrors();
+  let ok=true;
+  const sid=slides()[i]?.dataset.slide;
+  const req=(id,msg)=>{const v=(getData(id)||'').trim();if(!v){markError(id,msg||'Required');ok=false;}};
+  const reqRadio=(k,msg)=>{if(!getData(k)){document.querySelector(`[data-radio="${k}"]`)?.classList.add('has-error');toast(msg||'Please make a selection');ok=false;}};
+  const reqCheck=(k,msg)=>{if(!getData(k)){document.querySelector(`[data-check="${k}"]`)?.classList.add('has-error');toast(msg||'Please confirm');ok=false;}};
+  const isEmail=s=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+
+  if(sid==='welcome'){const z=(getData('w_zip')||'').replace(/\D/g,'');if(z.length!==5){markError('w_zip','Please enter a valid 5-digit ZIP');ok=false;}}
+  if(sid==='property_type')reqRadio('property_type','Please select');
+  if(sid==='rental_type')reqRadio('rental_type','Please select');
+  if(sid==='current_insurer')reqRadio('current_insurer','Please select');
+  if(sid==='pp_value')reqRadio('pp_value','Please select');
+  if(sid==='gender')reqRadio('p_sex','Please answer');
+  if(sid==='marital')reqRadio('p_marital','Please select');
+  if(sid==='military')reqRadio('p_military','Please select');
+  if(sid==='p_address'){req('a_street','Street required');req('a_state','State required');req('a_city','City required');const z=(getData('a_zip')||'').replace(/\D/g,'');if(z.length!==5){markError('a_zip','Enter a valid 5-digit ZIP');ok=false;}req('a_county','County required');}
+  if(sid==='mail_same')reqRadio('mail_same','Please answer');
+  if(sid==='mail_address'){req('m_street','Street required');req('m_state','State required');req('m_city','City required');const z=(getData('m_zip')||'').replace(/\D/g,'');if(z.length!==5){markError('m_zip','Enter a valid 5-digit ZIP');ok=false;}req('m_county','County required');}
+  if(sid==='year_built'){const v=parseInt(getData('d_year_built')||'0',10);if(!v||v<1800||v>new Date().getFullYear()+1){markError('d_year_built','Enter a valid year');ok=false;}}
+  if(sid==='sq_footage'){const v=parseInt(getData('d_sqft')||'0',10);if(!v||v<100){markError('d_sqft','Enter square footage');ok=false;}}
+  if(sid==='stories')reqRadio('d_stories','Please select');
+  if(sid==='construction')reqRadio('d_construction','Please select');
+  if(sid==='foundation')reqRadio('d_foundation','Please select');
+  if(sid==='roof')reqRadio('d_roof','Please select');
+  if(sid==='roof_updated')reqRadio('d_roof_updated','Please answer');
+  if(sid==='roof_year'){const v=parseInt(getData('d_roof_year')||'0',10);if(!v||v<1900||v>new Date().getFullYear()+1){markError('d_roof_year','Enter a valid year');ok=false;}}
+  if(sid==='heat')reqRadio('d_heat','Please select');
+  if(sid==='fuel')reqRadio('d_fuel','Please select');
+  if(sid==='dwelling_use')reqRadio('d_use','Please select');
+  if(sid==='pool')reqRadio('d_pool','Please answer');
+  if(sid==='trampoline')reqRadio('d_trampoline','Please answer');
+  if(sid==='dogs')reqRadio('d_dogs','Please answer');
+  if(sid==='business')reqRadio('d_business','Please answer');
+  if(sid==='damage')reqRadio('d_damage','Please answer');
+  if(sid==='renovation')reqRadio('d_renovation','Please answer');
+  if(sid==='claims')reqRadio('d_claims','Please answer');
+  if(sid==='canceled')reqRadio('d_canceled','Please answer');
+  if(sid==='name'){req('p_first','First name required');req('p_last','Last name required');}
+  if(sid==='dob')req('p_dob','Date of birth required');
+  if(sid==='has_ssn')reqRadio('p_has_ssn','Please answer');
+  if(sid==='ssn_input'){const s=(getData('p_ssn')||'').replace(/\D/g,'');if(!s||s.length!==9){markError('p_ssn','Enter a valid 9-digit SSN');ok=false;}}
+  if(sid==='contact'){const p=(getData('c_phone')||'').replace(/\D/g,'');if(p.length<10){markError('c_phone','Enter a valid phone');ok=false;}const e=getData('c_email')||'';if(!isEmail(e)){markError('c_email','Enter a valid email');ok=false;}}
+  if(sid==='dwelling_amount')reqRadio('cov_dwelling','Please select');
+  if(sid==='deductible')reqRadio('cov_deductible','Please select');
+  if(sid==='liability')reqRadio('cov_liability','Please select');
+  if(sid==='replacement')reqRadio('cov_replacement','Please answer');
+  if(sid==='add_insured')reqRadio('add_insured','Please answer');
+  if(sid==='add_insured_details'){req('ai_name','Name required');req('ai_rel','Relationship required');}
+  if(sid==='has_mortgage')reqRadio('has_mortgage','Please answer');
+  if(sid==='mortgage_info'){req('mort_company','Company required');req('mort_address','Address required');}
+  if(sid==='effective')req('pol_effective','Effective date required');
+  if(sid==='payment')reqRadio('pay_mode','Please select');
+  if(sid==='attestations'){['att_truthful','att_quote','att_tcpa'].forEach(k=>reqCheck(k,'All acknowledgments must be checked'));}
+  if(sid==='signature'){const sig=getData('sig_name');const f=(getData('p_first')||'').trim().toLowerCase();const l=(getData('p_last')||'').trim().toLowerCase();if(!sig){markError('sig_name','Please type your full name to sign');ok=false;}else{const s=sig.trim().toLowerCase();if(!s.includes(f)||!s.includes(l)){markError('sig_name','Signature must match your legal name');ok=false;}}}
+  return ok;
+}
+
+function renderForSlide(i){
+  const sid=slides()[i]?.dataset.slide;
+  if(sid==='policy_upload')wirePolicyUpload();
+  if(sid==='p_address')wireAddressBlock('a');
+  if(sid==='mail_address')wireAddressBlock('m');
+  if(sid==='signature'){
+    const d=new Date();
+    const dateEl=$('#sigDateDisplay');
+    if(dateEl){dateEl.textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});setData('sig_date',d.toISOString().slice(0,10));}
+    const inp=$('#sig_name');const prev=$('#sigPreview');
+    if(inp&&prev&&!inp.__sigBound){inp.__sigBound=true;const update=()=>{prev.textContent=inp.value||'\u00a0';};inp.addEventListener('input',update);update();}
+  }
+  if(sid==='review')renderReview();
+  if(sid==='thanks'){const r=$('#refNumber');if(r)r.textContent=state.reference||'OP-HM-0000';}
+}
+
+function updateProgress(){
+  const total=slides().filter(s=>!['welcome','loading','thanks','own_gate'].includes(s.dataset.slide)).length;
+  const currentSid=slides()[state.slide]?.dataset.slide;
+  if(['loading','thanks','own_gate'].includes(currentSid)){
+    // hide progress on terminal pages
+    $('#progressFill').style.width='100%';
+    $('#progressPct').textContent='100%';
+    $('#progressStage').textContent=STAGE_MAP[currentSid]||'';
+    return;
+  }
+  if(currentSid==='welcome'){
+    $('#progressFill').style.width='4%';
+    $('#progressPct').textContent='4%';
+    $('#progressStage').textContent='Getting started';
+    return;
+  }
+  // Count how many non-skip, non-terminal slides come before or at current
+  let step=0;let cur=-1;
+  slides().forEach((s,idx)=>{
+    if(['welcome','loading','thanks','own_gate'].includes(s.dataset.slide))return;
+    step++;
+    if(idx===state.slide)cur=step;
+  });
+  if(cur<0)cur=step;
+  const pct=Math.min(100,Math.round((cur/step)*100));
+  $('#progressFill').style.width=pct+'%';
+  $('#progressPct').textContent=pct+'%';
+  $('#progressStage').textContent=STAGE_MAP[currentSid]||'';
+}
+
+function showSlide(i){
+  if(autoAdvTimer){clearTimeout(autoAdvTimer);autoAdvTimer=null;}
+  if(i<0||i>=slides().length)return;
+  $$('.slide').forEach(s=>s.classList.remove('active'));
+  slides()[i].classList.add('active');
+  state.slide=i;save();
+  updateProgress();
+  renderForSlide(i);
+  // Prev button visibility
+  $('#prevBtn').classList.toggle('disabled',i===0||currentSid()==='welcome'||currentSid()==='thanks'||currentSid()==='loading');
+  // Scroll to top for long slides
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goNext(){
+  const i=state.slide;
+  if(!validateSlide(i))return;
+  // Own gate — if user says Own, show gate instead of next
+  // no ownership gate for home quote
+  let j=i+1;
+  while(j<slides().length&&shouldSkip(j))j++;
+  if(j>=slides().length)return;
+  showSlide(j);
+}
+
+function goBack(){
+  let j=state.slide-1;
+  while(j>0&&shouldSkip(j))j--;
+  if(j<0)j=0;
+  showSlide(j);
+}
+
+// ===== Bindings =====
+const OPT_ICONS={
+  // Yes/No/generic answers
+  Yes:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  No:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  Prefer_not:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  // Gender
+  Male:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="14" y1="10" x2="19" y2="5"/><polyline points="14 5 19 5 19 10"/></svg>',
+  Female:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/></svg>',
+  Nonbinary:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="5"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="9" y1="6" x2="15" y2="6"/></svg>',
+  // Property types
+  Homeowner:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  Landlord:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="12" y1="13" x2="12" y2="17"/><line x1="10" y1="15" x2="14" y2="15"/></svg>',
+  Condo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="7" x2="8" y2="7.01"/><line x1="12" y1="7" x2="12" y2="7.01"/><line x1="16" y1="7" x2="16" y2="7.01"/><line x1="8" y1="11" x2="8" y2="11.01"/><line x1="12" y1="11" x2="12" y2="11.01"/><line x1="16" y1="11" x2="16" y2="11.01"/><line x1="8" y1="15" x2="8" y2="15.01"/><line x1="12" y1="15" x2="12" y2="15.01"/><line x1="16" y1="15" x2="16" y2="15.01"/></svg>',
+  Mobile:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="11" rx="1"/><path d="M19 12h3v4h-3"/><circle cx="6" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>',
+  Renter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zM15.5 7.5l3 3L22 7l-3-3M15 8L9 14"/></svg>',
+  Apartment:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18M18 3v18M6 3h12v18H6z"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><line x1="9" y1="11" x2="9" y2="11.01"/><line x1="15" y1="11" x2="15" y2="11.01"/><line x1="9" y1="15" x2="9" y2="15.01"/><line x1="15" y1="15" x2="15" y2="15.01"/></svg>',
+  Townhome:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l3-5 6 5-6 5zM9 10l3-5 6 5-6 5zM15 10l3-5 6 5-6 5z" transform="translate(-3,1)"/></svg>',
+  Single_Family:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  Duplex:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l4-4 4 4v10H3zM13 10l4-4 4 4v10h-8z"/></svg>',
+  Other:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="8" y2="12.01"/><line x1="12" y1="12" x2="12" y2="12.01"/><line x1="16" y1="12" x2="16" y2="12.01"/></svg>',
+  // Marital
+  Single:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  Married:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 21v-1a5 5 0 0 1 5-5M21 21v-1a5 5 0 0 0-5-5"/></svg>',
+  Domestic_Partner:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 21v-1a5 5 0 0 1 5-5M21 21v-1a5 5 0 0 0-5-5"/></svg>',
+  Divorced:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><line x1="11" y1="6" x2="13" y2="12"/></svg>',
+  Widowed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>',
+  Separated:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><line x1="12" y1="4" x2="12" y2="21" stroke-dasharray="2 2"/></svg>',
+  // Military
+  Active:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2"/></svg>',
+  Reserve:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  Veteran:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V3l8 4 8-4v19"/><line x1="4" y1="7" x2="20" y2="7"/></svg>',
+  Dependent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  None:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
+  // Numbers / stories
+  '1':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20V8l4-3v15"/></svg>',
+  '1.5':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20V8l4-3v15"/><line x1="14" y1="14" x2="20" y2="14"/></svg>',
+  '2':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="16" height="8"/><rect x="6" y="4" width="12" height="8"/></svg>',
+  '2.5':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="16" height="8"/><rect x="6" y="6" width="12" height="6"/><polygon points="8 6 12 3 16 6"/></svg>',
+  '3':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="15" width="14" height="5"/><rect x="6" y="10" width="12" height="5"/><rect x="7" y="5" width="10" height="5"/></svg>',
+  // Fuel / heat
+  Natural_Gas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+  Electric:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  Propane:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="6" width="10" height="15" rx="2"/><line x1="10" y1="3" x2="14" y2="3"/><line x1="12" y1="3" x2="12" y2="6"/></svg>',
+  Oil:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+  Wood:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1.5-3.78a8 8 0 1 0 10.12-12.66"/></svg>',
+  // Primary/Secondary/Rental/Vacant/Seasonal
+  Primary:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  Secondary:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M5 20V10l7-6 7 6v10"/></svg>',
+  Seasonal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>',
+  Rental:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zM15.5 7.5l3 3L22 7l-3-3M15 8L9 14"/></svg>',
+  Vacant:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="8" y1="14" x2="16" y2="14"/></svg>',
+  // Default fallback
+  _default:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/></svg>'
+};
+function insertOptIcon(btn){
+  if(btn.querySelector('.opt-icon'))return;
+  const v=btn.dataset.val;
+  const svg=OPT_ICONS[v]||OPT_ICONS._default;
+  const iconWrap=document.createElement('span');
+  iconWrap.className='opt-icon';
+  iconWrap.innerHTML=svg;
+  btn.insertBefore(iconWrap, btn.firstChild);
+}
+
+let autoAdvTimer=null;
+function scheduleAutoAdvance(delay){
+  if(autoAdvTimer)clearTimeout(autoAdvTimer);
+  const sidAtSchedule=currentSid();
+  autoAdvTimer=setTimeout(()=>{autoAdvTimer=null;if(currentSid()===sidAtSchedule)goNext();},delay);
+}
+function bindRadioButtons(){
+  $$('[data-radio]').forEach(wrap=>{
+    const key=wrap.dataset.radio;
+    wrap.querySelectorAll('.opt-btn').forEach(btn=>{
+      if(btn.__rbound)return;btn.__rbound=true;
+      btn.addEventListener('click',()=>{
+        wrap.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        setData(key,btn.dataset.val);
+        wrap.classList.remove('has-error');
+        scheduleAutoAdvance(450);
+      });
+    });
+  });
+}
+
+function bindCheckCards(){
+  $$('[data-check]').forEach(el=>{
+    if(el.__cbound)return;el.__cbound=true;
+    const key=el.dataset.check;
+    el.addEventListener('click',e=>{
+      e.preventDefault();
+      const nowChecked=!el.classList.contains('checked');
+      el.classList.toggle('checked',nowChecked);
+      const cb=el.querySelector('input[type="checkbox"]');if(cb)cb.checked=nowChecked;
+      setData(key,nowChecked?'Yes':'');
+      el.classList.remove('has-error');
+    });
+  });
+}
+
+function bindInputs(){
+  $$('.input,.select').forEach(inp=>{
+    const key=inp.id;if(!key)return;
+    if(getData(key))inp.value=getData(key);
+    const tryAutoAdvance=()=>{
+      const slide=inp.closest('.slide');if(!slide)return;
+      // Only on slides with exactly one .input/.select — multi-field slides need manual Continue
+      const count=slide.querySelectorAll('.input,.select').length;
+      if(count!==1)return;
+      const typ=(inp.type||'').toLowerCase();
+      if(typ==='date'){if(inp.value)scheduleAutoAdvance(150);return;}
+      if(['number','tel','email','text','search','url'].includes(typ)){
+        // Debounced: only advance when input stops for 1200ms AND value is non-empty
+        if(inp.value&&inp.value.trim().length>0)scheduleAutoAdvance(1200);
+      }
+    };
+    inp.addEventListener('input',()=>{setData(key,inp.value);inp.closest('.field')?.classList.remove('has-error');tryAutoAdvance();});
+    inp.addEventListener('change',()=>{setData(key,inp.value);tryAutoAdvance();});
+  });
+  // Phone auto-format
+  const phone=$('#c_phone');
+  if(phone){phone.addEventListener('input',()=>{let d=phone.value.replace(/\D/g,'').slice(0,10);let out='';if(d.length>6)out='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);else if(d.length>3)out='('+d.slice(0,3)+') '+d.slice(3);else if(d.length>0)out='('+d;phone.value=out;setData('c_phone',out);});}
+}
+
+function bindNavButtons(){
+  const on=(sel,fn,evt='click')=>{const el=typeof sel==='string'?document.querySelector(sel):sel;if(el)el.addEventListener(evt,fn);};
+  $$('[data-next]').forEach(b=>{if(b.__nb)return;b.__nb=true;b.addEventListener('click',goNext);});
+  on('#prevBtn',()=>{if(!$('#prevBtn').classList.contains('disabled'))goBack();});
+  on('#exitBtn',()=>{const m=$('#exitModal');if(m)m.classList.add('show');});
+  on('#cancelExitBtn',()=>{const m=$('#exitModal');if(m)m.classList.remove('show');});
+  on('#confirmExitBtn',()=>{window.location.href='https://www.onepointinsuranceagency.com';});
+  on('#finalizeBtn',submitApplication);
+  // Enter to advance on typed inputs
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Enter')return;
+    const t=e.target;if(!t||t.tagName==='TEXTAREA')return;
+    if(['INPUT','SELECT'].includes(t.tagName)){
+      const typ=t.type||'';
+      if(['text','email','tel','number','date','search','url'].includes(typ)||t.tagName==='SELECT'){
+        e.preventDefault();goNext();
+      }
+    }
+  });
+}
+
+// ===== Review =====
+function renderReview(){
+  const p=$('#reviewPanel');if(!p)return;
+  const g=(k,fallback='\u2014')=>{const v=getData(k);return v?escapeHtml(v):fallback;};
+  const jump=sid=>{const i=slideIndex(sid);return `<button type="button" class="edit" data-goto="${i}">Edit</button>`;};
+  const secList=(()=>{const out=[];['deadbolt','smoke','fire_ext','burglar','central_fire','sprinkler','co2','smart','none'].forEach(k=>{if(getData('sec_'+k))out.push(k);});return out.join(', ')||'None listed';})();
+  const adList=(()=>{const out=[];['water_backup','earthquake','identity','equipment','service_line','mold','none'].forEach(k=>{if(getData('addon_'+k))out.push(k);});return out.join(', ')||'None';})();
+  p.innerHTML=`
+    <h3>Quick Quote ${jump('property_type')}</h3>
+    <div class="row"><span class="lbl">ZIP</span><span class="val">${g('w_zip')}</span></div>
+    <div class="row"><span class="lbl">Property type</span><span class="val">${g('property_type')}</span></div>
+    ${getData('property_type')==='Renter'?`<div class="row"><span class="lbl">Rental type</span><span class="val">${g('rental_type')}</span></div>`:''}
+    <div class="row"><span class="lbl">Current insurer</span><span class="val">${g('current_insurer')}</span></div>
+    <div class="row"><span class="lbl">Personal property</span><span class="val">${g('pp_value')}</span></div>
+    <div class="row"><span class="lbl">Gender</span><span class="val">${g('p_sex')}</span></div>
+    <div class="row"><span class="lbl">Marital status</span><span class="val">${g('p_marital')}</span></div>
+    <div class="row"><span class="lbl">Military</span><span class="val">${g('p_military')}</span></div>
+    <h3>Property ${jump('p_address')}</h3>
+    <div class="row"><span class="lbl">Address</span><span class="val">${g('a_street')}, ${g('a_city','')} ${g('a_state','')} ${g('a_zip','')}</span></div>
+    <div class="row"><span class="lbl">Mailing same</span><span class="val">${g('mail_same')}</span></div>
+    <div class="row"><span class="lbl">Year built / Sq ft</span><span class="val">${g('d_year_built')} / ${g('d_sqft')}</span></div>
+    <div class="row"><span class="lbl">Stories / Construction</span><span class="val">${g('d_stories')} / ${g('d_construction')}</span></div>
+    <div class="row"><span class="lbl">Foundation / Roof</span><span class="val">${g('d_foundation')} / ${g('d_roof')}</span></div>
+    <div class="row"><span class="lbl">Roof updated</span><span class="val">${g('d_roof_updated')}${getData('d_roof_updated')==='Yes'?' ('+g('d_roof_year','')+')':''}</span></div>
+    <div class="row"><span class="lbl">Heat / Fuel</span><span class="val">${g('d_heat')} / ${g('d_fuel')}</span></div>
+    <div class="row"><span class="lbl">Use</span><span class="val">${g('d_use')}</span></div>
+    <div class="row"><span class="lbl">Pool / Trampoline / Dogs</span><span class="val">${g('d_pool')} / ${g('d_trampoline')} / ${g('d_dogs')}</span></div>
+    <div class="row"><span class="lbl">Business / Damage / Reno</span><span class="val">${g('d_business')} / ${g('d_damage')} / ${g('d_renovation')}</span></div>
+    <div class="row"><span class="lbl">Security</span><span class="val">${secList}</span></div>
+    <div class="row"><span class="lbl">Claims 5yr / Canceled 5yr</span><span class="val">${g('d_claims')} / ${g('d_canceled')}</span></div>
+    <h3>Your info ${jump('name')}</h3>
+    <div class="row"><span class="lbl">Name</span><span class="val">${g('p_first')} ${g('p_middle','')} ${g('p_last')}</span></div>
+    <div class="row"><span class="lbl">DOB</span><span class="val">${g('p_dob')}</span></div>
+    <div class="row"><span class="lbl">SSN</span><span class="val">${getData('p_has_ssn')==='Yes'?(getData('p_ssn')?'***-**-'+String(getData('p_ssn')).replace(/\D/g,'').slice(-4):'\u2014'):'Not provided'}</span></div>
+    <div class="row"><span class="lbl">Phone / Email</span><span class="val">${g('c_phone')} / ${g('c_email')}</span></div>
+    <h3>Coverage ${jump('dwelling_amount')}</h3>
+    <div class="row"><span class="lbl">Dwelling amount</span><span class="val">${g('cov_dwelling')}</span></div>
+    <div class="row"><span class="lbl">Deductible</span><span class="val">${g('cov_deductible')}</span></div>
+    <div class="row"><span class="lbl">Liability</span><span class="val">${g('cov_liability')}</span></div>
+    <div class="row"><span class="lbl">Replacement cost</span><span class="val">${g('cov_replacement')}</span></div>
+    <div class="row"><span class="lbl">Additional insured</span><span class="val">${g('add_insured')}${getData('add_insured')==='Yes'?' \u2014 '+g('ai_name',''):''}</span></div>
+    <div class="row"><span class="lbl">Mortgage</span><span class="val">${g('has_mortgage')}${getData('has_mortgage')==='Yes'?' \u2014 '+g('mort_company',''):''}</span></div>
+    <div class="row"><span class="lbl">Effective date</span><span class="val">${g('pol_effective')}</span></div>
+    <div class="row"><span class="lbl">Payment</span><span class="val">${g('pay_mode')}</span></div>
+  `;
+  p.querySelectorAll('.edit[data-goto]').forEach(b=>b.addEventListener('click',()=>{const t=parseInt(b.dataset.goto,10);if(!isNaN(t))showSlide(t);}));
+}
+
+// ===== Submit =====
+function buildPayload(){
+  const g=k=>getData(k)||'';
+  const boolCheck=k=>!!getData(k);
+  const pickKeys=(prefix,keys)=>{const out=[];keys.forEach(k=>{if(getData(prefix+k))out.push(k);});return out;};
+  return {
+    source:SOURCE_NAME,
+    submitted_at:new Date().toISOString(),
+    reference:state.reference,
+    quick_quote:{
+      zip:g('w_zip'),
+      property_type:g('property_type'),
+      rental_type:g('rental_type'),
+      current_insurer:g('current_insurer'),
+      personal_property_value:g('pp_value'),
+      gender:g('p_sex'),
+      marital_status:g('p_marital'),
+      military:g('p_military')
+    },
+    property:{
+      address:{street:g('a_street'),apt:g('a_apt'),state:g('a_state'),city:g('a_city'),zip:g('a_zip'),county:g('a_county'),mailing_same:g('mail_same'),mailing:{street:g('m_street'),apt:g('m_apt'),state:g('m_state'),city:g('m_city'),zip:g('m_zip'),county:g('m_county')}},
+      dwelling:{year_built:g('d_year_built'),sqft:g('d_sqft'),stories:g('d_stories'),construction:g('d_construction'),foundation:g('d_foundation'),roof_material:g('d_roof'),roof_updated:g('d_roof_updated'),roof_year:g('d_roof_year'),heat_source:g('d_heat'),fuel:g('d_fuel'),use:g('d_use'),pool:g('d_pool'),trampoline:g('d_trampoline'),dogs:g('d_dogs'),business:g('d_business'),damage:g('d_damage'),renovation:g('d_renovation')},
+      security:pickKeys('sec_',['deadbolt','smoke','fire_ext','burglar','central_fire','sprinkler','co2','smart','none'])
+    },
+    applicant:{first:g('p_first'),middle:g('p_middle'),last:g('p_last'),dob:g('p_dob'),has_ssn:g('p_has_ssn'),ssn:g('p_has_ssn')==='Yes'?g('p_ssn'):'',phone:g('c_phone'),email:g('c_email')},
+    history:{claims_5yr:g('d_claims'),claim_info:g('d_claims')==='Yes'?g('claim_info'):'',canceled_5yr:g('d_canceled')},
+    coverage:{
+      dwelling_amount:g('cov_dwelling'),
+      deductible:g('cov_deductible'),
+      liability:g('cov_liability'),
+      replacement_cost:g('cov_replacement'),
+      addons:pickKeys('addon_',['water_backup','earthquake','identity','equipment','service_line','mold','none']),
+      want_water_backup:boolCheck('addon_water_backup'),
+      want_earthquake:boolCheck('addon_earthquake'),
+      want_identity:boolCheck('addon_identity'),
+      want_equipment:boolCheck('addon_equipment'),
+      want_service_line:boolCheck('addon_service_line'),
+      want_mold:boolCheck('addon_mold')
+    },
+    policy:{additional_insured:g('add_insured'),ai_name:g('ai_name'),ai_rel:g('ai_rel'),ai_company:g('ai_company'),ai_address:g('ai_address'),has_mortgage:g('has_mortgage'),mort_company:g('mort_company'),mort_loan:g('mort_loan'),mort_address:g('mort_address'),effective_date:g('pol_effective'),payment_mode:g('pay_mode'),current_policy_document:getData('policy_doc_name')?{name:getData('policy_doc_name'),type:getData('policy_doc_type'),size:getData('policy_doc_size'),data:getData('policy_doc_data')}:null},
+    attestations:{truthful:boolCheck('att_truthful'),quote_unbound_acknowledged:boolCheck('att_quote'),tcpa_consent:boolCheck('att_tcpa')},
+    signature:{name:g('sig_name'),date:g('sig_date')}
+  };
+}
+
+async function submitApplication(){
+  if(!state.reference)state.reference='OP-HM-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  const loadIdx=slideIndex('loading');
+  $$('.slide').forEach(s=>s.classList.remove('active'));
+  slides()[loadIdx].classList.add('active');
+  state.slide=loadIdx;updateProgress();
+  const payload=buildPayload();
+  try{
+    const r=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok)console.warn('Webhook returned',r.status);
+  }catch(e){console.warn('Webhook error',e);}
+  // Go straight to thank you — no document upload step
+  const tyIdx=slideIndex('thanks');
+  state.slide=tyIdx;state.submitted=true;save();
+  $$('.slide').forEach(s=>s.classList.remove('active'));
+  slides()[tyIdx].classList.add('active');updateProgress();
+  const r=$('#refNumber');if(r)r.textContent=state.reference;
+}
+
+
+// ===== Init =====
+function init(){
+  populateStates();
+  bindRadioButtons();
+  bindCheckCards();
+  bindInputs();
+  bindNavButtons();
+  initResume();
+  updateProgress();
+  // Pre-fill ZIP from URL parameter
+  try {
+    var preZip = new URLSearchParams(window.location.search).get('zip');
+    if(preZip && /^\d{5}$/.test(preZip)){
+      var wzip = document.getElementById('w_zip');
+      if(wzip){ wzip.value = preZip; wzip.dispatchEvent(new Event('input')); }
+    }
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>

@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Get a fast, confidential health insurance quote from OnePoint Insurance Agency. See if you qualify for savings in under 5 minutes.">
+<meta name="robots" content="noindex, nofollow">
+<title>Health Insurance Quote | OnePoint Insurance Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0a3d6b;--blue-dark:#052847;--navy:#052847;
+  --green:#0a3d6b;--green-dark:#052847;--gold:#E8C74E;
+  --page:#F7F9FA;--card:#fff;--border:#E8EBEE;--border-strong:#CFD6DE;
+  --text:#0F1D2D;--muted:#6B7280;--blue-ghost:#e0ecff;--danger:#D64545;
+  --shadow-sm:0 1px 2px rgba(5,40,71,.04),0 1px 3px rgba(5,40,71,.05);
+  --shadow-md:0 4px 12px rgba(5,40,71,.06),0 2px 4px rgba(5,40,71,.04);
+  --shadow-lg:0 20px 48px rgba(5,40,71,.12),0 8px 16px rgba(5,40,71,.06);
+  --radius-sm:6px;--radius:10px;--radius-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--page);color:var(--text);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.header-inner{max-width:none;margin:0;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--navy)}
+.brand-logo-img{height:42px;width:auto;display:block;flex-shrink:0}
+.brand-divider{width:1px;height:30px;background:var(--border-strong);flex-shrink:0}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-name{font-weight:700;font-size:16px;color:var(--navy)}
+.brand-tag{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+.header-contact{display:flex;align-items:center;gap:20px;font-size:14px}
+.header-phone{display:flex;align-items:center;gap:8px;color:var(--navy);font-weight:600}
+.header-phone svg{color:var(--green);flex-shrink:0}
+.header-secure{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;font-weight:500}
+.header-secure svg{color:var(--green)}
+@media (max-width:640px){.header-inner{padding:12px 16px}.brand-logo-img{height:34px}.brand-divider{display:none}.brand-tag{display:none}.header-secure{display:none}.header-phone{font-size:13px}}
+
+.savings-banner{background:linear-gradient(90deg,#e0ecff 0%,#FFF9E6 100%);border-bottom:1px solid var(--border);padding:10px 16px;text-align:center;font-size:13.5px;color:var(--navy);font-weight:500}
+.savings-banner strong{color:var(--navy);font-weight:700}
+.savings-banner .pill{display:inline-block;background:var(--gold);color:var(--navy);padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px;margin-right:8px;letter-spacing:.3px}
+
+.stepper-wrap{background:#fff;border-bottom:1px solid var(--border);padding:18px 24px 22px}
+.stepper{max-width:none;margin:0;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;position:relative}
+.stepper::before{content:"";position:absolute;top:14px;left:5%;right:5%;height:2px;background:var(--border);z-index:0}
+.stepper-progress{position:absolute;top:14px;left:5%;height:2px;background:linear-gradient(90deg,var(--blue),var(--green));z-index:1;transition:width .4s ease;width:0%}
+.step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:0}
+.step-dot{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--muted);transition:all .25s ease}
+.step.active .step-dot{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 4px rgba(10,61,107,.12)}
+.step.done .step-dot{background:var(--green);border-color:var(--green);color:#fff}
+.step-label{font-size:12px;font-weight:600;color:var(--muted);text-align:center;line-height:1.25;max-width:120px}
+.step.active .step-label{color:var(--navy)}
+.step.done .step-label{color:var(--green-dark)}
+@media (max-width:760px){.stepper-wrap{padding:14px 12px 16px}.stepper::before,.stepper-progress{display:none}.stepper{gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.stepper::-webkit-scrollbar{display:none}.step{flex:0 0 auto;min-width:70px}.step-label{font-size:11px;max-width:80px}}
+
+.micro-progress{height:3px;background:var(--border);position:relative;overflow:hidden}
+.micro-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));width:0%;transition:width .35s ease;border-radius:0 2px 2px 0}
+
+.main{max-width:none;margin:0;padding:32px 32px 80px}
+.slide{display:none;animation:fadeIn .3s ease;width:100%}
+.slide.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:40px;max-width:none;margin:0;width:100%}
+@media (max-width:640px){.card{padding:24px 20px;border-radius:var(--radius)}}
+
+.slide-header{margin-bottom:28px}
+.slide-kicker{display:inline-block;background:var(--blue-ghost);color:var(--blue-dark);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:14px}
+.slide-title{font-size:26px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:-.01em;line-height:1.25}
+.slide-subtitle{font-size:15px;color:var(--muted);margin:0;line-height:1.55}
+@media (max-width:640px){.slide-title{font-size:22px}.slide-subtitle{font-size:14px}}
+
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.form-grid .full{grid-column:1/-1}
+@media (max-width:640px){.form-grid{grid-template-columns:1fr}}
+
+.field{display:flex;flex-direction:column;gap:7px}
+.field label,.field-label{font-size:14px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:6px}
+.field-label .opt{color:var(--muted);font-weight:400;font-size:13px}
+.field-hint{font-size:12.5px;color:var(--muted);margin-top:-2px;line-height:1.45}
+.field-help{font-size:13px;color:var(--muted);line-height:1.5;background:#FAFBFC;border-left:3px solid var(--blue);padding:10px 14px;border-radius:0 6px 6px 0;margin-top:6px}
+
+.input,.select{width:100%;padding:11px 14px;font-size:15px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);background:#fff;transition:border-color .15s,box-shadow .15s;color:var(--text);outline:none}
+.input:hover,.select:hover{border-color:#99B0C2}
+.input:focus,.select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,61,107,.15)}
+.input.error{border-color:var(--danger)}
+.input.error:focus{box-shadow:0 0 0 3px rgba(214,69,69,.15)}
+.select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.error-msg{font-size:12.5px;color:var(--danger);font-weight:500;margin-top:2px}
+
+.opt-row{display:flex;gap:12px;flex-wrap:wrap}
+.opt-row.stacked{flex-direction:column;gap:10px}
+.opt-row.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;flex-wrap:unset}
+.opt-row.grid .opt-btn{min-width:0;justify-content:center;text-align:center;padding:22px 18px;font-size:15px;font-weight:600;color:var(--blue-dark);background:var(--blue-ghost);border-color:var(--blue-ghost);flex:unset}
+.opt-row.grid .opt-btn .circle{display:none}
+.opt-row.grid .opt-btn:hover{background:#cfdcef;border-color:#b8cee6}
+.opt-row.grid .opt-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
+@media (max-width:520px){.opt-row.grid{grid-template-columns:1fr}}
+.opt-btn{flex:1;min-width:140px;display:flex;align-items:center;gap:10px;padding:14px 18px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);background:#fff;font-size:14.5px;font-weight:500;color:var(--navy);text-align:left;transition:all .15s;cursor:pointer}
+.opt-btn:hover{border-color:var(--blue);background:var(--blue-ghost)}
+.opt-btn .circle{width:20px;height:20px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;transition:all .15s}
+.opt-btn.selected{border-color:var(--blue);background:var(--blue-ghost);color:var(--navy);font-weight:600}
+.opt-btn.selected .circle{border-color:var(--blue)}
+.opt-btn.selected .circle::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.opt-row.stacked .opt-btn{min-width:0;width:100%}
+.opt-btn.auto-flash{animation:pulseFlash .4s ease}
+@keyframes pulseFlash{0%,100%{box-shadow:0 0 0 0 rgba(10,61,107,0)}50%{box-shadow:0 0 0 6px rgba(10,61,107,.18)}}
+
+.check-row{display:flex;flex-direction:column;gap:10px}
+.check-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);background:#fff;cursor:pointer;transition:all .15s;font-size:14.5px;color:var(--navy)}
+.check-opt:hover{border-color:var(--blue);background:var(--blue-ghost)}
+.check-opt.selected{border-color:var(--blue);background:var(--blue-ghost)}
+.check-opt .box{width:20px;height:20px;border-radius:4px;border:2px solid var(--border-strong);background:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .15s}
+.check-opt.selected .box{background:var(--blue);border-color:var(--blue)}
+.check-opt.selected .box::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);margin-top:-2px}
+.check-opt .txt{flex:1;line-height:1.45}
+.check-opt .txt small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;font-weight:400}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px;flex-wrap:wrap}
+.btn{padding:13px 32px;font-size:15px;font-weight:600;border-radius:var(--radius-sm);transition:all .15s;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn-primary{background:linear-gradient(180deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;box-shadow:0 2px 8px rgba(10,61,107,.3)}
+.btn-primary:hover{background:linear-gradient(180deg,#0d4a80 0%,var(--blue) 100%);box-shadow:0 4px 14px rgba(10,61,107,.4);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-secondary{background:#fff;color:var(--navy);border:1.5px solid var(--border-strong)}
+.btn-secondary:hover{background:var(--page);border-color:var(--blue);color:var(--blue)}
+.btn-submit{background:linear-gradient(180deg,var(--green) 0%,var(--green-dark) 100%);color:#fff;font-weight:700;font-size:16px;padding:15px 40px;box-shadow:0 4px 14px rgba(10,61,107,.35)}
+.btn-submit:hover{box-shadow:0 6px 20px rgba(10,61,107,.45);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--blue);border:1.5px dashed var(--border-strong);padding:11px 20px;font-weight:600}
+.btn-ghost:hover{border-color:var(--blue);background:var(--blue-ghost)}
+.nav-row.back-only{justify-content:flex-start}
+
+.welcome{text-align:center;padding:20px 20px 10px}
+.welcome h1{font-size:36px;font-weight:800;color:var(--navy);margin:10px 0 14px;letter-spacing:-.02em;line-height:1.15}
+.welcome p.lead{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 32px;line-height:1.55}
+.welcome .zip-box{max-width:340px;margin:0 auto}
+.welcome .zip-box label{display:block;text-align:left;margin-bottom:8px;font-weight:600;color:var(--navy);font-size:14px}
+.welcome .zip-box .input{font-size:22px;font-weight:600;text-align:center;letter-spacing:.15em;padding:16px}
+.trust-row{display:flex;justify-content:center;gap:28px;margin-top:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);font-weight:500}
+.trust-item svg{color:var(--green);flex-shrink:0}
+@media (max-width:640px){.welcome h1{font-size:26px}.welcome p.lead{font-size:15px}.trust-row{gap:16px}.trust-item{font-size:12.5px}}
+
+.member-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.member-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);background:#fff}
+.member-card.selected{background:var(--blue-ghost);border-color:var(--blue)}
+.member-info{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.member-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--navy));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.member-name{font-weight:600;color:var(--navy);font-size:15px}
+.member-meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+.member-actions{display:flex;gap:6px;flex-shrink:0}
+.member-actions .btn{padding:7px 14px;font-size:13px;min-height:auto}
+.add-row{display:flex;gap:12px;flex-wrap:wrap}
+.add-row .btn-ghost{flex:1;min-width:180px}
+
+.income-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.income-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#FAFBFC}
+.income-item-info{min-width:0}
+.income-item-type{font-weight:600;color:var(--navy);font-size:14.5px}
+.income-item-amt{font-size:13px;color:var(--muted);margin-top:2px}
+.income-item-actions{display:flex;gap:6px}
+.income-item-actions .btn{padding:6px 12px;font-size:13px;min-height:auto}
+
+.summary-box{background:linear-gradient(135deg,#e0ecff 0%,#FFF9E6 100%);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px}
+.summary-box .big{font-size:28px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.summary-box .lbl{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.summary-box .note{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
+
+.sig-wrap{background:#FAFBFC;border:1.5px dashed var(--border-strong);border-radius:var(--radius);padding:22px;text-align:center;margin-top:10px}
+.sig-wrap input.sig-input{width:100%;max-width:420px;font-family:'Caveat',cursive;font-size:38px;font-weight:600;text-align:center;color:var(--navy);border:none;background:transparent;border-bottom:2px solid var(--border-strong);padding:6px 8px;outline:none;transition:border-color .15s}
+.sig-wrap input.sig-input:focus{border-color:var(--blue)}
+.sig-wrap .sig-hint{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+.review-group{border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:14px;background:#FAFBFC}
+.review-group h3{margin:0 0 12px;font-size:14px;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.5px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+.review-group h3 .edit{font-size:12px;color:var(--blue);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0;background:none;border:none;padding:0}
+.review-group h3 .edit:hover{text-decoration:underline}
+.review-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;font-size:14px}
+.review-list>div{display:flex;flex-direction:column;gap:2px}
+.review-list .lbl{font-size:12px;color:var(--muted);font-weight:500}
+.review-list .val{color:var(--navy);font-weight:500;word-break:break-word}
+.review-list .full{grid-column:1/-1}
+@media (max-width:640px){.review-list{grid-template-columns:1fr}}
+
+.attest-block{border-left:3px solid var(--blue);background:#FAFBFC;padding:16px 18px;border-radius:0 8px 8px 0;font-size:14px;color:var(--text);line-height:1.6;margin-bottom:16px}
+.attest-block strong{color:var(--navy)}
+.attest-block ul{margin:8px 0 0;padding-left:22px}
+.attest-block li{margin-bottom:6px}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(5,40,71,.55);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;animation:fadeIn .2s}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);max-width:440px;width:100%;padding:28px;box-shadow:var(--shadow-lg)}
+.modal h3{margin:0 0 10px;color:var(--navy);font-size:20px}
+.modal p{color:var(--muted);line-height:1.55;margin:0 0 22px;font-size:14.5px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
+@media (max-width:640px){.modal-actions{flex-direction:column-reverse}.modal-actions .btn{width:100%}}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:500;box-shadow:var(--shadow-lg);z-index:1100;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+
+.reveal{display:none;padding:18px;margin-top:14px;background:#FAFBFC;border:1px solid var(--border);border-radius:var(--radius-sm);animation:fadeIn .25s}
+.reveal.show{display:block}
+.reveal h4{margin:0 0 14px;font-size:14px;color:var(--navy);font-weight:700}
+
+.save-status{position:fixed;top:80px;right:20px;font-size:12px;color:var(--green-dark);font-weight:600;background:#fff;padding:6px 12px;border-radius:999px;box-shadow:var(--shadow-md);border:1px solid var(--border);opacity:0;transition:opacity .3s;z-index:50;display:flex;align-items:center;gap:6px}
+.save-status.show{opacity:1}
+.save-status svg{color:var(--green)}
+
+.thanks{text-align:center;padding:30px 20px}
+.thanks-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));margin:0 auto 20px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(10,61,107,.3)}
+.thanks h1{font-size:30px;color:var(--navy);margin:0 0 10px;font-weight:800}
+.thanks p{color:var(--muted);font-size:16px;max-width:520px;margin:0 auto 14px;line-height:1.55}
+.thanks .ref{display:inline-block;background:var(--blue-ghost);color:var(--navy);padding:8px 16px;border-radius:999px;font-weight:700;font-size:14px;margin-top:14px;letter-spacing:.5px}
+
+.field-group{border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;background:#FAFBFC;margin-bottom:16px}
+.field-group h4{margin:0 0 14px;font-size:15px;font-weight:700;color:var(--blue-dark)}
+
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.hidden{display:none!important}.text-muted{color:var(--muted)}.small{font-size:13px}
+
+.upload-wrap{margin-top:14px}
+.upload-file-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.upload-drop{display:flex;align-items:center;gap:14px;padding:18px 20px;border:1.5px dashed var(--border-strong);border-radius:var(--radius);background:#FAFBFC;cursor:pointer;transition:all .15s}
+.upload-drop:hover{border-color:var(--blue);background:var(--blue-ghost)}
+.upload-drop svg{color:var(--blue);flex-shrink:0}
+.upload-drop .upload-title{font-weight:600;color:var(--navy);font-size:15px}
+.upload-drop .upload-hint{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.upload-preview{display:none;margin-top:2px}
+.upload-preview.show{display:block}
+.upload-file{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid var(--green);background:#e0ecff;border-radius:var(--radius-sm)}
+.upload-file-ico{width:40px;height:40px;border-radius:8px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;font-weight:700}
+.upload-file-info{min-width:0;flex:1}
+.upload-file-name{font-weight:600;color:var(--navy);font-size:14px;word-break:break-all;line-height:1.3}
+.upload-file-size{font-size:12px;color:var(--muted);margin-top:2px}
+.upload-remove{background:none;border:none;color:var(--danger);font-weight:600;font-size:13px;cursor:pointer;padding:6px 10px;border-radius:4px;flex-shrink:0}
+.upload-remove:hover{background:rgba(214,69,69,.08)}
+
+.mem-step-header{margin-bottom:18px}
+.mem-step-kicker{display:inline-block;background:var(--blue-ghost);color:var(--blue-dark);padding:3px 11px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:8px}
+.mem-step-title{font-size:20px;font-weight:700;color:var(--navy);margin:0 0 10px;letter-spacing:-.01em;line-height:1.25}
+.mem-step-dots{display:flex;gap:6px;align-items:center}
+.mem-step-dot{flex:1;height:4px;border-radius:2px;background:var(--border)}
+.mem-step-dot.done{background:var(--green)}
+.mem-step-dot.active{background:linear-gradient(90deg,var(--blue),var(--green))}
+.mem-remove-link{background:none;border:none;color:var(--danger);font-size:13px;font-weight:600;cursor:pointer;padding:8px 12px;border-radius:4px;text-decoration:none}
+.mem-remove-link:hover{background:rgba(214,69,69,.08);text-decoration:underline}
+
+@media (max-width:640px){
+  .main{padding:22px 14px 60px}
+  .btn{padding:12px 22px;font-size:14.5px}
+  .save-status{top:68px;right:10px;font-size:11px}
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://www.onepointinsuranceagency.com" class="brand" target="_blank" rel="noopener">
+      <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69cefb46849c507b52617aaf.svg" alt="OnePoint Insurance Agency" class="brand-logo-img">
+      <span class="brand-divider"></span>
+      <span class="brand-tag">Health Coverage Quote</span>
+    </a>
+    <div class="header-contact">
+      <div class="header-secure">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Secure &amp; Confidential
+      </div>
+      <a href="tel:8888998117" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        888-899-8117
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="stepper-wrap">
+  <div class="stepper" id="stepper">
+    <div class="stepper-progress" id="stepperProgress"></div>
+    <div class="step" data-stage="0"><div class="step-dot">1</div><div class="step-label">Quick Quote</div></div>
+    <div class="step" data-stage="1"><div class="step-dot">2</div><div class="step-label">Your Details</div></div>
+    <div class="step" data-stage="2"><div class="step-dot">3</div><div class="step-label">Review &amp; Submit</div></div>
+  </div>
+</div>
+
+<div class="micro-progress"><div class="micro-progress-fill" id="microProgress"></div></div>
+
+<div class="save-status" id="saveStatus">
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span>Saved</span>
+</div>
+
+<main class="main">
+
+<section class="slide active" data-slide="0" data-stage="0">
+  <div class="card">
+    <div class="welcome">
+      <h1>Find affordable health coverage in minutes</h1>
+      <p class="lead">Answer a few questions for a personalized quote &mdash; no obligation. A licensed OnePoint agent will review and help you enroll.</p>
+      <div class="zip-box">
+        <label for="w_zip">Start by entering your ZIP code</label>
+        <input type="text" class="input" id="w_zip" inputmode="numeric" maxlength="5" placeholder="30022" autocomplete="postal-code">
+        <div class="error-msg" id="err_w_zip" style="display:none"></div>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>128-bit encrypted</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Licensed agents</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Under 5 minutes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-slide="plan_type" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Coverage</span>
+      <h2 class="slide-title">What type of plan are you looking for?</h2>
+      <p class="slide-subtitle">This helps us narrow down plan options for you.</p>
+    </div>
+    <div class="opt-row grid" data-radio="plan_type" data-auto>
+      <button type="button" class="opt-btn" data-val="Individual"><span class="circle"></span>Individual</button>
+      <button type="button" class="opt-btn" data-val="Family"><span class="circle"></span>Family</button>
+      <button type="button" class="opt-btn" data-val="Couple"><span class="circle"></span>Couple</button>
+      <button type="button" class="opt-btn" data-val="Child_Only"><span class="circle"></span>Child-only</button>
+      <button type="button" class="opt-btn" data-val="Medicare"><span class="circle"></span>Medicare supplement</button>
+      <button type="button" class="opt-btn" data-val="Other"><span class="circle"></span>Other / not sure</button>
+    </div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="1" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">About You</span>
+      <h2 class="slide-title">What's your date of birth?</h2>
+      <p class="slide-subtitle">We need this to check plan availability and pricing.</p>
+    </div>
+    <div class="form-grid"><div class="field full"><label for="p_dob">Date of birth</label><input type="date" class="input" id="p_dob"><div class="error-msg" id="err_p_dob" style="display:none"></div></div></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="2" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Household</span>
+      <h2 class="slide-title">How many people are in your household?</h2>
+      <p class="slide-subtitle">Include yourself, spouse/partner, and any dependents you'll claim on taxes.</p>
+    </div>
+    <div class="opt-row grid" data-radio="hh_size" data-auto><button type="button" class="opt-btn" data-val="1"><span class="circle"></span>Just me</button><button type="button" class="opt-btn" data-val="2"><span class="circle"></span>2 people</button><button type="button" class="opt-btn" data-val="3"><span class="circle"></span>3 people</button><button type="button" class="opt-btn" data-val="4"><span class="circle"></span>4 people</button><button type="button" class="opt-btn" data-val="5"><span class="circle"></span>5 people</button><button type="button" class="opt-btn" data-val="6+"><span class="circle"></span>6 or more</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="3" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Income</span>
+      <h2 class="slide-title">Annual Household Income</h2>
+      <p class="slide-subtitle">Include wages, self-employment income, Social Security, and investment income.</p>
+    </div>
+    <div class="opt-row grid" data-radio="hh_income" data-auto>
+      <button type="button" class="opt-btn" data-val="$0 - 20,000"><span class="circle"></span>$0 &ndash; 20,000</button>
+      <button type="button" class="opt-btn" data-val="$20,001 - 30,000"><span class="circle"></span>$20,001 &ndash; 30,000</button>
+      <button type="button" class="opt-btn" data-val="$30,001 - 40,000"><span class="circle"></span>$30,001 &ndash; 40,000</button>
+      <button type="button" class="opt-btn" data-val="$40,001 - 50,000"><span class="circle"></span>$40,001 &ndash; 50,000</button>
+      <button type="button" class="opt-btn" data-val="$50,001 - 60,000"><span class="circle"></span>$50,001 &ndash; 60,000</button>
+      <button type="button" class="opt-btn" data-val="$60,001 - 70,000"><span class="circle"></span>$60,001 &ndash; 70,000</button>
+      <button type="button" class="opt-btn" data-val="$70,001 - 80,000"><span class="circle"></span>$70,001 &ndash; 80,000</button>
+      <button type="button" class="opt-btn" data-val="$80,001 - 90,000"><span class="circle"></span>$80,001 &ndash; 90,000</button>
+      <button type="button" class="opt-btn" data-val="$90,001 - 100,000"><span class="circle"></span>$90,001 &ndash; 100,000</button>
+      <button type="button" class="opt-btn" data-val="$100,001 - 110,000"><span class="circle"></span>$100,001 &ndash; 110,000</button>
+      <button type="button" class="opt-btn" data-val="$110,001 - 120,000"><span class="circle"></span>$110,001 &ndash; 120,000</button>
+      <button type="button" class="opt-btn" data-val="$120,001 - 130,000"><span class="circle"></span>$120,001 &ndash; 130,000</button>
+      <button type="button" class="opt-btn" data-val="$130,001 - 140,000"><span class="circle"></span>$130,001 &ndash; 140,000</button>
+      <button type="button" class="opt-btn" data-val="$140,001 - 150,000"><span class="circle"></span>$140,001 &ndash; 150,000</button>
+      <button type="button" class="opt-btn" data-val="$150,001 - 160,000"><span class="circle"></span>$150,001 &ndash; 160,000</button>
+      <button type="button" class="opt-btn" data-val="$160,001 - 170,000"><span class="circle"></span>$160,001 &ndash; 170,000</button>
+      <button type="button" class="opt-btn" data-val="$170,001 - 180,000"><span class="circle"></span>$170,001 &ndash; 180,000</button>
+      <button type="button" class="opt-btn" data-val="$180,001 - 190,000"><span class="circle"></span>$180,001 &ndash; 190,000</button>
+      <button type="button" class="opt-btn" data-val="$190,001 - 200,000"><span class="circle"></span>$190,001 &ndash; 200,000</button>
+      <button type="button" class="opt-btn" data-val="$200,001 - 250,000+"><span class="circle"></span>$200,001 &ndash; 250,000+</button>
+    </div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="4" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">About You</span>
+      <h2 class="slide-title">What's your gender?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="p_sex" data-auto><button type="button" class="opt-btn" data-val="Male"><span class="circle"></span>Male</button><button type="button" class="opt-btn" data-val="Female"><span class="circle"></span>Female</button><button type="button" class="opt-btn" data-val="Nonbinary"><span class="circle"></span>Nonbinary</button><button type="button" class="opt-btn" data-val="Prefer_not"><span class="circle"></span>Prefer not to say</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="5" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Lifestyle</span>
+      <h2 class="slide-title">Do you use tobacco or nicotine?</h2>
+      <p class="slide-subtitle">4 or more times per week in the past 6 months. Affects plan pricing under Affordable Care Act regulations.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_tobacco" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="6" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Medical</span>
+      <h2 class="slide-title">Is anyone on this application pregnant?</h2>
+      <p class="slide-subtitle">This can affect eligibility for Medicaid and certain programs.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_pregnant" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button><button type="button" class="opt-btn" data-val="Prefer_not"><span class="circle"></span>Prefer not to say</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="7" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Employment</span>
+      <h2 class="slide-title">What's your employment situation?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="p_employment" data-auto><button type="button" class="opt-btn" data-val="Employed"><span class="circle"></span>Employed</button><button type="button" class="opt-btn" data-val="Self-Employed"><span class="circle"></span>Self-Employed</button><button type="button" class="opt-btn" data-val="Retired"><span class="circle"></span>Retired</button><button type="button" class="opt-btn" data-val="Student"><span class="circle"></span>Student</button><button type="button" class="opt-btn" data-val="Stay-at-Home Parent"><span class="circle"></span>Stay-at-Home Parent</button><button type="button" class="opt-btn" data-val="Not Currently Working"><span class="circle"></span>Not Currently Working</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="8" data-stage="0">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Timing</span>
+      <h2 class="slide-title">How soon do you want coverage?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="p_urgency" data-auto><button type="button" class="opt-btn" data-val="ASAP"><span class="circle"></span>As soon as possible</button><button type="button" class="opt-btn" data-val="30d"><span class="circle"></span>Within 30 days</button><button type="button" class="opt-btn" data-val="60d"><span class="circle"></span>Within 60 days</button><button type="button" class="opt-btn" data-val="Exploring"><span class="circle"></span>Just exploring</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="9" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">What's your name?</h2>
+      <p class="slide-subtitle">Use your legal name as it appears on your ID.</p>
+    </div>
+    <div class="form-grid"><div class="field"><label for="p_first">First name</label><input type="text" class="input" id="p_first"><div class="error-msg" id="err_p_first" style="display:none"></div></div><div class="field"><label for="p_middle">Middle</label><input type="text" class="input" id="p_middle" placeholder="Optional"><div class="error-msg" id="err_p_middle" style="display:none"></div></div><div class="field"><label for="p_last">Last name</label><input type="text" class="input" id="p_last"><div class="error-msg" id="err_p_last" style="display:none"></div></div></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="has_ssn" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">Do you have a Social Security Number?</h2>
+      <p class="slide-subtitle">SSN helps verify eligibility for subsidies and speeds enrollment. It\'s optional &mdash; you can continue without it.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_has_ssn" data-auto>
+      <button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button>
+      <button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button>
+    </div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="ssn_input" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">Enter your Social Security Number</h2>
+      <p class="slide-subtitle">Stored securely and used only for verification.</p>
+    </div>
+    <div class="form-grid"><div class="field full"><label for="p_ssn">SSN</label><input type="text" class="input" id="p_ssn" inputmode="numeric" placeholder="XXX-XX-XXXX" autocomplete="off"><div class="error-msg" id="err_p_ssn" style="display:none"></div></div></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="10" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">How can we reach you?</h2>
+      
+    </div>
+    <div class="form-grid"><div class="field"><label for="c_phone">Phone</label><input type="tel" class="input" id="c_phone" placeholder="(555) 555-5555"><div class="error-msg" id="err_c_phone" style="display:none"></div></div><div class="field full"><label for="c_email">Email address</label><input type="email" class="input" id="c_email" placeholder="you@email.com"><div class="error-msg" id="err_c_email" style="display:none"></div></div></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="11" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">What's your home address?</h2>
+      <p class="slide-subtitle">Physical address only &mdash; no P.O. Boxes.</p>
+    </div>
+    <div class="form-grid">
+      <div class="field full"><label for="a_street">Street address</label><input type="text" class="input" id="a_street" placeholder="123 Main Street"><div class="error-msg" id="err_a_street" style="display:none"></div></div>
+      <div class="field full"><label for="a_apt">Apt. / Ste. <span class="opt">(Optional)</span></label><input type="text" class="input" id="a_apt"></div>
+      <div class="field"><label for="a_state">State</label><select class="select" id="a_state" data-state-for="a"><option value="">Select state</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>District of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select><div class="error-msg" id="err_a_state" style="display:none"></div></div>
+      <div class="field"><label for="a_city">City</label><input type="text" class="input" id="a_city" list="a_city_list" placeholder="Start typing"><datalist id="a_city_list"></datalist><div class="error-msg" id="err_a_city" style="display:none"></div></div>
+      <div class="field"><label for="a_zip">ZIP code</label><input type="text" class="input" id="a_zip" inputmode="numeric" maxlength="5"><div class="error-msg" id="err_a_zip" style="display:none"></div></div>
+      <div class="field"><label for="a_county">County</label><select class="select" id="a_county" data-county-for="a"><option value="">Select state first</option></select><div class="error-msg" id="err_a_county" style="display:none"></div></div>
+    </div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="12" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">Is your mailing address the same as your home address?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="mail_same" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes, same</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No, different</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="13" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Your Info</span>
+      <h2 class="slide-title">What's your mailing address?</h2>
+      
+    </div>
+    <div class="form-grid">
+      <div class="field full"><label for="m_street">Street address</label><input type="text" class="input" id="m_street" placeholder="123 Main Street"><div class="error-msg" id="err_m_street" style="display:none"></div></div>
+      <div class="field full"><label for="m_apt">Apt. / Ste. <span class="opt">(Optional)</span></label><input type="text" class="input" id="m_apt"></div>
+      <div class="field"><label for="m_state">State</label><select class="select" id="m_state" data-state-for="m"><option value="">Select state</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>District of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select><div class="error-msg" id="err_m_state" style="display:none"></div></div>
+      <div class="field"><label for="m_city">City</label><input type="text" class="input" id="m_city" list="m_city_list" placeholder="Start typing"><datalist id="m_city_list"></datalist><div class="error-msg" id="err_m_city" style="display:none"></div></div>
+      <div class="field"><label for="m_zip">ZIP code</label><input type="text" class="input" id="m_zip" inputmode="numeric" maxlength="5"><div class="error-msg" id="err_m_zip" style="display:none"></div></div>
+      <div class="field"><label for="m_county">County</label><select class="select" id="m_county" data-county-for="m"><option value="">Select state first</option></select><div class="error-msg" id="err_m_county" style="display:none"></div></div>
+    </div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="14" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Household</span>
+      <h2 class="slide-title">What's your marital status?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="p_marital" data-auto><button type="button" class="opt-btn" data-val="Single"><span class="circle"></span>Single</button><button type="button" class="opt-btn" data-val="Married"><span class="circle"></span>Married</button><button type="button" class="opt-btn" data-val="Domestic_Partner"><span class="circle"></span>Domestic partner</button><button type="button" class="opt-btn" data-val="Divorced"><span class="circle"></span>Divorced</button><button type="button" class="opt-btn" data-val="Widowed"><span class="circle"></span>Widowed</button><button type="button" class="opt-btn" data-val="Separated"><span class="circle"></span>Separated</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="15" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Tax</span>
+      <h2 class="slide-title">What's your tax filing status?</h2>
+      <p class="slide-subtitle">How you'll file federal taxes this year &mdash; used to check subsidy eligibility.</p>
+    </div>
+    <div class="opt-row grid" data-radio="t_status" data-auto><button type="button" class="opt-btn" data-val="Single"><span class="circle"></span>Single</button><button type="button" class="opt-btn" data-val="MFJ"><span class="circle"></span>Married filing jointly</button><button type="button" class="opt-btn" data-val="MFS"><span class="circle"></span>Married filing separately</button><button type="button" class="opt-btn" data-val="HOH"><span class="circle"></span>Head of household</button><button type="button" class="opt-btn" data-val="QW"><span class="circle"></span>Qualifying widow(er)</button><button type="button" class="opt-btn" data-val="NoFile"><span class="circle"></span>Not planning to file</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="16" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Are you a US citizen or US national?</h2>
+      <p class="slide-subtitle">This helps determine program eligibility.</p>
+    </div>
+    <div class="opt-row grid" data-radio="e_citizen" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="17" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">How did you become a US citizen?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="e_citizen_type" data-auto><button type="button" class="opt-btn" data-val="US_Born"><span class="circle"></span>Born in the US</button><button type="button" class="opt-btn" data-val="Naturalized"><span class="circle"></span>Naturalized</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="18" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Do you have eligible immigration status?</h2>
+      <p class="slide-subtitle">Deferred Action for Childhood Arrivals (DACA) is not eligible. If unsure, choose "Prefer not to say" and a licensed agent will help.</p>
+    </div>
+    <div class="opt-row grid" data-radio="e_immigration" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes, I have eligible status</button><button type="button" class="opt-btn" data-val="Prefer_not"><span class="circle"></span>Prefer not to say</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="19" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Household</span>
+      <h2 class="slide-title">Add your household members</h2>
+      <p class="slide-subtitle">Include spouse/partner and any dependents you'll claim on taxes. If just applying for yourself, click Continue.</p>
+    </div>
+    <div class="member-list" id="memberList"></div>
+    <div class="add-row">
+      <button type="button" class="btn btn-ghost" id="addSpouseBtn">+ Add spouse</button>
+      <button type="button" class="btn btn-ghost" id="addPersonBtn">+ Add dependent</button>
+    </div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="20" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Income</span>
+      <h2 class="slide-title">Do you have any other income sources to report?</h2>
+      <p class="slide-subtitle">Things like rental income, Social Security, self-employment, etc. beyond what you already entered.</p>
+    </div>
+    <div class="opt-row grid" data-radio="inc_more" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes, add more</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No, that's everything</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="21" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Income</span>
+      <h2 class="slide-title">Add your income sources</h2>
+      
+    </div>
+    <div class="income-list" id="incomeList"></div>
+    <div class="form-grid" style="margin-top:12px">
+      <div class="field"><label for="inc_type">Income type</label><select class="select" id="inc_type"><option value="">Select</option><option>Job / Wages / Salary</option><option>Self-employment</option><option>Social Security</option><option>Unemployment</option><option>Retirement / Pension</option><option>Rental / Royalty</option><option>Alimony received</option><option>Investment / Interest / Dividends</option><option>Other</option></select></div>
+      <div class="field"><label for="inc_amount">Amount ($)</label><input type="number" class="input" id="inc_amount" min="0" step="1"></div>
+      <div class="field"><label for="inc_period">Per</label><select class="select" id="inc_period"><option>year</option><option>month</option><option>biweekly</option><option>weekly</option><option>hour</option></select></div>
+      <div class="field" style="justify-content:flex-end"><button type="button" class="btn btn-ghost" id="addIncomeBtn" style="margin-top:auto">+ Add income</button></div>
+    </div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="22" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Coverage</span>
+      <h2 class="slide-title">Have you had health coverage in the past 60 days?</h2>
+      <p class="slide-subtitle">Tells us whether you qualify for a Special Enrollment Period.</p>
+    </div>
+    <div class="opt-row grid" data-radio="c_prior" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="23" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Coverage</span>
+      <h2 class="slide-title">Did any of these happen in the past 60 days?</h2>
+      <p class="slide-subtitle">Qualifying life events can open a Special Enrollment Period outside open enrollment.</p>
+    </div>
+    <div class="opt-row grid" data-radio="c_sep" data-auto><button type="button" class="opt-btn" data-val="LostJob"><span class="circle"></span>Lost job-based coverage</button><button type="button" class="opt-btn" data-val="Married"><span class="circle"></span>Got married</button><button type="button" class="opt-btn" data-val="BabyAdopt"><span class="circle"></span>Had/adopted a baby</button><button type="button" class="opt-btn" data-val="Moved"><span class="circle"></span>Moved to a new area</button><button type="button" class="opt-btn" data-val="Divorce"><span class="circle"></span>Divorced or legally separated</button><button type="button" class="opt-btn" data-val="None"><span class="circle"></span>None of the above</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="24" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Are you a veteran or active duty military?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="p_veteran" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="25" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Have you received Advance Premium Tax Credits (APTC) before?</h2>
+      <p class="slide-subtitle">If yes, you'll need to reconcile on your tax return.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_aptc_prior" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button><button type="button" class="opt-btn" data-val="Unsure"><span class="circle"></span>Not sure</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="26" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Are you currently incarcerated?</h2>
+      <p class="slide-subtitle">Required by the Affordable Care Act for eligibility determination.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_incarc" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="27" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Eligibility</span>
+      <h2 class="slide-title">Are you American Indian or Alaska Native?</h2>
+      <p class="slide-subtitle">Members of federally recognized tribes may qualify for special enrollment and cost-sharing.</p>
+    </div>
+    <div class="opt-row grid" data-radio="p_native" data-auto><button type="button" class="opt-btn" data-val="Yes"><span class="circle"></span>Yes</button><button type="button" class="opt-btn" data-val="No"><span class="circle"></span>No</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="28" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Communication</span>
+      <h2 class="slide-title">How would you like to receive notices?</h2>
+      
+    </div>
+    <div class="opt-row grid" data-radio="c_delivery" data-auto><button type="button" class="opt-btn" data-val="Electronic"><span class="circle"></span>Electronically (email)</button><button type="button" class="opt-btn" data-val="Mail"><span class="circle"></span>US Mail</button></div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="addons" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Add-ons</span>
+      <h2 class="slide-title">Would you like dental or vision coverage?</h2>
+      <p class="slide-subtitle">Standalone dental and vision plans are often available alongside your health plan. Pick what you\'d like to hear about.</p>
+    </div>
+    <div class="opt-row grid" data-radio="c_addons" data-auto>
+      <button type="button" class="opt-btn" data-val="Both"><span class="circle"></span>Yes &mdash; Dental &amp; Vision</button>
+      <button type="button" class="opt-btn" data-val="Dental"><span class="circle"></span>Dental only</button>
+      <button type="button" class="opt-btn" data-val="Vision"><span class="circle"></span>Vision only</button>
+      <button type="button" class="opt-btn" data-val="None"><span class="circle"></span>Not interested</button>
+    </div>
+    <div class="nav-row back-only"><button type="button" class="btn btn-secondary" data-back>Back</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="29" data-stage="2">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Attestations</span>
+      <h2 class="slide-title">Quick final acknowledgments</h2>
+      
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <label class="check-opt" data-check="att_truthful"><span class="box"></span><span class="txt">I certify that the information provided is true and correct to the best of my knowledge.</span></label>
+      <label class="check-opt" data-check="att_changes"><span class="box"></span><span class="txt">I agree to notify OnePoint of any changes to my household, income, or coverage status within 30 days.</span></label>
+      <label class="check-opt" data-check="att_tcpa"><span class="box"></span><span class="txt">I consent to be contacted by OnePoint Insurance Agency at the phone and email provided, including by automated means.</span></label>
+    </div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="30" data-stage="2">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Signature</span>
+      <h2 class="slide-title">Electronic signature</h2>
+      <p class="slide-subtitle">Type your full legal name exactly as you entered it. This serves as your electronic signature.</p>
+    </div>
+    <div class="form-grid"><div class="field full"><label for="sig_name">Type your full legal name</label><input type="text" class="input" id="sig_name" placeholder="First Middle Last"><div class="error-msg" id="err_sig_name" style="display:none"></div></div></div>
+    <div class="field" style="margin-top:14px"><label>Signature date</label><div style="padding:10px 14px;background:var(--blue-ghost);border-radius:8px;font-weight:600;color:var(--navy)" id="sigDateDisplay">&mdash;</div></div>
+    <div class="field" style="margin-top:14px"><label>Signature preview</label><div style="padding:20px;background:#fff;border:1px solid var(--border);border-radius:8px;font-family:'Caveat',cursive;font-size:36px;color:var(--navy);min-height:60px" id="sigPreview">&nbsp;</div></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="31" data-stage="2">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Review</span>
+      <h2 class="slide-title">Review your application</h2>
+      <p class="slide-subtitle">Check everything and jump back to any section to edit. When ready, click Finalize to submit.</p>
+    </div>
+    <div id="reviewPanel"></div>
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" id="finalizeBtn">Finalize &amp; Submit</button></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="32" data-stage="2">
+  <div class="card" style="text-align:center;padding:60px 30px">
+    <div class="thanks-icon" style="background:linear-gradient(135deg,var(--blue),var(--navy));animation:spin 1.5s linear infinite">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    </div>
+    <h1 style="font-size:24px;color:var(--navy);margin:20px 0 8px">Submitting your application&hellip;</h1>
+    <p class="text-muted">Please don't close this window.</p>
+  </div>
+</section>
+
+<section class="slide" data-slide="33" data-stage="2">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker" style="background:#FFF7E6;color:#B07400">One more step</span>
+      <h2 class="slide-title">Please upload your documents</h2>
+      <p class="slide-subtitle">Your application has been received. To complete verification, we need a clear photo or scan of the documents below. A licensed agent will review within one business day.</p>
+    </div>
+    <div style="background:var(--blue-ghost);border-radius:10px;padding:16px;margin-bottom:18px">
+      <div style="font-weight:600;color:var(--navy);margin-bottom:4px">Reference: <span id="refNumberNC">OP-HL-0000</span></div>
+      <div class="small text-muted">Keep this reference handy when speaking to an agent.</div>
+    </div>
+    <div id="docUploadList"></div>
+    <div class="nav-row" style="margin-top:24px"><button type="button" class="btn btn-primary" id="uploadDoneBtn" style="width:100%">I'll upload later / Finish</button></div>
+    <div style="text-align:center;margin-top:12px"><a href="#" class="small text-muted" id="skipUploadLink">Skip and go back to home</a></div>
+  </div>
+</section>
+
+<section class="slide" data-slide="34" data-stage="2">
+  <div class="card">
+    <div class="thanks">
+      <div class="thanks-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h1>Application received!</h1>
+      <p>Thank you &mdash; your application has been submitted. A licensed OnePoint agent will reach out within one business day to review your options and help you enroll.</p>
+      <p class="text-muted small">A confirmation has been sent to the email on file. If you need immediate help, please call <a href="tel:8888998117">888-899-8117</a>.</p>
+      <div class="ref">Reference: <span id="refNumber">OP-HL-0000</span></div>
+      <div class="mt-24"><a href="https://www.onepointinsuranceagency.com" class="btn btn-secondary">Return to OnePoint</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="modal-overlay" id="resumeModal">
+  <div class="modal">
+    <h3>Welcome back!</h3>
+    <p>We saved your progress. Would you like to continue where you left off, or start a fresh application?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" id="startFreshBtn">Start fresh</button>
+      <button type="button" class="btn btn-primary" id="resumeBtn">Resume</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+(function(){
+'use strict';
+
+const STORAGE_KEY='op_health_v2';
+const WEBHOOK_URL='https://services.leadconnectorhq.com/hooks/HJjN5l584XeaaH5Qokj4/webhook-trigger/3533c0e7-126c-4eaa-abd3-367fa0fdf44b';
+const NOTIFY_EMAIL='marcel@onepointinsuranceagency.com';
+const SOURCE_NAME='OnePoint Health Quote Form v2';
+const AUTO_ADVANCE_DELAY=450;
+// ==== Address data & helpers ====
+const STATE_ABBR={"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"};
+const STATE_COUNTIES={"AL":["Autauga County","Baldwin County","Barbour County","Bibb County","Blount County","Bullock County","Butler County","Calhoun County","Chambers County","Cherokee County","Chilton County","Choctaw County","Clarke County","Clay County","Cleburne County","Coffee County","Colbert County","Conecuh County","Coosa County","Covington County","Crenshaw County","Cullman County","Dale County","Dallas County","Dekalb County","Elmore County","Escambia County","Etowah County","Fayette County","Franklin County","Geneva County","Greene County","Hale County","Henry County","Houston County","Jackson County","Jefferson County","Lamar County","Lauderdale County","Lawrence County","Lee County","Limestone County","Lowndes County","Macon County","Madison County","Marengo County","Marion County","Marshall County","Mobile County","Monroe County","Montgomery County","Morgan County","Perry County","Pickens County","Pike County","Randolph County","Russell County","Saint Clair County","Shelby County","St. Clair County","Sumter County","Talladega County","Tallapoosa County","Tuscaloosa County","Walker County","Washington County","Wilcox County","Winston County"],"AK":["Aleutians East Borough","Aleutians West Census Area","Anchorage Municipality","Bethel Census Area","Bristol Bay Borough","Copper River Census Area","Denali Borough","Dillingham Census Area","Fairbanks North Star Borough","Haines Borough","Hoonah-Angoon Census Area","Juneau","Juneau City and Borough","Kenai Peninsula Borough","Ketchikan Gateway Borough","Kodiak Island Borough","Kusilvak Census Area","Lake and Peninsula Borough","Matanuska-Susitna Borough","Nome Census Area","North Slope Borough","Northwest Arctic Borough","Petersburg Census Area","Prince of Wales-Hyder Census Area","Sitka","Sitka City and Borough","Skagway Municipality","Southeast Fairbanks Census Area","Valdez-Cordova Census Area","Wade Hampton Census Area","Wrangell","Wrangell City and Borough","Yakutat","Yakutat City and Borough","Yukon-Koyukuk Census Area"],"AZ":["Apache County","Cochise County","Coconino County","Gila County","Graham County","Greenlee County","La Paz County","Maricopa County","Mohave County","Navajo County","Pima County","Pinal County","Santa Cruz County","Yavapai County","Yuma County"],"AR":["Arkansas County","Ashley County","Baxter County","Benton County","Boone County","Bradley County","Calhoun County","Carroll County","Chicot County","Clark County","Clay County","Cleburne County","Cleveland County","Columbia County","Conway County","Craighead County","Crawford County","Crittenden County","Cross County","Dallas County","Desha County","Drew County","Faulkner County","Franklin County","Fulton County","Garland County","Grant County","Greene County","Hempstead County","Hot Spring County","Howard County","Independence County","Izard County","Jackson County","Jefferson County","Johnson County","Lafayette County","Lawrence County","Lee County","Lincoln County","Little River County","Logan County","Lonoke County","Madison County","Marion County","Miller County","Mississippi County","Monroe County","Montgomery County","Nevada County","Newton County","Ouachita County","Perry County","Phillips County","Pike County","Poinsett County","Polk County","Pope County","Prairie County","Pulaski County","Randolph County","Saint Francis County","Saline County","Scott County","Searcy County","Sebastian County","Sevier County","Sharp County","St. Francis County","Stone County","Union County","Van Buren County","Washington County","White County","Woodruff County","Yell County"],"CA":["Alameda County","Alpine County","Amador County","Butte County","Calaveras County","Colusa County","Contra Costa County","Del Norte County","El Dorado County","Fresno County","Glenn County","Humboldt County","Imperial County","Inyo County","Kern County","Kings County","Lake County","Lassen County","Los Angeles County","Madera County","Marin County","Mariposa County","Mendocino County","Merced County","Modoc County","Mono County","Monterey County","Napa County","Nevada County","Orange County","Placer County","Plumas County","Riverside County","Sacramento County","San Benito County","San Bernardino County","San Diego County","San Francisco County","San Joaquin County","San Luis Obispo County","San Mateo County","Santa Barbara County","Santa Clara County","Santa Cruz County","Shasta County","Sierra County","Siskiyou County","Solano County","Sonoma County","Stanislaus County","Sutter County","Tehama County","Trinity County","Tulare County","Tuolumne County","Ventura County","Yolo County","Yuba County"],"CO":["Adams County","Alamosa County","Arapahoe County","Archuleta County","Baca County","Bent County","Boulder County","Broomfield County","Chaffee County","Cheyenne County","Clear Creek County","Conejos County","Costilla County","Crowley County","Custer County","Delta County","Denver County","Dolores County","Douglas County","Eagle County","El Paso County","Elbert County","Fremont County","Garfield County","Gilpin County","Grand County","Gunnison County","Hinsdale County","Huerfano County","Jackson County","Jefferson County","Kiowa County","Kit Carson County","La Plata County","Lake County","Larimer County","Las Animas County","Lincoln County","Logan County","Mesa County","Mineral County","Moffat County","Montezuma County","Montrose County","Morgan County","Otero County","Ouray County","Park County","Phillips County","Pitkin County","Prowers County","Pueblo County","Rio Blanco County","Rio Grande County","Routt County","Saguache County","San Juan County","San Miguel County","Sedgwick County","Summit County","Teller County","Washington County","Weld County","Yuma County"],"CT":["Fairfield County","Hartford County","Litchfield County","Middlesex County","New Haven County","New London County","Tolland County","Windham County"],"DE":["Kent County","New Castle County","Sussex County"],"FL":["Alachua County","Baker County","Bay County","Bradford County","Brevard County","Broward County","Calhoun County","Charlotte County","Citrus County","Clay County","Collier County","Columbia County","Desoto County","Dixie County","Duval County","Escambia County","Flagler County","Franklin County","Gadsden County","Gilchrist County","Glades County","Gulf County","Hamilton County","Hardee County","Hendry County","Hernando County","Highlands County","Hillsborough County","Holmes County","Indian River County","Jackson County","Jefferson County","Lafayette County","Lake County","Lee County","Leon County","Levy County","Liberty County","Madison County","Manatee County","Marion County","Martin County","Miami-Dade County","Monroe County","Nassau County","Okaloosa County","Okeechobee County","Orange County","Osceola County","Palm Beach County","Pasco County","Pinellas County","Polk County","Putnam County","Saint Johns County","Saint Lucie County","Santa Rosa County","Sarasota County","Seminole County","St. Johns County","St. Lucie County","Sumter County","Suwannee County","Taylor County","Union County","Volusia County","Wakulla County","Walton County","Washington County"],"GA":["Appling County","Atkinson County","Bacon County","Baker County","Baldwin County","Banks County","Barrow County","Bartow County","Ben Hill County","Berrien County","Bibb County","Bleckley County","Brantley County","Brooks County","Bryan County","Bulloch County","Burke County","Butts County","Calhoun County","Camden County","Candler County","Carroll County","Catoosa County","Charlton County","Chatham County","Chattahoochee County","Chattooga County","Cherokee County","Clarke County","Clay County","Clayton County","Clinch County","Cobb County","Coffee County","Colquitt County","Columbia County","Cook County","Coweta County","Crawford County","Crisp County","Dade County","Dawson County","Decatur County","Dekalb County","Dodge County","Dooly County","Dougherty County","Douglas County","Early County","Echols County","Effingham County","Elbert County","Emanuel County","Evans County","Fannin County","Fayette County","Floyd County","Forsyth County","Franklin County","Fulton County","Gilmer County","Glascock County","Glynn County","Gordon County","Grady County","Greene County","Gwinnett County","Habersham County","Hall County","Hancock County","Haralson County","Harris County","Hart County","Heard County","Henry County","Houston County","Irwin County","Jackson County","Jasper County","Jeff Davis County","Jefferson County","Jenkins County","Johnson County","Jones County","Lamar County","Lanier County","Laurens County","Lee County","Liberty County","Lincoln County","Long County","Lowndes County","Lumpkin County","Macon County","Madison County","Marion County","Mcduffie County","Mcintosh County","Meriwether County","Miller County","Mitchell County","Monroe County","Montgomery County","Morgan County","Murray County","Muscogee County","Newton County","Oconee County","Oglethorpe County","Paulding County","Peach County","Pickens County","Pierce County","Pike County","Polk County","Pulaski County","Putnam County","Quitman County","Rabun County","Randolph County","Richmond County","Rockdale County","Schley County","Screven County","Seminole County","Spalding County","Stephens County","Stewart County","Sumter County","Talbot County","Taliaferro County","Tattnall County","Taylor County","Telfair County","Terrell County","Thomas County","Tift County","Toombs County","Towns County","Treutlen County","Troup County","Turner County","Twiggs County","Union County","Upson County","Walker County","Walton County","Ware County","Warren County","Washington County","Wayne County","Webster County","Wheeler County","White County","Whitfield County","Wilcox County","Wilkes County","Wilkinson County","Worth County"],"HI":["Hawaii County","Honolulu County","Kalawao County","Kauai County","Maui County"],"ID":["Ada County","Adams County","Bannock County","Bear Lake County","Benewah County","Bingham County","Blaine County","Boise County","Bonner County","Bonneville County","Boundary County","Butte County","Camas County","Canyon County","Caribou County","Cassia County","Clark County","Clearwater County","Custer County","Elmore County","Franklin County","Fremont County","Gem County","Gooding County","Idaho County","Jefferson County","Jerome County","Kootenai County","Latah County","Lemhi County","Lewis County","Lincoln County","Madison County","Minidoka County","Nez Perce County","Oneida County","Owyhee County","Payette County","Power County","Shoshone County","Teton County","Twin Falls County","Valley County","Washington County"],"IL":["Adams County","Alexander County","Bond County","Boone County","Brown County","Bureau County","Calhoun County","Carroll County","Cass County","Champaign County","Christian County","Clark County","Clay County","Clinton County","Coles County","Cook County","Crawford County","Cumberland County","De Witt County","Dekalb County","Douglas County","Dupage County","Edgar County","Edwards County","Effingham County","Fayette County","Ford County","Franklin County","Fulton County","Gallatin County","Greene County","Grundy County","Hamilton County","Hancock County","Hardin County","Henderson County","Henry County","Iroquois County","Jackson County","Jasper County","Jefferson County","Jersey County","Jo Daviess County","Johnson County","Kane County","Kankakee County","Kendall County","Knox County","Lake County","Lasalle County","Lawrence County","Lee County","Livingston County","Logan County","Macon County","Macoupin County","Madison County","Marion County","Marshall County","Mason County","Massac County","Mcdonough County","Mchenry County","Mclean County","Menard County","Mercer County","Monroe County","Montgomery County","Morgan County","Moultrie County","Ogle County","Peoria County","Perry County","Piatt County","Pike County","Pope County","Pulaski County","Putnam County","Randolph County","Richland County","Rock Island County","Saint Clair County","Saline County","Sangamon County","Schuyler County","Scott County","Shelby County","St. Clair County","Stark County","Stephenson County","Tazewell County","Union County","Vermilion County","Wabash County","Warren County","Washington County","Wayne County","White County","Whiteside County","Will County","Williamson County","Winnebago County","Woodford County"],"IN":["Adams County","Allen County","Bartholomew County","Benton County","Blackford County","Boone County","Brown County","Carroll County","Cass County","Clark County","Clay County","Clinton County","Crawford County","Daviess County","Dearborn County","Decatur County","Dekalb County","Delaware County","Dubois County","Elkhart County","Fayette County","Floyd County","Fountain County","Franklin County","Fulton County","Gibson County","Grant County","Greene County","Hamilton County","Hancock County","Harrison County","Hendricks County","Henry County","Howard County","Huntington County","Jackson County","Jasper County","Jay County","Jefferson County","Jennings County","Johnson County","Knox County","Kosciusko County","Lagrange County","Lake County","Laporte County","Lawrence County","Madison County","Marion County","Marshall County","Martin County","Miami County","Monroe County","Montgomery County","Morgan County","Newton County","Noble County","Ohio County","Orange County","Owen County","Parke County","Perry County","Pike County","Porter County","Posey County","Pulaski County","Putnam County","Randolph County","Ripley County","Rush County","Saint Joseph County","Scott County","Shelby County","Spencer County","St. Joseph County","Starke County","Steuben County","Sullivan County","Switzerland County","Tippecanoe County","Tipton County","Union County","Vanderburgh County","Vermillion County","Vigo County","Wabash County","Warren County","Warrick County","Washington County","Wayne County","Wells County","White County","Whitley County"],"IA":["Adair County","Adams County","Allamakee County","Appanoose County","Audubon County","Benton County","Black Hawk County","Boone County","Bremer County","Buchanan County","Buena Vista County","Butler County","Calhoun County","Carroll County","Cass County","Cedar County","Cerro Gordo County","Cherokee County","Chickasaw County","Clarke County","Clay County","Clayton County","Clinton County","Crawford County","Dallas County","Davis County","Decatur County","Delaware County","Des Moines County","Dickinson County","Dubuque County","Emmet County","Fayette County","Floyd County","Franklin County","Fremont County","Greene County","Grundy County","Guthrie County","Hamilton County","Hancock County","Hardin County","Harrison County","Henry County","Howard County","Humboldt County","Ida County","Iowa County","Jackson County","Jasper County","Jefferson County","Johnson County","Jones County","Keokuk County","Kossuth County","Lee County","Linn County","Louisa County","Lucas County","Lyon County","Madison County","Mahaska County","Marion County","Marshall County","Mills County","Mitchell County","Monona County","Monroe County","Montgomery County","Muscatine County","Obrien County","Osceola County","Page County","Palo Alto County","Plymouth County","Pocahontas County","Polk County","Pottawattamie County","Poweshiek County","Ringgold County","Sac County","Scott County","Shelby County","Sioux County","Story County","Tama County","Taylor County","Union County","Van Buren County","Wapello County","Warren County","Washington County","Wayne County","Webster County","Winnebago County","Winneshiek County","Woodbury County","Worth County","Wright County"],"KS":["Allen County","Anderson County","Atchison County","Barber County","Barton County","Bourbon County","Brown County","Butler County","Chase County","Chautauqua County","Cherokee County","Cheyenne County","Clark County","Clay County","Cloud County","Coffey County","Comanche County","Cowley County","Crawford County","Decatur County","Dickinson County","Doniphan County","Douglas County","Edwards County","Elk County","Ellis County","Ellsworth County","Finney County","Ford County","Franklin County","Geary County","Gove County","Graham County","Grant County","Gray County","Greeley County","Greenwood County","Hamilton County","Harper County","Harvey County","Haskell County","Hodgeman County","Jackson County","Jefferson County","Jewell County","Johnson County","Kearny County","Kingman County","Kiowa County","Labette County","Lane County","Leavenworth County","Lincoln County","Linn County","Logan County","Lyon County","Marion County","Marshall County","Mcpherson County","Meade County","Miami County","Mitchell County","Montgomery County","Morris County","Morton County","Nemaha County","Neosho County","Ness County","Norton County","Osage County","Osborne County","Ottawa County","Pawnee County","Phillips County","Pottawatomie County","Pratt County","Rawlins County","Reno County","Republic County","Rice County","Riley County","Rooks County","Rush County","Russell County","Saline County","Scott County","Sedgwick County","Seward County","Shawnee County","Sheridan County","Sherman County","Smith County","Stafford County","Stanton County","Stevens County","Sumner County","Thomas County","Trego County","Wabaunsee County","Wallace County","Washington County","Wichita County","Wilson County","Woodson County","Wyandotte County"],"KY":["Adair County","Allen County","Anderson County","Ballard County","Barren County","Bath County","Bell County","Boone County","Bourbon County","Boyd County","Boyle County","Bracken County","Breathitt County","Breckinridge County","Bullitt County","Butler County","Caldwell County","Calloway County","Campbell County","Carlisle County","Carroll County","Carter County","Casey County","Christian County","Clark County","Clay County","Clinton County","Crittenden County","Cumberland County","Daviess County","Edmonson County","Elliott County","Estill County","Fayette County","Fleming County","Floyd County","Franklin County","Fulton County","Gallatin County","Garrard County","Grant County","Graves County","Grayson County","Green County","Greenup County","Hancock County","Hardin County","Harlan County","Harrison County","Hart County","Henderson County","Henry County","Hickman County","Hopkins County","Jackson County","Jefferson County","Jessamine County","Johnson County","Kenton County","Knott County","Knox County","Larue County","Laurel County","Lawrence County","Lee County","Leslie County","Letcher County","Lewis County","Lincoln County","Livingston County","Logan County","Lyon County","Madison County","Magoffin County","Marion County","Marshall County","Martin County","Mason County","Mccracken County","Mccreary County","Mclean County","Meade County","Menifee County","Mercer County","Metcalfe County","Monroe County","Montgomery County","Morgan County","Muhlenberg County","Nelson County","Nicholas County","Ohio County","Oldham County","Owen County","Owsley County","Pendleton County","Perry County","Pike County","Powell County","Pulaski County","Robertson County","Rockcastle County","Rowan County","Russell County","Scott County","Shelby County","Simpson County","Spencer County","Taylor County","Todd County","Trigg County","Trimble County","Union County","Warren County","Washington County","Wayne County","Webster County","Whitley County","Wolfe County","Woodford County"],"LA":["Acadia Parish","Allen Parish","Ascension Parish","Assumption Parish","Avoyelles Parish","Beauregard Parish","Bienville Parish","Bossier Parish","Caddo Parish","Calcasieu Parish","Caldwell Parish","Cameron Parish","Catahoula Parish","Claiborne Parish","Concordia Parish","De Soto Parish","East Baton Rouge Parish","East Carroll Parish","East Feliciana Parish","Evangeline Parish","Franklin Parish","Grant Parish","Iberia Parish","Iberville Parish","Jackson Parish","Jefferson Davis Parish","Jefferson Parish","La Salle Parish","Lafayette Parish","Lafourche Parish","Lincoln Parish","Livingston Parish","Madison Parish","Morehouse Parish","Natchitoches Parish","Orleans Parish","Ouachita Parish","Plaquemines Parish","Pointe Coupee Parish","Rapides Parish","Red River Parish","Richland Parish","Sabine Parish","Saint Bernard Parish","Saint Charles Parish","Saint Helena Parish","Saint James Parish","Saint John the Baptist Parish","Saint Landry Parish","Saint Martin Parish","Saint Mary Parish","Saint Tammany Parish","St. Bernard Parish","St. Charles Parish","St. Helena Parish","St. James Parish","St. John the Baptist Parish","St. Landry Parish","St. Martin Parish","St. Mary Parish","St. Tammany Parish","Tangipahoa Parish","Tensas Parish","Terrebonne Parish","Union Parish","Vermilion Parish","Vernon Parish","Washington Parish","Webster Parish","West Baton Rouge Parish","West Carroll Parish","West Feliciana Parish","Winn Parish"],"ME":["Androscoggin County","Aroostook County","Cumberland County","Franklin County","Hancock County","Kennebec County","Knox County","Lincoln County","Oxford County","Penobscot County","Piscataquis County","Sagadahoc County","Somerset County","Waldo County","Washington County","York County"],"MD":["Allegany County","Anne Arundel County","Baltimore City","Baltimore County","Calvert County","Caroline County","Carroll County","Cecil County","Charles County","Dorchester County","Frederick County","Garrett County","Harford County","Howard County","Kent County","Montgomery County","Prince Georges County","Queen Annes County","Saint Marys County","Somerset County","St. Marys County","Talbot County","Washington County","Wicomico County","Worcester County"],"MA":["Barnstable County","Berkshire County","Bristol County","Dukes County","Essex County","Franklin County","Hampden County","Hampshire County","Middlesex County","Nantucket County","Norfolk County","Plymouth County","Suffolk County","Worcester County"],"MI":["Alcona County","Alger County","Allegan County","Alpena County","Antrim County","Arenac County","Baraga County","Barry County","Bay County","Benzie County","Berrien County","Branch County","Calhoun County","Cass County","Charlevoix County","Cheboygan County","Chippewa County","Clare County","Clinton County","Crawford County","Delta County","Dickinson County","Eaton County","Emmet County","Genesee County","Gladwin County","Gogebic County","Grand Traverse County","Gratiot County","Hillsdale County","Houghton County","Huron County","Ingham County","Ionia County","Iosco County","Iron County","Isabella County","Jackson County","Kalamazoo County","Kalkaska County","Kent County","Keweenaw County","Lake County","Lapeer County","Leelanau County","Lenawee County","Livingston County","Luce County","Mackinac County","Macomb County","Manistee County","Marquette County","Mason County","Mecosta County","Menominee County","Midland County","Missaukee County","Monroe County","Montcalm County","Montmorency County","Muskegon County","Newaygo County","Oakland County","Oceana County","Ogemaw County","Ontonagon County","Osceola County","Oscoda County","Otsego County","Ottawa County","Presque Isle County","Roscommon County","Saginaw County","Saint Clair County","Saint Joseph County","Sanilac County","Schoolcraft County","Shiawassee County","St. Clair County","St. Joseph County","Tuscola County","Van Buren County","Washtenaw County","Wayne County","Wexford County"],"MN":["Aitkin County","Anoka County","Becker County","Beltrami County","Benton County","Big Stone County","Blue Earth County","Brown County","Carlton County","Carver County","Cass County","Chippewa County","Chisago County","Clay County","Clearwater County","Cook County","Cottonwood County","Crow Wing County","Dakota County","Dodge County","Douglas County","Faribault County","Fillmore County","Freeborn County","Goodhue County","Grant County","Hennepin County","Houston County","Hubbard County","Isanti County","Itasca County","Jackson County","Kanabec County","Kandiyohi County","Kittson County","Koochiching County","Lac Qui Parle County","Lake County","Lake of the Woods County","Le Sueur County","Lincoln County","Lyon County","Mahnomen County","Marshall County","Martin County","Mcleod County","Meeker County","Mille Lacs County","Morrison County","Mower County","Murray County","Nicollet County","Nobles County","Norman County","Olmsted County","Otter Tail County","Pennington County","Pine County","Pipestone County","Polk County","Pope County","Ramsey County","Red Lake County","Redwood County","Renville County","Rice County","Rock County","Roseau County","Saint Louis County","Scott County","Sherburne County","Sibley County","St. Louis County","Stearns County","Steele County","Stevens County","Swift County","Todd County","Traverse County","Wabasha County","Wadena County","Waseca County","Washington County","Watonwan County","Wilkin County","Winona County","Wright County","Yellow Medicine County"],"MS":["Adams County","Alcorn County","Amite County","Attala County","Benton County","Bolivar County","Calhoun County","Carroll County","Chickasaw County","Choctaw County","Claiborne County","Clarke County","Clay County","Coahoma County","Copiah County","Covington County","Desoto County","Forrest County","Franklin County","George County","Greene County","Grenada County","Hancock County","Harrison County","Hinds County","Holmes County","Humphreys County","Issaquena County","Itawamba County","Jackson County","Jasper County","Jefferson County","Jefferson Davis County","Jones County","Kemper County","Lafayette County","Lamar County","Lauderdale County","Lawrence County","Leake County","Lee County","Leflore County","Lincoln County","Lowndes County","Madison County","Marion County","Marshall County","Monroe County","Montgomery County","Neshoba County","Newton County","Noxubee County","Oktibbeha County","Panola County","Pearl River County","Perry County","Pike County","Pontotoc County","Prentiss County","Quitman County","Rankin County","Scott County","Sharkey County","Simpson County","Smith County","Stone County","Sunflower County","Tallahatchie County","Tate County","Tippah County","Tishomingo County","Tunica County","Union County","Walthall County","Warren County","Washington County","Wayne County","Webster County","Wilkinson County","Winston County","Yalobusha County","Yazoo County"],"MO":["Adair County","Andrew County","Atchison County","Audrain County","Barry County","Barton County","Bates County","Benton County","Bollinger County","Boone County","Buchanan County","Butler County","Caldwell County","Callaway County","Camden County","Cape Girardeau County","Carroll County","Carter County","Cass County","Cedar County","Chariton County","Christian County","Clark County","Clay County","Clinton County","Cole County","Cooper County","Crawford County","Dade County","Dallas County","Daviess County","Dekalb County","Dent County","Douglas County","Dunklin County","Franklin County","Gasconade County","Gentry County","Greene County","Grundy County","Harrison County","Henry County","Hickory County","Holt County","Howard County","Howell County","Iron County","Jackson County","Jasper County","Jefferson County","Johnson County","Knox County","Laclede County","Lafayette County","Lawrence County","Lewis County","Lincoln County","Linn County","Livingston County","Macon County","Madison County","Maries County","Marion County","Mcdonald County","Mercer County","Miller County","Mississippi County","Moniteau County","Monroe County","Montgomery County","Morgan County","New Madrid County","Newton County","Nodaway County","Oregon County","Osage County","Ozark County","Pemiscot County","Perry County","Pettis County","Phelps County","Pike County","Platte County","Polk County","Pulaski County","Putnam County","Ralls County","Randolph County","Ray County","Reynolds County","Ripley County","Saint Charles County","Saint Clair County","Saint Francois County","Saint Louis City","Saint Louis County","Sainte Genevieve County","Saline County","Schuyler County","Scotland County","Scott County","Shannon County","Shelby County","St. Charles County","St. Clair County","St. Francois County","St. Louis City","St. Louis County","Ste. Genevieve County","Stoddard County","Stone County","Sullivan County","Taney County","Texas County","Vernon County","Warren County","Washington County","Wayne County","Webster County","Worth County","Wright County"],"MT":["Beaverhead County","Big Horn County","Blaine County","Broadwater County","Carbon County","Carter County","Cascade County","Chouteau County","Custer County","Daniels County","Dawson County","Deer Lodge County","Fallon County","Fergus County","Flathead County","Gallatin County","Garfield County","Glacier County","Golden Valley County","Granite County","Hill County","Jefferson County","Judith Basin County","Lake County","Lewis and Clark County","Liberty County","Lincoln County","Madison County","Mccone County","Meagher County","Mineral County","Missoula County","Musselshell County","Park County","Petroleum County","Phillips County","Pondera County","Powder River County","Powell County","Prairie County","Ravalli County","Richland County","Roosevelt County","Rosebud County","Sanders County","Sheridan County","Silver Bow County","Stillwater County","Sweet Grass County","Teton County","Toole County","Treasure County","Valley County","Wheatland County","Wibaux County","Yellowstone County"],"NE":["Adams County","Antelope County","Arthur County","Banner County","Blaine County","Boone County","Box Butte County","Boyd County","Brown County","Buffalo County","Burt County","Butler County","Cass County","Cedar County","Chase County","Cherry County","Cheyenne County","Clay County","Colfax County","Cuming County","Custer County","Dakota County","Dawes County","Dawson County","Deuel County","Dixon County","Dodge County","Douglas County","Dundy County","Fillmore County","Franklin County","Frontier County","Furnas County","Gage County","Garden County","Garfield County","Gosper County","Grant County","Greeley County","Hall County","Hamilton County","Harlan County","Hayes County","Hitchcock County","Holt County","Hooker County","Howard County","Jefferson County","Johnson County","Kearney County","Keith County","Keya Paha County","Kimball County","Knox County","Lancaster County","Lincoln County","Logan County","Loup County","Madison County","Mcpherson County","Merrick County","Morrill County","Nance County","Nemaha County","Nuckolls County","Otoe County","Pawnee County","Perkins County","Phelps County","Pierce County","Platte County","Polk County","Red Willow County","Richardson County","Rock County","Saline County","Sarpy County","Saunders County","Scotts Bluff County","Seward County","Sheridan County","Sherman County","Sioux County","Stanton County","Thayer County","Thomas County","Thurston County","Valley County","Washington County","Wayne County","Webster County","Wheeler County","York County"],"NV":["Carson","Carson City","Churchill County","Clark County","Douglas County","Elko County","Esmeralda County","Eureka County","Humboldt County","Lander County","Lincoln County","Lyon County","Mineral County","Nye County","Pershing County","Storey County","Washoe County","White Pine County"],"NH":["Belknap County","Carroll County","Cheshire County","Coos County","Grafton County","Hillsborough County","Merrimack County","Rockingham County","Strafford County","Sullivan County"],"NJ":["Atlantic County","Bergen County","Burlington County","Camden County","Cape May County","Cumberland County","Essex County","Gloucester County","Hudson County","Hunterdon County","Mercer County","Middlesex County","Monmouth County","Morris County","Ocean County","Passaic County","Salem County","Somerset County","Sussex County","Union County","Warren County"],"NM":["Bernalillo County","Catron County","Chaves County","Cibola County","Colfax County","Curry County","De Baca County","Dona Ana County","Eddy County","Grant County","Guadalupe County","Harding County","Hidalgo County","Lea County","Lincoln County","Los Alamos County","Luna County","Mckinley County","Mora County","Otero County","Quay County","Rio Arriba County","Roosevelt County","San Juan County","San Miguel County","Sandoval County","Santa Fe County","Sierra County","Socorro County","Taos County","Torrance County","Union County","Valencia County"],"NY":["Albany County","Allegany County","Bronx County","Brooklyn Borough","Broome County","Cattaraugus County","Cayuga County","Chautauqua County","Chemung County","Chenango County","Clinton County","Columbia County","Cortland County","Delaware County","Dutchess County","Erie County","Essex County","Franklin County","Fulton County","Genesee County","Greene County","Hamilton County","Herkimer County","Jefferson County","Kings County","Lewis County","Livingston County","Madison County","Manhattan Borough","Monroe County","Montgomery County","Nassau County","New York County","Niagara County","Oneida County","Onondaga County","Ontario County","Orange County","Orleans County","Oswego County","Otsego County","Putnam County","Queens County","Rensselaer County","Richmond County","Rockland County","Saint Lawrence County","Saratoga County","Schenectady County","Schoharie County","Schuyler County","Seneca County","St. Lawrence County","Staten Island Borough","Steuben County","Suffolk County","Sullivan County","The Bronx Borough","Tioga County","Tompkins County","Ulster County","Warren County","Washington County","Wayne County","Westchester County","Wyoming County","Yates County"],"NC":["Alamance County","Alexander County","Alleghany County","Anson County","Ashe County","Avery County","Beaufort County","Bertie County","Bladen County","Brunswick County","Buncombe County","Burke County","Cabarrus County","Caldwell County","Camden County","Carteret County","Caswell County","Catawba County","Chatham County","Cherokee County","Chowan County","Clay County","Cleveland County","Columbus County","Craven County","Cumberland County","Currituck County","Dare County","Davidson County","Davie County","Duplin County","Durham County","Edgecombe County","Forsyth County","Franklin County","Gaston County","Gates County","Graham County","Granville County","Greene County","Guilford County","Halifax County","Harnett County","Haywood County","Henderson County","Hertford County","Hoke County","Hyde County","Iredell County","Jackson County","Johnston County","Jones County","Lee County","Lenoir County","Lincoln County","Macon County","Madison County","Martin County","Mcdowell County","Mecklenburg County","Mitchell County","Montgomery County","Moore County","Nash County","New Hanover County","Northampton County","Onslow County","Orange County","Pamlico County","Pasquotank County","Pender County","Perquimans County","Person County","Pitt County","Polk County","Randolph County","Richmond County","Robeson County","Rockingham County","Rowan County","Rutherford County","Sampson County","Scotland County","Stanly County","Stokes County","Surry County","Swain County","Transylvania County","Tyrrell County","Union County","Vance County","Wake County","Warren County","Washington County","Watauga County","Wayne County","Wilkes County","Wilson County","Yadkin County","Yancey County"],"ND":["Adams County","Barnes County","Benson County","Billings County","Bottineau County","Bowman County","Burke County","Burleigh County","Cass County","Cavalier County","Dickey County","Divide County","Dunn County","Eddy County","Emmons County","Foster County","Golden Valley County","Grand Forks County","Grant County","Griggs County","Hettinger County","Kidder County","Lamoure County","Logan County","Mchenry County","Mcintosh County","Mckenzie County","Mclean County","Mercer County","Morton County","Mountrail County","Nelson County","Oliver County","Pembina County","Pierce County","Ramsey County","Ransom County","Renville County","Richland County","Rolette County","Sargent County","Sheridan County","Sioux County","Slope County","Stark County","Steele County","Stutsman County","Towner County","Traill County","Walsh County","Ward County","Wells County","Williams County"],"OH":["Adams County","Allen County","Ashland County","Ashtabula County","Athens County","Auglaize County","Belmont County","Brown County","Butler County","Carroll County","Champaign County","Clark County","Clermont County","Clinton County","Columbiana County","Coshocton County","Crawford County","Cuyahoga County","Darke County","Defiance County","Delaware County","Erie County","Fairfield County","Fayette County","Franklin County","Fulton County","Gallia County","Geauga County","Greene County","Guernsey County","Hamilton County","Hancock County","Hardin County","Harrison County","Henry County","Highland County","Hocking County","Holmes County","Huron County","Jackson County","Jefferson County","Knox County","Lake County","Lawrence County","Licking County","Logan County","Lorain County","Lucas County","Madison County","Mahoning County","Marion County","Medina County","Meigs County","Mercer County","Miami County","Monroe County","Montgomery County","Morgan County","Morrow County","Muskingum County","Noble County","Ottawa County","Paulding County","Perry County","Pickaway County","Pike County","Portage County","Preble County","Putnam County","Richland County","Ross County","Sandusky County","Scioto County","Seneca County","Shelby County","Stark County","Summit County","Trumbull County","Tuscarawas County","Union County","Van Wert County","Vinton County","Warren County","Washington County","Wayne County","Williams County","Wood County","Wyandot County"],"OK":["Adair County","Alfalfa County","Atoka County","Beaver County","Beckham County","Blaine County","Bryan County","Caddo County","Canadian County","Carter County","Cherokee County","Choctaw County","Cimarron County","Cleveland County","Coal County","Comanche County","Cotton County","Craig County","Creek County","Custer County","Delaware County","Dewey County","Ellis County","Garfield County","Garvin County","Grady County","Grant County","Greer County","Harmon County","Harper County","Haskell County","Hughes County","Jackson County","Jefferson County","Johnston County","Kay County","Kingfisher County","Kiowa County","Latimer County","Le Flore County","Lincoln County","Logan County","Love County","Major County","Marshall County","Mayes County","Mcclain County","Mccurtain County","Mcintosh County","Murray County","Muskogee County","Noble County","Nowata County","Okfuskee County","Oklahoma County","Okmulgee County","Osage County","Ottawa County","Pawnee County","Payne County","Pittsburg County","Pontotoc County","Pottawatomie County","Pushmataha County","Roger Mills County","Rogers County","Seminole County","Sequoyah County","Stephens County","Texas County","Tillman County","Tulsa County","Wagoner County","Washington County","Washita County","Woods County","Woodward County"],"OR":["Baker County","Benton County","Clackamas County","Clatsop County","Columbia County","Coos County","Crook County","Curry County","Deschutes County","Douglas County","Gilliam County","Grant County","Harney County","Hood River County","Jackson County","Jefferson County","Josephine County","Klamath County","Lake County","Lane County","Lincoln County","Linn County","Malheur County","Marion County","Morrow County","Multnomah County","Polk County","Sherman County","Tillamook County","Umatilla County","Union County","Wallowa County","Wasco County","Washington County","Wheeler County","Yamhill County"],"PA":["Adams County","Allegheny County","Armstrong County","Beaver County","Bedford County","Berks County","Blair County","Bradford County","Bucks County","Butler County","Cambria County","Cameron County","Carbon County","Centre County","Chester County","Clarion County","Clearfield County","Clinton County","Columbia County","Crawford County","Cumberland County","Dauphin County","Delaware County","Elk County","Erie County","Fayette County","Forest County","Franklin County","Fulton County","Greene County","Huntingdon County","Indiana County","Jefferson County","Juniata County","Lackawanna County","Lancaster County","Lawrence County","Lebanon County","Lehigh County","Luzerne County","Lycoming County","Mckean County","Mercer County","Mifflin County","Monroe County","Montgomery County","Montour County","Northampton County","Northumberland County","Perry County","Philadelphia County","Pike County","Potter County","Schuylkill County","Snyder County","Somerset County","Sullivan County","Susquehanna County","Tioga County","Union County","Venango County","Warren County","Washington County","Wayne County","Westmoreland County","Wyoming County","York County"],"RI":["Bristol County","Kent County","Newport County","Providence County","Washington County"],"SC":["Abbeville County","Aiken County","Allendale County","Anderson County","Bamberg County","Barnwell County","Beaufort County","Berkeley County","Calhoun County","Charleston County","Cherokee County","Chester County","Chesterfield County","Clarendon County","Colleton County","Darlington County","Dillon County","Dorchester County","Edgefield County","Fairfield County","Florence County","Georgetown County","Greenville County","Greenwood County","Hampton County","Horry County","Jasper County","Kershaw County","Lancaster County","Laurens County","Lee County","Lexington County","Marion County","Marlboro County","Mccormick County","Newberry County","Oconee County","Orangeburg County","Pickens County","Richland County","Saluda County","Spartanburg County","Sumter County","Union County","Williamsburg County","York County"],"SD":["Aurora County","Beadle County","Bennett County","Bon Homme County","Brookings County","Brown County","Brule County","Buffalo County","Butte County","Campbell County","Charles Mix County","Clark County","Clay County","Codington County","Corson County","Custer County","Davison County","Day County","Deuel County","Dewey County","Douglas County","Edmunds County","Fall River County","Faulk County","Grant County","Gregory County","Haakon County","Hamlin County","Hand County","Hanson County","Harding County","Hughes County","Hutchinson County","Hyde County","Jackson County","Jerauld County","Jones County","Kingsbury County","Lake County","Lawrence County","Lincoln County","Lyman County","Marshall County","Mccook County","Mcpherson County","Meade County","Mellette County","Miner County","Minnehaha County","Moody County","Oglala Lakota County","Pennington County","Perkins County","Potter County","Roberts County","Sanborn County","Shannon County","Spink County","Stanley County","Sully County","Todd County","Tripp County","Turner County","Union County","Walworth County","Yankton County","Ziebach County"],"TN":["Anderson County","Bedford County","Benton County","Bledsoe County","Blount County","Bradley County","Campbell County","Cannon County","Carroll County","Carter County","Cheatham County","Chester County","Claiborne County","Clay County","Cocke County","Coffee County","Crockett County","Cumberland County","Davidson County","Decatur County","Dekalb County","Dickson County","Dyer County","Fayette County","Fentress County","Franklin County","Gibson County","Giles County","Grainger County","Greene County","Grundy County","Hamblen County","Hamilton County","Hancock County","Hardeman County","Hardin County","Hawkins County","Haywood County","Henderson County","Henry County","Hickman County","Houston County","Humphreys County","Jackson County","Jefferson County","Johnson County","Knox County","Lake County","Lauderdale County","Lawrence County","Lewis County","Lincoln County","Loudon County","Macon County","Madison County","Marion County","Marshall County","Maury County","Mcminn County","Mcnairy County","Meigs County","Monroe County","Montgomery County","Moore County","Morgan County","Obion County","Overton County","Perry County","Pickett County","Polk County","Putnam County","Rhea County","Roane County","Robertson County","Rutherford County","Scott County","Sequatchie County","Sevier County","Shelby County","Smith County","Stewart County","Sullivan County","Sumner County","Tipton County","Trousdale County","Unicoi County","Union County","Van Buren County","Warren County","Washington County","Wayne County","Weakley County","White County","Williamson County","Wilson County"],"TX":["Anderson County","Andrews County","Angelina County","Aransas County","Archer County","Armstrong County","Atascosa County","Austin County","Bailey County","Bandera County","Bastrop County","Baylor County","Bee County","Bell County","Bexar County","Blanco County","Borden County","Bosque County","Bowie County","Brazoria County","Brazos County","Brewster County","Briscoe County","Brooks County","Brown County","Burleson County","Burnet County","Caldwell County","Calhoun County","Callahan County","Cameron County","Camp County","Carson County","Cass County","Castro County","Chambers County","Cherokee County","Childress County","Clay County","Cochran County","Coke County","Coleman County","Collin County","Collingsworth County","Colorado County","Comal County","Comanche County","Concho County","Cooke County","Coryell County","Cottle County","Crane County","Crockett County","Crosby County","Culberson County","Dallam County","Dallas County","Dawson County","Deaf Smith County","Delta County","Denton County","Dewitt County","Dickens County","Dimmit County","Donley County","Duval County","Eastland County","Ector County","Edwards County","El Paso County","Ellis County","Erath County","Falls County","Fannin County","Fayette County","Fisher County","Floyd County","Foard County","Fort Bend County","Franklin County","Freestone County","Frio County","Ft. Bend County","Gaines County","Galveston County","Garza County","Gillespie County","Glasscock County","Goliad County","Gonzales County","Gray County","Grayson County","Gregg County","Grimes County","Guadalupe County","Hale County","Hall County","Hamilton County","Hansford County","Hardeman County","Hardin County","Harris County","Harrison County","Hartley County","Haskell County","Hays County","Hemphill County","Henderson County","Hidalgo County","Hill County","Hockley County","Hood County","Hopkins County","Houston County","Howard County","Hudspeth County","Hunt County","Hutchinson County","Irion County","Jack County","Jackson County","Jasper County","Jeff Davis County","Jefferson County","Jim Hogg County","Jim Wells County","Johnson County","Jones County","Karnes County","Kaufman County","Kendall County","Kenedy County","Kent County","Kerr County","Kimble County","King County","Kinney County","Kleberg County","Knox County","La Salle County","Lamar County","Lamb County","Lampasas County","Lavaca County","Lee County","Leon County","Liberty County","Limestone County","Lipscomb County","Live Oak County","Llano County","Loving County","Lubbock County","Lynn County","Madison County","Marion County","Martin County","Mason County","Matagorda County","Maverick County","Mcculloch County","Mclennan County","Mcmullen County","Medina County","Menard County","Midland County","Milam County","Mills County","Mitchell County","Montague County","Montgomery County","Moore County","Morris County","Motley County","Nacogdoches County","Navarro County","Newton County","Nolan County","Nueces County","Ochiltree County","Oldham County","Orange County","Palo Pinto County","Panola County","Parker County","Parmer County","Pecos County","Polk County","Potter County","Presidio County","Rains County","Randall County","Reagan County","Real County","Red River County","Reeves County","Refugio County","Roberts County","Robertson County","Rockwall County","Runnels County","Rusk County","Sabine County","San Augustine County","San Jacinto County","San Patricio County","San Saba County","Schleicher County","Scurry County","Shackelford County","Shelby County","Sherman County","Smith County","Somervell County","Starr County","Stephens County","Sterling County","Stonewall County","Sutton County","Swisher County","Tarrant County","Taylor County","Terrell County","Terry County","Throckmorton County","Titus County","Tom Green County","Travis County","Trinity County","Tyler County","Upshur County","Upton County","Uvalde County","Val Verde County","Van Zandt County","Victoria County","Walker County","Waller County","Ward County","Washington County","Webb County","Wharton County","Wheeler County","Wichita County","Wilbarger County","Willacy County","Williamson County","Wilson County","Winkler County","Wise County","Wood County","Yoakum County","Young County","Zapata County","Zavala County"],"UT":["Beaver County","Box Elder County","Cache County","Carbon County","Daggett County","Davis County","Duchesne County","Emery County","Garfield County","Grand County","Iron County","Juab County","Kane County","Millard County","Morgan County","Piute County","Rich County","Salt Lake County","San Juan County","Sanpete County","Sevier County","Summit County","Tooele County","Uintah County","Utah County","Wasatch County","Washington County","Wayne County","Weber County"],"VT":["Addison County","Bennington County","Caledonia County","Chittenden County","Essex County","Franklin County","Grand Isle County","Lamoille County","Orange County","Orleans County","Rutland County","Washington County","Windham County","Windsor County"],"VA":["Accomack County","Albemarle County","Alexandria","Alexandria City","Alleghany County","Amelia County","Amherst County","Appomattox County","Arlington County","Augusta County","Bath County","Bedford City","Bedford County","Bland County","Botetourt County","Bristol","Bristol City","Brunswick County","Buchanan County","Buckingham County","Buena Vista","Buena Vista City","Campbell County","Caroline County","Carroll County","Charles City County","Charlotte County","Charlottesville","Charlottesville City","Chesapeake","Chesapeake City","Chesterfield County","Clarke County","Colonial Heights","Colonial Heights City","Covington","Covington City","Craig County","Culpeper County","Cumberland County","Danville","Danville City","Dickenson County","Dinwiddie County","Emporia","Emporia City","Essex County","Fairfax City","Fairfax County","Falls Church","Falls Church City","Fauquier County","Floyd County","Fluvanna County","Franklin City","Franklin County","Frederick County","Fredericksburg","Fredericksburg City","Galax","Galax City","Giles County","Gloucester County","Goochland County","Grayson County","Greene County","Greensville County","Halifax County","Hampton","Hampton City","Hanover County","Harrisonburg","Harrisonburg City","Henrico County","Henry County","Highland County","Hopewell","Hopewell City","Isle of Wight County","James City County","King George County","King William County","King and Queen County","Lancaster County","Lee County","Lexington","Lexington City","Loudoun County","Louisa County","Lunenburg County","Lynchburg","Lynchburg City","Madison County","Manassas","Manassas City","Manassas Park","Manassas Park City","Martinsville","Martinsville City","Mathews County","Mecklenburg County","Middlesex County","Montgomery County","Nelson County","New Kent County","Newport News","Newport News City","Norfolk","Norfolk City","Northampton County","Northumberland County","Norton","Norton City","Nottoway County","Orange County","Page County","Patrick County","Petersburg","Petersburg City","Pittsylvania County","Poquoson","Poquoson City","Portsmouth","Portsmouth City","Powhatan County","Prince Edward County","Prince George County","Prince William County","Pulaski County","Radford","Radford City","Rappahannock County","Richmond City","Richmond County","Roanoke City","Roanoke County","Rockbridge County","Rockingham County","Russell County","Salem","Salem City","Scott County","Shenandoah County","Smyth County","Southampton County","Spotsylvania County","Stafford County","Staunton","Staunton City","Suffolk","Suffolk City","Surry County","Sussex County","Tazewell County","Virginia Beach","Virginia Beach City","Warren County","Washington County","Waynesboro","Waynesboro City","Westmoreland County","Williamsburg","Williamsburg City","Winchester","Winchester City","Wise County","Wythe County","York County"],"WA":["Adams County","Asotin County","Benton County","Chelan County","Clallam County","Clark County","Columbia County","Cowlitz County","Douglas County","Ferry County","Franklin County","Garfield County","Grant County","Grays Harbor County","Island County","Jefferson County","King County","Kitsap County","Kittitas County","Klickitat County","Lewis County","Lincoln County","Mason County","Okanogan County","Pacific County","Pend Oreille County","Pierce County","San Juan County","Skagit County","Skamania County","Snohomish County","Spokane County","Stevens County","Thurston County","Wahkiakum County","Walla Walla County","Whatcom County","Whitman County","Yakima County"],"WV":["Barbour County","Berkeley County","Boone County","Braxton County","Brooke County","Cabell County","Calhoun County","Clay County","Doddridge County","Fayette County","Gilmer County","Grant County","Greenbrier County","Hampshire County","Hancock County","Hardy County","Harrison County","Jackson County","Jefferson County","Kanawha County","Lewis County","Lincoln County","Logan County","Marion County","Marshall County","Mason County","Mcdowell County","Mercer County","Mineral County","Mingo County","Monongalia County","Monroe County","Morgan County","Nicholas County","Ohio County","Pendleton County","Pleasants County","Pocahontas County","Preston County","Putnam County","Raleigh County","Randolph County","Ritchie County","Roane County","Summers County","Taylor County","Tucker County","Tyler County","Upshur County","Wayne County","Webster County","Wetzel County","Wirt County","Wood County","Wyoming County"],"WI":["Adams County","Ashland County","Barron County","Bayfield County","Brown County","Buffalo County","Burnett County","Calumet County","Chippewa County","Clark County","Columbia County","Crawford County","Dane County","Dodge County","Door County","Douglas County","Dunn County","Eau Claire County","Florence County","Fond Du Lac County","Forest County","Grant County","Green County","Green Lake County","Iowa County","Iron County","Jackson County","Jefferson County","Juneau County","Kenosha County","Kewaunee County","La Crosse County","Lafayette County","Langlade County","Lincoln County","Manitowoc County","Marathon County","Marinette County","Marquette County","Menominee County","Milwaukee County","Monroe County","Oconto County","Oneida County","Outagamie County","Ozaukee County","Pepin County","Pierce County","Polk County","Portage County","Price County","Racine County","Richland County","Rock County","Rusk County","Saint Croix County","Sauk County","Sawyer County","Shawano County","Sheboygan County","St. Croix County","Taylor County","Trempealeau County","Vernon County","Vilas County","Walworth County","Washburn County","Washington County","Waukesha County","Waupaca County","Waushara County","Winnebago County","Wood County"],"WY":["Albany County","Big Horn County","Campbell County","Carbon County","Converse County","Crook County","Fremont County","Goshen County","Hot Springs County","Johnson County","Laramie County","Lincoln County","Natrona County","Niobrara County","Park County","Platte County","Sheridan County","Sublette County","Sweetwater County","Teton County","Uinta County","Washakie County","Weston County"],"DC":["District of Columbia","Washington"]};
+
+function stateAbbr(name){return STATE_ABBR[name]||'';}
+function populateCountyDropdown(sel, stateName, savedValue){
+  if(!sel)return;
+  const abbr=stateAbbr(stateName);
+  const counties=STATE_COUNTIES[abbr]||[];
+  const want=savedValue||sel.value||'';
+  if(!counties.length){
+    sel.innerHTML='<option value="">Select state first</option>';
+    return;
+  }
+  sel.innerHTML='<option value="">Select county</option>'+counties.map(c=>'<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===want?' selected':'')+'>'+c+'</option>').join('');
+}
+let __cityCache={};
+async function populateCityDatalist(dl, stateName, hintEl){
+  if(!dl)return;
+  dl.innerHTML='';
+  if(!stateName)return;
+  if(__cityCache[stateName]){
+    dl.innerHTML=__cityCache[stateName].map(c=>'<option value="'+c.replace(/"/g,'&quot;')+'"></option>').join('');
+    return;
+  }
+  if(hintEl){hintEl.textContent='Loading cities…';hintEl.style.display='block';}
+  try{
+    const r=await fetch('https://countriesnow.space/api/v0.1/countries/state/cities',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({country:'United States',state:stateName})
+    });
+    const j=await r.json();
+    if(j&&!j.error&&Array.isArray(j.data)){
+      __cityCache[stateName]=j.data;
+      dl.innerHTML=j.data.map(c=>'<option value="'+c.replace(/"/g,'&quot;')+'"></option>').join('');
+      if(hintEl){hintEl.style.display='none';}
+    }else{
+      if(hintEl){hintEl.textContent='Type your city name';hintEl.style.display='block';}
+    }
+  }catch(e){
+    if(hintEl){hintEl.textContent='Type your city name';hintEl.style.display='block';}
+  }
+}
+function wireAddressBlock(prefix){
+  const st=document.getElementById(prefix+'_state');
+  const ct=document.getElementById(prefix+'_city');
+  const cl=document.getElementById(prefix+'_city_list');
+  const co=document.getElementById(prefix+'_county');
+  const zp=document.getElementById(prefix+'_zip');
+  const hint=document.getElementById(prefix+'_city_hint');
+  if(!st)return;
+  const refresh=()=>{
+    populateCityDatalist(cl,st.value,hint);
+    populateCountyDropdown(co,st.value,getData(prefix+'_county'));
+  };
+  // Guard against double-binding if wireAddressBlock runs more than once
+  if(!st.__opBound){
+    st.__opBound=true;
+    st.addEventListener('change',refresh);
+    st.addEventListener('input',refresh);
+  }
+  // Always run once in case a state value is already present (e.g. from ZIP auto-fill or resume)
+  if(st.value)refresh();
+  if(zp&&!zp.__opBound){
+    zp.__opBound=true;
+    let zipTimer;
+    zp.addEventListener('input',()=>{
+      const z=zp.value.replace(/\D/g,'');
+      if(z.length===5){
+        clearTimeout(zipTimer);
+        zipTimer=setTimeout(()=>{
+          fetch('https://api.zippopotam.us/us/'+z).then(r=>r.ok?r.json():null).then(j=>{
+            if(j&&j.places&&j.places[0]){
+              const place=j.places[0];
+              if(!st.value){
+                st.value=place.state;
+                setData(prefix+'_state',place.state);
+                refresh();
+              }
+              if(ct&&!ct.value){
+                ct.value=place['place name'];
+                setData(prefix+'_city',place['place name']);
+              }
+            }
+          }).catch(()=>{});
+        },350);
+      }
+    });
+  }
+}
+
+const state={slide:0,members:[],incomes:[],reference:'',submitted:false,data:{}};
+let autoAdvTimer=null;
+
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+function uid(){return 'id_'+Math.random().toString(36).slice(2,9);}
+function setData(k,v){state.data[k]=v;save();}
+function getData(k,d=''){return state.data[k]??d;}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({slide:state.slide,members:state.members,incomes:state.incomes,data:state.data,ts:Date.now()}));showSaveStatus();}catch(e){}}
+function load(){try{const r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
+function clearSaved(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}}
+
+function showSaveStatus(){const el=$('#saveStatus');if(!el)return;el.classList.add('show');clearTimeout(showSaveStatus._t);showSaveStatus._t=setTimeout(()=>el.classList.remove('show'),1400);}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2200);}
+
+const slides=()=>$$('.slide');
+const totalSlides=()=>slides().length;
+
+function renderForSlide(i){
+  const sid=slides()[i]?.dataset.slide;
+  if(sid==='11')wireAddressBlock('a');
+  if(sid==='13')wireAddressBlock('m');
+  if(sid==='19')renderMembers();
+  if(sid==='21')renderIncomes();
+  if(sid==='30')initSigDate();
+  if(sid==='31')renderReview();
+  if(sid==='33'){const r=$('#refNumberNC');if(r)r.textContent=state.reference||'OP-HL-0000';}
+  if(sid==='34'){const r=$('#refNumber');if(r)r.textContent=state.reference||'OP-HL-0000';}
+}
+
+function shouldSkip(i){
+  const sid=slides()[i]?.dataset.slide;
+  if(sid==='6')return getData('p_sex')!=='Female';
+  if(sid==='ssn_input')return getData('p_has_ssn')!=='Yes';
+  if(sid==='13')return getData('mail_same')!=='No';
+  if(sid==='17')return getData('e_citizen')!=='Yes';
+  if(sid==='18')return getData('e_citizen')!=='No';
+  if(sid==='21')return getData('inc_more')!=='Yes';
+  if(sid==='23')return getData('c_prior')!=='No';
+  if(sid==='32')return true; // loading overlay shown programmatically only
+  if(sid==='33')return true; // post-submit upload shown programmatically via submit flow
+  if(sid==='34')return true; // thank-you shown programmatically via submit flow
+  return false;
+}
+
+function showSlide(i){
+  if(autoAdvTimer){clearTimeout(autoAdvTimer);autoAdvTimer=null;}
+  const all=slides();
+  if(i<0||i>=all.length)return;
+  all.forEach(s=>s.classList.remove('active'));
+  all[i].classList.add('active');
+  state.slide=i;
+  save();
+  renderForSlide(i);
+  updateStepper();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSlide(){
+  if(!validateSlide(state.slide))return;
+  let t=state.slide+1;
+  while(t<totalSlides()&&shouldSkip(t))t++;
+  showSlide(t);
+}
+function prevSlide(){
+  let t=state.slide-1;
+  while(t>0&&shouldSkip(t))t--;
+  showSlide(t);
+}
+
+function updateStepper(){
+  const cur=slides()[state.slide];if(!cur)return;
+  const stage=parseInt(cur.dataset.stage,10);
+  const steps=$$('.step');
+  steps.forEach((s,idx)=>{s.classList.remove('active','done');if(idx<stage)s.classList.add('done');if(idx===stage)s.classList.add('active');});
+  const sp=$('#stepperProgress');
+  if(sp){const pct=stage===0?0:(stage/(steps.length-1))*90;sp.style.width=pct+'%';}
+  const mp=$('#microProgress');
+  if(mp){const pct=(state.slide/(totalSlides()-1))*100;mp.style.width=pct+'%';}
+}
+
+function maybeAutoAdvance(groupEl){
+  if(!groupEl.hasAttribute('data-auto'))return;
+  if(autoAdvTimer)clearTimeout(autoAdvTimer);
+  autoAdvTimer=setTimeout(()=>{
+    const slide=groupEl.closest('.slide');
+    const vis=slide.querySelector('.reveal.show');
+    if(!vis)nextSlide();
+    autoAdvTimer=null;
+  },AUTO_ADVANCE_DELAY);
+}
+
+function initRadios(){
+  $$('[data-radio]').forEach(group=>{
+    const key=group.dataset.radio;
+    const cur=getData(key);
+    group.querySelectorAll('.opt-btn').forEach(btn=>{
+      if(btn.dataset.val===cur)btn.classList.add('selected');
+      btn.addEventListener('click',()=>{
+        group.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        btn.classList.add('auto-flash');
+        setTimeout(()=>btn.classList.remove('auto-flash'),400);
+        setData(key,btn.dataset.val);
+        handleConditionalReveal(key,btn.dataset.val);
+        maybeAutoAdvance(group);
+      });
+    });
+  });
+}
+
+function handleConditionalReveal(key,val){
+  // Clear pregnancy data if gender changes to non-Female
+  if(key==='p_sex'&&val&&val!=='Female'){setData('p_pregnant','');}
+}
+function refreshAllReveals(){Object.keys(state.data).forEach(k=>handleConditionalReveal(k,state.data[k]));}
+
+function initChecks(){
+  $$('[data-check]').forEach(lbl=>{
+    const key=lbl.dataset.check;
+    if(getData(key)===true||getData(key)==='true')lbl.classList.add('selected');
+    lbl.addEventListener('click',e=>{e.preventDefault();lbl.classList.toggle('selected');setData(key,lbl.classList.contains('selected'));});
+  });
+}
+
+function initInputs(){
+  $$('.input, .select, .sig-input').forEach(inp=>{
+    const key=inp.id;if(!key)return;
+    if(getData(key))inp.value=getData(key);
+    inp.addEventListener('input',()=>{setData(key,inp.value);inp.classList.remove('error');const err=$('#err_'+key);if(err){err.style.display='none';err.textContent=''}});
+    inp.addEventListener('change',()=>{
+      setData(key,inp.value);
+      if(inp.tagName==='SELECT' && inp.hasAttribute('data-auto') && inp.value){
+        if(autoAdvTimer)clearTimeout(autoAdvTimer);
+        autoAdvTimer=setTimeout(()=>{nextSlide();autoAdvTimer=null;},AUTO_ADVANCE_DELAY);
+      }
+    });
+    // Enter-to-advance on typed inputs (skip inside member cards)
+    if(inp.tagName==='INPUT'&&(inp.type==='text'||inp.type==='number'||inp.type==='date'||inp.type==='tel'||inp.type==='email')){
+      inp.addEventListener('keydown',e=>{
+        if(e.key!=='Enter')return;
+        if(inp.closest('[data-mem-card]'))return;
+        e.preventDefault();
+        if(inp.type==='date'&&autoAdvTimer){clearTimeout(autoAdvTimer);autoAdvTimer=null;}
+        nextSlide();
+      });
+      // Debounced auto-advance — only on slides with exactly one typed input
+      const slideEl=inp.closest('.slide');
+      if(slideEl&&!inp.closest('[data-mem-card]')){
+        const inputsInSlide=slideEl.querySelectorAll('.input:not([type=checkbox]):not([type=radio])').length;
+        if(inputsInSlide===1){
+          const triggerAdv=()=>{
+            if(!inp.value||!inp.value.trim())return;
+            if(!slideEl.classList.contains('active'))return;
+            if(autoAdvTimer)clearTimeout(autoAdvTimer);
+            autoAdvTimer=setTimeout(()=>{autoAdvTimer=null;if(slideEl.classList.contains('active'))nextSlide();},AUTO_ADVANCE_DELAY+800);
+          };
+          if(inp.type==='date'){
+            inp.addEventListener('change',triggerAdv);
+          }else{
+            inp.addEventListener('input',triggerAdv);
+          }
+        }
+      }
+    }
+  });
+  const ssn=$('#p_ssn');
+  if(ssn){ssn.addEventListener('input',()=>{let d=ssn.value.replace(/\D/g,'').slice(0,9);if(d.length>5)ssn.value=d.slice(0,3)+'-'+d.slice(3,5)+'-'+d.slice(5);else if(d.length>3)ssn.value=d.slice(0,3)+'-'+d.slice(3);else ssn.value=d;setData('p_ssn',ssn.value);});}
+  const phone=$('#c_phone');
+  if(phone){phone.addEventListener('input',()=>{let d=phone.value.replace(/\D/g,'').slice(0,10);if(d.length>6)phone.value='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);else if(d.length>3)phone.value='('+d.slice(0,3)+') '+d.slice(3);else if(d.length>0)phone.value='('+d;else phone.value='';setData('c_phone',phone.value);});}
+  const wzip=$('#w_zip');
+  if(wzip){wzip.addEventListener('input',()=>{wzip.value=wzip.value.replace(/\D/g,'').slice(0,5);setData('w_zip',wzip.value);if(wzip.value.length===5){if(!getData('a_zip')){setData('a_zip',wzip.value);const az=$('#a_zip');if(az)az.value=wzip.value;}setTimeout(()=>nextSlide(),350);}});}
+  const azip=$('#a_zip');
+  if(azip){azip.addEventListener('input',()=>{azip.value=azip.value.replace(/\D/g,'').slice(0,5);setData('a_zip',azip.value);});}
+}
+
+function clearErrors(){$$('.input.error,.select.error').forEach(el=>el.classList.remove('error'));$$('.error-msg').forEach(el=>{el.textContent='';el.style.display='none';});}
+function markError(id,msg){const inp=$('#'+id);if(inp){inp.classList.add('error');inp.focus();}const err=$('#err_'+id);if(err){err.textContent=msg;err.style.display='block';}}
+function validateSlide(i){
+  const sid=slides()[i]?.dataset.slide;
+  let ok=true;
+  clearErrors();
+  const req=(id,msg)=>{const v=getData(id);if(!v||String(v).trim()===''){markError(id,msg||'Required');ok=false;}};
+  const reqRadio=(key,msg)=>{if(!getData(key)){toast(msg||'Please make a selection');ok=false;}};
+  if(sid==='0'){const z=getData('w_zip');if(!z||z.length!==5){markError('w_zip','Please enter a valid 5-digit ZIP');ok=false;}}
+  if(sid==='plan_type'){reqRadio('plan_type','Please select a plan type');}
+  if(sid==='1'){req('p_dob','Date of birth is required');}
+  if(sid==='2'){reqRadio('hh_size','Select household size');}
+  if(sid==='3'){reqRadio('hh_income','Please select a household income range');}
+  if(sid==='4'){reqRadio('p_sex','Please select');}
+  if(sid==='5'){reqRadio('p_tobacco','Please answer');}
+  if(sid==='6'){reqRadio('p_pregnant','Please answer');}
+  if(sid==='7'){reqRadio('p_employment','Please select');}
+  if(sid==='8'){reqRadio('p_urgency','Please select');}
+  if(sid==='9'){req('p_first','First name required');req('p_last','Last name required');}
+  if(sid==='has_ssn'){reqRadio('p_has_ssn','Please answer');}
+  if(sid==='ssn_input'){const s=(getData('p_ssn')||'').replace(/\D/g,'');if(!s||s.length!==9){markError('p_ssn','Enter a valid 9-digit SSN');ok=false;}}
+  if(sid==='10'){req('c_phone','Phone is required');const email=getData('c_email');if(!email){markError('c_email','Email is required');ok=false;}else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('c_email','Enter a valid email');ok=false;}}
+  if(sid==='11'){req('a_street','Street required');req('a_state','State required');req('a_city','City required');req('a_zip','ZIP required');req('a_county','County required');}
+  if(sid==='12'){reqRadio('mail_same','Please answer');}
+  if(sid==='13'){req('m_street','Street required');req('m_state','State required');req('m_city','City required');req('m_zip','ZIP required');req('m_county','County required');}
+  if(sid==='14'){reqRadio('p_marital','Please select');}
+  if(sid==='15'){reqRadio('t_status','Please select');}
+  if(sid==='16'){reqRadio('e_citizen','Please answer');}
+  if(sid==='17'){reqRadio('e_citizen_type','Please select');}
+  if(sid==='18'){reqRadio('e_immigration','Please answer');}
+  if(sid==='19'){const unsaved=state.members.find(m=>m.editing);if(unsaved){toast('Finish or remove the household member being edited');ok=false;}}
+  if(sid==='20'){reqRadio('inc_more','Please answer');}
+  if(sid==='22'){reqRadio('c_prior','Please answer');}
+  if(sid==='23'){reqRadio('c_sep','Please select');}
+  if(sid==='24'){reqRadio('p_veteran','Please answer');}
+  if(sid==='25'){reqRadio('p_aptc_prior','Please answer');}
+  if(sid==='26'){reqRadio('p_incarc','Please answer');}
+  if(sid==='27'){reqRadio('p_native','Please answer');}
+  if(sid==='28'){reqRadio('c_delivery','Please answer');}
+  if(sid==='addons'){reqRadio('c_addons','Please select');}
+  if(sid==='29'){if(!getData('att_truthful')||!getData('att_changes')||!getData('att_tcpa')){toast('Please acknowledge all three items');ok=false;}}
+  if(sid==='30'){const sig=getData('sig_name');const f=(getData('p_first')||'').trim().toLowerCase();const l=(getData('p_last')||'').trim().toLowerCase();if(!sig){markError('sig_name','Please type your full name to sign');ok=false;}else{const s=sig.trim().toLowerCase();if(!s.includes(f)||!s.includes(l)){markError('sig_name','Signature must match your legal name');ok=false;}}}
+  return ok;
+}
+
+function initMemberButtons(){
+  const s=$('#addSpouseBtn');if(s)s.addEventListener('click',()=>addMember('Spouse'));
+  const p=$('#addPersonBtn');if(p)p.addEventListener('click',()=>addMember(''));
+}
+function addMember(defaultRel){
+  state.members.push({
+    id:uid(),
+    first:'',middle:'',last:'',suffix:'',
+    relationship:defaultRel||'',dob:'',sex:'',
+    applying:'',citizen:'',citizen_type:'',immigration:'',
+    i_doctype:'',i_alien:'',i_card:'',i_exp:'',i_category:'',
+    tobacco:'',incarc:'',native:'',hispanic:'',race:'',
+    pregnant:'',preg_count:'',due_date:'',
+    has_income:'',incomes:[],
+    same_addr:'Yes',
+    addr_street:'',addr_apt:'',addr_state:'',addr_city:'',addr_zip:'',addr_county:'',
+    editing:true, stepVis:0
+  });
+  save();renderMembers();
+}
+function removeMember(id){
+  state.members=state.members.filter(m=>m.id!==id);
+  // Clean up any uploaded doc data associated with this member
+  ['mem_cit_'+id,'mem_imm_'+id].forEach(key=>{
+    ['_name','_data','_size','_type'].forEach(s=>{delete state.data[key+s];});
+  });
+  // Clean up any tax-dependent checkbox for this member
+  delete state.data['dep_'+id];
+  save();renderMembers();
+  if($('#depList'))renderDeps();
+}
+function saveMember(id){
+  const m=state.members.find(x=>x.id===id);if(!m)return;
+  if(!m.first||!m.last){toast('Please enter first and last name');return;}
+  if(!m.dob){toast('Please enter date of birth');return;}
+  if(m.same_addr==='No'){
+    if(!m.addr_street||!m.addr_state||!m.addr_city||!m.addr_zip||!m.addr_county){
+      toast('Please complete street, state, city, ZIP, and county for this person');return;
+    }
+  }
+  m.editing=false;save();
+  renderMembers();
+  if($('#depList'))renderDeps();
+}
+function editMember(id){const m=state.members.find(x=>x.id===id);if(!m)return;m.editing=true;m.stepVis=0;renderMembers();}
+function calcAge(dobStr){if(!dobStr)return '';const d=new Date(dobStr);if(isNaN(d))return '';const today=new Date();let a=today.getFullYear()-d.getFullYear();const m=today.getMonth()-d.getMonth();if(m<0||(m===0&&today.getDate()<d.getDate()))a--;return a;}
+
+function memRadios(m,field,options){
+  const selected=m[field]||'';
+  return `<div class="opt-row" data-mem-row data-mem-field="${field}" data-mem-id="${m.id}">${options.map(o=>`<button type="button" class="opt-btn${selected===o.val?' selected':''}" data-val="${o.val}"><span class="circle"></span>${escapeHtml(o.label)}</button>`).join('')}</div>`;
+}
+
+const MEMBER_STEPS=[
+  {key:'relationship',title:'relationship'},
+  {key:'first',title:'first name'},
+  {key:'last',title:'last name'},
+  {key:'dob',title:'date of birth'},
+  {key:'sex',title:'sex'},
+  {key:'applying',title:'applying for coverage'},
+  {key:'has_ssn',title:'SSN on file'},
+  {key:'ssn',title:'SSN entry',skip:m=>m.has_ssn!=='Yes'},
+  {key:'citizen',title:'US citizenship'},
+  {key:'citizen_type',title:'citizenship type',skip:m=>m.citizen!=='Yes'},
+  {key:'immigration',title:'immigration status',skip:m=>m.citizen!=='No'},
+  {key:'tobacco',title:'tobacco use'},
+  {key:'pregnant',title:'pregnancy',skip:m=>m.sex!=='Female'},
+  {key:'pregnant_details',title:'pregnancy details',skip:m=>!(m.sex==='Female'&&m.pregnant==='Yes'),optional:true},
+  {key:'same_addr',title:'address'},
+  {key:'address_block',title:'address details',skip:m=>m.same_addr!=='No'},
+  {key:'has_income',title:'income'},
+  {key:'income_list',title:'income sources',skip:m=>m.has_income!=='Yes',optional:true}
+];
+
+function visibleMemberSteps(m){return MEMBER_STEPS.filter(s=>!s.skip||!s.skip(m));}
+function currentMemberStepDef(m){
+  const vis=visibleMemberSteps(m);
+  const idx=Math.min(Math.max(m.stepVis||0,0),vis.length-1);
+  return {def:vis[idx],idx,total:vis.length};
+}
+
+function memGrid(m,field,options){
+  const sel=m[field]||'';
+  return `<div class="opt-row grid" data-mem-row data-mem-field="${field}" data-mem-id="${m.id}">${options.map(o=>`<button type="button" class="opt-btn${sel===o.val?' selected':''}" data-val="${o.val}"><span class="circle"></span>${escapeHtml(o.label)}</button>`).join('')}</div>`;
+}
+function memText(m,field,label,placeholder,type){
+  return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="${type||'text'}" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${escapeHtml(m[field]||'')}"${placeholder?' placeholder="'+placeholder+'"':''}><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
+}
+function memDate(m,field,label){
+  return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="date" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${m[field]||''}"><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
+}
+
+function memUpload(m,keySuffix,title,hint){
+  const key='mem_'+keySuffix+'_'+m.id;
+  return `<div class="upload-wrap" style="margin-top:10px">
+    <input type="file" id="${key}" class="upload-file-input" accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" data-upload data-max-mb="3">
+    <label for="${key}" class="upload-drop" id="${key}_label">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div><div class="upload-title">${title}</div><div class="upload-hint">${hint||'PDF, JPG, PNG &middot; Max 3 MB'}</div></div>
+    </label>
+    <div class="upload-preview" id="${key}_preview"></div>
+  </div>`;
+}
+
+function renderMemberStep(m){
+  const {def}=currentMemberStepDef(m);
+  if(!def)return '<div class="small text-muted">No step</div>';
+  const k=def.key;
+  const YN=[{val:'Yes',label:'Yes'},{val:'No',label:'No'}];
+  const YNP=[{val:'Yes',label:'Yes'},{val:'No',label:'No'},{val:'Prefer_not',label:'Prefer not to say'}];
+  const who=escapeHtml(m.first||'this person');
+  if(k==='relationship')return `<p class="slide-subtitle" style="margin-bottom:18px">Who is this person to you?</p>${memGrid(m,'relationship',[{val:'Spouse',label:'Spouse'},{val:'Domestic partner',label:'Domestic partner'},{val:'Son/Daughter',label:'Son / Daughter'},{val:'Stepson/Stepdaughter',label:'Stepson / Stepdaughter'},{val:'Child of a domestic partner',label:"Partner's child"},{val:'Grandchild',label:'Grandchild'},{val:'Parent',label:'Parent'},{val:'Sibling',label:'Sibling'},{val:'Other relative',label:'Other relative'},{val:'Unrelated',label:'Unrelated'}])}`;
+  if(k==='first')return `<p class="slide-subtitle" style="margin-bottom:18px">What's their first name?</p>${memText(m,'first','First name')}`;
+  if(k==='last')return `<p class="slide-subtitle" style="margin-bottom:18px">And ${who}'s last name?</p>${memText(m,'last','Last name')}`;
+  if(k==='dob')return `<p class="slide-subtitle" style="margin-bottom:18px">What's ${who}'s date of birth?</p>${memDate(m,'dob','Date of birth')}`;
+  if(k==='sex')return `<p class="slide-subtitle" style="margin-bottom:18px">What is ${who}'s sex?</p>${memGrid(m,'sex',[{val:'Male',label:'Male'},{val:'Female',label:'Female'}])}`;
+  if(k==='applying')return `<p class="slide-subtitle" style="margin-bottom:18px">Is ${who} applying for coverage?</p>${memGrid(m,'applying',YN)}`;
+  if(k==='has_ssn')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} have a Social Security Number?</p>${memGrid(m,'has_ssn',YN)}`;
+  if(k==='ssn')return `<p class="slide-subtitle" style="margin-bottom:18px">Enter ${who}'s SSN.</p><div class="form-grid"><div class="field full"><label>SSN</label><input type="text" class="input" data-mem-in data-mem-field="ssn" data-mem-id="${m.id}" value="${escapeHtml(m.ssn||'')}" placeholder="XXX-XX-XXXX" inputmode="numeric" autocomplete="off"><div class="error-msg" id="mem_err_${m.id}_ssn" style="display:none"></div></div></div>`;
+  if(k==='citizen')return `<p class="slide-subtitle" style="margin-bottom:18px">Is ${who} a US citizen or US national?</p>${memGrid(m,'citizen',YN)}`;
+  if(k==='citizen_type')return `<p class="slide-subtitle" style="margin-bottom:18px">How did ${who} become a US citizen?</p>${memGrid(m,'citizen_type',[{val:'US_Born',label:'Born in the US'},{val:'Naturalized',label:'Naturalized'}])}`;
+  if(k==='immigration')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} have eligible immigration status?</p>${memGrid(m,'immigration',[{val:'Yes',label:'Yes'},{val:'Decline',label:'Prefer not to say'}])}`;
+  if(k==='tobacco')return `<p class="slide-subtitle" style="margin-bottom:18px">Has ${who} used tobacco 4+ times a week in the past 6 months?</p>${memGrid(m,'tobacco',YN)}`;
+  if(k==='pregnant')return `<p class="slide-subtitle" style="margin-bottom:18px">Is ${who} pregnant?</p>${memGrid(m,'pregnant',YNP)}`;
+  if(k==='pregnant_details')return `<p class="slide-subtitle" style="margin-bottom:18px">Pregnancy details for ${who}.</p><div class="form-grid"><div class="field"><label># of babies expected</label><input type="number" class="input" data-mem-in data-mem-field="preg_count" data-mem-id="${m.id}" value="${escapeHtml(m.preg_count||'')}" min="1" max="10"></div><div class="field"><label>Expected due date</label><input type="date" class="input" data-mem-in data-mem-field="due_date" data-mem-id="${m.id}" value="${m.due_date||''}"></div></div>`;
+  if(k==='same_addr')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} live at the primary applicant's address?</p>${memGrid(m,'same_addr',YN)}`;
+  if(k==='address_block'){
+    return `<p class="slide-subtitle" style="margin-bottom:18px">Enter ${who}'s address.</p>
+    <div class="form-grid">
+      <div class="field full"><label>Street address</label><input type="text" class="input" data-mem-in data-mem-field="addr_street" data-mem-id="${m.id}" value="${escapeHtml(m.addr_street||'')}" placeholder="123 Main Street"></div>
+      <div class="field full"><label>Apt. / Ste. <span class="opt">(Optional)</span></label><input type="text" class="input" data-mem-in data-mem-field="addr_apt" data-mem-id="${m.id}" value="${escapeHtml(m.addr_apt||'')}"></div>
+      <div class="field"><label>State</label><select class="select" data-mem-in data-mem-field="addr_state" data-mem-id="${m.id}" id="mem_state_${m.id}"><option value="">Select state</option>${Object.keys(STATE_ABBR).sort().map(s=>`<option${m.addr_state===s?' selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="field"><label>City</label><input type="text" class="input" data-mem-in data-mem-field="addr_city" data-mem-id="${m.id}" id="mem_city_${m.id}" list="mem_city_list_${m.id}" value="${escapeHtml(m.addr_city||'')}" placeholder="Start typing"><datalist id="mem_city_list_${m.id}"></datalist></div>
+      <div class="field"><label>ZIP code</label><input type="text" class="input" data-mem-in data-mem-field="addr_zip" data-mem-id="${m.id}" id="mem_zip_${m.id}" inputmode="numeric" maxlength="5" value="${escapeHtml(m.addr_zip||'')}"></div>
+      <div class="field"><label>County</label><select class="select" data-mem-in data-mem-field="addr_county" data-mem-id="${m.id}" id="mem_county_${m.id}"><option value="">Select state first</option></select></div>
+    </div>`;
+  }
+  if(k==='has_income')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} currently get any income?</p>${memGrid(m,'has_income',YN)}`;
+  if(k==='income_list'){
+    const incTypes=['Job / Wages / Salary','Self-employment','Social Security','Unemployment','Retirement / Pension','Rental / Royalty','Alimony received','Investment / Interest / Dividends','Other'];
+    const items=(m.incomes||[]).map(i=>`<div class="income-item"><div class="income-item-info"><div class="income-item-type">${escapeHtml(i.type)}</div><div class="income-item-amt">$${Number(i.amount).toLocaleString()} per ${escapeHtml(i.period)}</div></div><div class="income-item-actions"><button type="button" class="btn btn-secondary" onclick="window.__opHQ.removeMemberIncome('${m.id}','${i.id}')">Remove</button></div></div>`).join('');
+    return `<p class="slide-subtitle" style="margin-bottom:18px">Add ${who}'s income sources.</p><div class="income-list" style="margin-top:6px">${items||'<div class="small text-muted" style="padding:8px">No income sources yet.</div>'}</div><div class="form-grid" style="margin-top:12px"><div class="field"><label>Income type</label><select class="select" id="mem_inc_type_${m.id}"><option value="">Select type</option>${incTypes.map(t=>`<option>${escapeHtml(t)}</option>`).join('')}</select></div><div class="field"><label>Amount</label><input type="number" class="input" id="mem_inc_amount_${m.id}" min="0" step="1"></div><div class="field"><label>Per</label><select class="select" id="mem_inc_period_${m.id}"><option>year</option><option>month</option><option>biweekly</option><option>weekly</option><option>hour</option></select></div><div class="field" style="justify-content:flex-end"><button type="button" class="btn btn-ghost" onclick="window.__opHQ.addMemberIncome('${m.id}')" style="margin-top:auto">+ Add income</button></div></div>`;
+  }
+  return '<div class="small text-muted">Unknown step</div>';
+}
+
+function renderMembers(){
+  const mainList=$('#memberList');
+  const taxList=$('#memberListTax');
+  if(!mainList&&!taxList)return;
+  const empty='<div class="small text-muted" style="padding:10px;text-align:center">No household members added. If just applying for yourself, continue below.</div>';
+  const emptyTax='<div class="small text-muted" style="padding:6px 10px">No extra dependents added yet.</div>';
+  const html=state.members.length===0?'':state.members.map(m=>{
+    if(m.editing){
+      return `<div class="member-edit-wrap" data-mem-card="${m.id}" style="border:1.5px solid var(--blue);border-radius:10px;padding:20px;background:#fff;margin-bottom:14px">${renderMemberEditForm(m)}</div>`;
+    }
+    const init=((m.first||'?')[0]+(m.last||'')[0]||'').toUpperCase();
+    const age=m.dob?calcAge(m.dob):'';
+    const bits=[escapeHtml(m.relationship||'Household member')];
+    if(age!=='')bits.push('Age '+age);
+    if(m.sex)bits.push(m.sex);
+    if(m.applying)bits.push('Applying: '+m.applying);
+    return `<div class="member-card selected"><div class="member-info"><div class="member-avatar">${init}</div><div><div class="member-name">${escapeHtml((m.first+' '+m.last).trim())||'Household member'}</div><div class="member-meta">${bits.join(' · ')}</div></div></div><div class="member-actions"><button type="button" class="btn btn-secondary" onclick="window.__opHQ.editMember('${m.id}')">Edit</button><button type="button" class="btn btn-secondary" onclick="window.__opHQ.removeMember('${m.id}')">Remove</button></div></div>`;
+  }).join('');
+  if(mainList)mainList.innerHTML=html||empty;
+  if(taxList)taxList.innerHTML=html||emptyTax;
+  initMemberFormHandlers();
+}
+
+function initMemberFormHandlers(){
+  $$('[data-mem-row]').forEach(row=>{
+    const memId=row.dataset.memId;
+    const field=row.dataset.memField;
+    const m=state.members.find(x=>x.id===memId);if(!m)return;
+    row.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        row.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        m[field]=btn.dataset.val;
+        if(field==='sex'&&m.sex!=='Female'){m.pregnant='';m.preg_count='';m.due_date='';}
+        save();
+        // Auto-advance after a brief delay so user sees their selection
+        const {def,idx,total}=currentMemberStepDef(m);
+        const isLast=idx===total-1;
+        if(!isLast){
+          setTimeout(()=>{
+            if(m.editing)window.__opHQ.memberNext(memId);
+            else renderMembers();
+          },AUTO_ADVANCE_DELAY);
+        }else{
+          renderMembers();
+        }
+      });
+    });
+  });
+  // Determine current step key (for auto-advance eligibility)
+  const editing=state.members.find(x=>x.editing);
+  const curKey=editing?currentMemberStepDef(editing).def?.key:null;
+  // Steps that are single typed inputs where we can auto-advance on change/input
+  const SINGLE_FIELD_STEPS=new Set(['first','last','dob']);
+  const MEMBER_AUTO_ADV_DELAY=1200;
+  if(!window.__memberAutoAdvTimer)window.__memberAutoAdvTimer=null;
+  let memberAutoAdvTimer=window.__memberAutoAdvTimer;
+  $$('[data-mem-in]').forEach(el=>{
+    const memId=el.dataset.memId;
+    const field=el.dataset.memField;
+    const m=state.members.find(x=>x.id===memId);if(!m)return;
+    const handler=()=>{
+      m[field]=el.value;
+      if(field==='sex'&&m.sex!=='Female'){m.pregnant='';m.preg_count='';m.due_date='';}
+      save();
+    };
+    el.addEventListener('input',handler);
+    el.addEventListener('change',handler);
+    // SSN auto-format (XXX-XX-XXXX) for member ssn field
+    if(field==='ssn'&&el.type==='text'){
+      el.addEventListener('input',()=>{
+        let d=el.value.replace(/\D/g,'').slice(0,9);
+        if(d.length>5)el.value=d.slice(0,3)+'-'+d.slice(3,5)+'-'+d.slice(5);
+        else if(d.length>3)el.value=d.slice(0,3)+'-'+d.slice(3);
+        else el.value=d;
+        m.ssn=el.value;save();
+      });
+    }
+    // Enter key always advances
+    if(el.tagName==='INPUT'&&(el.type==='text'||el.type==='number')){
+      el.addEventListener('keydown',e=>{
+        if(e.key==='Enter'&&m.editing&&el.value.trim()){
+          e.preventDefault();
+          handler();
+          if(memberAutoAdvTimer){clearTimeout(memberAutoAdvTimer);memberAutoAdvTimer=null;}
+          window.__opHQ.memberNext(memId);
+        }
+      });
+    }
+    // Debounced auto-advance on single-field text/number/date steps
+    if(SINGLE_FIELD_STEPS.has(curKey)&&field===curKey){
+      const autoAdv=()=>{
+        if(!m.editing)return;
+        if(!el.value||!el.value.trim())return;
+        // Re-validate before advancing
+        const v=validateMemberStep(m);
+        if(!v.ok)return;
+        if(memberAutoAdvTimer){clearTimeout(memberAutoAdvTimer);}
+        memberAutoAdvTimer=setTimeout(()=>{memberAutoAdvTimer=null;if(m.editing)window.__opHQ.memberNext(memId);},MEMBER_AUTO_ADV_DELAY);
+      };
+      if(el.type==='date'){
+        el.addEventListener('change',autoAdv);
+      }else{
+        el.addEventListener('input',autoAdv);
+        // Any keystroke / focus change cancels a pending advance so user can keep typing
+        el.addEventListener('keydown',()=>{if(memberAutoAdvTimer){clearTimeout(memberAutoAdvTimer);memberAutoAdvTimer=null;autoAdv();}});
+      }
+    }
+  });
+  // Per-member address dropdowns
+  state.members.forEach(m=>{
+    if(m.editing&&m.same_addr==='No')wireMemberAddress(m);
+  });
+  if(typeof initUploads==='function')initUploads();
+  // Auto-focus the first typed input on single-field typed steps
+  if(editing&&SINGLE_FIELD_STEPS.has(curKey)){
+    setTimeout(()=>{
+      const card=document.querySelector('[data-mem-card="'+editing.id+'"]');
+      const inp=card?.querySelector('input[data-mem-in][data-mem-field="'+curKey+'"]');
+      if(inp&&inp!==document.activeElement)inp.focus();
+    },60);
+  }
+}
+
+function wireMemberAddress(m){
+  const memId=m.id;
+  const st=document.getElementById('mem_state_'+memId);
+  const ct=document.getElementById('mem_city_'+memId);
+  const cl=document.getElementById('mem_city_list_'+memId);
+  const co=document.getElementById('mem_county_'+memId);
+  const zp=document.getElementById('mem_zip_'+memId);
+  if(!st)return;
+  const refresh=()=>{
+    if(typeof populateCityDatalist==='function')populateCityDatalist(cl,st.value);
+    if(typeof populateCountyDropdown==='function')populateCountyDropdown(co,st.value,m.addr_county||'');
+  };
+  if(st.value)refresh();
+  st.addEventListener('change',refresh);
+  if(zp){
+    let zipTimer;
+    zp.addEventListener('input',()=>{
+      const z=zp.value.replace(/\D/g,'');
+      if(z.length===5){
+        clearTimeout(zipTimer);
+        zipTimer=setTimeout(()=>{
+          fetch('https://api.zippopotam.us/us/'+z).then(r=>r.ok?r.json():null).then(j=>{
+            if(j&&j.places&&j.places[0]){
+              const place=j.places[0];
+              if(!st.value){st.value=place.state;m.addr_state=place.state;save();refresh();}
+              if(ct&&!ct.value){ct.value=place['place name'];m.addr_city=place['place name'];save();}
+            }
+          }).catch(()=>{});
+        },350);
+      }
+    });
+  }
+}
+
+function renderMemberEditForm(m){
+  const {def,idx,total}=currentMemberStepDef(m);
+  const pct=Math.round(((idx+1)/total)*100);
+  const isFirst=idx===0, isLast=idx===total-1;
+  const isOptional=!!(def&&def.optional);
+  const leftBtn=isFirst
+    ? `<button type="button" class="btn btn-secondary" onclick="window.__opHQ.cancelMemberEdit('${m.id}')">Cancel</button>`
+    : `<button type="button" class="btn btn-secondary" onclick="window.__opHQ.memberBack('${m.id}')">Back</button>`;
+  const rightLabel=isLast?'Save this person':(isOptional?'Skip':'Continue');
+  const rightAction=isLast?'saveMember':'memberNext';
+  const rightBtn=`<button type="button" class="btn btn-primary" onclick="window.__opHQ.${rightAction}('${m.id}')">${rightLabel}</button>`;
+  const displayName=(m.first||m.last)?escapeHtml((m.first+' '+m.last).trim()):escapeHtml(m.relationship||'Household member');
+  return `
+    <div class="mem-step-header">
+      <span class="mem-step-kicker">${displayName} &middot; Step ${idx+1} of ${total}${isOptional?' &middot; Optional':''}</span>
+      <h3 class="mem-step-title">${escapeHtml((def&&def.title)||'')}</h3>
+      <div style="height:4px;border-radius:2px;background:var(--border);overflow:hidden;margin-top:6px"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .3s"></div></div>
+    </div>
+    <div class="mem-step-body">${renderMemberStep(m)}</div>
+    <div class="nav-row" style="margin-top:20px;align-items:center">
+      ${leftBtn}
+      <button type="button" class="mem-remove-link" onclick="window.__opHQ.removeMember('${m.id}')">Remove this person</button>
+      ${rightBtn}
+    </div>
+  `;
+}
+
+function validateMemberStep(m){
+  const {def}=currentMemberStepDef(m);if(!def)return {ok:true};
+  const k=def.key;
+  if(k==='relationship'&&!m.relationship)return {ok:false,msg:'Please select a relationship'};
+  if(k==='first'&&(!m.first||!m.first.trim()))return {ok:false,msg:'Please enter a first name'};
+  if(k==='last'&&(!m.last||!m.last.trim()))return {ok:false,msg:'Please enter a last name'};
+  if(k==='dob'&&!m.dob)return {ok:false,msg:'Please enter date of birth'};
+  if(k==='sex'&&!m.sex)return {ok:false,msg:'Please select sex'};
+  if(k==='applying'&&!m.applying)return {ok:false,msg:'Please answer'};
+  if(k==='has_ssn'&&!m.has_ssn)return {ok:false,msg:'Please answer'};
+  if(k==='ssn'){const d=(m.ssn||'').replace(/\D/g,'');if(!d||d.length!==9)return {ok:false,msg:'Enter a valid 9-digit SSN'};}
+  if(k==='citizen'&&!m.citizen)return {ok:false,msg:'Please answer'};
+  if(k==='citizen_type'&&!m.citizen_type)return {ok:false,msg:'Please select'};
+  if(k==='immigration'&&!m.immigration)return {ok:false,msg:'Please answer'};
+  if(k==='tobacco'&&!m.tobacco)return {ok:false,msg:'Please answer'};
+  if(k==='pregnant'&&!m.pregnant)return {ok:false,msg:'Please answer'};
+  if(k==='same_addr'&&!m.same_addr)return {ok:false,msg:'Please answer'};
+  if(k==='address_block'){
+    if(!m.addr_street||!m.addr_state||!m.addr_city||!m.addr_zip||!m.addr_county){
+      return {ok:false,msg:'Please complete street, state, city, ZIP, and county'};
+    }
+  }
+  if(k==='has_income'&&!m.has_income)return {ok:false,msg:'Please answer'};
+  return {ok:true};
+}
+
+function memberNext(memId){
+  const m=state.members.find(x=>x.id===memId);if(!m)return;
+  const v=validateMemberStep(m);
+  if(!v.ok){toast(v.msg);return;}
+  const vis=visibleMemberSteps(m);
+  const cur=m.stepVis||0;
+  m.stepVis=Math.min(cur+1,vis.length-1);
+  save();renderMembers();
+  const card=document.querySelector('[data-mem-card="'+memId+'"]');
+  if(card)card.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function memberBack(memId){
+  const m=state.members.find(x=>x.id===memId);if(!m)return;
+  m.stepVis=Math.max((m.stepVis||0)-1,0);
+  save();renderMembers();
+  const card=document.querySelector('[data-mem-card="'+memId+'"]');
+  if(card)card.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function cancelMemberEdit(memId){
+  const m=state.members.find(x=>x.id===memId);if(!m)return;
+  if(!m.first&&!m.last&&!m.dob){
+    state.members=state.members.filter(x=>x.id!==memId);
+  }else{
+    m.editing=false;m.stepVis=0;
+  }
+  save();renderMembers();
+}
+
+function renderDeps(){
+  const list=$('#depList');if(!list)return;
+  const people=allPeople();
+  list.innerHTML=people.map(p=>{const sel=getData('dep_'+p.key)?' selected':'';return `<label class="check-opt${sel}" data-dep="${p.key}"><span class="box"></span><span class="txt">${escapeHtml(p.name)}</span></label>`;}).join('')+`<label class="check-opt${getData('dep_additional')?' selected':''}" data-dep="additional"><span class="box"></span><span class="txt">Additional people</span></label>`;
+  const wrap=$('#taxAddWrap');
+  const syncWrap=()=>{if(wrap)wrap.style.display=getData('dep_additional')?'block':'none';};
+  syncWrap();
+  list.querySelectorAll('[data-dep]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.preventDefault();
+      el.classList.toggle('selected');
+      setData('dep_'+el.dataset.dep,el.classList.contains('selected'));
+      if(el.dataset.dep==='additional'){syncWrap();if(getData('dep_additional'))renderMembers();}
+    });
+  });
+  renderMembers();
+  const addBtn=$('#addTaxDepBtn');
+  if(addBtn&&!addBtn.__bound){
+    addBtn.__bound=true;
+    addBtn.addEventListener('click',()=>{
+      addMember('');
+      // Scroll the newly added member card into view after render
+      setTimeout(()=>{
+        const newest=state.members[state.members.length-1];
+        if(newest){
+          const card=document.querySelector('#memberListTax [data-mem-card="'+newest.id+'"]');
+          if(card)card.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      },50);
+    });
+  }
+}
+function allPeople(){
+  const primary={key:'primary',name:((getData('p_first')||'')+' '+(getData('p_last')||'')).trim()||'Primary applicant'};
+  return [primary,...state.members.map(m=>({key:m.id,name:((m.first||'')+' '+(m.last||'')).trim()||'Household member'}))];
+}
+
+function renderPersonLists(){
+  const cfgs=[
+    {id:'disabilityList',prefix:'disab_'},{id:'dailyHelpList',prefix:'daily_'},
+    {id:'medicaidEndedList',prefix:'medend_'},{id:'medicaidDeniedList',prefix:'meddenied_'},
+    {id:'currentCoverageList',prefix:'cov_'},{id:'ichraList',prefix:'ichra_'},
+    {id:'ichraOfferedList',prefix:'ichrao_'},{id:'employerCoverageList',prefix:'emp_'},
+    {id:'losingCoverageList',prefix:'losing_'}
+  ];
+  const people=allPeople();
+  cfgs.forEach(cfg=>{
+    const list=$('#'+cfg.id);if(!list)return;
+    list.innerHTML=people.map(p=>{const key=cfg.prefix+p.key;const sel=getData(key)?' selected':'';return `<label class="check-opt${sel}" data-gen="${key}"><span class="box"></span><span class="txt">${escapeHtml(p.name)}</span></label>`;}).join('');
+    list.querySelectorAll('[data-gen]').forEach(el=>{el.addEventListener('click',e=>{e.preventDefault();el.classList.toggle('selected');setData(el.dataset.gen,el.classList.contains('selected'));});});
+  });
+}
+
+function initIncomeBtn(){const b=$('#addIncomeBtn');if(b)b.addEventListener('click',addIncome);}
+function addIncome(){
+  const t=$('#inc_type').value,a=$('#inc_amount').value,p=$('#inc_period').value;
+  if(!t){toast('Select an income type');return;}
+  if(!a||Number(a)<=0){toast('Enter an amount');return;}
+  state.incomes.push({id:uid(),type:t,amount:Number(a),period:p});
+  $('#inc_type').value='';$('#inc_amount').value='';$('#inc_period').value='year';
+  save();renderIncomes();
+}
+function removeIncome(id){state.incomes=state.incomes.filter(i=>i.id!==id);save();renderIncomes();}
+
+function addMemberIncome(memId){
+  const m=state.members.find(x=>x.id===memId);if(!m)return;
+  const t=$('#mem_inc_type_'+memId)?.value;
+  const a=$('#mem_inc_amount_'+memId)?.value;
+  const p=$('#mem_inc_period_'+memId)?.value||'year';
+  if(!t){toast('Select an income type');return;}
+  if(!a||Number(a)<=0){toast('Enter an amount');return;}
+  m.incomes=m.incomes||[];
+  m.incomes.push({id:uid(),type:t,amount:Number(a),period:p});
+  save();renderMembers();
+}
+
+function removeMemberIncome(memId,incId){
+  const m=state.members.find(x=>x.id===memId);if(!m)return;
+  m.incomes=(m.incomes||[]).filter(i=>i.id!==incId);
+  save();renderMembers();
+}
+function renderIncomes(){
+  const list=$('#incomeList');if(!list)return;
+  if(state.incomes.length===0){list.innerHTML='<div class="small text-muted" style="padding:10px">No income sources yet. Add one below.</div>';return;}
+  list.innerHTML=state.incomes.map(i=>`<div class="income-item"><div class="income-item-info"><div class="income-item-type">${escapeHtml(i.type)}</div><div class="income-item-amt">$${i.amount.toLocaleString()} per ${escapeHtml(i.period)}</div></div><div class="income-item-actions"><button type="button" class="btn btn-secondary" onclick="window.__opHQ.removeIncome('${i.id}')">Remove</button></div></div>`).join('');
+}
+function totalYearlyIncome(){
+  return state.incomes.reduce((s,i)=>{
+    const amt=Number(i.amount)||0;
+    const mult=i.period==='year'?1:i.period==='month'?12:i.period==='biweekly'?26:i.period==='weekly'?52:2080;
+    return s+amt*mult;
+  },0);
+}
+function renderIncomeSummary(){
+  const el=$('#incomeSummaryAmt');if(!el)return;
+  const ded=Number(getData('ded_amount'))||0;
+  const net=Math.max(0,totalYearlyIncome()-ded);
+  el.textContent='$'+net.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function initSigDate(){
+  // Populate today's date in the display
+  const dateEl=$('#sigDateDisplay');
+  if(dateEl){
+    const d=new Date();
+    dateEl.textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    setData('sig_date',d.toISOString().slice(0,10));
+  }
+  // Live-bind signature name input to the preview
+  const inp=$('#sig_name');
+  const prev=$('#sigPreview');
+  if(inp&&prev&&!inp.__sigBound){
+    inp.__sigBound=true;
+    const update=()=>{prev.textContent=inp.value||'\u00a0';};
+    inp.addEventListener('input',update);
+    update();
+  }
+}
+
+function renderReview(){
+  const p=$('#reviewPanel');if(!p)return;
+  const g=(k,d='—')=>{const v=getData(k);return v?escapeHtml(String(v)):d};
+  const addr=[g('a_street',''),getData('a_apt')?'Apt '+g('a_apt'):'',g('a_state'),g('a_city'),g('a_zip'),g('a_county')?g('a_county')+' County':''].filter(Boolean).join(', ');
+  const mailAddr=getData('mail_same')==='No'?[g('m_street',''),g('m_state'),g('m_city'),g('m_zip'),g('m_county')?g('m_county')+' County':''].filter(Boolean).join(', '):'Same as home';
+  const memberLines=state.members.length>0?state.members.map(m=>escapeHtml((m.first+' '+m.last).trim()+' ('+(m.relationship||'—')+')')).join('<br>'):'Just me';
+  const incomeLines=state.incomes.length>0?state.incomes.map(i=>escapeHtml(i.type+': $'+Number(i.amount).toLocaleString()+'/'+i.period)).join('<br>'):'None';
+  p.innerHTML=`
+    <div class="review-group"><h3>Quick Quote <button type="button" class="edit" data-goto="2">Edit</button></h3><div class="review-list">
+      <div><span class="lbl">Plan type</span><span class="val">${(g('plan_type','—')+'').replace('_',' ')}</span></div>
+      <div><span class="lbl">Date of birth</span><span class="val">${g('p_dob')}</span></div>
+      <div><span class="lbl">Household size</span><span class="val">${g('hh_size')}</span></div>
+      <div><span class="lbl">Annual income</span><span class="val">${g('hh_income','—')}</span></div>
+      <div><span class="lbl">Gender</span><span class="val">${g('p_sex')}</span></div>
+      <div><span class="lbl">Tobacco use</span><span class="val">${g('p_tobacco')}</span></div>
+      <div><span class="lbl">Pregnant</span><span class="val">${g('p_pregnant','N/A')}</span></div>
+      <div><span class="lbl">Employment</span><span class="val">${g('p_employment')}</span></div>
+      <div><span class="lbl">Coverage urgency</span><span class="val">${g('p_urgency')}</span></div>
+    </div></div>
+    <div class="review-group"><h3>Your Info <button type="button" class="edit" data-goto="10">Edit</button></h3><div class="review-list">
+      <div><span class="lbl">Name</span><span class="val">${g('p_first')} ${g('p_middle','')} ${g('p_last')}</span></div>
+      <div><span class="lbl">SSN</span><span class="val">${getData('p_has_ssn')==='Yes'?(getData('p_ssn')?'***-**-'+String(getData('p_ssn')).replace(/\D/g,'').slice(-4):'—'):'Not provided'}</span></div>
+      <div><span class="lbl">Phone</span><span class="val">${g('c_phone')}</span></div>
+      <div><span class="lbl">Email</span><span class="val">${g('c_email')}</span></div>
+      <div class="full"><span class="lbl">Home address</span><span class="val">${escapeHtml(addr)||'—'}</span></div>
+      <div class="full"><span class="lbl">Mailing address</span><span class="val">${escapeHtml(mailAddr)}</span></div>
+      <div><span class="lbl">Marital status</span><span class="val">${(g('p_marital','—')+'').replace('_',' ')}</span></div>
+      <div><span class="lbl">Tax filing status</span><span class="val">${g('t_status')}</span></div>
+    </div></div>
+    <div class="review-group"><h3>Eligibility <button type="button" class="edit" data-goto="19">Edit</button></h3><div class="review-list">
+      <div><span class="lbl">US citizen</span><span class="val">${g('e_citizen')}${getData('e_citizen_type')?' · '+(g('e_citizen_type')+'').replace('_',' '):''}</span></div>
+      <div><span class="lbl">Eligible immigration</span><span class="val">${g('e_immigration','N/A')}</span></div>
+      <div><span class="lbl">Veteran</span><span class="val">${g('p_veteran')}</span></div>
+      <div><span class="lbl">Previously received APTC</span><span class="val">${g('p_aptc_prior')}</span></div>
+      <div><span class="lbl">Incarcerated</span><span class="val">${g('p_incarc')}</span></div>
+      <div><span class="lbl">Native American / Alaska Native</span><span class="val">${g('p_native')}</span></div>
+    </div></div>
+    <div class="review-group"><h3>Household &amp; Income <button type="button" class="edit" data-goto="22">Edit</button></h3><div class="review-list">
+      <div class="full"><span class="lbl">Household members</span><span class="val">${memberLines}</span></div>
+      <div class="full"><span class="lbl">Additional income</span><span class="val">${incomeLines}</span></div>
+    </div></div>
+    <div class="review-group"><h3>Coverage <button type="button" class="edit" data-goto="25">Edit</button></h3><div class="review-list">
+      <div><span class="lbl">Prior coverage (60 days)</span><span class="val">${g('c_prior')}</span></div>
+      <div><span class="lbl">Life event / SEP trigger</span><span class="val">${g('c_sep','N/A')}</span></div>
+      <div><span class="lbl">Notice delivery</span><span class="val">${g('c_delivery')}</span></div>
+      <div><span class="lbl">Dental / Vision interest</span><span class="val">${g('c_addons','—')}</span></div>
+    </div></div>
+    <div class="review-group"><h3>Attestations &amp; Signature <button type="button" class="edit" data-goto="33">Edit</button></h3><div class="review-list">
+      <div><span class="lbl">Certified true</span><span class="val">${getData('att_truthful')?'✓':'—'}</span></div>
+      <div><span class="lbl">Will notify of changes</span><span class="val">${getData('att_changes')?'✓':'—'}</span></div>
+      <div><span class="lbl">TCPA consent</span><span class="val">${getData('att_tcpa')?'✓':'—'}</span></div>
+      <div><span class="lbl">Signature</span><span class="val">${g('sig_name')}</span></div>
+    </div></div>
+  `;
+  p.querySelectorAll('[data-goto]').forEach(btn=>btn.addEventListener('click',()=>{state.slide=Number(btn.dataset.goto);showSlide(state.slide);save();}));
+}
+
+function buildDocRequirements(){
+  // Returns array of {id, person, label, hint, kind} for each required upload
+  const reqs=[];
+  // Primary applicant
+  const primaryName=((getData('p_first')||'')+' '+(getData('p_last')||'')).trim()||'Primary applicant';
+  if(getData('e_citizen')==='Yes'&&getData('e_citizen_type')==='Naturalized'){
+    reqs.push({id:'primary_cit_doc',person:primaryName,label:'Citizenship document',hint:'Certificate of Naturalization (N-550), Certificate of Citizenship (N-560), or US passport.',kind:'citizenship'});
+  }
+  if(getData('e_citizen')==='No'&&getData('e_immigration')==='Yes'){
+    reqs.push({id:'primary_imm_doc',person:primaryName,label:'Immigration document',hint:'Permanent Resident Card (I-551), Employment Authorization (I-766), I-94, Visa, or Foreign passport.',kind:'immigration'});
+    reqs.push({id:'primary_photo_id',person:primaryName,label:'Photo ID',hint:'Driver license, state ID, or passport photo page.',kind:'photo_id',optional:true});
+  }
+  // Household members
+  state.members.forEach(m=>{
+    const name=((m.first||'')+' '+(m.last||'')).trim()||(m.relationship||'Household member');
+    if(m.citizen==='Yes'&&m.citizen_type==='Naturalized'){
+      reqs.push({id:'mem_cit_'+m.id,person:name,label:'Citizenship document',hint:'Certificate of Naturalization (N-550), Certificate of Citizenship (N-560), or US passport.',kind:'citizenship',memberId:m.id});
+    }
+    if(m.citizen==='No'&&m.immigration==='Yes'){
+      reqs.push({id:'mem_imm_'+m.id,person:name,label:'Immigration document',hint:'Permanent Resident Card (I-551), Employment Authorization (I-766), I-94, Visa, or Foreign passport.',kind:'immigration',memberId:m.id});
+    }
+  });
+  return reqs;
+}
+
+function renderDocUploadList(){
+  const wrap=$('#docUploadList');if(!wrap)return;
+  const reqs=buildDocRequirements();
+  if(reqs.length===0){wrap.innerHTML='<div class="small text-muted" style="padding:16px;text-align:center">No additional documents required.</div>';return;}
+  // Group by person
+  const byPerson={};
+  reqs.forEach(r=>{if(!byPerson[r.person])byPerson[r.person]=[];byPerson[r.person].push(r);});
+  wrap.innerHTML=Object.keys(byPerson).map(person=>{
+    const items=byPerson[person].map(r=>`
+      <div class="field" style="margin-top:14px">
+        <label class="field-label" style="display:block;margin-bottom:4px;font-weight:600">${escapeHtml(r.label)}${r.optional?' <span class="opt">(Optional)</span>':''}</label>
+        <div class="small text-muted" style="margin-bottom:6px">${r.hint}</div>
+        <div class="upload-wrap">
+          <input type="file" id="${r.id}" class="upload-file-input" accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" data-upload data-max-mb="3">
+          <label for="${r.id}" class="upload-drop" id="${r.id}_label">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div><div class="upload-title">Click to upload ${escapeHtml(r.label.toLowerCase())}</div><div class="upload-hint">PDF, JPG, PNG &middot; Max 3 MB</div></div>
+          </label>
+          <div class="upload-preview" id="${r.id}_preview"></div>
+        </div>
+      </div>`).join('');
+    return `<div style="border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px;background:#fff">
+      <div style="font-weight:700;color:var(--navy);font-size:15px;padding-bottom:4px;border-bottom:1px solid var(--border);margin-bottom:4px">${escapeHtml(person)}</div>
+      ${items}
+    </div>`;
+  }).join('');
+  // Re-run uploads wiring so the new inputs are bound
+  if(typeof initUploads==='function')initUploads();
+  // Bind post-submit behavior
+  bindPostSubmitUploads();
+}
+
+async function submitApplication(){
+  if(!state.reference)state.reference='OP-HL-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  // Show loading overlay
+  $$('.slide').forEach(s=>s.classList.remove('active'));
+  const loadEl=document.querySelector('[data-slide="32"]');if(loadEl)loadEl.classList.add('active');
+  updateStepper();
+  const payload=buildPayload();
+  try{
+    const r=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok)console.warn('Webhook returned',r.status);
+  }catch(e){
+    console.warn('Webhook error',e);
+  }
+  // Branch: show upload screen if ANY person needs a document; otherwise thank you
+  const reqs=buildDocRequirements();
+  const needsUpload=reqs.length>0;
+  const nextSid=needsUpload?'33':'34';
+  const nextIdx=Array.from($$('.slide')).findIndex(s=>s.dataset.slide===nextSid);
+  state.slide=nextIdx;
+  state.submitted=true;
+  save();
+  $$('.slide').forEach(s=>s.classList.remove('active'));
+  slides()[nextIdx].classList.add('active');
+  updateStepper();
+  // Populate reference and render uploads
+  const rTarget=needsUpload?$('#refNumberNC'):$('#refNumber');
+  if(rTarget)rTarget.textContent=state.reference;
+  if(needsUpload){
+    renderDocUploadList();
+  }
+}
+
+function bindPostSubmitUploads(){
+  const reqs=buildDocRequirements();
+  reqs.forEach(r=>{
+    const inp=document.getElementById(r.id);if(!inp)return;
+    if(inp.__postBound)return;
+    inp.__postBound=true;
+    inp.addEventListener('change',()=>{
+      // wait a tick for base64 to be stored by the standard upload handler
+      setTimeout(async()=>{
+        const data=getData(r.id+'_data');
+        if(!data)return;
+        const docsPayload={
+          source:SOURCE_NAME,
+          reference:state.reference,
+          phase:'documents',
+          submitted_at:new Date().toISOString(),
+          document:{
+            slot:r.id,
+            for:r.person,
+            kind:r.kind,
+            label:r.label,
+            member_id:r.memberId||null,
+            file:{name:getData(r.id+'_name'),type:getData(r.id+'_type'),size:getData(r.id+'_size'),data:data}
+          }
+        };
+        try{await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(docsPayload)});toast('Document uploaded');}catch(e){console.warn('Upload webhook error',e);}
+      },300);
+    });
+  });
+  const done=document.getElementById('uploadDoneBtn');
+  if(done&&!done.__b){done.__b=true;done.addEventListener('click',()=>{
+    const tyIdx=Array.from($$('.slide')).findIndex(s=>s.dataset.slide==='34');
+    state.slide=tyIdx;
+    $$('.slide').forEach(s=>s.classList.remove('active'));
+    slides()[tyIdx].classList.add('active');
+    const r=$('#refNumber');if(r)r.textContent=state.reference||'OP-HL-0000';
+    updateStepper();
+  });}
+  const skip=document.getElementById('skipUploadLink');
+  if(skip&&!skip.__b){skip.__b=true;skip.addEventListener('click',e=>{e.preventDefault();window.location.href='https://www.onepointinsuranceagency.com';});}
+}
+
+function keysBy(prefix){
+  return Object.keys(state.data).filter(k=>k.startsWith(prefix)&&state.data[k]).map(k=>{
+    const key=k.replace(prefix,'');const p=allPeople().find(x=>x.key===key);return p?p.name:key;
+  });
+}
+
+function buildPayload(){
+  const g=k=>getData(k)||'';
+  return {
+    source:SOURCE_NAME,
+    submitted_at:new Date().toISOString(),
+    reference:state.reference,
+    quick_quote:{
+      zip:g('w_zip'),
+      plan_type:g('plan_type'),
+      date_of_birth:g('p_dob'),
+      household_size:g('hh_size'),
+      annual_income:g('hh_income'),
+      gender:g('p_sex'),
+      tobacco_use:g('p_tobacco'),
+      pregnant:g('p_pregnant'),
+      employment:g('p_employment'),
+      coverage_urgency:g('p_urgency')
+    },
+    applicant:{
+      first:g('p_first'),middle:g('p_middle'),last:g('p_last'),
+      has_ssn:g('p_has_ssn'),
+      ssn:g('p_has_ssn')==='Yes'?g('p_ssn'):'',
+      phone:g('c_phone'),email:g('c_email'),
+      marital_status:g('p_marital'),
+      address:{street:g('a_street'),apt:g('a_apt'),state:g('a_state'),city:g('a_city'),zip:g('a_zip'),county:g('a_county'),
+        mailing_same:g('mail_same'),
+        mailing:{street:g('m_street'),state:g('m_state'),city:g('m_city'),zip:g('m_zip'),county:g('m_county')}}
+    },
+    tax:{filing_status:g('t_status')},
+    eligibility:{
+      us_citizen:g('e_citizen'),
+      citizen_type:g('e_citizen_type'),
+      immigration_status:g('e_immigration'),
+      veteran:g('p_veteran'),
+      aptc_prior:g('p_aptc_prior'),
+      incarcerated:g('p_incarc'),
+      native_american:g('p_native')
+    },
+    household:{
+      members:state.members.map(m=>({
+        first:m.first,middle:m.middle||'',last:m.last,
+        relationship:m.relationship,dob:m.dob,sex:m.sex,
+        applying:m.applying||'',citizen:m.citizen||'',
+        has_ssn:m.has_ssn||'',ssn:m.has_ssn==='Yes'?(m.ssn||''):'',
+        tobacco:m.tobacco||'',pregnant:m.pregnant||''
+      }))
+    },
+    income:{has_additional:g('inc_more'),sources:state.incomes},
+    coverage:{
+      prior_coverage_60d:g('c_prior'),
+      sep_trigger:g('c_sep'),
+      delivery_preference:g('c_delivery'),
+      addons:g('c_addons'),
+      want_dental:g('c_addons')==='Both'||g('c_addons')==='Dental',
+      want_vision:g('c_addons')==='Both'||g('c_addons')==='Vision'
+    },
+    attestations:{
+      truthful:!!getData('att_truthful'),
+      will_notify_changes:!!getData('att_changes'),
+      tcpa_consent:!!getData('att_tcpa')
+    },
+    signature:{
+      name:g('sig_name'),
+      date:new Date().toISOString().slice(0,10)
+    }
+  };
+}
+
+function formatFileSize(bytes){
+  const b=Number(bytes)||0;
+  if(b>=1024*1024)return (b/1024/1024).toFixed(2)+' MB';
+  if(b>=1024)return (b/1024).toFixed(1)+' KB';
+  return b+' B';
+}
+function fileIconLabel(type,name){
+  const t=String(type||'').toLowerCase();
+  const n=String(name||'').toLowerCase();
+  if(t.startsWith('image/')||/\.(jpe?g|png|heic|webp|gif)$/.test(n))return 'IMG';
+  if(t==='application/pdf'||n.endsWith('.pdf'))return 'PDF';
+  return 'DOC';
+}
+function renderUploadPreview(key){
+  const preview=$('#'+key+'_preview');if(!preview)return;
+  const label=$('#'+key+'_label');
+  const name=getData(key+'_name');
+  if(name){
+    preview.innerHTML=`<div class="upload-file"><div class="upload-file-ico">${fileIconLabel(getData(key+'_type'),name)}</div><div class="upload-file-info"><div class="upload-file-name">${escapeHtml(name)}</div><div class="upload-file-size">${escapeHtml(formatFileSize(getData(key+'_size')))}</div></div><button type="button" class="upload-remove" data-upload-remove="${key}">Remove</button></div>`;
+    preview.classList.add('show');
+    if(label)label.style.display='none';
+  }else{
+    preview.innerHTML='';
+    preview.classList.remove('show');
+    if(label)label.style.display='flex';
+  }
+}
+function initUploads(){
+  $$('[data-upload]').forEach(inp=>{
+    const key=inp.id;
+    if(inp.__upBound)return;
+    inp.__upBound=true;
+    inp.addEventListener('change',e=>{
+      const file=e.target.files&&e.target.files[0];
+      if(!file)return;
+      const maxMb=Number(inp.dataset.maxMb)||3;
+      if(file.size>maxMb*1024*1024){
+        toast('File is too large. Max '+maxMb+' MB.');
+        inp.value='';
+        return;
+      }
+      const reader=new FileReader();
+      reader.onload=()=>{
+        setData(key+'_data',reader.result);
+        setData(key+'_name',file.name);
+        setData(key+'_size',file.size);
+        setData(key+'_type',file.type||'');
+        renderUploadPreview(key);
+      };
+      reader.onerror=()=>{toast('Could not read file. Please try again.');};
+      reader.readAsDataURL(file);
+    });
+    renderUploadPreview(key);
+  });
+  if(!document.__upRemoveBound){
+    document.__upRemoveBound=true;
+    document.addEventListener('click',e=>{
+      const btn=e.target.closest('[data-upload-remove]');
+      if(!btn)return;
+      const key=btn.dataset.uploadRemove;
+      setData(key+'_data','');setData(key+'_name','');setData(key+'_size','');setData(key+'_type','');
+      const inp=$('#'+key);if(inp)inp.value='';
+      renderUploadPreview(key);
+    });
+  }
+}
+
+function initResume(){
+  const saved=load();if(!saved)return;
+  // Only show resume if user made real progress (past slide 1, or has members, or has substantial data)
+  const dataKeys=Object.keys(saved.data||{}).filter(k=>k!=='w_zip'&&k!=='a_zip');
+  const hasData=saved.slide>1||dataKeys.length>3||(saved.members||[]).length>0;
+  if(!hasData){clearSaved();return;}
+  const modal=$('#resumeModal');modal.classList.add('show');
+  $('#resumeBtn').addEventListener('click',()=>{
+    state.slide=saved.slide||0;
+    state.members=saved.members||[];
+    state.incomes=saved.incomes||[];
+    state.reference=saved.reference||'';
+    state.submitted=!!saved.submitted;
+    state.data=saved.data||{};
+    modal.classList.remove('show');
+    $$('.input, .select, .sig-input').forEach(inp=>{if(inp.id&&state.data[inp.id]!==undefined)inp.value=state.data[inp.id];});
+    $$('[data-radio]').forEach(g=>{const k=g.dataset.radio,c=state.data[k];g.querySelectorAll('.opt-btn').forEach(b=>{if(b.dataset.val===c)b.classList.add('selected');});});
+    $$('[data-check]').forEach(l=>{if(state.data[l.dataset.check])l.classList.add('selected');});
+    refreshAllReveals();
+    $$('[data-upload]').forEach(inp=>renderUploadPreview(inp.id));
+    wireAddressBlock('a');wireAddressBlock('m');
+    showSlide(state.slide);
+  });
+  $('#startFreshBtn').addEventListener('click',()=>{
+    clearSaved();modal.classList.remove('show');
+    state.slide=0;state.members=[];state.incomes=[];state.data={};
+    showSlide(0);
+  });
+}
+
+function initNav(){
+  $$('[data-next]').forEach(b=>b.addEventListener('click',nextSlide));
+  $$('[data-back]').forEach(b=>b.addEventListener('click',prevSlide));
+  const sb=$('#submitBtn');if(sb)sb.addEventListener('click',submitApplication);
+  const fb=$('#finalizeBtn');if(fb)fb.addEventListener('click',submitApplication);
+}
+
+function init(){
+  initInputs();initRadios();initChecks();initNav();initMemberButtons();initIncomeBtn();initUploads();
+  wireAddressBlock('a');wireAddressBlock('m');
+  refreshAllReveals();initResume();updateStepper();
+  window.__opHQ={saveMember,editMember,removeMember,removeIncome,addMemberIncome,removeMemberIncome,memberNext,memberBack,cancelMemberEdit};
+
+  // Pre-fill ZIP from URL parameter and auto-advance
+  var urlParams = new URLSearchParams(window.location.search);
+  var preZip = urlParams.get('zip');
+  if(preZip && preZip.length === 5 && /^\d{5}$/.test(preZip)){
+    var wzip = document.getElementById('w_zip');
+    if(wzip){
+      wzip.value = preZip;
+      wzip.dispatchEvent(new Event('input'));
+    }
+  }
+}
+document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+</body>
+</html>

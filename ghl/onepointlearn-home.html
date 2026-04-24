@@ -1,0 +1,981 @@
+<!--
+  ONEPOINT LEARN: HOME & PROPERTY (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/home
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Home & Property
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #2e9a55;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Home &amp; Property</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Home &amp; Property Insurance, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on what a homeowners policy actually pays for, where the quiet sub-limits hide, and the separate coverages most owners never hear about until it's too late.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~28</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/home" class="lc-btn lc-btn-ghost">Go to Home Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From dwelling and contents to flood, earthquake, and vacant homes, every coverage that actually belongs on your property.</div>
+      <ul class="art-list">
+        <li>Policy Structure</li>
+        <li>RCV vs. ACV</li>
+        <li>Condo (HO-6)</li>
+        <li>Landlord</li>
+        <li>Flood</li>
+        <li>Earthquake</li>
+        <li>Scheduled Property</li>
+        <li>Vacant &amp; Unoccupied</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · The Four Parts of a Homeowners Policy</option>
+      <option value="m2">Chapter 2 · Replacement Cost vs. Actual Cash Value</option>
+      <option value="m3">Chapter 3 · Condo Insurance (HO-6)</option>
+      <option value="m4">Chapter 4 · Landlord Insurance</option>
+      <option value="m5">Chapter 5 · Flood Insurance</option>
+      <option value="m6">Chapter 6 · Earthquake Insurance</option>
+      <option value="m7">Chapter 7 · Scheduled Personal Property</option>
+      <option value="m8">Chapter 8 · Vacant &amp; Unoccupied Homes</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">The Four Parts of a Homeowners Policy</a></li>
+        <li><a href="#m2" data-mod="2">Replacement Cost vs. Actual Cash Value</a></li>
+        <li><a href="#m3" data-mod="3">Condo Insurance (HO-6)</a></li>
+        <li><a href="#m4" data-mod="4">Landlord Insurance</a></li>
+        <li><a href="#m5" data-mod="5">Flood Insurance</a></li>
+        <li><a href="#m6" data-mod="6">Earthquake Insurance</a></li>
+        <li><a href="#m7" data-mod="7">Scheduled Personal Property</a></li>
+        <li><a href="#m8" data-mod="8">Vacant &amp; Unoccupied Homes</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Home &amp; Property</div>
+        <h1 class="lmod-title">The Four Parts of a Homeowners Policy (and What Each One Actually Pays For)</h1>
+        <p class="lmod-subtitle">Dwelling, contents, liability, loss of use, explained.</p>
+        <p class="lmod-lead">Most people think of homeowners insurance as one big "if something breaks, it covers it" policy. It's not. A standard homeowners policy is actually four separate coverages stacked together, each with its own limit and its own rules.</p>
+        <p>Understanding how those four parts work is the difference between getting a full payout and getting surprised. Every dollar your insurer sends after a claim comes out of one of these buckets, and each bucket has a ceiling.</p>
+
+        <h2>Coverage A, Dwelling</h2>
+        <p>Pays to repair or rebuild the physical structure of your home: walls, roof, foundation, built-in appliances, attached garage. This is the number your policy is built around, usually set to the cost to rebuild the home from scratch, not its market value. A home that would sell for $400,000 might only cost $280,000 to rebuild.</p>
+
+        <h2>Coverage B, Other Structures</h2>
+        <p>Pays for structures on your property that aren't attached to the house: detached garage, fence, shed, gazebo, driveway gate. Usually set at 10% of Coverage A automatically. If your Coverage A is $280,000, Coverage B is $28,000. If you have a $50,000 detached workshop, raise it.</p>
+
+        <h2>Coverage C, Personal Property</h2>
+        <p>Pays for your stuff: furniture, clothes, electronics, kitchen gear, bikes in the garage. Usually set at 50% to 70% of Coverage A. So a $280,000 dwelling gives you roughly $140,000 to $200,000 in personal property coverage.</p>
+        <p>Items like jewelry, firearms, silverware, and art have sub-limits, often $1,500 to $2,500 per category. A $15,000 wedding ring needs to be "scheduled" (listed separately) to be fully covered.</p>
+
+        <h2>Coverage D, Loss of Use</h2>
+        <p>Pays for a hotel, restaurant meals, and pet boarding while your home is being repaired after a covered loss. Usually set at 20% of Coverage A, around $56,000 on a $280,000 policy. This coverage is a lifesaver when a kitchen fire puts you out of the house for four months.</p>
+
+        <h2>The fifth and sixth, liability coverages</h2>
+        <p>On top of those four, every policy includes:</p>
+        <ul>
+          <li><strong>Personal Liability.</strong> Pays if someone is injured on your property or you damage someone else's property. Usually $100,000 to $500,000.</li>
+          <li><strong>Medical Payments to Others.</strong> Pays small medical bills for guests regardless of fault. Usually $1,000 to $5,000.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A kitchen fire on a $280,000 dwelling pushes you out of the house for four months. Dwelling pays to rebuild the kitchen. Coverage C replaces the cabinets' contents and ruined furniture. Coverage D covers four months of hotel bills, restaurant meals, and kennel fees for the dog, up to roughly $56,000. Without Coverage D, that's out of pocket.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My policy is for the value of my home."</strong> It's for the cost to rebuild your home. Those are different numbers.</li>
+            <li><strong>"My stuff is covered no matter what."</strong> Jewelry, cash, firearms, and art all have sub-limits. Check yours.</li>
+            <li><strong>"Loss of use is a small coverage I don't need to understand."</strong> It's the coverage that keeps a roof over your family's head during a claim.</li>
+          </ul>
+        </div>
+
+        <p>For deeper reading on how this all plays out in a real claim, our <a href="/blog/homeowners-georgia">Georgia homeowners post</a> walks through a live example, and our <a href="/home">home page</a> covers how to size each coverage for your situation.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Replacement Cost vs. Actual Cash Value</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Home &amp; Property</div>
+        <h1 class="lmod-title">Replacement Cost vs. Actual Cash Value</h1>
+        <p class="lmod-subtitle">The setting that changes everything.</p>
+        <p class="lmod-lead">There are two ways a homeowners or renters policy can pay you after a claim. One pays what it costs to replace your stuff today. The other pays what your stuff is worth today. The difference is thousands of dollars.</p>
+        <p>This setting is buried on the declarations page, and most owners never look at it until a claim forces them to. By then, it's too late to change.</p>
+
+        <h2>Replacement Cost (RCV)</h2>
+        <p>Pays what it costs to buy a new version of what you lost, without subtracting for age or wear. A 10-year-old couch gets replaced with a new couch of similar quality.</p>
+
+        <h2>Actual Cash Value (ACV)</h2>
+        <p>Pays replacement cost minus depreciation. That 10-year-old couch might be worth $200 even though a new one costs $1,200. ACV pays $200.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A kitchen fire destroys your appliances, cabinets, and 8-year-old sectional. Replacement cost: $22,000. On an RCV policy, you get $22,000 (minus your deductible). On an ACV policy, after subtracting depreciation, you might get $11,000 to $14,000.</p>
+        </div>
+
+        <h2>It usually applies to two things separately</h2>
+        <ul>
+          <li><strong>Dwelling.</strong> Most standard policies cover the structure on a replacement cost basis automatically.</li>
+          <li><strong>Personal property.</strong> This is where ACV vs. RCV matters most. Many base policies cover contents on ACV unless you upgrade.</li>
+        </ul>
+        <p>Upgrading contents to RCV usually costs 5 to 15% more in premium, often $50 to $150 per year. At claim time, it can recover 2 to 3 times that every year in a single payout.</p>
+
+        <h2>Roof coverage is a trap</h2>
+        <p>Several states, including <strong>FL, TX, LA, AL, MS, and increasingly GA and SC</strong>, are moving toward ACV-only coverage on older roofs. A 20-year-old roof damaged by hail might get paid out at $4,000 on ACV even though replacement costs $18,000. Read your policy's roof schedule.</p>
+
+        <h2>How RCV actually pays out</h2>
+        <p>Most insurers pay ACV first, then the rest of the replacement cost after you actually replace the item and send receipts. You don't get a blank check, you get reimbursed as you rebuild.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Replacement cost means I get the retail price back."</strong> Yes, minus your deductible and usually in two payments.</li>
+            <li><strong>"My old stuff is worth what I paid for it."</strong> ACV depreciates everything, often sharply.</li>
+            <li><strong>"My policy automatically includes replacement cost."</strong> Not always for personal property. Check the declarations page.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> walks through how to check and upgrade this setting on your policy.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>The Four Parts of a Homeowners Policy</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Condo Insurance (HO-6)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Home &amp; Property</div>
+        <h1 class="lmod-title">Condo Insurance (HO-6)</h1>
+        <p class="lmod-subtitle">Why your HOA's master policy isn't enough.</p>
+        <p class="lmod-lead">If you own a condo, your HOA's master policy covers part of your home, but nowhere near all of it. Condo insurance, technically an HO-6 policy, fills the gap. Skipping it means paying for your own walls, floors, and cabinets out of pocket after a burst pipe or kitchen fire.</p>
+
+        <h2>What the HOA's master policy covers</h2>
+        <p>HOAs carry one of three types of master policies:</p>
+        <ul>
+          <li><strong>Bare walls.</strong> Covers only the building exterior and common areas. Everything from your drywall in is your responsibility, including flooring, cabinets, appliances, and fixtures.</li>
+          <li><strong>Single-entity.</strong> Covers the building plus original fixtures, but not upgrades you made.</li>
+          <li><strong>All-inclusive.</strong> Covers the building and most fixtures, even upgrades. Rarest of the three.</li>
+        </ul>
+        <p>Read your HOA's master policy declarations before you size your HO-6.</p>
+
+        <h2>What an HO-6 covers</h2>
+        <ul>
+          <li><strong>Interior structure.</strong> Drywall, flooring, cabinets, countertops, light fixtures, built-ins.</li>
+          <li><strong>Personal property.</strong> Same as a homeowners Coverage C.</li>
+          <li><strong>Liability.</strong> If someone's injured in your unit or you accidentally flood the unit below.</li>
+          <li><strong>Loss assessment.</strong> Pays your share when the HOA bills residents for a loss that exceeded the master policy.</li>
+          <li><strong>Loss of use.</strong> Hotel costs if your unit is uninhabitable.</li>
+        </ul>
+
+        <h2>Loss assessment is the hidden one</h2>
+        <p>If a major loss hits the building, a fire that damages 10 units, or a lawsuit against the HOA, the master policy may not cover it all. The HOA assesses each owner their share. Loss assessment coverage on your HO-6 picks up that bill, often up to $50,000. Add this. It's cheap (usually $25 to $75 a year) and it prevents a five-figure surprise.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>A typical HO-6 policy runs $200 to $600 per year, well below a traditional homeowners policy because you're not insuring the building structure.</p>
+        </div>
+
+        <h2>State considerations</h2>
+        <p><strong>FL</strong> condo owners face unique rules after major hurricanes and the Surfside collapse, many HOAs require owners to carry minimum HO-6 limits and specific loss assessment amounts. <strong>NY</strong> co-ops work differently from condos; a co-op needs an HO-6-like policy with specific language. <strong>NJ, MD, VA, and IL</strong> have large condo markets with specific HOA master policy standards.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My HOA covers everything inside my unit."</strong> Almost never true.</li>
+            <li><strong>"I don't need liability, someone hurt in my unit would sue the HOA."</strong> They can sue both.</li>
+            <li><strong>"I don't have enough stuff to need contents coverage."</strong> Furniture, electronics, and clothing add up fast, usually $30,000 to $80,000 in a typical condo.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers HO-6 alongside standard homeowners and renters.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Replacement Cost vs. Actual Cash Value</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Landlord Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Home &amp; Property</div>
+        <h1 class="lmod-title">Landlord Insurance</h1>
+        <p class="lmod-subtitle">Why a homeowners policy won't cover a rental.</p>
+        <p class="lmod-lead">If you rent out a property, even one unit, even part-time, your homeowners policy doesn't cover it. You need a landlord policy, usually an HO-3 variant called a DP-3 (Dwelling Policy Form 3). Filing a homeowners claim on a rental can get the claim denied and the policy canceled.</p>
+
+        <h2>What a landlord policy covers</h2>
+        <ul>
+          <li><strong>The structure.</strong> Same as homeowners Coverage A.</li>
+          <li><strong>Other structures.</strong> Detached garages, sheds, fences.</li>
+          <li><strong>Loss of rental income.</strong> Pays the rent you lose while the property is being repaired after a covered loss.</li>
+          <li><strong>Landlord liability.</strong> If a tenant or visitor is injured and sues you.</li>
+          <li><strong>Landlord personal property.</strong> Covers items you own and leave at the property (appliances, lawn equipment).</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>The tenant's belongings.</strong> That's their renters policy.</li>
+          <li><strong>Tenant-caused damage beyond wear and tear.</strong> That's the security deposit plus, in bad cases, a lawsuit.</li>
+          <li><strong>Loss of rent from a tenant who just stops paying.</strong> That's an eviction, not a claim.</li>
+        </ul>
+
+        <h2>Short-term rentals are a different beast</h2>
+        <p>If you run an Airbnb or VRBO, a standard landlord policy likely excludes it. Short-term rentals usually require a <strong>commercial landlord policy</strong> or a specific short-term rental endorsement. Premium is higher, often 20 to 40% more, because of guest turnover risk.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>A landlord policy generally costs 15 to 25% more than a homeowners policy on the same building. A $280,000 single-family rental might cost $1,400 to $2,200 per year in most OnePoint states, with higher rates in FL, LA, and TX because of wind and hail exposure.</p>
+        </div>
+
+        <h2>Requiring tenants to carry renters insurance</h2>
+        <p>Most professional landlords require renters insurance in the lease, usually $100,000 in liability. It protects both parties, and it's cheap ($10 to $25 a month) for the tenant. If you don't currently require it, you probably should.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"A homeowners policy covers it if I just rent out the basement."</strong> Not usually. Any rental activity triggers a different policy or an endorsement.</li>
+            <li><strong>"My tenants' renters insurance covers my building."</strong> Never. Their policy covers their stuff and their liability, not your structure.</li>
+            <li><strong>"It's only part-time so I don't need to tell my insurer."</strong> Non-disclosure is the fastest way to have a claim denied.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers landlord policies alongside homeowners and condo.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Condo Insurance (HO-6)</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Flood Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Home &amp; Property</div>
+        <h1 class="lmod-title">Flood Insurance</h1>
+        <p class="lmod-subtitle">Why your homeowners policy doesn't cover floods.</p>
+        <p class="lmod-lead">Standard homeowners policies cover water damage from some sources, a burst pipe, an overflowing toilet, rain blown in through a broken window. They do not cover flood. Flood has a specific insurance definition, and it requires a separate policy.</p>
+
+        <h2>What counts as flood</h2>
+        <p>FEMA defines flood as surface water that inundates normally dry land, a rising river, a storm surge, a backed-up storm sewer, heavy rainfall that overwhelms drainage. If water touches the ground outside before entering your home, it's flood. If water came from inside (pipe, appliance, roof leak), it's usually homeowners.</p>
+
+        <h2>Where to buy it</h2>
+        <ul>
+          <li><strong>NFIP (National Flood Insurance Program).</strong> Run by FEMA, sold through private insurers. Limits cap at $250,000 building and $100,000 contents. Available in all 18 OnePoint states.</li>
+          <li><strong>Private flood insurance.</strong> Growing fast, often cheaper than NFIP in low-risk zones, with higher limits and sometimes broader coverage.</li>
+        </ul>
+
+        <h2>Who needs it</h2>
+        <p>FEMA designates flood zones on maps. If your home is in a <strong>Special Flood Hazard Area (Zone A, AE, V, VE)</strong> and you have a federally backed mortgage, the lender requires flood insurance. But:</p>
+        <ul>
+          <li>25% of flood claims come from outside high-risk zones.</li>
+          <li>FL, LA, TX, NJ, NY, NC, SC, VA, and MD all have significant flood exposure inland and along coasts.</li>
+          <li>Even AZ gets flash floods, last-mile monsoon events cause regular damage.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Low-risk zone (Zone X): $300 to $700 per year. Moderate-risk: $600 to $1,500 per year. High-risk (Zone AE coastal): $1,500 to $5,000 per year, with some specific FL and LA coastal rates far higher. NFIP rolled out Risk Rating 2.0 in 2021 to 2023, which priced policies based on specific property risk instead of zone-wide averages.</p>
+        </div>
+
+        <h2>The 30-day waiting period</h2>
+        <p>NFIP policies don't take effect for 30 days after you buy them (with narrow exceptions). You cannot buy flood insurance the day a hurricane forms and expect coverage. Buy it before the season, not during.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I'm not in a flood zone so I don't need it."</strong> Over a 30-year mortgage, a home in a moderate-risk zone has a 26% chance of flooding.</li>
+            <li><strong>"My homeowners covers it if water comes in through the roof."</strong> Wind-driven rain through a roof opening can be covered. Water that entered from the ground up never is.</li>
+            <li><strong>"The government pays for flood damage."</strong> Federal disaster aid is usually a loan, not a grant, and only activates during federally declared disasters.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers flood alongside standard homeowners.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Landlord Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Earthquake Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Home &amp; Property</div>
+        <h1 class="lmod-title">Earthquake Insurance</h1>
+        <p class="lmod-subtitle">The coverage you don't know you need.</p>
+        <p class="lmod-lead">Like flood, earthquake damage is specifically excluded from every standard homeowners policy. If the ground shakes and your foundation cracks, you pay out of pocket, unless you bought earthquake coverage separately.</p>
+
+        <h2>Where the risk actually is</h2>
+        <p>You probably associate earthquake risk with California, but several OnePoint states have real exposure:</p>
+        <ul>
+          <li><strong>MO, TN, AR.</strong> The New Madrid Seismic Zone runs through all three. A major event here would affect IL, MO, TN, AR, KY, and MS simultaneously.</li>
+          <li><strong>SC.</strong> The 1886 Charleston earthquake was the largest ever recorded in the eastern U.S. The fault is still active.</li>
+          <li><strong>GA, NC, VA.</strong> Lower but real risk. The 2011 Virginia quake cracked the Washington Monument.</li>
+          <li><strong>OH.</strong> Consistent small-to-moderate seismic activity.</li>
+        </ul>
+
+        <h2>What a policy covers</h2>
+        <ul>
+          <li><strong>Dwelling damage.</strong> Foundation, walls, roof.</li>
+          <li><strong>Personal property.</strong> Items shaken off shelves and broken.</li>
+          <li><strong>Loss of use.</strong> Temporary housing if the home is unlivable.</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>Fire caused by earthquake.</strong> Covered by homeowners, not earthquake.</li>
+          <li><strong>Flood caused by earthquake</strong> (tsunami, dam break). Requires flood insurance.</li>
+          <li><strong>Damage to land.</strong> Landslides, sinkholes.</li>
+        </ul>
+
+        <h2>The deductible problem</h2>
+        <p>Earthquake policies use <strong>percentage deductibles</strong>, not dollar deductibles. Common options: 5%, 10%, or 15% of the dwelling limit. On a $280,000 home with a 10% deductible, you're paying the first $28,000 out of pocket. This is why many homeowners who "have" earthquake insurance end up with no payout on moderate damage, the damage doesn't exceed the deductible.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Low-risk states (most of OnePoint's footprint): $100 to $400 per year. Moderate-risk (TN, MO, SC): $300 to $800 per year. High-risk zip codes (near New Madrid fault, Charleston): $800 to $2,000 per year.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"It only matters in California."</strong> The New Madrid and Charleston faults say otherwise.</li>
+            <li><strong>"My homeowners includes earthquake."</strong> Never, without an explicit endorsement.</li>
+            <li><strong>"The deductible doesn't matter."</strong> It's the whole game. A 15% deductible means you eat most small-to-moderate losses.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers earthquake endorsements alongside standard coverages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Flood Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Scheduled Personal Property</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Home &amp; Property</div>
+        <h1 class="lmod-title">Scheduled Personal Property</h1>
+        <p class="lmod-subtitle">Why your $15,000 ring is only insured for $1,500.</p>
+        <p class="lmod-lead">Your homeowners policy covers your stuff, with sub-limits that quietly cap specific categories at a few thousand dollars. A lost wedding ring, stolen camera gear, or damaged art piece can hit the sub-limit and leave you with a tiny fraction of its value. Scheduling fixes that.</p>
+
+        <h2>The sub-limits most policies include</h2>
+        <ul>
+          <li><strong>Jewelry, watches, furs.</strong> Usually capped at $1,500 to $2,500 total for theft.</li>
+          <li><strong>Firearms.</strong> $2,500 to $5,000.</li>
+          <li><strong>Silverware, goldware, pewter.</strong> $2,500.</li>
+          <li><strong>Business property.</strong> $2,500.</li>
+          <li><strong>Cash.</strong> $200.</li>
+          <li><strong>Securities, deeds, manuscripts.</strong> $1,500.</li>
+        </ul>
+        <p>These limits apply per category, not per item. If you have $30,000 in jewelry and $5,000 in firearms, the default coverage is almost useless.</p>
+
+        <h2>What scheduling does</h2>
+        <p>A scheduled personal property endorsement (or a separate "personal articles" policy) lists specific items with their appraised values. Each item is insured for its full value, usually with:</p>
+        <ul>
+          <li><strong>No deductible.</strong></li>
+          <li><strong>Broader coverage.</strong> Includes "mysterious disappearance" (losing a ring down the drain), which standard policies exclude.</li>
+          <li><strong>Worldwide coverage.</strong> Protects the item anywhere in the world.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Scheduling jewelry generally costs 1 to 2% of the appraised value per year. A $15,000 ring costs $150 to $300 per year to fully schedule. Firearms and cameras are often less, around 0.5 to 1% per year.</p>
+        </div>
+
+        <h2>What to schedule</h2>
+        <ul>
+          <li>Jewelry worth more than $2,500.</li>
+          <li>Engagement and wedding rings (almost always worth scheduling).</li>
+          <li>Firearms collections.</li>
+          <li>Camera and video equipment worth more than $5,000.</li>
+          <li>Collectibles: coins, stamps, sports memorabilia, rare books.</li>
+          <li>Art and antiques.</li>
+          <li>Musical instruments (especially for working musicians).</li>
+        </ul>
+
+        <h2>Appraisals matter</h2>
+        <p>Most insurers require a recent appraisal (within 3 to 5 years) for items above a certain value, often $5,000. Appraisals cost $75 to $200 per item and are worth it for claim speed and accuracy.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My homeowners covers my ring."</strong> Only up to the sub-limit, and only for theft, not loss.</li>
+            <li><strong>"I'll just raise my Coverage C limit."</strong> Coverage C has those category sub-limits regardless of total. Scheduling is the only way to break them.</li>
+            <li><strong>"My jewelry is safe at home."</strong> Over half of scheduled jewelry claims happen away from the home.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers scheduling alongside standard homeowners coverage.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Earthquake Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Vacant &amp; Unoccupied Homes</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Home &amp; Property</div>
+        <h1 class="lmod-title">Vacant &amp; Unoccupied Homes</h1>
+        <p class="lmod-subtitle">Why a 60-day vacation can void your policy.</p>
+        <p class="lmod-lead">Insurers treat empty homes differently from lived-in ones, and they treat "unoccupied" differently from "vacant." Getting the terminology wrong, or failing to notify your insurer, can turn a $300,000 claim into a $0 payout.</p>
+
+        <h2>Unoccupied vs. vacant</h2>
+        <ul>
+          <li><strong>Unoccupied.</strong> The home is temporarily empty but still furnished and maintained. A snowbird's FL house in July. An inherited home you're cleaning out. A vacation home you visit every few months.</li>
+          <li><strong>Vacant.</strong> The home is empty of personal property and not being lived in. An estate property between sale and new owner. A home gutted for renovation.</li>
+        </ul>
+        <p>Most standard homeowners policies include a <strong>60-day vacancy clause</strong>. If your home is vacant for more than 60 consecutive days, coverage for several perils, vandalism, glass breakage, water damage from freezing pipes, can be excluded or denied entirely.</p>
+
+        <h2>When you need a vacant home policy</h2>
+        <ul>
+          <li>Inherited property you're preparing to sell.</li>
+          <li>Renovation gutting the interior.</li>
+          <li>Between tenants for more than 60 days.</li>
+          <li>Second homes or vacation homes left empty for long stretches.</li>
+          <li>Investment properties pending rehab.</li>
+        </ul>
+
+        <h2>What a vacant home policy covers</h2>
+        <p>Similar to standard homeowners, but specifically underwritten for unoccupied risk. Commonly named perils only (fire, lightning, explosion) unless upgraded to special form. Premiums run <strong>50 to 100% higher</strong> than a standard homeowners policy, an empty house has more claims per year than an occupied one.</p>
+
+        <h2>Alternative: a vacancy permit endorsement</h2>
+        <p>If you're between tenants or temporarily unoccupied, your current insurer may issue a <strong>vacancy permit endorsement</strong>, a temporary waiver of the vacancy clause for 90 to 180 days. Cheaper than switching to a full vacant home policy, and available for predictable short gaps.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Vacancy permit endorsement: $100 to $500 flat fee depending on duration. Full vacant home policy: $1,500 to $4,000 per year on a $280,000 home.</p>
+        </div>
+
+        <h2>State-specific notes</h2>
+        <p>Winter freeze claims drive higher vacancy risk in <strong>OH, MI, IL, MO, MD, NJ, VA, NC, TN</strong>. In <strong>FL, TX, and LA</strong>, hurricane-season vacancy is a specific underwriting concern, many insurers require additional mitigation (storm shutters, someone to check the property) before writing coverage.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I can leave it empty while I travel, it's still my home."</strong> True for short absences. After 60 days, insurers stop seeing it that way.</li>
+            <li><strong>"My policy doesn't mention vacancy, so I'm fine."</strong> The clause is in every standard policy, often buried.</li>
+            <li><strong>"Vacant means forever empty."</strong> It can mean as little as 30 days of emptiness in some policies.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home insurance page</a> covers vacant home and vacancy permit options alongside standard homeowners.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Scheduled Personal Property</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Home &amp; Property track</div>
+          <h2>Ready to see how your own policy stacks up?</h2>
+          <p>A licensed OnePoint advisor can review your declarations page, spot the gaps, and tell you exactly where you're over or under covered. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/home" class="btn-white">Get a Home Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_home_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_home_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

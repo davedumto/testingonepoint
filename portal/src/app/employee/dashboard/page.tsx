@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Toast from '@/components/Toast';
+import ClockInWidget from '@/components/ClockInWidget';
 import { secureFetch } from '@/lib/client/secure-fetch';
 import { subscribe, CHANNELS } from '@/lib/pusher/client';
 import { formatClock, formatDate as formatDateShort, formatMonthAbbrev as formatEventMonth, formatDayOfMonth as formatEventDay } from '@/lib/client/format-time';
@@ -56,6 +57,12 @@ const QUICK_TOOLS = [
   { name: 'My LastPass Vault', url: 'https://lastpass.com/vault', color: '#d32d27', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498a1636a6c6547a3a3.png' },
   { name: 'Microsoft Teams', url: 'https://teams.cloud.microsoft/', color: '#5059c9', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498b0e5e2bb7fe92615.png' },
   { name: 'Outlook', url: 'https://outlook.cloud.microsoft/mail/', color: '#0078d4', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e934989ff45b49cc9201f8.png' },
+  // Newly added — design, image gen, and collaboration tools. Icons fetched
+  // via Google's favicon service (reliable 256x256) as a stopgap until the
+  // branded hero images are uploaded to the filesafe CDN alongside the rest.
+  { name: 'Canva', url: 'https://www.canva.com/', color: '#00c4cc', imageUrl: 'https://www.google.com/s2/favicons?domain=canva.com&sz=256' },
+  { name: 'HyGen', url: 'https://app.hygen.ai/', color: '#7c3aed', imageUrl: 'https://www.google.com/s2/favicons?domain=hygen.ai&sz=256' },
+  { name: 'Microsoft Loop', url: 'https://loop.cloud.microsoft/', color: '#5b5fc7', imageUrl: 'https://www.google.com/s2/favicons?domain=loop.cloud.microsoft&sz=256' },
 ];
 
 const CRM_IMAGE_URL = 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a717d5dd4e123759b.png';
@@ -219,6 +226,11 @@ export default function EmployeeTeamHubPage() {
           </div>
         </div>
       </div>
+
+      {/* Clock-in widget — first thing employees see under the greeting.
+          Pops a "don't forget to clock in" toast on mount when they're not
+          actively clocked in, so the prompt lands as soon as they land on the hub. */}
+      <ClockInWidget />
 
       {/* Insurance product / coverage tiles — image-led, SharePoint-style */}
       <section data-tour="products" style={{ marginBottom: 36 }}>

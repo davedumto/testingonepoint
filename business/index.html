@@ -18,147 +18,139 @@
   .hero-eyebrow { color: var(--orange); }
   .section-kicker { color: var(--orange); }
 
-  /* BUSINESS HERO — editorial cover: full-bleed photo, vertical orange spine label,
-     overlapping stat panel, dark quote card docked bottom-right */
+  /* BUSINESS HERO — disability-inspired: navy background, 2-column grid,
+     editorial content left, portrait image panel right with dynamic switching */
   .hero {
-    min-height: 0;
-    display: block; padding: 0;
+    min-height: 0; display: block; padding: 0;
     background: var(--navy);
     position: relative; overflow: visible;
   }
   .hero-decor::before, .hero-decor::after { display: none; }
 
-  /* Clipped layer holds the full-bleed photo so nothing leaks beyond the hero
-     while the hero itself keeps overflow:visible for the product dropdown. */
-  .hero-photo {
-    position: absolute; inset: 0;
-    background: url('../business.jpg') center/cover no-repeat;
-    z-index: 0; overflow: hidden;
-  }
-  .hero-photo::after {
-    content: ''; position: absolute; inset: 0;
-    background:
-      linear-gradient(90deg, rgba(5,40,71,.96) 0%, rgba(5,40,71,.88) 35%, rgba(5,40,71,.7) 65%, rgba(5,40,71,.55) 100%),
-      linear-gradient(180deg, rgba(5,40,71,.4) 0%, rgba(5,40,71,.15) 30%, rgba(5,40,71,.15) 70%, rgba(5,40,71,.7) 100%);
-  }
-
   /* Breadcrumb on top */
   .hero-bread {
-    position: relative; z-index: 2;
-    max-width: 1200px; margin: 0 auto; padding: 18px 28px;
-    font-size: 13px; color: rgba(255,255,255,.65);
+    position: relative; z-index: 3;
+    max-width: 1280px; margin: 0 auto; padding: 16px 28px;
+    font-size: 13px; color: rgba(255,255,255,.55);
   }
-  .hero-bread a { color: rgba(255,255,255,.65); text-decoration: none; }
+  .hero-bread a { color: rgba(255,255,255,.55); text-decoration: none; }
   .hero-bread a:hover { color: #fff; }
   .hero-bread .sep { margin: 0 8px; color: rgba(255,255,255,.3); }
   .hero-bread .current { color: #fff; font-weight: 500; }
 
-  /* Main editorial grid: massive text on left, floating stat on right top, quote card bottom-right */
+  /* 2-column hero grid */
   .biz-hero-grid {
-    position: relative; z-index: 20;
-    max-width: 1200px; margin: 0 auto;
-    padding: 28px 28px 44px 68px;
-    display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px;
-    align-items: end; min-height: 520px;
-  }
-  .biz-quote-dock { position: relative; z-index: 25; }
-
-  .biz-editorial {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .biz-issue {
-    display: flex; align-items: center; gap: 14px;
-    font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
-    color: rgba(255,255,255,.6); margin-bottom: 8px;
-  }
-  .biz-issue span.line { width: 40px; height: 1.5px; background: rgba(255,255,255,.4); }
-  .biz-editorial h1 {
-    font-size: clamp(40px, 5.6vw, 72px); font-weight: 700;
-    color: #fff; line-height: .98;
-    letter-spacing: -.025em; margin-bottom: 4px;
-    text-wrap: balance;
-  }
-  .biz-editorial h1 .accent {
-    display: inline-block; padding: 0 2px;
-    background: var(--orange); color: var(--navy);
-    transform: skewX(-8deg); transform-origin: center;
-  }
-  .biz-editorial h1 .accent span { display: inline-block; transform: skewX(8deg); }
-  .biz-editorial .lead {
-    font-size: 17px; color: rgba(255,255,255,.78);
-    line-height: 1.55; max-width: 480px; margin-top: 10px;
+    position: relative; z-index: 2;
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    min-height: 560px; align-items: stretch;
   }
 
-  .biz-coverage-counter {
-    position: absolute; top: 80px; right: 28px; z-index: 4;
-    background: var(--blue-light); color: var(--navy);
-    border-left: 4px solid var(--orange);
-    padding: 18px 24px;
-    display: flex; align-items: baseline; gap: 12px;
-    box-shadow: 0 14px 32px rgba(5,40,71,.18);
-    transform: rotate(2deg);
+  /* LEFT: editorial content + inline form */
+  .biz-content {
+    padding: 28px 48px 48px 28px;
+    display: flex; flex-direction: column; gap: 18px;
+    justify-content: center;
   }
-  .biz-coverage-counter .num {
-    font-size: 54px; font-weight: 700; line-height: 1; letter-spacing: -.02em;
+  .biz-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 4px;
   }
-  .biz-coverage-counter .label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .1em; line-height: 1.3; max-width: 90px;
+  .biz-kicker::before { content: ''; width: 28px; height: 1.5px; background: var(--orange); }
+
+  .biz-content h1 {
+    font-size: clamp(34px, 4.4vw, 52px); font-weight: 700;
+    color: #fff; line-height: 1.05; letter-spacing: -.02em;
+    max-width: 620px;
+  }
+  .biz-content .lead {
+    font-size: 17px; color: rgba(255,255,255,.72); line-height: 1.55;
+    max-width: 500px; margin-top: 4px;
   }
 
-  .biz-quote-dock {
-    background: var(--white); border: 1px solid var(--border);
-    padding: 22px 24px;
-    justify-self: end; width: 100%; max-width: 560px;
-    position: relative;
+  /* Compact horizontal quote form docked in the content column */
+  .biz-form {
+    display: grid; grid-template-columns: 1.4fr 1fr auto;
+    gap: 0; margin-top: 6px;
+    background: #fff;
+    max-width: 620px;
   }
-  .biz-quote-dock .qc-form {
-    grid-template-columns: 1.4fr 1fr auto;
-    gap: 16px; align-items: end;
-    display: grid;
+  .biz-form .qc-product-field,
+  .biz-form .qc-location-field {
+    padding: 14px 20px; border: none;
+    border-right: 1px solid var(--border);
   }
-  .biz-quote-dock .qc-product-field,
-  .biz-quote-dock .qc-location-field {
-    padding: 0; border: none;
+  .biz-form .qc-field-label {
+    color: var(--text); font-size: 10px; letter-spacing: .08em;
+    margin-bottom: 6px;
   }
-  .biz-quote-dock .qc-field-label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .08em; color: var(--text); margin-bottom: 6px;
+  .biz-form .qc-product-btn { padding: 0; }
+  .biz-form .qc-product-name {
+    border-bottom-color: var(--text); font-size: 15px; padding-bottom: 2px;
   }
-  .biz-quote-dock .qc-product-btn {
-    padding: 4px 0 6px; border-bottom: 2px solid var(--text);
+  .biz-form .qc-location-input {
+    border: none; border-bottom: 2px solid var(--border);
+    font-size: 15px; padding: 2px 0;
+  }
+  .biz-form .qc-cta {
+    background: var(--orange); color: #fff;
+    border: none; border-radius: 0;
+    padding: 0 32px; font-size: 14px; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+  }
+  .biz-form .qc-cta:hover { background: var(--orange-dark); }
+  .biz-form .qc-product-dropdown {
     color: var(--text);
-  }
-  .biz-quote-dock .qc-product-name { border-bottom: none; color: var(--text); }
-  .biz-quote-dock .qc-product-caret { color: var(--orange); }
-  .biz-quote-dock .qc-location-input {
-    border-bottom: 2px solid var(--border);
-    color: var(--text);
-  }
-  .biz-quote-dock .qc-location-input::placeholder { color: var(--subtle); }
-  .biz-quote-dock .qc-location-input:focus { border-bottom-color: var(--orange); }
-  .biz-quote-dock .qc-cta {
-    padding: 13px 26px; background: var(--orange);
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-  }
-  .biz-quote-dock .qc-cta:hover { background: var(--orange-dark); }
-  .biz-quote-dock .qc-product-dropdown {
-    color: var(--text);
-    right: auto; width: 520px;
+    right: auto;
+    width: 560px;
     max-width: calc(100vw - 48px);
   }
+  .biz-form .qc-other-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 20px;
+  }
   @media (max-width: 640px) {
-    .biz-quote-dock {
-      padding: 18px 18px;
-    }
-    .biz-quote-dock .qc-form {
-      grid-template-columns: 1fr;
-    }
-    .biz-quote-dock .qc-cta { width: 100%; padding: 14px; }
-    .biz-quote-dock .qc-product-dropdown {
-      width: calc(100vw - 48px); left: 0; right: 0;
-    }
+    .biz-form .qc-product-dropdown { width: calc(100vw - 48px); }
+    .biz-form .qc-other-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* RIGHT: vertical portrait panel with dynamic image switching */
+  .biz-portrait {
+    position: relative; background: var(--navy);
+    overflow: hidden;
+  }
+  .biz-portrait::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d28032af90bff05637426.png') center/cover no-repeat;
+    transition: opacity .6s ease;
+  }
+  .biz-portrait .biz-hero-img {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity .6s ease;
+  }
+  .biz-portrait .biz-hero-img.active { opacity: 1; }
+  .biz-portrait::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(5,40,71,1) 0%, rgba(5,40,71,.65) 18%, rgba(5,40,71,0) 45%);
+    z-index: 1;
+  }
+  .biz-portrait-tag {
+    position: absolute; right: 28px; bottom: 28px; z-index: 2;
+    background: rgba(5,40,71,.92); backdrop-filter: blur(8px);
+    color: #fff; padding: 14px 18px;
+    border-left: 3px solid var(--orange);
+    max-width: 280px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .biz-portrait-tag .big {
+    font-size: 26px; font-weight: 700; color: #fff;
+    line-height: 1; letter-spacing: -.01em;
+  }
+  .biz-portrait-tag .small {
+    font-size: 12px; color: rgba(255,255,255,.78); line-height: 1.45;
   }
 
   /* Industry ticker at the bottom of the hero */
@@ -181,9 +173,16 @@
   .biz-ticker-sep { color: rgba(5,40,71,.4); }
 
   @media (max-width: 960px) {
-    .biz-hero-grid { grid-template-columns: 1fr; padding: 20px 28px 32px; gap: 28px; }
-    .biz-coverage-counter { position: static; transform: none; align-self: flex-start; }
-    .biz-quote-dock { max-width: none; justify-self: stretch; }
+    .biz-hero-grid { grid-template-columns: 1fr; min-height: 0; }
+    .biz-content { padding: 20px 28px 32px; }
+    .biz-portrait { min-height: 300px; }
+    .biz-portrait::after {
+      background: linear-gradient(180deg, rgba(5,40,71,.6) 0%, rgba(5,40,71,0) 40%);
+    }
+    .biz-form { grid-template-columns: 1fr; }
+    .biz-form .qc-product-field,
+    .biz-form .qc-location-field { border-right: none; border-bottom: 1px solid var(--border); }
+    .biz-form .qc-cta { padding: 16px; }
   }
   @media (max-width: 500px) {
     .biz-ticker { font-size: 11px; padding: 10px 20px; gap: 16px; }
@@ -288,10 +287,10 @@
     <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
-        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <button onclick="toggleMega(this)">Shop Insurance <span class="caret">▾</span></button>
         <div class="mega-menu">
           <div class="mega-sidebar">
-            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Shop Insurance</button>
           </div>
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
@@ -365,7 +364,7 @@
                   <li><a href="../business/">General Liability</a></li>
                   <li><a href="../business/#cauto">Commercial Auto</a></li>
                   <li><a href="../business/#truck">Trucking</a></li>
-                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#cyber">Cyber Insurance</a></li>
                   <li><a href="../business/#prop">Commercial Property</a></li>
                   <li><a href="../business/#pl">Professional Liability</a></li>
                   <li><a href="../business/#mal">Malpractice</a></li>
@@ -376,7 +375,6 @@
                   <li><a href="../business/#uml">Commercial Umbrella</a></li>
                   <li><a href="../business/#garage">Garage</a></li>
                   <li><a href="../business/#event">Event Insurance</a></li>
-                  <li><a href="../business/#travel">Travel Insurance</a></li>
                 </ul>
               </div>
             </div>
@@ -415,36 +413,23 @@
 
 <main>
 
-  <!-- HERO — editorial cover: full-bleed photo, vertical spine, skewed orange accent,
-       floating coverage counter, docked quote card, industry ticker at bottom -->
+  <!-- HERO — disability-inspired: navy editorial left, portrait image panel right with dynamic switching -->
   <section class="hero">
-    <div class="hero-photo" role="img" aria-label="Business owners at work — protected by OnePoint"></div>
-
     <nav class="hero-bread" aria-label="Breadcrumb">
       <a href="../index.html">Home</a>
       <span class="sep">›</span>
       <span class="current">Business Insurance</span>
     </nav>
-
     <div class="biz-hero-grid">
-      <div class="biz-editorial">
-        <p style="font-size:13px;font-weight:700;color:#d03030;margin-bottom:8px;">One lawsuit or uncovered loss can shut your business down.</p>
-        <div class="biz-issue"><span class="line"></span>Business Insurance · 2026</div>
+      <div class="biz-content">
+        <span class="biz-kicker">Business Insurance · 15 Coverage Types</span>
         <h1 data-swap="heroH1">Protect Your Business — Before a Claim Does the Damage</h1>
         <p class="lead" data-swap="heroLead">15 commercial coverage types from 70+ A-rated carriers. Same-day coverage and COIs available. Tailored to your industry, your size, and the specific risk on your desk right now.</p>
-      </div>
 
-      <aside class="biz-coverage-counter" aria-label="Coverage types available">
-        <span class="num">15</span>
-        <span class="label">Coverage types,<br>one agency</span>
-      </aside>
-
-      <div class="biz-quote-dock quote-card">
-        <form class="qc-form" onsubmit="goQuote(event)">
+        <form class="biz-form quote-card" onsubmit="goQuote(event)">
           <div class="qc-product-field">
             <label class="qc-field-label">Type of coverage</label>
             <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
-              <span class="qc-product-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
               <span class="qc-product-name">Business Insurance</span>
               <span class="qc-product-caret">▾</span>
             </button>
@@ -487,6 +472,28 @@
           </div>
           <button type="submit" class="qc-cta">Get My Business Quote</button>
         </form>
+      </div>
+
+      <div class="biz-portrait" role="img" aria-label="Business protected by OnePoint insurance">
+        <div class="biz-hero-img active" data-hero="gl" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d28032af90bff05637426.png')"></div>
+        <div class="biz-hero-img" data-hero="cauto" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689203cef4d4f55d98c836aa.png')"></div>
+        <div class="biz-hero-img" data-hero="truck" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b487d96bc4b168b1727c2d.png')"></div>
+        <div class="biz-hero-img" data-hero="cyber" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689203ce7b1adb4ad309823d.png')"></div>
+        <div class="biz-hero-img" data-hero="prop" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454f8b902708d926ec.png')"></div>
+        <div class="biz-hero-img" data-hero="pl" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b61fcc3441c1ab72b32e4f.png')"></div>
+        <div class="biz-hero-img" data-hero="mal" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215467b1adbe90f0b14e5.png')"></div>
+        <div class="biz-hero-img" data-hero="wc" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0edb993094ba36abfb2.png')"></div>
+        <div class="biz-hero-img" data-hero="bop" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b71a471e1311075cc40296.png')"></div>
+        <div class="biz-hero-img" data-hero="liq" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68921545f4d4f55468c9c848.png')"></div>
+        <div class="biz-hero-img" data-hero="uml" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215459f273788c455753b.png')"></div>
+        <div class="biz-hero-img" data-hero="garage" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215467b1adb3dad0b14e4.png')"></div>
+        <div class="biz-hero-img" data-hero="event" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454c79b734cd24dbb4.png')"></div>
+        <div class="biz-hero-img" data-hero="travel" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b8547500bcb01cd801fffd.png')"></div>
+        <div class="biz-hero-img" data-hero="sport" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d280249458d70118126fd.png')"></div>
+        <div class="biz-portrait-tag">
+          <span class="big">Same-Day COIs</span>
+          <span class="small">15 coverage types · 70+ carriers · Tailored to your industry</span>
+        </div>
       </div>
     </div>
 
@@ -867,7 +874,7 @@
         </div>
       </div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/resources">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
       <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="../book/">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div><div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon-Fri, 9am-6pm ET</div></div></div>
     </div>
@@ -910,8 +917,8 @@ const bizData = {
 // page copy verbatim — clicking the General Liability tab restores the page to its default state.
 const bizSwap = {
   gl: {
-    heroH1: "Coverage built for the <span class=\"accent\"><span>work</span></span> you actually do.",
-    heroLead: "15 commercial coverage types, underwritten across 200+ A-rated carriers. Tailored to your industry, your size, and the specific risk on your desk right now.",
+    heroH1: "Protect Your Business — Before a Claim Does the Damage",
+    heroLead: "15 commercial coverage types from 70+ A-rated carriers. Same-day coverage and COIs available. Tailored to your industry, your size, and the specific risk on your desk right now.",
     coverKicker: "Coverage Types",
     coverH2: "Every business faces risk. The right policy manages it.",
     coverBody: "Whether you're a solo contractor or a growing company, we build a coverage package around what your business actually needs.",
@@ -1094,6 +1101,7 @@ function selectBiz(v){
   document.getElementById('bp-title').textContent = bizData[v].name;
   document.getElementById('bp-desc').textContent = bizData[v].desc;
   swapBizCopy(v);
+  document.querySelectorAll('.biz-hero-img').forEach(img => img.classList.toggle('active', img.dataset.hero === v));
 }
 function filterBiz(cat){
   document.querySelectorAll('.biz-cat').forEach(c=>c.classList.toggle('active', c.dataset.c === cat));

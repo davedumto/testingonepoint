@@ -1,0 +1,1119 @@
+<!--
+  ONEPOINT LEARN: DISABILITY & INCOME PROTECTION (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/disability
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Disability & Income Protection
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #d97706;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Disability &amp; Income Protection</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Disability &amp; Income Protection, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on the coverage that replaces your paycheck when illness or injury takes it away, plus the supplemental policies that fill the gaps most people never see coming.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~25</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>1 in 4</strong><span>workers face<br>a disability</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/disability" class="lc-btn lc-btn-ghost">Go to Disability Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From short-term basics to business overhead, every coverage that protects an income stream.</div>
+      <ul class="art-list">
+        <li>Disability 101</li>
+        <li>Own-Occ vs. Any-Occ</li>
+        <li>Accident Insurance</li>
+        <li>SSDI vs. Private</li>
+        <li>High-Earner Supplements</li>
+        <li>Cancer Insurance</li>
+        <li>Elimination &amp; Benefit</li>
+        <li>Business Overhead</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · Disability Insurance 101</option>
+      <option value="m2">Chapter 2 · Own-Occupation vs. Any-Occupation</option>
+      <option value="m3">Chapter 3 · Accident Insurance</option>
+      <option value="m4">Chapter 4 · SSDI vs. Private Disability</option>
+      <option value="m5">Chapter 5 · Supplemental Disability for High Earners</option>
+      <option value="m6">Chapter 6 · Cancer Insurance</option>
+      <option value="m7">Chapter 7 · Elimination &amp; Benefit Periods</option>
+      <option value="m8">Chapter 8 · Business Overhead Expense Disability</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">Disability Insurance 101</a></li>
+        <li><a href="#m2" data-mod="2">Own-Occupation vs. Any-Occupation</a></li>
+        <li><a href="#m3" data-mod="3">Accident Insurance</a></li>
+        <li><a href="#m4" data-mod="4">SSDI vs. Private Disability</a></li>
+        <li><a href="#m5" data-mod="5">Supplemental Disability for High Earners</a></li>
+        <li><a href="#m6" data-mod="6">Cancer Insurance</a></li>
+        <li><a href="#m7" data-mod="7">Elimination &amp; Benefit Periods</a></li>
+        <li><a href="#m8" data-mod="8">Business Overhead Expense Disability</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Disability Insurance 101</h1>
+        <p class="lmod-subtitle">The coverage most people don't know they need.</p>
+        <p class="lmod-lead">Disability insurance replaces part of your income when injury or illness stops you from working. Most Americans go without it. Most Americans also depend entirely on a paycheck to cover the mortgage, the car loan, the tuition, and everything else. The math doesn't work.</p>
+        <p>Your ability to earn an income is the single largest financial asset you own. A 35-year-old earning $80,000 a year will take home more than $3 million before retirement. Disability insurance protects that asset the way homeowners insurance protects your house.</p>
+
+        <h2>What it actually pays</h2>
+        <p>Disability insurance replaces <strong>40 to 70 percent of your pre-disability income</strong>, usually up to a monthly benefit cap. It kicks in after a waiting period and pays for a set benefit period.</p>
+
+        <h2>The two main types</h2>
+        <ul>
+          <li><strong>Short-term disability (STD)</strong> covers 3 to 12 months, typically 60 to 70 percent of income, and starts paying 7 to 14 days after disability begins.</li>
+          <li><strong>Long-term disability (LTD)</strong> covers 2, 5, or 10 years, or benefits continue to age 65 or 67. It typically replaces 50 to 60 percent of income and starts paying 90 to 180 days after disability.</li>
+        </ul>
+        <p>Most people need LTD. STD is often covered by employer benefits or by personal savings. LTD protects against the career-ending injury or illness that savings cannot cover.</p>
+
+        <h2>Why you actually need it</h2>
+        <p>Roughly 1 in 4 workers entering the workforce today will experience a disabling condition before retirement. Leading causes include back injuries, cancer, heart disease, mental health conditions, and accidents. Most disabilities aren't dramatic. They're cumulative issues that gradually make work impossible.</p>
+
+        <h2>What a policy costs</h2>
+        <ul>
+          <li><strong>Age 35, white-collar job, $5,000 monthly benefit, 90-day wait, to age 65:</strong> $90 to $180 per month.</li>
+          <li><strong>Age 35, blue-collar job (construction, nursing), same benefit:</strong> $180 to $400 per month.</li>
+          <li><strong>Age 45, white-collar, same benefit:</strong> $140 to $280 per month.</li>
+        </ul>
+        <p>The physicality of your job dramatically affects rates. Carriers classify occupations from 6A (lowest risk, like accountant) to 1A (highest, like roofer).</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 35-year-old accountant earning $90,000 buys a $5,000 monthly benefit with a 90-day elimination period and benefits to age 65. Premium: roughly $120 per month. Two years later, she's diagnosed with multiple sclerosis. Benefits pay $5,000 per month, tax-free (because she paid with after-tax dollars), for up to 30 years. Lifetime payout potential: $1.8 million.</p>
+        </div>
+
+        <h2>Group vs. individual</h2>
+        <ul>
+          <li><strong>Group LTD (through employer).</strong> Cheaper, often employer subsidized, but coverage ends if you leave the job. Taxable if the employer paid premiums.</li>
+          <li><strong>Individual LTD.</strong> Portable, typically richer coverage, with non-taxable benefits if paid with after-tax dollars. It stays in force regardless of employment.</li>
+        </ul>
+        <p>Many professionals stack both. Group coverage from the employer plus a smaller individual policy that supplements and travels.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Social Security disability will cover me."</strong> SSDI approval is slow and difficult. Fewer than 35 percent of applications are approved on first review.</li>
+            <li><strong>"My health insurance pays my income."</strong> Health insurance pays doctors. Disability insurance pays you.</li>
+            <li><strong>"I'm too healthy to need it."</strong> Disability rates are highest among people who were healthy before their disability. That's exactly why they didn't plan for it.</li>
+          </ul>
+        </div>
+
+        <p>For the comparison between STD and LTD in depth, see our post on <a href="/blog/std-vs-ltd">short-term vs. long-term disability</a>. Our <a href="/disability">disability insurance page</a> covers individual and supplemental coverage.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Own-Occupation vs. Any-Occupation</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Own-Occupation vs. Any-Occupation</h1>
+        <p class="lmod-subtitle">The definition that decides your claim.</p>
+        <p class="lmod-lead">Two disability policies can look nearly identical on paper, same monthly benefit, same waiting period, same premium, and pay out completely differently. The language that separates them is called the <strong>definition of disability</strong>. Getting this right is the most important decision in buying a disability policy.</p>
+
+        <h2>Own-occupation</h2>
+        <p>Pays benefits if you can't perform the duties of <strong>your specific occupation</strong>, even if you can do other work.</p>
+        <p>A surgeon who develops a tremor and can't operate still qualifies for benefits under own-occ, even if she could teach or consult. She loses the occupation she trained for. That's what own-occ protects.</p>
+
+        <h2>Any-occupation</h2>
+        <p>Pays benefits only if you can't perform <strong>any occupation</strong> for which you're reasonably suited by training, education, and experience.</p>
+        <p>That same surgeon, under any-occ, would likely be denied. She can teach, consult, or review cases. She's not disabled from "any occupation."</p>
+
+        <h2>The hybrid: modified own-occupation</h2>
+        <p>Many policies use own-occ for the first 2 to 5 years, then switch to any-occ. This is common in group LTD plans. A surgeon would get 2 to 5 years of benefits, then face a much harder claim process.</p>
+
+        <h2>Who needs true own-occ</h2>
+        <ul>
+          <li><strong>High-income specialists.</strong> Surgeons, dentists, airline pilots, anyone whose income depends on a specific licensed skill.</li>
+          <li><strong>People with long, expensive training.</strong> Doctors, attorneys, professional athletes.</li>
+          <li><strong>Anyone whose earning power drops dramatically outside their profession.</strong></li>
+        </ul>
+
+        <h2>Who can go with modified or any-occ</h2>
+        <ul>
+          <li>Lower-specialty roles where a disability in the primary occupation doesn't wipe out earning potential.</li>
+          <li>People with significant assets already.</li>
+          <li>Budget-constrained buyers who prioritize having coverage over having the richest definition.</li>
+        </ul>
+
+        <h2>The "regular occupation" language trap</h2>
+        <p>Some policies use "regular occupation," which sounds like own-occ but is actually a weaker definition. It may cover the job at disability onset but not the specialty. Read the policy, not the brochure.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>True own-occ coverage runs <strong>20 to 40 percent more</strong> than modified own-occ or any-occ. A 40-year-old surgeon paying $400 per month for modified own-occ might pay $520 per month for true own-occ. The difference is worth it for high-specialty professionals whose specialty income dwarfs what they could earn doing anything else.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"All disability insurance pays if I can't work."</strong> Only under the policy's specific definition. Read the definition section first.</li>
+            <li><strong>"Own-occ is always the right choice."</strong> For some professions, the extra cost isn't worth it. The answer depends on what you'd earn outside your current role.</li>
+            <li><strong>"The group LTD at work is own-occ."</strong> Most group LTD policies use modified own-occ or any-occ after the first few years. Read the Summary Plan Description.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability insurance page</a> walks through definitions for specific occupations and industries.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Disability Insurance 101</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Accident Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Accident Insurance</h1>
+        <p class="lmod-subtitle">Supplemental coverage for the unexpected.</p>
+        <p class="lmod-lead">Accident insurance pays a lump sum when you get hurt. Broken bone, dislocation, burn, ER visit, concussion. It's not a replacement for health insurance or disability insurance. It's a supplement that covers the expenses your primary insurance doesn't: deductibles, copays, lost work hours, and the out-of-pocket costs an injury always creates.</p>
+
+        <h2>How it works</h2>
+        <p>The policy has a schedule of payments by injury type. Examples from typical plans:</p>
+        <ul>
+          <li><strong>Emergency room visit:</strong> $100 to $250.</li>
+          <li><strong>X-ray or MRI:</strong> $75 to $200.</li>
+          <li><strong>Broken leg (major bone):</strong> $1,500 to $3,500.</li>
+          <li><strong>Broken finger (minor bone):</strong> $200 to $500.</li>
+          <li><strong>Concussion:</strong> $300 to $600.</li>
+          <li><strong>Stitches:</strong> $50 to $150.</li>
+          <li><strong>Ambulance (ground):</strong> $200 to $400.</li>
+          <li><strong>Ambulance (air):</strong> $1,000 to $2,000.</li>
+          <li><strong>Physical therapy (per visit):</strong> $25 to $50.</li>
+          <li><strong>Follow-up doctor visit:</strong> $50 to $100.</li>
+        </ul>
+        <p>Payouts are per event and come directly to you, not to the medical provider. Use them to cover deductibles, copays, lost wages, childcare, or anything else.</p>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Individual coverage:</strong> $10 to $25 per month.</li>
+          <li><strong>Family coverage:</strong> $20 to $45 per month.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>An 11-year-old breaks his arm falling off a skateboard. The ER bill is $2,800. The family health plan has a $5,000 deductible, so they owe the full amount. Their accident policy pays $200 for the ER visit, $150 for the X-ray, and $2,500 for the broken bone. Total payout: $2,850. Their monthly premium was $22 for family coverage.</p>
+        </div>
+
+        <h2>Who it's for</h2>
+        <ul>
+          <li>Families with active kids (sports, playgrounds, bikes, scooters).</li>
+          <li>People with high-deductible health plans who'd benefit from cash to cover out-of-pocket costs.</li>
+          <li>Physical-job workers (construction, nursing, agriculture).</li>
+          <li>People without short-term disability coverage.</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>Illness.</strong> Only accidents. Cancer, heart attacks, strokes, and infections aren't covered.</li>
+          <li><strong>Most overuse or repetitive injuries.</strong> Hernias, chronic back pain, tendonitis from typing.</li>
+          <li><strong>Self-inflicted or substance-related injuries.</strong></li>
+          <li><strong>Aviation accidents in non-commercial flights</strong> (varies by policy).</li>
+        </ul>
+
+        <h2>Accident insurance vs. critical illness</h2>
+        <ul>
+          <li><strong>Accident insurance</strong> covers injury-related events.</li>
+          <li><strong>Critical illness insurance</strong> covers specific diagnosed diseases (cancer, stroke, heart attack, organ failure).</li>
+        </ul>
+        <p>These cover different risks. High earners with expensive medical deductibles often carry both.</p>
+
+        <h2>What it doesn't replace</h2>
+        <p>Accident insurance doesn't replace health insurance, disability insurance, or life insurance. It's supplemental, meaning it adds cash to your pocket during a claim on top of other coverage.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"It covers anything bad that happens."</strong> Only accidents, specific injuries defined in the policy schedule.</li>
+            <li><strong>"It replaces health insurance."</strong> It doesn't. It supplements it.</li>
+            <li><strong>"I don't need it because I have health insurance."</strong> Health insurance covers doctors. Accident insurance covers you, your lost work, your copays, your rent.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability page</a> covers accident insurance alongside STD, LTD, and critical illness. See our post on <a href="/blog/critical-illness">critical illness</a> for that complementary coverage.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Own-Occupation vs. Any-Occupation</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>SSDI vs. Private Disability</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">SSDI vs. Private Disability</h1>
+        <p class="lmod-subtitle">Why Social Security isn't enough on its own.</p>
+        <p class="lmod-lead">A common assumption: "If I get disabled, Social Security will cover me." A look at the numbers and approval rates tells a different story. SSDI exists. It's a real program. But relying on it alone is a planning mistake.</p>
+
+        <h2>How SSDI works</h2>
+        <ul>
+          <li><strong>Funded by payroll taxes</strong> you've paid into Social Security throughout your career.</li>
+          <li><strong>Requires work credits.</strong> Generally, you need 40 credits (10 years of work), with 20 earned in the last 10 years.</li>
+          <li><strong>Strict disability definition.</strong> You must be unable to perform <strong>any substantial gainful activity</strong> (SGA), and the condition must be expected to last at least 12 months or result in death.</li>
+        </ul>
+
+        <h2>What it pays</h2>
+        <p>The average monthly SSDI benefit is around <strong>$1,540 per month</strong> in 2025. High earners max out at around $3,900. It's calculated on your lifetime earnings, not your pre-disability income.</p>
+        <p>For a household used to $7,000 per month in take-home pay, $1,540 doesn't cover the mortgage.</p>
+
+        <h2>The approval gauntlet</h2>
+        <ul>
+          <li><strong>Initial approval rate:</strong> roughly 30 to 35 percent.</li>
+          <li><strong>After first-level appeal (reconsideration):</strong> another 10 to 15 percent.</li>
+          <li><strong>After hearing with an administrative law judge:</strong> roughly 45 percent of cases heard.</li>
+          <li><strong>Total approval rate</strong> across multiple levels: around 45 to 55 percent.</li>
+          <li><strong>Average wait for a decision:</strong> 6 months to 2 years or more.</li>
+        </ul>
+        <p>During the wait, you typically can't work at more than a very low income threshold ($1,620 per month in 2025) without jeopardizing your claim.</p>
+
+        <h2>The 5-month waiting period</h2>
+        <p>Even if approved, SSDI benefits don't start until the 6th month after your disability began. Medicare eligibility follows 24 months after that.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 48-year-old project manager earning $110,000 per year suffers a stroke. She applies for SSDI and is denied on initial review. She appeals, waits 16 months, and is approved at the hearing level. Monthly benefit: $2,400. Her household was used to $6,500 per month in take-home pay. Without private LTD paying another $4,500 per month, she would have lost the house during the approval wait.</p>
+        </div>
+
+        <h2>How private disability supplements SSDI</h2>
+        <p>Private disability policies:</p>
+        <ul>
+          <li>Pay faster (benefits start 14 days to 6 months after disability, depending on waiting period).</li>
+          <li>Pay more (50 to 70 percent of income vs. SSDI's flat benefit).</li>
+          <li>Have more generous definitions (own-occupation vs. SSDI's "any SGA").</li>
+          <li>Coordinate with SSDI rather than eliminate it. Some policies reduce their payout if SSDI approves, but most still provide meaningfully more.</li>
+        </ul>
+
+        <h2>SSI vs. SSDI</h2>
+        <ul>
+          <li><strong>SSDI (Social Security Disability Insurance):</strong> based on your work history.</li>
+          <li><strong>SSI (Supplemental Security Income):</strong> based on financial need, for people with little work history and low income or assets. Max federal benefit: around $967 per month in 2025.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"SSDI will pay my bills."</strong> Usually not. It pays a fraction of what you were earning.</li>
+            <li><strong>"I'll apply and be approved quickly."</strong> Most claims take 1 to 2 years and multiple appeals.</li>
+            <li><strong>"SSDI and private disability are duplicative."</strong> They coordinate. Private insurance fills the gaps SSDI leaves.</li>
+          </ul>
+        </div>
+
+        <p>For the full picture on planning, our <a href="/blog/std-vs-ltd">short-term vs. long-term disability post</a> walks through private coverage. Our <a href="/disability">disability page</a> covers coordination strategies.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Accident Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Supplemental Disability for High Earners</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Supplemental Disability for High Earners</h1>
+        <p class="lmod-subtitle">When the group LTD cap leaves a real gap.</p>
+        <p class="lmod-lead">Group long-term disability policies, the kind your employer offers, usually cap benefits at 60 percent of salary or a flat monthly maximum, often <strong>$10,000 to $15,000 per month</strong>. For most employees, that's enough. For high earners, it's a ceiling that leaves a huge income gap.</p>
+
+        <h2>The cap problem</h2>
+        <p>If you earn <strong>$400,000 per year</strong> ($33,333 per month) and your group LTD pays 60 percent up to $10,000 per month, your coverage is really 30 percent of income, not 60 percent. A disability drops your household income by $23,000 per month.</p>
+        <p>Supplemental disability insurance fills that gap.</p>
+
+        <h2>How it works</h2>
+        <p>A supplemental policy (sometimes called "excess" or "high-limit") layers on top of your group LTD:</p>
+        <ul>
+          <li><strong>Own-occupation definition</strong> to protect specialty income.</li>
+          <li><strong>Benefits up to another $15,000 to $35,000 per month</strong> beyond your group policy.</li>
+          <li><strong>True replacement.</strong> Gets total coverage back to 60 to 70 percent of actual income.</li>
+          <li><strong>Non-taxable benefits</strong> if paid with after-tax personal dollars.</li>
+        </ul>
+
+        <h2>Who it's aimed at</h2>
+        <ul>
+          <li>Physicians, surgeons, dentists.</li>
+          <li>Attorneys, especially equity partners.</li>
+          <li>Executives with variable compensation (bonus, RSUs, profit sharing).</li>
+          <li>Business owners with large income concentrations.</li>
+          <li>Commissioned sales professionals earning $300K and up.</li>
+        </ul>
+
+        <h2>Bonus and stock, not always covered</h2>
+        <p>Group LTD typically covers base salary only. A trader earning $150K base and $500K in bonus might only have coverage on the $150K. Supplemental policies can include bonuses and variable comp. Ask specifically about that language.</p>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>$10,000 per month supplemental benefit, age 40 physician, own-occ, to age 65:</strong> $300 to $600 per month.</li>
+          <li><strong>$20,000 per month supplemental benefit, age 45 executive, own-occ, to age 65:</strong> $700 to $1,400 per month.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 42-year-old cardiologist earning $520,000 per year carries group LTD capped at $15,000 per month (roughly 35 percent of income). She adds a supplemental policy for $18,000 per month in additional benefit, own-occ, to age 65. Combined monthly coverage: $33,000, which replaces about 76 percent of take-home pay. Premium: $720 per month. When a hand tremor ends her surgical career three years later, the supplemental policy pays $6.5 million over its term.</p>
+        </div>
+
+        <h2>The tax wrinkle</h2>
+        <p>If your employer paid LTD premiums, benefits are taxable as income. If you paid with personal after-tax dollars, benefits are tax-free. This is why supplemental policies, always paid personally, are worth more per dollar of benefit than group coverage.</p>
+
+        <h2>Guaranteed Standard Issue (GSI) programs</h2>
+        <p>Some large employers and professional associations offer <strong>Guaranteed Standard Issue</strong> supplemental disability. Standardized underwriting without individual medical questions, available during specific enrollment windows. For high earners with health issues, this is the best shot at meaningful coverage.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My group LTD replaces my income."</strong> It replaces a portion of your base salary, often not bonuses or stock.</li>
+            <li><strong>"I can add more group coverage later."</strong> Group plans cap what they'll write. The cap is the cap.</li>
+            <li><strong>"I'll just save enough to self-insure."</strong> At current disability rates and incomes, self-insuring for a 25-year disability requires roughly $5M to $10M for high earners. Most haven't saved that yet.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability page</a> covers supplemental and excess disability for high earners.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>SSDI vs. Private Disability</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Cancer Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Cancer Insurance</h1>
+        <p class="lmod-subtitle">Specific-disease coverage for a specific risk.</p>
+        <p class="lmod-lead">Cancer insurance is a type of critical illness insurance focused solely on cancer diagnosis. It pays a lump sum when you're diagnosed with a covered cancer. For families with cancer history or high health plan deductibles, it's a targeted way to cover the non-medical costs of a cancer diagnosis.</p>
+
+        <h2>What it covers</h2>
+        <ul>
+          <li><strong>Initial diagnosis benefit.</strong> A lump sum (often $10,000 to $50,000) paid at diagnosis of a covered cancer.</li>
+          <li><strong>Treatment benefits.</strong> Some policies pay per treatment (chemo, radiation, surgery) or per day of hospitalization.</li>
+          <li><strong>Transportation and lodging.</strong> Many policies reimburse travel to treatment centers.</li>
+          <li><strong>Recurrence benefit.</strong> An additional payment if cancer returns after a treatment-free period (usually 5 years).</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>Skin cancer.</strong> Most policies exclude non-melanoma skin cancer or pay a smaller benefit.</li>
+          <li><strong>Pre-existing cancer.</strong> Cancers diagnosed before the policy waiting period.</li>
+          <li><strong>Cancers in-situ.</strong> Pre-cancerous cells that haven't invaded surrounding tissue often pay a reduced benefit.</li>
+        </ul>
+
+        <h2>Who it's for</h2>
+        <ul>
+          <li><strong>Family history of cancer</strong>, especially hereditary cancers (BRCA-related breast and ovarian, Lynch syndrome).</li>
+          <li><strong>High-deductible health plans</strong> where $10,000 or more out-of-pocket is likely during treatment.</li>
+          <li><strong>Self-employed or gig workers</strong> without strong disability or supplemental coverage.</li>
+          <li><strong>People in their 40s to 60s</strong>, when cancer risk rises sharply.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Age 40, non-smoker, $25,000 benefit:</strong> $25 to $45 per month.</li>
+          <li><strong>Age 50, non-smoker, $25,000 benefit:</strong> $40 to $70 per month.</li>
+          <li><strong>Age 60, non-smoker, $25,000 benefit:</strong> $60 to $110 per month.</li>
+        </ul>
+        <p>Smokers pay 40 to 80 percent more.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 52-year-old teacher with a $6,000 family health plan deductible is diagnosed with stage II breast cancer. Her cancer policy pays a $30,000 lump sum at diagnosis. She uses $8,000 for out-of-pocket medical costs, $4,500 for travel and lodging near a specialized treatment center, and the remaining $17,500 to cover 4 months of lost income while she recovers from surgery and completes radiation.</p>
+        </div>
+
+        <h2>Cancer insurance vs. critical illness</h2>
+        <ul>
+          <li><strong>Cancer-only.</strong> Lower premium, cancer diagnosis only.</li>
+          <li><strong>Broader critical illness.</strong> Covers heart attack, stroke, organ transplant, kidney failure, and cancer.</li>
+        </ul>
+        <p>For most people, critical illness is better value. For those with specific cancer family history and no cardiac concerns, cancer-only can work.</p>
+
+        <h2>What the money is actually for</h2>
+        <p>Health insurance covers treatment. Cancer insurance covers everything else:</p>
+        <ul>
+          <li>Travel to major treatment centers (many specialized oncologists are in metro areas).</li>
+          <li>Lost income during treatment (chemo fatigue, missed work).</li>
+          <li>Home healthcare after major surgeries.</li>
+          <li>Childcare during hospital stays.</li>
+          <li>Experimental treatments not covered by insurance.</li>
+          <li>Out-of-pocket maximums and deductibles.</li>
+        </ul>
+
+        <h2>Waiting periods</h2>
+        <p>Most cancer policies have a <strong>30 to 90 day waiting period</strong> before coverage starts. This prevents people from buying coverage right after diagnosis.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My health insurance covers cancer."</strong> It covers treatment. It doesn't cover the three months you can't work.</li>
+            <li><strong>"It's a scam."</strong> It's specific-disease coverage. It's right for some and wrong for others. Run the numbers.</li>
+            <li><strong>"I only need it if my family has cancer history."</strong> Most cancer diagnoses are not in people with known family history.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability page</a> covers cancer and critical illness insurance. See our post on <a href="/blog/critical-illness">critical illness</a> for broader disease coverage.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Supplemental Disability for High Earners</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Elimination &amp; Benefit Periods</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Elimination &amp; Benefit Periods</h1>
+        <p class="lmod-subtitle">The two timelines that price your policy.</p>
+        <p class="lmod-lead">The two most important choices in any disability policy aren't monthly benefit or occupation class. They're the <strong>elimination period</strong> (how long you wait before benefits start) and the <strong>benefit period</strong> (how long benefits last). These two levers drive most of the premium difference between policies, and getting them wrong means either overpaying or ending up underinsured when it matters most.</p>
+
+        <h2>Elimination period</h2>
+        <p>The waiting period between when your disability begins and when payments start. Also called a "waiting period."</p>
+        <p>Common options:</p>
+        <ul>
+          <li><strong>7, 14, 30 days</strong> for short-term disability.</li>
+          <li><strong>60, 90, 180, 365 days</strong> for long-term disability.</li>
+        </ul>
+        <p>A longer elimination period means a lower premium. A 90-day wait vs. a 30-day wait can cut premium by 20 to 30 percent.</p>
+
+        <h2>How to pick your elimination period</h2>
+        <p>Think of it as "how long can your savings cover expenses?" If you have 3 months of expenses saved, a 90-day elimination is reasonable. If you have 6 months, you might save money with a 180-day.</p>
+        <p>Coordinate with other coverage:</p>
+        <ul>
+          <li>If you have employer-paid STD that pays for 90 days, pick a 90-day LTD elimination period so the two line up.</li>
+          <li>If you have sick leave or PTO that covers 30 days, factor that in.</li>
+        </ul>
+
+        <h2>Benefit period</h2>
+        <p>How long benefits pay once they start.</p>
+        <p>Common options:</p>
+        <ul>
+          <li><strong>2 years.</strong> Cheap, but inadequate for truly disabling conditions.</li>
+          <li><strong>5 years.</strong> Moderate.</li>
+          <li><strong>10 years.</strong> Longer protection.</li>
+          <li><strong>To age 65 or 67.</strong> The standard for serious coverage.</li>
+          <li><strong>To age 70 or lifetime.</strong> Rare and expensive.</li>
+        </ul>
+
+        <h2>Why "to age 65" is the right default</h2>
+        <p>Most serious disabilities (cancer, heart disease, stroke, major injury, mental health conditions) either resolve within 2 years or last until retirement. A 2-year benefit period misses the catastrophic scenario this coverage exists for: the career-ending disability.</p>
+        <p>"To age 65" extends benefits until you'd normally retire and transition to retirement income.</p>
+
+        <h2>Benefit period affects premium significantly</h2>
+        <ul>
+          <li><strong>A 5-year benefit period</strong> costs roughly 40 to 50 percent of a to-age-65 benefit period.</li>
+          <li><strong>A to-age-65 benefit period</strong> is the baseline. Most policies are sold this way.</li>
+          <li><strong>A lifetime benefit period</strong> costs 30 to 60 percent more than to-age-65.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 38-year-old architect compares two quotes for a $6,000 monthly benefit. Option A: 90-day elimination, 5-year benefit period, $75 per month. Option B: 90-day elimination, to-age-65 benefit period, $170 per month. The $95 per month difference buys 22 additional years of coverage. If a stroke ended his career at 45, Option A would pay $360,000 and then stop. Option B would pay $1.44 million over 20 years.</p>
+        </div>
+
+        <h2>Mental health and substance abuse limits</h2>
+        <p>Many LTD policies cap benefits for mental health or substance abuse claims at <strong>24 months</strong>, even on a to-age-65 policy. If mental health coverage matters to you, and for many buyers it does, look for policies that extend these to the full benefit period or find a rider.</p>
+
+        <h2>The residual and partial disability piece</h2>
+        <p><strong>Residual disability benefits</strong> pay a partial benefit if you can work but at reduced capacity, say, 50 percent income loss while recovering. This is increasingly common and valuable because many disabilities aren't total.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I want the shortest elimination period possible."</strong> Not always. A 30-day wait vs. a 90-day wait costs meaningfully more.</li>
+            <li><strong>"Two years of benefits is enough."</strong> For a back surgery with a year of recovery, yes. For a stroke at 52, no.</li>
+            <li><strong>"I'll take the benefit period I can afford."</strong> Sometimes the right answer is a shorter benefit period (5 years) and higher monthly benefit, rather than a longer period with less monthly cash.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability page</a> covers elimination and benefit period structuring in detail.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Cancer Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Business Overhead Expense Disability</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Disability &amp; Income Protection</div>
+        <h1 class="lmod-title">Business Overhead Expense Disability</h1>
+        <p class="lmod-subtitle">The coverage solo practitioners miss.</p>
+        <p class="lmod-lead">Personal disability insurance replaces your personal income. But if you own a practice, firm, or small business, that's not enough. The rent still gets paid. The lease on the MRI machine is still due. The staff still needs to eat. <strong>Business Overhead Expense (BOE) disability insurance</strong> pays those fixed business costs while you're unable to work.</p>
+
+        <h2>How it works</h2>
+        <p>BOE insurance pays your covered business expenses for a set benefit period (usually 12 to 24 months) when you're disabled and unable to run your business.</p>
+
+        <h2>Covered expenses typically include</h2>
+        <ul>
+          <li><strong>Rent or mortgage interest</strong> on business property.</li>
+          <li><strong>Employee salaries</strong> for non-owner employees.</li>
+          <li><strong>Utilities</strong> such as electricity, water, gas, and internet.</li>
+          <li><strong>Insurance premiums</strong> for business property, liability, and workers' comp.</li>
+          <li><strong>Leased equipment payments.</strong></li>
+          <li><strong>Property taxes.</strong></li>
+          <li><strong>Accounting, legal, and professional services.</strong></li>
+          <li><strong>Office supplies and subscriptions.</strong></li>
+        </ul>
+
+        <h2>What's not covered</h2>
+        <ul>
+          <li><strong>Your personal income.</strong> That's what personal disability insurance is for.</li>
+          <li><strong>Inventory or merchandise.</strong></li>
+          <li><strong>Owner salaries or draws</strong> (some exceptions for specific structures).</li>
+          <li><strong>Business profits.</strong></li>
+        </ul>
+
+        <h2>Who needs it</h2>
+        <ul>
+          <li><strong>Solo practitioners.</strong> Doctors, dentists, chiropractors, veterinarians, attorneys.</li>
+          <li><strong>Small business owners</strong> with significant fixed overhead.</li>
+          <li><strong>Independent consultants</strong> with office and employee expenses.</li>
+          <li><strong>Anyone</strong> whose business would accumulate debt fast if they couldn't work.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <p>BOE premiums are typically <strong>3 to 5 percent of monthly covered expenses per year</strong>. Example:</p>
+        <ul>
+          <li><strong>$20,000 per month overhead, age 45, 60-day elimination, 18-month benefit period:</strong> $60 to $100 per month in premium.</li>
+        </ul>
+        <p>Rates vary by occupation class, elimination period, and benefit period.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 47-year-old solo dentist has $28,000 per month in fixed overhead: rent, 3 staff salaries, lab fees, equipment leases, and insurance. He carries a BOE policy with a 60-day elimination period and 24-month benefit. After a back surgery forces him out for 9 months, the policy reimburses $252,000 in business expenses. His practice stays open with a locum dentist filling in, and he returns to a viable business instead of a closed one.</p>
+        </div>
+
+        <h2>Tax treatment</h2>
+        <p>BOE premiums are <strong>tax-deductible</strong> as a business expense. Benefits received are <strong>taxable income</strong>, but they're offsetting deductible business expenses, so the net effect is usually tax-neutral.</p>
+
+        <h2>How BOE stacks with personal disability</h2>
+        <ul>
+          <li><strong>Personal disability</strong> replaces your personal income for your mortgage, groceries, and household bills.</li>
+          <li><strong>BOE</strong> pays the business bills so your practice stays open while you recover.</li>
+        </ul>
+        <p>Both are needed. Without BOE, a 6-month disability can force you to close or sell your practice, which also ends your personal disability claim once you're no longer "employed."</p>
+
+        <h2>Benefit periods for BOE</h2>
+        <p>Most BOE policies cap benefits at <strong>12 to 24 months</strong>. This is intentional. The coverage is meant to keep the business running while you either recover or transition to sale or closure, not to fund the business indefinitely.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My personal disability insurance covers this."</strong> It covers your income, not your business expenses.</li>
+            <li><strong>"My BOP (Business Owner's Policy) includes this."</strong> A BOP covers property and liability, not overhead for disabled owners.</li>
+            <li><strong>"I can run my practice from bed."</strong> Maybe briefly. Six months in, the answer is no.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/disability">disability page</a> covers BOE alongside personal disability. For business coverage, see our posts on <a href="/blog/business-owners-policy">BOP</a> and <a href="/blog/commercial-property">commercial property</a>.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Elimination &amp; Benefit Periods</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Disability &amp; Income Protection track</div>
+          <h2>Ready to see what your paycheck is actually protected against?</h2>
+          <p>A licensed OnePoint advisor can review your group LTD, spot the gaps, and build a private or supplemental plan around your actual income. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/disability" class="btn-white">Get a Disability Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_disability_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_disability_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

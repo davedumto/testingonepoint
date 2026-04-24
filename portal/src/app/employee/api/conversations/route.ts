@@ -106,6 +106,8 @@ export async function POST(req: NextRequest) {
     });
 
     // Serialize to match GET shape so subscribers can merge the delta without an extra fetch.
+    // Same shape is returned to the authoring client so it can prepend
+    // optimistically instead of doing a full reload.
     const serialized = {
       _id: post._id.toString(),
       authorId: post.authorId.toString(),
@@ -121,7 +123,7 @@ export async function POST(req: NextRequest) {
     };
     publish(CHANNELS.conversations, 'post:new', serialized);
 
-    return Response.json({ success: true, post }, { status: 201 });
+    return Response.json({ success: true, post: serialized }, { status: 201 });
   } catch (error) {
     logger.error('Conversation post error', { error: String(error) });
     return Response.json({ error: 'Something went wrong.' }, { status: 500 });

@@ -1,0 +1,969 @@
+<!--
+  ONEPOINT LEARN: AUTO & VEHICLE (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/auto
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Auto & Vehicle
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #0a3d6b;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Auto &amp; Vehicle</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Learn Track</span>
+      <h1>Auto &amp; Vehicle Insurance, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on everything your auto policy actually does, what it doesn't, and where drivers most often get caught off guard.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~25</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/auto" class="lc-btn lc-btn-ghost">Go to Auto Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From collision basics to rideshare gaps, every coverage that actually shows up on your policy.</div>
+      <ul class="art-list">
+        <li>Collision vs. Comp</li>
+        <li>UM/UIM</li>
+        <li>MedPay &amp; PIP</li>
+        <li>Gap Insurance</li>
+        <li>Motorcycle</li>
+        <li>RV</li>
+        <li>Boat</li>
+        <li>Rideshare</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · Collision vs. Comprehensive</option>
+      <option value="m2">Chapter 2 · Uninsured &amp; Underinsured Motorist</option>
+      <option value="m3">Chapter 3 · MedPay and PIP</option>
+      <option value="m4">Chapter 4 · Gap Insurance</option>
+      <option value="m5">Chapter 5 · Motorcycle Insurance 101</option>
+      <option value="m6">Chapter 6 · RV Insurance</option>
+      <option value="m7">Chapter 7 · Boat &amp; Watercraft</option>
+      <option value="m8">Chapter 8 · Rideshare &amp; Delivery</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">Collision vs. Comprehensive</a></li>
+        <li><a href="#m2" data-mod="2">Uninsured &amp; Underinsured Motorist</a></li>
+        <li><a href="#m3" data-mod="3">MedPay and PIP</a></li>
+        <li><a href="#m4" data-mod="4">Gap Insurance</a></li>
+        <li><a href="#m5" data-mod="5">Motorcycle Insurance 101</a></li>
+        <li><a href="#m6" data-mod="6">RV Insurance</a></li>
+        <li><a href="#m7" data-mod="7">Boat &amp; Watercraft</a></li>
+        <li><a href="#m8" data-mod="8">Rideshare &amp; Delivery</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Collision vs. Comprehensive</h1>
+        <p class="lmod-subtitle">Which one covers the hail, the deer, and the ditch?</p>
+        <p class="lmod-lead">You pay for "full coverage" on your car. Then a storm drops baseball-sized hail on it, and your insurer asks if you have comprehensive. You hesitate. That hesitation is expensive.</p>
+        <p>Most drivers lump collision and comprehensive together without knowing which one does what. They're two separate coverages, and dropping either one leaves a real gap.</p>
+
+        <h2>What collision covers</h2>
+        <p>Collision pays when your car hits something: another vehicle, a guardrail, a tree, a ditch. It applies whether the accident was your fault or not, and it applies even when there's no other driver involved. Slide off an icy road in Ohio and wrap your bumper around a mailbox? That's collision.</p>
+
+        <h2>What comprehensive covers</h2>
+        <p>Comprehensive, sometimes called "other than collision", covers almost everything that isn't a crash. Theft. Vandalism. Hail. Flood. Fire. Falling branches. A deer that jumps out of the woods in Tennessee and totals your hood. If something happens <strong>to</strong> your car rather than <strong>by</strong> your car, it's comprehensive.</p>
+
+        <h2>Each has its own deductible</h2>
+        <p>A common setup is a $500 collision deductible and a $250 comprehensive deductible. If a falling tree totals your $30,000 car, you pay $250 and your insurer pays the rest up to the car's actual cash value. If you rear-end someone, you pay $500 to get your car fixed.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A $30,000 SUV gets crushed by a falling tree. With a $250 comprehensive deductible, you pay $250 and your insurer pays the remaining $29,750, up to the car's actual cash value. Without comprehensive, that $29,750 comes out of your pocket.</p>
+        </div>
+
+        <h2>When to drop one, and when not to</h2>
+        <p>Once your car is paid off and worth less than $3,000 to $4,000, dropping <strong>collision</strong> starts to make sense. You're paying more in premium than the coverage will ever pay out. Comprehensive is usually cheap enough to keep longer, especially in hail-prone states like <strong>TX, MO, and IL</strong>, or deer-heavy states like <strong>MI, VA, and NC</strong>.</p>
+        <p>If your car is financed or leased, you don't get to choose. Lenders require both, no exceptions.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Full coverage" is a marketing term</strong>, not a policy option. Your real policy is liability plus collision plus comprehensive plus whatever else you added.</li>
+            <li><strong>Rental reimbursement is separate.</strong> If your car is in the shop for three weeks, neither collision nor comp pays for your rental unless you added that coverage.</li>
+            <li><strong>Glass isn't treated the same everywhere.</strong> FL and SC waive the comp deductible on windshield claims, other states don't.</li>
+          </ul>
+        </div>
+
+        <p>If you're not sure what's on your policy right now, pull your declarations page, it lists every coverage and deductible in one place. Our <a href="/auto">auto insurance page</a> walks through how to read it.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Uninsured &amp; Underinsured Motorist</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Uninsured &amp; Underinsured Motorist</h1>
+        <p class="lmod-subtitle">The coverage that saves you from other people's mistakes.</p>
+        <p class="lmod-lead">Roughly 1 in 8 drivers on U.S. roads has no insurance at all. Of those who do, millions carry the state minimum, which often isn't enough to pay for a broken leg, let alone a totaled SUV.</p>
+        <p>Uninsured/Underinsured Motorist coverage (UM/UIM) is the part of your policy that pays when the person who hit you can't.</p>
+
+        <h2>What UM covers</h2>
+        <p>If a driver with no insurance hits you, their liability coverage, which is what would normally pay for your injuries and car damage, doesn't exist. Uninsured Motorist coverage on your own policy steps in and pays what theirs would have.</p>
+
+        <h2>What UIM covers</h2>
+        <p>Underinsured Motorist coverage handles a related problem, the other driver has insurance, but not enough. If they carry $25,000 in liability (the minimum in many states) and your medical bills hit $90,000, UIM pays the gap up to the limit you chose.</p>
+
+        <h2>How much you need</h2>
+        <p>UM/UIM limits usually match your liability limits. If you carry 100/300/100, meaning $100,000 per person, $300,000 per accident, $100,000 in property damage, your UM/UIM should match. Raising UM/UIM from state minimum to 100/300 usually costs $5 to $15 more per month. For the price of a sandwich, you're buying a hospital bill.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A driver with the state minimum $25,000 liability rear-ends you on I-85. Your hospital bills hit $90,000. Without UIM, you eat $65,000. With 100/300 UIM on your own policy, your insurer pays the full $65,000 gap.</p>
+        </div>
+
+        <h2>State rules vary</h2>
+        <p>Most of OnePoint's states require insurers to offer UM. In <strong>GA, NC, SC, VA, MD, IL</strong>, and others, you have to sign a waiver to reject it. <strong>NY, NJ, and NC</strong> have specific rules about stacking, combining limits across multiple vehicles on one policy. <strong>FL</strong> handles UM differently because of its no-fault system, which pairs with PIP.</p>
+
+        <h2>When to raise your limits</h2>
+        <ul>
+          <li>You drive in states with high uninsured rates.</li>
+          <li>You have assets to protect, home equity, savings, a growing 401(k).</li>
+          <li>You commute long distances or have daily highway exposure.</li>
+          <li>You have kids who ride in the car regularly.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My health insurance will cover it."</strong> Your health insurer will pay and then come after the at-fault driver for reimbursement. If that driver has nothing, you may still owe deductibles, copays, and uncovered costs.</li>
+            <li><strong>"The state makes everyone carry insurance."</strong> Enforcement is weak, and uninsured rates in MS, FL, and TN regularly top 15 to 20%.</li>
+            <li><strong>"Hit-and-run isn't covered."</strong> In most states, a hit-and-run counts as an uninsured motorist claim.</li>
+          </ul>
+        </div>
+
+        <p>For a full walkthrough of how UM/UIM fits into the rest of your policy, see our <a href="/auto">auto insurance overview</a>.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Collision vs. Comprehensive</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>MedPay and PIP</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">MedPay and PIP</h1>
+        <p class="lmod-subtitle">Who pays your medical bills after a crash?</p>
+        <p class="lmod-lead">After a car accident, two sets of bills start stacking up: the one from the body shop and the one from the hospital. Liability and collision handle the first. MedPay and PIP handle the second.</p>
+
+        <h2>What MedPay does</h2>
+        <p>Medical Payments coverage, "MedPay", pays your medical bills after a crash regardless of who caused it. It also covers passengers in your car and, in most states, you as a pedestrian if a car hits you. Typical limits run from $1,000 to $10,000, and it's cheap, usually $3 to $15 per month.</p>
+        <p>MedPay fills the gap your health insurance leaves: deductibles, copays, ambulance rides, and the uncovered costs you'd otherwise pay out of pocket.</p>
+
+        <h2>What PIP does</h2>
+        <p>Personal Injury Protection is MedPay's bigger cousin. On top of medical bills, PIP can pay for lost wages, household help (someone to watch your kids while you recover), and funeral costs. Limits commonly run $10,000 to $50,000.</p>
+        <p>PIP is required in "no-fault" states, which among OnePoint's footprint includes <strong>FL, NY, MI, NJ, and MD</strong>. In no-fault states, your own PIP pays first for injuries regardless of who caused the crash, and lawsuits are limited to serious injuries.</p>
+
+        <h2>Who pays first</h2>
+        <p>In no-fault states, PIP pays before your health insurance. In other states, MedPay usually pays first for accident-related treatment, and your health insurance picks up what's left.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A $1,500 ambulance ride, a $4,500 ER visit, and $1,200 in follow-up care. Your health plan has a $6,000 deductible. MedPay at $5,000 absorbs most of the out-of-pocket costs, your health plan handles the rest. Without MedPay, you'd be writing a $6,000 check before your health coverage kicks in.</p>
+        </div>
+
+        <h2>Michigan is its own planet</h2>
+        <p>Michigan overhauled its no-fault system in 2020. Drivers now choose their PIP medical limit, from $50,000 up to unlimited lifetime, and the price gap between those choices is significant. If you live in MI, this is a decision worth understanding before you pick.</p>
+
+        <h2>When to add or raise these coverages</h2>
+        <ul>
+          <li>High health insurance deductible.</li>
+          <li>Self-employed or hourly work, where lost wages hit harder.</li>
+          <li>Kids or elderly parents regularly in the car.</li>
+          <li>No short-term disability coverage in place.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My health insurance is enough."</strong> Not if you have a $6,000 deductible and a $1,500 ambulance ride. MedPay covers what your health plan makes you pay.</li>
+            <li><strong>"PIP and MedPay are the same."</strong> They overlap, but PIP is broader and often mandatory. MedPay is optional in most states.</li>
+            <li><strong>"If the other driver is at fault, I don't need it."</strong> Their insurance can take months to pay. Yours pays now.</li>
+          </ul>
+        </div>
+
+        <p>For the full picture of how medical coverage stacks up after a claim, our <a href="/auto">auto insurance page</a> covers the full policy structure.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Uninsured &amp; Underinsured Motorist</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Gap Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Gap Insurance</h1>
+        <p class="lmod-subtitle">Why your loan balance can outlive your car.</p>
+        <p class="lmod-lead">You drive a new car off the lot. Two weeks later, you're rear-ended at a stoplight and the car is totaled. Your insurer cuts a check for what the car is worth that day, which is about $4,000 less than what you still owe the bank. You now owe the bank $4,000 on a car you can't drive.</p>
+        <p>That's the gap. Gap insurance fills it.</p>
+
+        <h2>How it works</h2>
+        <p>Gap coverage, technically "Guaranteed Asset Protection", pays the difference between what you owe on a loan or lease and what your car is actually worth at the time of a total loss. It kicks in only after your collision or comprehensive payout.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>You finance a $35,000 SUV with $2,000 down. Twelve months later, you still owe $31,000. A flood totals the car. Your insurer values it at $27,500 because it depreciated. Without gap, you write the bank a check for $3,500. With gap, the gap policy pays that $3,500.</p>
+        </div>
+
+        <h2>Where to buy it</h2>
+        <p>Dealers sell gap coverage at signing for $400 to $700 as a one-time fee rolled into your loan. Most auto insurers sell it as a policy add-on for $20 to $60 per year. Over a five-year loan, the insurer version is usually $150 to $300 total, a fraction of the dealer price.</p>
+
+        <h2>When you actually need it</h2>
+        <ul>
+          <li>You put less than 20% down on a new or used car.</li>
+          <li>You have a loan term longer than 48 months.</li>
+          <li>You're leasing (most leases require gap, but not all include it automatically).</li>
+          <li>You rolled negative equity from your last car into this loan.</li>
+        </ul>
+
+        <h2>When you don't</h2>
+        <ul>
+          <li>The car is paid off.</li>
+          <li>You owe less than the car is worth.</li>
+          <li>You put enough down that you'll never be underwater.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My dealer already included it."</strong> Sometimes yes, sometimes no. Read the contract.</li>
+            <li><strong>"It pays off my whole loan."</strong> It only covers the gap between payout and loan balance, not missed payments, late fees, or extended warranties.</li>
+            <li><strong>"Used cars don't need it."</strong> Used cars can depreciate just as fast in the first year of a new loan.</li>
+          </ul>
+        </div>
+
+        <p>If you're financing or leasing, gap is one of the cheapest coverages you can add. Our <a href="/auto">auto insurance page</a> covers how to stack it with collision and comprehensive.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>MedPay and PIP</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Motorcycle Insurance 101</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Motorcycle Insurance 101</h1>
+        <p class="lmod-subtitle">Why your auto policy doesn't cover your bike.</p>
+        <p class="lmod-lead">Motorcycle insurance works a lot like auto insurance, liability, collision, comprehensive, but with coverages unique to bikes and premiums that swing wildly based on what you ride.</p>
+
+        <h2>Why it's a separate policy</h2>
+        <p>Your auto policy specifically excludes motorcycles. Even if you add the bike to the same insurer, it runs on a separate policy with separate limits, deductibles, and underwriting.</p>
+
+        <h2>What a basic policy covers</h2>
+        <ul>
+          <li><strong>Liability</strong> pays for injuries and property damage you cause to others. Required in all 18 OnePoint states except where a financial responsibility bond is allowed.</li>
+          <li><strong>Collision</strong> pays to repair your bike after a crash.</li>
+          <li><strong>Comprehensive</strong> covers theft, vandalism, fire, and weather damage. Bike theft is a real risk, over 40,000 motorcycles are stolen in the U.S. each year, concentrated in FL, TX, and CA.</li>
+          <li><strong>UM/UIM</strong> plays the same role as on an auto policy, and is especially valuable on a bike where injuries are more severe.</li>
+          <li><strong>MedPay</strong> pays medical bills regardless of fault.</li>
+        </ul>
+
+        <h2>Coverages specific to motorcycles</h2>
+        <ul>
+          <li><strong>Accessories and custom parts.</strong> Standard policies cap custom parts (saddlebags, chrome, aftermarket exhaust) at $1,000 to $3,000. If you've put $8,000 into modifications, you need to schedule them.</li>
+          <li><strong>Gear coverage.</strong> Some policies reimburse for helmets, jackets, and boots damaged in a crash.</li>
+          <li><strong>Lay-down coverage.</strong> Pays for damage when you drop the bike without another vehicle involved.</li>
+          <li><strong>Trip interruption.</strong> If you break down more than 100 miles from home, it covers hotel and transportation.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 35-year-old rider with a clean record on a mid-size cruiser pays roughly $300 to $600 per year. The same rider on a sport bike pays $900 to $2,500. Bike type, age, zip code, and riding experience drive the price more than almost any other insurance product.</p>
+        </div>
+
+        <h2>Seasonal policies</h2>
+        <p>Some insurers in states with real winters (<strong>OH, MI, IL, MO</strong>) offer "lay-up" coverage, a reduced premium during months you store the bike, with comprehensive still active against theft and fire.</p>
+
+        <h2>State helmet laws affect coverage</h2>
+        <p>Helmet laws don't just affect tickets. In some states, not wearing a helmet can reduce what your insurance pays on an injury claim. Universal helmet laws apply in <strong>AL, GA, LA, MD, MS, MO, NC, NJ, NY, TN, VA</strong>. Partial laws apply in the rest of OnePoint's footprint.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My auto policy covers me when I ride."</strong> It doesn't, not even liability.</li>
+            <li><strong>"Cheaper bike means cheaper insurance."</strong> Not always. Sport bikes and touring bikes often cost more to insure than more expensive cruisers because of theft and claim rates.</li>
+            <li><strong>"I only ride on weekends, so I don't need full coverage."</strong> Theft and weather don't care when you ride.</li>
+          </ul>
+        </div>
+
+        <p>If you're shopping for a new bike or switching carriers, our <a href="/auto">auto and vehicle page</a> has motorcycle options listed alongside other specialty vehicles.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Gap Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>RV Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">RV Insurance</h1>
+        <p class="lmod-subtitle">Why your auto policy isn't enough.</p>
+        <p class="lmod-lead">An RV is a vehicle, a home, and a hotel room on wheels. That's why insuring one takes coverages a standard auto policy doesn't offer.</p>
+
+        <h2>The three types of RVs and why it matters</h2>
+        <ul>
+          <li><strong>Class A</strong>, the big bus-style motorhomes ($100,000 to $500,000+). Highest premiums because of size and value.</li>
+          <li><strong>Class B</strong>, camper vans built on a van chassis. Cheaper, more maneuverable, smaller claims.</li>
+          <li><strong>Class C</strong>, mid-size motorhomes with the cab-over-bed design. Premiums sit between A and B.</li>
+          <li><strong>Travel trailers, fifth wheels, pop-ups.</strong> These aren't motorized, so they're often insured through a "trailer" policy or endorsement rather than a full RV policy.</li>
+        </ul>
+
+        <h2>What a full-timer policy covers</h2>
+        <p>If you live in your RV full-time, you need a full-timer's policy, which adds homeowner-style coverages most auto policies don't include:</p>
+        <ul>
+          <li><strong>Personal belongings</strong>, clothes, electronics, cookware, bikes.</li>
+          <li><strong>Attached accessories</strong>, awnings, satellite dishes, solar panels.</li>
+          <li><strong>Liability on-site</strong>, if a guest trips on your RV steps at a campground.</li>
+          <li><strong>Emergency expense coverage</strong>, hotel and food if your RV becomes uninhabitable.</li>
+        </ul>
+
+        <h2>Coverages unique to RVs</h2>
+        <ul>
+          <li><strong>Vacation liability</strong>, liability coverage while you're parked at a campsite.</li>
+          <li><strong>Full replacement cost</strong>, pays for a new RV (not depreciated value) if your RV is totaled within the first 3 to 5 years.</li>
+          <li><strong>Roadside assistance tailored for RVs.</strong> Regular AAA often won't tow a 40-foot Class A.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Travel trailer or fifth wheel: $250 to $500 per year. Class C motorhome: $800 to $1,500. Class A motorhome: $1,500 to $3,500. Full-timer add-on: another $500 to $1,000 per year depending on belongings.</p>
+        </div>
+
+        <h2>Where you park matters</h2>
+        <p>Most OnePoint states allow year-round RV use, but premium and claim patterns differ. <strong>FL and TX</strong> see more hurricane and hail claims. <strong>GA, SC, and NC</strong> see falling-tree claims. <strong>MI and OH</strong> see winter-storage-related comprehensive claims.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My auto insurance covers my motorhome."</strong> It doesn't. Motorized RVs need their own policy, and non-motorized trailers need a trailer endorsement.</li>
+            <li><strong>"I don't need it in storage."</strong> Theft, fire, and falling trees don't care if you're driving it.</li>
+            <li><strong>"My homeowners covers the travel trailer."</strong> Usually not beyond a small amount while it's parked at your house.</li>
+          </ul>
+        </div>
+
+        <p>If you own, rent, or finance an RV, our <a href="/auto">auto and vehicle page</a> covers RV options alongside motorcycle and boat coverage.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Motorcycle Insurance 101</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Boat &amp; Watercraft</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Boat &amp; Watercraft Insurance</h1>
+        <p class="lmod-subtitle">What your homeowners policy won't cover.</p>
+        <p class="lmod-lead">A lot of boat owners assume their homeowners policy covers their boat. It covers a little, usually up to $1,000 on the hull while it's on your property, and sometimes some liability for very small boats. That's it. Everything else requires a boat policy.</p>
+
+        <h2>What a boat policy covers</h2>
+        <ul>
+          <li><strong>Hull coverage</strong> pays to repair or replace the boat after a collision, grounding, sinking, or storm damage.</li>
+          <li><strong>Liability</strong> kicks in if you injure another boater, damage another vessel, or cause a wake that swamps someone.</li>
+          <li><strong>Medical payments</strong> for you and your passengers.</li>
+          <li><strong>Uninsured boater.</strong> A lot of boaters carry no insurance. If one hits you, this coverage pays.</li>
+          <li><strong>Fuel spill liability.</strong> Cleaning up a fuel spill can run $5,000 to $50,000, and federal law makes you responsible.</li>
+          <li><strong>Wreck removal.</strong> If your boat sinks, you're legally required to remove it. This coverage pays for that.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Jet ski or personal watercraft: $150 to $400 per year. Small fishing boat or pontoon under 26 feet: $200 to $500. Mid-size cruiser from 26 to 40 feet: $500 to $1,500. Yacht over 40 feet: custom-underwritten, often $2,000 and up.</p>
+        </div>
+
+        <h2>Agreed value vs. actual cash value</h2>
+        <p>Ask for an <strong>agreed value</strong> policy. It pays a set dollar amount if the boat is totaled, what you and the insurer agreed on at signing. An actual cash value policy subtracts depreciation. Boats depreciate fast, and that difference can be thousands of dollars at claim time.</p>
+
+        <h2>Navigation area matters</h2>
+        <p>Policies specify where you're covered, a lake, a state, the Gulf Coast, "within 75 miles of shore". Taking your boat outside that zone without notifying your insurer can void coverage at the worst possible time.</p>
+
+        <h2>States with specific requirements</h2>
+        <p><strong>AR, AL, and UT</strong> mandate liability insurance for certain boat classes. Most of OnePoint's other states don't mandate boat insurance, but marinas and lenders almost always require it. Minimum $300,000 liability is typical.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My homeowners covers my jet ski."</strong> It might cover theft of a small PWC from your property. It almost never covers liability on the water.</li>
+            <li><strong>"The lake is too small for insurance."</strong> Collisions on small lakes happen constantly, and medical bills aren't smaller just because the lake is.</li>
+            <li><strong>"I don't need it in the off-season."</strong> Storage fires, hurricanes, and theft claims are often the biggest claims of the year.</li>
+          </ul>
+        </div>
+
+        <p>For boat coverage alongside RVs, motorcycles, and classic cars, our <a href="/auto">auto and vehicle page</a> has the full specialty vehicle lineup.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>RV Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Rideshare &amp; Delivery</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Auto &amp; Vehicle</div>
+        <h1 class="lmod-title">Rideshare &amp; Delivery Driving</h1>
+        <p class="lmod-subtitle">The coverage gap Uber and DoorDash won't tell you about.</p>
+        <p class="lmod-lead">If you drive for Uber, Lyft, DoorDash, Instacart, or Amazon Flex, your personal auto policy probably doesn't cover you while the app is on. The rideshare company's coverage probably doesn't cover you either, at least not all the time. There's a gap. And if you crash inside that gap, you're paying for everything yourself.</p>
+
+        <h2>The three "periods" of rideshare driving</h2>
+        <ul>
+          <li><strong>Period 0.</strong> App off, driving personally. Your personal auto policy covers you.</li>
+          <li><strong>Period 1.</strong> App on, waiting for a ride request. Uber and Lyft provide limited liability only, typically $50,000 per person, $100,000 per accident. Your own personal policy specifically excludes this period.</li>
+          <li><strong>Period 2.</strong> You've accepted a ride and are driving to the passenger.</li>
+          <li><strong>Period 3.</strong> Passenger in the car until drop-off.</li>
+        </ul>
+        <p>During Periods 2 and 3, Uber and Lyft provide $1 million in liability plus contingent collision and comprehensive (with a deductible around $2,500). During Period 1, which can be the biggest chunk of a driver's day, the coverage is thin.</p>
+
+        <h2>The gap that costs drivers</h2>
+        <p>Most personal auto policies have a "business use" exclusion. If you get in an accident during Period 1 and try to file a claim under your personal policy, it can be denied. In some cases, the insurer can cancel your policy entirely.</p>
+
+        <h2>How rideshare coverage fixes it</h2>
+        <p>A <strong>rideshare endorsement</strong> on your personal policy extends your coverage through Periods 1, 2, and 3. It costs $10 to $30 per month depending on the state and how much you drive. It's sometimes called a TNC endorsement (Transportation Network Company).</p>
+
+        <h2>Delivery apps are different, and worse</h2>
+        <p>DoorDash, Instacart, Uber Eats, and Amazon Flex provide some liability coverage but often no collision or comprehensive. And most personal auto policies exclude delivery driving just like they exclude rideshare. A <strong>delivery endorsement</strong>, or a full commercial auto policy for heavy drivers, closes that gap.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>You're on app in Atlanta, app on, no ride accepted yet, Period 1. Another driver runs a light and totals your car. Your personal policy denies because the app was on. Uber's Period 1 coverage is $50,000 liability only, not collision. Your $28,000 car is a total loss with no one to pay for it. A $15/month rideshare endorsement would have covered it.</p>
+        </div>
+
+        <h2>State-specific rules</h2>
+        <p>OnePoint states all allow rideshare endorsements, but availability varies by carrier. <strong>GA, FL, TX, NC, and VA</strong> have specific rideshare insurance statutes that mandate minimum coverage by TNCs. In <strong>NY</strong>, rideshare coverage in NYC specifically requires TLC licensing and commercial coverage, a personal endorsement isn't enough.</p>
+
+        <h2>When to add it</h2>
+        <ul>
+          <li>You drive for any app more than a few hours a month.</li>
+          <li>You deliver food, groceries, or packages for income.</li>
+          <li>You plan to start driving but haven't yet, add it before your first ride.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Uber covers me the whole time I'm driving for them."</strong> Only in Periods 2 and 3, and the deductible is high.</li>
+            <li><strong>"I only do it part-time, so I don't need to tell my insurer."</strong> Carriers find out through claim investigations, phone records, and app data. Non-disclosure can void the policy.</li>
+            <li><strong>"Delivery is different from rideshare."</strong> To your insurer, they're both commercial use. Both require disclosure.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/auto">auto insurance page</a> covers rideshare endorsements and commercial auto for heavier delivery drivers.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Boat &amp; Watercraft</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Auto &amp; Vehicle track</div>
+          <h2>Ready to see how your own policy stacks up?</h2>
+          <p>A licensed OnePoint advisor can pull your declarations page, spot the gaps, and tell you exactly where you're over or under covered. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/auto-quote" class="btn-white">Get an Auto Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_auto_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_auto_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

@@ -1,0 +1,2157 @@
+<!--
+  ONEPOINT BUSINESS — GHL Page Body
+  Paste into: GHL Page Builder → Custom HTML element (full-width section)
+  Nav & footer come from GHL Header / Footer Tracking Code snippets.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* GHL full-width override */
+section { width: 100%; }
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT INSURANCE · PRODUCT PAGES
+   UI pattern: Progressive.com
+═══════════════════════════════════════════════════════════ */
+
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --orange:      #0a3d6b;
+  --orange-dark: #052847;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --white:       #fff;
+  --shadow:      0 4px 20px rgba(5,40,71,.10);
+  --shadow-lg:   0 16px 56px rgba(5,40,71,.20);
+  --radius:      12px;
+  --radius-sm:   8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 28px; border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: .2s; border: none; white-space: nowrap;
+}
+.btn-blue  { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: var(--blue-dark); }
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-orange:hover { background: var(--orange-dark); }
+.btn-white { background: #fff; color: var(--navy); }
+.btn-white:hover { background: #f0f4f8; }
+.btn-ghost-white {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,.55);
+}
+.btn-ghost-white:hover { background: rgba(255,255,255,.12); }
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(5,40,71,.06);
+}
+.nav-inner {
+  display: flex; align-items: center;
+  height: 64px; gap: 0;
+  max-width: 1200px; margin: 0 auto; padding: 0 28px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none; margin-right: 28px; flex-shrink: 0;
+}
+.nav-brand-mark {
+  display: none;
+}
+.nav-brand-logo {
+  height: 38px; width: auto; display: block;
+}
+.nav-brand-name { display: none; }
+
+.nav-links { list-style: none; display: flex; align-items: center; gap: 2px; flex: 1; }
+.nav-links > li { position: relative; }
+.nav-links > li > a,
+.nav-links > li > button {
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--text); background: none; border: none; cursor: pointer;
+  white-space: nowrap; transition: .15s;
+}
+.nav-links > li > a:hover,
+.nav-links > li > button:hover { background: var(--bg); color: var(--blue); }
+.nav-links > li > button .caret {
+  font-size: 10px; color: var(--muted); transition: transform .2s; margin-left: 2px;
+}
+.nav-links > li.open > button .caret { transform: rotate(180deg); }
+
+.nav-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; flex-shrink: 0; }
+.nav-phone { font-size: 14px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+.nav-phone a { color: var(--navy); }
+.nav-cta {
+  padding: 9px 20px; border-radius: var(--radius-sm);
+  background: var(--orange); color: #fff;
+  font-size: 14px; font-weight: 600; transition: .2s;
+}
+.nav-cta:hover { background: var(--orange-dark); }
+
+/* Mega-menu */
+.mega-menu {
+  position: fixed; top: 64px; left: 50%; transform: translateX(-50%);
+  display: none;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  min-width: 900px;
+  overflow: hidden;
+}
+.nav-links > li.open .mega-menu { display: flex; }
+.mega-sidebar {
+  display: none;
+}
+.mega-tab {
+  display: block; width: 100%;
+  padding: 10px 20px;
+  text-align: left;
+  font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  border-left: 3px solid transparent; transition: .15s;
+}
+.mega-tab:hover, .mega-tab.active {
+  color: var(--navy); background: var(--white);
+  border-left-color: var(--blue);
+}
+.mega-content { flex: 1; padding: 24px; }
+.mega-panel { display: none; }
+.mega-panel.active { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 22px; }
+.mega-col h5 {
+  font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.mega-col ul { list-style: none; }
+.mega-col ul li a {
+  display: block; padding: 5px 0;
+  font-size: 14px; color: var(--text); transition: .15s;
+}
+.mega-col ul li a:hover { color: var(--blue); padding-left: 4px; }
+
+/* ══════════════════════════════════════════════
+   HERO — light, clean (no dark gradient)
+   overflow visible so the quote-card dropdown can escape.
+   Decor circles live on a separate clipped layer.
+══════════════════════════════════════════════ */
+.hero {
+  position: relative; z-index: 10;
+  min-height: calc(100vh - 64px);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: var(--bg);
+}
+.hero-decor {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+.hero-decor::before {
+  content: ''; position: absolute; top: -160px; right: -140px;
+  width: 580px; height: 580px; border-radius: 50%;
+  background: radial-gradient(circle, var(--hero-accent, rgba(0,102,204,.12)), transparent 70%);
+}
+.hero-decor::after {
+  content: ''; position: absolute; bottom: 30%; left: -200px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, var(--hero-accent-2, rgba(74,144,217,.08)), transparent 70%);
+}
+
+/* Optional hero side-image (right-side, fades to transparent on the left) */
+.hero-image {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 52%; max-width: 680px;
+  background-size: cover; background-position: center;
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.9) 10%, rgba(0,0,0,0) 80%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,.9) 10%, rgba(0,0,0,0) 80%);
+  z-index: 1; pointer-events: none;
+}
+@media (max-width: 960px) { .hero-image { display: none; } }
+.hero-text {
+  position: relative; z-index: 2;
+  text-align: center; padding: 56px 28px 0;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(5,40,71,.04);
+}
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 4.6vw, 54px);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.12;
+  max-width: 760px; margin: 0 auto 14px;
+  letter-spacing: -.01em;
+}
+.hero-sub {
+  font-size: 17px; color: var(--muted);
+  max-width: 540px; margin: 0 auto 28px; line-height: 1.6;
+}
+
+/* Quote card — Progressive-style horizontal: Product | ZIP | Get a quote
+   with bundles + product list inside the Product dropdown */
+.quote-card-wrap {
+  position: relative; z-index: 30;
+  padding: 0 28px;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.quote-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 48px rgba(5,40,71,.18);
+  max-width: 880px; margin: 0 auto;
+  position: relative;
+}
+.qc-form {
+  display: grid; grid-template-columns: 1.6fr 1.2fr auto;
+  align-items: stretch;
+  position: relative;
+}
+.qc-product-field, .qc-location-field {
+  padding: 18px 24px; position: relative;
+}
+.qc-product-field { border-right: 1px solid var(--border); }
+.qc-location-field { border-right: 1px solid var(--border); }
+.qc-field-label {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text); margin-bottom: 10px;
+}
+.qc-product-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: none; border: none; cursor: pointer; padding: 0;
+  width: 100%; text-align: left;
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px; font-weight: 600; color: var(--navy);
+}
+.qc-product-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue);
+}
+.qc-product-icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.qc-product-name {
+  flex: 1; padding-bottom: 4px;
+  border-bottom: 2px solid var(--text);
+}
+.qc-product-caret { color: var(--blue); font-size: 12px; transition: transform .2s; }
+.qc-product-btn.open .qc-product-caret { transform: rotate(180deg); }
+
+.qc-location-input {
+  width: 100%; border: none; border-bottom: 2px solid var(--border);
+  padding: 0 0 6px; font-family: 'Outfit', sans-serif;
+  font-size: 17px; color: var(--text); outline: none;
+  letter-spacing: .2em; background: transparent;
+  transition: border-color .2s;
+}
+.qc-location-input:focus { border-bottom-color: var(--blue); }
+.qc-location-input::placeholder { color: var(--subtle); letter-spacing: .15em; }
+
+.qc-cta {
+  background: var(--blue); color: #fff;
+  padding: 0 36px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px; font-weight: 700;
+  border: none; cursor: pointer; transition: .2s;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  white-space: nowrap;
+}
+.qc-cta:hover { background: var(--blue-dark); }
+
+/* Dropdown inside the product field */
+.qc-product-dropdown {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(5,40,71,.18);
+  border: 1px solid var(--border);
+  padding: 26px 32px 28px;
+  display: none; z-index: 40;
+  max-height: 70vh; overflow-y: auto;
+}
+.qc-product-dropdown.open { display: block; }
+
+.qc-bundle-headline {
+  font-size: 15px; font-weight: 700; color: var(--navy);
+  margin-bottom: 14px; line-height: 1.4;
+}
+.qc-bundle-headline sup { color: var(--blue); cursor: pointer; font-size: 11px; }
+
+.qc-bundle-links {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px;
+  padding-bottom: 22px; border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.qc-bundle-link {
+  font-size: 15px; color: var(--text); text-decoration: none;
+  font-weight: 500; transition: .15s;
+}
+.qc-bundle-link:hover { color: var(--blue); text-decoration: underline; }
+
+.qc-other-label {
+  font-size: 15px; font-weight: 700; color: var(--navy);
+  margin-bottom: 14px;
+}
+.qc-other-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 24px;
+}
+.qc-other-grid a {
+  font-size: 14px; color: var(--text); text-decoration: none;
+  padding: 5px 0; transition: .15s;
+  display: flex; align-items: center; gap: 6px;
+}
+.qc-other-grid a:hover { color: var(--blue); }
+.qc-other-grid a.current {
+  color: var(--blue); font-weight: 700;
+  border: 1.5px dashed var(--blue);
+  padding: 4px 8px; border-radius: 6px;
+  background: rgba(0,102,204,.04);
+}
+.qc-other-grid a.current::after {
+  content: '✓'; margin-left: auto;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Legacy classes — only .qc-input and .qc-submit retained for fallback */
+.qc-input {
+  padding: 14px 18px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif; font-size: 15px; color: var(--text);
+  outline: none; transition: .2s;
+  width: 100%; max-width: 240px;
+  letter-spacing: .15em;
+}
+.qc-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,204,.12); }
+.qc-submit {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 24px; border-radius: var(--radius-sm);
+  background: var(--orange); color: #fff;
+  font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700;
+  border: none; cursor: pointer; transition: .2s;
+  margin-top: 2px;
+}
+.qc-submit:hover { background: var(--orange-dark); }
+.qc-submit svg {
+  width: 18px; height: 18px; stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.qc-note {
+  padding: 12px 32px 16px; text-align: center;
+  font-size: 12px; color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+.qc-note a { color: var(--blue); }
+
+/* Other ways bar */
+.other-ways-bar {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto; padding: 0 28px;
+}
+.other-ways-inner {
+  background: var(--bg);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--muted);
+}
+.other-ways-inner strong { color: var(--text); margin-right: 4px; }
+.other-ways-inner a { color: var(--blue); font-weight: 500; }
+.other-ways-inner a:hover { text-decoration: underline; }
+.other-ways-sep { color: var(--border); margin: 0 4px; }
+
+/* ══════════════════════════════════════════════
+   TRUST BAR
+══════════════════════════════════════════════ */
+.trust-bar { background: var(--navy); padding: 0; }
+.trust-stats {
+  display: flex; align-items: stretch; justify-content: center;
+  flex-wrap: wrap;
+}
+.trust-stat {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 28px 48px;
+  border-right: 1px solid rgba(255,255,255,.1);
+  text-align: center;
+}
+.trust-stat:last-child { border-right: none; }
+.trust-stat strong { font-size: 30px; font-weight: 700; color: #fff; line-height: 1; }
+.trust-stat span { font-size: 13px; color: rgba(255,255,255,.55); margin-top: 4px; }
+
+/* ══════════════════════════════════════════════
+   CONTENT SECTIONS
+══════════════════════════════════════════════ */
+.section { padding: 72px 0; }
+.section-alt { background: var(--bg); }
+.section-navy { background: var(--navy); }
+
+.section-kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 12px;
+}
+.section-navy .section-kicker { color: var(--orange); }
+.section-h2 {
+  font-size: clamp(26px, 3.5vw, 40px); font-weight: 700;
+  color: var(--navy); line-height: 1.22; margin-bottom: 16px;
+}
+.section-navy .section-h2 { color: #fff; }
+.section-lead {
+  font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 560px;
+}
+.section-navy .section-lead { color: rgba(255,255,255,.65); }
+
+.section-header { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+.section-header .section-lead { margin: 0 auto; }
+
+/* Feature cards */
+.feat-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feat-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.feat-card {
+  background: var(--white); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 28px;
+  transition: .2s;
+}
+.feat-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: rgba(0,102,204,.3); }
+.feat-card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; color: var(--blue);
+}
+.feat-card-icon svg { width: 24px; height: 24px; }
+.feat-card h4 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.feat-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
+.steps::before {
+  content: ''; position: absolute;
+  top: 22px; left: calc(16.67% + 12px); right: calc(16.67% + 12px);
+  height: 2px; background: var(--border);
+}
+.step { position: relative; text-align: center; }
+.step-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--blue);
+}
+.step h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.step p { font-size: 14px; color: var(--muted); }
+
+/* Two-col with image */
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.split-img { border-radius: var(--radius); overflow: hidden; }
+.split-img img { width: 100%; height: 440px; object-fit: cover; }
+.split-points { display: flex; flex-direction: column; gap: 24px; margin-top: 8px; }
+.split-point { display: flex; gap: 16px; align-items: flex-start; }
+.split-point-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue);
+}
+.split-point-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.section-navy .split-point-icon { color: #fff; }
+.split-point h5 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.split-point p { font-size: 14px; color: var(--muted); }
+
+/* Mid-page CTA */
+.mid-cta { background: var(--blue); padding: 60px 0; }
+.mid-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.mid-cta-text h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: #fff; margin-bottom: 8px; }
+.mid-cta-text p { font-size: 15px; color: rgba(255,255,255,.75); }
+.mid-cta-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.mid-cta-phone { font-size: 13px; color: rgba(255,255,255,.7); }
+.mid-cta-phone a { color: #fff; font-weight: 600; }
+
+/* FAQ */
+.faq {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; max-width: 820px; margin: 0 auto;
+}
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; background: none; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600;
+  color: var(--navy); text-align: left; transition: .15s; gap: 16px;
+}
+.faq-q:hover { background: var(--bg); }
+.faq-icon { font-size: 22px; color: var(--blue); flex-shrink: 0; line-height: 1; }
+.faq-a {
+  display: none; padding: 0 24px 20px;
+  font-size: 15px; color: var(--muted); line-height: 1.75;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* Final CTA band */
+.cta-band { background: var(--blue); padding: 88px 0; text-align: center; }
+.cta-band .section-kicker { color: rgba(255,255,255,.85); }
+.cta-band .section-h2 { color: #fff; margin-bottom: 16px; }
+.cta-band p { font-size: 16px; color: rgba(255,255,255,.68); max-width: 520px; margin: 0 auto 36px; }
+.cta-band-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* ══════════════════════════════════════════════
+   BUNDLE & SAVE — Progressive-style
+══════════════════════════════════════════════ */
+.bundle-section {
+  padding: 72px 0;
+  background: var(--bg);
+  --bundle-accent: var(--orange);
+}
+.bundle-header { text-align: center; max-width: 720px; margin: 0 auto 44px; padding: 0 28px; }
+.bundle-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--bundle-accent); margin-bottom: 14px;
+}
+.bundle-kicker::before,
+.bundle-kicker::after { content: ''; width: 28px; height: 1.5px; background: var(--bundle-accent); }
+.bundle-header h2 {
+  font-size: clamp(26px, 3.4vw, 38px); font-weight: 700;
+  color: var(--navy); line-height: 1.18; margin-bottom: 12px; letter-spacing: -.01em;
+}
+.bundle-header p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+.bundle-disclosure { font-size: 12px; color: var(--subtle); margin-top: 10px; }
+.bundle-disclosure a { color: var(--blue); }
+
+.bundle-grid {
+  max-width: 1120px; margin: 0 auto; padding: 0 28px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.bundle-card {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 28px 26px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: .2s; position: relative;
+  text-decoration: none; color: var(--text);
+  cursor: pointer; text-align: left;
+  font-family: 'Outfit', sans-serif;
+  border-radius: 0;
+}
+.bundle-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+  background: var(--bundle-accent); transform: scaleY(0); transform-origin: bottom;
+  transition: transform .25s;
+}
+.bundle-card:hover {
+  border-color: var(--bundle-accent);
+  box-shadow: 0 10px 28px rgba(5,40,71,.08);
+  transform: translateY(-2px);
+}
+.bundle-card:hover::before { transform: scaleY(1); }
+
+.bundle-icons {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 4px;
+}
+.bundle-icon {
+  width: 46px; height: 46px;
+  background: rgba(0,102,204,.08); color: var(--bundle-accent);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.bundle-icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.bundle-plus { font-size: 20px; font-weight: 700; color: var(--subtle); }
+.bundle-icon-secondary { background: rgba(74,144,217,.1); color: var(--orange); }
+
+.bundle-card h4 { font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.22; }
+.bundle-card p { font-size: 14px; color: var(--muted); line-height: 1.6; flex: 1; margin: 0; }
+.bundle-savings {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  background: rgba(46,154,85,.1); color: #2e9a55;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  width: fit-content;
+}
+.bundle-savings svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.bundle-card-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--bundle-accent); margin-top: auto;
+  padding-top: 6px; text-transform: uppercase; letter-spacing: .06em;
+}
+.bundle-card-cta svg { width: 14px; height: 14px; transition: transform .2s; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bundle-card:hover .bundle-card-cta svg { transform: translateX(4px); }
+
+/* "Or, quote another product" — Progressive's full product list */
+.other-products { margin-top: 16px; }
+.other-products-label {
+  font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 18px; text-align: center;
+}
+.other-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+.other-product {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; color: var(--text);
+  text-decoration: none; transition: .15s;
+}
+.other-product:hover { background: var(--blue-light); color: var(--blue); }
+.other-product .op-arrow {
+  margin-left: auto; font-size: 14px; color: var(--subtle);
+  opacity: 0; transition: .15s;
+}
+.other-product:hover .op-arrow { opacity: 1; color: var(--blue); }
+
+/* ══════════════════════════════════════════════
+   NAV RESUME BUTTON + MODAL
+══════════════════════════════════════════════ */
+.nav-resume {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 13px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; color: var(--navy);
+  background: transparent; border: 1px solid var(--border);
+  cursor: pointer; transition: .15s; font-family: 'Outfit', sans-serif;
+  margin-right: 4px;
+}
+.nav-resume:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.nav-resume svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.resume-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(5,40,71,.55);
+  backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px; animation: fadeIn .2s ease;
+}
+.resume-backdrop.open { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.resume-modal {
+  background: var(--white); border-radius: var(--radius);
+  max-width: 460px; width: 100%; padding: 32px;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(5,40,71,.25);
+  animation: slideUp .25s ease;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.resume-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 22px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; transition: .15s;
+}
+.resume-close:hover { background: var(--bg); color: var(--text); }
+.resume-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: var(--blue-light); color: var(--blue);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.resume-icon svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.resume-modal h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.resume-modal p { font-size: 14px; color: var(--muted); margin-bottom: 22px; }
+.resume-form { display: flex; flex-direction: column; gap: 14px; }
+.resume-field { display: flex; flex-direction: column; gap: 6px; }
+.resume-field label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted);
+}
+.resume-field input {
+  padding: 13px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif; font-size: 15px; color: var(--text);
+  outline: none; transition: .2s;
+}
+.resume-field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,204,.12); }
+.resume-submit {
+  padding: 14px 20px; border-radius: var(--radius-sm);
+  background: var(--orange); color: #fff;
+  font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+  border: none; cursor: pointer; transition: .2s; margin-top: 4px;
+}
+.resume-submit:hover { background: var(--orange-dark); }
+.resume-note { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center; }
+
+@media (max-width: 960px) {
+  .bundle-grid { grid-template-columns: 1fr 1fr; }
+  .nav-resume { display: none; }
+  .qc-form { grid-template-columns: 1fr; }
+  .qc-product-field, .qc-location-field { border-right: none; border-bottom: 1px solid var(--border); }
+  .qc-cta { border-radius: 0 0 var(--radius) var(--radius); padding: 18px; }
+  .qc-bundle-links { grid-template-columns: 1fr 1fr; }
+  .qc-other-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .bundle-grid { grid-template-columns: 1fr; }
+  .bundle-section { padding: 56px 0; }
+  .other-products-grid { grid-template-columns: 1fr 1fr; }
+  .qc-bundle-links { grid-template-columns: 1fr; }
+  .qc-other-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   QUOTE MODAL — multi-step lead form (GHL-style)
+══════════════════════════════════════════════ */
+.qm-backdrop {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(5,40,71,.7);
+  backdrop-filter: blur(6px);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 32px 20px; overflow-y: auto;
+  animation: qmFadeIn .2s ease;
+}
+.qm-backdrop.open { display: flex; }
+@keyframes qmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.qm-modal {
+  background: #fff; width: 100%; max-width: 680px;
+  box-shadow: 0 24px 64px rgba(5,40,71,.3);
+  position: relative; margin: auto;
+  animation: qmSlideUp .28s cubic-bezier(.22,.9,.3,1);
+}
+@keyframes qmSlideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Header */
+.qm-header {
+  background: var(--navy); color: #fff;
+  padding: 20px 28px; position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+}
+.qm-header .qm-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.85);
+  margin-bottom: 4px;
+}
+.qm-header h3 { font-size: 20px; font-weight: 700; color: #fff; line-height: 1.2; }
+.qm-call {
+  font-size: 12px; color: rgba(255,255,255,.7); text-align: right;
+  line-height: 1.4;
+}
+.qm-call a { color: #fff; font-weight: 700; text-decoration: none; font-size: 14px; }
+.qm-call a:hover { color: rgba(255,255,255,.75); }
+.qm-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px; border: none;
+  background: rgba(255,255,255,.08); color: #fff;
+  font-size: 18px; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: .15s;
+}
+.qm-close:hover { background: rgba(255,255,255,.18); }
+
+/* Progress */
+.qm-progress {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.qm-prog-step {
+  padding: 14px 20px; text-align: left; position: relative;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+  transition: .2s;
+}
+.qm-prog-step::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  background: transparent; transition: .2s;
+}
+.qm-prog-step.active { color: var(--navy); }
+.qm-prog-step.active::after { background: var(--orange); }
+.qm-prog-step.done { color: var(--navy); }
+.qm-prog-step.done::after { background: var(--navy); opacity: .3; }
+.qm-prog-num {
+  display: inline-flex; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--subtle); color: #fff;
+  align-items: center; justify-content: center;
+  margin-right: 8px; font-size: 10px;
+}
+.qm-prog-step.active .qm-prog-num { background: var(--orange); }
+.qm-prog-step.done .qm-prog-num { background: var(--navy); }
+
+/* Body */
+.qm-body { padding: 28px 28px 8px; }
+.qm-step { display: none; }
+.qm-step.active { display: block; animation: qmFadeIn .2s ease; }
+.qm-step-title {
+  font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+}
+.qm-step-sub {
+  font-size: 13px; color: var(--muted); margin-bottom: 22px;
+}
+
+/* Fields */
+.qm-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-bottom: 14px;
+}
+.qm-row.full { grid-template-columns: 1fr; }
+.qm-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.qm-field label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted);
+}
+.qm-field label .req { color: var(--orange); }
+.qm-field input, .qm-field select, .qm-field textarea {
+  padding: 12px 14px; border: 1.5px solid var(--border);
+  font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--text);
+  outline: none; transition: .15s; background: #fff;
+}
+.qm-field input:focus, .qm-field select:focus, .qm-field textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(74,144,217,.12);
+}
+.qm-field textarea { min-height: 88px; resize: vertical; font-family: 'Outfit', sans-serif; }
+.qm-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%235a6c7e' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* Radio group */
+.qm-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+.qm-radio {
+  flex: 1; min-width: 110px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; border: 1.5px solid var(--border);
+  cursor: pointer; transition: .15s;
+  font-size: 13px; font-weight: 500; color: var(--text);
+}
+.qm-radio:hover { border-color: var(--orange); }
+.qm-radio input { accent-color: var(--orange); margin: 0; }
+.qm-radio.checked { border-color: var(--orange); background: rgba(74,144,217,.06); font-weight: 700; }
+
+/* Consent */
+.qm-consent {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 14px; background: var(--bg);
+  border-left: 3px solid var(--orange);
+  margin-top: 6px;
+}
+.qm-consent input { margin-top: 3px; accent-color: var(--orange); }
+.qm-consent label {
+  font-size: 11.5px; color: var(--muted); line-height: 1.55;
+}
+.qm-consent label a { color: var(--blue); text-decoration: underline; }
+.qm-consent label strong { color: var(--text); }
+
+/* Footer */
+.qm-footer {
+  padding: 18px 28px 24px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center;
+}
+.qm-btn-back {
+  padding: 11px 20px; background: none; color: var(--muted);
+  border: 1.5px solid var(--border);
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: .15s;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.qm-btn-back:hover { color: var(--navy); border-color: var(--navy); }
+.qm-btn-back[disabled] { opacity: 0; pointer-events: none; }
+.qm-btn-next {
+  padding: 13px 24px; background: var(--orange); color: #fff;
+  border: none; font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  text-transform: uppercase; letter-spacing: .06em;
+  justify-self: end;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: .15s;
+}
+.qm-btn-next:hover { background: var(--orange-dark); }
+.qm-btn-next svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Success state */
+.qm-success { padding: 48px 28px; text-align: center; display: none; }
+.qm-success.show { display: block; }
+.qm-success-icon {
+  width: 72px; height: 72px; margin: 0 auto 20px;
+  background: rgba(46,154,85,.12); color: #2e9a55;
+  display: flex; align-items: center; justify-content: center;
+}
+.qm-success-icon svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.qm-success h3 { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.qm-success p { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 440px; margin: 0 auto 20px; }
+.qm-success .btn-close {
+  padding: 12px 24px; background: var(--navy); color: #fff;
+  border: none; font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+
+@media (max-width: 560px) {
+  .qm-row { grid-template-columns: 1fr; }
+  .qm-backdrop { padding: 0; }
+  .qm-modal { max-width: 100%; min-height: 100vh; }
+  .qm-prog-step { padding: 12px 10px; font-size: 10px; }
+  .qm-prog-step .qm-prog-name { display: none; }
+  .qm-body { padding: 22px 20px 8px; }
+  .qm-footer { padding: 14px 20px 18px; }
+  .qm-radios { flex-direction: column; }
+}
+
+/* ══════════════════════════════════════════════
+   COVERAGE TABLE (for tier comparisons)
+══════════════════════════════════════════════ */
+.coverage-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.coverage-table th {
+  background: var(--navy); color: #fff;
+  padding: 14px 20px; text-align: left; font-weight: 600;
+}
+.coverage-table th:first-child { border-radius: 10px 0 0 0; }
+.coverage-table th:last-child { border-radius: 0 10px 0 0; }
+.coverage-table td { padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.coverage-table tr:nth-child(even) td { background: var(--bg); }
+.coverage-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+.coverage-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+.site-footer { background: #021e38; padding: 60px 0 0; }
+.ft-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+  gap: 40px; padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.ft-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.ft-brand-mark {
+  display: none;
+}
+.ft-brand-logo {
+  height: 34px; width: auto; display: block;
+}
+.ft-brand-name { display: none; }
+.ft-desc { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.7; margin-bottom: 16px; }
+.ft-states { display: flex; flex-wrap: wrap; gap: 5px; }
+.ft-state {
+  padding: 3px 7px; border-radius: 4px;
+  background: rgba(255,255,255,.07);
+  font-size: 11px; color: rgba(255,255,255,.45); font-weight: 600;
+}
+.ft-col h5 {
+  font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-bottom: 14px;
+}
+.ft-col ul { list-style: none; }
+.ft-col ul li { margin-bottom: 8px; }
+.ft-col ul li a { font-size: 13px; color: rgba(255,255,255,.5); transition: .15s; }
+.ft-col ul li a:hover { color: #fff; }
+.ft-contact-row { margin-bottom: 10px; }
+.ft-contact-label { font-size: 11px; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: .06em; }
+.ft-contact-val { font-size: 13px; color: rgba(255,255,255,.6); }
+.ft-contact-val a { color: rgba(255,255,255,.6); }
+.ft-contact-val a:hover { color: #fff; }
+.ft-social { display: flex; gap: 14px; margin-top: 20px; }
+.ft-social a {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.08); color: rgba(255,255,255,.5);
+  transition: all .2s ease;
+}
+.ft-social a:hover { background: rgba(255,255,255,.15); color: #fff; }
+.ft-social svg { width: 18px; height: 18px; }
+
+.ft-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; font-size: 12px; color: rgba(255,255,255,.3);
+}
+.ft-bottom-links { display: flex; gap: 20px; }
+.ft-bottom-links a { color: rgba(255,255,255,.3); }
+.ft-bottom-links a:hover { color: rgba(255,255,255,.7); }
+
+/* ══════════════════════════════════════════════
+   MOBILE NAV
+══════════════════════════════════════════════ */
+.nav-mobile-toggle {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; margin-left: auto;
+  flex-direction: column; gap: 5px; z-index: 300;
+}
+.nav-mobile-toggle span {
+  display: block; width: 24px; height: 2.5px;
+  background: var(--navy); border-radius: 2px;
+  transition: .2s;
+}
+.nav-mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-mobile-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.nav-mobile-menu {
+  display: none; position: fixed; inset: 0; top: 64px;
+  background: #fff; z-index: 250; overflow-y: auto;
+  padding: 24px 28px 80px; flex-direction: column; gap: 4px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  display: block; padding: 14px 0; font-size: 16px; font-weight: 600;
+  color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border);
+}
+.nav-mobile-menu a:hover { color: var(--blue); }
+.nav-mobile-menu .mobile-cta {
+  display: block; margin-top: 20px; padding: 16px;
+  background: var(--navy); color: #fff; text-align: center;
+  font-size: 15px; font-weight: 700; border-radius: 8px; text-decoration: none;
+}
+.nav-mobile-menu .mobile-phone {
+  display: block; margin-top: 12px; text-align: center;
+  font-size: 14px; color: var(--muted);
+}
+.nav-mobile-menu .mobile-phone a { display: inline; border: none; padding: 0; font-weight: 700; color: var(--navy); }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .feat-grid-3 { grid-template-columns: 1fr 1fr; }
+  .feat-grid-4 { grid-template-columns: 1fr 1fr; }
+  .steps::before { display: none; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .split-grid { grid-template-columns: 1fr; }
+  .split-img img { height: 280px; }
+  .mid-cta-inner { flex-direction: column; text-align: center; }
+  .mid-cta-actions { justify-content: center; }
+  .ft-grid { grid-template-columns: 1fr 1fr; }
+  .mega-menu { min-width: 0; width: calc(100vw - 40px); max-width: 900px; left: 50%; transform: translateX(-50%); }
+  .mega-panel.active { grid-template-columns: repeat(3, 1fr); }
+  .trust-stat { padding: 24px 28px; }
+  .trust-stats { flex-wrap: wrap; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-actions { display: none; }
+  .mega-menu { display: none !important; }
+  .nav-mobile-toggle { display: flex; }
+  .nav-inner { height: 56px; padding: 0 16px; }
+  .nav-brand-logo { height: 40px; }
+  .feat-grid-3, .feat-grid-4, .steps { grid-template-columns: 1fr; }
+  .qc-tabs { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .qc-tab { padding: 10px 4px; font-size: 11px; }
+  .trust-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0; flex-wrap: nowrap; }
+  .trust-stat { padding: 14px 16px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); text-align: center; }
+  .trust-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.1); }
+  .trust-stat:nth-last-child(-n+2) { border-bottom: none; }
+  .trust-stat strong { font-size: 22px; }
+  .trust-stat span { font-size: 11px; }
+  .ft-grid { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+  .ft-desc { font-size: 12px; }
+  .ft-states { display: none; }
+  .ft-col h5 { font-size: 13px; margin-bottom: 8px; }
+  .ft-col ul li a { font-size: 13px; padding: 3px 0; }
+  .ft-contact-val { font-size: 12px; }
+  .ft-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .ft-social { justify-content: center; }
+  .cta-band-actions { flex-direction: column; align-items: center; }
+  .cta-band-actions .btn { width: 100%; max-width: 320px; text-align: center; }
+  .other-ways-inner { flex-wrap: wrap; gap: 8px; }
+  .hero h1 { font-size: 28px; }
+  .hero-sub { font-size: 15px; }
+  .section { padding: 44px 0; }
+  .section-h2 { font-size: 24px; }
+  .section-lead { font-size: 14px; }
+  .container { padding: 0 16px; }
+  .bundle-grid { grid-template-columns: 1fr; }
+  .bundle-header h2 { font-size: 22px; }
+  .process-grid { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns:repeat(5"] { grid-template-columns: 1fr 1fr !important; }
+  .prod-grid { grid-template-columns: 1fr; gap: 12px; }
+  .prod-card { display: flex; flex-direction: column; }
+  .prod-card .prod-card-img img { height: 160px; }
+  .prod-card .prod-card-body { padding: 16px 18px; flex: none; }
+  .prod-card .prod-card-body p { flex: none; margin-bottom: 10px; font-size: 13px; }
+  .prod-card .prod-card-body h3 { font-size: 17px; margin-bottom: 6px; }
+  .prod-card .prod-card-cta { margin-top: 0; font-size: 12px; }
+  .prod-card .prod-card-kicker { margin-bottom: 4px; }
+  .prod-card.featured { grid-template-columns: 1fr; }
+  .prod-card.featured .prod-card-img img { height: 180px; }
+  .prod-card.featured .prod-card-body { padding: 18px; flex: none; }
+  .prod-card.featured .prod-card-body h3 { font-size: 20px; }
+  .prod-card.featured .prod-card-body p { font-size: 13px; flex: none; }
+  .home-scenes { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .home-action-cards { grid-template-columns: 1fr; }
+  .home-utility { flex-wrap: wrap; gap: 8px; }
+  .home-utility a { flex: 1; min-width: 140px; }
+  .qc-form { grid-template-columns: 1fr !important; gap: 12px; }
+  .qc-cta { width: 100%; padding: 14px; }
+  .qc-product-dropdown { width: calc(100vw - 32px) !important; left: 0 !important; right: 0; }
+  .faq-q { font-size: 15px; padding: 16px 0; }
+  table { font-size: 12px; }
+  table th, table td { padding: 10px 12px !important; }
+  .learn-grid { grid-template-columns: 1fr 1fr !important; }
+  .bl-grid { grid-template-columns: 1fr !important; }
+  .nav-mobile-menu { top: 56px; }
+  /* Fix inline-styled grids */
+  [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  .home-hero-headline [style*="display:grid"] { grid-template-columns: 1fr !important; }
+  /* Connecting line in step sections */
+  [style*="position:absolute"][style*="height:3px"] { display: none !important; }
+}
+@media (max-width: 480px) {
+  .home-scenes { grid-template-columns: 1fr; }
+  .learn-grid { grid-template-columns: 1fr !important; }
+  .hero h1 { font-size: 24px; }
+  .nav-brand-logo { height: 36px; }
+}
+</style>
+<style>
+/* GHL full-width override */
+section { width: 100%; }
+  :root {
+    --hero-accent: rgba(74,144,217,.14);
+    --hero-accent-2: rgba(0,102,204,.06);
+    --orange: #0a3d6b;
+    --orange-dark: #052847;
+  }
+  .hero-eyebrow { color: var(--orange); }
+  .section-kicker { color: var(--orange); }
+
+  /* BUSINESS HERO — disability-inspired: navy background, 2-column grid,
+     editorial content left, portrait image panel right with dynamic switching */
+  .hero {
+    min-height: 0; display: block; padding: 0;
+    background: var(--navy);
+    position: relative; overflow: visible;
+  }
+  .hero-decor::before, .hero-decor::after { display: none; }
+
+  /* Breadcrumb on top */
+  .hero-bread {
+    position: relative; z-index: 3;
+    max-width: 1280px; margin: 0 auto; padding: 16px 28px;
+    font-size: 13px; color: rgba(255,255,255,.55);
+  }
+  .hero-bread a { color: rgba(255,255,255,.55); text-decoration: none; }
+  .hero-bread a:hover { color: #fff; }
+  .hero-bread .sep { margin: 0 8px; color: rgba(255,255,255,.3); }
+  .hero-bread .current { color: #fff; font-weight: 500; }
+
+  /* 2-column hero grid */
+  .biz-hero-grid {
+    position: relative; z-index: 5;
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    min-height: 560px; align-items: stretch;
+  }
+
+  /* LEFT: editorial content + inline form */
+  .biz-content {
+    padding: 28px 48px 48px 28px;
+    display: flex; flex-direction: column; gap: 18px;
+    justify-content: center;
+  }
+  .biz-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .biz-kicker::before { content: ''; width: 28px; height: 1.5px; background: var(--orange); }
+
+  .biz-content h1 {
+    font-size: clamp(34px, 4.4vw, 52px); font-weight: 700;
+    color: #fff; line-height: 1.05; letter-spacing: -.02em;
+    max-width: 620px;
+  }
+  .biz-content .lead {
+    font-size: 17px; color: rgba(255,255,255,.72); line-height: 1.55;
+    max-width: 500px; margin-top: 4px;
+  }
+
+  /* Compact horizontal quote form docked in the content column */
+  .biz-form {
+    display: grid; grid-template-columns: 1.4fr 1fr auto;
+    gap: 0; margin-top: 6px;
+    background: #fff;
+    max-width: 620px;
+  }
+  .biz-form .qc-product-field,
+  .biz-form .qc-location-field {
+    padding: 14px 20px; border: none;
+    border-right: 1px solid var(--border);
+  }
+  .biz-form .qc-field-label {
+    color: var(--text); font-size: 10px; letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .biz-form .qc-product-btn { padding: 0; }
+  .biz-form .qc-product-name {
+    border-bottom-color: var(--text); font-size: 15px; padding-bottom: 2px;
+  }
+  .biz-form .qc-location-input {
+    border: none; border-bottom: 2px solid var(--border);
+    font-size: 15px; padding: 2px 0;
+  }
+  .biz-form .qc-cta {
+    background: var(--orange); color: #fff;
+    border: none; border-radius: 0;
+    padding: 0 32px; font-size: 14px; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+  }
+  .biz-form .qc-cta:hover { background: var(--orange-dark); }
+  .biz-form .qc-product-dropdown {
+    color: var(--text);
+    right: auto;
+    width: 560px;
+    max-width: calc(100vw - 48px);
+  }
+  .biz-form .qc-other-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 20px;
+  }
+  @media (max-width: 640px) {
+    .biz-form .qc-product-dropdown { width: calc(100vw - 48px); }
+    .biz-form .qc-other-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* RIGHT: vertical portrait panel with dynamic image switching */
+  .biz-portrait {
+    position: relative; background: var(--navy);
+    overflow: hidden;
+  }
+  .biz-portrait::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d28032af90bff05637426.png') center/cover no-repeat;
+    transition: opacity .6s ease;
+  }
+  .biz-portrait .biz-hero-img {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity .6s ease;
+  }
+  .biz-portrait .biz-hero-img.active { opacity: 1; }
+  .biz-portrait::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(5,40,71,1) 0%, rgba(5,40,71,.65) 18%, rgba(5,40,71,0) 45%);
+    z-index: 1;
+  }
+  .biz-portrait-tag {
+    position: absolute; right: 28px; bottom: 28px; z-index: 2;
+    background: rgba(5,40,71,.92); backdrop-filter: blur(8px);
+    color: #fff; padding: 14px 18px;
+    border-left: 3px solid var(--orange);
+    max-width: 280px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .biz-portrait-tag .big {
+    font-size: 26px; font-weight: 700; color: #fff;
+    line-height: 1; letter-spacing: -.01em;
+  }
+  .biz-portrait-tag .small {
+    font-size: 12px; color: rgba(255,255,255,.78); line-height: 1.45;
+  }
+
+  /* Industry ticker at the bottom of the hero */
+  .biz-ticker {
+    position: relative; z-index: 2;
+    background: var(--blue-light); color: var(--navy);
+    border-top: 1px solid #c7dcf2; border-bottom: 1px solid #c7dcf2;
+    padding: 12px 28px;
+    display: flex; align-items: center; gap: 28px;
+    font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    overflow: hidden; white-space: nowrap;
+  }
+  .biz-ticker-label { flex-shrink: 0; font-weight: 800; }
+  .biz-ticker-items {
+    display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none;
+  }
+  .biz-ticker-items::-webkit-scrollbar { display: none; }
+  .biz-ticker-items a { color: var(--navy); text-decoration: none; transition: .15s; }
+  .biz-ticker-items a:hover { color: var(--orange); }
+  .biz-ticker-sep { color: rgba(5,40,71,.4); }
+
+  @media (max-width: 960px) {
+    .biz-hero-grid { grid-template-columns: 1fr; min-height: 0; }
+    .biz-content { padding: 20px 28px 32px; }
+    .biz-portrait { min-height: 300px; }
+    .biz-portrait::after {
+      background: linear-gradient(180deg, rgba(5,40,71,.6) 0%, rgba(5,40,71,0) 40%);
+    }
+    .biz-form { grid-template-columns: 1fr; }
+    .biz-form .qc-product-field,
+    .biz-form .qc-location-field { border-right: none; border-bottom: 1px solid var(--border); }
+    .biz-form .qc-cta { padding: 16px; }
+  }
+  @media (max-width: 500px) {
+    .biz-ticker { font-size: 11px; padding: 10px 20px; gap: 16px; }
+  }
+
+  /* SUB-PRODUCTS — category filter + 15 chip picker + unified panel */
+  .sub-section { padding: 72px 0; background: var(--white); }
+  .sub-header { text-align: center; max-width: 760px; margin: 0 auto 36px; padding: 0 28px; }
+  .sub-header h2 {
+    font-size: clamp(26px, 3.2vw, 36px); font-weight: 700;
+    color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+  }
+  .sub-header p { color: var(--muted); font-size: 16px; }
+
+  .biz-picker { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  .biz-cat-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    justify-content: center; margin-bottom: 20px;
+  }
+  .biz-cat {
+    padding: 8px 18px; background: var(--white);
+    border: 1.5px solid var(--border);
+    font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+    color: var(--navy); cursor: pointer; transition: .15s;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .biz-cat:hover { border-color: var(--orange); color: var(--orange); }
+  .biz-cat.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+  .biz-chip-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 28px; padding: 20px;
+    background: var(--bg); border: 1px solid var(--border);
+  }
+  .biz-chip {
+    padding: 9px 14px; background: var(--white);
+    border: 1.5px solid var(--border);
+    font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--navy); cursor: pointer; transition: .15s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .biz-chip:hover { border-color: var(--orange); color: var(--orange); }
+  .biz-chip.active {
+    background: var(--orange); border-color: var(--orange); color: #fff;
+    font-weight: 700;
+  }
+  .biz-chip.hidden { display: none; }
+
+  .biz-panel {
+    background: var(--navy); color: #fff; padding: 36px 40px;
+    display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: center;
+    border-top: 4px solid var(--orange);
+  }
+  .biz-panel-kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
+  }
+  .biz-panel h3 {
+    font-size: 28px; font-weight: 700; color: #fff; line-height: 1.15;
+    margin-bottom: 10px; letter-spacing: -.005em;
+  }
+  .biz-panel p {
+    font-size: 15px; color: rgba(255,255,255,.78); line-height: 1.55;
+    max-width: 540px;
+  }
+  .biz-panel-form {
+    display: flex; flex-direction: column; gap: 10px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    padding: 20px;
+  }
+  .biz-panel-form label {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
+  }
+  .biz-panel-form input {
+    padding: 13px 16px; background: rgba(255,255,255,.1);
+    border: 1.5px solid rgba(255,255,255,.2);
+    font-family: 'Outfit', sans-serif; font-size: 14px;
+    outline: none; letter-spacing: .2em; color: #fff;
+  }
+  .biz-panel-form input::placeholder { color: rgba(255,255,255,.5); letter-spacing: .1em; }
+  .biz-panel-form input:focus { border-color: var(--orange); background: rgba(255,255,255,.15); }
+  .biz-panel-form button {
+    padding: 13px 20px; background: var(--orange); color: #fff;
+    border: none; font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: .06em;
+    transition: .15s;
+  }
+  .biz-panel-form button:hover { background: var(--orange-dark); }
+
+  @media (max-width: 820px) {
+    .biz-panel { grid-template-columns: 1fr; padding: 28px; gap: 24px; }
+  }
+
+  /* Readability — over blue/navy banners, invert buttons to white-bg/navy-text,
+     and lift kickers to white so they don't vanish into the banner. */
+  .mid-cta .btn-orange,
+  .cta-band .btn-orange,
+  .biz-panel-form button {
+    background: #fff;
+    color: var(--navy);
+  }
+  .mid-cta .btn-orange:hover,
+  .cta-band .btn-orange:hover,
+  .biz-panel-form button:hover {
+    background: #f0f4f8;
+    color: var(--navy);
+  }
+  .biz-kicker { color: rgba(255,255,255,.85); }
+  .biz-kicker::before { background: rgba(255,255,255,.6); }
+  .biz-panel-kicker { color: rgba(255,255,255,.8); }
+  .biz-portrait-tag { border-left-color: rgba(255,255,255,.7); }
+  .biz-form .qc-cta { background: var(--navy); border: 2px solid #fff; }
+  .biz-form .qc-cta:hover { background: #031d33; border-color: #fff; }
+</style>
+
+
+<main>
+
+  <!-- HERO — disability-inspired: navy editorial left, portrait image panel right with dynamic switching -->
+  <section class="hero">
+    <nav class="hero-bread" aria-label="Breadcrumb">
+      <a href="https://onepointinsuranceagency.com/index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Business Insurance</span>
+    </nav>
+    <div class="biz-hero-grid">
+      <div class="biz-content">
+        <span class="biz-kicker">Business Insurance · 15 Coverage Types</span>
+        <h1 data-swap="heroH1">Protect Your Business — Before a Claim Does the Damage</h1>
+        <p class="lead" data-swap="heroLead">15 commercial coverage types from 70+ A-rated carriers. Same-day coverage and COIs available. Tailored to your industry, your size, and the specific risk on your desk right now.</p>
+
+        <form class="biz-form quote-card" onsubmit="goQuote(event)">
+          <div class="qc-product-field">
+            <label class="qc-field-label">Type of coverage</label>
+            <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
+              <span class="qc-product-name">Business Insurance</span>
+              <span class="qc-product-caret">▾</span>
+            </button>
+            <div class="qc-product-dropdown" id="productDropdown">
+              <p class="qc-bundle-headline">Bundle core commercial coverage to protect the entire business.<sup>Δ</sup></p>
+              <div class="qc-bundle-links">
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='https://onepointinsuranceagency.com/fleet-quote?product=commercial_auto';">Business + Commercial Auto</a>
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='https://onepointinsuranceagency.com/business-quote';">Business + Workers' Comp</a>
+                <a href="#" class="qc-bundle-link" onclick="event.preventDefault();window.location.href='https://onepointinsuranceagency.com/business-quote';">Business + Professional Liability</a>
+              </div>
+              <p class="qc-other-label">Or, quote another product</p>
+              <div class="qc-other-grid">
+                <a href="https://onepointinsuranceagency.com/auto-insurance">Auto</a>
+                <a href="./" class="current">Business Insurance</a>
+                <a href="#biz-subs">BOP</a>
+                <a href="#biz-subs">Commercial Auto</a>
+                <a href="#biz-subs">Commercial Property</a>
+                <a href="#biz-subs">Commercial Umbrella</a>
+                <a href="#biz-subs">Cyber</a>
+                <a href="https://onepointinsuranceagency.com/disability-insurance">Disability Income</a>
+                <a href="#biz-subs">Event</a>
+                <a href="#biz-subs">Garage</a>
+                <a href="#biz-subs">General Liability</a>
+                <a href="https://onepointinsuranceagency.com/health">Health (Marketplace)</a>
+                <a href="https://onepointinsuranceagency.com/home">Homeowners</a>
+                <a href="https://onepointinsuranceagency.com/life">Life (Term)</a>
+                <a href="#biz-subs">Liquor Liability</a>
+                <a href="#biz-subs">Malpractice</a>
+                <a href="#biz-subs">Professional Liability</a>
+                <a href="#biz-subs">Sport</a>
+                <a href="#biz-subs">Travel</a>
+                <a href="#biz-subs">Trucking</a>
+                <a href="#biz-subs">Workers' Comp</a>
+              </div>
+            </div>
+          </div>
+          <div class="qc-location-field">
+            <label class="qc-field-label" for="zip">ZIP Code</label>
+            <input class="qc-location-input" id="zip" type="text" placeholder="00000" maxlength="5" inputmode="numeric" required>
+          </div>
+          <button type="submit" class="qc-cta">Get My Business Quote</button>
+        </form>
+      </div>
+
+      <div class="biz-portrait" role="img" aria-label="Business protected by OnePoint insurance">
+        <div class="biz-hero-img active" data-hero="gl" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d28032af90bff05637426.png')"></div>
+        <div class="biz-hero-img" data-hero="cauto" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689203cef4d4f55d98c836aa.png')"></div>
+        <div class="biz-hero-img" data-hero="truck" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b487d96bc4b168b1727c2d.png')"></div>
+        <div class="biz-hero-img" data-hero="cyber" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689203ce7b1adb4ad309823d.png')"></div>
+        <div class="biz-hero-img" data-hero="prop" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454f8b902708d926ec.png')"></div>
+        <div class="biz-hero-img" data-hero="pl" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b61fcc3441c1ab72b32e4f.png')"></div>
+        <div class="biz-hero-img" data-hero="mal" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215467b1adbe90f0b14e5.png')"></div>
+        <div class="biz-hero-img" data-hero="wc" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0edb993094ba36abfb2.png')"></div>
+        <div class="biz-hero-img" data-hero="bop" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b71a471e1311075cc40296.png')"></div>
+        <div class="biz-hero-img" data-hero="liq" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68921545f4d4f55468c9c848.png')"></div>
+        <div class="biz-hero-img" data-hero="uml" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215459f273788c455753b.png')"></div>
+        <div class="biz-hero-img" data-hero="garage" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215467b1adb3dad0b14e4.png')"></div>
+        <div class="biz-hero-img" data-hero="event" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454c79b734cd24dbb4.png')"></div>
+        <div class="biz-hero-img" data-hero="travel" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b8547500bcb01cd801fffd.png')"></div>
+        <div class="biz-hero-img" data-hero="sport" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/688d280249458d70118126fd.png')"></div>
+        <div class="biz-portrait-tag">
+          <span class="big">Same-Day COIs</span>
+          <span class="small">15 coverage types · 70+ carriers · Tailored to your industry</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Industry ticker stripe -->
+    <div class="biz-ticker" aria-label="Industries we serve">
+      <span class="biz-ticker-label">Industries ↠</span>
+      <div class="biz-ticker-items">
+        <a href="#biz-subs">Construction</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Retail</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Healthcare</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Professional Services</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Food &amp; Beverage</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Transport &amp; Trucking</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Contractors</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Tech &amp; SaaS</a>
+        <span class="biz-ticker-sep">/</span>
+        <a href="#biz-subs">Event &amp; Hospitality</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB-PRODUCTS — category filter + chip picker + unified panel -->
+  <section class="sub-section" id="biz-subs">
+    <div class="sub-header">
+      <h2>All 15 commercial coverage types.</h2>
+      <p>Filter by category or pick any coverage to see what's included and start a quote.</p>
+    </div>
+    <div class="biz-picker">
+      <div class="biz-cat-row" role="tablist">
+        <button type="button" class="biz-cat active" data-c="all" onclick="filterBiz('all')">All 15</button>
+        <button type="button" class="biz-cat" data-c="core" onclick="filterBiz('core')">Core Liability &amp; Property</button>
+        <button type="button" class="biz-cat" data-c="vehicle" onclick="filterBiz('vehicle')">Vehicles &amp; Fleet</button>
+        <button type="button" class="biz-cat" data-c="industry" onclick="filterBiz('industry')">Industry-Specific</button>
+      </div>
+      <div class="biz-chip-grid" id="bizChipGrid">
+        <button type="button" class="biz-chip active" data-v="gl"     data-c="core"     onclick="selectBiz('gl')">General Liability</button>
+        <button type="button" class="biz-chip"        data-v="prop"   data-c="core"     onclick="selectBiz('prop')">Commercial Property</button>
+        <button type="button" class="biz-chip"        data-v="bop"    data-c="core"     onclick="selectBiz('bop')">Business Owners Policy</button>
+        <button type="button" class="biz-chip"        data-v="uml"    data-c="core"     onclick="selectBiz('uml')">Commercial Umbrella</button>
+        <button type="button" class="biz-chip"        data-v="wc"     data-c="core"     onclick="selectBiz('wc')">Workers' Comp</button>
+        <button type="button" class="biz-chip"        data-v="cauto"  data-c="vehicle"  onclick="selectBiz('cauto')">Commercial Auto</button>
+        <button type="button" class="biz-chip"        data-v="truck"  data-c="vehicle"  onclick="selectBiz('truck')">Trucking</button>
+        <button type="button" class="biz-chip"        data-v="garage" data-c="vehicle"  onclick="selectBiz('garage')">Garage Insurance</button>
+        <button type="button" class="biz-chip"        data-v="pl"     data-c="industry" onclick="selectBiz('pl')">Professional Liability / E&amp;O</button>
+        <button type="button" class="biz-chip"        data-v="mal"    data-c="industry" onclick="selectBiz('mal')">Malpractice</button>
+        <button type="button" class="biz-chip"        data-v="cyber"  data-c="industry" onclick="selectBiz('cyber')">Cyber</button>
+        <button type="button" class="biz-chip"        data-v="liq"    data-c="industry" onclick="selectBiz('liq')">Liquor Liability</button>
+        <button type="button" class="biz-chip"        data-v="sport"  data-c="industry" onclick="selectBiz('sport')">Sport</button>
+        <button type="button" class="biz-chip"        data-v="event"  data-c="industry" onclick="selectBiz('event')">Event</button>
+        <button type="button" class="biz-chip"        data-v="travel" data-c="industry" onclick="selectBiz('travel')">Travel</button>
+      </div>
+      <div class="biz-panel" role="tabpanel">
+        <div>
+          <div class="biz-panel-kicker" id="bp-kicker">Core liability</div>
+          <h3 id="bp-title">General Liability</h3>
+          <p id="bp-desc">Covers bodily injury, property damage, and personal injury claims against your business. The foundation of any commercial policy.</p>
+        </div>
+        <form class="biz-panel-form" onsubmit="bpQuote(event)">
+          <label for="bp-zip">Start your quote</label>
+          <input type="text" id="bp-zip" placeholder="ZIP code" maxlength="5" inputmode="numeric" required>
+          <button type="submit">Get quote →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-stats">
+        <div class="trust-stat"><strong>18</strong><span>Licensed States</span></div>
+        <div class="trust-stat"><strong>70+</strong><span>Carrier Options</span></div>
+        <div class="trust-stat"><strong>Same Day</strong><span>Coverage &amp; COIs</span></div>
+        <div class="trust-stat"><strong>$0</strong><span>Cost to Compare</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK SECTION -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <div class="section-header">
+        <div class="section-kicker">The Risk</div>
+        <h2 class="section-h2">$50/Month vs. $50,000 Lawsuit</h2>
+        <p class="section-lead">The cost of business insurance is a fraction of what one uncovered claim can cost you.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto;">
+        <div style="background:var(--navy);color:#fff;padding:24px;border-radius:10px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;">$75K</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;">Slip &amp; fall claim</div>
+        </div>
+        <div style="background:var(--navy);color:#fff;padding:24px;border-radius:10px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;">$40K</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;">Contractor damage</div>
+        </div>
+        <div style="background:var(--navy);color:#fff;padding:24px;border-radius:10px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;">$100K+</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;">Data breach</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:24px;"><a href="https://onepointinsuranceagency.com/book-call" class="btn btn-orange">Get My Business Protected</a></div>
+    </div>
+  </section>
+
+  <!-- COI / COMPLIANCE CALLOUT -->
+  <section style="padding:0 0 48px;">
+    <div class="container" style="max-width:760px;">
+      <div style="background:var(--navy);color:#fff;padding:28px 32px;border-radius:10px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+        <div style="flex-shrink:0;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;">
+          <svg style="width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <p style="font-size:15px;font-weight:700;margin-bottom:4px;">Need a Certificate of Insurance (COI) Today?</p>
+          <p style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.5;">We issue COIs, add additional insureds, and handle contract compliance — often the same day. Get insured and get your proof fast.</p>
+        </div>
+        <a href="https://onepointinsuranceagency.com/book-call" style="padding:12px 22px;background:#fff;color:var(--navy);font-size:14px;font-weight:700;border-radius:6px;text-decoration:none;white-space:nowrap;">Get COI Fast</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE TYPES -->
+  <section class="section" id="coverage">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker" data-swap="coverKicker">Coverage Types</div>
+        <h2 class="section-h2" data-swap="coverH2">Every business faces risk. The right policy manages it.</h2>
+        <p class="section-lead" data-swap="coverBody">Whether you're a solo contractor or a growing company, we build a coverage package around what your business actually needs.</p>
+      </div>
+      <div class="feat-grid-3">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l3 7a3 3 0 0 1-6 0z"/><path d="M7 21h10"/></svg></div>
+          <h4>General Liability</h4>
+          <p>Covers bodily injury, property damage, and personal injury claims against your business. The foundation of any business policy.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h2M8 11h2M8 15h2M14 7h2M14 11h2M14 15h2"/></svg></div>
+          <h4>Commercial Property</h4>
+          <p>Protects your building, equipment, inventory, and business assets from fire, theft, vandalism, and covered weather events.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
+          <h4>Business Interruption</h4>
+          <p>Replaces lost income and covers operating expenses when a covered event forces your business to temporarily close.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h4l3 4v3h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div>
+          <h4>Commercial Auto</h4>
+          <p>Covers vehicles used for business purposes — owned, leased, or employee-owned — that a personal policy won't touch.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20v2H2zM4 18v-3a8 8 0 0 1 16 0v3"/><path d="M10 10V6h4v4"/></svg></div>
+          <h4>Workers' Compensation</h4>
+          <p>Required in most states if you have employees. Covers medical costs and lost wages when a worker is injured on the job.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4c0 1-1 1.5-2 2.5a3 3 0 0 0 1 5.5c0 1.5 1 3 3 3h4c2 0 3-1.5 3-3a3 3 0 0 0 1-5.5c-1-1-2-1.5-2-2.5a4 4 0 0 0-4-4z"/><path d="M12 8v5"/></svg></div>
+          <h4>Professional Liability</h4>
+          <p>Protects service-based businesses from claims of negligence, errors, or omissions in the work you deliver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">How It Works</div>
+        <h2 class="section-h2">Business coverage that's built around your operation.</h2>
+        <p class="section-lead">No generic packages. We take the time to understand your business before recommending coverage.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Tell us about your business</h4>
+          <p>Industry, size, location, employees — a quick conversation gives us what we need to build the right package.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>We identify your risks</h4>
+          <p>Your advisor pinpoints the coverage gaps that could cost you most — and recommends only what you actually need.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Get covered and stay protected</h4>
+          <p>We place your coverage with the right carrier, handle the paperwork, and check in at renewal to make sure nothing has changed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUNDLE & SAVE -->
+  <section class="bundle-section" style="--bundle-accent: var(--orange);">
+    <div class="bundle-header">
+      <span class="bundle-kicker">Bundle &amp; Save</span>
+      <h2>Bundle the coverage that protects your whole business.</h2>
+      <p>Pair core commercial coverage with the exposures your industry actually carries — one advisor, one policy review, less paperwork.</p>
+    </div>
+    <div class="bundle-grid">
+      <button type="button" class="bundle-card" onclick="window.location.href='https://onepointinsuranceagency.com/fleet-quote?product=commercial_auto'">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h4l3 4v3h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></span>
+        </div>
+        <h4>Business + Commercial Auto</h4>
+        <p>Personal auto doesn't cover work vehicles. Add commercial auto for trucks, vans, and employee-driven cars.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Required for work vehicles</span>
+        <span class="bundle-card-cta">Bundle biz + commercial auto <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="window.location.href='https://onepointinsuranceagency.com/business-quote'">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M2 18h20v2H2zM4 18v-3a8 8 0 0 1 16 0v3"/><path d="M10 10V6h4v4"/></svg></span>
+        </div>
+        <h4>Business + Workers' Comp</h4>
+        <p>Required in most states the moment you hire your first employee. Add it to your BOP to protect wages, medical, and liability.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Legally required in most states</span>
+        <span class="bundle-card-cta">Bundle biz + WC <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="bundle-card" onclick="window.location.href='https://onepointinsuranceagency.com/business-quote'">
+        <div class="bundle-icons">
+          <span class="bundle-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/><path d="M2.5 12h19"/></svg></span>
+          <span class="bundle-plus">+</span>
+          <span class="bundle-icon bundle-icon-secondary"><svg viewBox="0 0 24 24"><path d="M4 11h16v10H4z"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1.5"/></svg></span>
+        </div>
+        <h4>Business + Professional Liability</h4>
+        <p>General liability won't cover a claim of bad advice or a professional mistake. E&amp;O fills that gap for service firms.</p>
+        <span class="bundle-savings"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Critical for service businesses</span>
+        <span class="bundle-card-cta">Bundle biz + E&amp;O <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- MID CTA -->
+  <section class="mid-cta">
+    <div class="container">
+      <div class="mid-cta-inner">
+        <div class="mid-cta-text">
+          <h2 data-swap="midCtaH2">One lawsuit could cost more than your business is worth.</h2>
+          <p data-swap="midCtaLead">General liability alone can be the difference between surviving a claim and closing your doors. Talk to an advisor today.</p>
+        </div>
+        <div class="mid-cta-actions">
+          <a href="https://onepointinsuranceagency.com/business-quote" class="btn btn-orange" onclick="event.preventDefault();window.location.href=resolveBizQuoteURL();">Get My Business Quote</a>
+          <span class="mid-cta-phone">or call <a href="tel:888-899-8117">888-899-8117</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ONEPOINT -->
+  <section class="section">
+    <div class="container">
+      <div class="split-grid">
+        <div class="split-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b71a471e1311075cc40296.png" alt="Business owner protected by OnePoint" loading="lazy">
+        </div>
+        <div>
+          <div class="section-kicker">Why OnePoint</div>
+          <h2 class="section-h2">We understand business risk because we work with business owners every day.</h2>
+          <div class="split-points">
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 4V10l6 4V5l6 3v13z"/><path d="M9 17h2M13 17h2"/></svg></div>
+              <div>
+                <h5>Industry-specific expertise</h5>
+                <p>From contractors to consultants to retail — we know what coverage your industry demands and which carriers specialize in it.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
+              <div>
+                <h5>Claims support when it matters</h5>
+                <p>When something goes wrong, your advisor advocates for your business throughout the claims process — not just at policy purchase.</p>
+              </div>
+            </div>
+            <div class="split-point">
+              <div class="split-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+              <div>
+                <h5>Annual coverage reviews</h5>
+                <p>Your business changes. We review your coverage every year to make sure your policy keeps pace with your growth.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://onepointinsuranceagency.com/book-call" class="btn btn-orange" style="margin-top:32px">Talk to a Business Advisor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="section" style="padding:56px 0;">
+    <div class="container">
+      <div class="section-header"><div class="section-kicker">The Difference</div><h2 class="section-h2">Why Not Just Buy Direct?</h2></div>
+      <div style="max-width:700px;margin:0 auto;overflow:hidden;border:1px solid var(--border);border-radius:10px;">
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          <thead><tr><th style="padding:14px 18px;text-align:left;background:var(--bg);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);width:36%;"></th><th style="padding:14px 18px;text-align:center;background:var(--bg);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);">Direct Carrier</th><th style="padding:14px 18px;text-align:center;background:var(--navy);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">OnePoint</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:12px 18px;border-bottom:1px solid var(--border);font-weight:600;">Options</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted);">1 carrier</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;color:var(--navy);background:rgba(5,40,71,.03);">70+ carriers</td></tr>
+            <tr><td style="padding:12px 18px;border-bottom:1px solid var(--border);font-weight:600;">Policy type</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted);">Generic</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;color:var(--navy);background:rgba(5,40,71,.03);">Industry-specific</td></tr>
+            <tr><td style="padding:12px 18px;border-bottom:1px solid var(--border);font-weight:600;">Advisor</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted);">None</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;color:var(--navy);background:rgba(5,40,71,.03);">Licensed expert</td></tr>
+            <tr><td style="padding:12px 18px;border-bottom:1px solid var(--border);font-weight:600;">Strategy</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted);">No risk planning</td><td style="padding:12px 18px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;color:var(--navy);background:rgba(5,40,71,.03);">Risk-based planning</td></tr>
+            <tr><td style="padding:12px 18px;font-weight:600;">COI speed</td><td style="padding:12px 18px;text-align:center;color:var(--muted);">Days</td><td style="padding:12px 18px;text-align:center;font-weight:700;color:var(--navy);background:rgba(5,40,71,.03);">Same day</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:center;margin-top:24px;"><a href="https://onepointinsuranceagency.com/business-quote" class="btn btn-orange" onclick="event.preventDefault();window.location.href=resolveBizQuoteURL();">Compare My Options Now</a></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Common Questions</div>
+        <h2 class="section-h2">Business insurance, without the jargon.</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do I need business insurance if I work from home? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Yes. Your homeowners policy does not cover business equipment, liability from clients visiting your home, or professional errors. A home-based business policy or BOP can close those gaps affordably.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What's the difference between a BOP and a general liability policy? <span class="faq-icon">+</span></button>
+          <div class="faq-a">A Business Owner's Policy (BOP) bundles general liability and commercial property into one package, often at a lower cost than buying both separately. It's a smart starting point for most small businesses.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is workers' comp required? <span class="faq-icon">+</span></button>
+          <div class="faq-a">In most states, yes — if you have one or more employees. Requirements vary by state and industry. We'll confirm exactly what's required where you operate and find the most cost-effective option.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I know if I have enough coverage? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Coverage needs depend on revenue, number of employees, physical assets, contract requirements, and industry risk. Your advisor walks through a risk assessment to make sure there are no dangerous gaps.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I get a certificate of insurance quickly? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Yes. Once your policy is in place, we can issue a certificate of insurance — often the same day — for contracts, vendors, or landlords that require proof of coverage.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <p style="font-size:13px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;">Same-day coverage available</p>
+      <h2 class="section-h2" data-swap="finalCtaH2">Don't Wait Until a Claim to Find Out You're Not Covered</h2>
+      <p data-swap="finalCtaLead">A licensed business advisor will assess your risks, recommend the right coverage, and get you insured — often the same day.</p>
+      <div class="cta-band-actions">
+        <a href="https://onepointinsuranceagency.com/business-quote" class="btn btn-orange" style="font-size:16px;padding:16px 36px;" onclick="event.preventDefault();window.location.href=resolveBizQuoteURL();">Get My Business Quote Now</a>
+        <a href="tel:888-899-8117" class="btn btn-ghost-white">Call 888-899-8117</a>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.45);margin-top:18px;">Free comparison · COIs available · No obligation</p>
+    </div>
+  </section>
+
+</main>
+
+
+<script>
+// Route vehicle-side business products (Commercial Auto, Trucking, Garage) to the
+// dedicated fleet-quote form; everything else stays on the general business-quote.
+function resolveBizQuoteURL(zip, override){
+  var slug = override || (typeof selectedBiz !== 'undefined' ? selectedBiz : 'gl');
+  var fleetMap = { cauto:'commercial_auto', truck:'trucking', garage:'garage' };
+  var zipQs = zip ? 'zip=' + encodeURIComponent(zip) : '';
+  if(fleetMap[slug]){
+    var qs = 'product=' + encodeURIComponent(fleetMap[slug]);
+    if(zipQs) qs += '&' + zipQs;
+    return 'https://onepointinsuranceagency.com/fleet-quote?' + qs;
+  }
+  return 'https://onepointinsuranceagency.com/business-quote' + (zipQs ? '?' + zipQs : '');
+}
+function goQuote(e){e.preventDefault();var zip=e.target&&e.target.querySelector?(e.target.querySelector('input[type="text"]')||{}).value:'';window.location.href=resolveBizQuoteURL(zip);}
+
+function toggleFaq(btn){const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');btn.querySelector('.faq-icon').textContent='−';}}
+function toggleProductDropdown(e){e.stopPropagation();const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');btn.classList.toggle('open');dd.classList.toggle('open');}
+function subQuote(e,product){e.preventDefault();const zip=e.target.querySelector('input').value;window.location.href=resolveBizQuoteURL(zip,product);}
+const bizData = {
+  gl:     { kicker:'Core liability',       name:'General Liability',              desc:'Bodily injury, property damage, and personal injury claims against your business — the foundation of any commercial policy.' },
+  prop:   { kicker:'Core property',        name:'Commercial Property',            desc:'Protects your building, equipment, inventory, and assets from fire, theft, vandalism, and covered weather events.' },
+  bop:    { kicker:'Small business bundle', name:'Business Owners Policy (BOP)',  desc:'General liability + commercial property bundled for small business — simpler to manage, usually cheaper than buying separately.' },
+  uml:    { kicker:'Extra liability',      name:'Commercial Umbrella',            desc:'Extra $1M+ of liability above your underlying business limits for claims that exceed your base policy.' },
+  wc:     { kicker:'Employee coverage',    name:'Workers\' Compensation',         desc:'Required in most states when you have employees. Covers medical costs and lost wages when a worker is injured on the job.' },
+  cauto:  { kicker:'Vehicles',             name:'Commercial Auto',                desc:'Coverage for vehicles used for business — work trucks, vans, cars, and employee-driven fleet.' },
+  truck:  { kicker:'Motor carriers',       name:'Trucking',                       desc:'Specialized coverage for owner-operators, fleets, and motor carriers — including cargo, physical damage, and non-trucking liability.' },
+  garage: { kicker:'Auto businesses',      name:'Garage Insurance',               desc:'For dealers, service shops, and valet operations — includes garagekeepers liability for customer vehicles in your care.' },
+  pl:     { kicker:'Professional services', name:'Professional Liability / E&O', desc:'Protects service businesses from claims of negligence, errors, or omissions in the work you deliver.' },
+  mal:    { kicker:'Healthcare',           name:'Malpractice Insurance',          desc:'Specialized professional liability for healthcare practitioners — covers allegations of medical negligence.' },
+  cyber:  { kicker:'Data & digital',       name:'Cyber Insurance',                desc:'Data breach response, ransomware, and cyber liability — for any business that stores customer data or processes payments.' },
+  liq:    { kicker:'Food & beverage',      name:'Liquor Liability',               desc:'For restaurants, bars, and venues that serve alcohol — covers claims from incidents involving intoxicated patrons.' },
+  sport:  { kicker:'Sports & rec',         name:'Sport Insurance',                desc:'Coverage built for leagues, teams, clubs, and event organizers — participant liability, general liability, and equipment.' },
+  event:  { kicker:'Special events',       name:'Event Insurance',                desc:'One-day and multi-day coverage for weddings, conferences, and events — liability and cancellation in one policy.' },
+  travel: { kicker:'Business travel',      name:'Travel Insurance',               desc:'Trip cancellation, medical, and lost-baggage coverage for business travel.' }
+};
+// Page-wide copy keyed by subproduct slug. The `gl` entry IS the original
+// page copy verbatim — clicking the General Liability tab restores the page to its default state.
+const bizSwap = {
+  gl: {
+    heroH1: "Shield Your Business From Lawsuits, Claims, and Costly Loss.",
+    heroLead: "One slip, one damaged project, one angry client can cost years of work — General Liability keeps a single incident from becoming a business-ending bill.",
+    coverKicker: "Core liability",
+    coverH2: "What General Liability actually protects.",
+    coverBody: "Bodily injury, property damage, personal and advertising injury, medical payments, and legal defense costs tied to covered third-party claims.",
+    midCtaH2: "Most owners wait until it's too late.",
+    midCtaLead: "A landlord, client, or contract asks for proof — and suddenly coverage is rushed, stressful, and expensive.",
+    finalCtaH2: "Protect the business you've built.",
+    finalCtaLead: "One claim can cost more than years of premiums — get covered before a lawsuit, lease, or accident forces your hand."
+  },
+  prop: {
+    heroH1: "Defend Your Building, Gear, and Inventory From Major Loss.",
+    heroLead: "One fire, storm, or break-in can shut down operations and drain cash reserves — Commercial Property helps your business rebuild instead of close.",
+    coverKicker: "What's covered",
+    coverH2: "What Commercial Property actually covers.",
+    coverBody: "Your building, equipment, inventory, furniture, tenant improvements, and lost income from fire, theft, vandalism, and covered storm damage.",
+    midCtaH2: "Property damage doesn't give warnings.",
+    midCtaLead: "Fires, storms, and theft don't schedule themselves — the only question is whether your business can survive the loss.",
+    finalCtaH2: "Turn a disaster into a recovery plan.",
+    finalCtaLead: "Your location, tools, and inventory are the backbone of your business — cover them before you need to replace them out of pocket."
+  },
+  bop: {
+    heroH1: "Bundle Property and Liability Into One Smart Plan.",
+    heroLead: "Buying liability and property separately often leaves gaps or overpays — a BOP packages both with business interruption for stronger, simpler protection.",
+    coverKicker: "What's included",
+    coverH2: "What a BOP bundles together.",
+    coverBody: "General Liability, Commercial Property, and Business Interruption — three essential coverages in one policy, often at a better overall value.",
+    midCtaH2: "One policy can protect your entire business.",
+    midCtaLead: "Lawsuits, property damage, and lost income don't wait — not having a BOP can expose everything you've built.",
+    finalCtaH2: "Build protection the right way.",
+    finalCtaLead: "Serious owners don't piece policies together — bundle the right coverage, structure, and limits with one smart BOP today."
+  },
+  uml: {
+    heroH1: "Extend Your Limits When One Claim Isn't Enough.",
+    heroLead: "A single lawsuit can blow past your primary policy limits — a Commercial Umbrella adds an extra layer that protects your business from catastrophic loss.",
+    coverKicker: "Excess liability",
+    coverH2: "What Commercial Umbrella sits above.",
+    coverBody: "Extra liability limits layered over your General Liability, Commercial Auto, and Employer's Liability when a major claim exceeds underlying coverage.",
+    midCtaH2: "Large claims don't give warnings.",
+    midCtaLead: "Lawsuits escalate, multi-party accidents multiply fast, and medical costs skyrocket — the real question is whether your limits are high enough.",
+    finalCtaH2: "Don't let one claim define your future.",
+    finalCtaLead: "Smart owners don't settle for minimum limits — add the umbrella layer that protects everything you've built before you need it."
+  },
+  wc: {
+    heroH1: "Protect Employees, Stay Compliant, Keep Operating.",
+    heroLead: "If you have employees, workplace injuries can mean medical bills, lost wages, lawsuits, and state penalties — Workers Comp covers you on all sides.",
+    coverKicker: "Employee protection",
+    coverH2: "What Workers Comp actually covers.",
+    coverBody: "Medical expenses, lost wages, rehabilitation, disability benefits, death benefits, and employer's liability tied to covered workplace injuries.",
+    midCtaH2: "This isn't coverage you can delay.",
+    midCtaLead: "Hiring employees without Workers Comp risks fines, stop-work orders, lawsuits, and personal liability the moment someone gets hurt.",
+    finalCtaH2: "Your employees are your business.",
+    finalCtaLead: "Stay compliant, protect your people, and shield your finances — secure the right Workers Comp policy before an injury forces the issue."
+  },
+  cauto: {
+    heroH1: "Cover Your Vehicles, Drivers, and Road Liability.",
+    heroLead: "Personal auto rarely covers business use — one accident, one denied claim, or one injured third party can cost your company everything.",
+    coverKicker: "Vehicle protection",
+    coverH2: "What Commercial Auto actually covers.",
+    coverBody: "Liability for injuries and damage to others, physical damage to your vehicles, medical payments, uninsured motorist, and hired or non-owned auto use.",
+    midCtaH2: "Every mile driven is exposure.",
+    midCtaLead: "One serious accident can mean lawsuits, denied claims, and major financial loss — don't rely on a personal policy for business driving.",
+    finalCtaH2: "Keep your business rolling.",
+    finalCtaLead: "Protect the vehicles, drivers, and liability behind your operation — get the right Commercial Auto coverage before the next trip."
+  },
+  truck: {
+    heroH1: "Protect Your Trucks, Drivers, Cargo, and Authority.",
+    heroLead: "Trucking carries some of the highest liability in business — one accident, cargo loss, or compliance miss can halt operations and drain income fast.",
+    coverKicker: "Fleet protection",
+    coverH2: "What Trucking Insurance typically covers.",
+    coverBody: "Primary liability, physical damage, motor truck cargo, non-trucking (bobtail) liability, and trailer interchange — plus DOT/MC filings support.",
+    midCtaH2: "If your truck stops, your income stops.",
+    midCtaLead: "Accidents, cargo claims, and lapsed filings can shut you down for weeks — protect your authority and income before the next load.",
+    finalCtaH2: "Stay compliant. Stay moving.",
+    finalCtaLead: "Serious operators don't hit the road unprotected — get trucking coverage built around your cargo, radius, and authority today."
+  },
+  garage: {
+    heroH1: "Shield Your Auto Business, Vehicles, and Customer Cars.",
+    heroLead: "The moment a customer's vehicle is in your care, you take on serious liability — Garage Insurance protects your shop, lot, and every car that rolls through.",
+    coverKicker: "Auto business cover",
+    coverH2: "What Garage Insurance actually bundles.",
+    coverBody: "Garage liability, garagekeepers for customer vehicles in your care, physical damage on owned vehicles, and dealer open-lot coverage where applicable.",
+    midCtaH2: "One mistake can cost thousands.",
+    midCtaLead: "Customer vehicle damage, test-drive accidents, fire, and theft can escalate fast — don't run an auto business without proper garage coverage.",
+    finalCtaH2: "Protect the vehicles in your care.",
+    finalCtaLead: "Structure your garagekeepers, limits, and lot coverage correctly — before one incident damages your finances and your reputation."
+  },
+  pl: {
+    heroH1: "Defend Your Advice, Service, and Professional Reputation.",
+    heroLead: "You can be sued for a mistake — or for no mistake at all. Professional Liability (E&O) covers legal defense and damages when a client claims harm.",
+    coverKicker: "Errors & omissions",
+    coverH2: "What Professional Liability covers.",
+    coverBody: "Negligence, errors, omissions, misrepresentation, and breach of duty claims — plus the legal defense costs that pile up even when you're right.",
+    midCtaH2: "Claims can come from past work.",
+    midCtaLead: "Even projects completed months or years ago can trigger a lawsuit — the real question is whether you'll be protected when it hits.",
+    finalCtaH2: "Your expertise is your business.",
+    finalCtaLead: "Protect your work, your advice, and your reputation with E&O built around your profession — before a client questions anything."
+  },
+  mal: {
+    heroH1: "Protect Your Medical Career, License, and Future.",
+    heroLead: "Even textbook care can lead to claims — Malpractice Insurance defends your license, reputation, and finances when a patient files against you.",
+    coverKicker: "Medical liability",
+    coverH2: "What Malpractice Insurance covers.",
+    coverBody: "Legal defense, settlements, judgments, investigation expenses, and often license defense tied to allegations of negligence or medical error.",
+    midCtaH2: "Claims can arise at any time.",
+    midCtaLead: "Lawsuits can be filed years after treatment — the question isn't whether you were careful, it's whether you're protected when one lands.",
+    finalCtaH2: "You worked too hard to risk your career.",
+    finalCtaLead: "Years of training deserve real protection — secure malpractice coverage built around your specialty, license, and livelihood today."
+  },
+  cyber: {
+    heroH1: "Defend Your Data, Systems, and Revenue From Attack.",
+    heroLead: "Cyber incidents aren't if, they're when — one breach, ransomware hit, or phishing email can stop operations and drain cash in hours.",
+    coverKicker: "Digital risk",
+    coverH2: "What Cyber Liability actually covers.",
+    coverBody: "Data breach response, legal defense, notifications, credit monitoring, cyber extortion, business interruption, and system restoration after an attack.",
+    midCtaH2: "Cyber attacks don't give warnings.",
+    midCtaLead: "They hit suddenly, spread fast, and cost money immediately — the only question is whether your business can recover on its own.",
+    finalCtaH2: "Cyber risk is business risk.",
+    finalCtaLead: "Protect your data, clients, and operations with real coverage and expert response support — before the next incident stops your business cold."
+  },
+  liq: {
+    heroH1: "Protect Your Venue From Alcohol-Related Claims.",
+    heroLead: "General Liability rarely covers liquor exposure — if you serve or sell alcohol, one intoxicated guest can put your business on the hook for major damages.",
+    coverKicker: "Alcohol exposure",
+    coverH2: "What Liquor Liability actually covers.",
+    coverBody: "Bodily injury, property damage, legal defense, and settlements tied to alcohol-related incidents caused by patrons you served or sold to.",
+    midCtaH2: "Alcohol-related incidents happen fast.",
+    midCtaLead: "A DUI, a fight, or an over-served guest can trigger lawsuits and serious financial loss — don't serve without real protection in place.",
+    finalCtaH2: "Serving alcohol is a responsibility.",
+    finalCtaLead: "Cover dram shop exposure, host liability, and event-day risk the right way — before one incident ends up in court."
+  },
+  sport: {
+    heroH1: "Protect Your Team, League, Coaches, and Participants.",
+    heroLead: "Injuries are part of sports — liability doesn't have to be. Sports Insurance shields your organization from player, spectator, and coaching claims.",
+    coverKicker: "Program protection",
+    coverH2: "What Sports Insurance typically bundles.",
+    coverBody: "General liability, participant accident coverage, event coverage, equipment protection, and abuse and molestation where applicable to your program.",
+    midCtaH2: "One incident can impact your whole organization.",
+    midCtaLead: "Injuries, lawsuits, and venue shutouts can disrupt an entire season — waivers alone won't keep your program protected.",
+    finalCtaH2: "You're responsible for more than the game.",
+    finalCtaLead: "Cover players, coaches, spectators, and facilities with sports insurance built around your sport, age group, and schedule."
+  },
+  event: {
+    heroH1: "Protect Your Event, Guests, and Deposits.",
+    heroLead: "Venues require it and risks demand it — Event Insurance keeps one accident, cancellation, or claim from unraveling months of planning and thousands of dollars.",
+    coverKicker: "Event day cover",
+    coverH2: "What Event Insurance can include.",
+    coverBody: "General liability, event cancellation, liquor liability when alcohol is served, property damage, and protection around vendor-related issues.",
+    midCtaH2: "Your event date is approaching fast.",
+    midCtaLead: "Most clients call when the venue asks for insurance or the event is days away — don't wait for a last-minute scramble.",
+    finalCtaH2: "Your event is an investment.",
+    finalCtaLead: "Protect deposits, vendors, venues, and guests with same-day coverage built for weddings, corporate events, festivals, and more."
+  },
+  travel: {
+    heroH1: "Travel Insurance",
+    heroLead: "Protect travelers from trip cancellations, medical emergencies, and lost belongings.",
+    coverKicker: "What's Covered",
+    coverH2: "What travel insurance covers.",
+    coverBody: "Reimburses prepaid trip costs when you cancel or interrupt for covered reasons, pays for emergency medical care and evacuation abroad, and covers lost or delayed baggage. Business travel and group options are also available.",
+    midCtaH2: "Travel with peace of mind.",
+    midCtaLead: "A single medical evacuation overseas can cost more than most trips.",
+    finalCtaH2: "Get a travel quote.",
+    finalCtaLead: "Share your destination and dates and we'll price coverage in minutes."
+  }
+};
+// Swap every [data-swap] element on the page to the chosen subproduct's copy.
+// DOM is never moved or restructured — only innerHTML of tagged nodes changes.
+function swapBizCopy(v){
+  const data = bizSwap[v];
+  if(!data) return;
+  document.querySelectorAll('[data-swap]').forEach(el => {
+    const key = el.getAttribute('data-swap');
+    if(data[key] != null) el.innerHTML = data[key];
+  });
+}
+let selectedBiz = 'gl';
+function selectBiz(v){
+  if(!bizData[v]) return;
+  selectedBiz = v;
+  document.querySelectorAll('.biz-chip').forEach(c=>c.classList.toggle('active', c.dataset.v === v));
+  document.getElementById('bp-kicker').textContent = bizData[v].kicker;
+  document.getElementById('bp-title').textContent = bizData[v].name;
+  document.getElementById('bp-desc').textContent = bizData[v].desc;
+  swapBizCopy(v);
+  document.querySelectorAll('.biz-hero-img').forEach(img => img.classList.toggle('active', img.dataset.hero === v));
+}
+function filterBiz(cat){
+  document.querySelectorAll('.biz-cat').forEach(c=>c.classList.toggle('active', c.dataset.c === cat));
+  document.querySelectorAll('.biz-chip').forEach(c=>{
+    c.classList.toggle('hidden', cat !== 'all' && c.dataset.c !== cat);
+  });
+}
+function bpQuote(e){
+  e.preventDefault();
+  const zip = document.getElementById('bp-zip').value;
+  window.location.href = resolveBizQuoteURL(zip);
+}
+function openResume(){document.getElementById('resumeBackdrop').classList.add('open');document.body.style.overflow='hidden';}
+function closeResume(){document.getElementById('resumeBackdrop').classList.remove('open');document.body.style.overflow='';}
+function closeResumeOnBackdrop(e){if(e.target.id==='resumeBackdrop')closeResume();}
+function resumeQuote(e){e.preventDefault();window.location.href='https://onepointinsuranceagency.com/business-quote';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeResume();});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(l=>l.classList.remove('open'));
+  if(!e.target.closest('.qc-product-field')){const btn=document.querySelector('.qc-product-btn');const dd=document.getElementById('productDropdown');if(btn)btn.classList.remove('open');if(dd)dd.classList.remove('open');}
+});
+function handleBizHash(){
+  var hash = window.location.hash.replace('#','');
+  if(hash && bizData[hash]){
+    selectBiz(hash);
+    var picker = document.getElementById('biz-subs');
+    if(picker) setTimeout(function(){ picker.scrollIntoView({behavior:'smooth',block:'start'}); }, 300);
+  }
+}
+handleBizHash();
+window.addEventListener('hashchange', handleBizHash);
+</script>
+
+<!-- RESUME QUOTE MODAL -->
+<div class="resume-backdrop" id="resumeBackdrop" onclick="closeResumeOnBackdrop(event)">
+  <div class="resume-modal" role="dialog" aria-labelledby="resumeTitle">
+    <button class="resume-close" type="button" onclick="closeResume()" aria-label="Close">×</button>
+    <div class="resume-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+    <h3 id="resumeTitle">Pick up where you left off</h3>
+    <p>Already started a quote? Enter a few details and we'll pull it up so you can finish where you stopped.</p>
+    <form class="resume-form" onsubmit="resumeQuote(event)">
+      <div class="resume-field"><label for="r-last">Last name</label><input type="text" id="r-last" placeholder="Enter your last name" required></div>
+      <div class="resume-field"><label for="r-zip">ZIP code</label><input type="text" id="r-zip" placeholder="5-digit ZIP" maxlength="5" inputmode="numeric" required></div>
+      <div class="resume-field"><label for="r-email">Email or phone</label><input type="text" id="r-email" placeholder="you@example.com or 555-555-5555" required></div>
+      <button type="submit" class="resume-submit">Continue my quote</button>
+      <p class="resume-note">Can't find your quote? <a href="tel:888-899-8117" style="color:var(--blue);font-weight:600">Call 1-888-899-8117</a></p>
+    </form>
+  </div>
+</div>

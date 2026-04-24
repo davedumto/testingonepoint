@@ -151,6 +151,7 @@
   max-height: 60vh; overflow-y: auto;
 }
 .home-action .qc-product-dropdown.open { display: block; }
+.home-action .qc-product-dropdown button:hover { color: var(--blue); }
 
 .home-action-zip {
   background: transparent; border: none;
@@ -441,33 +442,33 @@
     <a href="index.html" class="nav-brand"><img src="logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
-        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <button onclick="toggleMega(this)">Shop Insurance <span class="caret">▾</span></button>
         <div class="mega-menu">
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
-              <div class="mega-col"><h5>Auto</h5><ul><li><a href="auto/">Auto Insurance</a></li><li><a href="auto/#classic">Antique / Classic Car</a></li><li><a href="auto/#atv">ATV</a></li><li><a href="auto/#motorcycle">Motorcycle</a></li><li><a href="auto/#rv">RV &amp; Travel Trailer</a></li><li><a href="auto/#boat">Boat &amp; Watercraft</a></li><li><a href="auto/#snowmobile">Snowmobile</a></li><li><a href="auto/#scooter">Scooter</a></li></ul></div>
+              <div class="mega-col"><h5>Auto</h5><ul><li><a href="auto-insurance/">Auto Insurance</a></li><li><a href="auto-insurance/#classic">Antique / Classic Car</a></li><li><a href="auto-insurance/#atv">ATV</a></li><li><a href="auto-insurance/#motorcycle">Motorcycle</a></li><li><a href="auto-insurance/#rv">RV &amp; Travel Trailer</a></li><li><a href="auto-insurance/#boat">Boat &amp; Watercraft</a></li><li><a href="auto-insurance/#snowmobile">Snowmobile</a></li><li><a href="auto-insurance/#scooter">Scooter</a></li></ul></div>
               <div class="mega-col"><h5>Homeowners</h5><ul><li><a href="home/">Homeowners</a></li><li><a href="home/#condo">Condo</a></li><li><a href="home/#mobile">Mobile Home</a></li><li><a href="home/#renters">Renters</a></li><li><a href="home/#flood">Flood</a></li><li><a href="home/#landlord">Landlord</a></li><li><a href="home/#umbrella">Umbrella</a></li></ul></div>
               <div class="mega-col"><h5>Health</h5><ul><li><a href="health/">Marketplace (ACA)</a></li><li><a href="health/#short">Short-Term Medical</a></li><li><a href="health/#dental">Dental</a></li><li><a href="health/#vision">Vision</a></li><li><a href="health/#medicare">Medicare Advantage</a></li><li><a href="health/#accident">Accident</a></li><li><a href="health/#hospital">Hospitalization</a></li><li><a href="health/#group">Group Health</a></li><li><a href="health/#travel">International Travel</a></li><li><a href="health/#critical">Critical Illness</a></li></ul></div>
               <div class="mega-col"><h5>Life</h5><ul><li><a href="life/">Term Life</a></li><li><a href="life/#whole">Whole Life</a></li><li><a href="life/#final">Final Expense</a></li><li><a href="life/#universal">Universal Life</a></li><li><a href="life/#iul">Indexed Universal Life</a></li><li><a href="life/#annuity">Annuity</a></li><li><a href="life/#group">Group Life</a></li><li><a href="life/#critical">Critical Illness</a></li></ul></div>
               <div class="mega-col"><h5>Disability</h5><ul><li><a href="disability/">Disability Income</a></li><li><a href="disability/#individual">Individual DI</a></li><li><a href="disability/#long">Long-Term</a></li><li><a href="disability/#short">Short-Term</a></li><li><a href="disability/#group">Group Disability</a></li><li><a href="disability/#boe">Business Overhead</a></li></ul></div>
-              <div class="mega-col"><h5>Business</h5><ul><li><a href="business/">General Liability</a></li><li><a href="business/#cauto">Commercial Auto</a></li><li><a href="business/#truck">Trucking</a></li><li><a href="business/#cyber">Cyber</a></li><li><a href="business/#prop">Commercial Property</a></li><li><a href="business/#pl">Professional Liability</a></li><li><a href="business/#mal">Malpractice</a></li><li><a href="business/#sport">Sport Insurance</a></li><li><a href="business/#wc">Workers' Comp</a></li><li><a href="business/#bop">Business Owners (BOP)</a></li><li><a href="business/#liq">Liquor Liability</a></li><li><a href="business/#uml">Commercial Umbrella</a></li><li><a href="business/#garage">Garage</a></li><li><a href="business/#event">Event Insurance</a></li><li><a href="business/#travel">Travel Insurance</a></li></ul></div>
+              <div class="mega-col"><h5>Business</h5><ul><li><a href="business/">General Liability</a></li><li><a href="business/#cauto">Commercial Auto</a></li><li><a href="business/#truck">Trucking</a></li><li><a href="business/#cyber">Cyber Insurance</a></li><li><a href="business/#prop">Commercial Property</a></li><li><a href="business/#pl">Professional Liability</a></li><li><a href="business/#mal">Malpractice</a></li><li><a href="business/#sport">Sport Insurance</a></li><li><a href="business/#wc">Workers' Comp</a></li><li><a href="business/#bop">Business Owners (BOP)</a></li><li><a href="business/#liq">Liquor Liability</a></li><li><a href="business/#uml">Commercial Umbrella</a></li><li><a href="business/#garage">Garage</a></li><li><a href="business/#event">Event Insurance</a></li></ul></div>
             </div>
           </div>
         </div>
       </li>
-      <li><a href="https://testingonepoint-7ly8.vercel.app/login">Client Portal</a></li>
       <li><a href="about/">About Us</a></li>
       <li><a href="contact/">Contact</a></li>
     </ul>
     <div class="nav-actions">
       <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
-      <a href="book/" class="nav-cta">Get a Quote</a>
+      <a href="https://testingonepoint-7ly8.vercel.app/login" class="nav-cta nav-cta-ghost">Client Portal</a>
+      <a href="book/" class="nav-cta">Book Appointment</a>
     </div>
     <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="mobileMenu">
-  <a href="auto/">Auto Insurance</a>
+  <a href="auto-insurance/">Auto Insurance</a>
   <a href="home/">Homeowners</a>
   <a href="health/">Health Insurance</a>
   <a href="life/">Life Insurance</a>
@@ -493,10 +494,10 @@
   </div>
 
   <div class="home-scenes">
-    <div class="home-scene"><span class="home-scene-label">Life & Health</span><img src="life-insurance-2.jpg" alt="Family protected by OnePoint Insurance"></div>
-    <div class="home-scene"><span class="home-scene-label">Home</span><img src="home.jpg" alt="Home protected by OnePoint"></div>
-    <div class="home-scene"><span class="home-scene-label">Auto</span><img src="car1.jpg" alt="Auto insurance"></div>
-    <div class="home-scene"><span class="home-scene-label">Business</span><img src="working.jpg" alt="Business insurance"></div>
+    <div class="home-scene"><span class="home-scene-label">Life & Health</span><img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b0925bd7b732ee5c5ab224.png" alt="Family protected by OnePoint Insurance"></div>
+    <div class="home-scene"><span class="home-scene-label">Home</span><img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890e8f5afc66b91db1f8f85.png" alt="Home protected by OnePoint"></div>
+    <div class="home-scene"><span class="home-scene-label">Auto</span><img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dd9c56ad27908f5d872.jpg" alt="Auto insurance"></div>
+    <div class="home-scene"><span class="home-scene-label">Business</span><img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b61fcc3441c1ab72b32e4f.png" alt="Business insurance"></div>
   </div>
 
   <div class="home-action-cards-wrap">
@@ -516,35 +517,35 @@
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px;">
               <div>
                 <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">Auto &amp; Vehicle</p>
-                <a href="auto/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Auto Insurance</a>
-                <a href="auto/#motorcycle" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Motorcycle</a>
-                <a href="auto/#rv" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">RV / Trailer</a>
-                <a href="auto/#boat" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Boat</a>
-                <a href="auto/#classic" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Classic Car</a>
+                <button type="button" onclick="selectProduct(this)" data-url="auto-quote/" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Auto Insurance</button>
+                <button type="button" onclick="selectProduct(this)" data-url="auto-quote/?product=Motorcycle" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Motorcycle</button>
+                <button type="button" onclick="selectProduct(this)" data-url="auto-quote/?product=RV" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">RV / Trailer</button>
+                <button type="button" onclick="selectProduct(this)" data-url="auto-quote/?product=Boat" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Boat</button>
+                <button type="button" onclick="selectProduct(this)" data-url="auto-quote/?product=Classic" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Classic Car</button>
               </div>
               <div>
                 <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">Home &amp; Property</p>
-                <a href="home/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Homeowners</a>
-                <a href="home/#renters" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Renters</a>
-                <a href="home/#condo" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Condo</a>
-                <a href="home/#flood" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Flood</a>
-                <a href="home/#umbrella" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Umbrella</a>
+                <button type="button" onclick="selectProduct(this)" data-url="home-quote/" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Homeowners</button>
+                <button type="button" onclick="selectProduct(this)" data-url="home-quote/?product=Renters" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Renters</button>
+                <button type="button" onclick="selectProduct(this)" data-url="home-quote/?product=Condo" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Condo</button>
+                <button type="button" onclick="selectProduct(this)" data-url="home-quote/?product=Flood" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Flood</button>
+                <button type="button" onclick="selectProduct(this)" data-url="home-quote/?product=Umbrella" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Umbrella</button>
               </div>
               <div>
                 <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">Health &amp; Life</p>
-                <a href="health/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Health (Marketplace)</a>
-                <a href="life/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Life (Term)</a>
-                <a href="life/#whole" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Whole Life</a>
-                <a href="disability/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Disability Income</a>
-                <a href="life/#final" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Final Expense</a>
+                <button type="button" onclick="selectProduct(this)" data-url="health-quote/" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Health (Marketplace)</button>
+                <button type="button" onclick="selectProduct(this)" data-url="life-quote/" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Life (Term)</button>
+                <button type="button" onclick="selectProduct(this)" data-url="life-quote/?product=Whole" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Whole Life</button>
+                <button type="button" onclick="selectProduct(this)" data-url="disability-quote/" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Disability Income</button>
+                <button type="button" onclick="selectProduct(this)" data-url="life-quote/?product=Final" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Final Expense</button>
               </div>
               <div>
                 <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">Business</p>
-                <a href="business/" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">General Liability</a>
-                <a href="business/#cauto" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Commercial Auto</a>
-                <a href="business/#wc" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Workers' Comp</a>
-                <a href="business/#bop" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Business Owners (BOP)</a>
-                <a href="business/#pl" style="font-size:14px;color:var(--text);text-decoration:none;display:block;padding:5px 0;">Professional Liability</a>
+                <button type="button" onclick="selectProduct(this)" data-url="business-quote/?product=GL" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">General Liability</button>
+                <button type="button" onclick="selectProduct(this)" data-url="business-quote/?product=Commercial+Auto" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Commercial Auto</button>
+                <button type="button" onclick="selectProduct(this)" data-url="business-quote/?product=WC" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Workers' Comp</button>
+                <button type="button" onclick="selectProduct(this)" data-url="business-quote/?product=BOP" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Business Owners (BOP)</button>
+                <button type="button" onclick="selectProduct(this)" data-url="business-quote/?product=PL" style="font:inherit;font-size:14px;color:var(--text);background:none;border:0;cursor:pointer;text-align:left;display:block;padding:5px 0;width:100%;">Professional Liability</button>
               </div>
             </div>
           </div>
@@ -589,6 +590,85 @@
     </div>
   </div>
 </div>
+
+<!-- PRODUCTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Our Coverage</div>
+      <h2 class="section-h2">Coverage Built Around Your Life and Business</h2>
+      <p class="section-lead">Most clients improve coverage and reduce costs after switching to OnePoint.</p>
+    </div>
+    <div class="prod-grid">
+      <a href="auto-insurance/" class="prod-card featured">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dda50b9a3263a27422e.jpg" alt="Auto insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Vehicle</div>
+          <h3>Auto Insurance</h3>
+          <p>Most drivers overpay by hundreds every year. We compare 70+ top-rated carriers to find the coverage and rate that actually fits your driving — liability, collision, comprehensive, roadside and more.</p>
+          <div class="prod-card-cta">Get a free auto quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+      <a href="home/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a3c8695313005f1864d45b.png" alt="Homeowners insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Property</div>
+          <h3>Homeowners Insurance</h3>
+          <p>Your home is your biggest asset. Make sure it's protected with the right coverage at the right price.</p>
+          <div class="prod-card-cta">Get a free home quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+      <a href="health/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68a8d83a54a62614a4cd1b8b.png" alt="Health insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Personal</div>
+          <h3>Health Insurance</h3>
+          <p>Marketplace plans, premium tax credits, and enrollment support from a licensed advisor — at no cost to you.</p>
+          <div class="prod-card-cta">Get a free health quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+      <a href="life/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68b0925bd7b732ee5c5ab224.png" alt="Life insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Personal</div>
+          <h3>Life Insurance</h3>
+          <p>One decision that protects your family's financial future. Term, whole, universal — we find what fits.</p>
+          <div class="prod-card-cta">Get a free life quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+      <a href="disability/" class="prod-card">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0ed643dbee4f1d79e75.png" alt="Disability income insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Income Protection</div>
+          <h3>Disability Income</h3>
+          <p>Your income keeps everything else running. Protect 60-70% of your paycheck if illness or injury stops you from working.</p>
+          <div class="prod-card-cta">Get a disability quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+      <a href="business/" class="prod-card featured reverse">
+        <div class="prod-card-img">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/689215454f8b902708d926ec.png" alt="Business insurance" loading="lazy">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-kicker">Business</div>
+          <h3>Business Insurance</h3>
+          <p>General liability, commercial property, workers' comp, commercial auto, and professional liability — tailored for your industry, your size, and the specific risks your business actually faces.</p>
+          <div class="prod-card-cta">Get a business quote <span>&rsaquo;</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- HOW IT WORKS -->
 <section class="section" style="padding:72px 0;">
@@ -668,85 +748,6 @@
         <p style="font-size:15px;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:18px;">Ready to see the difference?</p>
         <a href="book/" class="btn btn-orange" style="background:#fff;color:var(--navy);padding:12px 24px;font-size:14px;">Talk to an Advisor</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">Our Coverage</div>
-      <h2 class="section-h2">Coverage Built Around Your Life and Business</h2>
-      <p class="section-lead">Most clients improve coverage and reduce costs after switching to OnePoint.</p>
-    </div>
-    <div class="prod-grid">
-      <a href="auto/" class="prod-card featured">
-        <div class="prod-card-img">
-          <img src="car1.jpg" alt="Auto insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Vehicle</div>
-          <h3>Auto Insurance</h3>
-          <p>Most drivers overpay by hundreds every year. We compare 70+ top-rated carriers to find the coverage and rate that actually fits your driving — liability, collision, comprehensive, roadside and more.</p>
-          <div class="prod-card-cta">Get a free auto quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
-      <a href="home/" class="prod-card">
-        <div class="prod-card-img">
-          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&auto=format&fit=crop&q=80" alt="Homeowners insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Property</div>
-          <h3>Homeowners Insurance</h3>
-          <p>Your home is your biggest asset. Make sure it's protected with the right coverage at the right price.</p>
-          <div class="prod-card-cta">Get a free home quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
-      <a href="health/" class="prod-card">
-        <div class="prod-card-img">
-          <img src="health.jpg" alt="Health insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Personal</div>
-          <h3>Health Insurance</h3>
-          <p>Marketplace plans, premium tax credits, and enrollment support from a licensed advisor — at no cost to you.</p>
-          <div class="prod-card-cta">Get a free health quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
-      <a href="life/" class="prod-card">
-        <div class="prod-card-img">
-          <img src="life-insurance.jpg" alt="Life insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Personal</div>
-          <h3>Life Insurance</h3>
-          <p>One decision that protects your family's financial future. Term, whole, universal — we find what fits.</p>
-          <div class="prod-card-cta">Get a free life quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
-      <a href="disability/" class="prod-card">
-        <div class="prod-card-img">
-          <img src="people-first.jpg" alt="Disability income insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Income Protection</div>
-          <h3>Disability Income</h3>
-          <p>Your income keeps everything else running. Protect 60-70% of your paycheck if illness or injury stops you from working.</p>
-          <div class="prod-card-cta">Get a disability quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
-      <a href="business/" class="prod-card featured reverse">
-        <div class="prod-card-img">
-          <img src="business-professional.jpg" alt="Business insurance" loading="lazy">
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-kicker">Business</div>
-          <h3>Business Insurance</h3>
-          <p>General liability, commercial property, workers' comp, commercial auto, and professional liability — tailored for your industry, your size, and the specific risks your business actually faces.</p>
-          <div class="prod-card-cta">Get a business quote <span>&rsaquo;</span></div>
-        </div>
-      </a>
     </div>
   </div>
 </section>
@@ -1081,7 +1082,7 @@
       <div class="ft-col">
         <h5>Coverage</h5>
         <ul>
-          <li><a href="auto/">Auto Insurance</a></li>
+          <li><a href="auto-insurance/">Auto Insurance</a></li>
           <li><a href="home/">Homeowners</a></li>
           <li><a href="health/">Health</a></li>
           <li><a href="life/">Life Insurance</a></li>
@@ -1095,16 +1096,16 @@
           <li><a href="about/">About Us</a></li>
           <li><a href="partners/">Carriers</a></li>
           <li><a href="onepointblog/">Blog</a></li>
-          <li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li>
+          <li><a href="https://onepointinsuranceagency.com/resources">Learning Hub</a></li>
           <li><a href="contact/">Contact Us</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <h5>Client Tools</h5>
         <ul>
-          <li><a href="client-services/">File a Claim</a></li>
-          <li><a href="policy-request/">Update Policy</a></li>
-          <li><a href="client-services/">Upload Document</a></li>
+          <li><a href="https://testingonepoint-7ly8.vercel.app/login">File a Claim</a></li>
+          <li><a href="https://testingonepoint-7ly8.vercel.app/login">Update Policy</a></li>
+          <li><a href="https://testingonepoint-7ly8.vercel.app/login">Upload Document</a></li>
           <li><a href="book/">Schedule a Call</a></li>
         </ul>
       </div>
@@ -1152,10 +1153,28 @@ function heroQuote() {
   var dest = routes[product] || 'book/';
   window.location.href = dest + (zip ? '?zip=' + encodeURIComponent(zip) : '');
 }
+function selectProduct(btn){
+  var url = btn.getAttribute('data-url') || 'auto-quote/';
+  var name = btn.textContent.trim();
+  var form = document.querySelector('.home-action.personal .home-action-form');
+  if(!form) return;
+  var nameEl = form.querySelector('.qc-product-name');
+  if(nameEl) nameEl.textContent = name;
+  var productBtn = form.querySelector('.qc-product-btn');
+  if(productBtn){
+    productBtn.setAttribute('data-url', url);
+    productBtn.classList.remove('open');
+  }
+  var dd = document.getElementById('productDropdown');
+  if(dd) dd.classList.remove('open');
+}
 function goQuote(e) {
   e.preventDefault();
   var zip = (document.getElementById('zip-home') || {}).value || '';
-  window.location.href = 'auto-quote/' + (zip ? '?zip=' + encodeURIComponent(zip) : '');
+  var productBtn = document.querySelector('.home-action.personal .home-action-form .qc-product-btn');
+  var url = (productBtn && productBtn.getAttribute('data-url')) || 'auto-quote/';
+  var sep = url.indexOf('?') >= 0 ? '&' : '?';
+  window.location.href = url + (zip ? sep + 'zip=' + encodeURIComponent(zip) : '');
 }
 
 function toggleMobileMenu() {

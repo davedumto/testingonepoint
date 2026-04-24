@@ -1,0 +1,1156 @@
+<!--
+  ONEPOINT LEARN: BUSINESS INSURANCE (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/business
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Business Insurance
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #dc2626;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Business Insurance</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Business Insurance, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on the core coverages every business owner needs to understand, from general liability and workers' comp to cyber, D&amp;O, and business interruption.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~28</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/business" class="lc-btn lc-btn-ghost">Go to Business Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From the baseline policy every business needs, to the specialty coverages that keep owners and directors personally protected.</div>
+      <ul class="art-list">
+        <li>GL</li>
+        <li>Workers' Comp</li>
+        <li>Commercial Auto</li>
+        <li>Cyber</li>
+        <li>E&amp;O</li>
+        <li>D&amp;O</li>
+        <li>EPLI</li>
+        <li>BI</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · General Liability Insurance</option>
+      <option value="m2">Chapter 2 · Workers' Compensation</option>
+      <option value="m3">Chapter 3 · Commercial Auto Insurance</option>
+      <option value="m4">Chapter 4 · Cyber Liability Insurance</option>
+      <option value="m5">Chapter 5 · Professional Liability / E&amp;O</option>
+      <option value="m6">Chapter 6 · Directors &amp; Officers (D&amp;O)</option>
+      <option value="m7">Chapter 7 · Employment Practices Liability (EPLI)</option>
+      <option value="m8">Chapter 8 · Business Interruption Insurance</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">General Liability Insurance</a></li>
+        <li><a href="#m2" data-mod="2">Workers' Compensation</a></li>
+        <li><a href="#m3" data-mod="3">Commercial Auto Insurance</a></li>
+        <li><a href="#m4" data-mod="4">Cyber Liability Insurance</a></li>
+        <li><a href="#m5" data-mod="5">Professional Liability / E&amp;O</a></li>
+        <li><a href="#m6" data-mod="6">Directors &amp; Officers (D&amp;O)</a></li>
+        <li><a href="#m7" data-mod="7">Employment Practices Liability (EPLI)</a></li>
+        <li><a href="#m8" data-mod="8">Business Interruption Insurance</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Business Insurance</div>
+        <h1 class="lmod-title">General Liability Insurance</h1>
+        <p class="lmod-subtitle">The foundation every business needs.</p>
+        <p class="lmod-lead">If a customer slips in your store, if your contractor damages a client's property, or if your product causes an injury, General Liability is the policy that pays. Without it, those claims come out of the business checking account, or the owner's personal savings.</p>
+        <p>General Liability (GL) is the baseline insurance every business should carry. Almost every other commercial coverage sits on top of it.</p>
+
+        <h2>What GL actually covers</h2>
+        <ul>
+          <li><strong>Bodily injury to third parties.</strong> A customer trips on a loose rug and breaks a wrist. GL pays the medical bills and, if they sue, legal defense plus settlement.</li>
+          <li><strong>Property damage to third parties.</strong> A plumber leaves a fitting loose and floods a client's basement. GL pays for floors, drywall, and contents.</li>
+          <li><strong>Personal and advertising injury.</strong> Slander, libel, copyright infringement in your advertising, false arrest. Often overlooked, and increasingly relevant in the social media era.</li>
+          <li><strong>Medical payments.</strong> Small goodwill payments (usually $5,000 to $10,000) for minor injuries on your premises, regardless of fault.</li>
+        </ul>
+
+        <h2>What GL doesn't cover</h2>
+        <ul>
+          <li><strong>Employee injuries.</strong> That's workers' compensation.</li>
+          <li><strong>Your own property damage.</strong> That's commercial property insurance.</li>
+          <li><strong>Auto accidents in business vehicles.</strong> That's commercial auto.</li>
+          <li><strong>Professional errors or advice.</strong> That's professional liability (E&amp;O).</li>
+          <li><strong>Cyber incidents and data breaches.</strong> That's cyber liability.</li>
+          <li><strong>Employment-related lawsuits.</strong> That's EPLI.</li>
+        </ul>
+        <p>GL is the foundation. The other coverages sit on top.</p>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Low-risk office business:</strong> $400 to $800 per year for $1M/$2M limits.</li>
+          <li><strong>Retail or restaurant:</strong> $1,000 to $2,500 per year.</li>
+          <li><strong>Contractors (general, plumbing, HVAC):</strong> $1,500 to $5,000 per year depending on trade.</li>
+          <li><strong>Higher-risk trades (roofers, tree service, demolition):</strong> $4,000 to $15,000 per year.</li>
+        </ul>
+
+        <h2>Limits to understand</h2>
+        <p>Most GL policies offer a <strong>per-occurrence limit</strong> (the maximum paid per incident, often $1M) and an <strong>aggregate limit</strong> (the maximum paid total in a policy year, often $2M). A contractor who causes two $800,000 claims in one year would max out a $1M/$2M policy quickly. Higher-risk businesses often carry $2M/$4M or buy a commercial umbrella policy to layer on top.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A customer slips on a freshly mopped floor in a small retail shop and fractures a hip. Medical bills plus settlement hit $180,000. With $1M GL, the insurer handles defense and pays the claim. Without it, that check comes out of the owner's operating account, or worse, personal savings after the LLC shield fails.</p>
+        </div>
+
+        <h2>Certificate of Insurance (COI)</h2>
+        <p>Almost every commercial contract, leases, client contracts, subcontractor agreements, requires proof of GL. Your insurer issues a Certificate of Insurance (COI) listing your coverage and naming specific parties as "additional insureds" when required. COIs are a routine part of doing business, not a one-time document.</p>
+
+        <h2>GL in a BOP</h2>
+        <p>A Business Owner's Policy bundles GL with commercial property for small-to-mid-size businesses at a discount. For eligible businesses, a BOP is usually the right starting point. Our post on <a href="/post/how-business-owners-policies-work-bop-insurance">how BOPs work</a> covers when to use one versus standalone GL.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My LLC protects me."</strong> LLC structure protects personal assets from most business lawsuits, but only if you have the insurance to pay the business's share.</li>
+            <li><strong>"I only need it when I sign a big contract."</strong> You need it before the claim, which rarely comes from the big contract.</li>
+            <li><strong>"$1M is enough."</strong> Maybe, but umbrella coverage is cheap insurance for that assumption.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers GL alongside BOP, professional liability, and cyber.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Workers' Compensation</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Business Insurance</div>
+        <h1 class="lmod-title">Workers' Compensation</h1>
+        <p class="lmod-subtitle">The coverage almost every business must carry.</p>
+        <p class="lmod-lead">Workers' compensation pays medical bills and lost wages when an employee is injured or becomes ill because of their job. It's required by law in nearly every state, it applies to almost every business with employees, and going without it creates some of the biggest penalties in all of business insurance.</p>
+
+        <h2>What it covers</h2>
+        <ul>
+          <li><strong>Medical care</strong> for work-related injuries and illnesses, hospital bills, surgery, medications, physical therapy.</li>
+          <li><strong>Lost wage replacement,</strong> typically 60 to 70% of the employee's wages while they can't work.</li>
+          <li><strong>Permanent disability benefits</strong> if the injury causes lasting impairment.</li>
+          <li><strong>Death benefits</strong> to the family if a work injury is fatal.</li>
+          <li><strong>Employer liability coverage,</strong> defense if an employee sues the business outside the workers' comp system (rare, but possible).</li>
+        </ul>
+
+        <h2>It's mandatory (almost everywhere)</h2>
+        <p>Across OnePoint's 18 states, every state except TX requires most employers to carry workers' comp. <strong>TX</strong> is the only state where workers' comp is optional, but opting out creates significant liability exposure, and most TX employers still carry it. <strong>FL, GA, NY, NJ, MD, VA, IL, MI, MO, OH, TN, NC, SC, LA, MS, AL, AZ</strong> all require it for most employers with 1 to 5 or more employees, with varying thresholds.</p>
+        <p>Sole proprietors, partners, and certain LLC members can usually exclude themselves. Independent contractors aren't employees and don't require coverage, but misclassification is one of the top audit triggers in the industry.</p>
+
+        <h2>What it costs</h2>
+        <p>Workers' comp premiums are based on <strong>class code</strong> (the type of work each employee performs), <strong>payroll</strong> (premium is calculated per $100 of payroll), and the <strong>experience modifier</strong> (your claim history compared to similar businesses).</p>
+        <p>Example rates per $100 of payroll:</p>
+        <ul>
+          <li><strong>Clerical or office worker:</strong> $0.15 to $0.40.</li>
+          <li><strong>Retail clerk:</strong> $1.00 to $2.50.</li>
+          <li><strong>Electrician:</strong> $2.50 to $6.00.</li>
+          <li><strong>Roofer:</strong> $15.00 to $40.00.</li>
+        </ul>
+        <p>A small office with $200,000 in payroll might pay $600 to $1,200 per year. A small roofing company with the same payroll might pay $30,000 or more.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>Two small businesses each run $200,000 in annual payroll. A bookkeeping firm with all office staff pays roughly $800 per year in workers' comp. A roofing crew of the same payroll size pays closer to $40,000. The same coverage, the same state, very different class codes.</p>
+        </div>
+
+        <h2>The experience modifier</h2>
+        <p>After about 3 years in business, your claim history affects your premium through the experience modifier (X-Mod). An X-Mod of <strong>1.00</strong> is average for your class. Below 1.00 is a credit, you pay less. Above 1.00 is a debit, you pay more. An X-Mod of 1.25 means you pay 25% more than average. Safe workplaces save serious money.</p>
+
+        <h2>State-run vs. private markets</h2>
+        <p><strong>Monopolistic states</strong> (none in OnePoint's footprint) require workers' comp to be bought from the state fund. <strong>Competitive states</strong> (all OnePoint states) sell workers' comp through private insurers, sometimes alongside a state fund as the insurer of last resort.</p>
+
+        <h2>Ghost policies for sole proprietors</h2>
+        <p>In states like FL, many contractors carry a <strong>ghost policy</strong>, a workers' comp policy with $0 payroll that lets them provide certificates of insurance when required by general contractors, without paying premium for employees they don't have. Legal, common, and industry-standard in the trades.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I only have part-timers, so I don't need it."</strong> Thresholds vary by state, but most include part-timers in the count.</li>
+            <li><strong>"My 1099 contractors don't count."</strong> If they're really contractors, correct. If they're misclassified employees, you owe back premium plus penalties.</li>
+            <li><strong>"It costs too much."</strong> Penalties for going without are worse, tens of thousands in fines, personal liability, and uninsured claim payouts.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers workers' comp alongside GL and BOP.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>General Liability Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Commercial Auto Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Business Insurance</div>
+        <h1 class="lmod-title">Commercial Auto Insurance</h1>
+        <p class="lmod-subtitle">Why your personal policy won't cover business driving.</p>
+        <p class="lmod-lead">If you drive for work, even in your personal vehicle, your personal auto insurance may not cover you. A claim while "using the vehicle for business" can be denied, and the business can be held liable for damages. Commercial auto insurance closes that gap.</p>
+
+        <h2>Who needs commercial auto</h2>
+        <ul>
+          <li><strong>Vehicles owned by the business.</strong> Always require commercial coverage.</li>
+          <li><strong>Personal vehicles used regularly for business.</strong> Sales reps, real estate agents, contractors, delivery drivers. Personal policies often exclude commercial use beyond "driving to a single workplace."</li>
+          <li><strong>Employees driving their own cars for work.</strong> Requires hired and non-owned auto coverage (HNOA) on your commercial policy.</li>
+          <li><strong>Fleet vehicles.</strong> Any business with multiple trucks, vans, or cars.</li>
+        </ul>
+
+        <h2>What it covers (similar to personal auto, at higher limits)</h2>
+        <ul>
+          <li><strong>Liability</strong> for bodily injury and property damage to others.</li>
+          <li><strong>Collision and comprehensive</strong> for the business vehicle.</li>
+          <li><strong>Uninsured and underinsured motorist</strong> protection.</li>
+          <li><strong>Medical payments</strong> for driver and passengers.</li>
+        </ul>
+
+        <h2>Hired and Non-Owned Auto (HNOA)</h2>
+        <p>HNOA covers the business when employees use their own cars for work errands. If they cause an accident and their personal insurance denies coverage, HNOA defends and pays on behalf of the business. It also provides liability coverage on rental cars booked for business use. HNOA is cheap ($100 to $400 per year added to a GL or BOP) and catches a surprising number of claims.</p>
+
+        <h2>Personal auto policy "business use" exclusions</h2>
+        <p>Most personal auto policies cover commuting to and from a single workplace, plus occasional business errands. Most personal auto policies <strong>exclude</strong>:</p>
+        <ul>
+          <li>Delivery driving (food, packages, goods).</li>
+          <li>Driving with passengers for hire (rideshare without an endorsement).</li>
+          <li>Transporting business property or equipment regularly.</li>
+          <li>Driving to multiple job sites as part of a trade.</li>
+        </ul>
+        <p>A roofer hauling a ladder and materials to job sites all day in his personal truck is almost certainly not covered by his personal auto policy during work.</p>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Small business with 1 light vehicle:</strong> $1,200 to $2,500 per year.</li>
+          <li><strong>Contractor with work truck:</strong> $1,500 to $3,500 per year.</li>
+          <li><strong>Delivery van:</strong> $2,000 to $4,500 per year.</li>
+          <li><strong>Fleet of 5 vehicles:</strong> $6,000 to $15,000 per year depending on type.</li>
+        </ul>
+        <p>Rates vary dramatically by <strong>radius of operation</strong> (local, regional, long-haul), <strong>cargo type</strong> (hazardous materials, valuables, general freight), <strong>driving records</strong> of named drivers, and <strong>state</strong>. NJ, NY, LA, and FL typically run higher than OH, TN, and MO.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A contractor rear-ends another vehicle while driving his personal truck to a job site, with tools and materials in the bed. His personal auto carrier denies the claim because he was "in the course of business." Damages total $42,000. A $1,800 per year commercial auto policy would have paid the claim and defended him.</p>
+        </div>
+
+        <h2>DOT-regulated vehicles</h2>
+        <p>Large trucks and buses with federal DOT numbers have specific commercial auto requirements, often $750,000 to $5 million in liability minimums, and need specialized trucking policies, not standard commercial auto.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My personal insurance covers business use."</strong> Usually only commuting. Read your exclusions.</li>
+            <li><strong>"I only need commercial on the company truck."</strong> Any vehicle used regularly for work needs to be on the policy.</li>
+            <li><strong>"HNOA isn't necessary, my employees have their own insurance."</strong> Their insurance protects them. The business still gets sued.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers commercial auto alongside GL, workers' comp, and BOP.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Workers' Compensation</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Cyber Liability Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Business Insurance</div>
+        <h1 class="lmod-title">Cyber Liability Insurance</h1>
+        <p class="lmod-subtitle">The fastest-growing risk most small businesses ignore.</p>
+        <p class="lmod-lead">Cyber attacks used to target large corporations. That's changed. Today, small businesses are the primary target, precisely because they're underprotected. Ransomware, phishing, and data breaches routinely cost small businesses $50,000 to $500,000 per incident. Cyber liability insurance is how you survive one.</p>
+
+        <h2>What cyber liability covers</h2>
+        <p><strong>First-party coverage</strong> (your own business losses):</p>
+        <ul>
+          <li><strong>Ransomware payments and negotiation.</strong></li>
+          <li><strong>Data restoration,</strong> rebuilding corrupted or encrypted systems.</li>
+          <li><strong>Business interruption,</strong> lost income while systems are down.</li>
+          <li><strong>Forensic investigation,</strong> identifying what happened and how.</li>
+          <li><strong>Notification costs,</strong> legally required customer notifications after a breach.</li>
+          <li><strong>Credit monitoring</strong> offered to affected customers.</li>
+          <li><strong>Crisis management and PR.</strong></li>
+        </ul>
+        <p><strong>Third-party coverage</strong> (claims against your business):</p>
+        <ul>
+          <li><strong>Customer lawsuits</strong> from exposed data.</li>
+          <li><strong>Regulatory fines</strong> (HIPAA, state privacy laws, PCI).</li>
+          <li><strong>Media liability,</strong> defamation, copyright infringement, privacy violations on your website or social.</li>
+          <li><strong>Defense costs.</strong></li>
+        </ul>
+
+        <h2>Why small businesses are targets</h2>
+        <ul>
+          <li>Weaker security than enterprise companies.</li>
+          <li>Valuable data (customer info, credit cards, health records).</li>
+          <li>Often connected to larger companies (vendors, suppliers).</li>
+          <li>Limited resources to investigate and remediate.</li>
+        </ul>
+        <p>The average cost of a small business data breach in 2024: $120,000 to $250,000. Median ransomware demand: $400,000 or more.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 12-person accounting firm clicks a phishing email. The attacker encrypts every file and demands $180,000. Forensic and legal fees run $60,000. Client notifications, credit monitoring, and lost billable time add another $90,000. Total hit: around $330,000. A cyber policy at roughly $2,500 per year would have covered most of it.</p>
+        </div>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Small office, $1M coverage, basic data handling:</strong> $700 to $1,800 per year.</li>
+          <li><strong>E-commerce business with credit card processing:</strong> $1,500 to $4,000 per year.</li>
+          <li><strong>Healthcare provider with PHI:</strong> $2,500 to $7,500 per year.</li>
+          <li><strong>Financial services with PII:</strong> $3,000 to $10,000 per year.</li>
+        </ul>
+
+        <h2>Underwriting questions that matter</h2>
+        <p>Insurers now require specific security controls before they'll write coverage:</p>
+        <ul>
+          <li><strong>Multi-factor authentication (MFA)</strong> on email, remote access, and admin accounts.</li>
+          <li><strong>Offline backups</strong> tested regularly.</li>
+          <li><strong>Endpoint detection</strong> software.</li>
+          <li><strong>Security awareness training</strong> for employees.</li>
+          <li><strong>Incident response plan.</strong></li>
+        </ul>
+        <p>Not having these can mean declines, massive premium increases, or coverage restrictions (like ransomware sublimits).</p>
+
+        <h2>Common exclusions</h2>
+        <ul>
+          <li><strong>War and state-sponsored attacks.</strong> Expanded exclusions after recent geopolitical events.</li>
+          <li><strong>Unpatched known vulnerabilities,</strong> if the exploit used a patch available for more than 30 days.</li>
+          <li><strong>Social engineering,</strong> fake wire transfer requests, may need a separate rider.</li>
+          <li><strong>Prior acts,</strong> incidents that started before the policy began.</li>
+        </ul>
+
+        <h2>State regulatory exposure</h2>
+        <p>All 50 states have breach notification laws. OnePoint's footprint includes states with particularly strict rules. <strong>NY SHIELD Act</strong> requires reasonable safeguards and breach notifications. <strong>IL Biometric Information Privacy Act (BIPA)</strong> carries massive fines for biometric data mishandling. <strong>TX, FL, VA,</strong> and others have specific breach notification and credit freeze rules. Federal regulations matter too: HIPAA for healthcare, GLBA for finance, and FTC rules on data.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"We're too small to be a target."</strong> Small businesses are the primary target.</li>
+            <li><strong>"Our IT vendor's insurance covers us."</strong> It covers them, not you.</li>
+            <li><strong>"Cyber is just for tech companies."</strong> Every business that takes payments or stores customer data needs it.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers cyber alongside GL, E&amp;O, and BOP.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Commercial Auto Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Professional Liability / E&amp;O</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Business Insurance</div>
+        <h1 class="lmod-title">Professional Liability / E&amp;O</h1>
+        <p class="lmod-subtitle">When a client sues because of bad advice or a mistake.</p>
+        <p class="lmod-lead">General liability covers bodily injury and property damage. But if you give bad advice, make a professional mistake, or fail to deliver as promised, and a client sues, GL doesn't pay. That's what Professional Liability Insurance (also called Errors and Omissions, or E&amp;O) is for.</p>
+
+        <h2>Who needs E&amp;O</h2>
+        <ul>
+          <li><strong>Licensed professionals,</strong> attorneys, accountants, engineers, architects, real estate agents, insurance agents.</li>
+          <li><strong>Consultants</strong> of any type: management, IT, marketing, HR.</li>
+          <li><strong>Healthcare providers,</strong> though usually under the name "malpractice" insurance.</li>
+          <li><strong>Tech companies,</strong> software developers, SaaS businesses, IT services.</li>
+          <li><strong>Creative services,</strong> designers, marketers, advertising agencies, media producers.</li>
+          <li><strong>Any professional service firm</strong> billing clients for expertise.</li>
+        </ul>
+
+        <h2>What E&amp;O covers</h2>
+        <ul>
+          <li><strong>Defense costs</strong> when a client sues for financial harm caused by your professional services.</li>
+          <li><strong>Judgments and settlements</strong> for covered claims.</li>
+          <li><strong>Mistakes, errors, and omissions</strong> in your professional work.</li>
+          <li><strong>Negligence claims</strong> in how you performed services.</li>
+          <li><strong>Failure to deliver</strong> promised results (sometimes limited).</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>Bodily injury and property damage,</strong> that's GL.</li>
+          <li><strong>Intentional wrongdoing, fraud, or criminal acts.</strong></li>
+          <li><strong>Known prior claims</strong> (claims you knew about before the policy started).</li>
+          <li><strong>Work for which you weren't properly licensed.</strong></li>
+        </ul>
+
+        <h2>Claims-made vs. occurrence</h2>
+        <p>E&amp;O policies are almost always <strong>claims-made</strong>, meaning the policy must be in force when the claim is made, not when the alleged error occurred. When you switch insurers or cancel, you need <strong>tail coverage</strong> (an extended reporting period) to cover claims that come in later for past work. Tail coverage typically costs 100 to 300% of annual premium as a one-time fee and can extend reporting 3 years, 5 years, or unlimited.</p>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Real estate agent, solo:</strong> $400 to $800 per year for $1M coverage.</li>
+          <li><strong>Small accounting firm:</strong> $800 to $2,500 per year.</li>
+          <li><strong>Small law firm (3 attorneys):</strong> $2,500 to $8,000 per year depending on practice area.</li>
+          <li><strong>IT consulting firm:</strong> $1,500 to $5,000 per year.</li>
+          <li><strong>Management consultant:</strong> $1,000 to $3,500 per year.</li>
+        </ul>
+        <p>Rates depend heavily on specialty. Estate planning attorneys pay less than plaintiff's attorneys. Tax CPAs pay less than audit CPAs.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A small accounting firm misses a filing deadline for a business client. The client pays $85,000 in IRS penalties and interest, then sues the firm to recover. Legal defense alone runs $40,000. An E&amp;O policy at roughly $1,800 per year pays defense and settles the claim.</p>
+        </div>
+
+        <h2>Industry-specific versions</h2>
+        <ul>
+          <li><strong>Medical malpractice,</strong> doctors, dentists, nurses.</li>
+          <li><strong>Legal malpractice,</strong> attorneys.</li>
+          <li><strong>Agent E&amp;O,</strong> insurance and real estate agents.</li>
+          <li><strong>Architect and engineer E&amp;O,</strong> A&amp;E firms with specific design risks.</li>
+          <li><strong>Tech E&amp;O with cyber combined,</strong> often sold together for software and IT firms.</li>
+        </ul>
+
+        <h2>Contract requirements</h2>
+        <p>Many commercial clients require E&amp;O as a contract precondition, with specific language: minimum limits (often $1M or $2M), carrier rating (A.M. Best A-rated or better), additional insured or waiver of subrogation clauses, and specific retroactive dates or tail requirements.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My GL covers mistakes."</strong> It doesn't. GL is for bodily injury and property damage only.</li>
+            <li><strong>"I'm careful, so I don't need it."</strong> Claims come from unhappy clients, not only from actual errors.</li>
+            <li><strong>"I have malpractice, that's the same thing."</strong> Medical malpractice is a specific E&amp;O form. Other industries need the E&amp;O form suited to their work.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers E&amp;O alongside GL, cyber, and D&amp;O.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Cyber Liability Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Directors &amp; Officers (D&amp;O)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Business Insurance</div>
+        <h1 class="lmod-title">Directors &amp; Officers (D&amp;O)</h1>
+        <p class="lmod-subtitle">Protecting the people who run the company.</p>
+        <p class="lmod-lead">D&amp;O insurance protects the personal assets of directors and officers, and the company itself, when decisions made in leadership roles result in lawsuits. It applies to small and mid-sized businesses, not just public corporations, and it's one of the most overlooked coverages in private company insurance.</p>
+
+        <h2>What D&amp;O covers</h2>
+        <p>Three sides, usually labeled A, B, and C:</p>
+        <ul>
+          <li><strong>Side A</strong> protects directors and officers personally when the company can't indemnify them (bankruptcy, regulatory prohibition).</li>
+          <li><strong>Side B</strong> reimburses the company when it indemnifies directors and officers for covered claims.</li>
+          <li><strong>Side C</strong> protects the company itself (entity coverage) when it's named in the lawsuit. Common for public companies, sometimes added for private companies.</li>
+        </ul>
+
+        <h2>Who sues directors and officers</h2>
+        <ul>
+          <li><strong>Shareholders</strong> (even small private companies can have minority shareholder disputes).</li>
+          <li><strong>Employees</strong> (claims overlapping with EPLI).</li>
+          <li><strong>Creditors and bankruptcy trustees.</strong></li>
+          <li><strong>Regulators</strong> (SEC, state attorneys general, industry regulators).</li>
+          <li><strong>Customers</strong> (breach of fiduciary duty, misrepresentation).</li>
+          <li><strong>Vendors and competitors</strong> (tortious interference, antitrust).</li>
+        </ul>
+
+        <h2>Private company D&amp;O</h2>
+        <p>Most private company D&amp;O claims come from:</p>
+        <ul>
+          <li><strong>Employment-related claims</strong> (overlap with EPLI).</li>
+          <li><strong>Creditor disputes,</strong> especially after business failures.</li>
+          <li><strong>Shareholder or member disputes</strong> in LLCs, partnerships, or closely held corporations.</li>
+          <li><strong>Regulatory actions.</strong></li>
+          <li><strong>M&amp;A disputes,</strong> post-acquisition lawsuits.</li>
+        </ul>
+
+        <h2>Who should have it</h2>
+        <ul>
+          <li><strong>Nonprofits,</strong> board members have significant fiduciary responsibility and often serve voluntarily. D&amp;O is nearly universal for nonprofits.</li>
+          <li><strong>Private companies with outside investors,</strong> any VC-backed or PE-backed company typically requires it.</li>
+          <li><strong>Companies with independent directors.</strong></li>
+          <li><strong>Any company with shareholders or members</strong> beyond owner-operators.</li>
+          <li><strong>M&amp;A candidates,</strong> buyers expect to see a D&amp;O policy.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Small nonprofit (under $1M revenue):</strong> $600 to $1,500 per year for $1M coverage.</li>
+          <li><strong>Small private company:</strong> $1,200 to $3,500 per year.</li>
+          <li><strong>Mid-size private company (with EPLI combined):</strong> $5,000 to $25,000 per year.</li>
+          <li><strong>Venture-backed startup:</strong> $3,000 to $15,000 per year, scaling with valuation and funding stage.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A minority shareholder in a closely held family business sues the majority owners for breach of fiduciary duty over a recent distribution decision. Defense runs $150,000 through discovery, and the matter settles for another $200,000. A $2,500 per year D&amp;O policy absorbs most of it. Without it, the named directors write personal checks.</p>
+        </div>
+
+        <h2>The "insured vs. insured" exclusion</h2>
+        <p>Traditional D&amp;O excludes claims between insured parties, meaning the company can't sue its own directors and recover from the policy. Modern policies often have exceptions for derivative suits, but read the language carefully.</p>
+
+        <h2>Tail coverage at M&amp;A</h2>
+        <p>When a company is sold, the buyer typically requires the seller to buy <strong>tail coverage</strong> on the D&amp;O policy, usually 6 years. This ensures post-closing claims against the former directors and officers are covered.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"D&amp;O is for public companies."</strong> Private companies and nonprofits get sued constantly.</li>
+            <li><strong>"The LLC protects me personally."</strong> LLC structure helps, but plaintiffs often name individual directors and officers.</li>
+            <li><strong>"My business insurance covers board liability."</strong> A standard BOP doesn't. D&amp;O is a specific policy.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers D&amp;O alongside EPLI and E&amp;O.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Professional Liability / E&amp;O</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Employment Practices Liability (EPLI)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Business Insurance</div>
+        <h1 class="lmod-title">Employment Practices Liability (EPLI)</h1>
+        <p class="lmod-subtitle">When an employee sues.</p>
+        <p class="lmod-lead">EPLI protects a business from lawsuits brought by employees, former employees, and job applicants. Discrimination, harassment, wrongful termination, and retaliation claims account for a growing share of business lawsuits, and the legal fees alone to defend one can destroy a small company.</p>
+
+        <h2>What EPLI covers</h2>
+        <ul>
+          <li><strong>Discrimination claims</strong> (race, sex, age, religion, disability, pregnancy, national origin, sexual orientation).</li>
+          <li><strong>Sexual harassment</strong> (quid pro quo and hostile work environment).</li>
+          <li><strong>Wrongful termination.</strong></li>
+          <li><strong>Retaliation</strong> (firing or demoting someone for filing a complaint).</li>
+          <li><strong>Failure to promote.</strong></li>
+          <li><strong>Hostile work environment.</strong></li>
+          <li><strong>Wage and hour claims</strong> (sometimes, often with sublimits).</li>
+          <li><strong>Third-party harassment,</strong> claims by customers, vendors, or contractors alleging harassment by employees.</li>
+        </ul>
+
+        <h2>What it doesn't cover</h2>
+        <ul>
+          <li><strong>Wages actually owed.</strong> Back wages in a wage-and-hour judgment generally aren't covered, only defense costs and certain damages.</li>
+          <li><strong>Intentional violations</strong> of labor law.</li>
+          <li><strong>Workers' compensation claims,</strong> those go through the comp policy.</li>
+          <li><strong>ERISA claims,</strong> those typically require fiduciary liability insurance.</li>
+        </ul>
+
+        <h2>Why every business needs it</h2>
+        <p>EEOC charge stats in recent years: roughly 60,000 to 70,000 workplace discrimination charges per year. Average cost of a defended EPLI claim: $125,000 or more before settlement or judgment. Even dismissed claims require defense. Attorneys' fees for a "we won" case often exceed $30,000.</p>
+
+        <h2>The small business problem</h2>
+        <p>Small businesses are more vulnerable to EPLI claims than large ones:</p>
+        <ul>
+          <li>Less formal HR infrastructure.</li>
+          <li>No in-house legal team.</li>
+          <li>Less robust training.</li>
+          <li>Tighter cash flow that can't absorb legal fees.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Small business (under 25 employees):</strong> $1,000 to $3,500 per year for $1M coverage.</li>
+          <li><strong>Mid-size business (25 to 100 employees):</strong> $3,000 to $10,000 per year.</li>
+          <li><strong>Larger businesses or high-risk industries:</strong> $10,000 or more.</li>
+        </ul>
+        <p>Industries with higher EPLI premiums include <strong>healthcare</strong> (patient-facing plus shift work), <strong>hospitality and restaurants</strong> (high turnover, tip disputes), and <strong>staffing firms</strong> (complex employer and employee relationships).</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 40-person restaurant terminates a long-tenured manager. Six weeks later, the former manager files an age discrimination and retaliation claim. The case is dismissed on summary judgment, but defense fees alone run $68,000. An EPLI policy at roughly $2,200 per year covers the full defense cost minus the retention.</p>
+        </div>
+
+        <h2>State-specific considerations</h2>
+        <p>Some states in OnePoint's footprint have particularly active employment litigation environments. <strong>NY, NJ, IL</strong> have strong state-level employment protections and higher claim frequency. <strong>CA</strong> (outside OnePoint's footprint, but worth noting for remote workers) is the most litigious environment nationally. <strong>GA, TN, VA, NC, SC</strong> have relatively lower claim frequency, but trends are rising.</p>
+
+        <h2>Risk management that lowers premiums</h2>
+        <p>Insurers often require or reward:</p>
+        <ul>
+          <li><strong>Written employment policies and handbook.</strong></li>
+          <li><strong>Regular harassment and discrimination training.</strong></li>
+          <li><strong>Documented performance management process.</strong></li>
+          <li><strong>HR hotline</strong> for employees to report concerns.</li>
+          <li><strong>Legal review of terminations</strong> above a certain level.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My employees would never sue me."</strong> The lawsuit often comes from someone already in dispute, a recent termination, a missed promotion, a pattern of complaints.</li>
+            <li><strong>"I'll handle it with an employment lawyer on retainer."</strong> Retainers cover a few hours. EPLI claims run into the hundreds of thousands in defense alone.</li>
+            <li><strong>"It's covered under my BOP."</strong> Very rarely. EPLI is typically a standalone policy or a D&amp;O rider.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/business">business insurance page</a> covers EPLI alongside D&amp;O, E&amp;O, and BOP.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Directors &amp; Officers (D&amp;O)</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Business Interruption Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Business Insurance</div>
+        <h1 class="lmod-title">Business Interruption Insurance</h1>
+        <p class="lmod-subtitle">The coverage that keeps you alive after a disaster.</p>
+        <p class="lmod-lead">When fire, hurricane, water damage, or another covered event forces a business to shut down, commercial property insurance pays to rebuild. Business interruption insurance pays to keep the business alive during the shutdown, covering lost profits, continuing expenses, and the cost of operating from a temporary location.</p>
+
+        <h2>What business interruption covers</h2>
+        <ul>
+          <li><strong>Lost net income</strong> that the business would have earned during the shutdown.</li>
+          <li><strong>Ongoing operating expenses,</strong> rent, utilities, loan payments, payroll for retained employees.</li>
+          <li><strong>Temporary relocation costs,</strong> rent on a temporary space, moving costs.</li>
+          <li><strong>Extra expenses,</strong> rush-shipping replacement equipment, working overtime to catch up.</li>
+          <li><strong>Civil authority coverage,</strong> lost income when a government order prevents access to your property (within limits).</li>
+        </ul>
+
+        <h2>When it kicks in</h2>
+        <ul>
+          <li>Only after a <strong>covered property loss.</strong> The business shutdown must be caused by a peril that would be covered by your commercial property or BOP policy (fire, wind, water damage, and so on).</li>
+          <li>After the <strong>waiting period,</strong> typically 72 hours, after which coverage begins.</li>
+          <li>Payments continue through the <strong>period of restoration,</strong> the time reasonably required to restore the business, usually up to a 12-month limit (extendable).</li>
+        </ul>
+
+        <h2>Common exclusions</h2>
+        <ul>
+          <li><strong>Pandemics and communicable disease.</strong> Nearly all policies exclude this, cemented after COVID-19 litigation.</li>
+          <li><strong>Losses from perils not covered by the underlying property policy.</strong> If your property policy excludes flood, business interruption doesn't pay for flood-related shutdowns.</li>
+          <li><strong>Gradual or long-tail events,</strong> slowly declining business, bad weather that didn't cause direct property damage.</li>
+          <li><strong>Utility service interruption,</strong> often requires a specific endorsement.</li>
+        </ul>
+
+        <h2>Dependent Business Interruption (Contingent BI)</h2>
+        <p>What if your business is fine but your <strong>key supplier</strong> burns down, or your <strong>largest customer</strong> is forced to shut? Contingent Business Interruption covers lost income from covered losses to third parties you depend on: suppliers, customers, anchor tenants.</p>
+
+        <h2>Extra Expense coverage</h2>
+        <p>Similar to business interruption but pays <strong>extra costs</strong> you incur to avoid or minimize a shutdown: renting temporary equipment to keep running, expedited shipping for replacement inventory, renting a temporary office across the street.</p>
+
+        <h2>What it costs</h2>
+        <p>Business interruption is usually part of your commercial property policy or BOP. Adding it or raising limits typically costs:</p>
+        <ul>
+          <li><strong>Small retail or office:</strong> $200 to $600 per year for $100,000 to $250,000 of BI coverage.</li>
+          <li><strong>Restaurant:</strong> $500 to $1,500 per year. Restaurants have high BI exposure because of inventory spoilage and rent.</li>
+          <li><strong>Manufacturer or contractor:</strong> $1,000 to $5,000 per year depending on revenue and operation complexity.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A kitchen fire closes a neighborhood restaurant for seven months. The commercial property policy pays $340,000 to rebuild. Business interruption pays another $280,000 in lost profits, rent, and payroll for key staff the owner wanted to keep through the closure. Without BI, the restaurant closes permanently before reopening day.</p>
+        </div>
+
+        <h2>Sizing the coverage right</h2>
+        <p>The most common mistake is underinsuring BI. Most businesses need 12 months of lost profits plus continuing expenses to really survive a catastrophic loss, because rebuilding often takes longer than anyone expects. Work backwards from this question: if our location burned to the ground tomorrow and took 8 months to rebuild, what would we need in cash to stay in business and pay our people?</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My property insurance covers this."</strong> Property covers the building and contents. BI covers the income.</li>
+            <li><strong>"Business interruption covers COVID-style shutdowns."</strong> Almost universally excluded now.</li>
+            <li><strong>"I'll just use savings."</strong> Most businesses don't have 12 months of operating cash.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/post/what-is-commercial-property-insurance">commercial property post</a> and <a href="/post/how-business-owners-policies-work-bop-insurance">BOP post</a> cover how BI fits into business coverage. Our <a href="/business">business insurance page</a> covers standalone BI for larger operations.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Employment Practices Liability (EPLI)</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Business Insurance track</div>
+          <h2>Ready to see where your business coverage has gaps?</h2>
+          <p>A licensed OnePoint advisor can review your current policies, spot the gaps, and tell you exactly where you're over or under covered. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/business" class="btn-white">Get a Business Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_business_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_business_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

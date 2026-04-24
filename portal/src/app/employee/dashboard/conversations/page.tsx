@@ -179,7 +179,17 @@ export default function ConversationsPage() {
       setNewPostBody('');
       setNewPraiseRecipient('');
       setNewPostType('discussion');
-      load();
+      // Prepend the new post from the response. If the Pusher echo arrives
+      // for this same client, the subscription handler dedupes by _id so no
+      // duplicate. This removes the full-feed refetch latency.
+      if (data.post) {
+        const newPost = data.post as Post;
+        // Respect the current filter — if the user is viewing only Questions
+        // and just posted a Discussion, don't jump it into view.
+        if (filter === 'all' || newPost.type === filter) {
+          setPosts(prev => (prev.some(x => x._id === newPost._id) ? prev : [newPost, ...prev]));
+        }
+      }
     } finally { setPosting(false); }
   }
 
@@ -192,9 +202,23 @@ export default function ConversationsPage() {
       body: JSON.stringify({ body }),
     });
     if (res.ok) {
+      const data = await res.json();
       setReplyDrafts(d => ({ ...d, [postId]: '' }));
       setReplyingTo(null);
-      load();
+      // Optimistically append the reply + bump count. Pusher echo dedupes by reply._id.
+      if (data.reply) {
+        const newReply = data.reply as Reply;
+        const newReplyCount = typeof data.replyCount === 'number' ? data.replyCount : undefined;
+        setPosts(prev => prev.map(post => {
+          if (post._id !== postId) return post;
+          if (post.replies.some(r => r._id === newReply._id)) return post;
+          return {
+            ...post,
+            replyCount: newReplyCount ?? post.replyCount + 1,
+            replies: [...post.replies, newReply],
+          };
+        }));
+      }
     }
   }
 

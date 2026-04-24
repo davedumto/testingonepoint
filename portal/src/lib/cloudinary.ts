@@ -27,6 +27,9 @@ export interface UploadOptions {
   folder: string;
   publicId?: string;
   transformation?: Record<string, unknown>[];
+  // Default 'image' preserves existing photo-upload behaviour. Use 'auto' for
+  // client documents (PDFs, docx, etc.) so Cloudinary routes non-images to 'raw'.
+  resourceType?: 'image' | 'raw' | 'auto' | 'video';
 }
 
 // Uploads a buffer (e.g. from a multipart file) via Cloudinary's SDK. Returns the
@@ -39,7 +42,7 @@ export function uploadBuffer(buffer: Buffer, opts: UploadOptions): Promise<Uploa
       {
         folder: opts.folder,
         public_id: opts.publicId,
-        resource_type: 'image',
+        resource_type: opts.resourceType || 'image',
         overwrite: true,
         transformation: opts.transformation,
       },
@@ -55,4 +58,11 @@ export function uploadBuffer(buffer: Buffer, opts: UploadOptions): Promise<Uploa
 export async function deleteImage(publicId: string): Promise<void> {
   configure();
   await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
+}
+
+// Resource-type-aware delete. Use for document cleanup where the upload might
+// have landed as 'raw' (PDF/docx) rather than 'image'.
+export async function deleteAsset(publicId: string, resourceType: 'image' | 'raw' | 'video' = 'image'): Promise<void> {
+  configure();
+  await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
 }

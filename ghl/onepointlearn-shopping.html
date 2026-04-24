@@ -1,0 +1,1012 @@
+<!--
+  ONEPOINT LEARN: SHOPPING & SWITCHING (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/shopping
+  6 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Shopping & Switching
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #0891b2;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 16.6%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 6) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Shopping &amp; Switching</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Shopping &amp; Switching Insurance, Without Stepping in a Hole</h1>
+      <p class="lead">Six short chapters on how carriers price your coverage, what to compare, when to switch, and the reports that follow you between insurers.</p>
+      <div class="meta">
+        <div class="stat"><strong>6</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~20</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/" class="lc-btn lc-btn-ghost">Go to Home Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From quote comparison to credit scores to the claims database you didn't know existed.</div>
+      <ul class="art-list">
+        <li>Comparing Quotes</li>
+        <li>When to Switch</li>
+        <li>Rate Factors</li>
+        <li>Credit Scores</li>
+        <li>CLUE Report</li>
+        <li>Agent Types</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · Compare Quotes the Right Way</option>
+      <option value="m2">Chapter 2 · When to Switch Carriers</option>
+      <option value="m3">Chapter 3 · How Carriers Calculate Rates</option>
+      <option value="m4">Chapter 4 · Credit-Based Insurance Scores</option>
+      <option value="m5">Chapter 5 · The CLUE Report</option>
+      <option value="m6">Chapter 6 · Independent vs. Captive vs. Direct</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">Compare Quotes the Right Way</a></li>
+        <li><a href="#m2" data-mod="2">When to Switch Carriers</a></li>
+        <li><a href="#m3" data-mod="3">How Carriers Calculate Rates</a></li>
+        <li><a href="#m4" data-mod="4">Credit-Based Insurance Scores</a></li>
+        <li><a href="#m5" data-mod="5">The CLUE Report</a></li>
+        <li><a href="#m6" data-mod="6">Independent vs. Captive vs. Direct</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">How to Compare Insurance Quotes the Right Way</h1>
+        <p class="lmod-subtitle">What actually matters beyond the monthly price.</p>
+        <p class="lmod-lead">Most people compare insurance quotes by looking at one number: the monthly premium. That's the wrong way to do it. Two policies at the same price can offer wildly different coverage, and the cheaper looking one is often the more expensive one when something goes wrong.</p>
+
+        <h2>The four things that actually matter</h2>
+        <ul>
+          <li><strong>Coverage limits.</strong> Are you comparing apples to apples? A $1,000 per year auto policy with state minimum liability isn't comparable to a $1,400 per year policy with 250/500/100 limits.</li>
+          <li><strong>Deductibles.</strong> A lower premium with a $2,500 deductible looks great until you have a $3,000 claim.</li>
+          <li><strong>Coverages included vs. excluded.</strong> Some quotes drop comprehensive, rental reimbursement, or roadside to hit a lower price. Read the line items.</li>
+          <li><strong>The insurer's claims reputation.</strong> A cheap policy from an insurer with a bad claims process costs more in time, frustration, and denied claims.</li>
+        </ul>
+
+        <h2>Build a comparison spreadsheet</h2>
+        <p>For auto, list liability limits (per person, per accident, property damage), uninsured and underinsured motorist limits, MedPay or PIP, collision deductible, comprehensive deductible, endorsements included (rental reimbursement, roadside, gap, OEM parts), and the premium.</p>
+        <p>For home, list dwelling (Coverage A), personal property (Coverage C) and whether it's RCV or ACV, liability (Coverage E), loss of use (Coverage D), the all peril deductible plus wind, hail, and hurricane deductibles, endorsements (water backup, scheduled property, ordinance or law), and the premium.</p>
+        <p>Side by side, the comparison becomes obvious.</p>
+
+        <h2>Get at least three quotes</h2>
+        <p>Insurance pricing varies widely between carriers. Three quotes is a minimum; five is better for big ticket policies (home, life, business). Spread them across a national direct writer, a regional carrier, and an independent agent who can quote multiple carriers at once.</p>
+
+        <h2>Quote at the same coverage level</h2>
+        <p>The biggest mistake: getting one quote at one coverage level and another at a different one. Always insist on identical limits, deductibles, and endorsements across quotes.</p>
+
+        <h2>Check the carrier's financial strength</h2>
+        <p>Look up the insurer's <strong>A.M. Best rating</strong> (free at ambest.com). For most consumer policies, A- or higher is the standard. Below that, the carrier may struggle to pay large claims.</p>
+
+        <h2>Check claims reputation</h2>
+        <ul>
+          <li><strong>J.D. Power claims satisfaction studies.</strong></li>
+          <li><strong>NAIC complaint index.</strong> Measures complaints relative to market share. Anything well above 1.0 is a flag.</li>
+          <li><strong>State insurance department complaint data.</strong> Most state DOIs publish this.</li>
+        </ul>
+
+        <h2>Re-shop every 2 to 3 years</h2>
+        <p>Loyalty doesn't pay in insurance. Carriers raise rates on existing customers more than on new ones, a phenomenon called "price optimization." Re-shopping every 2 to 3 years catches this drift. After major life events (marriage, new home, new car), re-shop sooner.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Cheaper is always better."</strong> Often the cheapest quote has the worst coverage.</li>
+            <li><strong>"All carriers are basically the same."</strong> Claims service varies enormously.</li>
+            <li><strong>"I should switch every year for the lowest rate."</strong> Frequent switches can hurt your insurance score and create coverage gaps.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/auto">auto</a>, <a href="/home">home</a>, and <a href="/business">business</a> pages cover quote comparison and walk through what to ask.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 6</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>When to Switch Carriers</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">When to Switch Insurance Carriers</h1>
+        <p class="lmod-subtitle">And when not to.</p>
+        <p class="lmod-lead">Switching insurance carriers can save real money, sometimes hundreds per year. It can also create coverage gaps, lose loyalty discounts, and reset relationships with claims teams. Knowing when to switch matters as much as how.</p>
+
+        <h2>Good reasons to switch</h2>
+        <ul>
+          <li><strong>Your premium increased significantly without a clear reason.</strong> A 10 to 15% jump at renewal, without claims, tickets, or major life changes, is worth shopping.</li>
+          <li><strong>You've had a major life event.</strong> Marriage, divorce, new home, retirement. These change your needs and your eligibility for new discounts.</li>
+          <li><strong>Your current carrier downgraded coverage</strong> at renewal (for example, dropped to ACV only on roof damage).</li>
+          <li><strong>You found a meaningfully cheaper quote with equal or better coverage.</strong> Save 20%+ for the same policy structure? Likely worth it.</li>
+          <li><strong>Bad claims experience.</strong> If a claim was denied or mishandled, that's a relationship problem worth ending.</li>
+          <li><strong>Your carrier exited your state.</strong> Common in FL and LA after major hurricane seasons.</li>
+        </ul>
+
+        <h2>Bad reasons to switch</h2>
+        <ul>
+          <li><strong>You found a quote $5 per month cheaper.</strong> Not worth the friction.</li>
+          <li><strong>You're in the middle of a claim.</strong> Stay until the claim closes.</li>
+          <li><strong>You're locked into a multi-policy discount that disappears if you switch.</strong></li>
+          <li><strong>Your current carrier just raised rates statewide</strong> but you're getting the same increases elsewhere.</li>
+        </ul>
+
+        <h2>Don't create a coverage gap</h2>
+        <p>The cardinal rule: <strong>the new policy must start before the old one ends.</strong> Even one day without auto insurance can cost you the lowest rate tier (continuous coverage discount), trigger surcharges from the next insurer (lapses raise premiums), leave you uninsured at exactly the wrong moment, or get your driver's license suspended (in states with continuous coverage requirements).</p>
+        <p>Set the new policy effective date for the day before your current policy ends. Then cancel the old one.</p>
+
+        <h2>Cancel the old policy in writing</h2>
+        <p>Most insurers require written cancellation (email is fine for most). Specify the effective cancellation date. Request confirmation. Without explicit cancellation, automatic renewal can charge you for coverage you no longer want.</p>
+
+        <h2>Refunds on canceled policies</h2>
+        <p>Most personal policies refund pro-rated unused premium (auto, home). Some commercial policies use a "short rate" cancellation, a small penalty for early cancellation, deducting 5 to 10% from the refund.</p>
+
+        <h2>Multi-policy discount math</h2>
+        <p>Bundling auto plus home with one carrier typically saves 10 to 25%. If you switch one policy and lose the bundle, the remaining policy can become much more expensive. Always quote the bundle, not just the single policy.</p>
+
+        <h2>Switching life insurance</h2>
+        <p>Different rules apply. Don't cancel your old life policy until the new one is in force. Health and age can change between application and approval, and the new policy might be declined or rated up. The 1035 exchange (for permanent life insurance and annuities) lets you transfer cash value tax free, useful if you're trading up to a better priced policy. Consider keeping the old policy if it has lower mortality charges from your younger application age.</p>
+
+        <h2>Switching health insurance</h2>
+        <ul>
+          <li><strong>Marketplace coverage</strong> can usually only be switched during Open Enrollment or after a qualifying event.</li>
+          <li><strong>COBRA</strong> can be dropped at any time, but you can't pick it back up later.</li>
+          <li><strong>Medicare Advantage</strong> can be switched during the annual fall enrollment window.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I'll just cancel today and shop tomorrow."</strong> Coverage gap. Expensive mistake.</li>
+            <li><strong>"Loyalty pays."</strong> Often, it doesn't. Re-shop every 2 to 3 years.</li>
+            <li><strong>"Switching is too much hassle."</strong> A one hour comparison can save $500+ per year.</li>
+          </ul>
+        </div>
+
+        <p>For shopping help, see our <a href="/auto">auto</a>, <a href="/home">home</a>, and <a href="/life">life insurance</a> pages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Compare Quotes the Right Way</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 6</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>How Carriers Calculate Rates</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">How Carriers Calculate Your Rates</h1>
+        <p class="lmod-subtitle">The factors that actually drive your premium.</p>
+        <p class="lmod-lead">Insurance pricing feels random, but it isn't. Carriers calculate premiums using specific factors, weighted by their own actuarial data. Understanding the major factors lets you control what you can control, and stop worrying about what you can't.</p>
+
+        <h2>The three categories of rating factors</h2>
+        <ol>
+          <li><strong>What you're insuring</strong> (the asset).</li>
+          <li><strong>Who you are</strong> (the policyholder).</li>
+          <li><strong>Where you live and how you use it.</strong></li>
+        </ol>
+
+        <h2>Auto rating factors</h2>
+        <ul>
+          <li><strong>Driver age.</strong> The highest impact on price for young drivers. A 16 year old can pay 4x what a 30 year old pays.</li>
+          <li><strong>Driving record.</strong> At-fault accidents (5 to 7 year impact), tickets (3 to 5 years), DUIs (10+ years in some states).</li>
+          <li><strong>Vehicle type.</strong> Luxury cars, sports cars, and high theft models cost more. A Honda Civic might cost half what an equivalent BMW M3 costs to insure.</li>
+          <li><strong>Annual mileage.</strong> More miles, more risk, higher premium.</li>
+          <li><strong>Garaging address (ZIP code).</strong> Urban areas with high theft and accident rates pay more.</li>
+          <li><strong>Credit-based insurance score.</strong> Major factor in most states (see next module).</li>
+          <li><strong>Years of continuous coverage.</strong></li>
+          <li><strong>Multi-policy and multi-vehicle discounts.</strong></li>
+          <li><strong>Marital status.</strong> Married drivers usually pay slightly less.</li>
+        </ul>
+
+        <h2>Home rating factors</h2>
+        <ul>
+          <li><strong>Dwelling value.</strong> The higher the rebuild cost, the higher the premium.</li>
+          <li><strong>Construction type.</strong> Brick and masonry are cheaper to insure than frame or wood.</li>
+          <li><strong>Roof age and material.</strong> Newer roofs save 10 to 25%; impact-resistant shingles save more in hail-prone states.</li>
+          <li><strong>Distance to fire hydrant and fire station.</strong></li>
+          <li><strong>Fire protection class</strong> rated 1 to 10 (1 is best).</li>
+          <li><strong>Claims history on the property and the household.</strong></li>
+          <li><strong>Credit-based insurance score</strong> (in most states).</li>
+          <li><strong>Pool, trampoline, dog breed.</strong></li>
+          <li><strong>Security features.</strong> Alarm system, smart smoke detectors, water leak sensors.</li>
+          <li><strong>Catastrophe exposure.</strong> Hurricane, wildfire, hail, tornado.</li>
+        </ul>
+
+        <h2>Life insurance rating factors</h2>
+        <ul>
+          <li><strong>Age.</strong> Largest factor.</li>
+          <li><strong>Gender.</strong> Women pay less at every age.</li>
+          <li><strong>Tobacco or nicotine use.</strong> Typically doubles or triples premium.</li>
+          <li><strong>Health conditions</strong> (current and historical).</li>
+          <li><strong>Family medical history.</strong></li>
+          <li><strong>Build (height and weight ratio).</strong></li>
+          <li><strong>Driving record (DUIs especially).</strong></li>
+          <li><strong>Hobbies</strong> (private flying, scuba, climbing).</li>
+          <li><strong>Occupation</strong> (some high-risk jobs).</li>
+        </ul>
+
+        <h2>Health insurance rating factors</h2>
+        <p>The ACA limits what insurers can use to price individual coverage: age (within a 3:1 ratio), geographic area (rating area), tobacco use (within a 1.5:1 ratio), and family size and tier (individual, couple, family).</p>
+        <p>The ACA prohibits using pre-existing conditions, gender, and health history. Group health insurance follows different rules.</p>
+
+        <h2>Business insurance rating factors</h2>
+        <ul>
+          <li><strong>Class code</strong> (industry).</li>
+          <li><strong>Annual revenue or payroll.</strong></li>
+          <li><strong>Years in business.</strong></li>
+          <li><strong>Claims history.</strong></li>
+          <li><strong>Location.</strong></li>
+          <li><strong>Number of employees.</strong></li>
+          <li><strong>Risk management practices.</strong></li>
+          <li><strong>Limits and deductibles selected.</strong></li>
+        </ul>
+
+        <h2>What you can change</h2>
+        <ul>
+          <li>Improve your credit (in states where it counts).</li>
+          <li>Maintain continuous coverage.</li>
+          <li>Take a defensive driving course (often a 5 to 10% auto discount).</li>
+          <li>Bundle policies.</li>
+          <li>Raise deductibles.</li>
+          <li>Add safety features (home alarm, water sensors, smart smoke detectors).</li>
+          <li>Quit smoking (huge impact on life and health insurance).</li>
+        </ul>
+
+        <h2>What you can't change</h2>
+        <ul>
+          <li>Your age.</li>
+          <li>Your ZIP code (without moving).</li>
+          <li>Your gender (in lines where it's legal to use).</li>
+          <li>Your industry's claim history.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Insurance pricing is arbitrary."</strong> It's driven by specific data points.</li>
+            <li><strong>"I can't affect my premium."</strong> You can affect roughly 30 to 40% of it through controllable factors.</li>
+            <li><strong>"All insurers weigh factors the same."</strong> They don't. This is why three quotes give three different prices.</li>
+          </ul>
+        </div>
+
+        <p>For more, see our <a href="/auto">auto</a>, <a href="/home">home</a>, <a href="/life">life</a>, and <a href="/business">business</a> pages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>When to Switch Carriers</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 6</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Credit-Based Insurance Scores</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">Credit-Based Insurance Scores</h1>
+        <p class="lmod-subtitle">How your credit affects your premium.</p>
+        <p class="lmod-lead">In most states, your credit affects your auto and home insurance premiums, sometimes substantially. The credit-based insurance score isn't your FICO score; it's a separate score calculated from your credit data specifically to predict insurance claims. Most consumers have no idea it exists.</p>
+
+        <h2>What it actually is</h2>
+        <p>Insurers buy a specialized credit-based insurance score from one of the credit bureaus (Experian, TransUnion, Equifax) or from LexisNexis. The score uses similar data to a FICO score but weights it differently, optimized to predict insurance claim frequency rather than loan default.</p>
+
+        <h2>Why insurers use it</h2>
+        <p>Decades of actuarial data show a statistical correlation between credit-based insurance scores and claim frequency. People with lower insurance scores file claims more often, on average. Whether the correlation reflects financial responsibility, life stress, or something else is debated. The data is real; insurers price accordingly.</p>
+
+        <h2>How much it affects premium</h2>
+        <ul>
+          <li><strong>Top-tier insurance score (excellent):</strong> baseline rates.</li>
+          <li><strong>Mid-tier (average):</strong> 20 to 40% higher than top-tier.</li>
+          <li><strong>Low-tier (poor):</strong> 50 to 100%+ higher than top-tier.</li>
+        </ul>
+        <p>For auto insurance, credit can be the second largest pricing factor after driving record. For home insurance, it's often the largest factor after dwelling value and ZIP code.</p>
+
+        <h2>What helps your insurance score</h2>
+        <ul>
+          <li><strong>Paying bills on time</strong> (largest factor).</li>
+          <li><strong>Low credit utilization</strong> (using less than 30% of available credit).</li>
+          <li><strong>Long credit history.</strong></li>
+          <li><strong>Mix of credit types</strong> (cards, loans, mortgage).</li>
+          <li><strong>Few hard inquiries</strong> in the last 12 months.</li>
+        </ul>
+
+        <h2>States that restrict or prohibit credit-based insurance scoring</h2>
+        <p>In OnePoint's footprint:</p>
+        <ul>
+          <li><strong>MD.</strong> Prohibits credit-based scoring for homeowners insurance. Allows for auto with restrictions.</li>
+          <li><strong>MI.</strong> Banned credit-based insurance scoring for personal lines starting in 2020.</li>
+          <li>Other states in OnePoint's footprint allow credit-based scoring, but typically with consumer protection rules (for example, insurers can't use lack of credit history against you, or must consider extraordinary life circumstances like job loss, medical event, or divorce).</li>
+        </ul>
+        <p>States outside OnePoint's footprint that prohibit credit-based scoring entirely: <strong>CA, HI, MA, NV, OR, WA</strong> (the last few via recent legislative or regulatory changes).</p>
+
+        <h2>"Extraordinary life circumstances" exceptions</h2>
+        <p>Several states require insurers to consider extraordinary life circumstances if requested:</p>
+        <ul>
+          <li>Death of a spouse, child, or parent.</li>
+          <li>Serious illness.</li>
+          <li>Divorce.</li>
+          <li>Job loss.</li>
+          <li>Identity theft.</li>
+          <li>Military deployment.</li>
+        </ul>
+        <p>If your credit dropped because of an extraordinary event, you can request your insurer reconsider, sometimes with documentation. This isn't widely known, and it's often available where the law doesn't even require it.</p>
+
+        <h2>How to check your insurance score</h2>
+        <ul>
+          <li><strong>LexisNexis Risk Solutions</strong> allows you to request your C.L.U.E. report and current insurance score annually for free at consumer.risk.lexisnexis.com.</li>
+          <li>Most regular credit reports don't show the insurance-specific score.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My FICO score is what insurers use."</strong> It's a different score, but built from similar data.</li>
+            <li><strong>"My credit shouldn't affect my insurance."</strong> In most states, it legally can, and does.</li>
+            <li><strong>"There's nothing I can do about it."</strong> Improving credit-related habits affects insurance scores within months.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/auto">auto insurance page</a> and <a href="/home">home insurance page</a> cover how scoring affects rates.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>How Carriers Calculate Rates</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 6</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>The CLUE Report</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">The CLUE Report</h1>
+        <p class="lmod-subtitle">The insurance claims database you didn't know tracked you.</p>
+        <p class="lmod-lead">The CLUE report, Comprehensive Loss Underwriting Exchange, is a database run by LexisNexis that tracks every insurance claim filed under your name and on your properties for the past 5 to 7 years. It's a key tool insurers use when underwriting your application. And it occasionally contains errors that cost you real money.</p>
+
+        <h2>What's on a CLUE report</h2>
+        <ul>
+          <li><strong>Claim date.</strong></li>
+          <li><strong>Claim type</strong> (water damage, fire, theft, collision, and so on).</li>
+          <li><strong>Insurance company that handled the claim.</strong></li>
+          <li><strong>Amount paid.</strong></li>
+          <li><strong>Policy number.</strong></li>
+          <li><strong>Property address</strong> (for home claims) or vehicle (for auto claims).</li>
+        </ul>
+        <p>CLUE has two databases: one for <strong>personal property</strong> (home, renters, condo) and one for <strong>personal auto</strong>. Insurers pull both during underwriting.</p>
+
+        <h2>Why it matters</h2>
+        <p>Insurers use CLUE to evaluate the risk of a new applicant, identify patterns of frequent claims, detect undisclosed claims (lying on an application is grounds for denial or cancellation), and set the premium for a new policy.</p>
+
+        <h2>The "claims at this address" problem</h2>
+        <p>CLUE tracks claims by <strong>property address</strong>, not just by person. If you buy a home with a history of water damage claims, those claims appear when you apply for insurance, even though you didn't file them. The previous owner's claims affect your premium.</p>
+        <p>This is why getting a CLUE report on a home <strong>before you buy it</strong> is valuable. A home with multiple recent claims can be expensive (or impossible) to insure.</p>
+
+        <h2>How long claims stay</h2>
+        <ul>
+          <li><strong>Most claims:</strong> 5 years.</li>
+          <li><strong>Some serious claims:</strong> up to 7 years.</li>
+        </ul>
+        <p>After this window, claims drop off automatically.</p>
+
+        <h2>How to get your CLUE report</h2>
+        <p>You're entitled to one free copy per year under the Fair Credit Reporting Act:</p>
+        <ol>
+          <li>Go to <strong>consumer.risk.lexisnexis.com</strong>.</li>
+          <li>Request your <strong>CLUE Personal Property</strong> and/or <strong>CLUE Auto</strong> reports.</li>
+          <li>Reports arrive by mail in 7 to 14 days.</li>
+        </ol>
+        <p>For home buyers: ask the seller to pull the CLUE on the property and share it. Many real estate agents now know to ask for this.</p>
+
+        <h2>Disputing errors on CLUE</h2>
+        <p>Errors happen. To dispute, submit a dispute through LexisNexis (online or by mail). They have 30 days to investigate. Errors are corrected and updated reports sent to insurers who pulled it in the past 6 months.</p>
+
+        <h2>When to file vs. when to pay out of pocket</h2>
+        <p>A small claim creates a CLUE entry that can affect your premium for 5+ years. Industry rule of thumb:</p>
+        <ul>
+          <li><strong>Damage roughly equal to or less than your deductible:</strong> pay out of pocket.</li>
+          <li><strong>Damage 1.5 to 2x your deductible:</strong> consider paying out of pocket if you can. The premium impact may exceed the claim payout.</li>
+          <li><strong>Damage well above your deductible:</strong> file the claim.</li>
+        </ul>
+        <p>The best way to get a true sense: ask your agent to model the claim's impact on your renewal before you file.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Inquiries don't count, only paid claims."</strong> Some carriers count even denied claims and inquiries.</li>
+            <li><strong>"If I cancel after filing, the claim disappears from CLUE."</strong> It doesn't.</li>
+            <li><strong>"CLUE errors are rare."</strong> They're not as rare as you'd hope. Pull yours.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/home">home</a> and <a href="/auto">auto</a> pages cover claims history considerations and underwriting.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Credit-Based Insurance Scores</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 6</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Independent vs. Captive vs. Direct</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Shopping &amp; Switching</div>
+        <h1 class="lmod-title">Independent vs. Captive vs. Direct Agents</h1>
+        <p class="lmod-subtitle">Three distribution models, three trade-offs.</p>
+        <p class="lmod-lead">When you buy insurance, you're working with one of three distribution models: an independent agent, a captive agent, or a direct-to-consumer carrier. Each has trade-offs. The right choice depends on what you're buying and what you value.</p>
+
+        <h2>Independent agent</h2>
+        <p>Represents <strong>multiple insurance carriers</strong> and shops your coverage across all of them.</p>
+        <h3>Pros</h3>
+        <ul>
+          <li>One agent, multiple quotes.</li>
+          <li>Acts as your advocate at claim time across carriers.</li>
+          <li>Can match unusual situations (high-value home, complex business, rideshare driver) to specialty carriers.</li>
+          <li>Long-term relationship survives carrier changes. If one carrier exits the market or raises rates, the agent can move you.</li>
+        </ul>
+        <h3>Cons</h3>
+        <ul>
+          <li>Carrier choice depends on the agent's appointments. A small independent agency may have 10 carriers; a large one may have 30+.</li>
+          <li>Quality varies widely. Find an experienced agent with a meaningful book in your area.</li>
+        </ul>
+        <p><strong>Best for:</strong> complex needs, multiple policies, high-value assets, business insurance, anyone who wants ongoing advisory.</p>
+
+        <h2>Captive agent</h2>
+        <p>Represents <strong>one carrier only.</strong> Most well-known carriers (State Farm, Allstate, Farmers, American Family) work this way.</p>
+        <h3>Pros</h3>
+        <ul>
+          <li>Deep knowledge of one carrier's products and processes.</li>
+          <li>Brand recognition and infrastructure.</li>
+          <li>Often physical office presence in your community.</li>
+          <li>Strong local claims networks.</li>
+        </ul>
+        <h3>Cons</h3>
+        <ul>
+          <li>One carrier means one set of prices. If that carrier raises rates, you start over with a new agent if you want to shop.</li>
+          <li>Less flexibility for unusual or specialty needs.</li>
+          <li>The agent works for the carrier, not you (legally and structurally).</li>
+        </ul>
+        <p><strong>Best for:</strong> simpler personal insurance, customers who value brand familiarity, buyers in states where the captive's prices are competitive.</p>
+
+        <h2>Direct-to-consumer (online or call center)</h2>
+        <p><strong>No agent.</strong> You buy directly from the carrier through their website or call center. GEICO, Progressive Direct, Esurance, and many others operate this way.</p>
+        <h3>Pros</h3>
+        <ul>
+          <li>Often the lowest sticker price on auto insurance for simpler profiles.</li>
+          <li>Fast quote and bind process.</li>
+          <li>24/7 self-service tools.</li>
+        </ul>
+        <h3>Cons</h3>
+        <ul>
+          <li>No advocate at claim time. You deal with the call center.</li>
+          <li>Less ability to match specialty needs.</li>
+          <li>No relationship to call when something complicated happens.</li>
+          <li>Online quote flows often miss nuances that affect coverage (rideshare, business use, specialty vehicles).</li>
+        </ul>
+        <p><strong>Best for:</strong> simple auto policies for low-risk drivers, comfort with self-service, price-driven shoppers.</p>
+
+        <h2>Hybrid: brokerages</h2>
+        <p>Some larger firms operate as <strong>brokerages</strong>, usually independent agents at scale, with specialty teams (commercial, life, employee benefits). They function like independent agents but with broader expertise and carrier appointments.</p>
+
+        <h2>What it actually costs</h2>
+        <p>Agent compensation is <strong>already built into the premium</strong>. Going direct doesn't necessarily save money. Direct carriers spend on advertising what others spend on commissions. The differences in price come from the carrier's underwriting and pricing model, not from whether there's an agent.</p>
+
+        <h2>Where independent shines</h2>
+        <ul>
+          <li><strong>Home insurance in catastrophe-prone states.</strong> When your carrier non-renews after a hurricane, an independent agent can move you to another carrier without you starting over.</li>
+          <li><strong>Specialty needs.</strong> High-value homes, classic cars, rideshare, business insurance, life insurance with health concerns.</li>
+          <li><strong>Multiple policies.</strong> Bundling across carriers requires multi-carrier access.</li>
+        </ul>
+
+        <h2>Where captive shines</h2>
+        <ul>
+          <li><strong>Simple auto and home</strong> for someone who values one familiar relationship.</li>
+          <li><strong>Markets where the captive's rates are particularly competitive.</strong></li>
+        </ul>
+
+        <h2>Where direct shines</h2>
+        <ul>
+          <li><strong>Simple, low-risk drivers</strong> with clean records and standard vehicles.</li>
+          <li><strong>Shoppers who don't want to talk to anyone.</strong></li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Direct is always cheapest."</strong> Often, but not always, and not for everyone.</li>
+            <li><strong>"Independent agents cost more."</strong> Same premium; different distribution.</li>
+            <li><strong>"Captive agents have access to other carriers."</strong> They don't, with rare exceptions.</li>
+          </ul>
+        </div>
+
+        <p>OnePoint operates as an independent agency across 18 states. See our <a href="/auto">auto</a>, <a href="/home">home</a>, <a href="/life">life</a>, <a href="/health">health</a>, <a href="/disability">disability</a>, and <a href="/business">business</a> pages for the carriers we work with.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>The CLUE Report</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 6</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Shopping &amp; Switching track</div>
+          <h2>Ready to put it into practice?</h2>
+          <p>A licensed OnePoint advisor can run your current coverage against competing carriers, spot coverage gaps, and price a better structure. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/book" class="btn-white">Book a Free Review</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_shopping_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_shopping_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-6]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

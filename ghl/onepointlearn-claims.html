@@ -1,0 +1,1138 @@
+<!--
+  ONEPOINT LEARN: CLAIMS & LIFE EVENTS (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/claims
+  6 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Claims & Life Events
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #be185d;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 16.6%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 6) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Claims &amp; Life Events</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Claims &amp; Life Events, Explained Chapter by Chapter</h1>
+      <p class="lead">Six short chapters on filing claims the right way, and on the life moments (marriage, a new baby, a move, retirement) that quietly reshape every policy you own.</p>
+      <div class="meta">
+        <div class="stat"><strong>6</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~20</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/contact" class="lc-btn lc-btn-ghost">Talk to an Advisor</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From the first call to the adjuster through retirement paperwork, every claim and life event your coverage has to keep up with.</div>
+      <ul class="art-list">
+        <li>Filing</li>
+        <li>After Filing</li>
+        <li>Marriage/Divorce</li>
+        <li>New Baby</li>
+        <li>Moving</li>
+        <li>Retirement</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · How to File an Insurance Claim</option>
+      <option value="m2">Chapter 2 · What Happens After You File</option>
+      <option value="m3">Chapter 3 · Marriage and Divorce</option>
+      <option value="m4">Chapter 4 · New Baby</option>
+      <option value="m5">Chapter 5 · Moving Between States</option>
+      <option value="m6">Chapter 6 · Retirement</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">How to File an Insurance Claim</a></li>
+        <li><a href="#m2" data-mod="2">What Happens After You File</a></li>
+        <li><a href="#m3" data-mod="3">Marriage and Divorce</a></li>
+        <li><a href="#m4" data-mod="4">New Baby</a></li>
+        <li><a href="#m5" data-mod="5">Moving Between States</a></li>
+        <li><a href="#m6" data-mod="6">Retirement</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">How to File an Insurance Claim</h1>
+        <p class="lmod-subtitle">A step-by-step walkthrough.</p>
+        <p class="lmod-lead">A claim is the moment your insurance policy actually does its job. How you file affects how fast you get paid, how much you get paid, and whether the process turns into a months-long fight.</p>
+        <p>The steps differ by claim type, but the principles are the same. Do a few things right in the first hour and the rest of the process tends to go your way.</p>
+
+        <h2>Before you call anyone, do these first</h2>
+        <ol>
+          <li><strong>Make sure people are safe.</strong> Get medical attention if needed.</li>
+          <li><strong>Stop further damage if it's safe to do so.</strong> Tarp the roof, shut off the water main, move the car off the road. Most policies require "reasonable steps to mitigate damage," and reimburse you for the supplies you use.</li>
+          <li><strong>Document everything.</strong> Photos and video before you clean up or move anything. Time-stamped photos are best.</li>
+          <li><strong>Save receipts</strong> for emergency repairs, hotel stays, and supplies.</li>
+        </ol>
+
+        <h2>Filing an auto claim</h2>
+        <ol>
+          <li><strong>At the scene:</strong> call 911 if there's injury or major damage. Get a police report, this is critical for insurance.</li>
+          <li><strong>Exchange info</strong> with the other driver: name, phone, license plate, insurance carrier, policy number, license number.</li>
+          <li><strong>Photos:</strong> all damage, all vehicles, the scene from multiple angles, road conditions, traffic signs.</li>
+          <li><strong>Witness names</strong> and contact info if available.</li>
+          <li><strong>Call your insurer</strong> as soon as practical (most apps now allow filing in minutes).</li>
+          <li><strong>Don't admit fault</strong> at the scene or to the other driver's insurer.</li>
+          <li><strong>Get the claim number</strong> and the assigned adjuster's contact info.</li>
+        </ol>
+
+        <h2>Filing a home insurance claim</h2>
+        <ol>
+          <li><strong>Stop the damage</strong> (tarp, water shutoff, board up windows).</li>
+          <li><strong>Call the police</strong> for theft or vandalism.</li>
+          <li><strong>Document everything,</strong> photos, video, and a detailed inventory of damaged items with estimated values.</li>
+          <li><strong>Save damaged items</strong> if possible. Insurers often want to see them.</li>
+          <li><strong>Save receipts</strong> for emergency repairs and temporary lodging.</li>
+          <li><strong>Call your insurer.</strong> Get the claim number and adjuster info.</li>
+          <li><strong>Don't accept the first lowball estimate</strong> without comparing it to a contractor's bid.</li>
+        </ol>
+
+        <h2>Filing a life insurance claim</h2>
+        <ol>
+          <li><strong>Get certified copies of the death certificate</strong> (you'll need 5 to 10 for various accounts).</li>
+          <li><strong>Locate the policy</strong> and any beneficiary documents.</li>
+          <li><strong>Call the insurance company</strong> and request claim forms.</li>
+          <li><strong>Submit the claim form, death certificate, and policy</strong> (or policy number).</li>
+          <li><strong>Choose payment option:</strong> lump sum (most common), installments, or annuity options.</li>
+          <li><strong>Most life claims pay within 30 to 60 days</strong> if documentation is complete and there's no contestability issue.</li>
+        </ol>
+
+        <h2>Filing a health insurance claim</h2>
+        <p>Most providers file directly with the insurer. When you need to file yourself:</p>
+        <ol>
+          <li><strong>Get an itemized bill</strong> with CPT/diagnosis codes from the provider.</li>
+          <li><strong>Submit through your insurer's portal</strong> or by mail.</li>
+          <li><strong>Track claim status.</strong> Denials can usually be appealed.</li>
+        </ol>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A tree limb crashes through your roof during a storm in North Carolina. Before you call anyone, you tarp the hole, photograph every room with water damage, and keep the $180 tarp receipt. Two weeks later, when the adjuster arrives, your documentation drives the estimate up by thousands over what a memory-only walkthrough would have produced.</p>
+        </div>
+
+        <h2>Don't say these things to an adjuster</h2>
+        <ul>
+          <li><strong>"I'm sorry."</strong> Can be interpreted as admission of fault.</li>
+          <li><strong>"I'm fine."</strong> Especially after an injury. Soft tissue and concussion symptoms develop over days.</li>
+          <li><strong>"That sounds about right."</strong> When they offer a settlement, take time to evaluate it.</li>
+          <li><strong>"I don't have an attorney."</strong> True or not, this can affect how the case is handled.</li>
+        </ul>
+
+        <h2>Get everything in writing</h2>
+        <ul>
+          <li><strong>Claim numbers.</strong></li>
+          <li><strong>Adjuster contact info.</strong></li>
+          <li><strong>Coverage decisions.</strong></li>
+          <li><strong>Settlement offers.</strong></li>
+          <li><strong>Repair authorizations.</strong></li>
+        </ul>
+
+        <h2>When to involve an attorney</h2>
+        <p>For most property claims and small auto claims, an attorney is unnecessary. Consider one for:</p>
+        <ul>
+          <li><strong>Serious injury claims</strong> with significant medical bills and lost wages.</li>
+          <li><strong>Disputed liability</strong> in an at-fault accident.</li>
+          <li><strong>Claim denials you believe are wrong.</strong></li>
+          <li><strong>Bad faith insurer behavior</strong> (unjustified delays, lowball offers, denials of clearly covered claims).</li>
+        </ul>
+        <p>Most personal injury and bad faith attorneys work on contingency (no fee unless they recover).</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I have to file everything immediately."</strong> Most policies give you reasonable time. But document immediately even if you don't file right away.</li>
+            <li><strong>"Filing makes my rates go up automatically."</strong> Not always. Comprehensive claims (theft, weather) often don't affect rates. Liability claims usually do.</li>
+            <li><strong>"The adjuster works for me."</strong> The adjuster works for the insurer. They're not adversarial, but their job is to settle claims efficiently for the company.</li>
+          </ul>
+        </div>
+
+        <p>For more on what happens after you hang up with the adjuster, move on to the next module.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 6</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>What Happens After You File</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">What Happens After You File</h1>
+        <p class="lmod-subtitle">The 90% of the process most people don't know.</p>
+        <p class="lmod-lead">Filing the claim is the first 10% of the process. The other 90% is what happens next, and it can take days, weeks, or months depending on the claim type.</p>
+        <p>Knowing the timeline helps you ask the right questions and follow up at the right times.</p>
+
+        <h2>Step 1: Claim assignment (within 24 to 48 hours)</h2>
+        <p>The insurer assigns an adjuster. For auto claims, this often happens within hours. For home claims, sometimes a day or two. The adjuster's job:</p>
+        <ul>
+          <li>Investigate the claim.</li>
+          <li>Determine coverage.</li>
+          <li>Estimate the loss.</li>
+          <li>Negotiate or pay the settlement.</li>
+        </ul>
+
+        <h2>Step 2: Inspection</h2>
+        <ul>
+          <li><strong>Auto:</strong> Either an in-person inspection at a body shop or a "virtual inspection" via photos and video through the carrier's app. Many auto claims now resolve entirely virtually within 7 to 14 days.</li>
+          <li><strong>Home:</strong> A field adjuster visits the property, typically within 7 to 14 days. They take photos, measurements, and notes.</li>
+          <li><strong>Life:</strong> No inspection. The death certificate and policy documents are the evidence.</li>
+          <li><strong>Health:</strong> Provider files directly; the insurer reviews coding, medical necessity, and network status.</li>
+        </ul>
+
+        <h2>Step 3: Coverage decision</h2>
+        <p>The adjuster compares the claim against the policy:</p>
+        <ul>
+          <li>Is this loss type covered?</li>
+          <li>Is the cause covered?</li>
+          <li>Are exclusions involved?</li>
+          <li>What's the deductible and limit?</li>
+        </ul>
+        <p>If something is excluded or limited, you'll receive a coverage explanation letter.</p>
+
+        <h2>Step 4: Damage estimate</h2>
+        <p>The adjuster prepares an estimate, for repairs (auto, home), or for valuation (total loss vehicle, total loss home). You'll typically receive this within 14 to 30 days for non-catastrophe claims; longer during catastrophe events.</p>
+
+        <h2>Step 5: Negotiation (if needed)</h2>
+        <p>If you disagree with the estimate:</p>
+        <ul>
+          <li>Get a competing estimate from a contractor or repair shop.</li>
+          <li>Submit it to the adjuster with documentation.</li>
+          <li>Negotiate. This is normal, insurers expect it.</li>
+          <li>For complex claims, consider hiring a <strong>public adjuster</strong> (works for you, takes a percentage of the settlement) or an attorney.</li>
+        </ul>
+
+        <h2>Step 6: Settlement and payment</h2>
+        <ul>
+          <li><strong>Auto:</strong> Either pays the body shop directly (with you paying the deductible), or pays you a check and you handle repairs.</li>
+          <li><strong>Home:</strong> Typically pays in two parts, actual cash value upfront, depreciation released after repairs are completed and documented.</li>
+          <li><strong>Life:</strong> Typically lump sum within 30 to 60 days of receiving complete documentation.</li>
+        </ul>
+
+        <h2>Step 7: Closure</h2>
+        <p>The claim closes when:</p>
+        <ul>
+          <li>Payment has been made.</li>
+          <li>All repairs are documented (for home claims with depreciation holdbacks).</li>
+          <li>The statute of limitations expires (for liability claims with potential late-arriving claimants).</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>Your roof is damaged in a Texas hailstorm along with thousands of others. The insurer's first estimate comes in at $9,400. You pull a competing bid from a local roofer at $14,200, send photos of hidden decking damage, and negotiate the claim up to $13,600. The total time from first call to final check: about 11 weeks, which is normal for a catastrophe event.</p>
+        </div>
+
+        <h2>When claims drag on</h2>
+        <ul>
+          <li><strong>Catastrophe events</strong> (hurricane, wildfire, hailstorm) overwhelm adjuster availability. Expect 2 to 6 month delays in major events.</li>
+          <li><strong>Disputed liability</strong> (auto), when fault isn't clear, both insurers investigate before paying.</li>
+          <li><strong>Coverage disputes,</strong> when there's a question about whether something is covered.</li>
+          <li><strong>Documentation gaps,</strong> missing receipts, no photos, incomplete inventory.</li>
+          <li><strong>Bad faith,</strong> insurer is deliberately slow-walking. Document everything and consider a state DOI complaint.</li>
+        </ul>
+
+        <h2>Total loss vehicles</h2>
+        <p>If the cost to repair exceeds 70 to 80% of the vehicle's value (the threshold varies by state), the insurer "totals" it. They pay you the <strong>actual cash value</strong> (ACV), what the car was worth right before the accident. Use sources like Kelley Blue Book, NADA, and recent comparable sales to negotiate if the offer feels low.</p>
+
+        <h2>Total loss homes</h2>
+        <p>For homes, "total loss" means the cost to repair exceeds the policy limit (or the home is unrepairable). Settlements involve:</p>
+        <ul>
+          <li><strong>Dwelling limit</strong> payment for the structure.</li>
+          <li><strong>Personal property</strong> payment for contents.</li>
+          <li><strong>Loss of use</strong> for temporary housing during rebuild.</li>
+          <li><strong>Sometimes ordinance and law</strong> coverage for code-required upgrades.</li>
+        </ul>
+        <p>A total loss home claim can take 12 to 24 months to fully resolve.</p>
+
+        <h2>Your right to a public adjuster</h2>
+        <p>A <strong>public adjuster</strong> is licensed (in most states) to represent you against the insurer in property claims. They typically charge <strong>10 to 20% of the settlement</strong>. For large or complex claims, especially in catastrophe events, they often recover more than their fee.</p>
+
+        <h2>Right to appeal denied claims</h2>
+        <p>If a claim is denied:</p>
+        <ul>
+          <li>Get the denial in writing with specific policy language cited.</li>
+          <li>Request a re-review with additional documentation.</li>
+          <li>Appeal through the insurer's formal appeal process.</li>
+          <li>File a complaint with your state Department of Insurance.</li>
+          <li>Consult an attorney for serious disputes.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Once I file, I just wait."</strong> You should follow up actively, especially on home and complex claims.</li>
+            <li><strong>"The first offer is what I get."</strong> Most settlements are negotiable, especially on home claims.</li>
+            <li><strong>"If the insurer denies, that's the end."</strong> Most denials can be appealed; many are reversed.</li>
+          </ul>
+        </div>
+
+        <p>For more on coverage that affects claim outcomes, see our <a href="/auto">auto</a>, <a href="/home">home</a>, and <a href="/life">life insurance</a> pages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>How to File an Insurance Claim</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 6</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Marriage and Divorce</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">Marriage and Divorce</h1>
+        <p class="lmod-subtitle">The insurance changes everyone forgets.</p>
+        <p class="lmod-lead">Marriage and divorce both trigger important insurance updates. Skipping them can leave one spouse uncovered, leave the other paying for coverage they no longer need, or in the worst case, leave a death benefit going to the wrong person.</p>
+
+        <h2>Insurance changes after marriage</h2>
+
+        <h3>Auto insurance</h3>
+        <ul>
+          <li>Combine policies under one carrier for multi-car discounts (often 15 to 25%).</li>
+          <li>Add your spouse to your policy or vice versa. They can't drive your car without coverage.</li>
+          <li>Re-quote. Married drivers get lower rates on average.</li>
+        </ul>
+
+        <h3>Home insurance</h3>
+        <ul>
+          <li>Add your spouse to the deed AND the policy.</li>
+          <li>Update beneficiary designations on any escrow accounts.</li>
+          <li>Re-evaluate dwelling coverage if combining households means more belongings.</li>
+        </ul>
+
+        <h3>Health insurance</h3>
+        <ul>
+          <li>Marriage triggers a Special Enrollment Period, 60 days to add a spouse to your plan or to switch plans.</li>
+          <li>Compare your two employer plans and pick the better or cheaper one.</li>
+          <li>Update HSA and FSA elections.</li>
+        </ul>
+
+        <h3>Life insurance</h3>
+        <ul>
+          <li>Re-evaluate coverage amounts. A working spouse needs coverage too. The surviving spouse may face mortgage and childcare costs alone.</li>
+          <li>Update beneficiaries on existing policies (don't leave your ex-fiancé as beneficiary by accident, it's happened).</li>
+          <li>Consider buying coverage on a stay-at-home spouse based on the cost of replacing their household labor.</li>
+        </ul>
+
+        <h3>Disability insurance</h3>
+        <ul>
+          <li>Marriage can change your need calculation. Household income now depends on two incomes.</li>
+          <li>Update beneficiary on group LTD if applicable.</li>
+        </ul>
+
+        <h2>Insurance changes after divorce</h2>
+
+        <h3>Auto insurance</h3>
+        <ul>
+          <li>Separate policies. The spouse keeping the car needs to be the named insured.</li>
+          <li>Remove the ex from your policy (they cannot legally drive your insured car).</li>
+          <li>Update garaging address if you move.</li>
+          <li>Ensure no coverage gap during the transition.</li>
+        </ul>
+
+        <h3>Home insurance</h3>
+        <ul>
+          <li>Update the named insured on the policy if one spouse keeps the home.</li>
+          <li>Remove the ex from the deed AND the policy.</li>
+          <li>The spouse leaving needs renters or new homeowners coverage.</li>
+        </ul>
+
+        <h3>Health insurance</h3>
+        <ul>
+          <li>Divorce qualifies for a Special Enrollment Period.</li>
+          <li>A spouse losing employer-based coverage through divorce typically has 60 days to enroll in Marketplace coverage, and often qualifies for subsidies based on new (lower) household income.</li>
+          <li>Children's coverage: usually one parent carries them, with the divorce decree specifying details.</li>
+        </ul>
+
+        <h3>Life insurance</h3>
+        <ul>
+          <li><strong>Update beneficiaries immediately.</strong> This is the single most-missed step in divorce. Some states automatically revoke ex-spouse beneficiary designations; most don't. Insurance contracts override divorce decrees.</li>
+          <li>Decide whether to keep ex as beneficiary if there are children or alimony obligations. Sometimes the divorce decree requires it.</li>
+          <li>Consider whether existing policies are still appropriate or whether you need new coverage.</li>
+        </ul>
+
+        <h3>Disability insurance</h3>
+        <ul>
+          <li>Update beneficiary on individual disability policies.</li>
+          <li>Verify what happens to group LTD coverage tied to a spouse's employer.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A newly divorced parent in Georgia forgets to update the beneficiary on a $500,000 term life policy bought during the marriage. Two years later, they pass away unexpectedly. Because the beneficiary form still lists the ex-spouse, and Georgia does not automatically revoke ex-spouse designations, the ex receives the full payout. The children are left with nothing until an estate attorney fights for years.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My will updates everything."</strong> It doesn't. Beneficiary forms control insurance and retirement accounts, not the will.</li>
+            <li><strong>"I'll deal with it after the divorce is final."</strong> A claim during the process pays whoever is currently named.</li>
+            <li><strong>"Combining auto policies always saves."</strong> Sometimes it doesn't. If one spouse has a poor record, separate policies can cost less.</li>
+          </ul>
+        </div>
+
+        <p>For ongoing planning, see our <a href="/auto">auto</a>, <a href="/home">home</a>, <a href="/life">life</a>, and <a href="/health">health insurance</a> pages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>What Happens After You File</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 6</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>New Baby</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">New Baby</h1>
+        <p class="lmod-subtitle">The insurance updates that need to happen within 60 days.</p>
+        <p class="lmod-lead">A new child changes almost every insurance policy you have. Some changes are mandatory and time-sensitive. Others are easy to forget but financially important.</p>
+        <p>Here's the checklist most new parents never see.</p>
+
+        <h2>Health insurance, within 60 days</h2>
+        <ul>
+          <li><strong>Add the baby to a parent's plan.</strong> Birth qualifies for a Special Enrollment Period, 60 days to enroll. Coverage is typically retroactive to the birth date.</li>
+          <li><strong>Compare both parents' plans</strong> if both work. Pick the one that covers the baby better.</li>
+          <li><strong>Newborn nursery charges:</strong> some plans cover under the mother's plan for the first 30 days; some require immediate enrollment.</li>
+          <li><strong>Update FSA and HSA contributions.</strong> Childcare FSAs allow $5,000 in pre-tax childcare savings.</li>
+        </ul>
+
+        <h2>Life insurance, high priority</h2>
+        <ul>
+          <li><strong>Re-evaluate coverage amounts.</strong> Most parents are dramatically underinsured. A common rule of thumb: 10 to 12x annual income, plus enough to pay off the mortgage and fund college.</li>
+          <li><strong>Cover both parents,</strong> even a stay-at-home parent. Replacement costs for childcare, household management, and lost income for the working parent during early grief are real.</li>
+          <li><strong>Add a child rider</strong> or standalone children's coverage if desired.</li>
+          <li><strong>Update beneficiaries</strong> if needed.</li>
+        </ul>
+
+        <p>For a deeper dive, see our <a href="/blog/how-much-life-insurance">how much life insurance post</a> and our posts on <a href="/blog/term-life">term life</a> and <a href="/blog/whole-life">whole life</a>.</p>
+
+        <h2>Disability insurance, also high priority</h2>
+        <ul>
+          <li><strong>Re-evaluate coverage.</strong> A new dependent means more income at risk.</li>
+          <li><strong>Confirm benefit period</strong> is at least to age 65. The goal is to protect income through child-raising years.</li>
+          <li><strong>Add or increase individual coverage</strong> if employer LTD is the only coverage.</li>
+        </ul>
+
+        <h2>Estate planning (related)</h2>
+        <ul>
+          <li><strong>Will and guardianship.</strong> Name guardians for the child. Without a will, courts decide.</li>
+          <li><strong>Trust</strong> if life insurance is significant. Minor children can't directly receive large insurance payouts.</li>
+          <li><strong>Beneficiary designations</strong> updated to reflect new family structure.</li>
+        </ul>
+
+        <h2>Auto insurance</h2>
+        <p>Less urgent, but consider:</p>
+        <ul>
+          <li><strong>Adding car seats and stroller.</strong> These may be covered under personal property coverage (auto and home both apply).</li>
+          <li><strong>Re-evaluate vehicles</strong> if planning to upgrade for safety.</li>
+          <li><strong>Add teen driver coverage</strong> down the road (file this for later).</li>
+        </ul>
+
+        <h2>Home insurance</h2>
+        <ul>
+          <li><strong>Update personal property coverage.</strong> Baby gear adds up fast.</li>
+          <li><strong>Liability coverage.</strong> Re-evaluate if you're hosting more visitors.</li>
+          <li><strong>Pool and trampoline reminders.</strong> These are attractive nuisances that change as kids grow.</li>
+        </ul>
+
+        <h2>529 plans (related to insurance planning)</h2>
+        <ul>
+          <li>Open a 529 plan early. Even small contributions compound dramatically.</li>
+          <li>Some states (NY, IL, MI, OH, VA) offer state income tax deductions for in-state 529 contributions.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A dual-income couple in Virginia welcomes a baby in March. They assume the hospital "handles" insurance. By late May, past the 60-day window, the baby is still not formally enrolled. The insurer denies a $4,300 pediatric cardiology workup. They appeal, win partial coverage, and spend months cleaning up what a 10-minute phone call in the first week would have prevented.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I have time to deal with insurance."</strong> 60-day enrollment windows pass fast. Some can't be extended.</li>
+            <li><strong>"My existing life insurance is enough."</strong> Most parents need 2 to 4x what they had pre-baby.</li>
+            <li><strong>"The hospital takes care of newborn coverage."</strong> The hospital bills your insurance, but the baby still needs to be enrolled formally.</li>
+          </ul>
+        </div>
+
+        <p>For a deeper review, our <a href="/life">life</a>, <a href="/disability">disability</a>, and <a href="/health">health</a> pages cover post-baby planning.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Marriage and Divorce</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 6</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Moving Between States</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">Moving Between States</h1>
+        <p class="lmod-subtitle">How insurance changes when you cross a state line.</p>
+        <p class="lmod-lead">Moving between states isn't just changing your address. Auto insurance, homeowners insurance, life insurance, and health insurance all have state-specific rules that change when you cross a state line.</p>
+        <p>Some changes are required by law within days of moving. Skipping them can mean uninsured driving, denied claims, and tax consequences.</p>
+
+        <h2>Auto insurance</h2>
+        <ul>
+          <li><strong>Update your address with your insurer immediately.</strong> Premiums are based on garaging ZIP code, premium will change.</li>
+          <li><strong>State-required minimum coverages differ.</strong> A 25/50/25 policy from one state may not meet another state's minimums.</li>
+          <li><strong>Policy form differs</strong> by state. Your insurer typically issues a new policy with your new state's standard form.</li>
+          <li><strong>Re-register the vehicle and get a new license</strong> within the timeframe required by your new state, typically 30 to 60 days.</li>
+          <li><strong>No-fault states</strong> (FL, NY, MI, NJ, MD in OnePoint's footprint) require PIP coverage you might not have had before.</li>
+        </ul>
+
+        <h2>Homeowners insurance</h2>
+        <ul>
+          <li><strong>Cancel the old policy effective the day after closing on the old home.</strong></li>
+          <li><strong>New policy in place before closing on the new home.</strong> Lenders require it.</li>
+          <li><strong>Coverage limits change</strong> because rebuild costs vary by area.</li>
+          <li><strong>Coverages required vary:</strong> wind and hail deductibles in FL, TX, LA, NC, SC; earthquake in TN, MO, SC, AR; flood in coastal areas.</li>
+        </ul>
+
+        <h2>Renters insurance</h2>
+        <ul>
+          <li><strong>Same insurer can usually move the policy</strong> to a new state.</li>
+          <li>Update address and re-quote. Premiums vary by area.</li>
+        </ul>
+
+        <h2>Life insurance</h2>
+        <ul>
+          <li><strong>Generally portable across states.</strong> Your existing policy stays in force regardless of where you live.</li>
+          <li><strong>Update address</strong> so the insurer can reach you for premium notices and policy updates.</li>
+          <li><strong>State-specific consumer protections</strong> may change. A few states have specific replacement rules and disclosures.</li>
+        </ul>
+
+        <h2>Health insurance</h2>
+        <p>This is the big one. Most major moves trigger a Special Enrollment Period:</p>
+        <ul>
+          <li><strong>Marketplace coverage</strong> is state-specific. Moving to a new state requires enrolling in that state's exchange (or healthcare.gov).</li>
+          <li><strong>Employer coverage</strong> is generally portable. Coverage continues regardless of state.</li>
+          <li><strong>Medicare</strong> is national, but Medicare Advantage and Part D plans are state and region-specific. Moving requires choosing new plans.</li>
+          <li><strong>Medicaid</strong> is state-administered with different eligibility rules. Eligibility can change drastically across state lines.</li>
+          <li><strong>Provider networks</strong> change. Your old in-network doctor may be out-of-network in your new state.</li>
+        </ul>
+
+        <h2>Business insurance</h2>
+        <ul>
+          <li><strong>Workers' compensation</strong> is state-specific. A multi-state operation needs coverage in every state where employees work.</li>
+          <li><strong>Commercial auto</strong> rates change by state.</li>
+          <li><strong>Professional licensing</strong> affects E&amp;O coverage.</li>
+        </ul>
+
+        <h2>State residency and taxes</h2>
+        <p>Your insurance address is one factor in establishing legal residency. For people moving for tax reasons (high-tax to low-tax state), insurance is part of the documentation trail showing genuine residency change.</p>
+
+        <h2>Snowbirds and dual-state residents</h2>
+        <ul>
+          <li><strong>Auto:</strong> the vehicle should be insured in its primary garaging state.</li>
+          <li><strong>Home:</strong> primary residence vs. second home affects rates and policy form.</li>
+          <li><strong>Health:</strong> Medicare works in all states, but Medicare Advantage networks are local.</li>
+          <li><strong>Life:</strong> unaffected.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family moves from Georgia to Florida in June. They tell their auto insurer in September. In the meantime, a hurricane damages their car while it's parked at their new Florida address. The insurer investigates the claim, discovers the car has actually been garaged in Florida for three months, and reduces the payout for material misrepresentation. A 10-minute address update in June would have avoided the hit.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I'll update my address eventually."</strong> Driving with out-of-state plates and registration past the legal window is uninsured driving in some interpretations.</li>
+            <li><strong>"My policy automatically follows me."</strong> Auto and home policies often do, but rates change immediately.</li>
+            <li><strong>"Health insurance is portable."</strong> Marketplace coverage isn't. Moving requires new enrollment.</li>
+          </ul>
+        </div>
+
+        <p>For state-specific guidance, see our <a href="/auto">auto</a>, <a href="/home">home</a>, and <a href="/health">health insurance</a> pages.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>New Baby</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 6</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Retirement</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Claims &amp; Life Events</div>
+        <h1 class="lmod-title">Retirement</h1>
+        <p class="lmod-subtitle">How your insurance changes when you stop working.</p>
+        <p class="lmod-lead">Retirement reshapes nearly every insurance need you have. Coverage you needed disappears; coverage you didn't need becomes critical.</p>
+        <p>Planning the transition starts about 5 years before retirement and continues through Medicare enrollment.</p>
+
+        <h2>Health insurance, the biggest change</h2>
+        <p><strong>Pre-65 retirement:</strong> you likely lose employer coverage and need a bridge until Medicare. Options:</p>
+        <ul>
+          <li><strong>COBRA.</strong> Keep employer coverage for 18 months at full cost ($800 to $2,500+ per month).</li>
+          <li><strong>Spouse's employer plan,</strong> if available.</li>
+          <li><strong>ACA Marketplace,</strong> often qualifies for substantial subsidies based on early-retirement income.</li>
+          <li><strong>Short-term medical.</strong> See our post on <a href="/blog/short-term-medical">short-term medical</a> for limits.</li>
+        </ul>
+        <p><strong>At 65:</strong> enroll in Medicare during your Initial Enrollment Period, the 7-month window around your 65th birthday.</p>
+        <p><strong>Choose your Medicare path:</strong></p>
+        <ul>
+          <li><strong>Original Medicare (A + B) + Medigap + Part D.</strong> Predictable costs, broad provider access.</li>
+          <li><strong>Medicare Advantage (Part C).</strong> Lower premiums, network restrictions, often includes dental, vision, and Rx.</li>
+        </ul>
+
+        <h2>Life insurance</h2>
+        <ul>
+          <li><strong>Re-evaluate need.</strong> Once kids are grown, the mortgage is paid, and you have retirement savings, life insurance may be much less necessary.</li>
+          <li><strong>Term policies</strong> that expire in retirement years often don't need renewal.</li>
+          <li><strong>Permanent policies</strong> with cash value can become a source of supplemental retirement income (loans against cash value are tax-free if the policy stays in force).</li>
+          <li><strong>Final expense insurance</strong> (see our post on <a href="/resources/final-expense-insurance">final expense</a>) becomes more relevant.</li>
+        </ul>
+
+        <h2>Disability insurance</h2>
+        <ul>
+          <li><strong>Group LTD</strong> ends with employment.</li>
+          <li><strong>Individual disability</strong> generally ends at age 65 or 67 (the policy's "to-age" limit).</li>
+          <li><strong>In retirement, disability becomes less relevant.</strong> You're no longer earning income. But long-term care insurance becomes critical.</li>
+        </ul>
+
+        <h2>Long-term care insurance</h2>
+        <ul>
+          <li><strong>Best to buy before age 60.</strong> Premiums rise sharply with age, and health changes can disqualify you.</li>
+          <li><strong>Hybrid life and LTC policies</strong> combine death benefit with long-term care coverage.</li>
+          <li><strong>Medicare doesn't cover long-term care</strong> beyond a brief skilled nursing stay.</li>
+          <li><strong>Medicaid covers long-term care</strong> but only after spending down assets.</li>
+        </ul>
+
+        <h2>Auto insurance</h2>
+        <ul>
+          <li><strong>Annual mileage drops.</strong> Most retirees drive less. Update mileage to lower premium.</li>
+          <li><strong>Drop commuting from rating,</strong> savings of 5 to 15%.</li>
+          <li><strong>Pleasure use only</strong> rating in some states.</li>
+          <li><strong>Senior driver discounts</strong> for taking defensive driving courses (often 5 to 10%).</li>
+          <li><strong>Telematics programs</strong> can save more for low-mileage drivers.</li>
+        </ul>
+
+        <h2>Home insurance</h2>
+        <ul>
+          <li><strong>Mortgage paid off.</strong> You no longer have a lender requiring specific coverages, but coverage is still essential.</li>
+          <li><strong>Re-evaluate dwelling limit.</strong> Replacement costs may have changed significantly.</li>
+          <li><strong>Senior discounts</strong> in some states.</li>
+          <li><strong>Consider downsizing implications.</strong> If you move, see the moving module above.</li>
+        </ul>
+
+        <h2>Estate planning intersection</h2>
+        <ul>
+          <li><strong>Update beneficiaries</strong> on all life insurance and retirement accounts.</li>
+          <li><strong>Trusts</strong> for estate tax planning if assets are above relevant thresholds.</li>
+          <li><strong>Powers of attorney,</strong> financial and healthcare.</li>
+        </ul>
+
+        <h2>Travel insurance</h2>
+        <ul>
+          <li>Becomes more relevant in retirement when traveling more.</li>
+          <li><strong>Annual multi-trip policies</strong> are often cheaper than per-trip for frequent travelers.</li>
+          <li><strong>Cruise and international travel</strong> need separate medical coverage. Medicare doesn't cover most foreign care.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A couple retires at 62 in Tennessee. They bridge to Medicare with an ACA Marketplace plan, qualifying for strong subsidies because their taxable income drops to about $48,000. At 65, they enroll on time, choose Original Medicare plus a Medigap plan for predictable costs, and drop their old employer COBRA offer that would have cost them nearly $1,900 per month. The planned sequence saves them roughly $30,000 over three years.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I'll figure out Medicare when I turn 65."</strong> Missing the Initial Enrollment Period creates lifetime premium penalties.</li>
+            <li><strong>"I don't need life insurance anymore."</strong> For estate planning, final expenses, or providing for a surviving spouse, it may still matter.</li>
+            <li><strong>"Long-term care won't happen to me."</strong> About 70% of people 65+ will need some long-term care during retirement.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health</a> and <a href="/life">life insurance</a> pages cover retirement-stage planning, and our <a href="/resources/medicare-parts-explained">Medicare guide</a> walks through enrollment.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Moving Between States</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 6</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Claims &amp; Life Events track</div>
+          <h2>Ready to line your coverage up with your life?</h2>
+          <p>A licensed OnePoint advisor can walk through a claim, a life change, or a retirement transition with you, find the gaps, and tell you exactly what to update and when. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/contact" class="btn-white">Get Help With My Claim</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_claims_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_claims_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-6]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

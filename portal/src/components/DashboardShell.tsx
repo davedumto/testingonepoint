@@ -3,8 +3,12 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { IconDashboard, IconPolicies, IconCart, IconForms, IconPhone, IconLogout, IconMobile, IconSettings } from './Icons';
+import { IconDashboard, IconPolicies, IconCart, IconForms, IconPhone, IconLogout, IconMobile, IconSettings, IconDocument, IconServiceRequest, IconClaim, IconBilling, IconMessage, IconPlus } from './Icons';
 import { secureFetch } from '@/lib/client/secure-fetch';
+import { subscribe } from '@/lib/pusher/client';
+import TierBadge from './TierBadge';
+import ClientNotificationBell from './ClientNotificationBell';
+import type { ClientTier } from '@/lib/tier-meta';
 
 interface Props {
   user: { name: string; email: string; userId: string };
@@ -14,8 +18,15 @@ interface Props {
 const NAV_ITEMS = [
   { href: '/dashboard', label: 'Overview', Icon: IconDashboard, key: 'overview' },
   { href: '/dashboard/policies', label: 'My Policies', Icon: IconPolicies, key: 'policies' },
+  { href: '/dashboard/documents', label: 'Documents', Icon: IconDocument, key: 'documents' },
+  { href: '/dashboard/service-requests', label: 'Service Requests', Icon: IconServiceRequest, key: 'service-requests' },
+  { href: '/dashboard/claims', label: 'Claims', Icon: IconClaim, key: 'claims' },
+  { href: '/dashboard/billing', label: 'Billing', Icon: IconBilling, key: 'billing' },
+  { href: '/dashboard/messages', label: 'Messages', Icon: IconMessage, key: 'messages' },
+  { href: '/dashboard/notifications', label: 'Notifications', Icon: IconMessage, key: 'notifications' },
+  { href: '/dashboard/quotes', label: 'Get a Quote', Icon: IconPlus, key: 'quotes' },
   { href: '/dashboard/cart', label: 'Coverage Cart', Icon: IconCart, key: 'cart' },
-  { href: '/dashboard/forms', label: 'My Forms', Icon: IconForms, key: 'forms' },
+  { href: '/dashboard/forms', label: 'My Quotes', Icon: IconForms, key: 'forms' },
   { href: '/dashboard/book-call', label: 'Book a Call', Icon: IconPhone, key: 'call' },
   { href: '/dashboard/settings', label: 'Settings', Icon: IconSettings, key: 'settings' },
 ];
@@ -25,6 +36,8 @@ export default function DashboardShell({ user, children }: Props) {
   const router = useRouter();
   const [cartCount, setCartCount] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [tier, setTier] = useState<ClientTier | undefined>();
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   // Close drawer whenever the route changes on mobile
   useEffect(() => { setMobileOpen(false); }, [pathname]);
@@ -33,7 +46,33 @@ export default function DashboardShell({ user, children }: Props) {
     // Single fetch on mount. Polling was removed because it also kept the
     // 20-min inactivity session alive indefinitely.
     fetch('/api/cart').then(r => r.json()).then(d => setCartCount(d.items?.length || 0)).catch(() => {});
+    // Pull the tier off the user profile so the sidebar badge stays in sync
+    // with whatever the Policy hooks computed last.
+    fetch('/api/auth/me').then(r => r.ok ? r.json() : null).then(d => { if (d?.user?.tier) setTier(d.user.tier); }).catch(() => {});
+    // Unread message count for the Messages nav badge. Piggybacks on the
+    // dashboard overview which already computes this value.
+    fetch('/api/dashboard/overview').then(r => r.ok ? r.json() : null).then(d => { if (typeof d?.user?.unreadMessages === 'number') setUnreadMessages(d.user.unreadMessages); }).catch(() => {});
   }, []);
+
+  // Live increment when an agent sends a new message while the client is
+  // on any dashboard page. Clears when they open /dashboard/messages
+  // (read-all API call in that page flips readByClient=true).
+  useEffect(() => {
+    if (!user.userId) return;
+    return subscribe(`private-user-${user.userId}`, {
+      'message:new': (raw) => {
+        const m = raw as { senderType: 'client' | 'agent' | 'admin' };
+        if (m.senderType === 'agent' || m.senderType === 'admin') {
+          setUnreadMessages(n => n + 1);
+        }
+      },
+    });
+  }, [user.userId]);
+
+  // Clear unread badge whenever the user navigates to the messages page.
+  useEffect(() => {
+    if (pathname === '/dashboard/messages' && unreadMessages > 0) setUnreadMessages(0);
+  }, [pathname, unreadMessages]);
 
   useEffect(() => {
     function handleCartUpdate(e: Event) {
@@ -107,9 +146,10 @@ export default function DashboardShell({ user, children }: Props) {
           }}>
             {initials}
           </div>
-          <div style={{ overflow: 'hidden' }}>
+          <div style={{ overflow: 'hidden', flex: 1, minWidth: 0 }}>
             <p style={{ fontSize: 14, fontWeight: 600, color: '#052847', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.name}</p>
             <p style={{ fontSize: 12, color: '#8a9baa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</p>
+            {tier && <div style={{ marginTop: 6 }}><TierBadge tier={tier} size="sm" /></div>}
           </div>
         </div>
 
@@ -118,7 +158,8 @@ export default function DashboardShell({ user, children }: Props) {
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a9baa', padding: '8px 14px 6px', marginTop: 4 }}>Menu</p>
           {NAV_ITEMS.map(item => {
             const isActive = pathname === item.href;
-            const showBadge = item.key === 'cart' && cartCount > 0;
+            const badgeCount = item.key === 'cart' ? cartCount : item.key === 'messages' ? unreadMessages : 0;
+            const showBadge = badgeCount > 0;
 
             return (
               <Link
@@ -157,7 +198,7 @@ export default function DashboardShell({ user, children }: Props) {
                 {showBadge && (
                   <span style={{
                     marginLeft: 'auto',
-                    background: '#0d9488',
+                    background: item.key === 'messages' ? '#9a2f2f' : '#0d9488',
                     color: '#fff',
                     fontSize: 11,
                     fontWeight: 700,
@@ -169,7 +210,7 @@ export default function DashboardShell({ user, children }: Props) {
                     justifyContent: 'center',
                     padding: '0 6px',
                   }}>
-                    {cartCount}
+                    {badgeCount}
                   </span>
                 )}
               </Link>
@@ -210,7 +251,18 @@ export default function DashboardShell({ user, children }: Props) {
       </aside>
 
       {/* Main content */}
-      <main style={{ flex: 1, background: '#f4f7fb', overflow: 'auto', minWidth: 0 }}>
+      <main style={{ flex: 1, background: '#f4f7fb', overflow: 'auto', minWidth: 0, position: 'relative' }}>
+        {/* Floating notification bell — sticky to the top-right of the scroll
+            container so it stays visible as the client scrolls. Height: 0
+            wrapper + pointer-events: none keeps it from reserving layout space
+            or blocking clicks on the content beneath. */}
+        {user.userId && (
+          <div style={{ position: 'sticky', top: 16, zIndex: 20, display: 'flex', justifyContent: 'flex-end', padding: '0 24px', pointerEvents: 'none', height: 0 }}>
+            <div style={{ pointerEvents: 'auto' }}>
+              <ClientNotificationBell userId={user.userId} />
+            </div>
+          </div>
+        )}
         {/* Mobile top bar with hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#fff', borderBottom: '1px solid #e8ecf1' }} className="mobile-topbar">
           <button

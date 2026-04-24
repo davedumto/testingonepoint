@@ -1,0 +1,1094 @@
+<!--
+  ONEPOINT LEARN: HEALTH INSURANCE (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/health
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Health Insurance
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #0d9488;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Health Insurance</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Health Insurance, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on the coverage and tax tools that decide what you actually pay for care, from the Marketplace to Medicare to the accounts most people never use correctly.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~28</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/health" class="lc-btn lc-btn-ghost">Go to Health Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From the Marketplace to Medicare, plus the tax accounts and supplemental coverages that cut your real cost of care.</div>
+      <ul class="art-list">
+        <li>ACA Marketplace</li>
+        <li>Medicare A/B/C/D</li>
+        <li>Medigap</li>
+        <li>HSAs</li>
+        <li>FSA vs. HSA</li>
+        <li>Dental</li>
+        <li>Vision</li>
+        <li>COBRA</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · ACA Marketplace 101</option>
+      <option value="m2">Chapter 2 · Medicare Parts A, B, C, and D</option>
+      <option value="m3">Chapter 3 · Medigap (Medicare Supplement)</option>
+      <option value="m4">Chapter 4 · Health Savings Accounts (HSAs)</option>
+      <option value="m5">Chapter 5 · FSA vs. HSA</option>
+      <option value="m6">Chapter 6 · Dental Insurance</option>
+      <option value="m7">Chapter 7 · Vision Insurance</option>
+      <option value="m8">Chapter 8 · COBRA</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">ACA Marketplace 101</a></li>
+        <li><a href="#m2" data-mod="2">Medicare Parts A, B, C, and D</a></li>
+        <li><a href="#m3" data-mod="3">Medigap (Medicare Supplement)</a></li>
+        <li><a href="#m4" data-mod="4">Health Savings Accounts (HSAs)</a></li>
+        <li><a href="#m5" data-mod="5">FSA vs. HSA</a></li>
+        <li><a href="#m6" data-mod="6">Dental Insurance</a></li>
+        <li><a href="#m7" data-mod="7">Vision Insurance</a></li>
+        <li><a href="#m8" data-mod="8">COBRA</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Health Insurance</div>
+        <h1 class="lmod-title">ACA Marketplace 101</h1>
+        <p class="lmod-subtitle">How Healthcare.gov actually works.</p>
+        <p class="lmod-lead">The Affordable Care Act created the health insurance Marketplace, a federally run or state-run exchange where individuals and families without employer coverage can shop for insurance. Knowing how it works saves real money, especially because many people leave subsidies on the table every year.</p>
+
+        <h2>Who the Marketplace is for</h2>
+        <ul>
+          <li>Self-employed people.</li>
+          <li>Anyone whose employer doesn't offer health insurance.</li>
+          <li>People whose employer coverage is too expensive to be "affordable" by ACA standards.</li>
+          <li>Early retirees not yet eligible for Medicare.</li>
+          <li>People between jobs without COBRA.</li>
+        </ul>
+
+        <h2>The metal tiers</h2>
+        <p>All Marketplace plans fall into four categories based on how costs are split between you and the insurer:</p>
+        <ul>
+          <li><strong>Bronze</strong>, about 60% covered by the insurer. Lowest premium, highest deductible. Best for healthy people who rarely see a doctor.</li>
+          <li><strong>Silver</strong>, about 70% covered. Moderate premium and deductible. Best if you qualify for cost-sharing reductions.</li>
+          <li><strong>Gold</strong>, about 80% covered. Higher premium, lower deductible. Best for frequent care users.</li>
+          <li><strong>Platinum</strong>, about 90% covered. Highest premium, lowest out-of-pocket.</li>
+        </ul>
+        <p>Catastrophic plans are available for people under 30 or with hardship exemptions.</p>
+
+        <h2>The subsidy everyone misses</h2>
+        <p>Premium tax credits (APTC) reduce monthly premiums based on income. After the Inflation Reduction Act extensions through 2025, subsidies are available for households earning up to 400% of the federal poverty level, and in some cases beyond. A family of four earning $90,000 can often get $600 or more per month in subsidies without realizing it.</p>
+        <p><strong>Cost-sharing reductions (CSRs)</strong>, available only on Silver plans, reduce deductibles and out-of-pocket maximums for lower-income households. This is why Silver is often the best value when you qualify.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family of four in Georgia earning $90,000 enrolls in a Silver Marketplace plan. Their unsubsidized premium is roughly $1,400 per month. After APTC, they pay about $775 per month, and because they qualify for cost-sharing reductions, their Silver deductible drops from $4,500 to around $1,500. The paperwork took 40 minutes.</p>
+        </div>
+
+        <h2>Enrollment windows</h2>
+        <ul>
+          <li><strong>Open Enrollment</strong>, November 1 to January 15 in most states (different dates in some state exchanges).</li>
+          <li><strong>Special Enrollment Periods</strong>, triggered by qualifying life events: marriage, divorce, birth or adoption, loss of other coverage, moving to a new state, income changes affecting subsidy eligibility.</li>
+        </ul>
+        <p>Outside these windows, you generally can't buy Marketplace coverage.</p>
+
+        <h2>State exchanges in OnePoint's footprint</h2>
+        <ul>
+          <li><strong>State-run exchanges:</strong> MD, NJ, NY, VA (transitioned to state-based for 2024). These use their own websites.</li>
+          <li><strong>Federal exchange (Healthcare.gov):</strong> AL, AZ, FL, GA, IL, LA, MI, MS, MO, NC, OH, SC, TN, TX.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I make too much to qualify for subsidies."</strong> Many people at $75,000 to $150,000 qualify depending on family size. Run the numbers.</li>
+            <li><strong>"I can enroll any time."</strong> Only during open enrollment or after a qualifying event.</li>
+            <li><strong>"I'll just pay the penalty."</strong> The federal individual mandate penalty is $0 nationally, but NJ and MA still have state-level mandates with penalties.</li>
+          </ul>
+        </div>
+
+        <p>For reading on short-term alternatives and supplemental coverage, see our posts on <a href="/blog/short-term-medical">short-term medical</a>, <a href="/blog/hospitalization-indemnity">hospitalization indemnity</a>, and <a href="/blog/critical-illness">critical illness</a>. Our <a href="/health">health insurance page</a> covers Marketplace enrollment.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Medicare Parts A, B, C, and D</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Health Insurance</div>
+        <h1 class="lmod-title">Medicare Parts A, B, C, and D</h1>
+        <p class="lmod-subtitle">The letters explained.</p>
+        <p class="lmod-lead">Medicare is federal health insurance for people 65 and older and certain people with disabilities. It's built as four separate parts, each covering different things and sold through different channels. The letters confuse everyone.</p>
+
+        <h2>Part A, Hospital Insurance</h2>
+        <p>Covers inpatient hospital stays, skilled nursing facilities, hospice, and some home health. Most people don't pay a premium for Part A if they or their spouse paid Medicare taxes for 10 or more years (40 quarters). You still pay deductibles and coinsurance for each hospital stay.</p>
+
+        <h2>Part B, Medical Insurance</h2>
+        <p>Covers doctor visits, outpatient care, preventive services, durable medical equipment, and ambulance rides. Everyone pays a monthly Part B premium, <strong>$185 per month in 2025</strong> for most people, higher for high earners (IRMAA surcharge).</p>
+        <p>Part B has a small annual deductible (<strong>$257 in 2025</strong>) and then covers 80% of approved costs. You pay the other 20%, and there's no cap on that 20%. This is why most people on original Medicare also buy a Medigap policy (see the next module).</p>
+
+        <h2>Part C, Medicare Advantage</h2>
+        <p>Private insurance plans that bundle Parts A and B (and usually D) into one plan. Often includes dental, vision, hearing, and gym memberships. Limits your out-of-pocket spending (which original Medicare doesn't), but usually restricts you to network providers.</p>
+        <p>Premiums can be as low as $0 per month (above the Part B premium you still pay). Trade-offs: network limits, prior authorizations for certain services, and care that can be harder to access when you travel.</p>
+
+        <h2>Part D, Prescription Drug Coverage</h2>
+        <p>Covers prescription medications. Sold separately as a standalone plan (if you have original Medicare) or bundled into a Medicare Advantage plan.</p>
+        <p>In 2025, the Inflation Reduction Act capped total out-of-pocket prescription drug spending at <strong>$2,000 per year</strong>, a major change for people on expensive medications.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 66-year-old on a brand-name cancer drug used to face $12,000 in annual drug costs after Medicare's old donut hole. Starting in 2025, the Part D cap holds total out-of-pocket drug spending to $2,000 for the year, saving roughly $10,000.</p>
+        </div>
+
+        <h2>The enrollment window that matters</h2>
+        <ul>
+          <li><strong>Initial Enrollment Period</strong>, the 7-month window around your 65th birthday (3 months before, your birthday month, 3 months after). Missing this can mean lifetime penalties on Parts B and D.</li>
+          <li><strong>Annual Open Enrollment</strong>, October 15 to December 7. Switch plans, add or change Part D, switch between original Medicare and Medicare Advantage.</li>
+          <li><strong>Medicare Advantage Open Enrollment</strong>, January 1 to March 31. One-time switch out of or between MA plans.</li>
+        </ul>
+
+        <h2>The big decision: Original Medicare plus Medigap, or Medicare Advantage?</h2>
+        <p>Most people facing Medicare enrollment choose between:</p>
+        <ol>
+          <li><strong>Original Medicare (A plus B) plus Medigap plus Part D</strong>, freedom to see any provider who accepts Medicare, predictable costs, higher monthly premium.</li>
+          <li><strong>Medicare Advantage (Part C)</strong>, lower monthly premium, network restrictions, out-of-pocket cap, extra benefits.</li>
+        </ol>
+        <p>Neither is universally better. It depends on your health, your providers, where you travel, and your budget.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Medicare covers everything."</strong> It doesn't cover long-term care, most dental, routine vision, or hearing aids under original Medicare.</li>
+            <li><strong>"I can sign up any time after 65."</strong> You can, but missing your Initial Enrollment Period means permanent premium penalties.</li>
+            <li><strong>"Medicare Advantage is always cheaper."</strong> Lower premiums, but out-of-pocket costs can exceed original Medicare plus Medigap over time.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers Medicare enrollment and plan comparison.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>ACA Marketplace 101</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Medigap (Medicare Supplement)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Health Insurance</div>
+        <h1 class="lmod-title">Medigap (Medicare Supplement)</h1>
+        <p class="lmod-subtitle">Filling original Medicare's gaps.</p>
+        <p class="lmod-lead">Original Medicare covers about 80% of most medical costs. The other 20%, plus the deductibles and the coinsurance, is on you, with no cap. A Medicare Supplement (Medigap) policy fills those gaps. For people who want predictable costs in retirement, Medigap is the piece that makes the system sustainable.</p>
+
+        <h2>How Medigap works</h2>
+        <p>Medigap is sold by private insurers and is standardized by the federal government. Every "Plan G" from every insurer covers the same things, the only difference is price and service. This makes shopping simpler: find the cheapest Plan G in your area and the coverage is identical across carriers.</p>
+
+        <h2>The standardized plan letters</h2>
+        <p>Plans are labeled A, B, C, D, F, G, K, L, M, and N. The most common today:</p>
+        <ul>
+          <li><strong>Plan G</strong>, the most popular plan for new enrollees. Covers everything original Medicare doesn't, except the small Part B deductible ($257 in 2025).</li>
+          <li><strong>Plan N</strong>, lower premium than Plan G, with small copays for doctor and ER visits ($20 to $50).</li>
+          <li><strong>Plan F</strong>, the most comprehensive plan, but no longer available to people who became eligible for Medicare after January 1, 2020.</li>
+        </ul>
+        <p>Wisconsin, Massachusetts, and Minnesota have their own standardization systems, but all 18 OnePoint states use the standard federal system.</p>
+
+        <h2>What Medigap doesn't cover</h2>
+        <ul>
+          <li>Prescription drugs (you need a separate Part D plan).</li>
+          <li>Dental, vision, hearing (separate plans or Medicare Advantage).</li>
+          <li>Long-term care.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <p>Plan G premiums vary significantly by state, age, gender, and tobacco use:</p>
+        <ul>
+          <li><strong>Age 65, non-smoker, Plan G:</strong> $120 to $200 per month in most OnePoint states.</li>
+          <li><strong>Age 75, non-smoker, Plan G:</strong> $180 to $300 per month.</li>
+          <li><strong>Age 85, non-smoker, Plan G:</strong> $250 to $400 or more per month.</li>
+        </ul>
+        <p>Rates in <strong>FL, NJ, and NY</strong> are generally higher than in <strong>GA, TN, and SC</strong>.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 65-year-old in South Carolina with a hospitalization and follow-up care runs up $48,000 in covered charges. Original Medicare pays 80% after the Part B deductible. The remaining 20%, about $9,500, would be on her. With a Plan G at $140 per month, the Medigap policy picks up that $9,500.</p>
+        </div>
+
+        <h2>The Medigap Open Enrollment window, don't miss it</h2>
+        <p>For the 6 months starting the month you turn 65 and are enrolled in Part B, insurers must sell you any Medigap plan with no medical underwriting. Outside this window (in most states), insurers can ask health questions and decline you.</p>
+        <p>A few states offer more generous rules, <strong>NY and CT</strong> allow continuous guaranteed issue for Medigap, but <strong>most of OnePoint's states don't</strong>. Miss the 6-month window and you may not be able to buy Medigap later, or you'll pay substantially more.</p>
+
+        <h2>Medigap vs. Medicare Advantage</h2>
+        <p>You can have Medigap or Medicare Advantage, not both. Medigap pairs with original Medicare. Medicare Advantage replaces original Medicare with a private plan.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Plan G is different between insurers."</strong> The benefits are identical by law. Shop on price and service.</li>
+            <li><strong>"I can buy Medigap later if I need it."</strong> Only with medical underwriting in most states, and you may be declined.</li>
+            <li><strong>"Medigap includes drug coverage."</strong> It doesn't. You still need Part D.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers Medigap alongside Medicare Advantage and Part D.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Medicare Parts A, B, C, and D</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Health Savings Accounts (HSAs)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Health Insurance</div>
+        <h1 class="lmod-title">Health Savings Accounts (HSAs)</h1>
+        <p class="lmod-subtitle">The most underused tax break in America.</p>
+        <p class="lmod-lead">A Health Savings Account is a tax-advantaged account paired with a high-deductible health plan (HDHP). It's the only account with triple tax benefits, contributions go in tax-free, grow tax-free, and come out tax-free for qualified medical expenses. For people who can afford to fund one, it's the most tax-efficient account in the American system.</p>
+
+        <h2>Who qualifies</h2>
+        <ul>
+          <li>Enrolled in a <strong>HDHP</strong> (minimum deductibles and out-of-pocket maximums are set annually by the IRS).</li>
+          <li>Not enrolled in other non-HDHP health coverage (including most FSAs).</li>
+          <li>Not enrolled in Medicare.</li>
+          <li>Not claimed as a dependent on someone else's tax return.</li>
+        </ul>
+
+        <h2>2025 contribution limits</h2>
+        <ul>
+          <li><strong>Individual HDHP coverage:</strong> $4,300.</li>
+          <li><strong>Family HDHP coverage:</strong> $8,550.</li>
+          <li><strong>Age 55 and older catch-up:</strong> extra $1,000.</li>
+        </ul>
+
+        <h2>The triple tax benefit</h2>
+        <ol>
+          <li>Contributions reduce your taxable income (above-the-line deduction).</li>
+          <li>Earnings grow tax-free inside the account.</li>
+          <li>Withdrawals for qualified medical expenses are tax-free.</li>
+        </ol>
+        <p>After age 65, you can withdraw for any reason, non-medical withdrawals are taxed as ordinary income (like a traditional IRA), but no penalty.</p>
+
+        <h2>Qualified medical expenses</h2>
+        <ul>
+          <li>Doctor visits, copays, prescriptions.</li>
+          <li>Dental, vision, hearing, mental health.</li>
+          <li>Medicare premiums (Parts B, D, Medicare Advantage) after age 65.</li>
+          <li>Long-term care insurance premiums (up to IRS limits).</li>
+        </ul>
+        <p>What isn't qualified: cosmetic procedures, most over-the-counter items (some changed during COVID), and gym memberships (usually).</p>
+
+        <h2>The "receipt bank" strategy</h2>
+        <p>You can reimburse yourself for medical expenses from your HSA years, even decades, later, as long as you have receipts. Some people pay medical expenses out of pocket for 20 years, let the HSA grow invested, and then reimburse themselves tax-free in retirement.</p>
+
+        <h2>Investing the balance</h2>
+        <p>Most HSAs allow you to invest the balance above a small cash minimum ($1,000 to $2,000). Over 20 or more years, an invested HSA can grow to six figures, tax-free.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family maxing out the HSA at $8,550 in 2025 in the 24% federal bracket saves about $2,052 in federal income tax, plus another $654 in FICA taxes on payroll contributions. If that money is invested and compounds at 7% for 20 years, the single year's contribution grows to roughly $33,000, all tax-free for qualified medical expenses.</p>
+        </div>
+
+        <h2>HSA vs. FSA</h2>
+        <p>HSA rolls over year to year. FSA doesn't (use-it-or-lose-it, with small carryover allowances). HSAs are portable across jobs; FSAs aren't.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I'll spend it all each year."</strong> You don't have to, HSA balances roll forever.</li>
+            <li><strong>"I can use it for anything."</strong> Only qualified medical expenses without penalty (until age 65).</li>
+            <li><strong>"I can have an HSA and a regular FSA together."</strong> Usually no. Limited-purpose FSAs (dental and vision only) are allowed with an HSA.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers HDHPs and HSA-qualified plans.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Medigap (Medicare Supplement)</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>FSA vs. HSA</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Health Insurance</div>
+        <h1 class="lmod-title">FSA vs. HSA</h1>
+        <p class="lmod-subtitle">The tax accounts that look identical and aren't.</p>
+        <p class="lmod-lead">Flexible Spending Accounts and Health Savings Accounts both let you pay for medical expenses with pre-tax dollars. They sound interchangeable. They're not. Picking the wrong one, or not using the one you have, leaves real money on the table.</p>
+
+        <h2>FSA basics</h2>
+        <ul>
+          <li><strong>Offered through employers.</strong> You can't open one on your own.</li>
+          <li><strong>Available with any health plan</strong> (PPO, HMO, HDHP).</li>
+          <li><strong>2025 limit:</strong> $3,300 per employee (plus separate dependent care FSA at $5,000).</li>
+          <li><strong>Use-it-or-lose-it.</strong> Unused funds generally don't roll over, though employers may allow up to $660 carryover or a grace period through March 15.</li>
+          <li><strong>Funded upfront.</strong> Your full annual election is available on day one of the plan year.</li>
+          <li><strong>Not portable.</strong> Leave the employer, lose any remaining balance.</li>
+        </ul>
+
+        <h2>HSA basics</h2>
+        <ul>
+          <li><strong>Available only with HDHPs.</strong></li>
+          <li><strong>You own the account.</strong> Portable across jobs, banks, and retirement.</li>
+          <li><strong>2025 limit:</strong> $4,300 individual or $8,550 family.</li>
+          <li><strong>Rolls over forever.</strong></li>
+          <li><strong>Can be invested.</strong></li>
+          <li><strong>Funded as you contribute.</strong></li>
+        </ul>
+
+        <h2>When each one wins</h2>
+        <ul>
+          <li><strong>FSA is better when:</strong> your employer doesn't offer an HDHP, you know you'll spend your contribution in the plan year, or you want access to the full annual amount on January 1.</li>
+          <li><strong>HSA is better when:</strong> you have access to an HDHP, you can afford to build up a balance for future medical costs or retirement, and you want long-term growth.</li>
+        </ul>
+
+        <h2>Dependent Care FSA is separate</h2>
+        <p>The Dependent Care FSA covers childcare, before and after school programs, and elderly dependent care. Separate from the medical FSA with its own $5,000 limit. Usable with either a healthcare FSA or HSA.</p>
+
+        <h2>Limited-Purpose FSA</h2>
+        <p>If you're enrolled in an HDHP with an HSA, you can still have a <strong>Limited-Purpose FSA</strong> restricted to dental and vision expenses only. Useful for predictable orthodontia or LASIK costs.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family earning $120,000 that contributes $3,300 to a healthcare FSA saves roughly $800 to $1,000 in federal income and FICA taxes on that contribution. A similar family maxing out an HSA at $8,550 saves about $2,000 to $2,500 in the same year, plus whatever tax-free growth accumulates over time.</p>
+        </div>
+
+        <h2>Common mistakes</h2>
+        <ul>
+          <li>Treating FSA elections as "set it and forget it" and losing unused funds.</li>
+          <li>Not reimbursing yourself from an HSA for eligible expenses.</li>
+          <li>Double-dipping, submitting the same expense to both an FSA and HSA.</li>
+          <li>Assuming an FSA covers what an HSA does. HSAs have slightly broader eligibility in retirement.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"FSA and HSA are basically the same."</strong> Only at first glance. The rollover, portability, and investing differences change the math a lot over a career.</li>
+            <li><strong>"I can fund both fully."</strong> Not a standard FSA and an HSA in the same year. A Limited-Purpose FSA is the workaround.</li>
+            <li><strong>"I'll just forfeit my FSA."</strong> A $3,300 forfeiture is a real loss. Plan purchases (glasses, dental work, refills) before year-end.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers FSA and HSA-qualified plan options.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Health Savings Accounts (HSAs)</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Dental Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Health Insurance</div>
+        <h1 class="lmod-title">Dental Insurance</h1>
+        <p class="lmod-subtitle">What it actually covers, and doesn't.</p>
+        <p class="lmod-lead">Dental insurance is unusual in the insurance world, it's priced more like a prepaid discount plan than true catastrophic coverage. Understanding that framing saves you from being surprised by its limits.</p>
+
+        <h2>How a typical plan works</h2>
+        <ul>
+          <li><strong>Preventive care (cleanings, X-rays, exams):</strong> 100% covered, usually twice a year.</li>
+          <li><strong>Basic care (fillings, simple extractions, root canals):</strong> 70 to 80% covered.</li>
+          <li><strong>Major care (crowns, bridges, dentures, implants):</strong> 40 to 50% covered.</li>
+          <li><strong>Orthodontics:</strong> often a separate rider with lifetime limits.</li>
+        </ul>
+
+        <h2>The annual maximum</h2>
+        <p>Most dental plans cap payouts at <strong>$1,000 to $2,500 per year</strong>. That limit hasn't meaningfully changed in 30 years, in 1990, a $1,000 annual max was generous. Today, a single crown can cost $1,500.</p>
+
+        <h2>The waiting period</h2>
+        <p>Most plans have waiting periods for major services, typically 6 to 12 months before crowns and root canals are covered. Plans with no waiting period exist but usually cost more.</p>
+
+        <h2>PPO vs. DHMO</h2>
+        <ul>
+          <li><strong>PPO (Preferred Provider Organization):</strong> see any dentist, pay less in-network. Higher premium, more flexibility.</li>
+          <li><strong>DHMO (Dental HMO):</strong> must use network dentists, no annual max, very low cost. Best if good in-network providers are nearby.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Individual PPO:</strong> $25 to $50 per month.</li>
+          <li><strong>Family PPO:</strong> $65 to $120 per month.</li>
+          <li><strong>Individual DHMO:</strong> $10 to $25 per month.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>An adult with a $35 per month PPO needs a $1,500 crown. The plan covers 50% after a 6-month wait, so the insurer pays $750. Over the year, the member pays $420 in premium plus $750 out of pocket for the crown, a total of $1,170. Two routine cleanings (fully covered) would have cost roughly $300 cash. In this year, the plan is worth it; in a year with no major work, the cash path is cheaper.</p>
+        </div>
+
+        <h2>Dental discount plans (not insurance)</h2>
+        <p>Some companies sell "dental discount plans", not insurance, but membership programs that negotiate 15 to 50% off at participating dentists. Lower cost, no annual max, no waiting periods. Pay full price at the dentist, get the discount at checkout.</p>
+
+        <h2>Medicare and dental</h2>
+        <p><strong>Original Medicare doesn't cover routine dental.</strong> Medicare Advantage plans often include dental, but with significant limits. Standalone dental insurance is common for retirees.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"It covers everything."</strong> It covers preventive care fully, but caps major work at the annual max.</li>
+            <li><strong>"I don't go to the dentist, so I don't need it."</strong> Preventive cleanings prevent expensive problems. And some plans use preventive visits as the price justification.</li>
+            <li><strong>"Waiting periods don't matter."</strong> They matter a lot if you're enrolling specifically because you need work done. Look for no-wait plans or plan ahead.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers dental alongside medical and vision.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>FSA vs. HSA</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Vision Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Health Insurance</div>
+        <h1 class="lmod-title">Vision Insurance</h1>
+        <p class="lmod-subtitle">Usually not worth the math.</p>
+        <p class="lmod-lead">Vision insurance is one of the few insurance products where it's worth running the math yourself before buying. For many people, paying out of pocket is cheaper than the premium.</p>
+
+        <h2>How vision plans work</h2>
+        <p>Typical annual benefits:</p>
+        <ul>
+          <li><strong>Eye exam:</strong> covered in full or with a small copay ($10 to $25).</li>
+          <li><strong>Frames:</strong> $130 to $200 allowance once every 1 to 2 years.</li>
+          <li><strong>Lenses:</strong> basic lenses covered; extras (anti-glare, photochromic, progressives) cost extra.</li>
+          <li><strong>Contact lenses:</strong> allowance instead of glasses, usually $120 to $200.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <ul>
+          <li><strong>Individual plan:</strong> $10 to $20 per month.</li>
+          <li><strong>Family plan:</strong> $25 to $45 per month.</li>
+        </ul>
+
+        <h2>The math most people miss</h2>
+        <p>A $15 per month plan costs $180 per year. You get one exam ($120 out of pocket), frames up to $150, and a lens allowance. If you only need an exam, out-of-pocket is cheaper. If you wear glasses and need new frames every two years, a plan may break even.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A single filer pays $180 per year for a vision plan. That year she uses one exam ($120 value), new frames worth $200 (plan covers $150), and progressive lenses with add-ons ($220, plan covers about $110). Total plan value: roughly $380. She paid $180 in premium, saving about $200. In a year where she doesn't need new glasses, the plan returns about $120 in value on a $180 cost.</p>
+        </div>
+
+        <h2>When it's actually worth it</h2>
+        <ul>
+          <li>You wear prescription glasses and update them regularly.</li>
+          <li>Multiple family members need glasses.</li>
+          <li>You have kids needing kid-specific plans (with frame breakage coverage).</li>
+          <li>You wear contacts and buy them by prescription.</li>
+          <li>Your employer pays most or all of the premium.</li>
+        </ul>
+
+        <h2>When it's not worth it</h2>
+        <ul>
+          <li>You don't wear glasses or contacts.</li>
+          <li>You wear glasses but keep the same frames for years.</li>
+          <li>You're comfortable paying $250 to $400 out of pocket every 1 to 2 years.</li>
+        </ul>
+
+        <h2>Medical vs. vision insurance</h2>
+        <p>Your regular health insurance covers eye problems that are medical conditions, glaucoma, cataracts, retinal detachment, diabetic eye disease. Vision insurance covers routine exams and eyewear. If you have a medical eye issue, it goes through your health plan, not your vision plan.</p>
+
+        <h2>LASIK and vision insurance</h2>
+        <p>Vision plans sometimes offer LASIK discounts (typically 15 to 25% off) but rarely cover the procedure. Average cost after discounts: $2,000 to $3,000 per eye.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Vision insurance is always a good deal."</strong> Often it isn't, run the numbers.</li>
+            <li><strong>"It covers eye surgery."</strong> It covers routine eye care, not medical conditions.</li>
+            <li><strong>"I need it for kids."</strong> For kids who break glasses often, sometimes yes. Check the breakage rider.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers vision alongside medical and dental.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Dental Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>COBRA</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Health Insurance</div>
+        <h1 class="lmod-title">COBRA</h1>
+        <p class="lmod-subtitle">What it is, what it costs, and when it's worth it.</p>
+        <p class="lmod-lead">When you lose your job, get divorced, or age off a parent's plan, COBRA gives you the right to keep your old health insurance for a while, at a cost. It's a critical bridge for some people. For others, it's far more expensive than it needs to be.</p>
+
+        <h2>What COBRA is</h2>
+        <p>The Consolidated Omnibus Budget Reconciliation Act (1985) requires employers with 20 or more employees to offer departing workers the option to continue their group health plan for a set period, usually 18 months, up to 36 in certain family situations.</p>
+        <p><strong>Qualifying events:</strong></p>
+        <ul>
+          <li>Loss of job (voluntary or involuntary, except for gross misconduct).</li>
+          <li>Reduction in hours that ends group coverage.</li>
+          <li>Divorce or legal separation (spouse).</li>
+          <li>Death of covered employee (dependents).</li>
+          <li>Aging off parent's plan at 26 (dependents).</li>
+          <li>Employee's Medicare entitlement (dependents).</li>
+        </ul>
+
+        <h2>The cost problem</h2>
+        <p>When employed, your employer pays most of your health insurance premium. Under COBRA, you pay the <strong>full premium plus a 2% administrative fee</strong>. A plan that cost you $150 per month while employed might cost $850 per month under COBRA, because that's what the full plan actually costs.</p>
+        <p>Typical COBRA costs:</p>
+        <ul>
+          <li><strong>Individual:</strong> $550 to $900 per month.</li>
+          <li><strong>Family:</strong> $1,800 to $2,800 per month.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family in Illinois loses group coverage when the primary earner is laid off. COBRA for the family runs $2,100 per month. A comparable Silver Marketplace plan, after premium tax credits based on their reduced income, costs about $520 per month. The Marketplace route saves roughly $1,580 per month, more than $9,000 over a 6-month job search.</p>
+        </div>
+
+        <h2>When COBRA makes sense</h2>
+        <ul>
+          <li>You have ongoing specialists or treatments you can't easily transition.</li>
+          <li>You're in the middle of a deductible year and don't want to reset it.</li>
+          <li>You need short-term coverage (3 to 6 months) while between jobs.</li>
+          <li>You have specific prescriptions tied to your plan's formulary.</li>
+        </ul>
+
+        <h2>When it doesn't</h2>
+        <ul>
+          <li>You qualify for Marketplace subsidies that make ACA coverage far cheaper.</li>
+          <li>You're about to turn 65 and can enroll in Medicare.</li>
+          <li>You can join a spouse's plan (marriage or job change triggers special enrollment).</li>
+        </ul>
+
+        <h2>The ACA alternative</h2>
+        <p>Loss of job-based coverage triggers a Special Enrollment Period on the Marketplace. Many people who would have been stuck with COBRA now qualify for premium subsidies that cut their cost by 50 to 80%. Always compare COBRA cost against a Marketplace plan before electing.</p>
+
+        <h2>The 60-day window</h2>
+        <p>You have <strong>60 days</strong> from your qualifying event (or notice date, whichever is later) to elect COBRA. If you elect, coverage is retroactive to the date you lost coverage, meaning you can wait and see if you need it. If you don't have medical needs during the 60 days, you can decline and choose a cheaper option.</p>
+
+        <h2>State continuation ("mini-COBRA")</h2>
+        <p>Employers with fewer than 20 employees aren't subject to federal COBRA, but many OnePoint states have state continuation laws:</p>
+        <ul>
+          <li><strong>NY</strong> requires continuation up to 36 months.</li>
+          <li><strong>IL, NJ, TX, VA, GA, SC, and others</strong> have varying continuation periods (usually 3 to 18 months).</li>
+          <li><strong>TN, MO, and LA</strong> have weaker state continuation rules.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"COBRA is cheap because it's federal."</strong> The federal part is your right to keep coverage, not a subsidy.</li>
+            <li><strong>"I have to decide within 3 days of losing my job."</strong> You have 60 days to elect and even more time to pay the first premium.</li>
+            <li><strong>"COBRA is always cheaper than the Marketplace."</strong> Often it's dramatically more expensive.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/health">health insurance page</a> covers COBRA alongside Marketplace and short-term options, and our <a href="/blog/short-term-medical">short-term medical</a> post covers bridge coverage alternatives.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Vision Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Health Insurance track</div>
+          <h2>Ready to see how your own coverage stacks up?</h2>
+          <p>A licensed OnePoint advisor can compare your current plan against Marketplace, Medicare, and supplemental options, and tell you exactly where you're over or under covered. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/health-quote" class="btn-white">Get a Health Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_health_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_health_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

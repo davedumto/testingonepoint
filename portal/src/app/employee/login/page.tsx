@@ -181,20 +181,69 @@ export default function EmployeeLoginPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ width: '100%', maxWidth: 420 }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <img src="/logo.webp" alt="OnePoint Insurance Agency" style={{ height: 44, width: 'auto', marginBottom: 16 }} />
-          <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--navy)' }}>
-            {phase === 'totp' ? 'Two-Factor Verification' : 'Employee Portal'}
-          </h1>
-          <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 4 }}>
-            {phase === 'email' && 'Enter your work email to get started'}
-            {phase === 'setup' && 'Set up your password to activate your account'}
-            {phase === 'login' && 'Enter your password to sign in'}
-            {phase === 'totp' && 'Enter the 6-digit code from your authenticator or a backup code'}
+    <div className="login-grid" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', background: 'var(--cream, #faf7f2)' }}>
+      {/* LEFT: Brand pane with image and navy overlay. Hidden on mobile. */}
+      <aside
+        className="login-brand-pane"
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: '100vh',
+          color: '#fff',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '48px 56px',
+          backgroundImage: "linear-gradient(135deg, rgba(5,40,71,0.78) 0%, rgba(10,61,107,0.72) 55%, rgba(5,40,71,0.88) 100%), url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/655d0e076f3e2c0746e6ff53.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div />
+
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 620 }}>
+          <span style={{ display: 'inline-block', padding: '8px 18px', background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.28)', borderRadius: 999, fontSize: 13, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', marginBottom: 28 }}>
+            Team Portal
+          </span>
+          <h2 style={{ fontSize: 'clamp(44px, 4.6vw, 60px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.015em', color: '#fff', marginBottom: 22 }}>
+            Welcome back to OnePoint.
+          </h2>
+          <p style={{ fontSize: 20, lineHeight: 1.55, color: '#fff', opacity: 0.92 }}>
+            Track time, collaborate with the team, and everything else you need to run your day, all in one place.
           </p>
         </div>
+
+        <div />
+      </aside>
+
+      {/* RIGHT: Form pane */}
+      <main style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px', minHeight: '100vh' }}>
+        <div style={{ width: '100%', maxWidth: 440 }}>
+          <div style={{ marginBottom: 32 }}>
+            <img src="/logo.webp" alt="OnePoint Insurance Agency" style={{ height: 96, width: 'auto', display: 'block' }} />
+          </div>
+
+          <div style={{ marginBottom: 28 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--teal, #0d9488)' }}>
+              {phase === 'totp' ? 'Security check' : phase === 'setup' ? 'Activate account' : 'Sign in'}
+            </span>
+            <h1 style={{ fontSize: 30, fontWeight: 700, color: 'var(--navy)', marginTop: 8, letterSpacing: '-0.01em' }}>
+              {phase === 'totp' ? 'Two-factor verification' : phase === 'setup' ? 'Set up your password' : phase === 'login' ? 'Welcome back' : 'Sign in to your account'}
+            </h1>
+            <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 8, lineHeight: 1.55 }}>
+              {phase === 'email' && 'Enter your work email to continue to the team portal.'}
+              {phase === 'setup' && 'Activate your account by creating a secure password.'}
+              {phase === 'login' && 'Enter your password to pick up where you left off.'}
+              {phase === 'totp' && 'Enter the 6-digit code from your authenticator, or use a backup code.'}
+            </p>
+          </div>
+
+          <style>{`
+            @media (max-width: 960px) {
+              .login-grid { grid-template-columns: 1fr !important; }
+              .login-brand-pane { display: none !important; }
+            }
+          `}</style>
 
         {/* Phase 1: Email check */}
         {phase === 'email' && (
@@ -328,7 +377,12 @@ export default function EmployeeLoginPage() {
             </button>
           </form>
         )}
-      </div>
+
+          <p style={{ marginTop: 28, textAlign: 'center', fontSize: 16, color: 'var(--subtle, #8a9baa)' }}>
+            Need help? Contact your administrator or <a href="mailto:info@onepointinsuranceagency.com" style={{ color: 'var(--teal, #0d9488)', fontWeight: 600 }}>info@onepointinsuranceagency.com</a>
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

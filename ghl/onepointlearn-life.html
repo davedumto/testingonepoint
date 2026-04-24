@@ -1,0 +1,1065 @@
+<!--
+  ONEPOINT LEARN: LIFE INSURANCE (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/life
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Life Insurance
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #7c3aed;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Life Insurance</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Life Insurance, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on the policies that actually protect your family, the products that get oversold, and the fine print that quietly decides who gets paid.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~25</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>18</strong><span>states<br>covered</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/life" class="lc-btn lc-btn-ghost">Go to Life Page</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From universal life to beneficiary rules, every product and decision point that actually shapes your coverage.</div>
+      <ul class="art-list">
+        <li>Universal Life</li>
+        <li>IUL</li>
+        <li>Final Expense</li>
+        <li>Annuities</li>
+        <li>Guaranteed Issue</li>
+        <li>Child Policies</li>
+        <li>Beneficiaries</li>
+        <li>Term Conversion</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · Universal Life Insurance</option>
+      <option value="m2">Chapter 2 · Indexed Universal Life (IUL)</option>
+      <option value="m3">Chapter 3 · Final Expense Insurance</option>
+      <option value="m4">Chapter 4 · Annuities</option>
+      <option value="m5">Chapter 5 · Guaranteed Issue Life Insurance</option>
+      <option value="m6">Chapter 6 · Life Insurance for Children</option>
+      <option value="m7">Chapter 7 · Beneficiary Designations</option>
+      <option value="m8">Chapter 8 · Converting Term to Permanent</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">Universal Life Insurance</a></li>
+        <li><a href="#m2" data-mod="2">Indexed Universal Life (IUL)</a></li>
+        <li><a href="#m3" data-mod="3">Final Expense Insurance</a></li>
+        <li><a href="#m4" data-mod="4">Annuities</a></li>
+        <li><a href="#m5" data-mod="5">Guaranteed Issue Life Insurance</a></li>
+        <li><a href="#m6" data-mod="6">Life Insurance for Children</a></li>
+        <li><a href="#m7" data-mod="7">Beneficiary Designations</a></li>
+        <li><a href="#m8" data-mod="8">Converting Term to Permanent</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Life Insurance</div>
+        <h1 class="lmod-title">Universal Life Insurance</h1>
+        <p class="lmod-subtitle">Permanent coverage with flexible premiums.</p>
+        <p class="lmod-lead">Universal life (UL) sits between term and whole life: it offers permanent coverage like whole life, but with the flexibility term doesn't provide. It's one of the most misunderstood products in the industry, the wrong fit for most people, and the right fit for some.</p>
+
+        <h2>How it works</h2>
+        <p>A UL policy has two moving parts. The <strong>death benefit</strong> is what your beneficiaries get when you die. The <strong>cash value</strong> is a savings-like component that earns interest at a declared rate, usually with a guaranteed floor of 2 to 4%.</p>
+        <p>Premiums split between the cost of insurance, fees, and the cash value account. You can increase or decrease your premium within certain limits, skip payments if cash value can cover costs, and change the death benefit later with proof of insurability.</p>
+
+        <h2>Where the flexibility cuts both ways</h2>
+        <p>If the declared interest rate drops or you underfund the policy, the cash value can erode. When cash value hits zero, the policy can lapse, even after decades of payments. UL policies sold in the 1980s at 10%+ projected rates famously collapsed when rates fell.</p>
+
+        <h2>What it costs</h2>
+        <p>A 40-year-old non-smoker male: a $500,000 UL policy runs roughly $180 to $280 per month. The same coverage as 20-year term costs $25 to $40 per month. UL is 6 to 8x more expensive for a reason: you're also building cash value and buying coverage that never expires if properly funded.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>$500,000 UL on a 40-year-old non-smoker male: $180 to $280 per month. The same face amount as 20-year term: $25 to $40 per month. Over 30 years, UL costs roughly $75,000 to $100,000 more in premium, but pays out (and builds cash value) if you live past the term period.</p>
+        </div>
+
+        <h2>When it actually makes sense</h2>
+        <ul>
+          <li>You've maxed out 401(k), IRA, and HSA contributions and want another tax-advantaged vehicle.</li>
+          <li>You have a permanent need: estate planning, or lifelong dependents like a special needs child.</li>
+          <li>Business succession: funding a buy-sell agreement.</li>
+          <li>You want lifetime coverage without whole life's rigid premium.</li>
+        </ul>
+
+        <h2>When it doesn't</h2>
+        <ul>
+          <li>You need a lot of coverage for a defined period (mortgage, kids to adulthood). Term is cheaper and simpler.</li>
+          <li>You haven't maxed out retirement accounts yet, do that first.</li>
+          <li>You can't commit to funding it adequately for decades.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"The cash value is my money."</strong> It is, but accessing it means loans against the policy (with interest) or withdrawals that reduce the death benefit.</li>
+            <li><strong>"The premium is fixed."</strong> It's flexible, which is also how policies quietly lapse.</li>
+            <li><strong>"It's an investment."</strong> It's insurance with a savings feature. Compare its returns to a taxable investment account over 30 years before calling it an investment.</li>
+          </ul>
+        </div>
+
+        <p>For deeper reading, our posts on <a href="/blog/term-life">term life</a> and <a href="/blog/whole-life">whole life</a> cover the two cleaner endpoints. Our <a href="/life">life insurance page</a> covers UL in context.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Indexed Universal Life (IUL)</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Life Insurance</div>
+        <h1 class="lmod-title">Indexed Universal Life (IUL)</h1>
+        <p class="lmod-subtitle">The product that gets oversold.</p>
+        <p class="lmod-lead">IUL is universal life with a twist: the cash value earns interest linked to a stock index (usually the S&amp;P 500) rather than a declared rate. In good years, cash value grows faster. In bad years, a floor prevents losses. It sounds great. It's also one of the most aggressively sold and most frequently misunderstood products in insurance.</p>
+
+        <h2>How the math actually works</h2>
+        <ul>
+          <li><strong>The floor</strong>, usually 0% or 1%. You don't lose money in down market years.</li>
+          <li><strong>The cap</strong>, usually 8 to 12%. Gains above the cap don't count.</li>
+          <li><strong>Participation rate</strong>, you may get 80 to 100% of the index's return up to the cap.</li>
+          <li><strong>Fees</strong>, the cost of insurance rises with age, plus policy charges, plus rider costs. These come out of the cash value.</li>
+        </ul>
+        <p>So if the S&amp;P 500 returns 25% one year, you might get 10% (the cap). If it loses 20%, you get 0%. Over long periods, this usually underperforms direct investment in the index, not because IUL is a scam, but because the caps and fees compress returns.</p>
+
+        <h2>When it can make sense</h2>
+        <ul>
+          <li>Very high earners who've fully used 401(k), IRA, HSA, and backdoor Roth, and want another tax-deferred vehicle.</li>
+          <li>Estate planning for large estates (over current federal exemption).</li>
+          <li>Business owners funding buy-sell agreements.</li>
+          <li>People who genuinely want permanent coverage AND are willing to overfund a policy for decades.</li>
+        </ul>
+
+        <h2>When it's the wrong product</h2>
+        <ul>
+          <li>You're looking for an investment. Use a brokerage account.</li>
+          <li>You're looking for simple life insurance. Use term.</li>
+          <li>You haven't saved enough in retirement accounts yet. Fill those first.</li>
+          <li>You'd have trouble funding it at projected levels for 20+ years.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <p>Same 40-year-old non-smoker male, $500,000 IUL properly funded for cash value growth: $300 to $600 per month. Minimum-funded for coverage only: $150 to $250 per month. Term equivalent: $25 to $40 per month.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>$500,000 IUL on a 40-year-old non-smoker male, properly funded for cash value growth: $300 to $600 per month. Minimum-funded for coverage only: $150 to $250 per month. A comparable 20-year term policy: $25 to $40 per month.</p>
+        </div>
+
+        <h2>The illustration trap</h2>
+        <p>IUL illustrations typically project at 6 to 7% annual crediting rates. State regulators (the <strong>NAIC Actuarial Guideline 49-A</strong>) limit what illustrations can show, but the projections are still just projections, not guarantees. The guaranteed column (usually 2 to 3%) tells you what you're actually promised.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I can't lose money."</strong> The floor protects against index losses, but fees and cost of insurance can still erode cash value.</li>
+            <li><strong>"It's a tax-free retirement account."</strong> Loans against cash value are tax-free if the policy stays in force. If it lapses, the loans become taxable income.</li>
+            <li><strong>"It beats the stock market."</strong> Rarely, once caps and fees are factored in over long time horizons.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> covers IUL alongside term and whole life so you can see the full menu.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Universal Life Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Final Expense Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Life Insurance</div>
+        <h1 class="lmod-title">Final Expense Insurance</h1>
+        <p class="lmod-subtitle">Coverage designed for funerals and final bills.</p>
+        <p class="lmod-lead">Final expense insurance, sometimes called burial insurance or funeral insurance, is a small, simple whole life policy designed to cover funeral costs, medical bills, and small debts left behind. It's aimed at people 50+ who don't have life insurance, can't qualify for traditional coverage, or just want something simple and paid-up.</p>
+
+        <h2>What it covers</h2>
+        <p>Final expense is whole life insurance with a few defining traits:</p>
+        <ul>
+          <li><strong>Smaller death benefits</strong>, usually $5,000 to $50,000.</li>
+          <li><strong>Simplified underwriting</strong>, a few health questions and no medical exam.</li>
+          <li><strong>Guaranteed premiums</strong>, the price never goes up.</li>
+          <li><strong>Guaranteed coverage</strong>, it never expires as long as premiums are paid.</li>
+          <li><strong>Builds cash value</strong>, modestly.</li>
+        </ul>
+
+        <h2>The real cost of a funeral</h2>
+        <p>According to NFDA (National Funeral Directors Association) data, the median cost of a funeral with burial is around $8,000 to $9,500, and cremation with a memorial service runs $6,000 to $7,500. That doesn't include cemetery plots ($1,000 to $4,000) or headstones ($1,000 to $3,000).</p>
+        <p>Most people leave this bill to their family. A $15,000 final expense policy usually covers it.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>Age 50, non-smoker, $15,000 coverage: $35 to $55 per month. Age 60: $55 to $85 per month. Age 70: $95 to $150 per month. Smokers pay roughly 50 to 100% more. Women pay slightly less than men at the same age.</p>
+        </div>
+
+        <h2>Three underwriting tiers</h2>
+        <ul>
+          <li><strong>Level benefit</strong>, best rates, for healthier applicants. Full death benefit from day one.</li>
+          <li><strong>Graded benefit</strong>, for moderate health issues. Limited payout in the first 2 to 3 years, full benefit after.</li>
+          <li><strong>Guaranteed issue</strong>, no health questions, anyone qualifies. Highest premiums, and most policies have a 2 to 3 year waiting period before full payout (return of premium plus interest if death occurs in that window).</li>
+        </ul>
+
+        <h2>When it's the right fit</h2>
+        <ul>
+          <li>Age 50 to 85 without existing life insurance.</li>
+          <li>Health issues that make traditional underwriting expensive or impossible.</li>
+          <li>You want to avoid leaving funeral costs to your kids.</li>
+          <li>You've paid off your term life and still want some coverage.</li>
+        </ul>
+
+        <h2>When it's not</h2>
+        <ul>
+          <li>You're young and healthy. Term life gives you more coverage for less money.</li>
+          <li>You need significant coverage for a mortgage or dependents. Final expense is too small.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"It's just for poor families."</strong> Final expense is bought by plenty of people who simply don't want to burden their family with a $10,000 bill.</li>
+            <li><strong>"Guaranteed issue means instant payout."</strong> Most have a 2-year graded period.</li>
+            <li><strong>"It's the same as pre-paying a funeral home."</strong> Pre-paid funeral contracts lock you to one provider and can be lost in bankruptcy. A life insurance policy pays to whoever you name.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> covers final expense alongside term and whole life.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Indexed Universal Life (IUL)</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Annuities</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Life Insurance</div>
+        <h1 class="lmod-title">Annuities</h1>
+        <p class="lmod-subtitle">What they are, who they're for, and the fine print.</p>
+        <p class="lmod-lead">An annuity is a contract between you and an insurance company where you pay a lump sum (or series of payments) in exchange for future income, often for life. They're sold aggressively, priced complexly, and right for some people and very wrong for others.</p>
+
+        <h2>The four main types</h2>
+        <ul>
+          <li><strong>Fixed annuity</strong>, guaranteed interest rate for a set period. Like a CD from an insurer. Safest, lowest return. Recent rates: 4 to 6%.</li>
+          <li><strong>Fixed indexed annuity</strong>, returns tied to a stock index with a floor and a cap, similar to IUL. Moderate return potential, principal protected.</li>
+          <li><strong>Variable annuity</strong>, cash grows based on investments you choose (sub-accounts like mutual funds). Higher potential, higher risk, higher fees.</li>
+          <li><strong>Immediate annuity</strong>, you pay a lump sum and start receiving income right away, usually for life.</li>
+        </ul>
+
+        <h2>Why people buy them</h2>
+        <ul>
+          <li><strong>Guaranteed income in retirement.</strong> Immediate annuities turn a lump sum into a lifetime paycheck, useful if you're worried about outliving your savings.</li>
+          <li><strong>Tax-deferred growth.</strong> Earnings aren't taxed until withdrawn.</li>
+          <li><strong>Principal protection</strong> on fixed and indexed types.</li>
+        </ul>
+
+        <h2>Why people criticize them</h2>
+        <ul>
+          <li><strong>High fees.</strong> Variable annuities can carry 2 to 3% in annual fees between the mortality and expense charge, sub-account fees, and rider costs.</li>
+          <li><strong>Surrender charges.</strong> Taking money out in the first 5 to 10 years often triggers penalties, sometimes 7 to 10% declining over time.</li>
+          <li><strong>Complexity.</strong> Riders, caps, participation rates, and spreads make apples-to-apples comparison nearly impossible.</li>
+          <li><strong>Commissions.</strong> Annuities pay high commissions (3 to 8%), which can influence who gets sold one.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 65-year-old puts $200,000 into an immediate annuity and receives roughly $1,100 to $1,300 per month for life. If they live to 90, that's around $330,000 to $390,000 in total payments. If they live to 75, the insurer keeps the rest. That is the trade annuities force you to make.</p>
+        </div>
+
+        <h2>Who they're actually right for</h2>
+        <ul>
+          <li>Retirees with enough savings to cover basics but worried about longevity risk.</li>
+          <li>People without pensions who want guaranteed income.</li>
+          <li>High earners who've maxed out retirement accounts and want more tax-deferred growth.</li>
+        </ul>
+
+        <h2>Who they're wrong for</h2>
+        <ul>
+          <li>Anyone who might need the principal back in the first 5 to 10 years.</li>
+          <li>Younger savers who haven't maxed out 401(k), IRA, or HSA.</li>
+          <li>People who can't understand the contract without a financial professional walking through it (that's a sign the product is too complex for the need).</li>
+        </ul>
+
+        <h2>The 1035 exchange</h2>
+        <p>If you already have an annuity or cash-value life policy, you can transfer it to a new one tax-free under IRC Section 1035. Worth doing if rates have improved or your current product has high fees, but surrender charges may still apply.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Annuities are scams."</strong> They're contracts. Some are useful, some are oversold.</li>
+            <li><strong>"My annuity is FDIC-insured."</strong> Annuities aren't FDIC products. They're backed by the insurer and secondarily by state guaranty associations (with state-specific caps).</li>
+            <li><strong>"The income is tax-free."</strong> Withdrawals are taxed as ordinary income on the gains portion.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> covers annuities alongside term, whole, and universal life.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Final Expense Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Guaranteed Issue Life Insurance</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Life Insurance</div>
+        <h1 class="lmod-title">Guaranteed Issue Life Insurance</h1>
+        <p class="lmod-subtitle">Coverage without a medical exam.</p>
+        <p class="lmod-lead">Guaranteed issue life insurance is exactly what it sounds like: the insurer cannot turn you down based on health. No medical exam, no blood draw, sometimes not even health questions. For people with serious health conditions, it's often the only available option.</p>
+
+        <h2>How it works</h2>
+        <ul>
+          <li><strong>No health questions</strong> (or very few).</li>
+          <li><strong>No medical exam.</strong></li>
+          <li><strong>Age limits</strong>, typically 40 to 85, with most policies aimed at 50 to 80.</li>
+          <li><strong>Small coverage amounts</strong>, usually $2,000 to $25,000.</li>
+          <li><strong>Whole life structure</strong>, the premium is fixed for life and coverage never expires.</li>
+          <li><strong>Graded benefit period</strong>, if you die from natural causes in the first 2 to 3 years, the policy returns your premiums plus interest instead of the full death benefit. Accidental deaths are typically covered in full from day one.</li>
+        </ul>
+
+        <h2>What it costs</h2>
+        <p>A 65-year-old for $10,000 guaranteed issue: $65 to $105 per month. A 75-year-old: $120 to $180 per month. Compare to a medically-underwritten term or whole life policy, which could cost 40 to 60% less for healthy applicants.</p>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>$10,000 guaranteed issue on a 65-year-old: $65 to $105 per month. Same coverage on a 75-year-old: $120 to $180 per month. A simplified-issue policy for a healthy applicant at the same ages costs 40 to 60% less.</p>
+        </div>
+
+        <h2>Who it's for</h2>
+        <ul>
+          <li>People declined by traditional life insurance.</li>
+          <li>Serious health conditions: recent cancer, heart disease, advanced diabetes, COPD.</li>
+          <li>Anyone 70+ who wants simple, paid-for coverage without exam logistics.</li>
+          <li>Final expense planning where health disqualifies you from simplified issue.</li>
+        </ul>
+
+        <h2>Who it's not for</h2>
+        <ul>
+          <li>Healthy applicants. You'll pay far more than you need to.</li>
+          <li>People needing large coverage (over $25,000). Guaranteed issue caps are low.</li>
+          <li>Anyone who can qualify for simplified issue (a middle ground with a few health questions and no exam).</li>
+        </ul>
+
+        <h2>The underwriting ladder</h2>
+        <p>From most to least underwriting:</p>
+        <ol>
+          <li><strong>Fully underwritten</strong>, full medical exam, full questionnaire, best rates.</li>
+          <li><strong>Simplified issue</strong>, short questionnaire, no exam, moderate rates.</li>
+          <li><strong>Guaranteed issue</strong>, no questions, no exam, highest rates.</li>
+        </ol>
+        <p>Try to qualify as high on the ladder as you can. Rates drop significantly at each step.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Guaranteed issue means instant payout."</strong> Most have a 2 to 3 year graded period for natural death.</li>
+            <li><strong>"Everyone needs guaranteed issue."</strong> Most people qualify for simplified or fully underwritten. Try those first.</li>
+            <li><strong>"The premium will go up."</strong> With whole life structure, the premium is fixed for life.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> covers guaranteed issue alongside term, whole, and final expense.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Annuities</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Life Insurance for Children</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Life Insurance</div>
+        <h1 class="lmod-title">Life Insurance for Children</h1>
+        <p class="lmod-subtitle">What it actually does, and what it doesn't.</p>
+        <p class="lmod-lead">Buying life insurance on a child is one of the most debated decisions in personal finance. Some advisors call it essential. Others call it unnecessary. The truth is in the middle: it's cheap, it has two specific benefits, and it's rarely a top financial priority.</p>
+
+        <h2>What it covers</h2>
+        <p>A children's whole life policy pays a small death benefit (usually $10,000 to $50,000) and builds a small cash value over time. The premium is locked in for life and is very low because the insured is young and healthy.</p>
+
+        <h2>Why parents buy it</h2>
+        <ul>
+          <li><strong>Lock in insurability.</strong> If the child later develops a serious health condition (Type 1 diabetes, cancer in young adulthood), they already have coverage. Many policies include a <strong>guaranteed insurability rider</strong> letting the child buy additional coverage at standard rates later, regardless of future health.</li>
+          <li><strong>Funeral expenses.</strong> Rare but tragic. A $25,000 policy covers a child's funeral plus lost work time for grieving parents.</li>
+          <li><strong>Inexpensive start to adult coverage.</strong> Cash value grows slowly but is owned by the child at adulthood.</li>
+        </ul>
+
+        <h2>What it actually costs</h2>
+        <ul>
+          <li><strong>$25,000 whole life on a 5-year-old:</strong> $12 to $20 per month.</li>
+          <li><strong>$50,000 whole life on a 5-year-old:</strong> $22 to $35 per month.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">What It Costs</span>
+          <p>$25,000 whole life on a 5-year-old: $12 to $20 per month. $50,000 on the same child: $22 to $35 per month. A child rider on a parent's existing policy adds $5 to $10 per month total and usually covers all current and future children under one rider.</p>
+        </div>
+
+        <h2>Why some advisors push back</h2>
+        <ul>
+          <li><strong>Children typically don't have income to replace.</strong> The financial purpose of life insurance is usually replacing income, which a child doesn't have.</li>
+          <li><strong>The cash value grows slowly.</strong> A 529 plan, custodial brokerage, or UTMA account typically outperforms whole life cash value for college funding or wealth transfer.</li>
+          <li><strong>The parents may be underinsured themselves.</strong> If you haven't maxed out term coverage on yourself first, start there.</li>
+        </ul>
+
+        <h2>A cleaner alternative: riders</h2>
+        <p>Most term or whole life policies on the parent offer a <strong>child rider</strong>, a small amount of coverage ($10,000 to $25,000) on all current and future children for $5 to $10 per month total. It's cheaper than a standalone policy and often covers all your kids under one rider.</p>
+
+        <h2>When a standalone policy might make sense</h2>
+        <ul>
+          <li>Child has a family history of diabetes, early-onset cancer, or other insurability risks.</li>
+          <li>You've already fully funded your own life insurance.</li>
+          <li>You want a specific guaranteed insurability ladder for the child.</li>
+          <li>You've maxed out tax-advantaged alternatives (529, Roth, HSA).</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"It's the best investment I can make for my child."</strong> The returns are low. A 529 or brokerage account usually does more.</li>
+            <li><strong>"It covers college costs."</strong> Cash value grows slowly. A $25,000 policy has maybe $3,000 to $5,000 in cash value at age 18.</li>
+            <li><strong>"It's the only way to protect insurability."</strong> A standalone policy at age 25 is still cheap for a healthy young adult.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> and <a href="/blog/how-much-life-insurance">how much life insurance post</a> walk through how to prioritize your own coverage first.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Guaranteed Issue Life Insurance</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Beneficiary Designations</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Life Insurance</div>
+        <h1 class="lmod-title">Beneficiary Designations</h1>
+        <p class="lmod-subtitle">The document that overrides your will.</p>
+        <p class="lmod-lead">A life insurance beneficiary is the person (or entity) who receives the death benefit. Naming one sounds simple. Done wrong, it triggers probate, tax consequences, family disputes, and delayed payouts. Done right, it transfers money to the people you care about within weeks of a death.</p>
+
+        <h2>Primary vs. contingent</h2>
+        <ul>
+          <li><strong>Primary beneficiary</strong>, receives the death benefit if alive.</li>
+          <li><strong>Contingent beneficiary</strong>, receives it if the primary is deceased.</li>
+        </ul>
+        <p>Always name both. A policy with no contingent and a deceased primary pays into your estate, which means probate, creditor claims, and months of delay.</p>
+
+        <h2>Per stirpes vs. per capita</h2>
+        <p>If you name your three adult children as equal primary beneficiaries and one dies before you, what happens to their share?</p>
+        <ul>
+          <li><strong>Per stirpes</strong>, their share passes to their children (your grandkids).</li>
+          <li><strong>Per capita</strong>, their share gets redistributed among the surviving siblings.</li>
+        </ul>
+        <p>Most people with kids and grandkids want per stirpes. It's one word that changes who inherits.</p>
+
+        <h2>Beneficiary designations override your will</h2>
+        <p>This is the part that trips people up. If your will says "everything to my spouse" but your old life insurance lists your ex-spouse as beneficiary, the ex-spouse gets the money. Courts have enforced this over and over, because the beneficiary form is a contract, not a suggestion.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A policyholder updates his will after divorce to leave "everything" to his new spouse, but never updates the $500,000 life insurance beneficiary form naming his ex-wife. He dies five years later. The ex-wife receives the full $500,000. The new spouse has no claim. Federal and state courts have upheld this outcome repeatedly.</p>
+        </div>
+
+        <p>Review beneficiaries after:</p>
+        <ul>
+          <li>Marriage.</li>
+          <li>Divorce.</li>
+          <li>A child's birth.</li>
+          <li>A beneficiary's death.</li>
+          <li>Any major financial change.</li>
+        </ul>
+
+        <h2>Minor children as beneficiaries</h2>
+        <p>You can name a minor, but insurers won't pay the money directly to them. The funds go into a court-supervised account until the child turns 18 (or 21 in some states). A better approach:</p>
+        <ul>
+          <li>Name a <strong>trust</strong> for the child, with a trustee you choose.</li>
+          <li>Name an adult guardian as custodian under UTMA (Uniform Transfers to Minors Act).</li>
+          <li>Name your spouse with instructions to provide for the children.</li>
+        </ul>
+
+        <h2>Special situations</h2>
+        <ul>
+          <li><strong>Blended families</strong>, consider naming a trust to manage how funds are split between current spouse and kids from a prior marriage.</li>
+          <li><strong>Special needs child</strong>, use a Special Needs Trust so the inheritance doesn't disqualify them from Medicaid or SSI.</li>
+          <li><strong>Estate tax planning</strong>, large estates may benefit from an Irrevocable Life Insurance Trust (ILIT), which keeps the death benefit out of the taxable estate.</li>
+        </ul>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My will controls it."</strong> It doesn't. The beneficiary form does.</li>
+            <li><strong>"It automatically updates after divorce."</strong> Some states automatically revoke ex-spouse designations, most don't. Update it yourself.</li>
+            <li><strong>"My kids will figure it out."</strong> Without a contingent beneficiary, they might figure it out in probate court.</li>
+          </ul>
+        </div>
+
+        <p>Our <a href="/life">life insurance page</a> covers beneficiary best practices, and <a href="/blog/how-much-life-insurance">how much life insurance</a> covers sizing your coverage.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Life Insurance for Children</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Converting Term to Permanent</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Life Insurance</div>
+        <h1 class="lmod-title">Converting Term to Permanent</h1>
+        <p class="lmod-subtitle">The option most people don't know they have.</p>
+        <p class="lmod-lead">Most term life policies include a conversion option, the right to switch all or part of your term coverage to permanent coverage without a new medical exam. It's a quiet feature that can be enormously valuable if your health changes, and it's one of the most underused tools in life insurance.</p>
+
+        <h2>How it works</h2>
+        <ul>
+          <li>During the conversion period (usually the first 10 to 20 years, or before a specific age like 65 to 70), you can convert some or all of your term coverage to a permanent policy (whole life, universal life, or IUL) offered by the same insurer.</li>
+          <li><strong>No medical exam required.</strong></li>
+          <li><strong>Premium is based on your age at conversion</strong>, not your original age.</li>
+          <li>Your original health class (preferred, standard, etc.) usually carries over.</li>
+        </ul>
+
+        <h2>Why it matters</h2>
+        <p>Life changes. You may be diagnosed with a condition that would make you uninsurable today. Conversion locks in your insurability. You can still get permanent coverage at standard rates even after a cancer diagnosis, heart attack, or new disability.</p>
+
+        <h2>When conversion is worth considering</h2>
+        <ul>
+          <li><strong>Health change.</strong> If you've been diagnosed with anything that would make new underwriting expensive or impossible, convert before your term ends.</li>
+          <li><strong>Permanent need emerges.</strong> You have a lifelong dependent, an estate planning need, or a business succession need that didn't exist when you bought term.</li>
+          <li><strong>Term is about to expire</strong> and you still need coverage. Converting is usually cheaper than buying new permanent coverage at older age with current health.</li>
+        </ul>
+
+        <h2>When it's not worth it</h2>
+        <ul>
+          <li>You're healthy and your term policy has many years left. Wait, you may decide you don't need lifetime coverage.</li>
+          <li>You can afford to buy new permanent coverage with underwriting. It's often cheaper than converting.</li>
+        </ul>
+
+        <h2>The math</h2>
+        <p>A 45-year-old converting a $500,000 term policy to whole life: $600 to $900 per month. Compare to the $30 to $50 per month they were paying for term. The cost shock is real: permanent coverage is 15 to 20x more expensive than term.</p>
+        <p>A smart middle ground: convert <strong>part</strong> of the policy. A $500,000 term policy can often be converted to $100,000 of permanent coverage, leaving the rest as term until expiration.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 45-year-old pays $40 per month for a $500,000 term policy. A cancer diagnosis at age 52 would make new underwriting impossible. She uses her conversion option to move $150,000 of the term to whole life at $220 per month (her age 52 rate, no medical exam). The remaining $350,000 stays as term until expiration. Without the conversion option, she would have $0 in permanent coverage.</p>
+        </div>
+
+        <h2>Deadlines matter</h2>
+        <p>Conversion windows are time-limited. A 20-year term with a "conversion rider" may only allow conversion in the first 10 years, or until age 65, whichever comes first. Check your specific policy. Miss the window and the option disappears.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I can convert any time I want."</strong> Only during the conversion period in your policy.</li>
+            <li><strong>"Conversion requires a medical exam."</strong> It doesn't. That's the whole point.</li>
+            <li><strong>"My rates stay the same."</strong> They're based on your age at conversion, which is almost always higher than your original age.</li>
+          </ul>
+        </div>
+
+        <p>Our posts on <a href="/blog/term-life">term life</a> and <a href="/blog/whole-life">whole life</a> cover the two ends of this conversion. Our <a href="/life">life insurance page</a> covers term-to-permanent strategy for people approaching conversion decisions.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Beneficiary Designations</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Life Insurance track</div>
+          <h2>Ready to see how your own coverage stacks up?</h2>
+          <p>A licensed OnePoint advisor can review your existing policies, spot the gaps, and tell you exactly where term, whole, universal, or final expense fits your situation. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/life" class="btn-white">Get a Life Quote</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_life_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_life_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

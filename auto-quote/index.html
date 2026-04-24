@@ -3408,6 +3408,19 @@ function buildPDF(d){
     goto(0);
   }
 
+  // Pre-fill ZIP from URL parameter and auto-advance
+  var urlParams = new URLSearchParams(window.location.search);
+  var preZip = urlParams.get('zip');
+  if(preZip && preZip.length === 5 && /^\d{5}$/.test(preZip)){
+    var zipField = $('q_zip');
+    if(zipField){
+      zipField.value = preZip;
+      refreshNextButton();
+      // Auto-advance past ZIP slide after a brief moment
+      setTimeout(function(){ if(cur === 0) next(); }, 400);
+    }
+  }
+
   // initial render
   renderVehicleList();
 })();

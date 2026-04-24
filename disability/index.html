@@ -199,8 +199,16 @@
   }
   .dis-portrait::before {
     content: ''; position: absolute; inset: 0;
-    background: url('../disability.jpg') center/cover no-repeat;
+    background: url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0ed643dbee4f1d79e75.png') center/cover no-repeat;
+    transition: opacity .6s ease;
   }
+  /* Preload hero images for smooth switching */
+  .dis-portrait .dis-hero-img {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity .6s ease;
+  }
+  .dis-portrait .dis-hero-img.active { opacity: 1; }
   .dis-portrait::after {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(90deg, rgba(5,40,71,1) 0%, rgba(5,40,71,.65) 18%, rgba(5,40,71,0) 45%);
@@ -350,10 +358,10 @@
     <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
-        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <button onclick="toggleMega(this)">Shop Insurance <span class="caret">▾</span></button>
         <div class="mega-menu">
           <div class="mega-sidebar">
-            <button class="mega-tab active" onclick="switchTab(this,'ins')">Insurance &amp; more</button>
+            <button class="mega-tab active" onclick="switchTab(this,'ins')">Shop Insurance</button>
           </div>
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
@@ -427,7 +435,7 @@
                   <li><a href="../business/">General Liability</a></li>
                   <li><a href="../business/#cauto">Commercial Auto</a></li>
                   <li><a href="../business/#truck">Trucking</a></li>
-                  <li><a href="../business/#cyber">Cyber</a></li>
+                  <li><a href="../business/#cyber">Cyber Insurance</a></li>
                   <li><a href="../business/#prop">Commercial Property</a></li>
                   <li><a href="../business/#pl">Professional Liability</a></li>
                   <li><a href="../business/#mal">Malpractice</a></li>
@@ -438,7 +446,6 @@
                   <li><a href="../business/#uml">Commercial Umbrella</a></li>
                   <li><a href="../business/#garage">Garage</a></li>
                   <li><a href="../business/#event">Event Insurance</a></li>
-                  <li><a href="../business/#travel">Travel Insurance</a></li>
                 </ul>
               </div>
             </div>
@@ -554,6 +561,12 @@
       </div>
 
       <div class="dis-portrait" role="img" aria-label="Worker protected by OnePoint disability income insurance">
+        <div class="dis-hero-img active" data-hero="overview" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/6890c0ed643dbee4f1d79e75.png')"></div>
+        <div class="dis-hero-img" data-hero="individual" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68913409711f89c2a261807f.png')"></div>
+        <div class="dis-hero-img" data-hero="short" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68af3af42c36670e95a5a329.png')"></div>
+        <div class="dis-hero-img" data-hero="long" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68af7579cf02b62ffdc406d0.png')"></div>
+        <div class="dis-hero-img" data-hero="group" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68af08a75ee8e0a06dc3987b.png')"></div>
+        <div class="dis-hero-img" data-hero="boe" style="background-image:url('https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68913409a6e2a24fe1ea5184.png')"></div>
         <div class="dis-portrait-tag">
           <span class="big">As low as $25/mo</span>
           <span class="small">Own your policy. Keep it if you change jobs. Starts covering illness &amp; injury on day one.</span>
@@ -668,7 +681,7 @@
           <a href="../book/" class="btn btn-orange" style="margin-top:32px">Get a Disability Quote</a>
         </div>
         <div class="split-img">
-          <img src="../people-first.jpg" alt="Professional protected by disability income coverage" loading="lazy">
+          <img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/68913409a6e2a2ded2ea5185.png" alt="Arm in sling — disability income protection" loading="lazy">
         </div>
       </div>
     </div>
@@ -813,7 +826,7 @@
         </div>
       </div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/resources">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
       <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="../book/">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div><div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon-Fri, 9am-6pm ET</div></div></div>
     </div>
@@ -847,8 +860,8 @@ const disData = {
 // page copy verbatim — clicking the Overview tab restores the page to its default state.
 const disabilitySwap = {
   overview: {
-    heroH1: "If your paycheck stops, we keep it <span class=\"underline\">coming.</span>",
-    heroLead: "1 in 4 working Americans will face a disability lasting 90+ days before they retire. Don't let a bad diagnosis cost you your rent, your groceries, or your kids' plans — insure the asset that pays for all of it.",
+    heroH1: "If your paycheck stops — how long would you <span class=\"underline\">last?</span>",
+    heroLead: "1 in 4 working Americans face a disability lasting 90+ days before retirement. For someone earning $100K/year, that's $3M+ of lifetime income on the line — insure the asset that pays for everything else.",
     coverKicker: "Coverage Types",
     coverH2: "Three paths to income protection — each built for a different situation.",
     coverBody: "Disability coverage isn't one-size-fits-all. Your recovery timeline, work situation, and financial obligations all shape which type of policy makes the most sense.",
@@ -858,8 +871,8 @@ const disabilitySwap = {
     finalCtaLead: "A licensed advisor will walk you through individual, employer, and business coverage options — and find the policy that fits your income, your recovery risk, and your life."
   },
   individual: {
-    heroH1: "Individual Disability Income",
-    heroLead: "A personal policy you own — and keep when you change jobs — that pays a contracted monthly benefit if you can't work.",
+    heroH1: "Your lifetime earnings are your biggest <span class=\"underline\">unprotected</span> asset.",
+    heroLead: "$100K/year compounds to $3M+ over 30 years. $200K/year, to $6M+. Individual DI is a personal policy that owns that number — it follows you through every job change and pays a contracted monthly benefit if you can't work.",
     coverKicker: "What's Covered",
     coverH2: "Income protection that goes wherever you do.",
     coverBody: "Individual DI is best-in-class coverage for professionals and high earners. Pays a monthly benefit based on your pre-disability income, often with own-occupation language so partial disability still pays — even if you can do a different job.",
@@ -869,8 +882,8 @@ const disabilitySwap = {
     finalCtaLead: "Get a personalized individual DI quote and own a policy that follows you through every job change."
   },
   short: {
-    heroH1: "Short-Term Disability",
-    heroLead: "Benefits that kick in within 1–14 days and last up to 3–6 months — built for surgery recovery, maternity leave, or temporary illness.",
+    heroH1: "Most people can't afford to miss <span class=\"underline\">one</span> paycheck. Can you?",
+    heroLead: "$4,000/mo out for 2 months = $8,000 gone. Short-term DI kicks in within 1–14 days of an approved claim and pays 60–70% of your income for 3–6 months — the window that causes most financial stress.",
     coverKicker: "What's Covered",
     coverH2: "Fast benefits when you can't work for weeks.",
     coverBody: "Short-term disability typically replaces 60–70% of your gross income for 3–6 months after a brief elimination period. Built to bridge the gap between an injury or illness and your return to work — or until long-term coverage takes over.",
@@ -880,14 +893,14 @@ const disabilitySwap = {
     finalCtaLead: "Affordable monthly premiums and benefits that start within days of an approved claim."
   },
   long: {
-    heroH1: "Long-Term Disability",
-    heroLead: "Coverage for serious conditions — cancer, stroke, chronic illness, major injury — with benefits that can continue for years.",
+    heroH1: "A long-term disability can cost you <span class=\"underline\">millions</span> in lost income.",
+    heroLead: "$80K/yr out 5 years = $400K lost. $120K/yr out 10 years = $1.2M lost. Long-term DI replaces 50–70% of your income after a 90–180-day wait and keeps paying for years — or all the way to retirement.",
     coverKicker: "What's Covered",
     coverH2: "Protection for the diagnoses that change everything.",
     coverBody: "Long-term disability replaces a portion of your income (typically 50–70%) after a 90–180-day elimination period. Benefits can continue for 2 years, 5 years, or all the way to retirement age depending on the policy you choose.",
     midCtaH2: "Cover the years your career can't.",
     midCtaLead: "1 in 4 working Americans will face a disability lasting 90+ days before they retire.",
-    finalCtaH2: "Get long-term disability coverage.",
+    finalCtaH2: "Short-term problems pass. Long-term income loss doesn't.",
     finalCtaLead: "Lock in income protection while you're healthy and watch the years of coverage stack up cheaply."
   },
   group: {
@@ -933,6 +946,8 @@ function selectDis(v){
   document.getElementById('dp-title').textContent = disData[v].name;
   document.getElementById('dp-desc').textContent = disData[v].desc;
   swapDisabilityCopy(v);
+  // Switch hero portrait image
+  document.querySelectorAll('.dis-hero-img').forEach(img => img.classList.toggle('active', img.dataset.hero === v));
 }
 function dpQuote(e){
   e.preventDefault();

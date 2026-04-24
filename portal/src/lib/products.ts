@@ -42,16 +42,23 @@ export const ALL_PRODUCTS: InsuranceProduct[] = [
   { name: 'Professional Liability', category: 'business', description: 'Errors & omissions coverage for service-based businesses.', icon: '⚖️', bundlesWith: ['General Liability'] },
 ];
 
+// Tier ladder per client portal spec — 6 levels, keyed to active policy count.
+// Colors kept in the brand navy family with accent shifts; the User.tier enum
+// in models/User.ts is the canonical data type, this is display config.
 export const TIER_CONFIG = {
-  bronze: { min: 1, max: 1, label: 'Bronze', color: '#cd7f32', next: 'Silver' },
-  silver: { min: 2, max: 2, label: 'Silver', color: '#c0c0c0', next: 'Platinum' },
-  platinum: { min: 3, max: 3, label: 'Platinum', color: '#6f88a0', next: 'Emerald' },
-  emerald: { min: 4, max: Infinity, label: 'Emerald', color: '#047857', next: null },
+  bronze:   { min: 1, max: 1,        label: 'Bronze',   color: '#7a4a1f', next: 'Silver' },
+  silver:   { min: 2, max: 2,        label: 'Silver',   color: '#5a6c7e', next: 'Gold' },
+  gold:     { min: 3, max: 3,        label: 'Gold',     color: '#8a6a00', next: 'Platinum' },
+  platinum: { min: 4, max: 4,        label: 'Platinum', color: '#0a3d6b', next: 'Emerald' },
+  emerald:  { min: 5, max: 5,        label: 'Emerald',  color: '#0a7d4a', next: 'Crown' },
+  crown:    { min: 6, max: Infinity, label: 'Crown',    color: '#052847', next: null },
 };
 
 export function getTier(policyCount: number) {
-  if (policyCount >= 4) return TIER_CONFIG.emerald;
-  if (policyCount === 3) return TIER_CONFIG.platinum;
+  if (policyCount >= 6) return TIER_CONFIG.crown;
+  if (policyCount === 5) return TIER_CONFIG.emerald;
+  if (policyCount === 4) return TIER_CONFIG.platinum;
+  if (policyCount === 3) return TIER_CONFIG.gold;
   if (policyCount === 2) return TIER_CONFIG.silver;
   if (policyCount === 1) return TIER_CONFIG.bronze;
   return { min: 0, max: 0, label: 'No Tier', color: '#8a9baa', next: 'Bronze' };
@@ -75,4 +82,59 @@ export function getRecommendations(existingProducts: string[]): InsuranceProduct
   scored.sort((a, b) => b.score - a.score || a.product.name.localeCompare(b.product.name));
 
   return scored.map(s => s.product);
+}
+
+export interface CrossSellRec {
+  productKey: string;     // matches QUOTE_CATALOG key — lets the UI deep-link to the right quote form
+  productName: string;
+  reason: string;          // why this is being shown, client-friendly
+  priority: number;        // higher = more prominent
+}
+
+// Rule-based cross-sell engine per spec §14. Takes the client's existing
+// policies + a minimal profile flag (has a business? has a home?) and
+// returns ordered recommendations with human-readable reasons.
+//
+// This is intentionally hand-rolled (no ML, no A/B) — the spec enumerates
+// concrete bundling scenarios and we implement each as a rule. Easy to
+// add/remove rules as the business learns what converts.
+export function getCrossSellRecommendations(args: {
+  categories: string[];      // Policy.productCategory values the client has active
+  hasBusinessName: boolean;  // User.businessName is set
+}): CrossSellRec[] {
+  const has = (cat: string) => args.categories.includes(cat);
+  const recs: CrossSellRec[] = [];
+
+  // Auto-only: push home + life. Spec quote: "Bundle your home and save up to 25%"
+  if (has('auto') && !has('home')) {
+    recs.push({ productKey: 'home', productName: 'Homeowners', reason: 'Bundle your home with auto and save up to 25%.', priority: 100 });
+  }
+  if (has('auto') && !has('life')) {
+    recs.push({ productKey: 'life', productName: 'Life Insurance', reason: 'Protect your family\'s income with life insurance.', priority: 80 });
+  }
+
+  // Auto + Home: push umbrella (major coverage gap) + life.
+  if (has('auto') && has('home') && !args.categories.includes('umbrella')) {
+    recs.push({ productKey: 'home', productName: 'Umbrella Coverage', reason: 'Add $1M+ liability above your auto and home.', priority: 95 });
+  }
+
+  // Business client rules — three heaviest cross-sells
+  if (args.hasBusinessName || has('business')) {
+    recs.push({ productKey: 'wc', productName: 'Workers Compensation', reason: 'Most states require it once you have employees.', priority: 90 });
+    recs.push({ productKey: 'comm-auto', productName: 'Commercial Auto', reason: 'Personal auto won\'t cover business use — close the gap.', priority: 85 });
+    recs.push({ productKey: 'cyber', productName: 'Cyber Insurance', reason: 'Ransomware + breach response, essential for modern businesses.', priority: 80 });
+  }
+
+  // Health-adjacent: push disability for income protection when client has health but no DI
+  if (has('health') && !has('disability')) {
+    recs.push({ productKey: 'disability', productName: 'Disability Income', reason: 'Covers 60-70% of income if you can\'t work.', priority: 70 });
+  }
+
+  // Dedupe by productKey (keep highest priority) and sort
+  const dedup = new Map<string, CrossSellRec>();
+  for (const r of recs) {
+    const existing = dedup.get(r.productKey);
+    if (!existing || r.priority > existing.priority) dedup.set(r.productKey, r);
+  }
+  return Array.from(dedup.values()).sort((a, b) => b.priority - a.priority);
 }

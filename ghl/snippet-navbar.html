@@ -1,0 +1,227 @@
+<!--
+  ONEPOINT NAVBAR — Global Snippet
+  Paste this into GHL: Settings → Custom Code → Header
+  All paths are absolute so it works on any page.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Disabled state for portal links (coming soon) */
+.is-disabled { opacity: .55; cursor: not-allowed; pointer-events: none; }
+/* NAV VARIABLES */
+:root {
+  --navy: #052847; --blue: #0a3d6b; --blue-dark: #052847; --blue-light: #e0ecff;
+  --orange: #0a3d6b; --orange-dark: #052847;
+  --text: #1a2e42; --muted: #5a6c7e; --subtle: #8a9baa;
+  --border: #dde4ed; --bg: #f4f7fb; --white: #fff;
+  --radius: 12px; --radius-sm: 8px;
+  --shadow-lg: 0 16px 56px rgba(5,40,71,.20);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+.site-nav { position: sticky; top: 0; z-index: 200; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 2px 8px rgba(5,40,71,.06); }
+.nav-inner { display: flex; align-items: center; height: 110px !important; gap: 0; max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.nav-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; margin-right: 28px; flex-shrink: 0; }
+.site-nav .nav-brand-logo, img.nav-brand-logo { height: 50px !important; max-height: 50px !important; width: auto !important; max-width: none !important; display: block !important; }
+.nav-links { list-style: none; display: flex; align-items: center; gap: 2px; flex: 1; }
+.nav-links > li { position: relative; }
+.nav-links > li > a, .nav-links > li > button { display: flex; align-items: center; gap: 4px; padding: 8px 14px; border-radius: var(--radius-sm); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); background: none; border: none; cursor: pointer; white-space: nowrap; transition: .15s; }
+.nav-links > li > a:hover, .nav-links > li > button:hover { background: var(--bg); color: var(--blue); }
+.nav-links > li > button .caret { font-size: 10px; color: var(--muted); transition: transform .2s; margin-left: 2px; }
+.nav-links > li.open > button .caret { transform: rotate(180deg); }
+.nav-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; flex-shrink: 0; }
+.nav-phone { font-size: 14px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+.nav-phone a { color: var(--navy); }
+.nav-cta { padding: 9px 20px; border-radius: var(--radius-sm); background: var(--navy); color: #fff; font-size: 14px; font-weight: 600; transition: .2s; text-decoration: none; white-space: nowrap; }
+.nav-cta:hover { background: #031d33; }
+.nav-cta.nav-cta-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); padding: 7px 18px; }
+.nav-cta.nav-cta-ghost:hover { background: var(--navy); color: #fff; }
+.mega-menu { position: fixed; top: 110px; left: 50%; transform: translateX(-50%); display: none; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-lg); min-width: 900px; overflow: hidden; }
+.nav-links > li.open .mega-menu { display: flex; }
+.mega-sidebar { display: none; }
+.mega-content { flex: 1; padding: 24px; }
+.mega-panel { display: none; }
+.mega-panel.active { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 22px; }
+.mega-col h5 { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.mega-col ul { list-style: none; }
+.mega-col ul li a { display: block; padding: 5px 0; font-size: 14px; color: var(--text); transition: .15s; }
+.mega-col ul li a:hover { color: var(--blue); padding-left: 4px; }
+/* Compact dropdown (used for simple nav items like About Us) */
+.nav-dropdown { position: absolute; top: calc(100% + 6px); left: 0; display: none; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-lg); min-width: 180px; overflow: hidden; z-index: 210; padding: 6px 0; }
+.nav-links > li.open .nav-dropdown { display: block; }
+.nav-dropdown a { display: block; padding: 9px 18px; font-size: 14px; color: var(--text); white-space: nowrap; transition: .15s; }
+.nav-dropdown a:hover { background: var(--bg); color: var(--blue); }
+/* Mobile nav */
+.nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; margin-left: auto; flex-direction: column; gap: 5px; z-index: 300; }
+.nav-mobile-toggle span { display: block; width: 24px; height: 2.5px; background: var(--navy); border-radius: 2px; transition: .2s; }
+.nav-mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-mobile-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+.nav-mobile-menu { display: none; position: fixed; inset: 0; top: 110px; background: #fff; z-index: 250; overflow-y: auto; padding: 24px 28px 80px; flex-direction: column; gap: 4px; }
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a { display: block; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); }
+.nav-mobile-menu a:hover { color: var(--blue); }
+.nav-mobile-menu .m-group { border-bottom: 1px solid var(--border); }
+.nav-mobile-menu .m-group-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--navy); background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
+.nav-mobile-menu .m-group-btn .m-caret { font-size: 12px; color: var(--muted); transition: transform .2s; }
+.nav-mobile-menu .m-group.open .m-group-btn .m-caret { transform: rotate(180deg); }
+.nav-mobile-menu .m-group-items { display: none; padding: 4px 0 10px; }
+.nav-mobile-menu .m-group.open .m-group-items { display: block; }
+.nav-mobile-menu .m-group-items a { padding: 9px 0 9px 14px; font-size: 14px; font-weight: 500; color: var(--text); border-bottom: none; }
+.nav-mobile-menu .m-group-items a:hover { color: var(--blue); }
+.nav-mobile-menu .mobile-cta { display: block; margin-top: 20px; padding: 16px; background: var(--navy); color: #fff; text-align: center; font-size: 15px; font-weight: 700; border-radius: 8px; text-decoration: none; border: none; }
+.nav-mobile-menu .mobile-phone { display: block; margin-top: 12px; text-align: center; font-size: 14px; color: var(--muted); }
+.nav-mobile-menu .mobile-phone a { display: inline; border: none; padding: 0; font-weight: 700; color: var(--navy); }
+@media (max-width: 960px) {
+  .mega-menu { min-width: 0; width: calc(100vw - 40px); max-width: 900px; left: 50%; transform: translateX(-50%); }
+  .mega-panel.active { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-actions { display: none; }
+  .mega-menu { display: none !important; }
+  .nav-mobile-toggle { display: flex; }
+  .nav-inner { height: 64px !important; padding: 0 16px; }
+  .site-nav .nav-brand-logo, img.nav-brand-logo { height: 40px !important; max-height: 40px !important; }
+  .nav-mobile-menu { top: 64px; }
+}
+</style>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="https://onepointinsuranceagency.com/homepage" class="nav-brand"><img src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69cefb46849c507b52617aaf.svg" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
+    <ul class="nav-links">
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">Shop Insurance <span class="caret">&#9662;</span></button>
+        <div class="mega-menu">
+          <div class="mega-content">
+            <div class="mega-panel active" id="panel-ins">
+              <div class="mega-col"><h5>Auto</h5><ul><li><a href="https://onepointinsuranceagency.com/auto-insurance">Auto Insurance</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#classic">Antique / Classic Car</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#atv">ATV</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#motorcycle">Motorcycle</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#rv">RV &amp; Travel Trailer</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#boat">Boat &amp; Watercraft</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#snowmobile">Snowmobile</a></li><li><a href="https://onepointinsuranceagency.com/auto-insurance#scooter">Scooter</a></li></ul></div>
+              <div class="mega-col"><h5>Homeowners</h5><ul><li><a href="https://onepointinsuranceagency.com/home">Homeowners</a></li><li><a href="https://onepointinsuranceagency.com/home#condo">Condo</a></li><li><a href="https://onepointinsuranceagency.com/home#mobile">Mobile Home</a></li><li><a href="https://onepointinsuranceagency.com/home#renters">Renters</a></li><li><a href="https://onepointinsuranceagency.com/home#flood">Flood</a></li><li><a href="https://onepointinsuranceagency.com/home#landlord">Landlord</a></li><li><a href="https://onepointinsuranceagency.com/home#umbrella">Umbrella</a></li></ul></div>
+              <div class="mega-col"><h5>Health</h5><ul><li><a href="https://onepointinsuranceagency.com/health">Health ACA</a></li><li><a href="https://onepointinsuranceagency.com/health#short">Short-Term Medical</a></li><li><a href="https://onepointinsuranceagency.com/health#dentalvision">Dental &amp; Vision</a></li><li><a href="https://onepointinsuranceagency.com/health#medicare">Medicare Advantage</a></li><li><a href="https://onepointinsuranceagency.com/health#accident">Accident</a></li><li><a href="https://onepointinsuranceagency.com/health#hospital">Hospitalization</a></li><li><a href="https://onepointinsuranceagency.com/health#group">Group Health</a></li><li><a href="https://onepointinsuranceagency.com/health#travel">International Travel</a></li><li><a href="https://onepointinsuranceagency.com/health#critical">Critical Illness</a></li></ul></div>
+              <div class="mega-col"><h5>Life</h5><ul><li><a href="https://onepointinsuranceagency.com/life">Term Life</a></li><li><a href="https://onepointinsuranceagency.com/life#whole">Whole Life</a></li><li><a href="https://onepointinsuranceagency.com/life#final">Final Expense</a></li><li><a href="https://onepointinsuranceagency.com/life#iul">Indexed Universal Life</a></li><li><a href="https://onepointinsuranceagency.com/life#annuity">Annuity</a></li><li><a href="https://onepointinsuranceagency.com/life#group">Group Life</a></li></ul></div>
+              <div class="mega-col"><h5>Disability</h5><ul><li><a href="https://onepointinsuranceagency.com/disability-insurance">Disability Income</a></li><li><a href="https://onepointinsuranceagency.com/disability-insurance#individual">Individual DI</a></li><li><a href="https://onepointinsuranceagency.com/disability-insurance#long">Long-Term</a></li><li><a href="https://onepointinsuranceagency.com/disability-insurance#short">Short-Term</a></li><li><a href="https://onepointinsuranceagency.com/disability-insurance#group">Group Disability</a></li><li><a href="https://onepointinsuranceagency.com/disability-insurance#boe">Business Overhead</a></li></ul></div>
+              <div class="mega-col"><h5>Business</h5><ul><li><a href="https://onepointinsuranceagency.com/business">General Liability</a></li><li><a href="https://onepointinsuranceagency.com/business#prop">Commercial Property</a></li><li><a href="https://onepointinsuranceagency.com/business#bop">Business Owners (BOP)</a></li><li><a href="https://onepointinsuranceagency.com/business#uml">Commercial Umbrella</a></li><li><a href="https://onepointinsuranceagency.com/business#wc">Workers' Comp</a></li><li><a href="https://onepointinsuranceagency.com/business#cauto">Commercial Auto</a></li><li><a href="https://onepointinsuranceagency.com/business#truck">Trucking</a></li><li><a href="https://onepointinsuranceagency.com/business#garage">Garage Insurance</a></li><li><a href="https://onepointinsuranceagency.com/business#pl">Professional Liability</a></li><li><a href="https://onepointinsuranceagency.com/business#mal">Malpractice</a></li><li><a href="https://onepointinsuranceagency.com/business#cyber">Cyber Insurance</a></li><li><a href="https://onepointinsuranceagency.com/business#liq">Liquor Liability</a></li><li><a href="https://onepointinsuranceagency.com/business#sport">Sport Insurance</a></li><li><a href="https://onepointinsuranceagency.com/business#event">Event Insurance</a></li></ul></div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="has-mega">
+        <button onclick="toggleMega(this)">About Us <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown">
+          <a href="https://onepointinsuranceagency.com/about-us">About Us</a>
+          <a href="https://onepointinsuranceagency.com/onepointblog/">Blog</a>
+          <a href="https://onepointinsuranceagency.com/resources">Learn</a>
+        </div>
+      </li>
+      <li><a href="https://onepointinsuranceagency.com/contact-us">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-phone"><a href="tel:888-899-8117">1-888-899-8117</a></span>
+      <span class="nav-cta nav-cta-ghost is-disabled" role="link" aria-disabled="true" title="Client Portal — coming soon">Client Portal</span>
+      <a href="https://onepointinsuranceagency.com/book-call" class="nav-cta">Book Appointment</a>
+    </div>
+    <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Auto Insurance<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/auto-insurance">Auto Insurance</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#classic">Antique / Classic Car</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#atv">ATV</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#motorcycle">Motorcycle</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#rv">RV &amp; Travel Trailer</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#boat">Boat &amp; Watercraft</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#snowmobile">Snowmobile</a>
+      <a href="https://onepointinsuranceagency.com/auto-insurance#scooter">Scooter</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Homeowners<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/home">Homeowners</a>
+      <a href="https://onepointinsuranceagency.com/home#condo">Condo</a>
+      <a href="https://onepointinsuranceagency.com/home#mobile">Mobile Home</a>
+      <a href="https://onepointinsuranceagency.com/home#renters">Renters</a>
+      <a href="https://onepointinsuranceagency.com/home#flood">Flood</a>
+      <a href="https://onepointinsuranceagency.com/home#landlord">Landlord</a>
+      <a href="https://onepointinsuranceagency.com/home#umbrella">Umbrella</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Health Insurance<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/health">Health ACA</a>
+      <a href="https://onepointinsuranceagency.com/health#short">Short-Term Medical</a>
+      <a href="https://onepointinsuranceagency.com/health#dentalvision">Dental &amp; Vision</a>
+      <a href="https://onepointinsuranceagency.com/health#medicare">Medicare Advantage</a>
+      <a href="https://onepointinsuranceagency.com/health#accident">Accident</a>
+      <a href="https://onepointinsuranceagency.com/health#hospital">Hospitalization</a>
+      <a href="https://onepointinsuranceagency.com/health#group">Group Health</a>
+      <a href="https://onepointinsuranceagency.com/health#travel">International Travel</a>
+      <a href="https://onepointinsuranceagency.com/health#critical">Critical Illness</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Life Insurance<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/life">Term Life</a>
+      <a href="https://onepointinsuranceagency.com/life#whole">Whole Life</a>
+      <a href="https://onepointinsuranceagency.com/life#final">Final Expense</a>
+      <a href="https://onepointinsuranceagency.com/life#iul">Indexed Universal Life</a>
+      <a href="https://onepointinsuranceagency.com/life#annuity">Annuity</a>
+      <a href="https://onepointinsuranceagency.com/life#group">Group Life</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Disability<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/disability-insurance">Disability Income</a>
+      <a href="https://onepointinsuranceagency.com/disability-insurance#individual">Individual DI</a>
+      <a href="https://onepointinsuranceagency.com/disability-insurance#long">Long-Term</a>
+      <a href="https://onepointinsuranceagency.com/disability-insurance#short">Short-Term</a>
+      <a href="https://onepointinsuranceagency.com/disability-insurance#group">Group Disability</a>
+      <a href="https://onepointinsuranceagency.com/disability-insurance#boe">Business Overhead</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">Business Insurance<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/business">General Liability</a>
+      <a href="https://onepointinsuranceagency.com/business#prop">Commercial Property</a>
+      <a href="https://onepointinsuranceagency.com/business#bop">Business Owners (BOP)</a>
+      <a href="https://onepointinsuranceagency.com/business#uml">Commercial Umbrella</a>
+      <a href="https://onepointinsuranceagency.com/business#wc">Workers' Comp</a>
+      <a href="https://onepointinsuranceagency.com/business#cauto">Commercial Auto</a>
+      <a href="https://onepointinsuranceagency.com/business#truck">Trucking</a>
+      <a href="https://onepointinsuranceagency.com/business#garage">Garage Insurance</a>
+      <a href="https://onepointinsuranceagency.com/business#pl">Professional Liability</a>
+      <a href="https://onepointinsuranceagency.com/business#mal">Malpractice</a>
+      <a href="https://onepointinsuranceagency.com/business#cyber">Cyber Insurance</a>
+      <a href="https://onepointinsuranceagency.com/business#liq">Liquor Liability</a>
+      <a href="https://onepointinsuranceagency.com/business#sport">Sport Insurance</a>
+      <a href="https://onepointinsuranceagency.com/business#event">Event Insurance</a>
+    </div>
+  </div>
+  <div class="m-group">
+    <button class="m-group-btn" onclick="toggleMGroup(this)">About Us<span class="m-caret">&#9662;</span></button>
+    <div class="m-group-items">
+      <a href="https://onepointinsuranceagency.com/about-us">About Us</a>
+      <a href="https://onepointinsuranceagency.com/onepointblog/">Blog</a>
+      <a href="https://onepointinsuranceagency.com/resources">Learn</a>
+    </div>
+  </div>
+  <a href="https://onepointinsuranceagency.com/contact-us">Contact</a>
+  <span class="is-disabled" role="link" aria-disabled="true" title="Client Portal — coming soon" style="display:block;padding:14px 0;font-size:16px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--border);">Client Portal</span>
+  <a href="https://onepointinsuranceagency.com/book-call" class="mobile-cta">Get a Free Quote</a>
+  <p class="mobile-phone">or call <a href="tel:888-899-8117">888-899-8117</a></p>
+</div>
+<script>
+function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.querySelector('.nav-mobile-toggle');m.classList.toggle('open');b.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+function toggleMGroup(btn){btn.parentElement.classList.toggle('open');}
+function toggleMega(btn){var li=btn.closest('li'),o=li.classList.contains('open');document.querySelectorAll('.nav-links li').forEach(function(l){l.classList.remove('open');});if(!o)li.classList.add('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))document.querySelectorAll('.nav-links li').forEach(function(l){l.classList.remove('open');});});
+</script>

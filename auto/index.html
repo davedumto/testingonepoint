@@ -117,8 +117,10 @@
   /* Inline quote card inside Freeway hero */
   .auto-inline-card {
     background: var(--white); border: 1px solid var(--border);
-    padding: 22px 24px; max-width: 560px;
+    border-top: 4px solid var(--navy);
+    padding: 28px 32px; max-width: 620px;
     position: relative;
+    box-shadow: 0 18px 44px rgba(5,40,71,.14);
   }
   .auto-inline-card .qc-form {
     grid-template-columns: 1.4fr 1fr auto;
@@ -272,7 +274,7 @@
     <a href="../index.html" class="nav-brand"><img src="../logo.webp" alt="OnePoint Insurance Agency" class="nav-brand-logo"></a>
     <ul class="nav-links">
       <li class="has-mega">
-        <button onclick="toggleMega(this)">Insurance &amp; more <span class="caret">▾</span></button>
+        <button onclick="toggleMega(this)">Shop Insurance <span class="caret">▾</span></button>
         <div class="mega-menu">
           <div class="mega-content">
             <div class="mega-panel active" id="panel-ins">
@@ -329,7 +331,7 @@
         <div class="auto-inline-card quote-card">
           <form class="qc-form" onsubmit="goQuote(event)">
             <div class="qc-product-field">
-              <label class="qc-field-label">Type of Insurance Product</label>
+              <label class="qc-field-label">Coverage</label>
               <button type="button" class="qc-product-btn" onclick="toggleProductDropdown(event)">
                 <span class="qc-product-icon"><svg viewBox="0 0 24 24"><path d="M5 11l1.6-4.8A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18v5h-2.2a1.8 1.8 0 0 1-3.6 0h-6.4a1.8 1.8 0 0 1-3.6 0H3v-5z"/><circle cx="7" cy="16" r="1.2"/><circle cx="17" cy="16" r="1.2"/></svg></span>
                 <span class="qc-product-name">Auto Insurance</span>
@@ -372,8 +374,8 @@
               </div>
             </div>
             <div class="qc-location-field">
-              <label class="qc-field-label" for="zip">Zip Code</label>
-              <input class="qc-location-input" id="zip" type="text" placeholder="Zip Code" maxlength="5" inputmode="numeric" required>
+              <label class="qc-field-label" for="zip">ZIP Code</label>
+              <input class="qc-location-input" id="zip" type="text" placeholder="00000" maxlength="5" inputmode="numeric" required>
             </div>
             <button type="submit" class="qc-cta">Get My Free Quote Now</button>
           </form>
@@ -386,8 +388,8 @@
         <div class="hero-accent-block"></div>
         <div class="hero-outline-block"></div>
         <div class="hero-photo-frame">
-          <img id="heroImgA" class="hero-img-in" src="../car1.jpg" alt="Car insurance coverage">
-          <img id="heroImgB" class="hero-img-out" src="../car1.jpg" alt="Car insurance coverage">
+          <img id="heroImgA" class="hero-img-in" src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dd9c56ad27908f5d872.jpg" alt="Car insurance coverage">
+          <img id="heroImgB" class="hero-img-out" src="https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dd9c56ad27908f5d872.jpg" alt="Car insurance coverage">
         </div>
         <div class="hero-savings-badge">
           <span class="hero-savings-num">$820</span>
@@ -466,37 +468,33 @@
     </div>
   </div>
 
-  <!-- PAIN SECTION -->
-  <section class="section">
-    <div class="container" style="max-width:800px;">
-      <div class="section-header">
-        <div class="section-kicker">The Problem</div>
-        <h2 class="section-h2">You're Either Overpaying — Or Underprotected</h2>
-        <p class="section-lead">Most drivers don't realize they're paying too much or missing critical coverage until it's too late.</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto;">
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Lower your premium</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Improve your coverage</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Identify hidden gaps</div>
-      </div>
-      <div style="text-align:center;margin-top:28px;"><a href="../book/" class="btn btn-orange">Check My Current Coverage</a></div>
-    </div>
-  </section>
 
   <!-- HOW WE SOLVE IT -->
   <section class="section section-alt">
-    <div class="container" style="max-width:800px;">
+    <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Our Approach</div>
-        <h2 class="section-h2">We Do the Shopping — You Get the Best Option</h2>
-        <p class="section-lead">Instead of calling multiple companies yourself, we compare top carriers and show you the best options based on your needs.</p>
+        <div class="section-kicker" data-swap="approachKicker">Our Approach</div>
+        <h2 class="section-h2" data-swap="approachH2">We Do the Shopping — You Get the Best Option</h2>
+        <p class="section-lead" data-swap="approachLead">Instead of calling multiple companies yourself, we compare top carriers and show you the best options based on your needs.</p>
       </div>
-      <div style="display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto;">
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Liability, collision, and comprehensive options explained</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Discounts you may be missing</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);"><div style="width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Coverage tailored to your driving habits</div>
+      <div class="feat-grid-3">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h4>Coverage options explained</h4>
+          <p>Liability, collision, comprehensive, uninsured motorist — we break down what each one does and whether you actually need it.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/></svg></div>
+          <h4>Discounts you may be missing</h4>
+          <p>Multi-car, good driver, bundling, low mileage, defensive driving — we find every discount you qualify for.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h4>Tailored to your situation</h4>
+          <p>Your driving habits, vehicle type, household members, and commute all shape the right policy. We match coverage to your real life.</p>
+        </div>
       </div>
-      <div style="text-align:center;margin-top:28px;"><a href="../auto-quote/" class="btn btn-orange">See My Auto Insurance Options</a></div>
+      <div style="text-align:center;margin-top:32px;"><a href="../auto-quote/" class="btn btn-orange">See My Auto Insurance Options</a></div>
     </div>
   </section>
 
@@ -542,9 +540,9 @@
     <div class="container">
       <div class="mid-cta-inner" style="flex-direction:column;text-align:center;">
         <div class="mid-cta-text" style="max-width:640px;">
-          <h2>One Accident Could Cost You Thousands</h2>
-          <p style="margin-top:14px;">If your coverage isn't structured correctly, one accident could leave you paying out of pocket for:</p>
-          <div style="display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap;font-size:14px;">
+          <h2 data-swap="midCtaH2">One Accident Could Cost You Thousands</h2>
+          <p style="margin-top:14px;" data-swap="midCtaLead">If your coverage isn't structured correctly, one accident could leave you paying out of pocket for:</p>
+          <div style="display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap;font-size:14px;color:#fff;">
             <span>Medical bills</span><span>Vehicle damage</span><span>Lawsuits</span><span>Lost wages</span>
           </div>
           <div style="margin-top:28px;"><a href="../book/" class="btn btn-orange" style="background:#fff;color:var(--navy);">Get My Coverage Reviewed</a></div>
@@ -572,7 +570,7 @@
   <!-- WHO THIS IS FOR -->
   <section class="section section-alt">
     <div class="container" style="max-width:700px;">
-      <div class="section-header"><div class="section-kicker">Is This You?</div><h2 class="section-h2">Who This Works Best For</h2></div>
+      <div class="section-header"><div class="section-kicker" data-swap="whoKicker">Is This You?</div><h2 class="section-h2" data-swap="whoH2">Who This Works Best For</h2></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div style="display:flex;align-items:center;gap:10px;background:#fff;padding:16px;border:1px solid var(--border);font-size:14px;font-weight:500;color:var(--text);"><svg style="width:18px;height:18px;flex-shrink:0;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Drivers paying $100+/month</div>
         <div style="display:flex;align-items:center;gap:10px;background:#fff;padding:16px;border:1px solid var(--border);font-size:14px;font-weight:500;color:var(--text);"><svg style="width:18px;height:18px;flex-shrink:0;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Recently renewed policies</div>
@@ -580,19 +578,6 @@
         <div style="display:flex;align-items:center;gap:10px;background:#fff;padding:16px;border:1px solid var(--border);font-size:14px;font-weight:500;color:var(--text);"><svg style="width:18px;height:18px;flex-shrink:0;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> New drivers or new vehicles</div>
       </div>
       <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--muted);">Most drivers we help pay $120-$280/month. Many save 10-30% after switching.</p>
-    </div>
-  </section>
-
-  <!-- MULTI-DRIVER -->
-  <section class="section">
-    <div class="container" style="max-width:700px;">
-      <div class="section-header"><div class="section-kicker">Family Coverage</div><h2 class="section-h2">Have Multiple Drivers or Vehicles?</h2></div>
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto;">
-        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text);"><svg style="width:18px;height:18px;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Multi-car discounts</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text);"><svg style="width:18px;height:18px;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Family coverage savings</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text);"><svg style="width:18px;height:18px;color:var(--navy);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Bundling opportunities</div>
-      </div>
-      <div style="text-align:center;margin-top:24px;"><a href="../auto-quote/" class="btn btn-orange">See My Family Options</a></div>
     </div>
   </section>
 
@@ -642,14 +627,28 @@
 
   <!-- CLAIMS SUPPORT -->
   <section class="section section-alt" style="padding:56px 0;">
-    <div class="container" style="max-width:700px;text-align:center;">
-      <div class="section-kicker">After You Buy</div>
-      <h2 class="section-h2">We're With You When It Matters Most</h2>
-      <p class="section-lead">We don't disappear after you buy.</p>
-      <div style="display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--navy);"><svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Claims guidance</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--navy);"><svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Policy changes</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--navy);"><svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Renewals</div>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">After You Buy</div>
+        <h2 class="section-h2">We're With You When It Matters Most</h2>
+        <p class="section-lead">We don't disappear after you buy. Your advisor stays with you through claims, renewals, and life changes.</p>
+      </div>
+      <div class="feat-grid-3">
+        <div class="feat-card" style="text-align:center;">
+          <div class="feat-card-icon" style="margin:0 auto 16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h4>Claims guidance</h4>
+          <p>We walk you through the process and advocate on your behalf so nothing gets missed or delayed.</p>
+        </div>
+        <div class="feat-card" style="text-align:center;">
+          <div class="feat-card-icon" style="margin:0 auto 16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <h4>Policy changes</h4>
+          <p>New car, new address, added driver — we update your policy and re-shop if there's a better rate.</p>
+        </div>
+        <div class="feat-card" style="text-align:center;">
+          <div class="feat-card-icon" style="margin:0 auto 16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg></div>
+          <h4>Proactive renewals</h4>
+          <p>Before your renewal hits, we re-compare rates and make sure you're still getting the best deal.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -685,7 +684,7 @@
         </div>
       </div>
       <div class="ft-col"><h5>Coverage</h5><ul><li><a href="../auto/">Auto Insurance</a></li><li><a href="../home/">Homeowners</a></li><li><a href="../health/">Health</a></li><li><a href="../life/">Life Insurance</a></li><li><a href="../disability/">Disability Income</a></li><li><a href="../business/">Business</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/learn">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="../about/">About Us</a></li><li><a href="../partners/">Carriers</a></li><li><a href="../onepointblog/">Blog</a></li><li><a href="https://onepointinsuranceagency.com/resources">Learning Hub</a></li><li><a href="../contact/">Contact Us</a></li></ul></div>
       <div class="ft-col"><h5>Client Tools</h5><ul><li><a href="../client-services/">File a Claim</a></li><li><a href="../policy-request/">Update Policy</a></li><li><a href="../client-services/">Upload Document</a></li><li><a href="../book/">Schedule a Call</a></li></ul></div>
       <div class="ft-col"><h5>Contact</h5><div class="ft-contact-row"><div class="ft-contact-label">Phone</div><div class="ft-contact-val"><a href="tel:888-899-8117">888-899-8117</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Email</div><div class="ft-contact-val"><a href="mailto:info@onepointinsuranceagency.com">info@onepointins.com</a></div></div><div class="ft-contact-row"><div class="ft-contact-label">Address</div><div class="ft-contact-val">555 NorthPoint Center E<br>Alpharetta, GA 30022</div></div><div class="ft-contact-row"><div class="ft-contact-label">Hours</div><div class="ft-contact-val">Mon-Fri, 9am-6pm ET</div></div></div>
     </div>
@@ -758,89 +757,153 @@ const autoSwap = {
   auto: {
     heroH1: "Car Insurance Quotes",
     heroLead: "Compare auto insurance prices online and save.",
+    painKicker: "The Problem",
+    painH2: "You're Either Overpaying — Or Underprotected",
+    painLead: "Most drivers don't realize they're paying too much or missing critical coverage until it's too late. A single gap in your policy can cost you thousands after an accident.",
+    approachKicker: "Our Approach",
+    approachH2: "We Do the Shopping — You Get the Best Option",
+    approachLead: "Instead of calling multiple companies yourself, we compare top carriers and show you the best options based on your needs.",
     coverKicker: "What's Covered",
     coverH2: "Auto coverage that protects you in the moments that matter.",
     coverBody: "From fender benders to total losses, the right policy makes sure an accident doesn't derail your finances.",
-    midCtaH2: "Most drivers overpay by hundreds a year.",
-    midCtaLead: "A quick auto insurance comparison takes two minutes and costs nothing. Find out what you should actually be paying.",
-    finalCtaH2: "Get your free auto quote in minutes.",
-    finalCtaLead: "No pressure. No spam. Just honest advice from a licensed advisor who has your best interest — not a carrier's commission — in mind."
+    midCtaH2: "One Accident Could Cost You Thousands",
+    midCtaLead: "If your coverage isn't structured correctly, one accident could leave you paying out of pocket for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who This Works Best For",
+    finalCtaH2: "Stop Overpaying for Auto Insurance",
+    finalCtaLead: "Get the coverage you need — at the price you deserve."
   },
   classic: {
-    heroH1: "Classic Car Insurance",
-    heroLead: "Specialized coverage for antique and collector vehicles, built around their true value and the way you actually drive them.",
+    heroH1: "Classic Car Insurance That Protects What Your Vehicle Is Truly Worth",
+    heroLead: "We compare top-rated specialty carriers to secure agreed value coverage — so your classic, collector, or antique car is protected based on its real value, not a depreciated guess.",
+    painKicker: "The Problem",
+    painH2: "You're Either Underinsured — Or Not Protected at All",
+    painLead: "Most classic car owners assume their vehicle is covered properly. But standard auto policies depreciate value, ignore collector status, and don't account for appreciation — leaving you thousands short when it matters.",
+    approachKicker: "Our Approach",
+    approachH2: "We Do the Shopping — You Get the Right Protection",
+    approachLead: "Instead of guessing coverage, we compare specialty carriers who understand collector vehicles and build policies around true vehicle value, usage patterns, storage conditions, and restoration investment.",
     coverKicker: "What's Covered",
     coverH2: "Protection as timeless as your car.",
     coverBody: "Agreed value coverage locks in your car's worth with no depreciation, plus spare parts, restoration-in-progress, flexible mileage plans, roadside assistance, and liability — tailored to collectors, not daily drivers.",
     midCtaH2: "Your classic is priceless. Insure it that way.",
-    midCtaLead: "Standard auto policies underpay on classics. Get agreed value coverage that respects what your car is really worth.",
-    finalCtaH2: "Protect the ride you've built.",
-    finalCtaLead: "Talk to a specialist who understands collector cars and get a quote tailored to your vehicle's true value."
+    midCtaLead: "Standard auto policies underpay on classics. Without agreed value coverage, one claim could leave you paying out of pocket for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who This Coverage Is Built For",
+    finalCtaH2: "Don't Let the Wrong Policy Undervalue Your Classic",
+    finalCtaLead: "A few minutes today can protect your investment for years to come."
   },
   atv: {
-    heroH1: "ATV Insurance",
-    heroLead: "Affordable coverage that protects your quad, your gear, and your adventures wherever the trail takes you.",
+    heroH1: "ATV Insurance That Protects You On and Off the Trail",
+    heroLead: "We compare top-rated carriers to find the right ATV coverage — so you're protected from liability, damage, and unexpected risks wherever you ride.",
+    painKicker: "The Risk",
+    painH2: "ATVs Come With More Risk Than You Think",
+    painLead: "Off-road vehicles aren't covered the same way as standard cars. Rollovers, rider injuries, property damage, and liability exposure — without the right coverage, one accident could cost you thousands out of pocket.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage Built for Off-Road Riders",
+    approachLead: "We compare 200+ carriers who understand off-road risks and build policies around how, where, and how often you actually ride — not a one-size-fits-all template.",
     coverKicker: "What's Covered",
     coverH2: "Coverage that goes where you ride.",
-    coverBody: "Liability, collision, comprehensive, uninsured motorist, medical payments, custom parts and accessories, trailside recovery, and transport trailer coverage — built for trail riders, farm use, and weekend warriors alike.",
-    midCtaH2: "Ride harder. Worry less.",
-    midCtaLead: "Whether it's mud, dunes, or backwoods trails, the right ATV policy keeps one bad day from costing a whole season.",
-    finalCtaH2: "Protect your ATV and your adventures.",
+    coverBody: "Liability, collision, comprehensive, uninsured rider protection, medical payments, custom parts and accessories, trailside recovery, and transport trailer coverage — built for trail riders, farm use, and weekend warriors alike.",
+    midCtaH2: "Saving $15 a Month Isn't Worth a $10,000 Accident",
+    midCtaLead: "Many ATV owners focus only on price. The real risk is being underinsured when something goes wrong. One bad ride could leave you paying for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs ATV Insurance",
+    finalCtaH2: "Protect Your ATV and Your Adventures",
     finalCtaLead: "Get a free, personalized ATV insurance quote in minutes from a licensed OnePoint advisor."
   },
   motorcycle: {
-    heroH1: "Motorcycle Insurance",
-    heroLead: "Coverage designed for riders who value freedom, safety, and peace of mind on every highway and side street.",
+    heroH1: "Motorcycle Insurance Built for Real Riders",
+    heroLead: "We compare top-rated carriers to find you coverage that protects your bike, your gear, and your freedom — on every highway and side street.",
+    painKicker: "The Risk",
+    painH2: "Motorcycle Accidents Aren't Minor",
+    painLead: "Compared to cars, motorcycle accidents are more likely to cause serious injury, more expensive medically, and carry greater liability exposure. One accident can impact your health, finances, and future.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage That Respects the Ride",
+    approachLead: "We compare motorcycle-specialist carriers and build policies around your bike, your mods, your mileage, and how you actually ride — not a generic auto template.",
     coverKicker: "What's Covered",
     coverH2: "Protection for every mile you ride.",
     coverBody: "Liability, collision, and comprehensive cover crashes, theft, and weather damage, while custom parts and accessories coverage protects your exhaust, fairings, saddlebags, paint, and the upgrades that make the bike yours.",
-    midCtaH2: "Your journey, our priority.",
-    midCtaLead: "We make motorcycle insurance simple so you can focus on what matters — the open road.",
-    finalCtaH2: "Ride protected. Ride free.",
+    midCtaH2: "One Crash Can Change Everything",
+    midCtaLead: "Without the right motorcycle coverage, a single accident could leave you paying out of pocket for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs Motorcycle Insurance",
+    finalCtaH2: "Ride Protected. Ride Free.",
     finalCtaLead: "Compare motorcycle carriers in minutes with a licensed advisor and lock in coverage before your next ride."
   },
   rv: {
-    heroH1: "RV & Travel Trailer Insurance",
-    heroLead: "Affordable coverage designed for life on the road, so you have peace of mind wherever you park.",
+    heroH1: "RV & Travel Trailer Insurance That Protects Your Journey",
+    heroLead: "We compare top-rated carriers to find coverage that fits your rig, your travel style, and the way you actually use it — weekends, vacations, or full-time life on the road.",
+    painKicker: "The Risk",
+    painH2: "RV Insurance Covers More Than Just Driving",
+    painLead: "Your RV or trailer carries multiple risks: vehicle damage on the road, personal property loss, liability at campsites, and living expenses if your rig becomes unusable. Standard auto policies rarely cover any of it.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage Built for Life on the Road",
+    approachLead: "We compare RV-specialist carriers and tailor your policy to your rig, how often you use it, where you store it, and whether you travel weekends or full-time.",
     coverKicker: "What's Covered",
     coverH2: "Protection for the road and the campsite.",
-    coverBody: "Covers accidents, theft, vandalism, fire, and weather damage to your RV, plus the belongings you travel with and liability protection when you're on the road or set up at a campsite.",
-    midCtaH2: "Hit the road fully covered.",
-    midCtaLead: "From weekend trailers to full-time motorhomes, we'll match you with carriers that know RV life.",
-    finalCtaH2: "Ready to roll with confidence?",
+    coverBody: "Liability, collision, comprehensive, personal belongings coverage, vacation liability while parked, and emergency expense coverage for hotels and travel if your RV becomes unusable after a covered incident.",
+    midCtaH2: "One Incident Shouldn't End Your Trip",
+    midCtaLead: "Without the right coverage, one storm, accident, or theft at a campsite can turn your trip into a financial setback. Out-of-pocket costs could include:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs RV Insurance",
+    finalCtaH2: "Ready to Roll With Confidence?",
     finalCtaLead: "Get a personalized RV quote in minutes and travel knowing your rig and belongings are protected."
   },
   boat: {
-    heroH1: "Boat & Watercraft Insurance",
-    heroLead: "From fishing trips to weekend cruises, safeguard your boat and everyone aboard with tailored coverage.",
+    heroH1: "Boat Insurance That Protects Every Voyage",
+    heroLead: "We compare top-rated marine carriers to find coverage that protects your boat, your passengers, and your time on the water — from fishing trips to weekend cruises.",
+    painKicker: "The Risk",
+    painH2: "Boating Comes With Real Financial Risk",
+    painLead: "Boating accidents can lead to expensive repairs, injury claims, liability lawsuits, and property damage. Collisions, storm damage, theft at docks, and passenger injuries aren't covered by homeowners or auto policies.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage Built for the Water",
+    approachLead: "We compare marine specialist carriers and build policies around your boat's type, age, value, how you use it, and where it's stored — from powerboats to sailboats to personal watercraft.",
     coverKicker: "What's Covered",
     coverH2: "Coverage from the dock to open water.",
     coverBody: "Hull and machinery damage, liability, medical payments, uninsured boater, personal effects, fishing equipment, towing and emergency service, trailer coverage, and agreed value or total loss replacement on qualifying boats.",
-    midCtaH2: "Get a free custom boat quote.",
-    midCtaLead: "Tell us about your boat and how you use it — we'll shop marine carriers for the right coverage at the right price.",
-    finalCtaH2: "Ready to set sail with confidence?",
+    midCtaH2: "One Incident Can Sink Your Finances",
+    midCtaLead: "Without proper marine coverage, one collision, storm, or injury claim can leave you paying out of pocket for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs Boat Insurance",
+    finalCtaH2: "Ready to Set Sail With Confidence?",
     finalCtaLead: "A licensed OnePoint advisor will compare marine policies and get you on the water, fully covered."
   },
   snowmobile: {
-    heroH1: "Snowmobile Insurance",
-    heroLead: "Comprehensive coverage built to keep you safe on and off the trail all season long.",
+    heroH1: "Snowmobile Insurance Built for Every Trail",
+    heroLead: "We compare top-rated carriers to find coverage that protects your sled, your gear, and your rides — through every season and every condition.",
+    painKicker: "The Risk",
+    painH2: "Snowmobile Riding Comes With Serious Risk",
+    painLead: "Snowmobiles operate in unpredictable conditions — ice, snow, low visibility, and remote locations. Higher injury severity, limited emergency access, and collision risk with terrain or other riders mean one accident in the snow can become a major financial loss.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage for the Conditions You Ride In",
+    approachLead: "We compare snowmobile specialist carriers and tailor policies around your sled, your riding habits, your trails, and where your machine is stored during the off-season.",
     coverKicker: "What's Covered",
     coverH2: "Protection for every trail you take.",
-    coverBody: "Liability, collision, comprehensive, uninsured motorist, medical payments, trailside assistance, accessory and gear coverage, transport trailer, trip interruption, seasonal lay-up, and agreed value on qualifying sleds.",
-    midCtaH2: "What shapes your snowmobile premium?",
-    midCtaLead: "Your riding record, sled type, usage, and where you store it all factor in. See what you'd actually pay.",
-    finalCtaH2: "Ready to ride with confidence?",
+    coverBody: "Liability, collision, comprehensive, uninsured rider protection, medical payments, trailside assistance, accessory and gear coverage, transport trailer, trip interruption, seasonal lay-up, and agreed value on qualifying sleds.",
+    midCtaH2: "One Crash in the Backcountry Can Cost Thousands",
+    midCtaLead: "Without the right snowmobile coverage, remote terrain means even a small incident can lead to big out-of-pocket costs for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs Snowmobile Insurance",
+    finalCtaH2: "Ready to Ride With Confidence?",
     finalCtaLead: "Get a fast, free snowmobile insurance quote tailored to your sled and how you ride."
   },
   scooter: {
-    heroH1: "Scooter Insurance",
-    heroLead: "Stay covered on the road with flexible, low-cost scooter coverage built for city commutes and short trips.",
+    heroH1: "Scooter Insurance Built for City Riders",
+    heroLead: "We compare top-rated carriers to find coverage that protects your scooter, your commute, and your wallet — flexible policies built for short trips and daily use.",
+    painKicker: "The Risk",
+    painH2: "Scooter Accidents Are More Common Than You Think",
+    painLead: "Scooters share the road with cars — but without the same physical protection. Collisions with vehicles, injury due to exposure, and liability for damage or injury mean one accident in traffic can leave you paying out of pocket.",
+    approachKicker: "Our Approach",
+    approachH2: "Coverage Built for Urban Commuters",
+    approachLead: "We compare scooter-friendly carriers and build policies around your scooter, your commute, and how often you ride — stacking every discount you qualify for.",
     coverKicker: "What's Covered",
     coverH2: "Coverage for every block you ride.",
     coverBody: "Liability for injuries and property damage you cause, collision for crash repairs, comprehensive for theft, vandalism, and weather, uninsured motorist protection, and medical payments for your own injuries after a covered incident.",
-    midCtaH2: "Ready to start riding smarter?",
-    midCtaLead: "Compare scooter coverage from trusted carriers and stack the discounts you qualify for in minutes.",
-    finalCtaH2: "Ride with confidence — get covered.",
+    midCtaH2: "One Crash Can Cost More Than a Year of Commuting",
+    midCtaLead: "Without proper scooter coverage, a single incident on your commute can leave you paying out of pocket for:",
+    whoKicker: "Is This You?",
+    whoH2: "Who Needs Scooter Insurance",
+    finalCtaH2: "Ride With Confidence — Get Covered",
     finalCtaLead: "Get a personalized scooter quote in minutes from a licensed OnePoint advisor. Free and no pressure."
   }
 };
@@ -856,14 +919,14 @@ function swapAutoCopy(v){
 }
 // Hero image per sub-product — fades on tab switch
 const autoHeroImg = {
-  auto:       '../car1.jpg',
-  classic:    '../classic-cars.jpg',
-  atv:        '../atv.jpg',
-  motorcycle: '../motorcycle.jpg',
-  rv:         '../rv-mobile-home.jpg',
-  boat:       '../boat.jpg',
-  snowmobile: '../snow-mobile.jpg',
-  scooter:    '../scooter.jpg'
+  auto:       'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dd9c56ad27908f5d872.jpg',
+  classic:    'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e560632c135a8c836b75cc.jpg',
+  atv:        'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e560632c135a8c836b75cb.jpg',
+  motorcycle: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e54dda50b9a3263a27422e.jpg',
+  rv:         'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e560632c135a8c836b75ca.jpg',
+  boat:       'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e56063c56ad27908f99a5c.jpg',
+  snowmobile: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e5606338381eafa8a6c8fb.jpg',
+  scooter:    'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e560632c135a8c836b75f4.jpg'
 };
 // True dual-image crossfade — both images stack inside .hero-photo-frame.
 // The "front" image fades out while the "back" image (already loaded) fades in
@@ -879,7 +942,7 @@ function swapHeroImage(slug){
   var front = heroFront === 'A' ? imgA : imgB;
   var back  = heroFront === 'A' ? imgB : imgA;
   // If already showing this image, skip
-  if(front.src.endsWith(newSrc.replace('../',''))) return;
+  if(front.src === newSrc || front.src.endsWith(newSrc.split('/').pop())) return;
   // Load new image into the hidden back layer
   back.src = newSrc;
   back.alt = vehicleData[slug].name + ' insurance coverage';

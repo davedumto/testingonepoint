@@ -1,0 +1,1174 @@
+<!--
+  ONEPOINT LEARN: INSURANCE FUNDAMENTALS (Category Course Page)
+  Paste into: GHL Page Builder → Custom HTML element
+  URL: /resources/fundamentals
+  8 Modules, navigated with Prev/Next. Hash-based deep linking (#m1, #m2, ...).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ONEPOINT LEARN · CATEGORY COURSE PAGE
+   Insurance Fundamentals
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:        #052847;
+  --blue:        #0a3d6b;
+  --blue-dark:   #052847;
+  --blue-light:  #e0ecff;
+  --text:        #1a2e42;
+  --muted:       #5a6c7e;
+  --subtle:      #8a9baa;
+  --border:      #dde4ed;
+  --bg:          #f4f7fb;
+  --bg-soft:     #fafbfd;
+  --white:       #fff;
+  --amber-bg:    #fef3c7;
+  --amber-br:    #f59e0b;
+  --amber-tx:    #b45309;
+  --cat-auto:    #475569;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 4px 20px rgba(5,40,71,.08);
+}
+
+.lc *, .lc *::before, .lc *::after { box-sizing: border-box; }
+.lc { font-family: 'Outfit', sans-serif; color: var(--text); line-height: 1.6; background: var(--white); }
+.lc a { color: var(--blue); text-decoration: none; font-weight: 600; }
+/* Button text readability fixes (must beat .lc a cascade) */
+.lc a.lc-btn-primary, .lc a.lc-btn-primary:hover, .lc a.lc-btn-primary:visited { color: #fff; }
+.lc a.lc-btn-ghost, .lc a.lc-btn-ghost:hover, .lc a.lc-btn-ghost:visited { color: var(--navy); }
+.lc a.lmod-prev, .lc a.lmod-prev:hover, .lc a.lmod-prev:visited { color: var(--navy); }
+.lc a.lmod-prev .label small { color: var(--muted); }
+.lc a.lmod-prev .label strong { color: var(--navy); }
+.lc a.lmod-next, .lc a.lmod-next:hover, .lc a.lmod-next:visited { color: #fff; }
+.lc a.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lc a.lmod-next .label strong { color: #fff; }
+.lc-finish a.btn-white, .lc-finish a.btn-white:hover, .lc-finish a.btn-white:visited { color: var(--navy); }
+.lc-finish a.btn-ghost, .lc-finish a.btn-ghost:hover, .lc-finish a.btn-ghost:visited { color: #fff; }
+.lc a:hover { text-decoration: underline; }
+.lc img { max-width: 100%; display: block; }
+
+/* ── BREADCRUMB ── */
+.lc-crumb { max-width: 1200px; margin: 0 auto; padding: 22px 28px 0; font-size: 13px; color: var(--muted); }
+.lc-crumb a { color: var(--muted); font-weight: 500; }
+.lc-crumb a:hover { color: var(--navy); text-decoration: none; }
+.lc-crumb .sep { margin: 0 8px; color: var(--subtle); }
+.lc-crumb .here { color: var(--navy); font-weight: 600; }
+
+/* ── COURSE HERO ── */
+.lc-hero {
+  max-width: 1200px; margin: 0 auto; padding: 32px 28px 40px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center;
+}
+.lc-hero .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--cat-auto); padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.lc-hero h1 {
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700; color: var(--navy);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px;
+}
+.lc-hero .lead {
+  font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 560px; margin: 0 0 26px;
+}
+.lc-hero .meta {
+  display: flex; gap: 28px; margin-bottom: 28px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.lc-hero .meta .stat { display: flex; align-items: center; gap: 8px; }
+.lc-hero .meta .stat strong { color: var(--navy); font-weight: 700; font-size: 22px; }
+.lc-hero .meta .stat span { line-height: 1.3; }
+.lc-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: var(--radius-sm); font: 600 15px 'Outfit', sans-serif;
+  cursor: pointer; transition: .18s; border: none; text-decoration: none;
+}
+.lc-btn-primary { background: var(--navy); color: #fff; }
+.lc-btn-primary:hover { background: var(--blue); text-decoration: none; }
+.lc-btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+.lc-btn-ghost:hover { background: var(--bg); text-decoration: none; }
+
+.lc-hero-art {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: var(--radius); padding: 36px 32px; color: #fff;
+  position: relative; overflow: hidden; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.lc-hero-art::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.lc-hero-art::after {
+  content: ''; position: absolute; bottom: -80px; left: -40px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.lc-hero-art .art-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 14px; position: relative; z-index: 1;
+}
+.lc-hero-art .art-title {
+  font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.lc-hero-art .art-list {
+  list-style: none; padding: 0; margin: 0; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  font-size: 13.5px; color: rgba(255,255,255,.88);
+}
+.lc-hero-art .art-list li { display: flex; align-items: center; gap: 8px; }
+.lc-hero-art .art-list li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+
+/* ── COURSE BODY (sidebar + modules) ── */
+.lc-body {
+  max-width: 1200px; margin: 0 auto; padding: 16px 28px 80px;
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR / TOC */
+.lc-toc {
+  position: sticky; top: 88px;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.lc-toc .toc-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.lc-toc .toc-progress {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 18px;
+}
+.lc-toc .toc-progress-fill {
+  height: 100%; background: var(--cat-auto); width: 12.5%;
+  transition: width .3s ease;
+}
+.lc-toc ol {
+  list-style: none; padding: 0; margin: 0; counter-reset: module;
+}
+.lc-toc li { counter-increment: module; margin-bottom: 2px; }
+.lc-toc a {
+  display: flex; gap: 12px; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;
+  line-height: 1.4; transition: .15s;
+}
+.lc-toc a::before {
+  content: counter(module, decimal-leading-zero);
+  flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--subtle);
+  letter-spacing: .05em; padding-top: 2px;
+}
+.lc-toc a:hover { background: #fff; color: var(--navy); text-decoration: none; }
+.lc-toc a.active {
+  background: var(--navy); color: #fff; font-weight: 600;
+}
+.lc-toc a.active::before { color: rgba(255,255,255,.6); }
+.lc-toc a.done { color: var(--muted); }
+.lc-toc a.done::before { color: var(--cat-auto); }
+.lc-toc .toc-footer {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted);
+}
+
+/* MODULES PANEL */
+.lc-panel { min-width: 0; }
+.lmod {
+  display: none;
+  animation: lmod-in .35s ease;
+}
+.lmod.active { display: block; }
+@keyframes lmod-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lmod-meta {
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cat-auto); margin-bottom: 14px;
+}
+.lmod h1.lmod-title {
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; color: var(--navy);
+  line-height: 1.15; letter-spacing: -.015em; margin: 0 0 14px;
+}
+.lmod-subtitle {
+  font-size: 19px; color: var(--muted); line-height: 1.45; margin: 0 0 32px;
+  font-weight: 400;
+}
+.lmod-lead {
+  font-size: 19px; line-height: 1.55; color: var(--navy); font-weight: 500;
+  padding-left: 20px; border-left: 3px solid var(--cat-auto);
+  margin: 0 0 28px;
+}
+.lmod p { font-size: 17px; line-height: 1.75; color: var(--text); margin: 0 0 22px; }
+.lmod h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.25;
+  margin: 42px 0 16px; letter-spacing: -.005em;
+}
+.lmod h3 {
+  font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.3;
+  margin: 28px 0 10px;
+}
+.lmod ul, .lmod ol { margin: 0 0 22px; padding-left: 22px; }
+.lmod li { font-size: 17px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+.lmod strong { color: var(--navy); font-weight: 600; }
+
+/* Callouts */
+.lmod-example {
+  background: #f4f7fb; border-left: 4px solid var(--cat-auto);
+  padding: 20px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-example .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cat-auto); margin-bottom: 8px;
+}
+.lmod-example p { font-size: 16px; line-height: 1.6; margin: 0; color: var(--text); }
+
+.lmod-warn {
+  background: var(--amber-bg); border-left: 4px solid var(--amber-br);
+  padding: 22px 26px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.lmod-warn .label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber-tx); margin-bottom: 12px;
+}
+.lmod-warn ul { margin: 0; padding-left: 20px; }
+.lmod-warn li { font-size: 16px; line-height: 1.6; margin-bottom: 10px; color: var(--text); }
+.lmod-warn li:last-child { margin-bottom: 0; }
+
+/* Module footer nav */
+.lmod-foot {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+}
+.lmod-prev, .lmod-next {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: var(--radius-sm);
+  font: 600 14px 'Outfit', sans-serif; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--navy);
+  transition: .18s; text-decoration: none;
+}
+.lmod-prev { justify-self: start; }
+.lmod-next { justify-self: end; background: var(--navy); color: #fff; border-color: var(--navy); }
+.lmod-prev:hover { background: var(--bg); border-color: var(--muted); text-decoration: none; }
+.lmod-next:hover { background: var(--blue); border-color: var(--blue); text-decoration: none; }
+.lmod-prev:disabled, .lmod-next:disabled {
+  opacity: .4; cursor: not-allowed;
+}
+.lmod-prev .label, .lmod-next .label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+.lmod-next .label { align-items: flex-end; }
+.lmod-prev .label small, .lmod-next .label small {
+  font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lmod-next .label small { color: rgba(255,255,255,.7); }
+.lmod-prev .label strong, .lmod-next .label strong {
+  font-size: 14px; font-weight: 600; color: inherit;
+}
+.lmod-foot .progress {
+  font-size: 13px; font-weight: 600; color: var(--muted); text-align: center;
+  white-space: nowrap;
+}
+
+/* Finish band (shown after Module 8) */
+.lc-finish {
+  margin-top: 40px; padding: 44px 40px; background: var(--navy); color: #fff;
+  border-radius: var(--radius); text-align: center;
+}
+.lc-finish .kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.7); margin-bottom: 10px;
+}
+.lc-finish h2 {
+  font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 14px; letter-spacing: -.01em;
+}
+.lc-finish p {
+  font-size: 16px; color: rgba(255,255,255,.78); line-height: 1.55;
+  max-width: 560px; margin: 0 auto 26px;
+}
+.lc-finish .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.lc-finish .btn-white {
+  background: #fff; color: var(--navy); padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+}
+.lc-finish .btn-white:hover { background: #eef3f9; text-decoration: none; }
+.lc-finish .btn-ghost {
+  background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius-sm);
+  font: 700 14px 'Outfit', sans-serif; text-decoration: none; transition: .15s;
+  border: 1.5px solid rgba(255,255,255,.45);
+}
+.lc-finish .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Mobile TOC toggle */
+.lc-toc-mobile {
+  display: none;
+  position: relative;
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+}
+.lc-toc-mobile select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--bg-soft);
+  font: 600 14px 'Outfit', sans-serif; color: var(--navy); cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .lc-hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 32px; }
+  .lc-hero-art { min-height: 260px; padding: 28px 24px; }
+  .lc-hero-art .art-list { grid-template-columns: 1fr; }
+  .lc-body { grid-template-columns: 1fr; gap: 0; padding: 8px 20px 60px; }
+  .lc-toc { display: none; }
+  .lc-toc-mobile { display: block; }
+}
+@media (max-width: 560px) {
+  .lc-crumb { padding: 18px 20px 0; font-size: 12px; }
+  .lc-hero h1 { font-size: 32px; }
+  .lc-hero .lead { font-size: 16px; }
+  .lc-hero .meta { gap: 18px; }
+  .lmod h1.lmod-title { font-size: 26px; }
+  .lmod-subtitle { font-size: 16px; }
+  .lmod-lead { font-size: 17px; padding-left: 16px; }
+  .lmod p { font-size: 16px; }
+  .lmod h2 { font-size: 22px; margin: 32px 0 12px; }
+  .lmod-foot { grid-template-columns: 1fr; gap: 10px; }
+  .lmod-prev, .lmod-next { justify-self: stretch; justify-content: center; }
+  .lmod-foot .progress { order: -1; }
+  .lc-finish { padding: 32px 22px; }
+}
+</style>
+
+<div class="lc">
+
+  <!-- BREADCRUMB -->
+  <nav class="lc-crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <a href="/resources">Resources</a>
+    <span class="sep">/</span>
+    <span class="here">Insurance Fundamentals</span>
+  </nav>
+
+  <!-- COURSE HERO -->
+  <section class="lc-hero">
+    <div class="lc-hero-intro">
+      <span class="eyebrow">Resources Track</span>
+      <h1>Insurance Fundamentals, Explained Chapter by Chapter</h1>
+      <p class="lead">Eight short chapters on the core concepts every policyholder should know: premiums, deductibles, limits, exclusions, and how policies actually start and end.</p>
+      <div class="meta">
+        <div class="stat"><strong>8</strong><span>chapters<br>in this track</span></div>
+        <div class="stat"><strong>~25</strong><span>minutes<br>to finish</span></div>
+        <div class="stat"><strong>All</strong><span>coverage<br>types</span></div>
+      </div>
+      <div class="cta-row">
+        <a href="#m1" class="lc-btn lc-btn-primary" id="startBtn">Start Chapter 1 →</a>
+        <a href="/" class="lc-btn lc-btn-ghost">Go to Home</a>
+      </div>
+    </div>
+    <div class="lc-hero-art">
+      <div class="art-kicker">Inside this track</div>
+      <div class="art-title">From premiums to cancellation, every core concept that shapes how your coverage actually works.</div>
+      <ul class="art-list">
+        <li>Premiums</li>
+        <li>Deductibles</li>
+        <li>Coinsurance</li>
+        <li>Limits</li>
+        <li>Exclusions</li>
+        <li>Riders</li>
+        <li>Underwriting</li>
+        <li>Lapse</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mobile TOC dropdown -->
+  <div class="lc-toc-mobile">
+    <select id="mobileToc" aria-label="Jump to chapter">
+      <option value="m1">Chapter 1 · What Is a Premium, Really</option>
+      <option value="m2">Chapter 2 · Deductibles</option>
+      <option value="m3">Chapter 3 · Coinsurance and Copays</option>
+      <option value="m4">Chapter 4 · Policy Limits</option>
+      <option value="m5">Chapter 5 · Exclusions</option>
+      <option value="m6">Chapter 6 · Riders and Endorsements</option>
+      <option value="m7">Chapter 7 · Underwriting</option>
+      <option value="m8">Chapter 8 · Grace Periods, Cancellation, and Lapse</option>
+    </select>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div class="lc-body">
+
+    <!-- STICKY SIDEBAR TOC -->
+    <aside class="lc-toc" aria-label="Chapter list">
+      <div class="toc-title">Course Progress</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="tocFill"></div></div>
+      <ol id="tocList">
+        <li><a href="#m1" data-mod="1">What Is a Premium, Really</a></li>
+        <li><a href="#m2" data-mod="2">Deductibles</a></li>
+        <li><a href="#m3" data-mod="3">Coinsurance and Copays</a></li>
+        <li><a href="#m4" data-mod="4">Policy Limits</a></li>
+        <li><a href="#m5" data-mod="5">Exclusions</a></li>
+        <li><a href="#m6" data-mod="6">Riders and Endorsements</a></li>
+        <li><a href="#m7" data-mod="7">Underwriting</a></li>
+        <li><a href="#m8" data-mod="8">Grace Periods, Cancellation, and Lapse</a></li>
+      </ol>
+      <div class="toc-footer">Your progress is saved in your browser. Close the tab and pick up where you left off.</div>
+    </aside>
+
+    <!-- MODULE PANEL -->
+    <div class="lc-panel">
+
+      <!-- MODULE 1 -->
+      <article class="lmod" id="m1" data-module="1">
+        <div class="lmod-meta">Chapter 1 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">What Is a Premium, Really</h1>
+        <p class="lmod-subtitle">Understanding what you actually pay for.</p>
+        <p class="lmod-lead">A premium is the amount you pay the insurance company to keep your policy active. That's the simple answer. The more useful answer is understanding what actually drives the number, because premiums feel arbitrary until you understand the math.</p>
+
+        <h2>The basic definition</h2>
+        <p>Premium is the regular payment (monthly, quarterly, semi-annually, or annually) for your insurance coverage. Stop paying and the policy eventually lapses, meaning you have no coverage even if you paid for most of the year.</p>
+
+        <h2>What the premium pays for</h2>
+        <p>The insurance company uses your premium to cover several things:</p>
+        <ul>
+          <li><strong>Expected claims</strong> across all policyholders. This is the biggest chunk, usually 60 to 75%.</li>
+          <li><strong>Operating costs</strong>, including underwriting, claims processing, and agent commissions.</li>
+          <li><strong>Reinsurance</strong>, the insurance the insurer buys to protect itself against catastrophes.</li>
+          <li><strong>Reserves</strong>, money set aside for future claims.</li>
+          <li><strong>Profit margin</strong>, typically 3 to 8% for most personal insurance lines.</li>
+        </ul>
+
+        <h2>Why the premium is what it is</h2>
+        <p>Every premium is calculated based on risk factors specific to you and your coverage:</p>
+        <ul>
+          <li>The likelihood of a claim, based on data for people like you.</li>
+          <li>The expected size of a claim if one occurs.</li>
+          <li>The coverage limits and deductibles you chose.</li>
+          <li>Any discounts that apply, such as bundling, safe driving, or home safety features.</li>
+        </ul>
+
+        <h2>Why premiums change at renewal</h2>
+        <ul>
+          <li><strong>Your own claim history.</strong> One at-fault auto accident can increase premiums 20 to 40% for 3 to 5 years.</li>
+          <li><strong>Inflation and reinsurance costs.</strong> Replacement costs for homes and cars rise, so do premiums.</li>
+          <li><strong>State-level catastrophes.</strong> A hurricane-heavy year in FL or hail storms in TX drive up rates for everyone in the state, even those who didn't file claims.</li>
+          <li><strong>Law and regulation changes.</strong> New coverage requirements, tort reform, or court decisions.</li>
+          <li><strong>Your own situation.</strong> Adding a teen driver, buying a more expensive car, updating a home.</li>
+        </ul>
+
+        <h2>Payment frequency affects total cost</h2>
+        <p>Paying in full annually often saves 5 to 10% compared to monthly installments. The reason: insurers avoid billing costs and collect the money upfront. If cash flow allows, paying 6 or 12 months at a time is a quiet way to save.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A homeowner pays $2,400 per year for a policy when billed monthly at $200. Switching to an annual payment drops the total to about $2,160, a $240 savings just for changing how the bill is structured. No coverage changes, no shopping, no calls.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"My premium is the only cost."</strong> The deductible, copays, and out-of-pocket maximums are also costs.</li>
+            <li><strong>"Premium equals value."</strong> A cheap policy may have higher deductibles, lower limits, or an insurer with slow claims service. Read the coverage, not just the price.</li>
+            <li><strong>"My premium is locked in."</strong> It's locked in for the policy term (usually 6 or 12 months), then recalculated at renewal.</li>
+          </ul>
+        </div>
+
+        <p>Understanding your premium is step one of being a smart buyer. Our <a href="/">home page</a> connects you to an advisor who can walk through how yours was built.</p>
+
+        <div class="lmod-foot">
+          <button class="lmod-prev" disabled aria-label="Start of track">
+            <span class="label"><small>← Previous</small><strong>Start of track</strong></span>
+          </button>
+          <span class="progress">Chapter 1 of 8</span>
+          <a href="#m2" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Deductibles</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="lmod" id="m2" data-module="2">
+        <div class="lmod-meta">Chapter 2 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Deductibles</h1>
+        <p class="lmod-subtitle">The amount you pay before insurance pays.</p>
+        <p class="lmod-lead">The deductible is the portion of a claim you pay out of pocket before the insurance company pays anything. It's one of the most misunderstood parts of any policy, and picking the wrong deductible can cost you thousands either in premiums you didn't need to pay or in out-of-pocket costs you weren't ready for.</p>
+
+        <h2>How a deductible works</h2>
+        <p>Imagine a $1,000 deductible on an auto collision claim. You have a $4,500 repair bill. You pay $1,000. The insurer pays $3,500. You're out $1,000 plus the time and paperwork of a claim.</p>
+
+        <h2>Deductibles vary by coverage type</h2>
+        <p>Within a single auto policy, you might have:</p>
+        <ul>
+          <li><strong>Collision deductible:</strong> $500.</li>
+          <li><strong>Comprehensive deductible:</strong> $250.</li>
+          <li><strong>No deductible on liability</strong> (standard, because liability is paid directly to third parties).</li>
+          <li><strong>No deductible on roadside assistance, rental reimbursement, or MedPay.</strong></li>
+        </ul>
+        <p>Within a homeowners policy:</p>
+        <ul>
+          <li><strong>All-peril deductible:</strong> $1,000 to $2,500.</li>
+          <li><strong>Wind/hail deductible</strong> (separate, usually higher): 1 to 5% of dwelling limit.</li>
+          <li><strong>Hurricane deductible</strong> (in FL, LA, NC, SC, VA, MD): 2 to 5% of dwelling limit.</li>
+          <li><strong>Earthquake deductible:</strong> 5 to 25% of dwelling limit.</li>
+        </ul>
+        <p>Within health insurance:</p>
+        <ul>
+          <li>Annual deductible that resets each year.</li>
+          <li>Individual vs. family deductible in family plans.</li>
+          <li>Separate deductibles for in-network vs. out-of-network.</li>
+        </ul>
+
+        <h2>Percentage vs. dollar deductibles</h2>
+        <p>Auto policies use flat dollar deductibles ($500, $1,000). Homeowners policies often use percentage deductibles for specific perils, especially wind, hail, hurricane, and earthquake. A 2% deductible on a $400,000 home is $8,000, more than many claimants expect.</p>
+
+        <h2>Raising your deductible to save on premium</h2>
+        <p>The common relationship:</p>
+        <ul>
+          <li>Raising auto collision deductible from $500 to $1,000 usually saves 10 to 15% on that coverage.</li>
+          <li>Raising homeowners deductible from $1,000 to $2,500 typically saves 15 to 25%.</li>
+        </ul>
+        <p>The break-even math: how often would you file a small claim? If you have no at-fault claims in 5 to 7 years, a higher deductible saves money long-term. If you file claims regularly (and can afford the higher out-of-pocket), higher deductibles aren't worth it.</p>
+
+        <h2>Health deductibles and the out-of-pocket max</h2>
+        <p>Health insurance works differently. You pay your deductible, then coinsurance, then hit an out-of-pocket maximum, after which the insurer pays 100%. Understanding the full structure matters more than the deductible alone.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A homeowner in Dallas raises her deductible from $1,000 to $2,500. Her premium drops $380 per year. If she files no claims for 7 years, she's saved $2,660. If she files one hail claim in year 5, she pays an extra $1,500 out of pocket but has already banked $1,900 in premium savings. Still ahead.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Higher deductible equals worse coverage."</strong> Not necessarily. It's a cost-sharing choice, not a coverage choice.</li>
+            <li><strong>"My deductible resets after each claim."</strong> On annual policies (auto, home), it generally doesn't reset per claim, but you pay it again for each separate claim.</li>
+            <li><strong>"The insurance pays me and I pay the shop."</strong> Usually the insurer pays the shop directly, minus your deductible.</li>
+          </ul>
+        </div>
+
+        <p>A deductible sits at the heart of every policy decision. Our <a href="/">home page</a> points to advisors who can help you set yours with your budget in mind.</p>
+
+        <div class="lmod-foot">
+          <a href="#m1" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>What Is a Premium, Really</strong></span>
+          </a>
+          <span class="progress">Chapter 2 of 8</span>
+          <a href="#m3" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Coinsurance and Copays</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="lmod" id="m3" data-module="3">
+        <div class="lmod-meta">Chapter 3 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Coinsurance and Copays</h1>
+        <p class="lmod-subtitle">What each one actually means.</p>
+        <p class="lmod-lead">Coinsurance and copay are both ways you share costs with your insurance company, but they work very differently. Health insurance uses both, often in the same plan, and confusing them leads to surprise bills at the doctor's office.</p>
+
+        <h2>Copay</h2>
+        <p>A <strong>fixed dollar amount</strong> you pay for a specific service:</p>
+        <ul>
+          <li>$30 for a primary care visit.</li>
+          <li>$60 for a specialist visit.</li>
+          <li>$200 for an ER visit.</li>
+          <li>$15 for a generic prescription.</li>
+        </ul>
+        <p>Copays are predictable. You know exactly what you'll pay for the visit before you walk in.</p>
+
+        <h2>Coinsurance</h2>
+        <p>A <strong>percentage of the cost</strong> you pay after meeting your deductible.</p>
+        <ul>
+          <li>20% coinsurance means you pay 20% of the bill, insurance pays 80%.</li>
+          <li>On a $5,000 surgery, you'd pay $1,000 in coinsurance.</li>
+        </ul>
+        <p>Coinsurance is unpredictable. You don't know the final bill until you get it.</p>
+
+        <h2>How they stack together</h2>
+        <p>A typical health plan works in four steps:</p>
+        <ol>
+          <li>You pay copays for office visits and prescriptions from day one.</li>
+          <li>You pay the deductible ($3,000, say) out of pocket for anything outside copays (imaging, surgery, hospital stays).</li>
+          <li>Then coinsurance kicks in. You pay 20%, insurance pays 80%, until you hit the out-of-pocket max.</li>
+          <li>Then insurance pays 100% for the rest of the year.</li>
+        </ol>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A family plan with a $4,000 deductible, 20% coinsurance, and $8,000 out-of-pocket max. Mom has a $40,000 surgery. She pays the first $4,000 (deductible). She pays 20% of the next $20,000, which is $4,000 (coinsurance). That hits the $8,000 out-of-pocket max. Insurance pays the remaining $28,000. Her total cost: $8,000. The insurer's total cost: $32,000.</p>
+        </div>
+
+        <h2>In non-health insurance</h2>
+        <p>Homeowners and commercial property policies have a different kind of coinsurance: a penalty for underinsuring the building. If you insure your home for only 60% of replacement cost, a coinsurance clause can reduce your claim payment proportionally. This is why making sure your dwelling limit matches replacement cost matters.</p>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"A lower copay plan is always better."</strong> Lower copays often come with higher premiums. Calculate your expected annual costs.</li>
+            <li><strong>"Coinsurance applies to all healthcare."</strong> Many services (primary care, prescriptions, preventive) are copay-based. Coinsurance usually applies to big-ticket care.</li>
+            <li><strong>"I pay 20% of the bill forever."</strong> You stop paying after hitting the out-of-pocket max.</li>
+          </ul>
+        </div>
+
+        <p>Understanding how copays and coinsurance fit together is the key to picking a health plan. Start from our <a href="/">home page</a> to talk with an advisor about yours.</p>
+
+        <div class="lmod-foot">
+          <a href="#m2" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Deductibles</strong></span>
+          </a>
+          <span class="progress">Chapter 3 of 8</span>
+          <a href="#m4" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Policy Limits</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="lmod" id="m4" data-module="4">
+        <div class="lmod-meta">Chapter 4 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Policy Limits</h1>
+        <p class="lmod-subtitle">The most important number on your policy.</p>
+        <p class="lmod-lead">Your policy limit is the maximum amount your insurance will pay for a covered claim. Go over it, and you pay the rest. For big claims like a totaled luxury car, a house fire, or a lawsuit, the difference between an adequate limit and a low one can be tens of thousands of dollars out of pocket.</p>
+
+        <h2>Types of limits</h2>
+        <ul>
+          <li><strong>Per-occurrence limit:</strong> the max paid for a single event.</li>
+          <li><strong>Aggregate limit:</strong> the max paid across all claims in a policy period.</li>
+          <li><strong>Per-person limit:</strong> the max paid for a single injured person (common in liability).</li>
+          <li><strong>Combined single limit:</strong> one number covering all types of damage in one event.</li>
+          <li><strong>Sub-limits:</strong> specific caps on certain items or categories (jewelry, cash, business property).</li>
+        </ul>
+
+        <h2>Auto liability limits explained</h2>
+        <p>Auto liability is often quoted as three numbers like <strong>100/300/100</strong>:</p>
+        <ul>
+          <li>$100,000 per person for bodily injury.</li>
+          <li>$300,000 per accident for bodily injury.</li>
+          <li>$100,000 for property damage.</li>
+        </ul>
+        <p>If you injure one person badly, the insurer pays up to $100K. If you injure three people badly, the insurer pays up to $300K across all of them. The person whose car you damaged gets up to $100K for their vehicle.</p>
+
+        <h2>State minimums are nowhere near enough</h2>
+        <p>Many states have auto liability minimums of <strong>25/50/25</strong>, meaning $25K per person, $50K per accident, $25K property damage. A hospital bill for one injured person can easily exceed $25K. Once the policy tops out, the remainder is your personal responsibility. Savings, retirement, home equity.</p>
+        <p>Recommendation for most people: <strong>100/300/100 at minimum</strong>, ideally <strong>250/500/250</strong> with an umbrella on top.</p>
+
+        <h2>Homeowners limits to watch</h2>
+        <ul>
+          <li><strong>Dwelling (Coverage A):</strong> should equal full replacement cost of the home.</li>
+          <li><strong>Personal property (Coverage C):</strong> usually 50 to 70% of dwelling. Often needs adjusting upward.</li>
+          <li><strong>Liability (Coverage E):</strong> usually $100K to $500K. Consider raising to $500K or more and adding umbrella.</li>
+          <li><strong>Sub-limits on valuables:</strong> jewelry, firearms, cash. Often undersized.</li>
+        </ul>
+
+        <h2>Commercial limits</h2>
+        <p>Business policies often carry <strong>$1M per occurrence / $2M aggregate</strong> as baseline general liability. Service businesses may need higher. Construction and high-risk industries often carry $2M/$4M or higher.</p>
+
+        <h2>Umbrella for limits you didn't buy yourself</h2>
+        <p>A personal or commercial umbrella policy adds $1M to $10M on top of your underlying auto, home, and other liability policies, at a fraction of the cost of raising each underlying limit individually. For most households with assets to protect, an umbrella is the most cost-effective limit upgrade available. See our <a href="/blog/umbrella">umbrella post</a> for details.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A driver carrying 25/50/25 runs a red light and injures two people. Their hospital bills total $180,000. The policy pays up to $50,000 combined for injuries. The driver personally owes the remaining $130,000, which a court can collect from wages, savings, and home equity. A 250/500/250 policy, costing roughly $200 more per year, would have covered it entirely.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"State minimum is enough."</strong> State minimums are the legal floor, not enough to protect your finances.</li>
+            <li><strong>"I'll never need that much coverage."</strong> One serious accident, one major lawsuit, and you'll need exactly that much.</li>
+            <li><strong>"Higher limits cost proportionally more."</strong> They don't. Raising auto liability from 100/300 to 250/500 often costs only 10 to 20% more.</li>
+          </ul>
+        </div>
+
+        <p>Your policy limits decide how well a claim ends. From our <a href="/">home page</a> you can connect with an advisor to make sure yours are right-sized.</p>
+
+        <div class="lmod-foot">
+          <a href="#m3" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Coinsurance and Copays</strong></span>
+          </a>
+          <span class="progress">Chapter 4 of 8</span>
+          <a href="#m5" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Exclusions</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="lmod" id="m5" data-module="5">
+        <div class="lmod-meta">Chapter 5 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Exclusions</h1>
+        <p class="lmod-subtitle">The fine print that decides what's not covered.</p>
+        <p class="lmod-lead">An exclusion is any loss, peril, person, or circumstance a policy specifically does not cover. Every insurance policy has them, and they're not hidden. They're listed clearly in the policy document. Reading them before you need to file a claim is the single easiest way to avoid an ugly surprise.</p>
+
+        <h2>Why exclusions exist</h2>
+        <ul>
+          <li><strong>Some risks need separate policies.</strong> Flood, earthquake, and war need dedicated coverage.</li>
+          <li><strong>Some risks are uninsurable.</strong> Intentional acts, illegal activity, nuclear events.</li>
+          <li><strong>Some risks would make coverage unaffordable</strong> for most buyers (regional catastrophes, specific high-risk assets).</li>
+          <li><strong>Some losses are gradual rather than sudden and accidental</strong>, such as wear and tear, decay, aging.</li>
+        </ul>
+
+        <h2>Common homeowners exclusions</h2>
+        <ul>
+          <li>Flood. Separate NFIP or private flood policy required.</li>
+          <li>Earthquake. Separate endorsement or policy required.</li>
+          <li>Neglect and intentional loss.</li>
+          <li>Wear and tear.</li>
+          <li>Mold above a sublimit.</li>
+          <li>Termites, rats, and other pests.</li>
+          <li>War and nuclear events.</li>
+          <li>Business use of the home above a sublimit.</li>
+        </ul>
+
+        <h2>Common auto exclusions</h2>
+        <ul>
+          <li>Business use above personal-use limits.</li>
+          <li>Racing, track use, or speed competitions.</li>
+          <li>Intentional acts.</li>
+          <li>Using the vehicle as a taxi or delivery vehicle (without rideshare endorsement).</li>
+          <li>Damage to property you own or rent.</li>
+        </ul>
+
+        <h2>Common health exclusions</h2>
+        <ul>
+          <li>Cosmetic procedures (unless medically necessary).</li>
+          <li>Experimental treatments.</li>
+          <li>Care outside the country (sometimes covered with travel insurance).</li>
+          <li>Care outside the network in HMO plans (outside of emergencies).</li>
+        </ul>
+
+        <h2>Common life insurance exclusions</h2>
+        <ul>
+          <li>Suicide in the first 2 years (contestability clause).</li>
+          <li>Death from illegal activities.</li>
+          <li>Death from wars or acts of war in some policies.</li>
+          <li>Non-disclosure on the application. Material misrepresentation can void coverage within the contestability period.</li>
+        </ul>
+
+        <h2>Named perils vs. open perils</h2>
+        <ul>
+          <li><strong>Named perils policies</strong> list specific covered events. Everything else is excluded by default.</li>
+          <li><strong>Open perils (all-risk) policies</strong> cover everything except specifically listed exclusions.</li>
+        </ul>
+        <p>HO-3 (most homeowners policies) is open perils on the structure, named perils on contents. HO-5 is open perils on both.</p>
+
+        <h2>Reading your own policy</h2>
+        <p>Every policy has an "Exclusions" section. On a homeowners policy, it's typically 2 to 4 pages. On commercial policies, longer. Read it once at purchase and keep the declarations page somewhere accessible.</p>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A Charleston homeowner files a claim after six inches of rainwater flood her basement. The insurer denies it. Her policy excludes flood, and she never purchased a separate NFIP policy. A $600-per-year flood policy would have covered the $40,000 in damage. The exclusion was on page 14 of her policy, right where it always was.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"If it's not listed as an exclusion, it's covered."</strong> Not on named-perils policies.</li>
+            <li><strong>"My agent told me it's covered, so it's covered."</strong> Oral statements don't override written policy terms. Get it in writing or check the policy.</li>
+            <li><strong>"Exclusions are the same across insurers."</strong> Similar, but they vary. Policy forms differ, and endorsements can add or remove exclusions.</li>
+          </ul>
+        </div>
+
+        <p>Exclusions are where claims go to die. From our <a href="/">home page</a>, an advisor can walk through yours before a loss forces you to learn them.</p>
+
+        <div class="lmod-foot">
+          <a href="#m4" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Policy Limits</strong></span>
+          </a>
+          <span class="progress">Chapter 5 of 8</span>
+          <a href="#m6" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Riders and Endorsements</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="lmod" id="m6" data-module="6">
+        <div class="lmod-meta">Chapter 6 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Riders and Endorsements</h1>
+        <p class="lmod-subtitle">How to modify a standard policy.</p>
+        <p class="lmod-lead">A rider or endorsement is an add-on that modifies a standard insurance policy. They let you expand coverage for specific needs the base policy doesn't include, or sometimes restrict coverage in exchange for a lower premium.</p>
+
+        <h2>Terminology</h2>
+        <p>"Rider" and "endorsement" mean roughly the same thing. "Rider" is more common in life and health insurance. "Endorsement" is more common in property and casualty (home, auto, business). Both change the policy's terms by adding, modifying, or removing coverage.</p>
+
+        <h2>Common life insurance riders</h2>
+        <ul>
+          <li><strong>Accelerated death benefit:</strong> lets you access part of the death benefit while alive if diagnosed with terminal illness. Often included for free.</li>
+          <li><strong>Waiver of premium:</strong> waives premiums if you become disabled.</li>
+          <li><strong>Child rider:</strong> adds coverage on all current and future children for a single small premium.</li>
+          <li><strong>Accidental death benefit:</strong> pays double if death is accidental.</li>
+          <li><strong>Guaranteed insurability rider:</strong> lets you buy additional coverage at future dates without new underwriting.</li>
+          <li><strong>Long-term care rider:</strong> accesses part of the death benefit for long-term care expenses.</li>
+        </ul>
+
+        <h2>Common homeowners endorsements</h2>
+        <ul>
+          <li><strong>Scheduled personal property:</strong> adds specific coverage for jewelry, firearms, art.</li>
+          <li><strong>Water backup:</strong> covers sewer and sump pump backups (standard policies exclude).</li>
+          <li><strong>Service line:</strong> covers damage to utility lines on your property.</li>
+          <li><strong>Identity theft.</strong></li>
+          <li><strong>Ordinance or law:</strong> pays extra to rebuild to modern code after a loss.</li>
+          <li><strong>Home business:</strong> extends coverage for small in-home business operations.</li>
+          <li><strong>Vacant home endorsement:</strong> for homes empty beyond 60 days.</li>
+          <li><strong>Green rebuild:</strong> pays extra to rebuild with energy-efficient materials.</li>
+        </ul>
+
+        <h2>Common auto endorsements</h2>
+        <ul>
+          <li><strong>Gap coverage:</strong> pays the gap between loan balance and vehicle value.</li>
+          <li><strong>Rideshare endorsement:</strong> extends coverage for Uber or Lyft driving.</li>
+          <li><strong>Original equipment manufacturer (OEM) parts:</strong> requires insurer to use factory parts, not aftermarket.</li>
+          <li><strong>New car replacement:</strong> pays for a new car, not depreciated value, within the first 1 to 3 years.</li>
+          <li><strong>Custom equipment:</strong> for aftermarket stereos, wheels, lift kits, and similar items.</li>
+          <li><strong>Accident forgiveness:</strong> first at-fault accident doesn't increase premium.</li>
+        </ul>
+
+        <h2>Common business insurance endorsements</h2>
+        <ul>
+          <li><strong>Additional insured:</strong> extends coverage to named parties (landlords, clients, subcontractors).</li>
+          <li><strong>Waiver of subrogation:</strong> waives the insurer's right to sue responsible parties after paying a claim.</li>
+          <li><strong>Blanket additional insured:</strong> covers any party required by contract.</li>
+          <li><strong>Equipment breakdown:</strong> covers mechanical and electrical failure of business equipment.</li>
+        </ul>
+
+        <h2>What endorsements cost</h2>
+        <p>Most cost $10 to $50 per year each. Some, like scheduled personal property for high-value jewelry, or a rideshare endorsement, can cost more. Compared to the coverage gap they fill, most are bargains.</p>
+
+        <h2>When to add or drop</h2>
+        <ul>
+          <li><strong>Life changes</strong> such as marriage, a new baby, buying a home, or starting a business often trigger endorsement decisions.</li>
+          <li><strong>Annual review.</strong> Going through your coverages once a year catches endorsements you need and ones you no longer need.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A homeowner adds a $28-per-year water backup endorsement. Two years later, a sump pump fails during a storm and floods the finished basement. Damage comes to $14,000. The base policy would have excluded it entirely. The endorsement paid the claim minus the deductible, with $56 in total premium spent.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"I need every endorsement available."</strong> Most people need 2 to 4, chosen based on their specific situation.</li>
+            <li><strong>"Adding an endorsement is permanent."</strong> You can drop them at renewal.</li>
+            <li><strong>"Riders don't matter much."</strong> A $20-per-year rider can be the difference between a covered claim and a denied one.</li>
+          </ul>
+        </div>
+
+        <p>Endorsements are how a policy starts fitting your life, not just the template. Our <a href="/">home page</a> connects you to an advisor who can map the right ones to your situation.</p>
+
+        <div class="lmod-foot">
+          <a href="#m5" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Exclusions</strong></span>
+          </a>
+          <span class="progress">Chapter 6 of 8</span>
+          <a href="#m7" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Underwriting</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="lmod" id="m7" data-module="7">
+        <div class="lmod-meta">Chapter 7 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Underwriting</h1>
+        <p class="lmod-subtitle">How insurance companies decide what to charge you.</p>
+        <p class="lmod-lead">Underwriting is the process insurance companies use to evaluate an applicant's risk and decide whether to offer coverage, what to charge, and with what conditions. Understanding what underwriters look at helps you get better rates, and understand why two people with similar situations can pay very different premiums.</p>
+
+        <h2>What underwriters actually do</h2>
+        <ul>
+          <li><strong>Assess risk.</strong> What's the likelihood of a claim? How expensive could a claim be?</li>
+          <li><strong>Price accordingly.</strong> Higher risk means higher premium.</li>
+          <li><strong>Decide on acceptance.</strong> Some risks are declined, some accepted at standard rates, some accepted with restrictions.</li>
+          <li><strong>Apply discounts and surcharges</strong> based on specific factors.</li>
+        </ul>
+
+        <h2>What auto underwriters look at</h2>
+        <ul>
+          <li>Driving record (moving violations, accidents, DUIs).</li>
+          <li>Age and experience (teen drivers and drivers under 25 are highest-cost categories).</li>
+          <li>Vehicle type, age, and value.</li>
+          <li>Credit-based insurance score (legal in most states).</li>
+          <li>Garaging ZIP code.</li>
+          <li>Annual mileage.</li>
+          <li>Prior insurance history (lapses in coverage).</li>
+          <li>Claims history (via CLUE report).</li>
+        </ul>
+
+        <h2>What homeowners underwriters look at</h2>
+        <ul>
+          <li>Home age, construction type, roof age, and roof material.</li>
+          <li>Location (proximity to fire hydrants, fire station, wildfire or flood risk).</li>
+          <li>Prior claims on this home and this household (CLUE report).</li>
+          <li>Credit-based insurance score.</li>
+          <li>Dog breeds (some breeds are excluded or surcharged).</li>
+          <li>Swimming pools, trampolines (attractive nuisance surcharges).</li>
+          <li>Security features (monitored alarm, smoke detectors).</li>
+        </ul>
+
+        <h2>What life insurance underwriters look at</h2>
+        <ul>
+          <li>Age.</li>
+          <li>Gender.</li>
+          <li>Smoking or nicotine use.</li>
+          <li>Height and weight (BMI).</li>
+          <li>Medical history, including prior diagnoses, surgeries, and medications.</li>
+          <li>Current health, including blood pressure, cholesterol, and A1C.</li>
+          <li>Family history (heart disease, cancer, early deaths).</li>
+          <li>Occupation and hobbies (risky jobs or hobbies such as pilots, climbers, skydivers).</li>
+          <li>Driving record (multiple DUIs affect life insurance).</li>
+        </ul>
+
+        <h2>Health class tiers in life insurance</h2>
+        <p>Most companies offer tiered pricing:</p>
+        <ul>
+          <li><strong>Preferred Plus / Super Preferred:</strong> excellent health, no family history issues, best rates.</li>
+          <li><strong>Preferred:</strong> very good health.</li>
+          <li><strong>Standard Plus:</strong> better than average.</li>
+          <li><strong>Standard:</strong> average health.</li>
+          <li><strong>Substandard / Rated:</strong> health concerns, with rates as percentage increases over standard.</li>
+        </ul>
+        <p>Moving up one class can cut premium by 15 to 25%. Lose weight, quit smoking, control blood pressure, and re-underwrite in a year or two.</p>
+
+        <h2>Simplified vs. fully underwritten</h2>
+        <ul>
+          <li><strong>Fully underwritten:</strong> full application, medical exam, lab work. Best rates, longest process (4 to 8 weeks).</li>
+          <li><strong>Simplified issue:</strong> medical questionnaire, no exam. Higher premium, faster (days to a few weeks).</li>
+          <li><strong>Guaranteed issue:</strong> no health questions. Highest premium, slowest coverage start (graded benefits).</li>
+        </ul>
+
+        <h2>Credit-based insurance scores</h2>
+        <p>In most states, insurers use a specialized credit score to help price auto and home policies. The logic: credit patterns correlate with claim frequency statistically. Higher scores mean lower premium.</p>
+        <p>States that restrict or prohibit credit-based insurance scoring in OnePoint's footprint:</p>
+        <ul>
+          <li><strong>MD</strong> prohibits using credit for homeowners insurance (allows for auto with limits).</li>
+          <li>Others have specific consumer protection rules.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A 42-year-old applicant quits smoking, loses 20 pounds, and controls her blood pressure over 18 months. When she re-applies for a $500,000 term life policy, she moves from Standard to Preferred. Annual premium drops from $780 to $520, a savings of $260 per year for 20 years, or $5,200 total.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"They can't use my credit against me."</strong> In most states, they can, and often do, significantly.</li>
+            <li><strong>"My premium is random."</strong> It's driven by specific data points and math.</li>
+            <li><strong>"A medical exam is always required for life insurance."</strong> Simplified issue policies skip it, for a price.</li>
+          </ul>
+        </div>
+
+        <p>Underwriting is where your application becomes a price. From our <a href="/">home page</a>, an advisor can help you present your risk in the best light.</p>
+
+        <div class="lmod-foot">
+          <a href="#m6" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Riders and Endorsements</strong></span>
+          </a>
+          <span class="progress">Chapter 7 of 8</span>
+          <a href="#m8" class="lmod-next">
+            <span class="label"><small>Up next</small><strong>Grace Periods, Cancellation, and Lapse</strong></span>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 8 -->
+      <article class="lmod" id="m8" data-module="8">
+        <div class="lmod-meta">Chapter 8 · Insurance Fundamentals</div>
+        <h1 class="lmod-title">Grace Periods, Cancellation, and Lapse</h1>
+        <p class="lmod-subtitle">How policies end.</p>
+        <p class="lmod-lead">Insurance policies don't just end. They go through specific processes when payments lapse, when you cancel, or when the insurer cancels you. Knowing how each works prevents an unexpected coverage gap at the worst possible time.</p>
+
+        <h2>Grace period</h2>
+        <p>The window after your premium due date when the policy stays in force even though you haven't paid. It varies by policy type:</p>
+        <ul>
+          <li><strong>Life insurance:</strong> usually 30 to 31 days.</li>
+          <li><strong>Health insurance:</strong> varies by plan. 30 days is common, with longer grace periods for subsidized ACA plans (up to 90 days).</li>
+          <li><strong>Auto and home:</strong> typically shorter, often 10 to 30 days depending on state and insurer.</li>
+          <li><strong>Commercial:</strong> varies widely. Some have no grace period.</li>
+        </ul>
+        <p>Pay within the grace period and the policy continues as if nothing happened. Miss it, and the policy lapses.</p>
+
+        <h2>Lapse vs. cancellation</h2>
+        <ul>
+          <li><strong>Lapse:</strong> the policy ends because you didn't pay.</li>
+          <li><strong>Cancellation:</strong> the policy ends because you or the insurer chose to end it.</li>
+        </ul>
+
+        <h2>What happens at lapse</h2>
+        <ul>
+          <li><strong>Coverage ends</strong> at the end of the grace period.</li>
+          <li><strong>Claims during the lapse period aren't covered.</strong></li>
+          <li><strong>Reinstatement.</strong> Some policies allow you to reinstate within a window (often 30 to 90 days for life insurance) if you pay back premiums. Life insurance reinstatement often requires updated health information.</li>
+          <li><strong>Impact on future applications.</strong> A lapse can affect your ability to get coverage elsewhere. Insurance history is checked.</li>
+        </ul>
+
+        <h2>Cancellation by the insurer</h2>
+        <p>Insurers can cancel policies, but only under specific circumstances and with state-mandated notice:</p>
+        <ul>
+          <li><strong>Non-payment</strong> of premium, typically 10 to 30 days' notice.</li>
+          <li><strong>Material misrepresentation</strong> on the application.</li>
+          <li><strong>Substantial increase in the risk</strong> (for example, installing a pool without notifying them, or having a license revoked).</li>
+          <li><strong>At renewal.</strong> Insurers have more flexibility not to renew, but most states require advance notice.</li>
+        </ul>
+
+        <h2>Cancellation by you</h2>
+        <p>You can typically cancel any time by writing to the insurer. What to expect:</p>
+        <ul>
+          <li><strong>Pro-rated refund</strong> for unused coverage (common on auto and home).</li>
+          <li><strong>Short-rate refund</strong> (less favorable, a small cancellation penalty) on some commercial policies.</li>
+          <li><strong>Life insurance:</strong> you get the cash surrender value, not a premium refund. Term life generally has no cash value, so canceling just ends coverage.</li>
+        </ul>
+
+        <h2>Non-renewal vs. cancellation</h2>
+        <ul>
+          <li><strong>Cancellation:</strong> policy terminated mid-term.</li>
+          <li><strong>Non-renewal:</strong> insurer decides not to offer coverage when the current term ends.</li>
+        </ul>
+        <p>Non-renewal is more common and happens at the end of a policy period. Reasons include too many claims, rate changes, or the insurer exiting the market. In states like <strong>FL and LA</strong>, insurers regularly non-renew home policies because of hurricane risk.</p>
+
+        <h2>What triggers a cancellation for cause</h2>
+        <p>Beyond non-payment, common triggers:</p>
+        <ul>
+          <li>Fraud or material misrepresentation.</li>
+          <li>Multiple at-fault accidents (auto).</li>
+          <li>Multiple claims on a home policy, especially water damage claims.</li>
+          <li>DUI convictions.</li>
+          <li>Adding an unacceptable driver to an auto policy.</li>
+        </ul>
+
+        <h2>The 60-day or 90-day "new business" window</h2>
+        <p>In most states, insurers can cancel a new policy for any reason in the first 60 or 90 days of coverage. After that, stricter rules apply. This is why initial applications matter. If you failed to disclose something, it's during this window that the insurer is most likely to find it and cancel.</p>
+
+        <h2>Reinstatement after lapse</h2>
+        <ul>
+          <li><strong>Auto and home:</strong> reinstatement is uncommon. You'll usually apply for new coverage.</li>
+          <li><strong>Life:</strong> reinstatement often possible within 3 to 5 years, may require updated health info.</li>
+          <li><strong>Health (ACA):</strong> usually requires waiting for Open Enrollment or a qualifying event.</li>
+        </ul>
+
+        <div class="lmod-example">
+          <span class="label">Real Example</span>
+          <p>A Tampa homeowner misses a premium payment during a job transition. Nine days past the due date, a tropical storm floods her garage. The claim is denied because the payment came in on day 12, after coverage had already lapsed. The grace period was 10 days. One missed email cost her $22,000.</p>
+        </div>
+
+        <div class="lmod-warn">
+          <span class="label">What people get wrong</span>
+          <ul>
+            <li><strong>"Missing one payment ends my coverage immediately."</strong> The grace period usually protects you for weeks.</li>
+            <li><strong>"I can just restart my policy if I let it lapse."</strong> Often, but at new rates and sometimes with different underwriting.</li>
+            <li><strong>"My insurer can cancel any time."</strong> Most states have specific rules requiring notice and reason.</li>
+          </ul>
+        </div>
+
+        <p>Knowing how a policy ends matters almost as much as knowing how it starts. Our <a href="/">home page</a> can connect you to an advisor before a payment gap becomes a coverage gap.</p>
+
+        <div class="lmod-foot">
+          <a href="#m7" class="lmod-prev">
+            <span class="label"><small>← Previous</small><strong>Underwriting</strong></span>
+          </a>
+          <span class="progress">Chapter 8 of 8</span>
+          <button class="lmod-next" disabled aria-label="End of track">
+            <span class="label"><small>Up next</small><strong>End of track</strong></span>
+          </button>
+        </div>
+
+        <!-- Finish band -->
+        <div class="lc-finish">
+          <div class="kicker">You finished the Insurance Fundamentals track</div>
+          <h2>Ready to put these fundamentals to work on your own policies?</h2>
+          <p>A licensed OnePoint advisor can review your current coverages, spot the gaps, and make sure your premium, deductible, and limits actually fit your situation. No pressure, no obligation.</p>
+          <div class="cta-row">
+            <a href="/book" class="btn-white">Book a Free Review</a>
+            <a href="tel:888-899-8117" class="btn-ghost">Call 888-899-8117</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.lc-panel -->
+  </div><!-- /.lc-body -->
+
+</div><!-- /.lc -->
+
+<script>
+(function() {
+  var modules = document.querySelectorAll('.lmod');
+  var tocLinks = document.querySelectorAll('#tocList a');
+  var tocFill = document.getElementById('tocFill');
+  var mobileToc = document.getElementById('mobileToc');
+  var total = modules.length;
+  var visited = new Set();
+
+  try {
+    var stored = JSON.parse(localStorage.getItem('lc_fundamentals_visited') || '[]');
+    stored.forEach(function(n) { visited.add(n); });
+  } catch (e) {}
+
+  function showModule(id) {
+    if (!id || !document.getElementById(id)) { id = 'm1'; }
+    var num = parseInt(id.replace('m', ''), 10);
+
+    modules.forEach(function(m) { m.classList.remove('active'); });
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+
+    tocLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('data-mod') === String(num)) a.classList.add('active');
+    });
+
+    visited.add(num);
+    tocLinks.forEach(function(a) {
+      var n = parseInt(a.getAttribute('data-mod'), 10);
+      if (visited.has(n) && n !== num) a.classList.add('done');
+    });
+
+    var pct = (visited.size / total) * 100;
+    if (tocFill) tocFill.style.width = pct + '%';
+
+    try { localStorage.setItem('lc_fundamentals_visited', JSON.stringify(Array.from(visited))); } catch (e) {}
+
+    if (mobileToc) mobileToc.value = id;
+
+    window.scrollTo({ top: document.querySelector('.lc-body').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function onHashChange() {
+    var h = window.location.hash.replace('#', '');
+    if (h && h.match(/^m[1-8]$/)) {
+      showModule(h);
+    } else {
+      showModule('m1');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+
+  if (mobileToc) {
+    mobileToc.addEventListener('change', function() {
+      window.location.hash = this.value;
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    var active = document.querySelector('.lmod.active');
+    if (!active) return;
+    var num = parseInt(active.getAttribute('data-module'), 10);
+    if (e.key === 'ArrowRight' && num < total) { window.location.hash = 'm' + (num + 1); }
+    if (e.key === 'ArrowLeft' && num > 1) { window.location.hash = 'm' + (num - 1); }
+  });
+
+  onHashChange();
+})();
+</script>

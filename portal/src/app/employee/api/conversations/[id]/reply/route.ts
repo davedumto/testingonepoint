@@ -40,19 +40,28 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     post.updatedAt = new Date();
     await post.save();
 
+    const serializedReply = {
+      _id: reply._id.toString(),
+      authorId: reply.authorId.toString(),
+      authorName: reply.authorName,
+      body: reply.body,
+      createdAt: reply.createdAt,
+    };
+
     publish(CHANNELS.conversations, 'reply:new', {
       postId: post._id.toString(),
       replyCount: post.replyCount,
-      reply: {
-        _id: reply._id.toString(),
-        authorId: reply.authorId.toString(),
-        authorName: reply.authorName,
-        body: reply.body,
-        createdAt: reply.createdAt,
-      },
+      reply: serializedReply,
     });
 
-    return Response.json({ success: true, reply }, { status: 201 });
+    // Return the same shape the Pusher payload uses so the authoring client
+    // can append optimistically instead of refetching the whole feed.
+    return Response.json({
+      success: true,
+      postId: post._id.toString(),
+      replyCount: post.replyCount,
+      reply: serializedReply,
+    }, { status: 201 });
   } catch (error) {
     logger.error('Conversation reply error', { error: String(error) });
     return Response.json({ error: 'Something went wrong.' }, { status: 500 });

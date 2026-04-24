@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation';
 const NAV_ITEMS: { href: string; label: string; exact: boolean; group?: string }[] = [
   { href: '/admin/dashboard', label: 'CSV Import', exact: true, group: 'Team' },
   { href: '/admin/dashboard/employees', label: 'Employees', exact: false, group: 'Team' },
+  { href: '/admin/dashboard/clients', label: 'Clients', exact: false, group: 'Team' },
+  { href: '/admin/dashboard/service-requests', label: 'Service Requests', exact: false, group: 'Team' },
+  { href: '/admin/dashboard/claims', label: 'Claims', exact: false, group: 'Team' },
   { href: '/admin/dashboard/time-tracking', label: 'Time Tracking', exact: false, group: 'Team' },
   { href: '/admin/dashboard/access-requests', label: 'Access Requests', exact: false, group: 'Access' },
   { href: '/admin/dashboard/app-gateway', label: 'App Gateway', exact: false, group: 'Access' },
