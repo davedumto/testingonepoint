@@ -174,12 +174,18 @@ export async function sendLeadNotification(
   const to = process.env.LEADS_NOTIFY_EMAIL || 'info@onepointinsuranceagency.com';
   const label = LEAD_LABELS[type];
 
-  const firstName = pick(payload, 'first_name', 'applicant.first');
-  const lastName  = pick(payload, 'last_name', 'applicant.last');
+  // Each path covers one of the form payload shapes:
+  //   • flat (auto, health)             → first_name / email / phone / postal_code
+  //   • nested applicant (home, life)   → applicant.first / applicant.email / ...
+  //   • nested contact   (business)     → contact.first_name / contact.email / ...
+  // ZIP also lives under quick_quote.zip (home), demographics.zip (life), and
+  // business.primary_address.zip (business).
+  const firstName = pick(payload, 'first_name', 'applicant.first', 'contact.first_name');
+  const lastName  = pick(payload, 'last_name', 'applicant.last', 'contact.last_name');
   const fullName  = `${firstName} ${lastName}`.trim() || 'New lead';
-  const email     = pick(payload, 'email', 'applicant.email', 'c_email');
-  const phone     = pick(payload, 'phone', 'applicant.phone', 'c_phone');
-  const zip       = pick(payload, 'postal_code', 'zip', 'quick_quote.zip', 'demographics.zip');
+  const email     = pick(payload, 'email', 'applicant.email', 'contact.email', 'c_email');
+  const phone     = pick(payload, 'phone', 'applicant.phone', 'contact.phone', 'c_phone');
+  const zip       = pick(payload, 'postal_code', 'zip', 'quick_quote.zip', 'demographics.zip', 'business.primary_address.zip');
   const reference = pick(payload, 'reference', 'reference_number');
   const pdfUrl    = pick(payload, 'pdf_summary_url');
   const fullText  = pick(payload, 'full_submission', 'email_body');
@@ -254,11 +260,11 @@ export async function sendLeadConfirmation(
   type: LeadType,
   payload: Record<string, unknown>
 ) {
-  const email = pick(payload, 'email', 'applicant.email', 'c_email');
+  const email = pick(payload, 'email', 'applicant.email', 'contact.email', 'c_email');
   if (!email) return; // nothing to confirm to
 
   const label = LEAD_LABELS[type];
-  const firstName = pick(payload, 'first_name', 'applicant.first');
+  const firstName = pick(payload, 'first_name', 'applicant.first', 'contact.first_name');
   const reference = pick(payload, 'reference', 'reference_number');
   const greeting  = firstName ? `Hi ${firstName},` : 'Hi there,';
   const article   = type === 'auto' ? 'an auto' : type === 'home' ? 'a home' : `a ${label.toLowerCase()}`;
