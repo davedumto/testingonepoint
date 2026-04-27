@@ -134,9 +134,27 @@ export async function POST(
       if (isCloudinaryConfigured()) {
         const ref = String(payload.reference || payload.reference_number || Date.now());
         const safeRef = ref.replace(/[^A-Za-z0-9_-]/g, '');
+
+        // Build a staff-friendly filename: FirstName_LastName_<Type>_Quote_<Ref>.pdf
+        // Strip non-letters from each name part and title-case so "david ejere"
+        // becomes "David_Ejere". Fall back to <Type>_Quote_<Ref>.pdf when name is
+        // missing (rare — name is collected before submit).
+        const applicant = (payload.applicant as Record<string, unknown> | undefined) || {};
+        const firstRaw = String(payload.first_name || applicant.first || '');
+        const lastRaw  = String(payload.last_name  || applicant.last  || '');
+        const cleanPart = (s: string) => {
+          const letters = s.replace(/[^A-Za-z]/g, '');
+          return letters ? letters.charAt(0).toUpperCase() + letters.slice(1).toLowerCase() : '';
+        };
+        const nameSlug = [cleanPart(firstRaw), cleanPart(lastRaw)].filter(Boolean).join('_');
+        const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+        const baseName = nameSlug
+          ? `${nameSlug}_${typeLabel}_Quote_${safeRef}`
+          : `${typeLabel}_Quote_${safeRef}`;
+
         const upload = await uploadBuffer(pdfBuf, {
           folder: 'leads/auto',
-          publicId: `${safeRef}_${Date.now()}`,
+          publicId: `${baseName}.pdf`,
           resourceType: 'raw',
         });
         pdfUrl = upload.secure_url;
