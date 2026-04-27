@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { LEAD_SIGNATURE_HTML } from './lead-signature';
 
 // Port 465 → implicit SSL (SMTPS). Port 587 → STARTTLS upgrade from plain.
 // We pick `secure` from the port so SMTP_PORT is the only thing that needs
@@ -228,9 +229,10 @@ export async function sendLeadNotification(
           <pre style="font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.55; color: #1a2e42; background: #f4f7fb; padding: 16px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; margin: 0;">${escape(fullText)}</pre>
         </div>` : ''}
       </div>
-      <p style="color: #8a9baa; font-size: 11px; text-align: center; margin-top: 16px;">
+      <p style="color: #8a9baa; font-size: 11px; text-align: center; margin: 16px 0 24px;">
         Sent automatically from the OnePoint marketing site. Reply directly to contact the lead.
       </p>
+      ${LEAD_SIGNATURE_HTML}
     </div>
   `;
 
@@ -293,16 +295,8 @@ export async function sendLeadConfirmation(
         <div style="font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #5a6c7e; margin-bottom: 4px;">Your reference number</div>
         <div style="font-family: 'Courier New', monospace; font-size: 18px; font-weight: 700; color: #052847; letter-spacing: .04em;">${escape(reference)}</div>
       </div>` : ''}
-      <p style="font-size: 14px; color: #5a6c7e; line-height: 1.6; margin: 22px 0 6px;">Need to reach us sooner?</p>
-      <table style="font-size: 14px; line-height: 1.6;">
-        <tr><td style="color: #5a6c7e; padding-right: 14px;">Toll-Free</td><td><a href="tel:888-899-8117" style="color: #052847; font-weight: 600; text-decoration: none;">1-888-899-8117</a></td></tr>
-        <tr><td style="color: #5a6c7e; padding-right: 14px;">Local</td><td><a href="tel:770-884-8117" style="color: #052847; font-weight: 600; text-decoration: none;">770-884-8117</a></td></tr>
-        <tr><td style="color: #5a6c7e; padding-right: 14px;">Email</td><td><a href="mailto:info@onepointinsuranceagency.com" style="color: #052847; font-weight: 600; text-decoration: none;">info@onepointinsuranceagency.com</a></td></tr>
-      </table>
-      <hr style="border: none; border-top: 1px solid #dde4ed; margin: 32px 0 18px;" />
-      <p style="color: #8a9baa; font-size: 11px; text-align: center; margin: 0;">
-        OnePoint Insurance Agency · 555 NorthPoint Center E, Suite 400 · Alpharetta, GA 30022
-      </p>
+      <p style="font-size: 14px; color: #5a6c7e; line-height: 1.6; margin: 22px 0 18px;">Need to reach us sooner? Use the contact info below.</p>
+      ${LEAD_SIGNATURE_HTML}
     </div>
   `;
 
