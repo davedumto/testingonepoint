@@ -24,6 +24,7 @@ const CSRF_EXEMPT = [
   '/api/employee/auth/reset-password',
   '/api/webhooks/',
   '/api/pusher/auth',
+  '/api/leads/', // public lead intake from the marketing site forms
 ];
 
 function isCSRFExempt(pathname: string): boolean {

@@ -8,17 +8,16 @@ const HERO_BG = `${MARKETING_BASE}/working.jpg`;
 // Image-led tool tiles, using the same filesafe CDN assets as the Team Hub's
 // Quick Access block so the visual language stays consistent.
 const TOOLS = [
-  { name: 'Quote Forms', description: 'Run quotes across carriers', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', imageUrl: 'https://media.akamai.odsp.cdn.office.net/southcentralus1-mediap.svc.ms/transform/thumbnail?provider=url&inputFormat=jpg&docid=https%3A%2F%2Fcdn.hubblecontent.osi.office.net%2Fm365content%2Fpublish%2Fe8d814a4-baa6-4c1e-82e6-f03a10350289%2F678822401.jpg&w=400' },
-  { name: 'Tech Tools', description: 'Internal tooling and utilities', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tech-Tools.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a38e07b348488dea5.png' },
-  { name: 'Client Tools', description: 'Service desk and resources', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322b9ff45b49cc916125.png' },
-  { name: 'Imagine, Grok', description: 'AI assistant for research', url: 'https://grok.com', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916eb0e5e2bb7f6f317b.png' },
-  { name: 'My LastPass Vault', description: 'Shared credential vault', url: 'https://lastpass.com/vault', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498a1636a6c6547a3a3.png' },
-  { name: 'OnePoint CRM', description: 'GoHighLevel client workspace', url: 'http://app.innovateihub.com/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a717d5dd4e123759b.png' },
-  { name: 'Microsoft Teams', description: 'Team chat and meetings', url: 'https://teams.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498b0e5e2bb7fe92615.png' },
-  { name: 'Microsoft Loop', description: 'Docs and project pages', url: 'https://loop.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916e0d66f2a665df0105.png' },
-  { name: 'Outlook', description: 'Email and calendar', url: 'https://outlook.cloud.microsoft/mail/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e934989ff45b49cc9201f8.png' },
+  { name: 'Quote Forms', description: 'Run quotes across carriers', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb0b03cc5c71312f96af4.png' },
+  { name: 'Client Tools', description: 'Service desk and resources', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb1169fe87a9994ddfcf5.png' },
+  { name: 'Imagine, Grok', description: 'AI assistant for research', url: 'https://grok.com', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d3cc5c71312f9390a.png' },
+  { name: 'My LastPass Vault', description: 'Shared credential vault', url: 'https://lastpass.com/vault', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d717d5dd4e1db8f3d.png' },
+  { name: 'OnePoint CRM', description: 'GoHighLevel client workspace', url: 'http://app.innovateihub.com/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d9fe87a9994ddbcb5.png' },
+  { name: 'Microsoft Teams', description: 'Team chat and meetings', url: 'https://teams.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9db0e5e2bb7fa19214.png' },
+  { name: 'Microsoft Loop', description: 'Docs and project pages', url: 'https://loop.cloud.microsoft/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d717d5dd4e1db8f3b.png' },
+  { name: 'Outlook', description: 'Email and calendar', url: 'https://outlook.cloud.microsoft/mail/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d3cc5c71312f93912.png' },
   { name: 'Canva', description: 'Design graphics and social posts', url: 'https://www.canva.com/', imageUrl: 'https://www.google.com/s2/favicons?domain=canva.com&sz=256' },
-  { name: 'HyGen', description: 'AI video generation', url: 'https://app.hygen.ai/', imageUrl: 'https://www.google.com/s2/favicons?domain=hygen.ai&sz=256' },
+  { name: 'HyGen', description: 'AI video generation', url: 'https://app.hygen.ai/', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb3930d66f2a66511b1f0.png' },
 ];
 
 export default function ToolsPage() {
@@ -77,7 +76,7 @@ export default function ToolsPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16, alignItems: 'start' }}>
           {TOOLS.map(tool => (
             <a key={tool.name} href={tool.url} target="_blank" rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#fff', position: 'relative', overflow: 'hidden' }}>
                 <img
                   src={tool.imageUrl}
                   alt=""
@@ -86,7 +85,8 @@ export default function ToolsPage() {
                     inset: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
+                    padding: 12,
                     display: 'block',
                   }}
                 />

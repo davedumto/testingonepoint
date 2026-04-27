@@ -50,23 +50,18 @@ const TRAINING_HUB_URL = 'https://portal.onepointinsuranceagency.com/';
 const LEARN_URL = `${MARKETING_BASE}/onepointblog`;
 
 const QUICK_TOOLS = [
-  // TODO: admin-configurable in Phase 4. Stubs for Quote Forms / Tech Tools / Imagine until URLs are supplied.
-  { name: 'Quote Forms', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', color: '#0d9488', imageUrl: 'https://media.akamai.odsp.cdn.office.net/southcentralus1-mediap.svc.ms/transform/thumbnail?provider=url&inputFormat=jpg&docid=https%3A%2F%2Fcdn.hubblecontent.osi.office.net%2Fm365content%2Fpublish%2Fe8d814a4-baa6-4c1e-82e6-f03a10350289%2F678822401.jpg&w=400' },
-  { name: 'Tech Tools', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tech-Tools.aspx', color: '#052847', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a38e07b348488dea5.png' },
-  { name: 'Client Tools', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', color: '#0a7d63', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322b9ff45b49cc916125.png' },
-  { name: 'Imagine, Grok', url: 'https://grok.com', color: '#000000', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916eb0e5e2bb7f6f317b.png' },
-  { name: 'My LastPass Vault', url: 'https://lastpass.com/vault', color: '#d32d27', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498a1636a6c6547a3a3.png' },
-  { name: 'Microsoft Teams', url: 'https://teams.cloud.microsoft/', color: '#5059c9', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e93498b0e5e2bb7fe92615.png' },
-  { name: 'Outlook', url: 'https://outlook.cloud.microsoft/mail/', color: '#0078d4', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e934989ff45b49cc9201f8.png' },
-  // Newly added — design, image gen, and collaboration tools. Icons fetched
-  // via Google's favicon service (reliable 256x256) as a stopgap until the
-  // branded hero images are uploaded to the filesafe CDN alongside the rest.
+  { name: 'Quote Forms', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Quote-Forms.aspx', color: '#0d9488', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb0b03cc5c71312f96af4.png' },
+  { name: 'Client Tools', url: 'https://onepointinsuranceagency.sharepoint.com/sites/OnePointTeamHub/SitePages/Tools-%26-Resources.aspx', color: '#0a7d63', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb1169fe87a9994ddfcf5.png' },
+  { name: 'Imagine, Grok', url: 'https://grok.com', color: '#000000', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d3cc5c71312f9390a.png' },
+  { name: 'My LastPass Vault', url: 'https://lastpass.com/vault', color: '#d32d27', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d717d5dd4e1db8f3d.png' },
+  { name: 'Microsoft Teams', url: 'https://teams.cloud.microsoft/', color: '#5059c9', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9db0e5e2bb7fa19214.png' },
+  { name: 'Outlook', url: 'https://outlook.cloud.microsoft/mail/', color: '#0078d4', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d3cc5c71312f93912.png' },
   { name: 'Canva', url: 'https://www.canva.com/', color: '#00c4cc', imageUrl: 'https://www.google.com/s2/favicons?domain=canva.com&sz=256' },
-  { name: 'HyGen', url: 'https://app.hygen.ai/', color: '#7c3aed', imageUrl: 'https://www.google.com/s2/favicons?domain=hygen.ai&sz=256' },
-  { name: 'Microsoft Loop', url: 'https://loop.cloud.microsoft/', color: '#5b5fc7', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69eb916e0d66f2a665df0105.png' },
+  { name: 'HyGen', url: 'https://app.hygen.ai/', color: '#7c3aed', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecb3930d66f2a66511b1f0.png' },
+  { name: 'Microsoft Loop', url: 'https://loop.cloud.microsoft/', color: '#5b5fc7', imageUrl: 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d717d5dd4e1db8f3b.png' },
 ];
 
-const CRM_IMAGE_URL = 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69e9322a717d5dd4e123759b.png';
+const CRM_IMAGE_URL = 'https://assets.cdn.filesafe.space/HJjN5l584XeaaH5Qokj4/media/69ecaf9d9fe87a9994ddbcb5.png';
 
 const CRM_DESTINATION = 'http://app.innovateihub.com/';
 const CRM_OAUTH_INITIATE = '/employee/api/oauth/ghl';
@@ -203,7 +198,6 @@ export default function EmployeeTeamHubPage() {
   // step — any employee can authenticate.
   const crmFresh = isAuthFresh(hub?.crm.lastAuthenticated);
   const crmHref = crmFresh ? CRM_DESTINATION : CRM_OAUTH_INITIATE;
-  const crmLabel = crmFresh ? 'Open CRM' : 'Authenticate';
 
   if (loading) return <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '80px 0' }}>Loading…</p>;
 
@@ -461,16 +455,8 @@ export default function EmployeeTeamHubPage() {
               employee's last authentication is still fresh, in which case
               we jump straight to the CRM in a new tab. */}
           <a href={crmHref} target={crmFresh ? '_blank' : '_self'} rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef', position: 'relative' }}>
-              <img src={CRM_IMAGE_URL} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <span className="badge" style={{
-                position: 'absolute', top: 8, right: 8,
-                background: crmFresh ? 'rgba(46,154,85,0.95)' : 'rgba(13,148,136,0.95)',
-                color: '#fff',
-                fontSize: 10,
-              }}>
-                {crmLabel}
-              </span>
+            <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#fff', position: 'relative' }}>
+              <img src={CRM_IMAGE_URL} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 10, display: 'block' }} />
             </div>
             <div style={{ padding: 12 }}>
               <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>OnePoint CRM</p>
@@ -480,8 +466,8 @@ export default function EmployeeTeamHubPage() {
 
           {QUICK_TOOLS.map(tool => (
             <a key={tool.name} href={tool.url} target="_blank" rel="noopener" className="card-sm" style={{ padding: 0, textDecoration: 'none', overflow: 'hidden' }}>
-              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#f6f4ef' }}>
-                <img src={tool.imageUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <div style={{ width: '100%', aspectRatio: '16 / 9', background: '#fff' }}>
+                <img src={tool.imageUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 10, display: 'block' }} />
               </div>
               <div style={{ padding: 12 }}>
                 <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}>{tool.name}</p>
