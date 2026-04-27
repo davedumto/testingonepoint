@@ -3,6 +3,11 @@ import { sendLeadConfirmation, sendLeadNotification, type LeadType } from '@/lib
 import { checkRateLimit, getRateLimitKey } from '@/lib/security/rate-limiter';
 import { getRequestInfo } from '@/lib/security/request-info';
 import { logger } from '@/lib/logger';
+import { renderAutoQuotePdf } from '@/lib/pdf/render';
+import { uploadBuffer, isCloudinaryConfigured } from '@/lib/cloudinary';
+
+// React-PDF renders with Node APIs (Buffer/fs); pin to the Node runtime.
+export const runtime = 'nodejs';
 
 // POST /api/leads/[type]
 // Public endpoint, called from the marketing site quote forms
@@ -117,6 +122,34 @@ export async function POST(
   // Strip the token from the payload so it doesn't end up in the email.
   delete payload.turnstile_token;
 
+  // ── Server-side PDF generation (auto only for now) ──
+  // We build the PDF before sending the staff email so the email body can
+  // include the Cloudinary download link. Failure here is non-fatal: we
+  // still send the email + show the lead success screen, just without a
+  // PDF link. The raw payload is captured in the email's text section.
+  let pdfUrl = '';
+  if (type === 'auto') {
+    try {
+      const pdfBuf = await renderAutoQuotePdf(payload);
+      if (isCloudinaryConfigured()) {
+        const ref = String(payload.reference || payload.reference_number || Date.now());
+        const safeRef = ref.replace(/[^A-Za-z0-9_-]/g, '');
+        const upload = await uploadBuffer(pdfBuf, {
+          folder: 'leads/auto',
+          publicId: `${safeRef}_${Date.now()}`,
+          resourceType: 'raw',
+        });
+        pdfUrl = upload.secure_url;
+        payload.pdf_summary_url = pdfUrl;
+      } else {
+        logger.warn('Cloudinary not configured — skipping PDF upload', { type });
+      }
+    } catch (err) {
+      logger.error('Lead PDF generation failed', { type, ip, error: String(err) });
+      // Continue without a PDF rather than failing the whole submission.
+    }
+  }
+
   // Staff notification is the priority — if it fails, we 502 so the form
   // shows an error and the lead can retry.
   try {
@@ -135,5 +168,5 @@ export async function POST(
     logger.warn('Lead confirmation email failed', { type, ip, error: String(err) });
   });
 
-  return Response.json({ ok: true }, { status: 200, headers: cors });
+  return Response.json({ ok: true, pdf_url: pdfUrl || null }, { status: 200, headers: cors });
 }
