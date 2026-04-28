@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { sendLeadConfirmation, sendLeadNotification, type LeadType } from '@/lib/email';
+import { sendLeadNotification, type LeadType } from '@/lib/email';
 import { checkRateLimit, getRateLimitKey } from '@/lib/security/rate-limiter';
 import { getRequestInfo } from '@/lib/security/request-info';
 import { logger } from '@/lib/logger';
@@ -185,16 +185,6 @@ export async function POST(
       { error: 'Could not send notification. Please try again.' },
       { status: 502, headers: cors }
     );
-  }
-
-  // Lead confirmation is best-effort but must be awaited — fire-and-forget
-  // gets killed when Vercel terminates the function on response, so the
-  // SMTP send never completes. We swallow the error so a bad/typo'd email
-  // still returns success (staff already has the data, lead can call in).
-  try {
-    await sendLeadConfirmation(type, payload);
-  } catch (err) {
-    logger.warn('Lead confirmation email failed', { type, ip, error: String(err) });
   }
 
   return Response.json({ ok: true, pdf_url: pdfUrl || null }, { status: 200, headers: cors });
