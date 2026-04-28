@@ -1,4 +1,4 @@
-// Server-side PDF generation. Wraps @react-pdf/renderer and reads the brand
+// Server-side PDF rendering. Wraps @react-pdf/renderer and reads the brand
 // logo once per process (file is bundled in /public).
 //
 // Used by the public lead-intake API to produce a polished PDF the staff
@@ -9,6 +9,11 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import React from 'react';
 import { AutoQuotePdf } from './auto-quote-pdf';
+import { HomeQuotePdf } from './home-quote-pdf';
+import { LifeQuotePdf } from './life-quote-pdf';
+import { HealthQuotePdf } from './health-quote-pdf';
+import { BusinessQuotePdf } from './business-quote-pdf';
+import type { LeadType } from '../email';
 
 let cachedLogo: string | undefined;
 
@@ -30,10 +35,34 @@ function getLogoDataUrl(): string | undefined {
   }
 }
 
-export async function renderAutoQuotePdf(payload: Record<string, unknown>): Promise<Buffer> {
+// Per-type PDF dispatch. AutoQuotePdf etc. all return a <Document> rooted
+// element; we cast through the renderer's expected type because each
+// product's wrapper has a different inferred React type.
+type RendererProps = { payload: Record<string, unknown>; logoSrc?: string };
+type Renderer = (props: RendererProps) => React.ReactElement;
+
+const RENDERERS: Record<LeadType, Renderer> = {
+  auto: AutoQuotePdf as unknown as Renderer,
+  home: HomeQuotePdf as unknown as Renderer,
+  life: LifeQuotePdf as unknown as Renderer,
+  health: HealthQuotePdf as unknown as Renderer,
+  business: BusinessQuotePdf as unknown as Renderer,
+};
+
+// Render the right PDF for the given lead type. Throws on unknown types,
+// which the route catches.
+export async function renderQuotePdf(
+  type: LeadType,
+  payload: Record<string, unknown>,
+): Promise<Buffer> {
+  const Component = RENDERERS[type];
+  if (!Component) throw new Error(`No PDF renderer for lead type "${type}"`);
   const logoSrc = getLogoDataUrl();
-  // AutoQuotePdf renders a <Document>, but TS infers the wrapper component
-  // type. Cast through to the renderer's expected element type.
-  const element = React.createElement(AutoQuotePdf, { payload, logoSrc }) as unknown as React.ReactElement<DocumentProps>;
+  const element = React.createElement(Component, { payload, logoSrc }) as unknown as React.ReactElement<DocumentProps>;
   return renderToBuffer(element);
+}
+
+// Back-compat alias so older imports don't break.
+export async function renderAutoQuotePdf(payload: Record<string, unknown>): Promise<Buffer> {
+  return renderQuotePdf('auto', payload);
 }

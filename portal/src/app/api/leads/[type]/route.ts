@@ -3,7 +3,7 @@ import { sendLeadConfirmation, sendLeadNotification, type LeadType } from '@/lib
 import { checkRateLimit, getRateLimitKey } from '@/lib/security/rate-limiter';
 import { getRequestInfo } from '@/lib/security/request-info';
 import { logger } from '@/lib/logger';
-import { renderAutoQuotePdf } from '@/lib/pdf/render';
+import { renderQuotePdf } from '@/lib/pdf/render';
 import { uploadBuffer, isCloudinaryConfigured } from '@/lib/cloudinary';
 
 // React-PDF renders with Node APIs (Buffer/fs); pin to the Node runtime.
@@ -122,50 +122,54 @@ export async function POST(
   // Strip the token from the payload so it doesn't end up in the email.
   delete payload.turnstile_token;
 
-  // ── Server-side PDF generation (auto only for now) ──
-  // We build the PDF before sending the staff email so the email body can
-  // include the Cloudinary download link. Failure here is non-fatal: we
-  // still send the email + show the lead success screen, just without a
-  // PDF link. The raw payload is captured in the email's text section.
+  // ── Server-side PDF generation ──
+  // We build a branded PDF for every lead type before sending the staff
+  // email so the email body can include the Cloudinary download link.
+  // Failure here is non-fatal: we still send the email + show the lead
+  // success screen, just without a PDF link. The raw payload is captured
+  // in the email's text section as a backup.
   let pdfUrl = '';
-  if (type === 'auto') {
-    try {
-      const pdfBuf = await renderAutoQuotePdf(payload);
-      if (isCloudinaryConfigured()) {
-        const ref = String(payload.reference || payload.reference_number || Date.now());
-        const safeRef = ref.replace(/[^A-Za-z0-9_-]/g, '');
+  try {
+    const pdfBuf = await renderQuotePdf(type, payload);
+    if (isCloudinaryConfigured()) {
+      const ref = String(payload.reference || payload.reference_number || Date.now());
+      const safeRef = ref.replace(/[^A-Za-z0-9_-]/g, '');
 
-        // Build a staff-friendly filename: FirstName_LastName_<Type>_Quote_<Ref>.pdf
-        // Strip non-letters from each name part and title-case so "david ejere"
-        // becomes "David_Ejere". Fall back to <Type>_Quote_<Ref>.pdf when name is
-        // missing (rare — name is collected before submit).
-        const applicant = (payload.applicant as Record<string, unknown> | undefined) || {};
-        const firstRaw = String(payload.first_name || applicant.first || '');
-        const lastRaw  = String(payload.last_name  || applicant.last  || '');
-        const cleanPart = (s: string) => {
-          const letters = s.replace(/[^A-Za-z]/g, '');
-          return letters ? letters.charAt(0).toUpperCase() + letters.slice(1).toLowerCase() : '';
-        };
-        const nameSlug = [cleanPart(firstRaw), cleanPart(lastRaw)].filter(Boolean).join('_');
-        const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
-        const baseName = nameSlug
-          ? `${nameSlug}_${typeLabel}_Quote_${safeRef}`
-          : `${typeLabel}_Quote_${safeRef}`;
-
-        const upload = await uploadBuffer(pdfBuf, {
-          folder: 'leads/auto',
-          publicId: `${baseName}.pdf`,
-          resourceType: 'raw',
-        });
-        pdfUrl = upload.secure_url;
-        payload.pdf_summary_url = pdfUrl;
-      } else {
-        logger.warn('Cloudinary not configured — skipping PDF upload', { type });
+      // Build a staff-friendly filename: FirstName_LastName_<Type>_Quote_<Ref>.pdf
+      // Strip non-letters from each name part and title-case so "david ejere"
+      // becomes "David_Ejere". For business leads, also accept the legal
+      // business name as a fallback. Final fallback: <Type>_Quote_<Ref>.pdf.
+      const applicant = (payload.applicant as Record<string, unknown> | undefined) || {};
+      const contact   = (payload.contact   as Record<string, unknown> | undefined) || {};
+      const business  = (payload.business  as Record<string, unknown> | undefined) || {};
+      const firstRaw = String(payload.first_name || applicant.first || contact.first_name || '');
+      const lastRaw  = String(payload.last_name  || applicant.last  || contact.last_name  || '');
+      const cleanPart = (s: string) => {
+        const letters = s.replace(/[^A-Za-z]/g, '');
+        return letters ? letters.charAt(0).toUpperCase() + letters.slice(1).toLowerCase() : '';
+      };
+      let nameSlug = [cleanPart(firstRaw), cleanPart(lastRaw)].filter(Boolean).join('_');
+      if (!nameSlug && business.legal_name) {
+        nameSlug = String(business.legal_name).replace(/[^A-Za-z0-9]/g, '_').replace(/_+/g, '_').slice(0, 60);
       }
-    } catch (err) {
-      logger.error('Lead PDF generation failed', { type, ip, error: String(err) });
-      // Continue without a PDF rather than failing the whole submission.
+      const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+      const baseName = nameSlug
+        ? `${nameSlug}_${typeLabel}_Quote_${safeRef}`
+        : `${typeLabel}_Quote_${safeRef}`;
+
+      const upload = await uploadBuffer(pdfBuf, {
+        folder: `leads/${type}`,
+        publicId: `${baseName}.pdf`,
+        resourceType: 'raw',
+      });
+      pdfUrl = upload.secure_url;
+      payload.pdf_summary_url = pdfUrl;
+    } else {
+      logger.warn('Cloudinary not configured — skipping PDF upload', { type });
     }
+  } catch (err) {
+    logger.error('Lead PDF generation failed', { type, ip, error: String(err) });
+    // Continue without a PDF rather than failing the whole submission.
   }
 
   // Staff notification is the priority — if it fails, we 502 so the form

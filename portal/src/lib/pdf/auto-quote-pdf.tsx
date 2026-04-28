@@ -2,345 +2,28 @@
 // Auto-quote PDF rendered with @react-pdf/renderer. Built on the server in
 // the /api/leads/auto handler; the marketing site never imports this file.
 //
-// Design notes:
-//   • One brand palette (navy, accent blue, muted gray) reused everywhere
-//   • Top "cover band" with logo, applicant name, reference, submission time
-//   • Rounded section "cards" with a colored sidebar accent
-//   • Two-column key/value rows for compact applicant/coverage data
-//   • Per-vehicle / per-driver mini-cards so multi-unit quotes scan cleanly
-//   • Page number + reference footer on every page
-//
-// The payload is intentionally loosely-typed (`Record<string, unknown>`) so
-// the same renderer copes with the auto form's flat shape today and any
-// future shape tweaks without breaking the contract.
+// Layout primitives (Cover, Section, KV, ItemCard, Footer, Page, styles)
+// come from ./components — every per-product PDF uses the same shapes so
+// staff sees one consistent visual language across all 5 products.
 
+import { Document } from '@react-pdf/renderer';
 import {
-  Document,
   Page,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-} from '@react-pdf/renderer';
-
-const NAVY = '#052847';        // section titles, footer brand text
-const COVER_BLUE = '#0A3D6B';  // cover band — lighter brand blue (--blue on the marketing site)
-const ACCENT = '#4A90D9';
-const MUTED = '#5A6C7E';
-const BORDER = '#DDE4ED';
-const BAND = '#F4F7FB';
-const TEXT = '#1A2E42';
-
-const styles = StyleSheet.create({
-  page: {
-    paddingTop: 0,
-    paddingBottom: 56,
-    paddingHorizontal: 0,
-    fontFamily: 'Helvetica',
-    fontSize: 10,
-    color: TEXT,
-    backgroundColor: '#FFFFFF',
-  },
-  // ── Cover band (page 1 only) ──
-  cover: {
-    backgroundColor: COVER_BLUE,
-    paddingHorizontal: 36,
-    paddingVertical: 28,
-    color: '#FFFFFF',
-  },
-  coverRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 18,
-  },
-  logo: {
-    width: 110,
-    height: 36,
-    objectFit: 'contain',
-  },
-  coverEyebrow: {
-    fontSize: 9,
-    letterSpacing: 1.4,
-    color: 'rgba(255,255,255,0.65)',
-    fontFamily: 'Helvetica-Bold',
-    marginBottom: 4,
-  },
-  coverTitle: {
-    fontSize: 22,
-    fontFamily: 'Helvetica-Bold',
-    color: '#FFFFFF',
-    marginBottom: 4,
-  },
-  coverSubtitle: {
-    fontSize: 11,
-    color: 'rgba(255,255,255,0.78)',
-  },
-  coverMetaRow: {
-    flexDirection: 'row',
-    marginTop: 14,
-    paddingTop: 14,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.18)',
-    borderTopStyle: 'solid',
-  },
-  coverMetaCell: {
-    flex: 1,
-  },
-  coverMetaLabel: {
-    fontSize: 8,
-    color: 'rgba(255,255,255,0.55)',
-    letterSpacing: 1.1,
-    fontFamily: 'Helvetica-Bold',
-    marginBottom: 3,
-  },
-  coverMetaValue: {
-    fontSize: 11,
-    color: '#FFFFFF',
-    fontFamily: 'Helvetica-Bold',
-  },
-  // ── Body wrapper / sections ──
-  body: {
-    paddingHorizontal: 36,
-    paddingTop: 24,
-  },
-  section: {
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: BORDER,
-    borderStyle: 'solid',
-    borderRadius: 4,
-    overflow: 'hidden',
-  },
-  sectionHead: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: BAND,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: BORDER,
-    borderBottomStyle: 'solid',
-  },
-  sectionAccent: {
-    width: 3,
-    height: 12,
-    backgroundColor: ACCENT,
-    marginRight: 8,
-  },
-  sectionTitle: {
-    fontSize: 11,
-    fontFamily: 'Helvetica-Bold',
-    color: NAVY,
-    letterSpacing: 0.5,
-    textTransform: 'uppercase',
-  },
-  sectionBody: {
-    padding: 12,
-  },
-  // ── Two-column key/value rows ──
-  kvGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  kvCell: {
-    width: '50%',
-    paddingRight: 8,
-    paddingBottom: 8,
-  },
-  kvCellFull: {
-    width: '100%',
-    paddingBottom: 8,
-  },
-  kvLabel: {
-    fontSize: 8,
-    color: MUTED,
-    letterSpacing: 0.6,
-    fontFamily: 'Helvetica-Bold',
-    textTransform: 'uppercase',
-    marginBottom: 2,
-  },
-  kvValue: {
-    fontSize: 10,
-    color: TEXT,
-  },
-  // ── Mini-cards for items in arrays (vehicles, drivers, etc) ──
-  itemCard: {
-    borderWidth: 1,
-    borderColor: BORDER,
-    borderStyle: 'solid',
-    borderRadius: 3,
-    padding: 10,
-    marginBottom: 8,
-    backgroundColor: '#FFFFFF',
-  },
-  itemHead: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  itemTitle: {
-    fontSize: 11,
-    fontFamily: 'Helvetica-Bold',
-    color: NAVY,
-  },
-  itemTag: {
-    fontSize: 8,
-    fontFamily: 'Helvetica-Bold',
-    color: NAVY,
-    backgroundColor: '#DCE9F6',
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 2,
-    letterSpacing: 0.5,
-    textTransform: 'uppercase',
-  },
-  itemSub: {
-    fontSize: 9,
-    color: MUTED,
-    marginBottom: 4,
-  },
-  itemDetail: {
-    fontSize: 9,
-    color: TEXT,
-    marginTop: 2,
-  },
-  itemDetailLabel: {
-    fontFamily: 'Helvetica-Bold',
-    color: MUTED,
-  },
-  // ── Footer (every page) ──
-  footer: {
-    position: 'absolute',
-    left: 36,
-    right: 36,
-    bottom: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: BORDER,
-    borderTopStyle: 'solid',
-  },
-  footerText: {
-    fontSize: 8,
-    color: MUTED,
-  },
-  footerBrand: {
-    fontFamily: 'Helvetica-Bold',
-    color: NAVY,
-  },
-  pageNum: {
-    fontSize: 8,
-    color: MUTED,
-  },
-});
-
-// ─────────────────────────────────────────────────────────────────────
-// Helpers
-// ─────────────────────────────────────────────────────────────────────
-
-type Payload = Record<string, unknown>;
-
-function s(v: unknown): string {
-  if (v === null || v === undefined) return '';
-  if (Array.isArray(v)) return v.filter((x) => x !== '').join(', ');
-  return String(v);
-}
-
-function pick(p: Payload, ...keys: string[]): string {
-  for (const k of keys) {
-    const v = p[k];
-    if (v !== undefined && v !== null && v !== '') return s(v);
-  }
-  return '';
-}
-
-// True if any of the listed top-level keys has a non-empty value. Used by
-// each section to skip rendering its card frame when the lead provided
-// nothing for that section (otherwise we'd show an empty heading).
-function anyValue(p: Payload, ...keys: string[]): boolean {
-  return keys.some((k) => pick(p, k) !== '');
-}
-
-function fmtDate(v: unknown): string {
-  const str = s(v);
-  if (!str) return '';
-  // ISO yyyy-mm-dd → mm/dd/yyyy
-  if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
-    const [y, m, d] = str.slice(0, 10).split('-');
-    return `${m}/${d}/${y}`;
-  }
-  return str;
-}
-
-function arr<T = Record<string, unknown>>(p: Payload, key: string): T[] {
-  const v = p[key];
-  return Array.isArray(v) ? (v as T[]) : [];
-}
-
-// ─────────────────────────────────────────────────────────────────────
-// Reusable layout primitives
-// ─────────────────────────────────────────────────────────────────────
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  // Section is wrappable so a long Vehicles/Drivers list can flow across
-  // pages instead of overflowing or leaving a half-empty page behind it.
-  // ItemCards inside still use wrap={false} so individual rows stay intact.
-  return (
-    <View style={styles.section}>
-      <View style={styles.sectionHead}>
-        <View style={styles.sectionAccent} />
-        <Text style={styles.sectionTitle}>{title}</Text>
-      </View>
-      <View style={styles.sectionBody}>{children}</View>
-    </View>
-  );
-}
-
-function KV({ label, value, full }: { label: string; value: string; full?: boolean }) {
-  if (!value) return null;
-  return (
-    <View style={full ? styles.kvCellFull : styles.kvCell}>
-      <Text style={styles.kvLabel}>{label}</Text>
-      <Text style={styles.kvValue}>{value}</Text>
-    </View>
-  );
-}
-
-function Detail({ label, value }: { label: string; value: string }) {
-  if (!value) return null;
-  return (
-    <Text style={styles.itemDetail}>
-      <Text style={styles.itemDetailLabel}>{label}: </Text>
-      {value}
-    </Text>
-  );
-}
-
-function ItemCard({
-  title,
-  tag,
-  sub,
-  children,
-}: {
-  title: string;
-  tag?: string;
-  sub?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <View style={styles.itemCard} wrap={false}>
-      <View style={styles.itemHead}>
-        <Text style={styles.itemTitle}>{title}</Text>
-        {tag ? <Text style={styles.itemTag}>{tag}</Text> : null}
-      </View>
-      {sub ? <Text style={styles.itemSub}>{sub}</Text> : null}
-      {children}
-    </View>
-  );
-}
+  Cover,
+  Footer,
+  Section,
+  KV,
+  Detail,
+  ItemCard,
+  styles,
+  s,
+  pick,
+  anyValue,
+  fmtDate,
+  arr,
+  type Payload,
+} from './components';
+import { View, Text } from '@react-pdf/renderer';
 
 // ─────────────────────────────────────────────────────────────────────
 // Sections
@@ -650,7 +333,7 @@ function DiscountsSection({ p }: { p: Payload }) {
         {discounts.length ? discounts.join(', ') : 'None selected'}
       </Text>
       {pick(p, 'training_date') ? (
-        <Text style={{ ...styles.kvValue, marginTop: 4, color: MUTED }}>
+        <Text style={{ ...styles.kvValue, marginTop: 4, color: '#5A6C7E' }}>
           Training completed: {fmtDate(p.training_date)}
         </Text>
       ) : null}
@@ -677,83 +360,33 @@ function CertificationsSection({ p }: { p: Payload }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Cover band + footer
-// ─────────────────────────────────────────────────────────────────────
-
-function Cover({ p, logoSrc }: { p: Payload; logoSrc?: string | Buffer }) {
-  const fullName =
-    pick(p, 'full_name') ||
-    `${pick(p, 'first_name')} ${pick(p, 'last_name')}`.trim() ||
-    'New auto quote';
-  const ref = pick(p, 'reference', 'reference_number');
-  const submitted = new Date().toLocaleString('en-US', {
-    timeZone: 'America/New_York',
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  });
-  const products = arr<string>(p, 'products_selected')
-    .map((x) => x.toUpperCase())
-    .join(' / ');
-  return (
-    <View style={styles.cover}>
-      <View style={styles.coverRow}>
-        {logoSrc ? <Image src={logoSrc as string} style={styles.logo} /> : null}
-      </View>
-      <Text style={styles.coverEyebrow}>NEW {products || 'AUTO'} QUOTE REQUEST</Text>
-      <Text style={styles.coverTitle}>{fullName}</Text>
-      <Text style={styles.coverSubtitle}>
-        {pick(p, 'email')} {pick(p, 'phone') ? '· ' + pick(p, 'phone') : ''}
-      </Text>
-      <View style={styles.coverMetaRow}>
-        <View style={styles.coverMetaCell}>
-          <Text style={styles.coverMetaLabel}>REFERENCE</Text>
-          <Text style={styles.coverMetaValue}>{ref || '—'}</Text>
-        </View>
-        <View style={styles.coverMetaCell}>
-          <Text style={styles.coverMetaLabel}>SUBMITTED</Text>
-          <Text style={styles.coverMetaValue}>{submitted} ET</Text>
-        </View>
-        <View style={styles.coverMetaCell}>
-          <Text style={styles.coverMetaLabel}>STATE</Text>
-          <Text style={styles.coverMetaValue}>{pick(p, 'state') || '—'}</Text>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-function Footer({ refCode }: { refCode?: string }) {
-  return (
-    <View style={styles.footer} fixed>
-      <Text style={styles.footerText}>
-        <Text style={styles.footerBrand}>OnePoint Insurance Agency</Text>
-        {' · 888-899-8117 · info@onepointinsuranceagency.com'}
-        {refCode ? ` · Ref ${refCode}` : ''}
-      </Text>
-      <Text
-        style={styles.pageNum}
-        render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
-      />
-    </View>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────
 // Document
 // ─────────────────────────────────────────────────────────────────────
 
 export interface AutoQuotePdfProps {
   payload: Payload;
-  // Pass either a logo path/URL or a Buffer (server-side reads file).
   logoSrc?: string | Buffer;
 }
 
 export function AutoQuotePdf({ payload, logoSrc }: AutoQuotePdfProps) {
   const ref = pick(payload, 'reference', 'reference_number');
+  const fullName =
+    pick(payload, 'full_name') ||
+    `${pick(payload, 'first_name')} ${pick(payload, 'last_name')}`.trim() ||
+    'New auto quote';
+  const products = arr<string>(payload, 'products_selected')
+    .map((x) => x.toUpperCase())
+    .join(' / ');
   return (
     <Document title={`OnePoint Auto Quote ${ref || ''}`.trim()}>
       <Page size="LETTER" style={styles.page} wrap>
-        <Cover p={payload} logoSrc={logoSrc} />
+        <Cover
+          payload={payload}
+          logoSrc={logoSrc}
+          eyebrow={`NEW ${products || 'AUTO'} QUOTE REQUEST`}
+          fullName={fullName}
+          metaThird={{ label: 'State', value: pick(payload, 'state') }}
+        />
         <View style={styles.body}>
           <LeadQualifiersSection p={payload} />
           <ApplicantSection p={payload} />
