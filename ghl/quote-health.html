@@ -95,6 +95,15 @@ a:hover{text-decoration:underline}
 .select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
 .error-msg{font-size:12.5px;color:var(--danger);font-weight:500;margin-top:2px}
 
+/* MM/DD/YYYY date inputs (mobile-friendly numeric, replaces native date picker) */
+.dob-row{display:flex;gap:10px}
+.dob-row input{font-family:inherit;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:16px;font-weight:500;color:var(--text);text-align:center;padding:11px 8px;background:#fff;transition:border-color .15s,box-shadow .15s;outline:none}
+.dob-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,61,107,.15)}
+.dob-row input.error{border-color:var(--danger)}
+.field:has(input[type="hidden"].error) .dob-row input{border-color:var(--danger)}
+.dob-mm,.dob-dd{flex:0 0 72px}
+.dob-yy{flex:1;max-width:120px}
+
 .opt-row{display:flex;gap:12px;flex-wrap:wrap}
 .opt-row.stacked{flex-direction:column;gap:10px}
 .opt-row.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;flex-wrap:unset}
@@ -446,7 +455,7 @@ a:hover{text-decoration:underline}
       <h2 class="slide-title">What's your date of birth?</h2>
       <p class="slide-subtitle">We need this to check plan availability and pricing.</p>
     </div>
-    <div class="form-grid"><div class="field full"><label for="p_dob">Date of birth</label><input type="date" class="input" id="p_dob"><div class="error-msg" id="err_p_dob" style="display:none"></div></div></div>
+    <div class="form-grid" style="max-width:340px"><div class="field full"><label>Date of birth</label><div class="dob-row"><input type="tel" class="dob-mm" id="p_dob_mm" maxlength="2" inputmode="numeric" placeholder="MM" autocomplete="bday-month"><input type="tel" class="dob-dd" id="p_dob_dd" maxlength="2" inputmode="numeric" placeholder="DD" autocomplete="bday-day"><input type="tel" class="dob-yy" id="p_dob_yy" maxlength="4" inputmode="numeric" placeholder="YYYY" autocomplete="bday-year"></div><input type="hidden" id="p_dob"><div class="error-msg" id="err_p_dob" style="display:none"></div></div></div>
     <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
   </div>
 </section>
@@ -859,7 +868,7 @@ a:hover{text-decoration:underline}
     </div>
     <div class="form-grid">
       <div class="field"><label for="c_prior_carrier">Prior carrier name</label><input type="text" class="input" id="c_prior_carrier" placeholder="e.g. Blue Cross Blue Shield"></div>
-      <div class="field"><label for="c_prior_end">Coverage end date</label><input type="date" class="input" id="c_prior_end"></div>
+      <div class="field"><label>Coverage end date</label><div class="dob-row"><input type="tel" class="dob-mm" id="c_prior_end_mm" maxlength="2" inputmode="numeric" placeholder="MM"><input type="tel" class="dob-dd" id="c_prior_end_dd" maxlength="2" inputmode="numeric" placeholder="DD"><input type="tel" class="dob-yy" id="c_prior_end_yy" maxlength="4" inputmode="numeric" placeholder="YYYY"></div><input type="hidden" id="c_prior_end"><div class="error-msg" id="err_c_prior_end" style="display:none"></div></div>
     </div>
     <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
   </div>
@@ -1051,8 +1060,8 @@ a:hover{text-decoration:underline}
       <p class="slide-subtitle">You can find these on your red, white, and blue Medicare card. Skip any you don't know.</p>
     </div>
     <div class="form-grid">
-      <div class="field"><label for="mc_part_a_date">Part A effective date</label><input type="date" class="input" id="mc_part_a_date"></div>
-      <div class="field"><label for="mc_part_b_date">Part B effective date</label><input type="date" class="input" id="mc_part_b_date"></div>
+      <div class="field"><label>Part A effective date</label><div class="dob-row"><input type="tel" class="dob-mm" id="mc_part_a_date_mm" maxlength="2" inputmode="numeric" placeholder="MM"><input type="tel" class="dob-dd" id="mc_part_a_date_dd" maxlength="2" inputmode="numeric" placeholder="DD"><input type="tel" class="dob-yy" id="mc_part_a_date_yy" maxlength="4" inputmode="numeric" placeholder="YYYY"></div><input type="hidden" id="mc_part_a_date"><div class="error-msg" id="err_mc_part_a_date" style="display:none"></div></div>
+      <div class="field"><label>Part B effective date</label><div class="dob-row"><input type="tel" class="dob-mm" id="mc_part_b_date_mm" maxlength="2" inputmode="numeric" placeholder="MM"><input type="tel" class="dob-dd" id="mc_part_b_date_dd" maxlength="2" inputmode="numeric" placeholder="DD"><input type="tel" class="dob-yy" id="mc_part_b_date_yy" maxlength="4" inputmode="numeric" placeholder="YYYY"></div><input type="hidden" id="mc_part_b_date"><div class="error-msg" id="err_mc_part_b_date" style="display:none"></div></div>
       <div class="field full"><label for="mc_mbi">Medicare Beneficiary Identifier (MBI) <span class="opt">(Optional now)</span></label><input type="text" class="input" id="mc_mbi" placeholder="e.g. 1AB2-CD3-EF45"><div class="field-hint">11-character ID on your Medicare card. You can provide this later to your agent.</div></div>
     </div>
     <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
@@ -1360,8 +1369,8 @@ a:hover{text-decoration:underline}
       <p class="slide-subtitle">We use these to calculate trip duration and premium.</p>
     </div>
     <div class="form-grid">
-      <div class="field"><label for="trv_start">Departure date</label><input type="date" class="input" id="trv_start"></div>
-      <div class="field"><label for="trv_end">Return date</label><input type="date" class="input" id="trv_end"></div>
+      <div class="field"><label>Departure date</label><div class="dob-row"><input type="tel" class="dob-mm" id="trv_start_mm" maxlength="2" inputmode="numeric" placeholder="MM"><input type="tel" class="dob-dd" id="trv_start_dd" maxlength="2" inputmode="numeric" placeholder="DD"><input type="tel" class="dob-yy" id="trv_start_yy" maxlength="4" inputmode="numeric" placeholder="YYYY"></div><input type="hidden" id="trv_start"><div class="error-msg" id="err_trv_start" style="display:none"></div></div>
+      <div class="field"><label>Return date</label><div class="dob-row"><input type="tel" class="dob-mm" id="trv_end_mm" maxlength="2" inputmode="numeric" placeholder="MM"><input type="tel" class="dob-dd" id="trv_end_dd" maxlength="2" inputmode="numeric" placeholder="DD"><input type="tel" class="dob-yy" id="trv_end_yy" maxlength="4" inputmode="numeric" placeholder="YYYY"></div><input type="hidden" id="trv_end"><div class="error-msg" id="err_trv_end" style="display:none"></div></div>
     </div>
     <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
   </div>
@@ -1785,11 +1794,48 @@ function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show'
 const slides=()=>$$('.slide');
 const totalSlides=()=>slides().length;
 
+// Wire a 3-part MM/DD/YYYY input (idBase + _mm/_dd/_yy) to a hidden ISO
+// field at idBase. Hydrates from state.data on every render so resume nav
+// works, and writes back to both the hidden input and state.data.
+function setupDobInputs(idBase){
+  const mm=document.getElementById(idBase+'_mm');
+  const dd=document.getElementById(idBase+'_dd');
+  const yy=document.getElementById(idBase+'_yy');
+  const hidden=document.getElementById(idBase);
+  if(!mm||!dd||!yy||!hidden)return;
+  const saved=getData(idBase)||hidden.value||'';
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(saved);
+  if(m){
+    if(!yy.value)yy.value=m[1];
+    if(!mm.value)mm.value=m[2];
+    if(!dd.value)dd.value=m[3];
+    hidden.value=saved;
+  }
+  if(mm.__dobBound)return;
+  mm.__dobBound=true;
+  function sync(){
+    const mmOk=mm.value.length>=1&&mm.value.length<=2;
+    const ddOk=dd.value.length>=1&&dd.value.length<=2;
+    const next=(mmOk&&ddOk&&yy.value.length===4)
+      ? (yy.value+'-'+mm.value.padStart(2,'0')+'-'+dd.value.padStart(2,'0'))
+      : '';
+    hidden.value=next;
+    setData(idBase,next);
+  }
+  mm.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)dd.focus();sync();});
+  dd.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)yy.focus();sync();});
+  yy.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');sync();});
+}
+
 function renderForSlide(i){
   const sid=slides()[i]?.dataset.slide;
+  if(sid==='1')setupDobInputs('p_dob');
   if(sid==='10')wireAddressBlock('a');
   if(sid==='12')wireAddressBlock('m');
   if(sid==='20')renderMembers();
+  if(sid==='26')setupDobInputs('c_prior_end');
+  if(sid==='mc_parts'){setupDobInputs('mc_part_a_date');setupDobInputs('mc_part_b_date');}
+  if(sid==='trv_dates'){setupDobInputs('trv_start');setupDobInputs('trv_end');}
   if(sid==='27')renderAttestations();
   if(sid==='28')initSigDate();
   if(sid==='29')renderReview();
@@ -1961,7 +2007,7 @@ function initInputs(){
   if(azip){azip.addEventListener('input',()=>{azip.value=azip.value.replace(/\D/g,'').slice(0,5);setData('a_zip',azip.value);});}
 }
 
-function clearErrors(){$$('.input.error,.select.error').forEach(el=>el.classList.remove('error'));$$('.error-msg').forEach(el=>{el.textContent='';el.style.display='none';});}
+function clearErrors(){$$('.input.error,.select.error,input[type="hidden"].error').forEach(el=>el.classList.remove('error'));$$('.error-msg').forEach(el=>{el.textContent='';el.style.display='none';});}
 function markError(id,msg){const inp=$('#'+id);if(inp){inp.classList.add('error');inp.focus();}const err=$('#err_'+id);if(err){err.textContent=msg;err.style.display='block';}}
 function validateSlide(i){
   const sid=slides()[i]?.dataset.slide;
@@ -2135,7 +2181,16 @@ function memText(m,field,label,placeholder,type){
   return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="${type||'text'}" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${escapeHtml(m[field]||'')}"${placeholder?' placeholder="'+placeholder+'"':''}><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
 }
 function memDate(m,field,label){
-  return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="date" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${m[field]||''}"><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
+  // 3-part MM/DD/YYYY date input. The visible boxes feed a hidden input
+  // tagged with `data-mem-in` so the generic member-input handler picks
+  // up the combined ISO value via dispatched `input` events.
+  const v=m[field]||'';
+  const p=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  const yy=p?p[1]:'';
+  const mm=p?p[2]:'';
+  const dd=p?p[3]:'';
+  const base='mem_'+m.id+'_'+field;
+  return `<div class="form-grid" style="max-width:340px"><div class="field full"><label>${label}</label><div class="dob-row" data-mem-dob data-mem-id="${m.id}" data-mem-field="${field}"><input type="tel" class="dob-mm" id="${base}_mm" maxlength="2" inputmode="numeric" placeholder="MM" value="${mm}"><input type="tel" class="dob-dd" id="${base}_dd" maxlength="2" inputmode="numeric" placeholder="DD" value="${dd}"><input type="tel" class="dob-yy" id="${base}_yy" maxlength="4" inputmode="numeric" placeholder="YYYY" value="${yy}"></div><input type="hidden" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" id="${base}" value="${v}"><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
 }
 
 function memUpload(m,keySuffix,title,hint){
@@ -2321,6 +2376,34 @@ function initMemberFormHandlers(){
         el.addEventListener('keydown',()=>{if(memberAutoAdvTimer){clearTimeout(memberAutoAdvTimer);memberAutoAdvTimer=null;autoAdv();}});
       }
     }
+  });
+  // Per-member 3-part date inputs (DOB). Sync the visible MM/DD/YYYY boxes
+  // into the hidden ISO field and dispatch `input` so the generic
+  // [data-mem-in] handler above persists it onto the member record.
+  $$('[data-mem-dob]').forEach(row=>{
+    const memId=row.dataset.memId;
+    const field=row.dataset.memField;
+    const hidden=document.getElementById('mem_'+memId+'_'+field);
+    const mm=row.querySelector('.dob-mm');
+    const dd=row.querySelector('.dob-dd');
+    const yy=row.querySelector('.dob-yy');
+    if(!hidden||!mm||!dd||!yy)return;
+    if(row.__dobBound)return;
+    row.__dobBound=true;
+    function sync(){
+      const mmOk=mm.value.length>=1&&mm.value.length<=2;
+      const ddOk=dd.value.length>=1&&dd.value.length<=2;
+      const next=(mmOk&&ddOk&&yy.value.length===4)
+        ? (yy.value+'-'+mm.value.padStart(2,'0')+'-'+dd.value.padStart(2,'0'))
+        : '';
+      if(hidden.value!==next){
+        hidden.value=next;
+        hidden.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+    }
+    mm.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)dd.focus();sync();});
+    dd.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)yy.focus();sync();});
+    yy.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');sync();});
   });
   // Per-member address dropdowns
   state.members.forEach(m=>{

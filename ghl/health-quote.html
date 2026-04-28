@@ -95,6 +95,16 @@ a:hover{text-decoration:underline}
 .select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
 .error-msg{font-size:12.5px;color:var(--danger);font-weight:500;margin-top:2px}
 
+/* MM/DD/YYYY date inputs (mobile-friendly numeric, replaces native date picker) */
+.dob-row{display:flex;gap:10px}
+.dob-row input{font-family:inherit;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:16px;font-weight:500;color:var(--text);text-align:center;padding:11px 8px;background:#fff;transition:border-color .15s,box-shadow .15s;outline:none}
+.dob-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,61,107,.15)}
+.dob-row input.error{border-color:var(--danger)}
+/* Propagate error border to visible boxes when the sibling hidden ISO input is flagged */
+.field:has(input[type="hidden"].error) .dob-row input{border-color:var(--danger)}
+.dob-mm,.dob-dd{flex:0 0 72px}
+.dob-yy{flex:1;max-width:120px}
+
 .opt-row{display:flex;gap:12px;flex-wrap:wrap}
 .opt-row.stacked{flex-direction:column;gap:10px}
 .opt-row.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;flex-wrap:unset}
@@ -122,6 +132,13 @@ a:hover{text-decoration:underline}
 .check-opt.selected .box::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);margin-top:-2px}
 .check-opt .txt{flex:1;line-height:1.45}
 .check-opt .txt small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;font-weight:400}
+
+/* Plan-preferences chip strip + required-marker */
+.field label .req{color:var(--danger);font-weight:600;margin-left:2px}
+.condition-chips{display:flex;flex-wrap:wrap;gap:8px}
+.condition-chips .chip{padding:9px 14px;border:1.5px solid var(--border-strong);border-radius:100px;background:#fff;font-size:13.5px;font-weight:500;color:var(--navy);cursor:pointer;transition:all .15s}
+.condition-chips .chip:hover{border-color:var(--blue);background:var(--blue-ghost)}
+.condition-chips .chip.selected{border-color:var(--blue);background:var(--blue);color:#fff}
 
 .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px;flex-wrap:wrap}
 .btn{padding:13px 32px;font-size:15px;font-weight:600;border-radius:var(--radius-sm);transition:all .15s;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
@@ -346,7 +363,7 @@ a:hover{text-decoration:underline}
       <h2 class="slide-title">What's your date of birth?</h2>
       <p class="slide-subtitle">We need this to check plan availability and pricing.</p>
     </div>
-    <div class="form-grid"><div class="field full"><label for="p_dob">Date of birth</label><input type="date" class="input" id="p_dob"><div class="error-msg" id="err_p_dob" style="display:none"></div></div></div>
+    <div class="form-grid" style="max-width:340px"><div class="field full"><label>Date of birth</label><div class="dob-row"><input type="tel" class="dob-mm" id="p_dob_mm" maxlength="2" inputmode="numeric" placeholder="MM" autocomplete="bday-month"><input type="tel" class="dob-dd" id="p_dob_dd" maxlength="2" inputmode="numeric" placeholder="DD" autocomplete="bday-day"><input type="tel" class="dob-yy" id="p_dob_yy" maxlength="4" inputmode="numeric" placeholder="YYYY" autocomplete="bday-year"></div><input type="hidden" id="p_dob"><div class="error-msg" id="err_p_dob" style="display:none"></div></div></div>
     <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
   </div>
 </section>
@@ -764,6 +781,68 @@ a:hover{text-decoration:underline}
   </div>
 </section>
 
+<section class="slide" data-slide="plan_prefs" data-stage="1">
+  <div class="card">
+    <div class="slide-header">
+      <span class="slide-kicker">Plan preferences</span>
+      <h2 class="slide-title">Help us match you to the right plan</h2>
+      <p class="slide-subtitle">Optional but very helpful. We use this to confirm your doctors are in-network, your prescriptions are covered, and the deductible matches how often you actually use care. <strong>Visit frequency is required.</strong></p>
+    </div>
+
+    <div class="form-grid">
+      <div class="field full">
+        <label for="pp_doctors">Preferred doctors <span class="opt">(optional, one per line)</span></label>
+        <textarea class="input" id="pp_doctors" rows="3" placeholder="Dr. Jane Smith, Northside Atlanta&#10;Dr. Marcus Lee, Emory Family Medicine"></textarea>
+        <div class="field-hint">Include city or practice if you can. We&rsquo;ll verify each doctor is in-network on the plans we recommend.</div>
+      </div>
+
+      <div class="field full">
+        <label for="pp_hospitals">Preferred hospitals <span class="opt">(optional, one per line)</span></label>
+        <textarea class="input" id="pp_hospitals" rows="2" placeholder="Northside Hospital Atlanta&#10;Emory University Hospital"></textarea>
+      </div>
+
+      <div class="field full">
+        <label for="pp_meds">Prescription medications <span class="opt">(optional, one per line)</span></label>
+        <textarea class="input" id="pp_meds" rows="4" placeholder="Lipitor 20mg&#10;Metformin 500mg&#10;Albuterol inhaler"></textarea>
+        <div class="field-hint">Drug name and dosage if known. We check formulary tier and copay for each plan we send you.</div>
+      </div>
+
+      <div class="field full">
+        <label>How often do you visit a doctor? <span class="req">*</span></label>
+        <div class="opt-row stacked" data-radio="pp_visits">
+          <button type="button" class="opt-btn" data-val="Rarely (less than once a year)"><span class="circle"></span>Rarely &mdash; less than once a year</button>
+          <button type="button" class="opt-btn" data-val="1-2 times a year"><span class="circle"></span>1&ndash;2 times a year (annual checkup)</button>
+          <button type="button" class="opt-btn" data-val="3-5 times a year"><span class="circle"></span>3&ndash;5 times a year</button>
+          <button type="button" class="opt-btn" data-val="Monthly or more"><span class="circle"></span>Monthly or more</button>
+          <button type="button" class="opt-btn" data-val="Weekly or more"><span class="circle"></span>Weekly or more (chronic care)</button>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Any ongoing medical conditions? <span class="opt">(optional, select all that apply)</span></label>
+        <div class="condition-chips" id="pp_conditions">
+          <button type="button" class="chip" data-cond="Diabetes">Diabetes</button>
+          <button type="button" class="chip" data-cond="Asthma">Asthma</button>
+          <button type="button" class="chip" data-cond="Heart disease">Heart disease</button>
+          <button type="button" class="chip" data-cond="Cancer">Cancer</button>
+          <button type="button" class="chip" data-cond="Mental health">Mental health</button>
+          <button type="button" class="chip" data-cond="Pregnancy">Pregnancy</button>
+          <button type="button" class="chip" data-cond="Autoimmune">Autoimmune</button>
+          <button type="button" class="chip" data-cond="High blood pressure">High blood pressure</button>
+          <button type="button" class="chip" data-cond="None">None</button>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label for="pp_cond_other">Other conditions or notes <span class="opt">(optional)</span></label>
+        <input type="text" class="input" id="pp_cond_other" placeholder="Anything not listed above">
+      </div>
+    </div>
+
+    <div class="nav-row"><button type="button" class="btn btn-secondary" data-back>Back</button><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+  </div>
+</section>
+
 <section class="slide" data-slide="29" data-stage="2">
   <div class="card">
     <div class="slide-header">
@@ -981,12 +1060,47 @@ function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show'
 const slides=()=>$$('.slide');
 const totalSlides=()=>slides().length;
 
+// Wire a 3-part MM/DD/YYYY input to a hidden ISO field. Auto-advances focus
+// across boxes, hydrates from state.data on every render so resume works,
+// and writes to both the hidden input (for `g(id)` reads) and state.data.
+function setupDobInputs(idBase){
+  const mm=document.getElementById(idBase+'_mm');
+  const dd=document.getElementById(idBase+'_dd');
+  const yy=document.getElementById(idBase+'_yy');
+  const hidden=document.getElementById(idBase);
+  if(!mm||!dd||!yy||!hidden)return;
+  const saved=getData(idBase)||hidden.value||'';
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(saved);
+  if(m){
+    if(!yy.value)yy.value=m[1];
+    if(!mm.value)mm.value=m[2];
+    if(!dd.value)dd.value=m[3];
+    hidden.value=saved;
+  }
+  if(mm.__dobBound)return;
+  mm.__dobBound=true;
+  function sync(){
+    const mmOk=mm.value.length>=1&&mm.value.length<=2;
+    const ddOk=dd.value.length>=1&&dd.value.length<=2;
+    const next=(mmOk&&ddOk&&yy.value.length===4)
+      ? (yy.value+'-'+mm.value.padStart(2,'0')+'-'+dd.value.padStart(2,'0'))
+      : '';
+    hidden.value=next;
+    setData(idBase,next);
+  }
+  mm.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)dd.focus();sync();});
+  dd.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)yy.focus();sync();});
+  yy.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');sync();});
+}
+
 function renderForSlide(i){
   const sid=slides()[i]?.dataset.slide;
+  if(sid==='1')setupDobInputs('p_dob');
   if(sid==='11')wireAddressBlock('a');
   if(sid==='13')wireAddressBlock('m');
   if(sid==='19')renderMembers();
   if(sid==='21')renderIncomes();
+  if(sid==='plan_prefs')hydratePlanPrefs();
   if(sid==='30')initSigDate();
   if(sid==='31')renderReview();
   if(sid==='33'){const r=$('#refNumberNC');if(r)r.textContent=state.reference||'OP-HL-0000';}
@@ -1139,7 +1253,7 @@ function initInputs(){
   if(azip){azip.addEventListener('input',()=>{azip.value=azip.value.replace(/\D/g,'').slice(0,5);setData('a_zip',azip.value);});}
 }
 
-function clearErrors(){$$('.input.error,.select.error').forEach(el=>el.classList.remove('error'));$$('.error-msg').forEach(el=>{el.textContent='';el.style.display='none';});}
+function clearErrors(){$$('.input.error,.select.error,input[type="hidden"].error').forEach(el=>el.classList.remove('error'));$$('.error-msg').forEach(el=>{el.textContent='';el.style.display='none';});}
 function markError(id,msg){const inp=$('#'+id);if(inp){inp.classList.add('error');inp.focus();}const err=$('#err_'+id);if(err){err.textContent=msg;err.style.display='block';}}
 function validateSlide(i){
   const sid=slides()[i]?.dataset.slide;
@@ -1179,6 +1293,7 @@ function validateSlide(i){
   if(sid==='27'){reqRadio('p_native','Please answer');}
   if(sid==='28'){reqRadio('c_delivery','Please answer');}
   if(sid==='addons'){reqRadio('c_addons','Please select');}
+  if(sid==='plan_prefs'){reqRadio('pp_visits','Please select how often you visit a doctor');}
   if(sid==='29'){if(!getData('att_truthful')||!getData('att_changes')||!getData('att_tcpa')){toast('Please acknowledge all three items');ok=false;}}
   if(sid==='30'){const sig=getData('sig_name');const f=(getData('p_first')||'').trim().toLowerCase();const l=(getData('p_last')||'').trim().toLowerCase();if(!sig){markError('sig_name','Please type your full name to sign');ok=false;}else{const s=sig.trim().toLowerCase();if(!s.includes(f)||!s.includes(l)){markError('sig_name','Signature must match your legal name');ok=false;}}}
   return ok;
@@ -1272,7 +1387,16 @@ function memText(m,field,label,placeholder,type){
   return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="${type||'text'}" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${escapeHtml(m[field]||'')}"${placeholder?' placeholder="'+placeholder+'"':''}><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
 }
 function memDate(m,field,label){
-  return `<div class="form-grid"><div class="field full"><label>${label}</label><input type="date" class="input" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" value="${m[field]||''}"><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
+  // 3-part MM/DD/YYYY date input. The visible boxes feed a hidden input
+  // tagged with `data-mem-in` so the generic member-input handler picks
+  // up the combined ISO value via dispatched `input` events.
+  const v=m[field]||'';
+  const p=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  const yy=p?p[1]:'';
+  const mm=p?p[2]:'';
+  const dd=p?p[3]:'';
+  const base='mem_'+m.id+'_'+field;
+  return `<div class="form-grid" style="max-width:340px"><div class="field full"><label>${label}</label><div class="dob-row" data-mem-dob data-mem-id="${m.id}" data-mem-field="${field}"><input type="tel" class="dob-mm" id="${base}_mm" maxlength="2" inputmode="numeric" placeholder="MM" value="${mm}"><input type="tel" class="dob-dd" id="${base}_dd" maxlength="2" inputmode="numeric" placeholder="DD" value="${dd}"><input type="tel" class="dob-yy" id="${base}_yy" maxlength="4" inputmode="numeric" placeholder="YYYY" value="${yy}"></div><input type="hidden" data-mem-in data-mem-field="${field}" data-mem-id="${m.id}" id="${base}" value="${v}"><div class="error-msg" id="mem_err_${m.id}_${field}" style="display:none"></div></div></div>`;
 }
 
 function memUpload(m,keySuffix,title,hint){
@@ -1307,7 +1431,13 @@ function renderMemberStep(m){
   if(k==='immigration')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} have eligible immigration status?</p>${memGrid(m,'immigration',[{val:'Yes',label:'Yes'},{val:'Decline',label:'Prefer not to say'}])}`;
   if(k==='tobacco')return `<p class="slide-subtitle" style="margin-bottom:18px">Has ${who} used tobacco 4+ times a week in the past 6 months?</p>${memGrid(m,'tobacco',YN)}`;
   if(k==='pregnant')return `<p class="slide-subtitle" style="margin-bottom:18px">Is ${who} pregnant?</p>${memGrid(m,'pregnant',YNP)}`;
-  if(k==='pregnant_details')return `<p class="slide-subtitle" style="margin-bottom:18px">Pregnancy details for ${who}.</p><div class="form-grid"><div class="field"><label># of babies expected</label><input type="number" class="input" data-mem-in data-mem-field="preg_count" data-mem-id="${m.id}" value="${escapeHtml(m.preg_count||'')}" min="1" max="10"></div><div class="field"><label>Expected due date</label><input type="date" class="input" data-mem-in data-mem-field="due_date" data-mem-id="${m.id}" value="${m.due_date||''}"></div></div>`;
+  if(k==='pregnant_details'){
+    const dv=m.due_date||'';
+    const dp=/^(\d{4})-(\d{2})-(\d{2})$/.exec(dv);
+    const dyy=dp?dp[1]:'';const dmm=dp?dp[2]:'';const ddd=dp?dp[3]:'';
+    const dbase='mem_'+m.id+'_due_date';
+    return `<p class="slide-subtitle" style="margin-bottom:18px">Pregnancy details for ${who}.</p><div class="form-grid"><div class="field"><label># of babies expected</label><input type="number" class="input" data-mem-in data-mem-field="preg_count" data-mem-id="${m.id}" value="${escapeHtml(m.preg_count||'')}" min="1" max="10"></div><div class="field"><label>Expected due date</label><div class="dob-row" data-mem-dob data-mem-id="${m.id}" data-mem-field="due_date"><input type="tel" class="dob-mm" id="${dbase}_mm" maxlength="2" inputmode="numeric" placeholder="MM" value="${dmm}"><input type="tel" class="dob-dd" id="${dbase}_dd" maxlength="2" inputmode="numeric" placeholder="DD" value="${ddd}"><input type="tel" class="dob-yy" id="${dbase}_yy" maxlength="4" inputmode="numeric" placeholder="YYYY" value="${dyy}"></div><input type="hidden" data-mem-in data-mem-field="due_date" data-mem-id="${m.id}" id="${dbase}" value="${dv}"></div></div>`;
+  }
   if(k==='same_addr')return `<p class="slide-subtitle" style="margin-bottom:18px">Does ${who} live at the primary applicant's address?</p>${memGrid(m,'same_addr',YN)}`;
   if(k==='address_block'){
     return `<p class="slide-subtitle" style="margin-bottom:18px">Enter ${who}'s address.</p>
@@ -1437,6 +1567,34 @@ function initMemberFormHandlers(){
         el.addEventListener('keydown',()=>{if(memberAutoAdvTimer){clearTimeout(memberAutoAdvTimer);memberAutoAdvTimer=null;autoAdv();}});
       }
     }
+  });
+  // Per-member 3-part date inputs (DOB / due date). Sync the visible MM/DD/YYYY
+  // boxes into the hidden ISO field and dispatch `input` so the generic
+  // [data-mem-in] handler above persists it onto the member record.
+  $$('[data-mem-dob]').forEach(row=>{
+    const memId=row.dataset.memId;
+    const field=row.dataset.memField;
+    const hidden=document.getElementById('mem_'+memId+'_'+field);
+    const mm=row.querySelector('.dob-mm');
+    const dd=row.querySelector('.dob-dd');
+    const yy=row.querySelector('.dob-yy');
+    if(!hidden||!mm||!dd||!yy)return;
+    if(row.__dobBound)return;
+    row.__dobBound=true;
+    function sync(){
+      const mmOk=mm.value.length>=1&&mm.value.length<=2;
+      const ddOk=dd.value.length>=1&&dd.value.length<=2;
+      const next=(mmOk&&ddOk&&yy.value.length===4)
+        ? (yy.value+'-'+mm.value.padStart(2,'0')+'-'+dd.value.padStart(2,'0'))
+        : '';
+      if(hidden.value!==next){
+        hidden.value=next;
+        hidden.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+    }
+    mm.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)dd.focus();sync();});
+    dd.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');if(this.value.length===2)yy.focus();sync();});
+    yy.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');sync();});
   });
   // Per-member address dropdowns
   state.members.forEach(m=>{
@@ -1624,6 +1782,46 @@ function renderPersonLists(){
 }
 
 function initIncomeBtn(){const b=$('#addIncomeBtn');if(b)b.addEventListener('click',addIncome);}
+
+// ── Plan preferences (slide "plan_prefs") ─────────────────────────
+// Hydrates inputs from saved state on slide entry, wires textareas to
+// persist on input, and toggles condition chips. Conditions are stored
+// as a comma-separated string so they round-trip naturally through the
+// existing flat state.data store (no new state arrays needed).
+function hydratePlanPrefs(){
+  ['pp_doctors','pp_hospitals','pp_meds','pp_cond_other'].forEach(id=>{
+    const el=$('#'+id);if(!el||el.__ppBound)return;
+    el.value=getData(id,'');
+    el.addEventListener('input',()=>setData(id,el.value));
+    el.__ppBound=true;
+  });
+  const wrap=$('#pp_conditions');
+  if(wrap && !wrap.__ppBound){
+    const selected=new Set((getData('pp_cond_list','')||'').split(',').map(s=>s.trim()).filter(Boolean));
+    wrap.querySelectorAll('.chip').forEach(chip=>{
+      const v=chip.dataset.cond;
+      if(selected.has(v))chip.classList.add('selected');
+      chip.addEventListener('click',()=>{
+        // "None" is exclusive — selecting it clears the others, and
+        // selecting anything else clears "None".
+        if(v==='None'){
+          if(chip.classList.contains('selected')){chip.classList.remove('selected');}
+          else{
+            wrap.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
+            chip.classList.add('selected');
+          }
+        } else {
+          const noneChip=wrap.querySelector('.chip[data-cond="None"]');
+          if(noneChip)noneChip.classList.remove('selected');
+          chip.classList.toggle('selected');
+        }
+        const list=Array.from(wrap.querySelectorAll('.chip.selected')).map(c=>c.dataset.cond);
+        setData('pp_cond_list',list.join(','));
+      });
+    });
+    wrap.__ppBound=true;
+  }
+}
 function addIncome(){
   const t=$('#inc_type').value,a=$('#inc_amount').value,p=$('#inc_period').value;
   if(!t){toast('Select an income type');return;}
@@ -1736,6 +1934,20 @@ function renderReview(){
       <div><span class="lbl">Notice delivery</span><span class="val">${g('c_delivery')}</span></div>
       <div><span class="lbl">Dental / Vision interest</span><span class="val">${g('c_addons','—')}</span></div>
     </div></div>
+    ${(()=>{
+      const pp=(getData('pp_doctors')||getData('pp_hospitals')||getData('pp_meds')||getData('pp_visits')||getData('pp_cond_list')||getData('pp_cond_other'));
+      if(!pp) return '';
+      const ppGotoIdx=Array.from(slides()).findIndex(s=>s.dataset.slide==='plan_prefs');
+      const lst=v=>v?escapeHtml(v).replace(/\n/g,'<br>'):'—';
+      return `<div class="review-group"><h3>Plan preferences <button type="button" class="edit" data-goto="${ppGotoIdx}">Edit</button></h3><div class="review-list">
+        <div><span class="lbl">Visit frequency</span><span class="val">${g('pp_visits','—')}</span></div>
+        <div class="full"><span class="lbl">Doctors</span><span class="val">${lst(getData('pp_doctors'))}</span></div>
+        <div class="full"><span class="lbl">Hospitals</span><span class="val">${lst(getData('pp_hospitals'))}</span></div>
+        <div class="full"><span class="lbl">Prescriptions</span><span class="val">${lst(getData('pp_meds'))}</span></div>
+        <div class="full"><span class="lbl">Conditions</span><span class="val">${escapeHtml((getData('pp_cond_list')||'').split(',').filter(Boolean).join(', '))||'—'}</span></div>
+        ${getData('pp_cond_other')?`<div class="full"><span class="lbl">Other</span><span class="val">${escapeHtml(getData('pp_cond_other'))}</span></div>`:''}
+      </div></div>`;
+    })()}
     <div class="review-group"><h3>Attestations &amp; Signature <button type="button" class="edit" data-goto="33">Edit</button></h3><div class="review-list">
       <div><span class="lbl">Certified true</span><span class="val">${getData('att_truthful')?'✓':'—'}</span></div>
       <div><span class="lbl">Will notify of changes</span><span class="val">${getData('att_changes')?'✓':'—'}</span></div>
@@ -1938,6 +2150,16 @@ function buildPayload(){
       addons:g('c_addons'),
       want_dental:g('c_addons')==='Both'||g('c_addons')==='Dental',
       want_vision:g('c_addons')==='Both'||g('c_addons')==='Vision'
+    },
+    // Lead-supplied plan-matching context. Lists are split from the textarea
+    // so staff can copy/paste into the carrier plan-shopper directly.
+    plan_preferences:{
+      doctors:(g('pp_doctors')||'').split('\n').map(s=>s.trim()).filter(Boolean),
+      hospitals:(g('pp_hospitals')||'').split('\n').map(s=>s.trim()).filter(Boolean),
+      prescriptions:(g('pp_meds')||'').split('\n').map(s=>s.trim()).filter(Boolean),
+      visit_frequency:g('pp_visits'),
+      conditions:(g('pp_cond_list')||'').split(',').map(s=>s.trim()).filter(Boolean),
+      conditions_other:g('pp_cond_other')
     },
     attestations:{
       truthful:!!getData('att_truthful'),
