@@ -162,10 +162,9 @@ export async function POST(
         publicId: `${baseName}.pdf`,
         resourceType: 'raw',
       });
-      // Inject fl_attachment so the link forces a browser download instead
-      // of opening the PDF inline. Cloudinary honors the flag inserted
-      // right after /upload/ in the delivery URL.
-      pdfUrl = upload.secure_url.replace('/upload/', '/upload/fl_attachment/');
+      // Plain Cloudinary URL — opens the PDF in the browser when clicked
+      // from the staff email rather than forcing a download.
+      pdfUrl = upload.secure_url;
       payload.pdf_summary_url = pdfUrl;
     } else {
       logger.warn('Cloudinary not configured — skipping PDF upload', { type });
