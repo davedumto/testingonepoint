@@ -160,7 +160,11 @@ export async function POST(
       const upload = await uploadBuffer(pdfBuf, {
         folder: `leads/${type}`,
         publicId: `${baseName}.pdf`,
-        resourceType: 'raw',
+        // 'image' so Cloudinary serves the PDF with Content-Type:
+        // application/pdf, which lets the browser render it inline.
+        // 'raw' served as application/octet-stream and the browser
+        // refused to open the file.
+        resourceType: 'image',
       });
       // Plain Cloudinary URL — opens the PDF in the browser when clicked
       // from the staff email rather than forcing a download.
